@@ -1,0 +1,23 @@
+fragment MirrorBaseFields on Mirror {
+  id
+  profile {
+    ...ProfileFields
+  }
+  stats {
+    ...PublicationStatsFields
+  }
+  metadata {
+    ...MetadataOutputFields
+  }
+  createdAt
+  collectModule {
+    ...CollectModuleFields
+  }
+  referenceModule {
+    ...ReferenceModuleFields
+  }
+  appId
+  hidden
+  reaction(request: null)
+  hasCollectedByMe
+}

@@ -1,0 +1,24 @@
+fragment CommentBaseFields on Comment {
+  id
+  profile {
+    ...ProfileFields
+  }
+  stats {
+    ...PublicationStatsFields
+  }
+  metadata {
+    ...MetadataOutputFields
+  }
+  createdAt
+  collectModule {
+    ...CollectModuleFields
+  }
+  referenceModule {
+    ...ReferenceModuleFields
+  }
+  appId
+  hidden
+  reaction(request: $reactionRequest)
+  mirrors(by: $profileId)
+  hasCollectedByMe
+}

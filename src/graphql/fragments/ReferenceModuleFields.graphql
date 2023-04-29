@@ -1,0 +1,18 @@
+fragment ReferenceModuleFields on ReferenceModule {
+  ... on FollowOnlyReferenceModuleSettings {
+    type
+    contractAddress
+  }
+  ... on UnknownReferenceModuleSettings {
+    type
+    contractAddress
+    referenceModuleReturnData
+  }
+  ... on DegreesOfSeparationReferenceModuleSettings {
+    type
+    contractAddress
+    commentsRestricted
+    mirrorsRestricted
+    degreesOfSeparation
+  }
+}

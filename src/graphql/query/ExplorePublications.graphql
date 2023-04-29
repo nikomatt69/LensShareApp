@@ -1,0 +1,24 @@
+query ExplorePublications(
+  $request: ExplorePublicationRequest!
+  $reactionRequest: ReactionFieldResolverRequest
+  $profileId: ProfileId
+  ) {
+  explorePublications(request: $request) {
+    items {
+      ... on Post {
+        ...PostFields
+      }
+      ... on Comment {
+        ...CommentFields
+      }
+      ... on Mirror {
+        ...MirrorFields
+      }
+    }
+    pageInfo {
+      prev
+      next
+      totalCount
+    }
+  }
+}

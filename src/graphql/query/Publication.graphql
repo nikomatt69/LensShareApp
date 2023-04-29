@@ -1,0 +1,18 @@
+query Publication(
+$request: PublicationQueryRequest!
+$reactionRequest: ReactionFieldResolverRequest
+$profileId: ProfileId
+) {
+  publication(request: $request) {
+   __typename 
+    ... on Post {
+      ...PostFields
+    }
+    ... on Comment {
+      ...CommentFields
+    }
+    ... on Mirror {
+      ...MirrorFields
+    }
+  }
+}

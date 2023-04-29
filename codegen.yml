@@ -1,0 +1,14 @@
+schema: ${NEXT_PUBLIC_LENS_API_MUMBAI}
+
+documents: ["./src/graphql/**/*.graphql"]
+
+generates:
+  ./src/utils/lens:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+      - fragment-matcher
+    config:
+      fetcher: fetch
+      dedupeFragments: true

@@ -1,0 +1,8 @@
+name: GITNAME
+          uses: 4everland/pin-action@main
+          continue-on-error: true
+          timeout-minutes: 2
+          with:
+            EVER_TOKEN: ${{ secrets.EVER_TOKEN }}
+            EVER_PROJECT_NAME: 'LensShare2'
+            path: './build'

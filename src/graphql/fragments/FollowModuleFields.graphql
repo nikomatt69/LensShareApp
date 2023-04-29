@@ -1,0 +1,28 @@
+fragment FollowModuleFields on FollowModule {
+  ... on FeeFollowModuleSettings {
+    type
+    amount {
+      asset {
+        name
+        symbol
+        decimals
+        address
+      }
+      value
+    }
+    recipient
+  }
+  ... on ProfileFollowModuleSettings {
+    type
+    contractAddress
+  }
+  ... on RevertFollowModuleSettings {
+    type
+    contractAddress
+  }
+  ... on UnknownFollowModuleSettings {
+    type
+    contractAddress
+    followModuleReturnData
+  }
+}
