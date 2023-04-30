@@ -73,7 +73,7 @@ interface Props {
 
         return (
             <div className="flex justify-center mx-4">
-             <MetaTags title={`User  • ${formatHandle(profile?.handle)} ${APP_NAME}`}/>
+             <MetaTags title={`User  • ${profile?.name} ${APP_NAME}`}/>
                 <div className="w-full  max-w-[1150px]">   
                 <Cover
                   cover={
