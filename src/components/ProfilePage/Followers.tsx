@@ -11,6 +11,7 @@ import FollowingAccounts from "@/components/Sidebar/FollowingAccounts";
 import Categories from "@/components/Sidebar/Categories";
 import { useAppStore } from "src/store/app";
 import { Profile } from '@/types/lens';
+import Link from 'next/link';
 
 interface Props {
     profileId: string
@@ -62,6 +63,7 @@ const Followers: FC<Props> = ({profileId}) => {
             loader={<InfiniteLoader />}
             scrollableTarget="scrollableDiv"
         > 
+        <Link href={`/u/${profileId}`} key={profileId}/>
             <div className="divide-y">
                 {followers?.map((follow) => (
                     <div className="p-5" key={follow?.wallet?.defaultProfile?.id}
@@ -79,8 +81,7 @@ const Followers: FC<Props> = ({profileId}) => {
                                 </div>
                                 <div className="lg:block">
                                     <p className="flex gap-1 items-center text-md font-bold text lowercase">
-                                        {follow?.wallet?.defaultProfile?.name}
-                                        <GoVerified className="text-blue-400" />
+                                        {follow?.wallet?.defaultProfile?.name} {""}
                                         <p className="cpaitalize text-grey text-xs">
                                             {follow?.wallet?.defaultProfile?.handle} {""}
                                         </p>
