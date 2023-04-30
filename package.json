@@ -45,7 +45,6 @@
     "graphql": "^16.6.0",
     "headlessui": "^0.0.0",
     "heroicons": "^2.0.13",
-    "hooks": "link:@huddle01/react/hooks",
     "html-entities": "^2.3.3",
     "interweave": "^13.0.0",
     "interweave-autolink": "^5.1.0",
