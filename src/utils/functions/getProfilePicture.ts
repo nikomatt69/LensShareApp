@@ -1,5 +1,4 @@
 import type { Profile } from 'src/utils/lens'
-
 import { getRandomProfilePicture } from './getRandomProfilePicture'
 import imageCdn from './imageCdn'
 import sanitizeIpfsUrl from 'src/utils/functions/sanitizeIpfsUrl2'

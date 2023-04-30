@@ -18,6 +18,7 @@ import MessageIcon from "./Messages/MessageIcon";
 import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
+import SearchBarDiscover from "./Search/SearchBarDiscover";
 
 
 
@@ -41,7 +42,7 @@ const Navbar: FC = () => {
           />
         </div>
       </Link>
-    <SearchBar />
+    <SearchBarDiscover />
     <div>
       <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
         <Link href='/upload'>

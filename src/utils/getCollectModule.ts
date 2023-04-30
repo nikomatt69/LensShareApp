@@ -1,5 +1,4 @@
 import type { CollectModuleParams } from "@/types/lens";
-
 import type { CollectModuleType } from "@/types/app";
 
 export const getCollectModule = (

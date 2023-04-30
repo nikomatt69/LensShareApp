@@ -1,7 +1,6 @@
 import { ARWEAVE_WEBSITE_URL } from '@/constants'
 import { IPFS_GATEWAY} from '@/utils/const'
 
-
 export const sanitizeIpfsUrl = (url: string) => {
   const ipfsGateway = `${IPFS_GATEWAY}/`
   const arweaveGateway = `${ARWEAVE_WEBSITE_URL}/`

@@ -15,6 +15,7 @@ import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { Toaster } from "react-hot-toast";
 import DiscoverMain from "./DiscoverMain";
+import NavbarDetails from "../NavbarDetails";
 
 
 const DiscoverMob: NextPage = () => {
@@ -23,7 +24,7 @@ const DiscoverMob: NextPage = () => {
     <div>
       <div className="xl:w-[1200px] lg:w-[1100px] items-center m-auto overflow-hidden h-[100vh]">
       <Toaster position="bottom-right" />
-      <Navbar />
+      <NavbarDetails />
         <div className="flex gap-6 md:gap-20">
           <div className="mt-2 mb-8 pb-8 flex flex-col items-center gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
             <DiscoverMain />

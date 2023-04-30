@@ -1,5 +1,4 @@
 
-
 /**
  *
  * @param symbol - Token symbol

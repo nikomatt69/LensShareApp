@@ -69,7 +69,7 @@ const Followers: FC<Props> = ({profileId}) => {
                         {follow?.wallet?.defaultProfile ? (
                             <div className="flex gap-1 hover:bg-primary p-2 cursor-pointer font-semibold rounded-full items-center">
                                 <div>
-                                    <img
+                                    <Image
                                         width={40}
                                         height={40}
                                         className="rounded cursor-pointer"

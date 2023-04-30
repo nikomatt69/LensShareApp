@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import ProfileCard from "@/components/ProfilePage/ProfileCard";
@@ -41,7 +40,9 @@ const Profile: NextPage = () => {
       if (!currentProfile) {
         setFollowing(false)
       }
-      }, [profile?.isFollowedByMe])
+      }, 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [profile?.isFollowedByMe])
 
   return (
     <div>

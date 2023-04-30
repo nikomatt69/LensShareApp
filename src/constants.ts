@@ -48,7 +48,6 @@ export const LS_KEYS = {
 };
 
 
-
 export const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/ogg', 'video/webm', 'video/quicktime'];
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
 export const ALLOWED_MEDIA_TYPES = [...ALLOWED_VIDEO_TYPES, ...ALLOWED_IMAGE_TYPES];
@@ -59,11 +58,7 @@ export const WRONG_NETWORK = IS_MAINNET
   ? 'Please change network to Polygon mainnet.'
   : 'Please change network to Polygon Mumbai testnet.'
 export const SIGN_ERROR = 'Failed to sign data'
-
 export const RELAYER_ENABLED = true
-
-
-
 
 export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz'
 export const BUNDLR_METADATA_UPLOAD_URL = 'https://metadata.lenshareapp.xyz'
@@ -72,9 +67,6 @@ export const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz';
 export const STATIC_IMAGES_URL = `${STATIC_ASSETS_URL}/images`;
 
 export const FALLBACK_COVER_URL=`${STATIC_ASSETS_URL}/images/logo.png`;
-
-
-
 
 export const RELAY_ON = true
 export const ERROR_MESSAGE = "Something went wrong!";
@@ -128,9 +120,6 @@ export const DEFAULT_COLLECT_TOKEN = "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270
 export const LIT_PROTOCOL_ENV = IS_MAINNET ? "polygon" : "mumbai"
 
 export const GIPHY_TOKEN = 'mztAE0vdQdlfCYsM11E6UaPjUmjpYDHV'
-
-
-
 
 export const MESSAGE_PAGE_LIMIT = 35;
 export const SCROLL_THRESHOLD = 0.1;

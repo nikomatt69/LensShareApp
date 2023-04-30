@@ -3,12 +3,13 @@ import type { NextPage } from "next";
 import Navbar from "@/components/Navbar";
 import UploadVideo from "@/components/VideoUpload";
 import BottomNav from "@/components/Navs/BottomNav";
+import NavbarDetails from "@/components/NavbarDetails";
 
 const Upload: NextPage = () => {
   return (
     <div>
       <div>
-        <Navbar />
+        <NavbarDetails />
       </div>
       <div>
         <UploadVideo />

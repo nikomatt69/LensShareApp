@@ -1,6 +1,6 @@
 // auth routes
 export const AUTH_ROUTES = [
-  '/create',
+  '/upload',
   '/settings',
   '/following',
   '/settings/permissions',

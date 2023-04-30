@@ -9,15 +9,13 @@ export const Mention = ({ ...props }: any) => {
     <Link
       href={`/u/${props.display.slice(1)}`}
       onClick={(event) => {
-        event.stopPropagation();
-        
+        event.stopPropagation();  
       }}
     >
       <Slug slug={props.display} />
     </Link>
   );
 };
-
 export class MentionMatcher extends Matcher {
   replaceWith(match: string, props: any) {
     return createElement(Mention, props, match);

@@ -157,5 +157,4 @@ export interface NewLenstokAttachment extends Omit<LenstokAttachment, 'item'> {
   previewItem?: string;
 }
 
-
 export const PublicationMainContentFocus = [PublicationMainFocus.Image , PublicationMainFocus.Video];

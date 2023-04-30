@@ -8,7 +8,6 @@ import { createElement } from 'react';
 export const Hashtag = ({ ...props }: any) => {
   const hashflag = props.display.slice(1).toLowerCase();
  
-
   return (
     <span className="inline-flex items-center space-x-1">
       <span>
@@ -22,7 +21,6 @@ export const Hashtag = ({ ...props }: any) => {
           {props.display}
         </Link>
       </span>
-      
     </span>
   );
 };
