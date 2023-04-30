@@ -2727,7 +2727,7 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/connect-kit-loader/-/connect-kit-loader-1.0.2.tgz#8554e16943f86cc2a5f6348a14dfe6e5bd0c572a"
   integrity sha512-TQ21IjcZOw/scqypaVFY3jHVqI7X7Hta3qN/us6FvTol3AY06UmrhhXGww0E9xHmAbdX241ddwXEiMBSQZFr9g==
 
-"@lens-protocol/sdk-gated@^1.2.0":
+"@lens-protocol/sdk-gated@^1.0.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@lens-protocol/sdk-gated/-/sdk-gated-1.2.0.tgz#67af73ef2486395c022fb46e88d63d1826d4b14e"
   integrity sha512-9r2+nKUhI7n6940oN1iM4shPNUVDsqNbFLgTajN0ojJNnDdDA29uUzzEZgXMCLTwKTcGkoVeJmuf1zPVQtltFA==
@@ -7579,10 +7579,6 @@ hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   dependencies:
     react-is "^16.7.0"
-
-"hooks@link:@huddle01/react/hooks":
-  version "0.0.0"
-  uid ""
 
 html-entities@^2.3.3:
   version "2.3.3"
