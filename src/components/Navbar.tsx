@@ -42,7 +42,7 @@ const Navbar: FC = () => {
           />
         </div>
       </Link>
-    <SearchBarDiscover />
+    <SearchBar />
     <div>
       <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
         <Link href='/upload'>

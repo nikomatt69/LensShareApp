@@ -61,7 +61,7 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
 
   return (
     <div>
-     <MetaTags title={title} />
+     <MetaTags title={`Messages  • ${profile?.name} ${APP_NAME}`} />
       <NavbarDetails />
       <PreviewList
           className="hidden md:hidden sm:hidden xs:hidden"
