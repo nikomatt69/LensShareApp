@@ -14,7 +14,7 @@ import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, Use
 import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { Toaster } from "react-hot-toast";
-import Latest from "../Latest";
+import { useRouter } from "next/router";
 
 
 const Home: NextPage = () => {

@@ -21,11 +21,12 @@ import { useAppStore } from "src/store/app";
 import UnfollowButton from "../Buttons/UnfollowButton";
 import FollowButton from "../Buttons/FollowButton";
 import Like from "../Buttons/Likes/Like";
-import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
 import formatHandle from "@/utils/functions/formatHandle";
 import CollectButton from "../Buttons/Collects/CollectButton";
 import MetaTags from "../UI/MetaTags";
 import { APP_NAME } from "@/constants";
+import NavbarDetails from "../NavbarDetails";
 
 
 interface Props {
@@ -89,12 +90,12 @@ const VideoDetail: FC<Props> = ({
   return (
     <div className="flex flex-col lg:flex-row lg:h-screen items-stretch">
       <MetaTags
-        title={`Detail • ${APP_NAME}`}
+        title={`Post • ${APP_NAME}`}
       />
       <Toaster position="bottom-right" />
       <div className="lg:flex-grow flex justify-center items-center relative bg-black">
         <video
-          className="w-auto h-auto max-w-full max-h-[450px] lg:max-h-full"
+          className="w-auto h-auto max-w-full max-h-[450px] "
           ref={videoRef}
           onClick={onVideoClick}
           loop
@@ -106,9 +107,9 @@ const VideoDetail: FC<Props> = ({
         <div className="absolute top-5 left-5 flex gap-3">
           <button
             onClick={() => router.back()}
-            className="bg-[#3D3C3D] w-[40px] h-[40px] rounded-md flex justify-center items-center"
+            className="w-[40px] h-[40px] rounded-md flex justify-center items-center"
           >
-            <FaTimes className="w-5 h-5 fill-white cursor-pointer" />
+            <ArrowLeftIcon className="w-5 h-5 fill-white font-semibold cursor-pointer" />
           </button>
         </div>
       </div>
@@ -137,20 +138,13 @@ const VideoDetail: FC<Props> = ({
               </p>
             </div>
 
-            <div className="flex-shrink-0">
-              {/* // follow button goes here */}
-              {following ? (
-                <UnfollowButton
-                  profile={profile as Profile}
-                  setFollowing={setFollowing}
-                />
-              ) : (
-                <FollowButton
-                  setFollowing={setFollowing}
-                  profile={profile as Profile}
-                />
-              )}
-            </div>
+            {<div className="flex-shrink-0">
+          { following ? ( 
+            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
+            ) : (
+            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+          )}
+        </div>}
           </div>
           <p
             className="my-3 pb-3 text-sm text-gray-600"

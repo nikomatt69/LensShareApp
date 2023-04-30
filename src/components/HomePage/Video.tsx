@@ -8,6 +8,7 @@ import MirrorButton from  "@/components/Buttons/Mirrors/MirrorButton";
 import CommentButton from  "@/components/Buttons/CommentButton";
 import CollectButton from  "@/components/Buttons/Collects/CollectButton";
 import getMedia from "@/lib/getMedia";
+import { useRouter } from "next/router";
 
 interface Props {
   publication: Publication;
@@ -24,6 +25,7 @@ const Video: FC<Props> = ({ publication }) => {
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
   const isMirror = publication.__typename === 'Mirror'
   const video = isMirror ? publication.mirrorOf : publication
+  const nextRouter = useRouter();
   
 
   const onVideoClick = () => {

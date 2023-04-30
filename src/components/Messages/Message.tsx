@@ -20,6 +20,7 @@ import Composer from './Composer';
 import MessagesList from './MessagesList';
 import PreviewList from './PreviewList';
 import Navbar from '../Navbar';
+import NavbarDetails from '../NavbarDetails';
 
 interface MessageProps {
   conversationKey: string;
@@ -61,7 +62,7 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
   return (
     <div>
      <MetaTags title={title} />
-      <Navbar />
+      <NavbarDetails />
       <PreviewList
           className="hidden md:hidden sm:hidden xs:hidden"
           selectedConversationKey={conversationKey} />

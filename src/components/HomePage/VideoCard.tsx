@@ -57,7 +57,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
               width={62}
               height={62}
               alt={profile.handle}
-              className="rounded-full"
+              className="rounded-full border-2 border-blue-500"
              />
         <div className="break-word ">
           <Link href={`/u/${profile.id}`} key={profile.id}>
@@ -68,7 +68,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
             </div>
           </Link>
           <Slug className="p-1 pl-1 text-xs text-grey-400 " slug={formatHandle(profile?.handle)} prefix="@" /> 
-          <p className="text-xs pl-1 p-1 block font-semibold text-gray-400"> {timestamp}</p>
+          <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
           <Link 
         className="pointer-events-auto "
         href={`/post/${publication.id}`} key={publication.id} 

@@ -25,11 +25,12 @@ import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
 import router from 'next/router';
 import Cover from './Cover';
-import { STATIC_IMAGES_URL } from '@/constants';
+import { APP_NAME, STATIC_IMAGES_URL } from '@/constants';
 import formatHandle from '@/utils/functions/formatHandle';
 import Slug from '../UI/Slug';
 import { format } from 'url';
 import BottomNav from '../Navs/BottomNav';
+import MetaTags from '../UI/MetaTags';
 
 
 
@@ -72,6 +73,7 @@ interface Props {
 
         return (
             <div className="flex justify-center mx-4">
+             <MetaTags title={`User  • ${formatHandle(profile?.handle)} ${APP_NAME}`}/>
                 <div className="w-full  max-w-[1150px]">   
                 <Cover
                   cover={
@@ -85,7 +87,7 @@ interface Props {
                             alt="profile picture"
                             height={180}
                             width={180}
-                            className="rounded-full intrinsic"
+                            className="rounded-full intrinsic border-2 border-blue-500"
                             />
                             </div>
                             <div className='flex flex-col justify-center p-1'>

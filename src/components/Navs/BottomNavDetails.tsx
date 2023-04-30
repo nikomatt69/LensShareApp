@@ -79,6 +79,13 @@ const BottomNav: React.FC = () => {
       ) : ( 
         <LoginWalletMobile />
       )}
+       <button
+            onClick={() => router.back()}
+            className="bg-[#3D3C3D] w-5px h-5px rounded-md flex justify-center items-center"
+          >
+            <ArrowLeftIcon className="w-5 h-5 fill-white cursor-pointer" />
+          </button>
+
     </nav>
     </div>
   )

@@ -15,9 +15,10 @@ import MenuTransition from "./UI/MenuTransition";
 import { NextLink2 } from "./UI/NextLink2";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import MessageIcon from "./Messages/MessageIcon";
-import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
+import router from "next/router";
 
 
 
@@ -31,28 +32,15 @@ const Navbar: FC = () => {
   
   return (
     <div className="w-full flex justify-between rounded-lg items-center border-4 border-blue-500 p-2 ">
-      <Link href="/">
-        <div className="w-[100px] md:w-[129px]">
-          <Image
-            className="cursor-pointer"
-            src={logo}
-            alt="logo"
-            layout="responsive"
-          />
-        </div>
-      </Link>
+      <button
+            onClick={() => router.back()}
+            className="text-black w-6px h-6px rounded-md flex justify-center items-center"
+          >
+            <ArrowLeftIcon className="w-6 h-6 fill-black cursor-pointer" />
+          </button>
     <SearchBar />
     <div>
-      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
-        <Link href='/upload'>
-        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
-         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <VideoCameraIcon className='h-6 h-6 text-black' />{' '}
-         <span className='hidden '>Upload </span>
-        </button>  
-      </Link>
-      <div className="flex">
+      <div className='flex pl-full centre-item gap-5 md:gap-10 '>
         {currentProfile ? (
            <div className='w-12 h-12'>
           <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
@@ -86,7 +74,6 @@ const Navbar: FC = () => {
         )}
         </div>
       </div>
-     </div>
     </div>
   );
 };

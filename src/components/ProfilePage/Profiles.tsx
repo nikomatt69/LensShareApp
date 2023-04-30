@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAppStore } from "@/store/app";
 import BottomNav from "../Navs/BottomNav";
+import NavbarDetails from "../NavbarDetails";
 
 
 
@@ -46,7 +47,7 @@ const Profile: NextPage = () => {
     <div>
       <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
         <Toaster position="bottom-right" />
-        <Navbar />
+        <NavbarDetails />
         <div className="flex gap-6">
           <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
             <Sidebar />

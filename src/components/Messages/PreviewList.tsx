@@ -24,6 +24,7 @@ import { useDetectClickOutside } from 'react-detect-click-outside';
 import { BsSearch } from 'react-icons/bs';
 import  ProfileId from '@/utils/lens';
 import Navbar from '../Navbar';
+import NavbarDetails from '../NavbarDetails';
 
 interface Props {
   className?: string;
@@ -121,7 +122,7 @@ const PreviewList: FC<Props> = ({ className, selectedConversationKey }) => {
                 className
             )}
         >
-        <Navbar />
+        <NavbarDetails />
             <Card className="flex h-full flex-col justify-between !border-r-0 !rounded-tl-3xl !rounded-bl-3xl !rounded-none">
                 <div className="flex items-center justify-between bg-blue-500 border-4 border-black rounded-3xl p-5 ">
                     <div className="font-bold">Messages</div>
