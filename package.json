@@ -25,7 +25,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@huddle01/huddle01-iframe": "^0.0.9",
     "@huddle01/react": "^0.0.6",
-    "@lens-protocol/sdk-gated": "^1.2.0",
+    "@lens-protocol/sdk-gated": "^1.0.0",
     "@lit-protocol/sdk-browser": "^1.1.238",
     "@livepeer/react": "^1.5.5",
     "@rainbow-me/rainbowkit": "^0.12.7",
