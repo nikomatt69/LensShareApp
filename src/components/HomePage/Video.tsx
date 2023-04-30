@@ -57,7 +57,7 @@ const Video: FC<Props> = ({ publication }) => {
         onMouseLeave={() => setIsHover(false)}
         className="rounded-xl"
       >
-        <Link href={`/detail/${video.id}`} key={video.id} >
+        <Link href={`/post/${video.id}`} key={video.id} >
           <video 
             loop
             autoPlay

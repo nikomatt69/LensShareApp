@@ -37,7 +37,7 @@ const FollowingAccounts = () => {
 
       <div>
         {iFollow?.map((following) => (
-          <Link href={`/profile/${following?.profile.id}`} key={following?.profile.id}>
+          <Link href={`/u/${following?.profile.id}`} key={following?.profile.id}>
             <div className="flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center">
               <div className="relative h-[32px] w-[32px]">
                 <Image

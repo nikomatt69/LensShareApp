@@ -61,7 +61,7 @@ const SearchProfiles: FC<Props> = ({ query }) => {
         <div className='space-y-3'>
             {profiles?.map((profile: Profile) => (
                 <div key={profile?.id} className="p-5">
-                    <Link href={`/profile/${profile?.id}`}>                           
+                    <Link href={`/u/${profile?.id}`}>                           
                         <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
                                 <Image 
                                     width={62}

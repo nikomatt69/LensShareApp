@@ -65,7 +65,7 @@ const VideoDetail: FC<Props> = ({
   // console.log("Publication", publication)
 
   //CHANGE LINK ON DEPLOYMENT TO NEW DOMAIN!
-  const Links = `https://lenshareapp.xyz/detail/${publication?.id}`;
+  const Links = `https://lenshareapp.xyz/post/${publication?.id}`;
   const Title = `${formatHandle(profile?.handle)} on LensShare`;
 
   const itsNotMe = profile?.id !== currentProfile?.id;
@@ -115,7 +115,7 @@ const VideoDetail: FC<Props> = ({
       <div className="w-full lg:w-[500px] flex-shrink-0 flex flex-col items-stretch h-screen">
         <div className="px-4 pt-10 pb-4 flex-shrink-0 border-b">
           <div className="flex">
-            <Link legacyBehavior href={`/profile/${profile?.id}`} key={profile?.id}>
+            <Link legacyBehavior href={`/u/${profile?.id}`} key={profile?.id}>
               <a className="mr-3 flex-shrink-0 rounded-full">
                 <Image
                   src={getAvatar(profile)}
@@ -127,7 +127,7 @@ const VideoDetail: FC<Props> = ({
               </a>
             </Link>
             <div className="flex p-1 flex-col flex-grow justify-center">
-              <Link href={`/profile/${profile?.id}`} key={profile?.id}>
+              <Link href={`/u/${profile?.id}`} key={profile?.id}>
                 <a className="font-bold block hover:underline items-center text-primary">
                   {profile?.name}
                 </a>

@@ -68,7 +68,7 @@ const CommentData: FC<Props> = ({ comment, publication }) => {
 
   return (
     <div className="flex border-2 p-3 bg-cyan-100 rounded-xl hover:bg-blue-400 gap-2">
-      <Link href={`/profile/${comment.profile.id}`} key={comment.profile.id}>
+      <Link href={`/u/${comment.profile.id}`} key={comment.profile.id}>
         <div className="flex-shrink-0 rounded-full">
           <Image
             width={40}

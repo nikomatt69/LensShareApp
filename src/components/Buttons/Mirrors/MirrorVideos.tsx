@@ -51,7 +51,7 @@ import { BsPlay } from "react-icons/bs";
             <div className="grid gap-2 mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
             {publications?.map((pub) => (
                 <div key={pub.id}>
-                    <Link href={`/detail/${pub.id}`} key={pub.id}>
+                    <Link href={`/post/${pub.id}`} key={pub.id}>
                         <a className="block h-0 relative pb-[131%]">
                         <video
                         ref={videoRef}

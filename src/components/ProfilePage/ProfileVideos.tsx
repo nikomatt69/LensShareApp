@@ -47,7 +47,7 @@ import { BsPlay } from "react-icons/bs";
             <div className="grid  gap-2 mr-2 mt-2 mb-2 lg:grid-cols-3 md:gap-y-6 gap-x-4 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
             {publications?.map((pub) => (
                 <div key={pub.id}>
-                    <Link legacyBehavior href={`/detail/${pub.id}`} key={pub.id}>
+                    <Link legacyBehavior href={`/post/${pub.id}`} key={pub.id}>
                         <a  className="block h-0 border-2 border-black rounded-lg relative pb-[131%]">
                         <video
                         autoPlay

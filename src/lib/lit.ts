@@ -113,9 +113,9 @@ class Lit {
       symmetricKey
     );
     // eslint-disable-next-line no-console
-    /*  console.log( {
+    console.log({
       decryptedFile,
-    }); */
+    });
     return { decryptedFile };
   }
 }

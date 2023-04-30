@@ -77,7 +77,7 @@ const SearchBar: FC<Props> = ({ hideDropdown = false }) => {
                     <>
                         {profiles.map((profile: Profile) => (
                             <div className='p-5' key={profile?.id}>
-                                <Link href={`/profile/${profile?.id}`}>
+                                <Link href={`/u/${profile?.id}`}>
                                     <div className='flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center'>
                                         <div>
                                             <img 

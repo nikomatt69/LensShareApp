@@ -17,7 +17,7 @@ const CommentButton: FC<Props> = ({ publication }) => {
 
     return (
        <div className="flex gap-6">
-         <Link href={`/detail/${publication.id}`}> 
+         <Link href={`/post/${publication.id}`}> 
         <a className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">        
         {alreadyCommented ? (
          

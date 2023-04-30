@@ -82,7 +82,7 @@ const QueuedData: FC<Props> = ({ txn }) => {
 
   return (
     <div className="flex gap-2">
-    <Link href={`/profile/${currentProfile?.id}`} key={currentProfile?.id}>
+    <Link href={`/u/${currentProfile?.id}`} key={currentProfile?.id}>
         <div className="flex-shrink-0 rounded-full">
             <Image
                 width={40}

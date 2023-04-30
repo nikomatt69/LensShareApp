@@ -49,10 +49,10 @@ const VideoCard: FC<Props> = ({ publication }) => {
     <div className="flex flex-col bg-[#d9dff1f6] justify-content break-word border-b-2 border-gray-200 pb-0 md:pb-6">
       <div className="flex-row flex break-word ">
         <div className="flex-auto gap-3 p-2 mt-4 cursor-pointer break-word font-semibold rounded">
-        <Link href={`/profile/${profile.id}`} key={profile.id}/>
+        <Link href={`/u/${profile.id}`} key={profile.id}/>
           
             <Image
-              itemRef={`/profile/${profile.id}`}
+              itemRef={`/u/${profile.id}`}
               src={getAvatar(profile)}
               width={62}
               height={62}
@@ -60,7 +60,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
               className="rounded-full"
              />
         <div className="break-word ">
-          <Link href={`/profile/${profile.id}`} key={profile.id}>
+          <Link href={`/u/${profile.id}`} key={profile.id}>
             <div className="flex items-center gap-2">
               <p className="capitalize flex pl-1 gap-2 items-center md:text-md font-bold text-primary">
                 {profile.name}{' '}
@@ -71,7 +71,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
           <p className="text-xs pl-1 p-1 block font-semibold text-gray-400"> {timestamp}</p>
           <Link 
         className="pointer-events-auto "
-        href={`/detail/${publication.id}`} key={publication.id} 
+        href={`/post/${publication.id}`} key={publication.id} 
         >
              <div
             className="my-3 pb-3  text-xs break-word text-black font-semibold"

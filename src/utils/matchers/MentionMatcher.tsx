@@ -7,7 +7,7 @@ import { createElement } from 'react';
 export const Mention = ({ ...props }: any) => {
   return (
     <Link
-      href={`/profile/${props.display.slice(1)}`}
+      href={`/u/${props.display.slice(1)}`}
       onClick={(event) => {
         event.stopPropagation();
         

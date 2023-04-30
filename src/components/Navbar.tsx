@@ -83,7 +83,7 @@ const Navbar: FC = () => {
       <div className="flex">
         {currentProfile ? (
            <div className='w-12 h-12'>
-          <Link href={`/profile/${currentProfile.id}`} key={currentProfile.id}>
+          <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
             { profilePic?.__typename === "MediaSet" ? (
               profilePic.original?.url.includes("ipfs") ? (
                     <Image
