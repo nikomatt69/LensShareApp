@@ -62,4 +62,3 @@ Comments, encrypted with Lit Protocol give further user control on both the crea
 
 ## Credits
 LensShare was created by @Nikoemme @N44TS, @driespindola, @PaoloCalzone# LensShare
-# LensShare
