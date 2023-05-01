@@ -28,7 +28,10 @@ const client = create({
   port: 5001,
   protocol: "https",
   headers: {
-    authorization: `Basic ${Buffer.from( `${projectId}:${secret}`,"utf-8").toString("base64")}`,
+    authorization: `Basic ${Buffer.from(
+      `${projectId}:${secret}`,
+      "utf-8"
+    ).toString("base64")}`,
   },
 });
 
