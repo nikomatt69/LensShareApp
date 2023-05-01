@@ -48,7 +48,7 @@ import { BsPlay } from "react-icons/bs";
             {publications?.map((pub) => (
                 <div key={pub.id}>
                     <Link legacyBehavior href={`/post/${pub.id}`} key={pub.id}>
-                        <a  className="block h-0 border-2 border-black rounded-lg relative pb-[131%]">
+                        <a  className="block h-0 border-2 border-blue-500 rounded-lg relative pb-[131%]">
                         <video
                         autoPlay
                         preload="metadata"
