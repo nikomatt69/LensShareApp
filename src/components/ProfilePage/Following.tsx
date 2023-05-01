@@ -10,7 +10,6 @@ import SuggestedAccounts from "@/components/Sidebar/SuggestedAccounts";
 import FollowingAccounts from "@/components/Sidebar/FollowingAccounts";
 import Categories from "@/components/Sidebar/Categories";
 import { useAppStore } from "src/store/app";
-import Link from "next/link";
 
 interface Props {
     profile: Profile
@@ -62,7 +61,6 @@ const Following: FC<Props> = ({profile}) => {
             loader={<InfiniteLoader />}
             scrollableTarget="scrollableDiv"
         > 
-        <Link href={`/u/${profile.id}`} key={profile.id}/>
             <div className="divide-y">
                 {following?.map((follow) => (
                     <div className="p-5" key={follow?.profile?.id}

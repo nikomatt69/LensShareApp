@@ -31,7 +31,6 @@ import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { apolloClient } from "@/apollo-client";
 import Video from "./HomePage/Video";
-import { Analytics } from "@vercel/analytics/react";
 
 const { chains, provider } = configureChains(
   [IS_MAINNET ? polygon : polygonMumbai],
@@ -77,7 +76,6 @@ const livepeerClient = createReactClient({
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <WagmiConfig client={wagmiClient}>
-     < Analytics />
       <RainbowKitProvider chains={chains} 
       theme={lightTheme({
         ...lightTheme.accentColors.blue,
@@ -95,7 +93,6 @@ const Providers = ({ children }: { children: ReactNode }) => {
       </ApolloProvider>
       </RainbowKitProvider>
     </WagmiConfig>
-    
   );
 };
 
