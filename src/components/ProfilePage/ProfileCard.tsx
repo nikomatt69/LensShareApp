@@ -31,6 +31,7 @@ import Slug from '../UI/Slug';
 import { format } from 'url';
 import BottomNav from '../Navs/BottomNav';
 import MetaTags from '../UI/MetaTags';
+import getProfilePicture from '@/utils/functions/getProfilePicture';
 
 
 
@@ -82,7 +83,7 @@ interface Props {
                       : `${STATIC_IMAGES_URL}`}/>
                      <div className="flex border-4 rounded-3xl bg-cyan-200 border-black justify-center">
                             <Image
-                            src={getAvatar(profile)}
+                            src={getProfilePicture(profile)}
                             alt="profile picture"
                             height={80}
                             width={80}
