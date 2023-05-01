@@ -168,7 +168,7 @@ const LensSteps = () => {
         console.log("Something wrong while trying storing to IPFS");
       } else {
         let responseJSON = await response.json();
-        const contentURI =`https://ipfs-infura.io/ipfs/${responseJSON.cid}`;
+        const contentURI =`https://lens.ipfs-infura.io/ipfs/${responseJSON.cid}`;
         return contentURI;
       }
     } catch (error) {
