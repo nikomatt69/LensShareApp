@@ -12,7 +12,7 @@ const imageProxy2 = (url: string, name?: string): string => {
     return '';
   }
 
-  return name ? `${USER_CONTENT_URL}/${name}/${url}` : `${USER_CONTENT_URL}/${url}`;
+  return name ? `${USER_CONTENT_URL}/${name}/${url}` : `${USER_CONTENT_URL}/${name}/${url}`;
 };
 
 export default imageProxy2;

@@ -33,7 +33,7 @@ const MetaTags: FC<Props> = (props) => {
             <link rel="canonical" href={`${LENSTOK_URL}${router.asPath}`} />
             <meta
                 property="og:url"
-                content={`${APP_NAME}${router.asPath}`}
+                content={`${LENSTOK_URL}${router.asPath}`}
             />
             <meta property="og:type" content={meta.type} />
             <meta property="og:site_name" content={`${APP_NAME}`} />
@@ -48,7 +48,7 @@ const MetaTags: FC<Props> = (props) => {
             <meta name="twitter:site" content={`${APP_NAME}`} />
             <meta name="twitter:title" content={meta.title} />
             <meta name="twitter:description" content={meta.description} />
-            <meta property="twitter:image:src" content={meta.image} />
+            <meta property="twitter:image" content={meta.image} />
             <meta property="twitter:creator" content={APP_NAME} />
         </Head>
     )
