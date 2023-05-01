@@ -26,7 +26,7 @@ const SuggestedAccounts = () => {
               <div className="relative h-[32px] w-[32px]">
                 <Image
                   src={getAvatar(profile)}
-                  alt={profile.handle}
+                  alt={getAvatar(profile)}
                   className="rounded-full"
                   layout="fill"
                 />

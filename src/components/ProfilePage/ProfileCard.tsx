@@ -83,8 +83,8 @@ interface Props {
                       : `${STATIC_IMAGES_URL}`}/>
                      <div className="flex border-4 rounded-3xl bg-cyan-200 border-black justify-center">
                             <Image
-                            src={getProfilePicture(profile)}
-                            alt="profile picture"
+                            src={getAvatar(profile)}
+                            alt={getAvatar(profile)}
                             height={80}
                             width={80}
                             className="rounded-full intrinsic border-2 border-blue-500"
