@@ -73,29 +73,29 @@ interface Props {
 
         return (
             <div className="flex justify-center mx-4">
-             <MetaTags title={`User  • ${profile?.name} ${APP_NAME}`}/>
+             <MetaTags title={`User • ${profile?.name} on ${APP_NAME}`}/>
                 <div className="w-full  max-w-[1150px]">   
                 <Cover
                   cover={
                     profile?.coverPicture?.__typename === 'MediaSet'
                       ? profile?.coverPicture?.original?.url
                       : `${STATIC_IMAGES_URL}`}/>
-                        <div className="flex bg-cyan-200 border-4 border-t-2 h-45 border-black rounded-2xl p-2 gap-0.2">
-                            <div className="">
+                     <div className="flex border-4 rounded-3xl bg-cyan-200 border-black justify-center">
                             <Image
                             src={getAvatar(profile)}
                             alt="profile picture"
-                            height={180}
-                            width={180}
+                            height={80}
+                            width={80}
                             className="rounded-full intrinsic border-2 border-blue-500"
                             />
-                            </div>
+                        </div>
+                        <div className="flex bg-cyan-200 border-4 border-t-2 h-45 border-black rounded-2xl p-2 gap-0.2">
                             <div className='flex flex-col justify-center p-1'>
                                 <h1 className="text-lg p-1  font-bold capitalize">
                                 {profile?.name}
                                 </h1>
                                 <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" />
-                     <div className="flex-shrink-0 ">
+                     <div className="flex-shrink-0 pl-1.5 pt-1 ">
                            {itsNotMe ? (
                              <div>
                             { following ? (

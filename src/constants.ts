@@ -47,6 +47,8 @@ export const LS_KEYS = {
   MESSAGE_STORE: "message.store",
 };
 
+export const USER_CONTENT_URL = 'https://user-content.lenster.xyz';
+
 
 export const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/ogg', 'video/webm', 'video/quicktime'];
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
@@ -82,6 +84,8 @@ export const BUNDLR_NODE_URL = IS_MAINNET
 export const BUNDLR_CURRENCY = "matic";
 export const BUNDLR_CONNECT_MESSAGE = 'Sign to initialize & estimate upload...'
 
+
+
 export const VIDEO_CDN_URL = "https://cdn.livepeer.com";
 
 export const IMAGEPROXY_URL = IS_MAINNET ? "https://ik.imagekit.io/gzmagoxn0r" : "https://img.lenstube.xyz";
@@ -90,11 +94,11 @@ export const API_ORIGINS = "https://lenshareapp.xyz/*";
 
 export const ARWEAVE_WEBSITE_URL = "https://arweave.net";
 export const ARWEAVE_GATEWAY = 'https://arweave.net/';
-export const OPENSEA_MARKETPLACE_URL = IS_MAINNET
-  ? "https://opensea.io"
-  : "https://testnets.opensea.io";
+export const OPENSEA_MARKETPLACE_URL = IS_MAINNET ? "https://opensea.io" : "https://testnets.opensea.io";
 
-export const IMAGE_CDN_URL = IS_MAINNET ? "https://img.lenstube.xyz" : "https://img.lenstube.xyz";
+export const RARIBLE_URL = IS_MAINNET ? 'https://rarible.com' : 'https://testnet.rarible.com';
+
+export const IMAGE_CDN_URL = IS_MAINNET ? "https://img.lenster.xyz" : "https://img.lenstube.xyz";
 
 export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET
   ? "0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938"

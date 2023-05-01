@@ -90,7 +90,7 @@ const VideoDetail: FC<Props> = ({
   return (
     <div className="flex flex-col lg:flex-row lg:h-screen items-stretch">
       <MetaTags
-        title={`Post • ${APP_NAME}`}
+        title={`Post • on ${APP_NAME}`}
       />
       <Toaster position="bottom-right" />
       <div className="lg:flex-grow flex justify-center items-center relative bg-black">

@@ -1,4 +1,4 @@
-import {  IS_MAINNET, OPENSEA_MARKETPLACE_URL } from '@/constants';
+import {  CHAIN_ID, IS_MAINNET, OPENSEA_MARKETPLACE_URL, RARIBLE_URL } from '@/constants';
 import { Nft } from '@/utils/lens'
 import React, { FC, useRef, useState } from 'react'
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
@@ -10,9 +10,9 @@ interface Props {
 
 const NFT: FC<Props> = ({ nft }) => {
     
-    const nftURL = `${OPENSEA_MARKETPLACE_URL}/assets/${IS_MAINNET ? 'matic/' : 'mumbai/'}${nft.contractAddress}/${
+    const nftURL = `${RARIBLE_URL}/token/${nft.chainId === CHAIN_ID ? 'polygon/' : ''}${nft.contractAddress}:${
       nft.tokenId
-    }`.toLowerCase();
+    }`.toLowerCase()
 
     const STATIC_ASSETS = "https://assets.lenshareapp.xyz"
 
@@ -32,7 +32,7 @@ const NFT: FC<Props> = ({ nft }) => {
                     src={imageCdn(
                       nft.originalContent?.uri
                       ? sanitizeIpfsUrl(nft.originalContent?.uri)
-                      : `${STATIC_ASSETS}/images/placeholder.webp`,
+                      : `${STATIC_ASSETS}/placeholder.webp`,
                       'thumbnail'
                     )}
                   />
