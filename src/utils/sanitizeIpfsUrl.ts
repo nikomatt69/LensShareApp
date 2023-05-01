@@ -16,6 +16,7 @@ export const sanitizeIpfsUrl = (url: string) => {
     .replace('https://ipfs-infura.io/ipfs/', ipfsGateway)
     .replace('https://lens.ipfs-infura.io/ipfs/', ipfsGateway)
     .replace('https://lenshareapp.ipfs-infura.io/ipfs/', ipfsGateway)
+    .replace('https://lenshareapp.ipfs-infura.io/', ipfsGateway)
     .replace('ipfs://', ipfsGateway)
     .replace('ipfs://ipfs/', ipfsGateway)
     .replace('ar://', arweaveGateway)

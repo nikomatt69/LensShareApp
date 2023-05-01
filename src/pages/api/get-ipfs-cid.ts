@@ -43,7 +43,8 @@ export default async function handler(
 }
 
 async function getAsset(id: string) {
-  const response = await fetch(`https://livepeer.studio/api/asset/${id}`, {
+  const response = await fetch(`https://livepeer.studio/api/asset/${id}`,
+ {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${API_KEY}`,

@@ -31,6 +31,7 @@ import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { apolloClient } from "@/apollo-client";
 import Video from "./HomePage/Video";
+import { Analytics } from '@vercel/analytics/react';
 
 const { chains, provider } = configureChains(
   [IS_MAINNET ? polygon : polygonMumbai],
@@ -88,6 +89,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
           <ThemeProvider defaultTheme="light" attribute="class">
             {children}
           </ThemeProvider>
+          <Analytics />
           {/* <Video /> */}
         </LivepeerConfig>
       </ApolloProvider>

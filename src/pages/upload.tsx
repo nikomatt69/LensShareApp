@@ -9,7 +9,7 @@ const Upload: NextPage = () => {
   return (
     <div>
       <div>
-        <NavbarDetails />
+        <Navbar />
       </div>
       <div>
         <UploadVideo />
