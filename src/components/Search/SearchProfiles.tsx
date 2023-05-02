@@ -8,6 +8,7 @@ import Image from 'next/image'
 import getAvatar from '@/lib/getAvatar'
 import { GoVerified } from 'react-icons/go'
 import Link from 'next/link'
+import formatHandle from '@/utils/functions/formatHandle'
 
 interface Props {
     query: string | string[]
@@ -68,13 +69,13 @@ const SearchProfiles: FC<Props> = ({ query }) => {
                                     height={62}
                                     className="rounded-full cursor-pointer"
                                     src={getAvatar(profile)}
-                                    alt={profile?.handle}
+                                    alt={formatHandle(profile?.handle)}
                                 />
                             <div className=" lg:block">
                                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">{profile?.name}
                                 <GoVerified className="text-blue-400" />
                                 <p className="capitalize text-gray-400">
-                                    {profile?.handle}{""}
+                                    {formatHandle(profile?.handle)}{""}
                                 </p>
                                 </p>
                             </div>

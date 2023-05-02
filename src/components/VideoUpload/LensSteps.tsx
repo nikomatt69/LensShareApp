@@ -99,7 +99,7 @@ const LensSteps = () => {
             name: "Content-Type",
             value: uploadedVideo.videoType || "video/mp4",
           },
-          { name: "App-Name", value: "LensShare" },
+          { name: "App-Name", value: "Lenstok" },
         ];
         const upload = await uploader?.uploadData(uploadedVideo.stream as any, {
           tags: tags,
@@ -156,7 +156,7 @@ const LensSteps = () => {
             type: uploadedVideo.videoType,
           },
         ],
-        appId: "lensshare",
+        appId: "lenstok",
       };
       const response = await fetch(`${LENSTOK_URL}/api/meta-to-ipfs`, {
         method: "POST",
@@ -168,7 +168,7 @@ const LensSteps = () => {
         console.log("Something wrong while trying storing to IPFS");
       } else {
         let responseJSON = await response.json();
-        const contentURI =`https://lens.ipfs-infura.io/ipfs/${responseJSON.cid}`;
+        const contentURI = `https://infura-ipfs.io/ipfs/${responseJSON.cid}`;
         return contentURI;
       }
     } catch (error) {

@@ -21,7 +21,7 @@ import { BsPlay } from "react-icons/bs";
       request: {
         profileId: id,
         publicationTypes: ["POST"],
-        limit: 10,
+        limit: 30,
         metadata: {
           mainContentFocus: ["VIDEO"],
         },
