@@ -99,7 +99,7 @@ const LensSteps = () => {
             name: "Content-Type",
             value: uploadedVideo.videoType || "video/mp4",
           },
-          { name: "App-Name", value: "Lenstok" },
+          { name: "App-Name", value: "LensShare" },
         ];
         const upload = await uploader?.uploadData(uploadedVideo.stream as any, {
           tags: tags,
