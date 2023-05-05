@@ -50,7 +50,9 @@ import { BsPlay } from "react-icons/bs";
                     <Link href={`/post/${pub.id}`} key={pub.id}>
                         <a  className="block h-0 border-2 border-blue-500 rounded-lg relative pb-[131%]">
                         <video
+                        loop
                         autoPlay
+                        playsInline
                         preload="metadata"
                         ref={videoRef}
                         src={sanitizeIpfsUrl(pub.metadata.media[0].original.url)}

@@ -46,6 +46,8 @@ const nextConfig = {
       "4everland.io",
       "test.com",
       "ui-avatars.com",
+      "opensea.io",
+      "rarible.com",
       "lenshareapp.xyz",
       "lenshareapp.infura-ipfs.io",
       "store.lenshareapp.xyz",
