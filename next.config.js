@@ -13,6 +13,8 @@ const nextConfig = {
   swcMinify: true,
   getStaticPaths: true,
   fallback: true,
+  revalidate: true,
+  redirects: true,
   getStaticProps: true,
   webpack5: true,
   experimental: {

@@ -44,7 +44,7 @@ import { BsPlay } from "react-icons/bs";
         {publications?.length === 0 ? (
             <p className="text-center">No videos yet</p>
            ) : (
-            <div className="grid  gap-2 mr-2 mt-2 mb-2 lg:grid-cols-3 md:gap-y-6 gap-x-4 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+            <div className="grid  gap-2 ml-1 mr-2 mt-2 mb-2 lg:grid-cols-3 md:gap-y-6 gap-x-4 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
             {publications?.map((pub) => (
                 <div key={pub.id}>
                     <Link href={`/post/${pub.id}`} key={pub.id}>
