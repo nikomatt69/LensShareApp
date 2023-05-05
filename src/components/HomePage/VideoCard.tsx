@@ -62,7 +62,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
         <div className="break-word ">
           <Link href={`/u/${profile.id}`} key={profile.id}>
             <div className="flex items-center gap-2">
-              <p className="capitalize flex pl-1 gap-2 items-center md:text-md font-bold text-primary">
+              <p className="capitalize flex pl-1 pt-1 gap-2 items-center md:text-md font-bold text-primary">
                 {profile.name}{' '}
               </p>
             </div>
