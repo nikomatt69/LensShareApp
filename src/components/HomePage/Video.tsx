@@ -52,6 +52,13 @@ const Video: FC<Props> = ({ publication }) => {
     }
   }, []);
 
+  const handleOnMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
+    e.currentTarget.play();
+  };
+  const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
+    e.currentTarget.pause();
+  };
+
   return (
     <div className="lg:ml-20 md:flex gap-4 relative">
       <div
@@ -68,6 +75,9 @@ const Video: FC<Props> = ({ publication }) => {
             onClick={onVideoClick}
             ref={videoRef}
             src={getMedia(publication)}
+            // poster={video.coverURL}
+            onMouseOver={handleOnMouseOver}
+            onMouseOut={handleOnMouseOut}
             // className='lg:w-[400px] h-[300px] md:h-[400px] lg:h-[500px] w-[400px] rounded-2xl cursor-pointer bg-gray-100'
             className='lg:w-[410px] lg:h-[547px] md:h-[400px] md:w-[400px] h-[547px] w-full  xs:w-[full] xs:h-[full] shadow-inner rounded-xl
             object-cover transform transition object-contain md:rounded-lg cursor-pointer bg-black pointer-events-auto md:pointer-events-auto'

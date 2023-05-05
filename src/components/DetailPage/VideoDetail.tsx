@@ -133,7 +133,7 @@ const VideoDetail: FC<Props> = ({
                   {profile?.name}
                 </a>
               </Link>
-              <p className="capitalize font-medium text-sm text-gray-500">
+              <p prefix="@" className="capitalize font-medium text-sm text-gray-500">
                 {formatHandle(profile?.handle)}
               </p>
             </div>
