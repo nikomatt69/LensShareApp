@@ -21,6 +21,7 @@ const FollowingAccounts = () => {
     variables: { 
       request: {
           address: address,
+          first: 20,
           
       }
      },

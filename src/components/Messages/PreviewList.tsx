@@ -25,6 +25,7 @@ import { BsSearch } from 'react-icons/bs';
 import  ProfileId from '@/utils/lens';
 import Navbar from '../Navbar';
 import NavbarDetails from '../NavbarDetails';
+import Search from '../Search/Search';
 
 interface Props {
   className?: string;
@@ -206,39 +207,25 @@ const PreviewList: FC<Props> = ({ className, selectedConversationKey }) => {
                 )}
                 </div>
             </Card>
-            <Modal
-                title={`New message`}
-                icon={<BiMessageRoundedDots className="text-brand2 h-5 w-5" />}
-                size="sm"
-                show={showSearchModal}
-                onClose={() => setShowSearchModal(false)}
-            >
-                <div className="w-full px-4 pt-4">
-                    <div 
-                        className="relative w-full overflow-hidden border-2 rounded-lg  cursor-default border-gray-700  rounded-full sm:text-sm">
-                        <input
-                            className="w-full py-3 pl-12 pr-4 text-sm bg-transparent focus:outline-none"
-                            onChange={(e) => onSearchProfile(e)}
-                            placeholder="Search for someone to message..."
-                            value={keyword}
-                            
-                        />
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-4">
-                            <BsSearch
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                                
-                            />
-                        </div>
-                    </div>
-                </div>
-                {searchLoading && <div className="flex flex-row items-center py-8 justify-center">
-                    <Loader /></div>
-                }
-                {currentProfile && <Following profile={currentProfile} onProfileSelected={onProfileSelected} />}
-                
-            </Modal>
+        <div className='' >
+        <Modal
+        title={`New message`}
+        icon={<BiMessageRoundedDots className="text-brand h-5 w-5" />}
+        size="sm"
+        show={showSearchModal}
+        onClose={() => setShowSearchModal(false)}
+        >
+        <div className="w-full px-4 pb pt-4">
+          <Search
+            modalWidthClassName="max-w"
+            placeholder={`Search for someone to message...`}
+            onProfileSelected={onProfileSelected}
+          />
         </div>
+
+         </Modal>
+        </div>
+    </div>
     );
 };
 

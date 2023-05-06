@@ -20,7 +20,7 @@ const SuggestedAccounts = () => {
       </p>
 
       <div>
-        {data?.recommendedProfiles.slice(0, 8).map((profile) => (
+        {data?.recommendedProfiles.slice(0, 20).map((profile) => (
           <Link href={`/u/${profile.id}`} key={profile.id}>
             <div className="flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center">
               <div className="relative h-[32px] w-[32px]">
