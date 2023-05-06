@@ -33,7 +33,7 @@ const Messages: NextPage = () => {
 
     return (
         <>
-            <MetaTags title={`${APP_NAME} :: Messages`} />
+            <MetaTags title={`Messages • ${APP_NAME}`} />
             <div className="flex-grow w-full h-full xs:h-3/4 w-full rounded-3xl">
                 <PreviewList />
                 <div className="xs:w-3/4 sm:h-[50-vh] rounded-xl sm:w-3/4 sm:hidden sm:h-[76vh] md:w-3/4 md:hidden md:h-[80vh] lg:block xl:h-[84vh]">

@@ -50,10 +50,10 @@ const FollowingAccounts = () => {
               <div/>
               <div >
                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
-                  {formatHandle(following?.profile.handle)}
+                  {following?.profile.name}
                 </p>
                 <p className="capitalize text-gray-400 text-xs">
-                {following?.profile.name} {""}
+                {formatHandle(following?.profile.handle)} {""}
                 </p>
               </div>
             </div>

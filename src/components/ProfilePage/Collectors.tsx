@@ -7,6 +7,7 @@ import { GoVerified } from 'react-icons/go'
 import InfiniteLoader from '../UI/InfiniteLoader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import formatHandle from '@/utils/functions/formatHandle'
+import Link from 'next/link'
 
 interface Props {
     publicationId: string
@@ -55,6 +56,7 @@ const Collectors: FC<Props> = ({publicationId}) => {
         > 
             <div className="divide-y">
                 {profiles?.map((wallet) => (
+                     <Link href={`/u/${wallet?.defaultProfile?.id}`} key={wallet?.defaultProfile?.id}>
                     <div className="p-5" key={wallet?.address}>
                         {wallet?.defaultProfile ? (
                             <div className="flex gap-3  p-2 cursor-pointer font-semibold rounded items-center">
@@ -67,18 +69,21 @@ const Collectors: FC<Props> = ({publicationId}) => {
                                         alt={wallet?.defaultProfile?.handle}
                                     />
                                 </div>
-                                <div className="flex">
-                                    <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
-                                        {(wallet?.defaultProfile?.name)}
-                                      
-                                    </p>
-                                </div>
-                            </div>
+                             <div >
+                             <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
+                             {wallet?.defaultProfile?.name}
+                             </p>
+                             <p className="capitalize text-gray-400 text-xs">
+                            {formatHandle(wallet?.defaultProfile?.handle)} {""}
+                            </p>
+                       </div>
+                   </div>
                         ) : (
                             null
                         ) }
                         
                     </div>
+                    </Link>
                 ))}
             </div>
         </InfiniteScroll>

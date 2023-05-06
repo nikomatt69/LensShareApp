@@ -129,9 +129,6 @@ interface Props {
                             <ChatBubbleOvalLeftIcon  className='h-6 w-6 text-black' />
                             
                         </Link>
-                        
-
-    
                         <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>

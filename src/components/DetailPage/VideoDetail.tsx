@@ -27,6 +27,9 @@ import CollectButton from "../Buttons/Collects/CollectButton";
 import MetaTags from "../UI/MetaTags";
 import { APP_NAME } from "@/constants";
 import NavbarDetails from "../NavbarDetails";
+import Following from "../ProfilePage/Following";
+import { Modal } from "../UI/Modal";
+import Followers from "../ProfilePage/Followers";
 
 
 interface Props {
@@ -47,6 +50,8 @@ const VideoDetail: FC<Props> = ({
   const [count, setCount] = useState(publication?.stats?.totalUpvotes);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
+  const [showFollowersModal, setShowFollowersModal] = useState(false);
+  const [showFollowingModal, setShowFollowingModal] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
@@ -148,6 +153,31 @@ const VideoDetail: FC<Props> = ({
           )}
         </div>}
           </div>
+          <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
+                            <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
+                                <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
+                                <span>Following</span>
+                                <Modal
+                                title="Following"
+                                show={showFollowingModal}
+                                onClose={() => setShowFollowingModal(false)}
+                                
+                                >
+                                    <Following profile={profile as Profile} />
+                                </Modal>
+                            </div>
+                        <div className="flex items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
+                            <span className="font-bold text-sx">{profile?.stats.totalFollowers}</span>
+                            <span>Followers</span>
+                            <Modal
+                                title="Followers"
+                                show={showFollowersModal}
+                                onClose={() => setShowFollowersModal(false)}
+                            >
+                                <Followers profile={profile?.id} />
+                            </Modal>
+                        </div>
+                        </div>
           <p
             className="my-3 pb-3 text-sm text-gray-600"
             style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
