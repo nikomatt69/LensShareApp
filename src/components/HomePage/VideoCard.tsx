@@ -79,7 +79,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
           >
               {publication?.metadata?.description?.slice(0, 150)} {""}
             </div>
-            <span className="text-grey border-2 border  text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">See more</span>
+            <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">See more</span>
           </Link>
         </div>
         </div>

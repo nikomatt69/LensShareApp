@@ -37,7 +37,7 @@ const DiscoverMain = () => {
         <div className="flex  justify-center items-center p-5 border-4 border-black rounded-full bg-blue-500 w-full">
           <span className="text-xl font-semibold text-center">Discover</span>
         </div>
-        <div className="flex rounded-full border-black border-2 bg-blue-500 justify-center items-center gap-10 p-5 mb-5 border-gray-200 bg-white w-full">
+        <div className="flex rounded-full border-black border-2 bg-blue-500 justify-center items-center gap-10 p-5 mb-5  w-full">
           <span
             className={`text-md rounded-full px-2 py-2 border-2 border-black font-semibold cursor-pointer ${suggestedaccountsClass} mt-2`}
             onClick={() => setSelectedTab("suggestedaccounts")}

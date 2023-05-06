@@ -154,7 +154,7 @@ interface Props {
                             </Modal>
                         </div>
                         </div>
-                        <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5 border-2 rounded-full border-black bg-blue-100 w-full'>
+                        <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5  rounded-full border-black bg-blue-100 w-full'>
                         <span className={`text-sm  bg-blue-500  rounded-full items-center  py-3 px-3  font-semibold cursor-pointer ${videos} mt-2`} onClick={() => setShowUserVideos(true)}>
                         Videos
                         </span>
