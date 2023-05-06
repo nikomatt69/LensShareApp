@@ -1,4 +1,4 @@
-schema: ${NEXT_PUBLIC_LENS_API_MUMBAI}
+schema: ${NEXT_PUBLIC_LENS_API} # required
 
 documents: ["./src/graphql/**/*.graphql"]
 

@@ -6,6 +6,7 @@ import getAvatar from '@/lib/getAvatar'
 import { GoVerified } from 'react-icons/go'
 import InfiniteLoader from '../UI/InfiniteLoader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import formatHandle from '@/utils/functions/formatHandle'
 
 interface Props {
     publicationId: string
@@ -68,11 +69,8 @@ const Collectors: FC<Props> = ({publicationId}) => {
                                 </div>
                                 <div className="flex">
                                     <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
-                                        {wallet?.defaultProfile?.handle}
-                                        <GoVerified className="text-blue-400" />
-                                        <p className="capitalize text-black text-xs">
-                                            {wallet?.defaultProfile?.name} {""}
-                                        </p>
+                                        {(wallet?.defaultProfile?.name)}
+                                      
                                     </p>
                                 </div>
                             </div>

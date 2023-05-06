@@ -153,7 +153,7 @@ interface Props {
                                 show={showFollowersModal}
                                 onClose={() => setShowFollowersModal(false)}
                             >
-                                <Followers profileId={profile?.id} />
+                                <Followers profile={profile?.id} />
                             </Modal>
                         </div>
                         </div>

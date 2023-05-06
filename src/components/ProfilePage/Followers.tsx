@@ -11,19 +11,21 @@ import FollowingAccounts from "@/components/Sidebar/FollowingAccounts";
 import Categories from "@/components/Sidebar/Categories";
 import { useAppStore } from "src/store/app";
 import { Profile } from '@/types/lens';
+import Link from 'next/link';
+import formatHandle from '@/utils/functions/formatHandle';
 
 interface Props {
-    profileId: string
+    profile: string
     onProfileSelected?: (profile: Profile) => void;
 }
 
-const Followers: FC<Props> = ({profileId}) => {
+const Followers: FC<Props> = ({profile}) => {
 
-    const request = { profileId: profileId, limit: 50 }
+    const request = { profileId: profile, limit: 50 }
 
     const { data, loading, error, fetchMore } = useFollowersQuery({
         variables: { request },
-        skip: !profileId
+        skip: !profile
     })
 
     const followers = data?.followers?.items
@@ -51,8 +53,11 @@ const Followers: FC<Props> = ({profileId}) => {
         </div>
         )
     }
+    const areFollowers = data?.followers.items
+    console.log('Followers', Followers);
 
   return (
+
     <div className="overflow-y-auto max-h-[80vh]" id="scrollableDiv">
         <InfiniteScroll
             dataLength={followers?.length ?? 0}
@@ -62,38 +67,31 @@ const Followers: FC<Props> = ({profileId}) => {
             loader={<InfiniteLoader />}
             scrollableTarget="scrollableDiv"
         > 
-            <div className="divide-y">
-                {followers?.map((follow) => (
-                    <div className="p-5" key={follow?.wallet?.defaultProfile?.id}
-                    onClick={() => setSelectedTab("followers")}>
-                        {follow?.wallet?.defaultProfile ? (
-                            <div className="flex gap-1 hover:bg-primary p-2 cursor-pointer font-semibold rounded-full items-center">
-                                <div>
-                                    <Image
-                                        width={40}
-                                        height={40}
-                                        className="rounded cursor-pointer"
-                                        src={getAvatar(follow?.wallet?.defaultProfile)}
-                                        alt={follow?.wallet?.defaultProfile?.handle}
-                                    />
-                                </div>
-                                <div className="lg:block">
-                                    <p className="flex gap-1 items-center text-md font-bold text lowercase">
-                                        {follow?.wallet?.defaultProfile?.name}
-                                        <GoVerified className="text-blue-400" />
-                                        <p className="cpaitalize text-grey text-xs">
-                                            {follow?.wallet?.defaultProfile?.handle} {""}
-                                        </p>
-                                    </p>
-                                </div>
-                            </div>
-                        ) : (
-                            null
-                        ) }
-                        
-                    </div>
-                ))}
+        <div>
+        {areFollowers?.map((followers) => (
+          <Link href={`/u/${followers?.wallet?.defaultProfile?.id}`} key={followers?.wallet?.defaultProfile?.id}>
+            <div className="flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center">
+              <div className="relative h-[32px] w-[32px]">
+                <Image
+                  src={getAvatar(followers?.wallet?.defaultProfile)}
+                  alt="profilepic"
+                  className="rounded-full"
+                  layout="fill"
+                />
+              </div>
+              <div/>
+              <div >
+                <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
+                  {formatHandle(followers?.wallet?.defaultProfile?.handle)}
+                </p>
+                <p className="capitalize text-gray-400 text-xs">
+                {followers?.wallet?.defaultProfile?.name} {""}
+                </p>
+              </div>
             </div>
+          </Link>
+        ))}
+      </div>
         </InfiniteScroll>
     </div>
   )

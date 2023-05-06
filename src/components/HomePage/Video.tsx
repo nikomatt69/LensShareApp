@@ -67,7 +67,7 @@ const Video: FC<Props> = ({ publication }) => {
         className="rounded-xl"
       >
         <Link href={`/post/${video.id}`} key={video.id} >
-          <video 
+          <video
             loop
             autoPlay
             playsInline
@@ -75,7 +75,6 @@ const Video: FC<Props> = ({ publication }) => {
             onClick={onVideoClick}
             ref={videoRef}
             src={getMedia(publication)}
-            // poster={video.coverURL}
             onMouseOver={handleOnMouseOver}
             onMouseOut={handleOnMouseOut}
             // className='lg:w-[400px] h-[300px] md:h-[400px] lg:h-[500px] w-[400px] rounded-2xl cursor-pointer bg-gray-100'

@@ -292,13 +292,13 @@ const CollectModule: FC<Props> = ({publication, setCount, count }) => {
               {collectModule?.collectLimit && (
                 <div className="flex items-center space-x-2">
                   <CameraIcon className="w-4 h-4 text-gray-500" />
-                  <div className="font-bold">{parseInt(collectModule?.collectLimit) - count} avaliable</div>
+                  <div className="font-bold">{parseInt(collectModule?.collectLimit) - count} Avaliable</div>
                 </div>
               )}
               {collectModule?.referralFee ? (
                 <div className="flex items-center space-x-2">
                   <CurrencyDollarIcon className="w-4 h-4 text-gray-500" />
-                  <div className="font-bold">{collectModule.referralFee}% referral fee</div>
+                  <div className="font-bold">{collectModule.referralFee}% Referral fee</div>
                 </div>
               ) : null}
             </div>

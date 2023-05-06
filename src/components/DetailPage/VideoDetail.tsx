@@ -98,11 +98,13 @@ const VideoDetail: FC<Props> = ({
           className="w-auto h-auto max-w-full max-h-[450px] "
           ref={videoRef}
           onClick={onVideoClick}
+          muted
           loop
           src={getMedia(publication)}
           // poster={video.coverURL}
           controls
           playsInline
+          autoPlay
         ></video>
         <div className="absolute top-5 left-5 flex gap-3">
           <button
@@ -173,7 +175,7 @@ const VideoDetail: FC<Props> = ({
                 </span>
               </div>
               <div className="flex items-center gap-1">
-               <button className="fill-black w-9 h-9 flex lg:pb-3 justify-center items-center ">
+               <button className="fill-black w-9 h-9 flex md:pb-3 lg:pb-3 justify-center items-center ">
                   {/* // comments button goes here
                       <FaCommentDots className="w-5 h-5 scale-x-[-1]" /> */}
                   <CollectButton

@@ -62,12 +62,12 @@ const VideoCard: FC<Props> = ({ publication }) => {
         <div className="break-word ">
           <Link href={`/u/${profile.id}`} key={profile.id}>
             <div className="flex items-center gap-2">
-              <p className="capitalize flex pl-1 pt-1 gap-2 items-center md:text-md font-bold text-primary">
+              <p className="capitalize flex pl-1 pt-3 gap-1 items-center text-md font-bold text-primary">
                 {profile.name}{' '}
               </p>
             </div>
           </Link>
-          <Slug className="p-1 pl-1 text-xs text-grey-400 " slug={formatHandle(profile?.handle)} prefix="@" /> 
+          <Slug className="pl-1 text-xs text-grey-400 " slug={formatHandle(profile?.handle)} prefix="@" /> 
           <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
           <Link 
         className="pointer-events-auto "
