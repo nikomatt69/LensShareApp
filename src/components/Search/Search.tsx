@@ -91,11 +91,11 @@ const Search: FC<SearchProps> = ({
       </form>
       {pathname !== '/search' && !hideDropdown && searchText.length > 0 && (
         <div
-          className={clsx('absolute mt-2 flex w-[90%] justify-between justify-content items-center flex-col', modalWidthClassName)}
+          className={clsx('absolute mt-2 flex w-[90%] text-xs rounded-xl  justify-content items-center flex-col', modalWidthClassName)}
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="max-h-[80vh] justify-between items-center justify-content bg-white overflow-y-auto py-2">
+          <Card className="max-h-[80vh] rounded-xl text-xs items-center justify-content bg-white overflow-y-auto py-2">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />

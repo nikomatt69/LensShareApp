@@ -59,11 +59,11 @@ const SearchProfiles: FC<Props> = ({ query }) => {
     }
 
   return (
-        <div className='space-y-3'>
+        <div className='space-y-3 rounded-xl'>
             {profiles?.map((profile: Profile) => (
                 <div key={profile?.id} className="p-5">
                     <Link href={`/u/${profile?.id}`}>                           
-                        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded items-center">
+                        <div className="flex gap-3 p-2 cursor-pointer rounded-xl font-semibold rounded items-center">
                                 <Image 
                                     width={62}
                                     height={62}
@@ -73,7 +73,6 @@ const SearchProfiles: FC<Props> = ({ query }) => {
                                 />
                             <div className=" lg:block">
                                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">{profile?.name}
-                                <GoVerified className="text-blue-400" />
                                 <p className="capitalize text-gray-400">
                                     {formatHandle(profile?.handle)}{""}
                                 </p>
