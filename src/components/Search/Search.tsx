@@ -91,7 +91,7 @@ const Search: FC<SearchProps> = ({
       </form>
       {pathname !== '/search' && !hideDropdown && searchText.length > 0 && (
         <div
-          className={clsx('absolute mt-2 flex w-[80%] justify-between justify-content items-center flex-col', modalWidthClassName)}
+          className={clsx('absolute mt-2 flex w-[90%] justify-between justify-content items-center flex-col', modalWidthClassName)}
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
