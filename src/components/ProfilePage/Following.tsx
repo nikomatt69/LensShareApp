@@ -80,8 +80,8 @@ const Following: FC<Props> = ({profile}) => {
                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
                   {following?.profile.name}
                 </p>
-                <p className="capitalize text-gray-400 text-xs">
-                {following?.profile.name}{formatHandle(following?.profile.handle)}{""}
+                <p prefix="@" className="capitalize text-gray-400 text-xs">
+                {formatHandle(following?.profile.handle)}{""}
                 </p>
               </div>
             </div>

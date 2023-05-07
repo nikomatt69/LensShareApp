@@ -84,7 +84,7 @@ const Followers: FC<Props> = ({profile}) => {
                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
                 {followers?.wallet?.defaultProfile?.name}
                 </p>
-                <p className="capitalize text-gray-400 text-xs">
+                <p prefix="@"className="capitalize  text-gray-400 text-xs">
                 {formatHandle(followers?.wallet?.defaultProfile?.handle)} {""}
                 </p>
               </div>

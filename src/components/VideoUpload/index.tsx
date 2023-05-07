@@ -11,12 +11,15 @@ import {
   UPLOADED_VIDEO_BUNDLR_DEFAULTS,
 } from "@/store/app";
 
+
 import toast from "react-hot-toast";
 
 import Collect from "@/components/VideoUpload/Collect";
 import { getCollectModule } from "@/utils/getCollectModule";
 
 import { Spinner } from "../UI/Spinner";
+import MetaTags from "../UI/MetaTags";
+import { APP_NAME, LENSTOK_URL } from "@/constants";
 
 const UploadVideo = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -105,7 +108,12 @@ const UploadVideo = () => {
 
   return (
   <div className='flex w-full absolute left-0 pt-10 lg:pt-5 bg-[#d9dff1f6] justify-center'>
-  <div className=' bg-white rounded-lg flex gap-6 flex-wrap justify-center items-center p-14 pt-6 md:mb-10 '>
+  <MetaTags
+      title={`Upload Video • ${APP_NAME}`}
+      description={`Upload Video to ${APP_NAME} using the Livepeer.com network"`}
+      image="/images/icon.png"
+    />
+  <div className=' bg-white rounded-xl flex gap-6 flex-wrap justify-center items-center p-14 pt-6 md:mb-10 '>
          
           <div className="md:object-contain md:h-full">
               <div>
@@ -113,7 +121,7 @@ const UploadVideo = () => {
                <p className='text-md text-gray-400 mt-1'>Post a video to your account</p>
               </div>
               <div className="w-[250px] flex-shrink-0 border-2 border-gray-300 rounded
-                 border-dashed flex flex-col items-center p-8 mt-8 transition cursor-pointer
+                 border-dashed flex flex-col justify-center items-center p-8 mt-8 transition cursor-pointer
                   hover:border-red-300 hover:bg-gray-100">
                   {isLoading ? (
                       <p>Uploading....</p>
@@ -134,7 +142,7 @@ const UploadVideo = () => {
                                )}
                           </div>
                         ) : (
-                          <label className='cursor-pointer'>
+                          <label className='cursor-pointer rounded-xl'>
                               <div className='flex flex-col items-center justify-center'>
                                 <div className='flex flex-col justify-center items-center'>
                                   <p className='font-bold text-xl'>
@@ -149,7 +157,7 @@ const UploadVideo = () => {
                                   MP4 or WebM or ogg <br/>
                                   Make it short <br />
                                 </p>
-                                <p className="w-full rounded-full bg-blue-700 text-white p-2 text-center">
+                                <p className="w-full rounded-xl bg-blue-700 text-white p-2 text-center">
                                   Select File
                                 </p>
                               </div>
@@ -184,7 +192,7 @@ const UploadVideo = () => {
                   type='text'
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className='rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
+                  className='rounded-xl lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
                   ></input>
 
                   <label className='text-md font-medium'>Description</label>
@@ -192,10 +200,10 @@ const UploadVideo = () => {
                   type='text'
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className='rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
+                  className='rounded-xl lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
                   ></input>
 
-                  <label className='text-md font-medium'>Choose a Category</label>
+                  <label className='text-md rounded-xl font-medium'>Choose a Category</label>
                   <select
                   onChange={(e) => setCategory(e.target.value)}
                   className='outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer'
@@ -217,7 +225,7 @@ const UploadVideo = () => {
             <button
               onClick={resetToDefaults}
               type="button"
-              className="border-gray-300 border-2 text-md font-medium p-2 rounded-full w-28 lg:w-44 outline-none"
+              className="border-gray-300 border-2 text-md font-medium p-2 rounded-xl w-28 lg:w-44 outline-none"
             >
               {" "}
               Discard
@@ -227,7 +235,7 @@ const UploadVideo = () => {
             uploadedVideo.stream ? (
               <button
                 type="button"
-                className="bg-blue-700 text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
+                className="bg-blue-700 text-white text-md font-medium p-2 rounded-xl w-28 lg:w-44 outline-none"
                 disabled={uploadedVideo.loading}
               >
                 <div className="flex justify-around">
@@ -245,7 +253,7 @@ const UploadVideo = () => {
               <div>
                 <button
                   type="submit"
-                  className="bg-blue-700 text-white text-md font-medium p-2 rounded-full w-28 lg:w-44 outline-none"
+                  className="bg-blue-700 text-white text-md font-medium p-2 rounded-xl w-28 lg:w-44 outline-none"
                 >
                   Connect to Bundlr
                 </button>

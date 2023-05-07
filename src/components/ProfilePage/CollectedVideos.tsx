@@ -7,6 +7,7 @@ import React, { FC, useState } from 'react'
 import { BsPlay } from 'react-icons/bs';
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
 import NFT from './NFT';
+import { ListMultipartUploadsCommand } from '@aws-sdk/client-s3';
 
 interface Props {
   profile: Profile
@@ -16,12 +17,14 @@ const CollectedVideos: FC<Props> = ({ profile }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   
   const request = {
+    limit : 30,
     chainIds: [CHAIN_ID, polygon.id],
     ownerAddress: profile?.ownedBy,
   };
 
   const { data, loading, error } = useNftFeedQuery({
-    variables: { request }
+    variables: { request },
+    
   });
 
   const nfts = data?.nfts?.items;

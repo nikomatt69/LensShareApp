@@ -30,8 +30,8 @@ const App = ({ Component, pageProps }: AppProps) => {
          function gtag(){window.dataLayer.push(arguments);}
          gtag('js', new Date());
          gtag('config', '${GA_MEASUREMENT_ID}');
-  `}
-</Script>
+        `}
+      </Script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
     <Suspense fallback={<Loading />}>
       <Providers>

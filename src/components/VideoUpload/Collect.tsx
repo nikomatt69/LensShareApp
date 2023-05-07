@@ -7,7 +7,7 @@ const Collect = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const uploadedVideo = useAppStore((state) => state.uploadedVideo);
   const canCollects = ["Anyone", "Followers"];
-  const prizes = ["Free", "1", "5", "10"];
+  const prizes = ["Free","0.1","0.5", "1", "5", "10","20"];
   const [canCollect, setCanCollect] = useState(canCollects[0]);
   const [prize, setPrize] = useState(prizes[0]);
 
@@ -37,10 +37,10 @@ const Collect = () => {
   console.log("Prize", prize);
 
   return (
-    <div className="rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-4 mb-4">
+    <div className="rounded-xl lg:after:w-650 outline-none text-md border-2 border-gray-200 p-4 mb-4">
         {" "}
       <RadioGroup value={canCollect} onChange={setCanCollect}>
-        <RadioGroup.Label as="div" className="text-md rounded-full font-medium">
+        <RadioGroup.Label as="div" className="text-md rounded-xl font-medium">
           Who can collect your video?
         </RadioGroup.Label>
         <div>
@@ -48,7 +48,7 @@ const Collect = () => {
             <RadioGroup.Option key={canCollect} value={canCollect}>
               {({ active, checked }) => (
                 <div
-                  className={clsx("p-2 cursor-pointer rounded-full", {
+                  className={clsx("p-2 cursor-pointer rounded-xl", {
                     "bg-blue-700 text-white": checked,
                     "bg-white text-black": !checked,
                   })}
@@ -61,7 +61,7 @@ const Collect = () => {
         </div>
       </RadioGroup>
       <RadioGroup value={prize} onChange={setPrize}>
-        <RadioGroup.Label as="div" className="text-md font-medium">
+        <RadioGroup.Label as="div" className="text-md rounded-xl font-medium">
           Price (in wMatic):
         </RadioGroup.Label>
         <div className="flex flex-row ">
@@ -69,7 +69,7 @@ const Collect = () => {
             <RadioGroup.Option key={prize} value={prize}>
               {({ active, checked }) => (
                 <div
-                  className={clsx("p-2 cursor-pointer rounded-full", {
+                  className={clsx("p-2 cursor-pointer rounded-xl", {
                     "bg-blue-700 text-white": checked,
                     "bg-white text-black": !checked,
                   })}
