@@ -80,4 +80,4 @@ export const URL_PATTERN = combinePatterns([URL_SCHEME, URL_HOST, URL_PATH, URL_
   flags: 'i'
 });
 
-export const BLOCKED_TLDS = ['lens'];
+

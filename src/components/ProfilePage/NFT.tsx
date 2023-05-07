@@ -20,7 +20,7 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
   return (
     <Card>
       {nft?.originalContent?.animatedUrl ? (
-        <div className="divider h-52 sm:h-80 sm:rounded-t-[10px]">
+        <div className="divider p-1 max-w-full h-52 sm:h-80 sm:rounded-t-[10px]">
           {nft?.originalContent?.animatedUrl?.includes('.gltf') ? (
             <a href={nftURL} target="_blank" rel="noreferrer noopener">
               <div

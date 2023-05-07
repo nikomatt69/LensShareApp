@@ -98,9 +98,9 @@ const VideoDetail: FC<Props> = ({
         title={`Post • ${APP_NAME}`}
       />
       <Toaster position="bottom-right" />
-      <div className="lg:flex-grow flex justify-center items-center relative bg-black">
+      <div className="lg:flex-grow flex justify-center  items-center relative bg-black">
         <video
-          className="w-auto h-auto max-w-full max-h-[450px] "
+          className="w-auto h-auto object-cover max-w-full max-h-[450px] "
           ref={videoRef}
           onClick={onVideoClick}
           muted

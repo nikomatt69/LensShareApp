@@ -63,6 +63,7 @@ import { BsPlay } from "react-icons/bs";
                         /> 
                          <p className="absolute left-3 bottom-3 text-white font-semibold text-xs">
                         {pub.metadata.name}
+                        
                         </p> 
                         </a>
                      </Link>

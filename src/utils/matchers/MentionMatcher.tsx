@@ -2,17 +2,35 @@ import Slug from '@/components/UI/Slug';
 import { Matcher } from 'interweave';
 import Link from 'next/link';
 import { createElement } from 'react';
+import type { Profile } from '@/utils/lens';
+import formatHandle from '@/utils/functions/formatHandle';
+import { stopEventPropagation } from '@/lib/stopEventPropagation';
+import type { FC } from 'react';
+import type { MarkupLinkProps } from 'src/types/app';
 
 
-export const Mention = ({ ...props }: any) => {
+
+
+export const Mention = ({href, title = href }: any) => {
+  const handle = title?.slice(1);
+
+  if (!handle) {
+    return null;
+  }
+
+  const profile = {
+    __typename: 'Profile',
+    handle: handle,
+    name: null,
+    id: null
+  };
   return (
-    <Link
-      href={`/u/${props.display.slice(1)}`}
-      onClick={(event) => {
-        event.stopPropagation();  
-      }}
-    >
-      <Slug slug={props.display} />
+    <Link href={`/u/${formatHandle(handle)}`} onClick={stopEventPropagation}>
+      {profile?.handle ? (
+          <Slug slug={formatHandle(handle)} prefix="@" />
+      ) : (
+        <Slug slug={formatHandle(handle)} prefix="@" />
+      )}
     </Link>
   );
 };

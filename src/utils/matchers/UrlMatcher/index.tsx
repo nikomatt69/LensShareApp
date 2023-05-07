@@ -2,7 +2,7 @@ import type { ChildrenNode, MatchResponse, Node } from 'interweave';
 import { Matcher } from 'interweave';
 import { createElement } from 'react';
 
-import { BLOCKED_TLDS, URL_PATTERN } from './constants';
+import { URL_PATTERN } from './constants';
 
 interface UrlProps {
   children: ChildrenNode;
@@ -42,10 +42,6 @@ export class UrlMatcher extends Matcher<UrlProps> {
     if (response?.valid) {
       const { host } = response;
       const tld = host.slice(host.lastIndexOf('.') + 1).toLowerCase();
-
-      if (BLOCKED_TLDS.includes(tld)) {
-        response.valid = false;
-      }
     }
 
     return response;

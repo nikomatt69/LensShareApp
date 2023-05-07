@@ -8,9 +8,9 @@ export default async function handle(
   if (req.method === "POST") {
     console.log("REQUEST FROOOM", req.body.url);
     const response = await fetch(req.body.url);
-    //console.log("RESPONSE", response);
+    console.log("RESPONSE", response);
     const jsonLit = await response.json();
-    // console.log("JsonLit", jsonLit);
+    console.log("JsonLit", jsonLit);
     return res.status(200).json(jsonLit);
   } else {
     return res

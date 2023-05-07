@@ -12,6 +12,12 @@ import type {
   TimedFeeCollectModuleSettings,
 } from "./lens";
 
+export interface MarkupLinkProps {
+  href?: string;
+  title?: string;
+}
+
+
 export type CollectModuleType = {
   isTimedFeeCollect?: boolean;
   isFreeCollect?: boolean;
