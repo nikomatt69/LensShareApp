@@ -5,6 +5,8 @@ import type { NextPage } from 'next';
 import Custom404 from 'src/pages/404';
 import PreviewList from './PreviewList';
 import {useAppStore} from 'src/store/app';
+import ProfileRender from '../ProfilePage/ProfileRender';
+
 
 
 const Messages: NextPage = () => {
@@ -22,7 +24,6 @@ const Messages: NextPage = () => {
                 <PreviewList />
                 <div className="xs:w-3/4 rounded-xl sm:w-3/4 sm:hidden sm:h-[76vh] md:w-3/4 md:hidden md:h-[80vh] lg:block xl:h-[84vh]">
                     <Card className=" bg-grey-300 flex-grow xs:w-full xs:h-full !rounded-tr-xl !rounded-br-xl !rounded-none">
-               
                     </Card>
                 </div>
             </div>

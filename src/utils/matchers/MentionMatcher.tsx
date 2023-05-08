@@ -7,8 +7,8 @@ import formatHandle from '@/utils/functions/formatHandle';
 import { stopEventPropagation } from '@/lib/stopEventPropagation';
 import type { FC } from 'react';
 import type { MarkupLinkProps } from 'src/types/app';
-
-
+import { title } from 'process';
+import { id } from 'ethers/lib/utils.js';
 
 
 export const Mention = ({href, title = href }: any) => {
@@ -25,7 +25,7 @@ export const Mention = ({href, title = href }: any) => {
     id: null
   };
   return (
-    <Link href={`/u/${formatHandle(handle)}`} onClick={stopEventPropagation}>
+    <Link href={`/u/${[id]}`} onClick={stopEventPropagation}>
       {profile?.handle ? (
           <Slug slug={formatHandle(handle)} prefix="@" />
       ) : (
@@ -40,7 +40,14 @@ export class MentionMatcher extends Matcher {
   }
 
   asTag(): string {
-    return 'a';
+    const profile = title?.slice(1);
+    return (
+      
+      `${<Link href={`/u/${[id]}`} onClick={stopEventPropagation}>
+    
+      <Slug slug={profile} prefix="@" />
+    
+  </Link>}`);
   }
 
   match(value: string) {

@@ -12,20 +12,26 @@ interface SingleNftProps {
 
 const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
   const nftURL = linkToDetail
-    ? `${RARIBLE_URL}/token/${nft.chainId === CHAIN_ID ? 'polygon/' : ''}${nft.contractAddress}:${
+    ? `${RARIBLE_URL}/token/polygon/${nft.contractAddress}:${
         nft.tokenId
       }`.toLowerCase()
-    : undefined;
+    : `${RARIBLE_URL}/token/polygon/${nft.contractAddress}:${
+      nft.tokenId
+    }`.toLowerCase();
 
   return (
     <Card>
       {nft?.originalContent?.animatedUrl ? (
-        <div className="divider p-1 max-w-full h-52 sm:h-80 sm:rounded-t-[10px]">
+        <div className="grid gap-2 p-1 rounded-xl mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
           {nft?.originalContent?.animatedUrl?.includes('.gltf') ? (
             <a href={nftURL} target="_blank" rel="noreferrer noopener">
               <div
                 style={{
-                  backgroundImage: `url(${`${USER_CONTENT_URL}/placeholder.webp`})`,
+                  backgroundImage: `url(${
+                    nft.originalContent.uri
+                      ? sanitizeDStorageUrl(nft.originalContent.uri)
+                      : `${USER_CONTENT_URL}/placeholder.webp`
+                  })`,
                   backgroundSize: 'contain',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat'
@@ -43,7 +49,7 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
       ) : (
         <a href={nftURL} target="_blank" rel="noreferrer noopener">
           <div
-            className="divider h-52 sm:h-80 sm:rounded-t-[10px]"
+           
             style={{
               backgroundImage: `url(${
                 nft.originalContent.uri
@@ -57,7 +63,7 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
           />
         </a>
       )}
-      <div className="space-y-1 p-5">
+      <div className="grid gap-2 rounded mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
         {nft.collectionName && <div className="lt-text-gray-500 truncate text-sm">{nft.collectionName}</div>}
         <div className="truncate">
           <a className="font-bold" href={nftURL} target="_blank" rel="noreferrer noopener">

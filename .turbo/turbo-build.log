@@ -18,6 +18,7 @@ warn  - Experimental features are not covered by semver, and may cause unexpecte
 
 info  - Linting and checking validity of types...
 info  - Creating an optimized production build...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (679kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 warn  - Compiled with warnings
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
@@ -26,7 +27,7 @@ Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Eve
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
@@ -34,7 +35,7 @@ Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Eve
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
@@ -42,7 +43,7 @@ Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Eve
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
@@ -50,7 +51,7 @@ Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Eve
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
@@ -58,7 +59,7 @@ Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
@@ -66,7 +67,7 @@ Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 
 Import trace for requested module:
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
 ./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
+./src/components/VideoUpload/index.tsx
 
 info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -77,7 +78,6 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -87,6 +87,7 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -101,41 +102,42 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 info  - Generating static pages (0/11)
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 info  - Generating static pages (2/11)
 info  - Generating static pages (5/11)
 info  - Generating static pages (8/11)
 info  - Generating static pages (11/11)
 info  - Finalizing page optimization...
 
-Route (pages)                                Size     First Load JS
-┌ ○ /                                        6.21 kB         929 kB
-├   /_app                                    0 B            82.7 kB
-├ ○ /404                                     1.3 kB         86.1 kB
-├ ℇ /api/corn/route                          0 B            82.7 kB
-├ λ /api/get-encrypted                       0 B            82.7 kB
-├ λ /api/get-ipfs-cid                        0 B            82.7 kB
-├ λ /api/hello                               0 B            82.7 kB
-├ λ /api/meta-to-ipfs                        0 B            82.7 kB
-├ ℇ /api/og                                  0 B            82.7 kB
-├ λ /api/revalidate                          0 B            82.7 kB
-├ λ /api/store-encrypted                     0 B            82.7 kB
-├ ○ /discover                                9.75 kB         838 kB
-├ ○ /latest                                  6.31 kB         929 kB
-├ ○ /messages (351 ms)                       4.29 kB        1.06 MB
-├ ○ /messages/[...conversationKey] (311 ms)  13.7 kB        1.08 MB
-├ ○ /post/[id]                               453 kB         1.33 MB
-├ ○ /search                                  6.76 kB         924 kB
-├ ○ /u/[id]                                  6.64 kB         866 kB
-└ ○ /upload                                  55.8 kB         900 kB
-+ First Load JS shared by all                91.3 kB
-  ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
-  ├ chunks/main-d8fa6b61425a8e6e.js          27.4 kB
-  ├ chunks/pages/_app-2912ea16cbf52622.js    6.92 kB
-  ├ chunks/webpack-7a61be3cbfb435c4.js       3.01 kB
-  └ css/387dbe2577017a27.css                 8.58 kB
+Route (pages)                              Size     First Load JS
+┌ ○ /                                      6.21 kB         929 kB
+├   /_app                                  0 B            82.7 kB
+├ ○ /404                                   1.3 kB         86.1 kB
+├ ℇ /api/corn/route                        0 B            82.7 kB
+├ λ /api/get-encrypted                     0 B            82.7 kB
+├ λ /api/get-ipfs-cid                      0 B            82.7 kB
+├ λ /api/hello                             0 B            82.7 kB
+├ λ /api/meta-to-ipfs                      0 B            82.7 kB
+├ ℇ /api/og                                0 B            82.7 kB
+├ λ /api/revalidate                        0 B            82.7 kB
+├ λ /api/store-encrypted                   0 B            82.7 kB
+├ ○ /discover                              9.75 kB         838 kB
+├ ○ /latest                                6.31 kB         929 kB
+├ ○ /messages (364 ms)                     4.29 kB        1.06 MB
+├ ○ /messages/[...conversationKey]         13.8 kB        1.08 MB
+├ ○ /post/[id]                             453 kB         1.33 MB
+├ ○ /search                                6.76 kB         924 kB
+├ ○ /u/[id] (303 ms)                       6.6 kB          866 kB
+└ ○ /upload                                50.3 kB         895 kB
++ First Load JS shared by all              91.3 kB
+  ├ chunks/framework-1f1fb5c07f2be279.js   45.4 kB
+  ├ chunks/main-d8fa6b61425a8e6e.js        27.4 kB
+  ├ chunks/pages/_app-82047ece0d54f4c0.js  6.94 kB
+  ├ chunks/webpack-85de7e88470a9741.js     3.01 kB
+  └ css/387dbe2577017a27.css               8.58 kB
 
 ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 20.54s.
+Done in 18.51s.

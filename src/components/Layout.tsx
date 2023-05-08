@@ -83,7 +83,7 @@ const Layout = ({ children }: Props) => {
     setMounted(true);
   }, []);
 
-  if (loading || !mounted) return <div><img src="./images/splash.png" alt="" /></div>;
+  if (loading || !mounted) return <div><img src="./images/icon.png" alt="" /></div>;
   return (
     <div>
       {" "}

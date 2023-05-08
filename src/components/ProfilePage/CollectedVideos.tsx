@@ -17,7 +17,7 @@ const CollectedVideos: FC<Props> = ({ profile }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   
   const request = {
-    limit : 30,
+    limit : 50,
     chainIds: [CHAIN_ID, polygon.id],
     ownerAddress: profile?.ownedBy,
   };
@@ -38,7 +38,7 @@ const CollectedVideos: FC<Props> = ({ profile }) => {
         <div className="grid gap-2 rounded mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
           {nfts?.map((nft) => (
             <>
-              <div key={nft.chainId}>
+              <div className='object-contain' key={nft.chainId}>
                 <NFT nft={nft as Nft} />
               </div>
             </>

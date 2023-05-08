@@ -67,7 +67,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
               </p>
             </div>
           </Link>
-          <Slug className="pl-1 text-xs text-grey-400 " slug={formatHandle(profile?.handle)} prefix="@" /> 
+          <Slug className="pl-1 text-xs text-grey-500 " slug={formatHandle(profile?.handle)} prefix="@" /> 
           <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
           <Link 
         className="pointer-events-auto "

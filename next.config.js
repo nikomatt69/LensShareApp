@@ -5,12 +5,11 @@
 
 
 /** @type {import('next').NextConfig} */
-
+const {i18n} = require("./next-i18next.config");
 const nextConfig = {
   reactStrictMode: true,
   getServerSideProps: true,
   getInitialProps: true,
-  swcMinify: true,
   getStaticPaths: true,
   fallback: true,
   revalidate: true,

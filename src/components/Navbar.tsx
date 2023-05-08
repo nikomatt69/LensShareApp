@@ -49,7 +49,7 @@ const Navbar: FC = () => {
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
          rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <VideoCameraIcon className='h-6 h-6 text-black' />{' '}
+         <VideoCameraIcon className='h-6 text-black' />{' '}
          <span className='hidden '>Upload </span>
         </button>  
       </Link>

@@ -50,6 +50,7 @@ const MetaTags: FC<Props> = (props) => {
             <meta name="twitter:description" content={meta.description} />
             <meta property="twitter:image" content={meta.image} />
             <meta property="twitter:creator" content={APP_NAME} />
+            
         </Head>
     )
 }

@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 import MetaTags from "@/components/UI/MetaTags";
 import { STATIC_IMAGES_URL } from "@/constants";
 import Script from "next/script";
+import React from "react";
 
 const Providers = lazy(() => import("@/components/Providers"));
 const Layout = lazy(() => import("@/components/Layout"));
@@ -33,6 +34,8 @@ const App = ({ Component, pageProps }: AppProps) => {
         `}
       </Script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  
+   <React.StrictMode>
     <Suspense fallback={<Loading />}>
       <Providers>
         <Layout>
@@ -41,6 +44,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Providers>
       <Analytics/>
     </Suspense>
+    </React.StrictMode>
     </div>
   );
 };

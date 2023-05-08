@@ -1,0 +1,8 @@
+apiKey: 4f42A7b8bcD908290c824bB5D9AB14fce60128a89981fD54
+downloadFormat: single-language-json
+downloadPath: ./public/locales/{lang}/{ns}.json
+
+uploadFormat: single-language-json
+uploadPath: ./public/locales/{lang}/{ns}.json
+uploadOptions:
+  - REPLACE_TRANSLATION_IF_FOUND # used to override translation from JSON files on upload

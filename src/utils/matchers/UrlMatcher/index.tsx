@@ -1,8 +1,10 @@
 import type { ChildrenNode, MatchResponse, Node } from 'interweave';
 import { Matcher } from 'interweave';
 import { createElement } from 'react';
-
+import Profile from '@/utils/lens'
 import { URL_PATTERN } from './constants';
+import formatHandle from '@/utils/functions/formatHandle';
+import { title } from 'process';
 
 interface UrlProps {
   children: ChildrenNode;
@@ -12,9 +14,10 @@ interface UrlProps {
 
 const Url = ({ children, url }: UrlProps) => {
   let href = url;
+  const handle = title?.slice(1);
 
   if (!href.match(/^https?:\/\//)) {
-    href = `http://${href}`;
+    href = `/u/${formatHandle(handle)}`;
   }
 
   return (
