@@ -5,18 +5,32 @@
 /.pnp
 .pnp.js
 
+/storybook
+/storybook-static
+
 # testing
 /coverage
 
 # next.js
 /.next/
 /out/
+
+/storybook
+/storybook-static
+
 # production
 /build
+/simplelocalize.yml
+.storybook
+.storybook-static
+
 
 # misc
 .DS_Store
 *.pem
+
+/storybook
+/storybook-static
 
 # debug
 npm-debug.log*
@@ -31,12 +45,20 @@ yarn-error.log*
 .env.example
 # vercel
 .vercel
-
+src/simplelocalize.yml
 src/sitemap-generator.js
 src/sitemap-routes.js
+
+src/storybook
+src/storybook-static
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 /hop.yml
 .yarn.lock.turbo
+./simplelocalize.yml
+
+/storybook
+/storybook-static
+.turbo.json

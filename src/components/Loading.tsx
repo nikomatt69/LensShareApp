@@ -1,19 +1,23 @@
 import type { FC } from "react";
 import logo from "@/images/Lenstoklogo.png";
 import Image from "next/image";
+import imageProxy from "@/lib/imageProxy";
+import { STATIC_ASSETS_URL } from "@/constants";
+import MetaTags from "./UI/MetaTags";
 
 const Loading: FC = () => {
   return (
-    <div className="grid items-center justify-content h-screen place-items-center">
-       <Image
-            className="w-28 h-28"
-            height={112}
-            width={112}
-            src={logo}
-            alt="logo"
-            layout="responsive"
-          />
-    </div>
+    <div className="grid h-screen place-items-center">
+  <MetaTags />
+  <div className="animate-bounce">
+    <img
+      src={imageProxy(`${STATIC_ASSETS_URL}/images/icon.png`)}
+      draggable={false}
+      className="h-12 w-12 md:h-16 md:w-16"
+      alt="lensshare"
+    />
+  </div>
+</div>
   );
 };
 

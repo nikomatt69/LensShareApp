@@ -6,6 +6,11 @@ import { useQuery } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
 import { CHAIN_ID } from "@/constants";
 import { useAccount, useDisconnect, useNetwork } from "wagmi";
+import MetaTags from "./UI/MetaTags";
+import imageCdn from "@/lib/imageCdn";
+import { STATIC_ASSETS_URL } from "@/constants";
+import imageProxy from "@/lib/imageProxy";
+
 
 interface Props {
   children: ReactNode;
@@ -83,7 +88,17 @@ const Layout = ({ children }: Props) => {
     setMounted(true);
   }, []);
 
-  if (loading || !mounted) return <div><img src="./images/icon.png" alt="" /></div>;
+  if (loading || !mounted) return <div className="grid h-screen place-items-center">
+  <MetaTags />
+  <div className="animate-bounce">
+    <img
+      src={imageProxy(`${STATIC_ASSETS_URL}/images/icon.png`)}
+      draggable={false}
+      className="h-12 w-12 md:h-16 md:w-16"
+      alt="lensshare"
+    />
+  </div>
+</div>;
   return (
     <div>
       {" "}
