@@ -4,6 +4,7 @@ import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import type { FC } from 'react';
 import { CHAIN_ID } from 'src/constants';
 import { Card } from '@/components/UI/Card';
+import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 
 interface Props {
   nft: Nft;
@@ -12,12 +13,8 @@ interface Props {
 
 const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
   const nftURL = 
-     `${RARIBLE_URL}/token/polygon/${nft.contractAddress}/${
-        nft.tokenId
-      }`.toLowerCase()
-    || `${OPENSEA_MARKETPLACE_URL}/assets/${IS_MAINNET ? 'matic/' : 'mumbai/'}${nft.contractAddress}/${
-      nft.tokenId
-    }`.toLowerCase() 
+  `${RARIBLE_URL}/token/polygon/${nft.contractAddress}:${nft.tokenId}`.toLowerCase()
+  || `${OPENSEA_MARKETPLACE_URL}/assets/${IS_MAINNET ? 'matic' : 'mumbai'}/${nft.contractAddress}/${nft.tokenId}`.toLowerCase();
 
 
   return (
@@ -30,8 +27,8 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
                 style={{
                   backgroundImage: `url(${
                     nft.originalContent.uri
-                      ? sanitizeDStorageUrl(nft.originalContent.uri)
-                      : `${STATIC_ASSETS_URL}/placeholder.webp`
+                      ? sanitizeIpfsUrl(nft.originalContent.uri)
+                      : `${STATIC_ASSETS_URL}/images/placeholder.webp`
                   })`,
                   backgroundSize: 'contain',
                   backgroundPosition: 'center center',
@@ -43,7 +40,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
             <iframe
               title={`${nft.contractAddress}:${nft.tokenId}`}
               sandbox=""
-              src={sanitizeDStorageUrl(nft?.originalContent?.animatedUrl)}
+              src={sanitizeIpfsUrl(nft?.originalContent?.animatedUrl)}
             />
           )}
         </div>
@@ -54,8 +51,8 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
             style={{
               backgroundImage: `url(${
                 nft.originalContent.uri
-                  ? sanitizeDStorageUrl(nft.originalContent.uri)
-                  : `${STATIC_ASSETS_URL}/placeholder.webp`
+                  ? sanitizeIpfsUrl(nft.originalContent.uri)
+                  : `${STATIC_ASSETS_URL}/images/placeholder.webp`
               })`,
               backgroundSize: 'contain',
               backgroundPosition: 'center center',

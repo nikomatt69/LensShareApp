@@ -8,6 +8,7 @@ import { BsPlay } from 'react-icons/bs';
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
 import NFT from './NFT';
 
+
 interface Props {
   profile: Profile
 }
