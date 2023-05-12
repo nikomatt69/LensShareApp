@@ -38,13 +38,13 @@ const MessageTile: FC<MessageTileProps> = ({ message, profile, currentProfile })
         {address !== message.senderAddress && (
           <img
             src={getAvatar(profile)}
-            className="h-12 w-12 border-2 border bg-gray-200 rounded-full mr-2"
+            className="h-12 w-12 border-2  bg-gray-200 rounded-full mr-2"
             alt={profile?.handle}
           />
         )}
         <div
           className={clsx(
-            address === message.senderAddress ? 'bg-brand-500' : 'bg-blue-500 bg-blue-500',
+            address === message.senderAddress ? 'bg-blue-400' : 'bg-blue-500',
             ' border-2 border-black pt-1 rounded-3xl w-full'
           )}
         >
@@ -136,7 +136,7 @@ const MessagesList: FC<MessageListProps> = ({
           <InfiniteScroll
             dataLength={messages.length}
             next={fetchNextMessages}
-            className="flex flex-col-reverse overflow-y-auto overflow-x-hidden"
+            className="flex flex-col-reverse overflow-y-hidden overflow-x-hidden"
             inverse
             endMessage={<ConversationBeginningNotice />}
             hasMore={hasMore}

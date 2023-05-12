@@ -1,23 +1,24 @@
-import { RARIBLE_URL, STATIC_IMAGES_URL, USER_CONTENT_URL } from '@/constants';
+import { RARIBLE_URL, STATIC_IMAGES_URL, USER_CONTENT_URL,OPENSEA_MARKETPLACE_URL, IS_MAINNET, STATIC_ASSETS_URL } from '@/constants';
 import type { Nft } from '@/utils/lens';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import type { FC } from 'react';
 import { CHAIN_ID } from 'src/constants';
 import { Card } from '@/components/UI/Card';
 
-interface SingleNftProps {
+interface Props {
   nft: Nft;
   linkToDetail?: boolean;
 }
 
-const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
-  const nftURL = linkToDetail
-    ? `${RARIBLE_URL}/token/polygon/${nft.contractAddress}:${
+const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
+  const nftURL = 
+     `${RARIBLE_URL}/token/polygon/${nft.contractAddress}/${
         nft.tokenId
       }`.toLowerCase()
-    : `${RARIBLE_URL}/token/polygon/${nft.contractAddress}:${
+    || `${OPENSEA_MARKETPLACE_URL}/assets/${IS_MAINNET ? 'matic/' : 'mumbai/'}${nft.contractAddress}/${
       nft.tokenId
-    }`.toLowerCase();
+    }`.toLowerCase() 
+
 
   return (
     <Card>
@@ -30,7 +31,7 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
                   backgroundImage: `url(${
                     nft.originalContent.uri
                       ? sanitizeDStorageUrl(nft.originalContent.uri)
-                      : `${USER_CONTENT_URL}/placeholder.webp`
+                      : `${STATIC_ASSETS_URL}/placeholder.webp`
                   })`,
                   backgroundSize: 'contain',
                   backgroundPosition: 'center center',
@@ -48,13 +49,13 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
         </div>
       ) : (
         <a href={nftURL} target="_blank" rel="noreferrer noopener">
-          <div
+          <img
            
             style={{
               backgroundImage: `url(${
                 nft.originalContent.uri
                   ? sanitizeDStorageUrl(nft.originalContent.uri)
-                  : `${USER_CONTENT_URL}/placeholder.webp`
+                  : `${STATIC_ASSETS_URL}/placeholder.webp`
               })`,
               backgroundSize: 'contain',
               backgroundPosition: 'center center',
@@ -75,4 +76,4 @@ const SingleNft: FC<SingleNftProps> = ({ nft, linkToDetail = true }) => {
   );
 };
 
-export default SingleNft;
+export default NFT;

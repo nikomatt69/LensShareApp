@@ -67,7 +67,7 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
           className="hidden md:hidden sm:hidden xs:hidden"
           selectedConversationKey={conversationKey} />
           <div className=" flex-auto xs:w-[100vh] w-full h-full mb-0 sm:w-[100vh]  md:h-[100vh] xl:h-[100vh]">
-          <Card className="flex-1 w-full h-full !rounded-tr-lg !rounded-br-lg ">
+          <Card className="flex-1 overflow-x-auto overflow-y-auto w-full h-full !rounded-tr-lg !rounded-br-lg ">
               {showLoading ? (
                   <div className="flex h-full flex-grow justify-center items-center">
                       <Loader message="Loading messages" />
