@@ -10,6 +10,7 @@ const nextConfig = {
   getServerSideProps: true,
   getInitialProps: true,
   getStaticPaths: true,
+  swcMinify: true,
   fallback: true,
   revalidate: true,
   redirects: true,

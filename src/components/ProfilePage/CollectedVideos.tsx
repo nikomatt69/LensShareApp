@@ -33,7 +33,7 @@ const CollectedVideos: FC<Props> = ({ profile }) => {
       {nfts?.length === 0 ? (
         <p className=" rounded text-center">This user has no NFTs</p>
         ) : (
-        <div className="grid gap-2 rounded mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+        <div className="grid gap-2 rounded-xl mr-2 mt-2 object-contain object-center lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
           {nfts?.map((nft) => (
             <>
               <div key={nft.chainId}>

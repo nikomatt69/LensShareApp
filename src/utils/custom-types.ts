@@ -157,4 +157,10 @@ export interface NewLenstokAttachment extends Omit<LenstokAttachment, 'item'> {
   previewItem?: string;
 }
 
+
+export enum CustomNotificationsFilterEnum {
+  HIGH_SIGNAL = 'HighSignal',
+  ALL_NOTIFICATIONS = 'AllNotifications'
+}
+
 export const LenstokMainContentFocus = [PublicationMainFocus.Image , PublicationMainFocus.Video];

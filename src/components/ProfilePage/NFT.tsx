@@ -20,7 +20,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
   return (
     <Card>
       {nft?.originalContent?.animatedUrl ? (
-        <div className="grid gap-2 p-1 rounded-xl mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+        <div className="grid gap-2 p-1 rounded-xl object-center object-contain mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
           {nft?.originalContent?.animatedUrl?.includes('.gltf') ? (
             <a href={nftURL} target="_blank" rel="noreferrer noopener">
               <div
@@ -54,14 +54,14 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
                   ? sanitizeIpfsUrl(nft.originalContent.uri)
                   : `${STATIC_ASSETS_URL}/images/placeholder.webp`
               })`,
-              backgroundSize: 'contain',
-              backgroundPosition: 'center center',
+              backgroundSize: ' object-contain contain',
+              backgroundPosition: 'center object-contain center',
               backgroundRepeat: 'no-repeat'
             }}
           />
         </a>
       )}
-      <div className="grid gap-2 rounded mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+      <div className="grid gap-2 rounded-xl object-center object-contain mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
         {nft.collectionName && <div className="lt-text-gray-500 truncate text-sm">{nft.collectionName}</div>}
         <div className="truncate">
           <a className="font-bold" href={nftURL} target="_blank" rel="noreferrer noopener">

@@ -1,4 +1,5 @@
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
+import { CustomFiltersTypes } from '@/utils/lens'
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === "mainnet";
 
@@ -67,6 +68,8 @@ export const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz';
 export const STATIC_IMAGES_URL = `${STATIC_ASSETS_URL}/images`;
 
 export const FALLBACK_COVER_URL=`${STATIC_ASSETS_URL}/images/logo.png`;
+
+export const LENS_CUSTOM_FILTERS = [CustomFiltersTypes.Gardeners]
 
 export const RELAY_ON = true
 export const ERROR_MESSAGE = "Something went wrong!";

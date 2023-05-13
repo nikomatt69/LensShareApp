@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useState } from 'react';
 import ButtonTest from '../Login/ButtonTest';
 import LoginWalletMobile from '../Login/LoginWalletMobile';
-import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon, BellIcon } from '@heroicons/react/24/outline';
 import router from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 
@@ -60,6 +60,16 @@ const BottomNav: React.FC = () => {
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </button>
       </Link>
+
+      <div>
+      {/* //latest */}
+     <Link href='/notifications'>
+       <button
+       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
+        <BellIcon className="text-brand-500 h-6 w-6" />{' '}
+        </button>
+      </Link>
+      </div>
       <div>
       {/* //messages */}
      <Link href='/messages'>

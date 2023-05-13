@@ -30,6 +30,7 @@ import NavbarDetails from "../NavbarDetails";
 import Following from "../ProfilePage/Following";
 import { Modal } from "../UI/Modal";
 import Followers from "../ProfilePage/Followers";
+import ReportModal from "./ReportModal";
 
 
 interface Props {
@@ -52,6 +53,7 @@ const VideoDetail: FC<Props> = ({
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
+  const [showReport, setShowReport] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
@@ -178,13 +180,20 @@ const VideoDetail: FC<Props> = ({
                             </Modal>
                         </div>
                         </div>
-          <p
-            className="my-3 pb-3 text-sm text-gray-600"
-            style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
-          >
-            {publication?.metadata.description?.slice(0, 500)}
-          </p>
-
+                        <div className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowReport(!showReport) }} >
+                        <span>Report</span>
+                        <ReportModal
+                         show={showReport}
+                         setShowReport={setShowReport}
+                         video={publication}
+                        />
+                      </div>
+                      <p
+                        className="my-3 pb-3 text-sm text-gray-600"
+                        style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
+                      >
+                      {publication?.metadata.description?.slice(0, 500)}
+                    </p>
           {/* BUTTONS */}
           <div className="flex justify-between items-center">
             <div className="flex gap-5">

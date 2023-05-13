@@ -72,10 +72,14 @@ interface AppState {
   userSigNonce: number;
   setUserSigNonce: (userSigNonce: number) => void;
   getBundlrInstance: (signer: FetchSignerResult) => Promise<WebBundlr | null>;
+  hasNewNotification: boolean
+  setHasNewNotification: (value: boolean) => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
   showCreateBoard: false,
+  hasNewNotification: false,
+  setHasNewNotification: (b) => set({ hasNewNotification: b }),
   setShowCreateBoard: (showCreateBoard) => set({ showCreateBoard }),
   uploadedVideo: UPLOADED_VIDEO_FORM_DEFAULTS,
   setUploadedVideo: (videoData) =>

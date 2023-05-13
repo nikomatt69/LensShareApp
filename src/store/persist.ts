@@ -1,6 +1,7 @@
 import { BoardType, QueuedCommentType, QueuedPublicationType } from '@/utils/custom-types2'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { CustomNotificationsFilterEnum } from '@/utils/custom-types'
 
 type Tokens = {
   accessToken: string | null
@@ -12,7 +13,10 @@ interface AppPerisistState {
   refreshToken: Tokens['refreshToken']
   currentProfileId: string | null
   sidebarCollapsed: boolean
+  latestNotificationId: string
   notificationCount: number;
+  selectedNotificationsFilter: CustomNotificationsFilterEnum
+  setLatestNotificationId: (id: string) => void
   setNotificationCount: (notificationCount: number) => void;
   queuedComments: QueuedCommentType[]
   queuedPublications: QueuedPublicationType[]
@@ -24,12 +28,16 @@ interface AppPerisistState {
   signIn: (tokens: { accessToken: string; refreshToken: string }) => void
   signOut: () => void
   hydrateAuthTokens: () => Tokens
+  setSelectedNotificationsFilter: (
+    filter: CustomNotificationsFilterEnum
+  ) => void
 }
 
 export const usePersistStore = create(
   persist<AppPerisistState>(
     (set, get) => ({
       accessToken: null,
+      latestNotificationId: '',
       refreshToken: null,
       currentProfileId: null,
       sidebarCollapsed: true,
@@ -38,6 +46,10 @@ export const usePersistStore = create(
       queuedComments: [],
       queuedPublications: [],
       currentBoard: [],
+      setLatestNotificationId: (latestNotificationId) =>set({ latestNotificationId }),
+      selectedNotificationsFilter: CustomNotificationsFilterEnum.HIGH_SIGNAL,
+      setSelectedNotificationsFilter: (selectedNotificationsFilter) =>
+      set({ selectedNotificationsFilter }),
       setCurrentBoard: (currentBoard) => set({ currentBoard }),
       setQueuedComments: (queuedComments) => set({ queuedComments }),
       setQueuedPublications: (queuedPublications) => set({ queuedPublications }),
