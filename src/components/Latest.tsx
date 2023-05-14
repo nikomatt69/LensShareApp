@@ -61,7 +61,7 @@ const Latest = () => {
         variables: {
           request: {
             cursor: pageInfo?.next,
-            ...Request
+           
           }
         }
       })
@@ -88,7 +88,7 @@ const Latest = () => {
         dataLength={publications?.length ?? 0}
         next={() => {}}
         hasMore={true}
-        loader={<LoadingMore/>}
+        loader={<Loading/>}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>

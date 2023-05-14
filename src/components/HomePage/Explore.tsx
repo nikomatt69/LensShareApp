@@ -65,7 +65,7 @@ const Explore = () => {
         variables: {
           request: {
             cursor: pageInfo?.next,
-            ...Request
+            
           }
         }
       })

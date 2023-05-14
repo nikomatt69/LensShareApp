@@ -74,6 +74,7 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -101,6 +102,7 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 info  - Generating static pages (0/13)
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 info  - Generating static pages (3/13)
 info  - Generating static pages (6/13)
 info  - Generating static pages (9/13)
@@ -108,9 +110,9 @@ info  - Generating static pages (13/13)
 info  - Finalizing page optimization...
 
 Route (pages)                                Size     First Load JS
-┌ ○ / (408 ms)                               271 B           945 kB
+┌ ○ /                                        271 B           945 kB
 ├   /_app                                    0 B             106 kB
-├ ○ /404 (587 ms)                            1.3 kB          109 kB
+├ ○ /404 (393 ms)                            1.3 kB          109 kB
 ├ ℇ /api/corn/route                          0 B             106 kB
 ├ λ /api/get-encrypted                       0 B             106 kB
 ├ λ /api/get-ipfs-cid                        0 B             106 kB
@@ -119,25 +121,25 @@ Route (pages)                                Size     First Load JS
 ├ ℇ /api/og                                  0 B             106 kB
 ├ λ /api/revalidate                          0 B             106 kB
 ├ λ /api/store-encrypted                     0 B             106 kB
-├ ○ /discover                                11.9 kB         851 kB
-├ ○ /feed                                    1.17 kB         945 kB
+├ ○ /discover (371 ms)                       11.9 kB         851 kB
+├ ○ /feed                                    2.95 kB         947 kB
 ├ ○ /latest                                  7.52 kB         945 kB
-├ ○ /messages (545 ms)                       6.29 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (560 ms)  16.2 kB        1.09 MB
-├ ○ /notifications (440 ms)                  24.3 kB         871 kB
-├ ○ /post/[id] (556 ms)                      454 kB         1.35 MB
-├ ○ /search                                  6.87 kB         937 kB
-├ ○ /u/[id] (421 ms)                         9.07 kB         880 kB
-└ ○ /upload                                  53.8 kB         908 kB
+├ ○ /messages (357 ms)                       6.29 kB        1.07 MB
+├ ○ /messages/[...conversationKey] (501 ms)  16.2 kB        1.09 MB
+├ ○ /notifications (492 ms)                  22.4 kB         872 kB
+├ ○ /post/[id] (333 ms)                      454 kB         1.35 MB
+├ ○ /search (408 ms)                         6.88 kB         937 kB
+├ ○ /u/[id] (398 ms)                         9.06 kB         880 kB
+└ ○ /upload                                  51.9 kB         909 kB
 + First Load JS shared by all                114 kB
   ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
   ├ chunks/main-d8fa6b61425a8e6e.js          27.4 kB
   ├ chunks/pages/_app-a31085765d0d7814.js    29.7 kB
-  ├ chunks/webpack-c9d961dc51e1d8d9.js       3.05 kB
-  └ css/a9d4c4c79ec357d7.css                 8.88 kB
+  ├ chunks/webpack-a92c5f09f099f008.js       3.05 kB
+  └ css/23cc524798513fac.css                 8.87 kB
 
 ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 37.59s.
+Done in 31.05s.

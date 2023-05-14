@@ -32,7 +32,7 @@ import { Card } from '../UI/Card'
 import Navbar from '../Navbar'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import NavbarDetails from '../NavbarDetails'
-import BottomNav from '../Navs/BottomNavDetails'
+import BottomNav from '../Navs/BottomNav'
 
 const initialFilters = {
   all: false,

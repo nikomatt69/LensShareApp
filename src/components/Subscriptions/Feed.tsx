@@ -8,9 +8,11 @@ import React from 'react'
 import { useInView } from 'react-cool-inview'
 import Custom400 from '@/pages'
 import Loading from '../Loading'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { Card } from '../UI/Card'
 
 
-const Subscriptions = () => {
+const Feed = () => {
   const currentProfile = useAppStore((state) => state.currentProfile)
   
 
@@ -60,10 +62,19 @@ const Subscriptions = () => {
 
   return (
     <div>
-      {!error && !loading && (
-        <>
-          <div className="rounded-xl flex flex-auto flex-col break-word break-text px-3">
-            {pub?.map((feedItem: FeedItem) => {
+ <InfiniteScroll
+  dataLength={pub?.length ?? 0}
+  next={() => {}}
+  hasMore={true}
+  loader={<Loading/>}
+  endMessage={
+    <p style={{ textAlign: "center" }}>
+      <b>Yay! You have seen it all</b>
+    </p>
+  }
+ >
+ <Card className="rounded-xl px-3">
+  {pub?.map((feedItem: FeedItem) => {
               const pub = feedItem.root
               return (
                 <VideoCard
@@ -72,16 +83,16 @@ const Subscriptions = () => {
                 />
               )
             })}
-          </div>
           {pageInfo?.next && (
             <span ref={observe} className="flex justify-center p-10">
-              <Loading/>
+              <Loader/>
             </span>
           )}
-        </>
-      )}
-    </div>
+ </Card>
+ </InfiniteScroll>
+ </div>
   )
 }
 
-export default Subscriptions
+
+export default Feed

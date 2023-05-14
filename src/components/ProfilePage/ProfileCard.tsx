@@ -142,6 +142,7 @@ interface Props {
                                     <Following profile={profile as Profile} />
                                 </Modal>
                             </div>
+                            
                         <div className="flex items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
                             <span className="font-bold text-sx">{profile?.stats.totalFollowers}</span>
                             <span>Followers</span>
