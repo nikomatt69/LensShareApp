@@ -7,10 +7,12 @@ import { FeedEventItemType, PublicationMainFocus, useFeedQuery } from '@/utils/l
 import React from 'react'
 import { useInView } from 'react-cool-inview'
 import Custom400 from '@/pages'
+import Loading from '../Loading'
 
 
 const Subscriptions = () => {
   const currentProfile = useAppStore((state) => state.currentProfile)
+  
 
 
   const request = {
@@ -73,7 +75,7 @@ const Subscriptions = () => {
           </div>
           {pageInfo?.next && (
             <span ref={observe} className="flex justify-center p-10">
-              <Loader />
+              <Loading/>
             </span>
           )}
         </>

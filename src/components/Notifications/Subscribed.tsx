@@ -62,7 +62,7 @@ const SubscribedNotification: FC<Props> = ({ notification }) => {
       <div className="flex items-center justify-between">
         <span className="text-gray-600 dark:text-gray-400">
           {currentProfile
-          ?.followModule ? `joined` : `subscribed`}{' '}
+          ?.followModule ? `joined` : `followed you`}{' '}
           
         </span>
         <div className="flex flex-none text-xs items-center text-gray-600">

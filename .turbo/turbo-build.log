@@ -18,6 +18,7 @@ warn  - Experimental features are not covered by semver, and may cause unexpecte
 
 info  - Linting and checking validity of types...
 info  - Creating an optimized production build...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (679kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 warn  - Compiled with warnings
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
@@ -73,11 +74,6 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -99,19 +95,22 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-info  - Generating static pages (0/14)
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+info  - Generating static pages (0/13)
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-info  - Generating static pages (3/14)
-info  - Generating static pages (6/14)
-info  - Generating static pages (10/14)
-info  - Generating static pages (14/14)
+info  - Generating static pages (3/13)
+info  - Generating static pages (6/13)
+info  - Generating static pages (9/13)
+info  - Generating static pages (13/13)
 info  - Finalizing page optimization...
 
 Route (pages)                                Size     First Load JS
-┌ ○ /                                        272 B           945 kB
+┌ ○ / (408 ms)                               271 B           945 kB
 ├   /_app                                    0 B             106 kB
-├ ○ /404 (339 ms)                            1.11 kB         109 kB
+├ ○ /404 (587 ms)                            1.3 kB          109 kB
 ├ ℇ /api/corn/route                          0 B             106 kB
 ├ λ /api/get-encrypted                       0 B             106 kB
 ├ λ /api/get-ipfs-cid                        0 B             106 kB
@@ -120,26 +119,25 @@ Route (pages)                                Size     First Load JS
 ├ ℇ /api/og                                  0 B             106 kB
 ├ λ /api/revalidate                          0 B             106 kB
 ├ λ /api/store-encrypted                     0 B             106 kB
-├ ○ /discover (385 ms)                       11.9 kB         851 kB
-├ ○ /explore (309 ms)                        8.18 kB         894 kB
-├ ○ /feed                                    1.16 kB         946 kB
-├ ○ /latest                                  7.75 kB         945 kB
-├ ○ /messages (326 ms)                       6.29 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (357 ms)  16.2 kB        1.09 MB
-├ ○ /notifications                           24.3 kB         871 kB
-├ ○ /post/[id]                               454 kB         1.35 MB
-├ ○ /search                                  7.11 kB         938 kB
-├ ○ /u/[id]                                  9.07 kB         880 kB
+├ ○ /discover                                11.9 kB         851 kB
+├ ○ /feed                                    1.17 kB         945 kB
+├ ○ /latest                                  7.52 kB         945 kB
+├ ○ /messages (545 ms)                       6.29 kB        1.07 MB
+├ ○ /messages/[...conversationKey] (560 ms)  16.2 kB        1.09 MB
+├ ○ /notifications (440 ms)                  24.3 kB         871 kB
+├ ○ /post/[id] (556 ms)                      454 kB         1.35 MB
+├ ○ /search                                  6.87 kB         937 kB
+├ ○ /u/[id] (421 ms)                         9.07 kB         880 kB
 └ ○ /upload                                  53.8 kB         908 kB
 + First Load JS shared by all                114 kB
   ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
   ├ chunks/main-d8fa6b61425a8e6e.js          27.4 kB
-  ├ chunks/pages/_app-4d9d876f236fd83e.js    29.7 kB
-  ├ chunks/webpack-fe1065efd39fa9a4.js       3.05 kB
+  ├ chunks/pages/_app-a31085765d0d7814.js    29.7 kB
+  ├ chunks/webpack-c9d961dc51e1d8d9.js       3.05 kB
   └ css/a9d4c4c79ec357d7.css                 8.88 kB
 
 ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 25.50s.
+Done in 37.59s.

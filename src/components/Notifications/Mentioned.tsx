@@ -37,12 +37,12 @@ const MentionedNotification: FC<Props> = ({ notification }) => {
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
           <Link
-            href={`/watch/${notification?.mentionPublication.id}`}
+            href={`/post/${notification?.mentionPublication.id}`}
             className="mr-1 text-indigo-500"
           >
            mentioned
           </Link>
-          your channel
+          your profile
         </span>
         <div className="flex flex-none text-xs items-center space-x-1 text-gray-600">
           <span>{getRelativeTime(notification?.createdAt)}</span>

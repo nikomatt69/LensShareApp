@@ -11,6 +11,7 @@ import { useInView } from 'react-cool-inview'
 import {
   LENS_CUSTOM_FILTERS,
   APP_ID,
+  APP_NAME,
 
 } from '@/constants'
 import {CustomNotificationsFilterEnum} from '@/utils/custom-types'
@@ -117,12 +118,11 @@ const Notifications = () => {
     }
   })
 
-  return (
-    
-    <div className="mx-auto my-2  md:container md:max-w-3xl md:p-0">
-      <MetaTags title={`Notifications`} />
+  return ( 
+    <div className="mx-auto md:container md:max-w-3xl md:p-0">
+      <MetaTags title={`Notifications • ${APP_NAME}`} />
     <NavbarDetails/>
-      <Card>
+      <Card className='p-2'>
       <Tab.Group as="div" className="w-full">
         <div className="mb-4 flex items-center justify-between">
           <Tab.List className="no-scrollbar flex w-full space-x-4 overflow-x-auto pr-4">
