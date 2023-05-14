@@ -65,8 +65,17 @@ const Explore = () => {
         variables: {
           request: {
             cursor: pageInfo?.next,
+            sortCriteria: "CURATED_PROFILES",
+            publicationTypes: ["POST"],
+            limit: 30,
+            metadata: {
+              mainContentFocus: ["VIDEO"],
+            },
+          },
+          reactionRequest,
+          profileId
             
-          }
+          
         }
       })
     }

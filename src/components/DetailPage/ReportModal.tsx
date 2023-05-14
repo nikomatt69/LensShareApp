@@ -5,10 +5,12 @@ import type { Publication } from '@/utils/lens'
 import type { FC } from 'react'
 import React from 'react'
 
+
 type Props = {
   video: Publication
   show: boolean
   setShowReport: React.Dispatch<boolean>
+
 }
 
 const ReportModal: FC<Props> = ({ show, setShowReport, video }) => {

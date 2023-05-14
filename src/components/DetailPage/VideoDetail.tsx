@@ -31,6 +31,8 @@ import Following from "../ProfilePage/Following";
 import { Modal } from "../UI/Modal";
 import Followers from "../ProfilePage/Followers";
 import ReportModal from "./ReportModal";
+import Delete from "./Delete";
+
 
 
 interface Props {
@@ -38,6 +40,7 @@ interface Props {
   profile: Profile;
   setFollowing: Dispatch<boolean>;
   following: boolean;
+  
 }
 
 const VideoDetail: FC<Props> = ({
@@ -187,6 +190,7 @@ const VideoDetail: FC<Props> = ({
                          setShowReport={setShowReport}
                          video={publication}
                         />
+                      
                       </div>
                       <p
                         className="my-3 pb-3 text-sm text-gray-600"

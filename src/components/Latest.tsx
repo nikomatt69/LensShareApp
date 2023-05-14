@@ -61,8 +61,27 @@ const Latest = () => {
         variables: {
           request: {
             cursor: pageInfo?.next,
+            sortCriteria: "LATEST",
+        publicationTypes: ["POST"],
+        timestamp: 1,
+        limit: 30,
+        excludeProfileIds: [
+          //nsfw
+          "0x5eaf",
+          "0x3f7d",
+          "0x5b94",
+          "0x5c7c",
+          "0x62dd",
+          "0x53cd",
+        ],
+        metadata: {
+          mainContentFocus: ["VIDEO"],
+        },
+      },
+      reactionRequest,
+      profileId,
            
-          }
+          
         }
       })
     }

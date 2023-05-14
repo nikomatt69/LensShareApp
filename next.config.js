@@ -15,7 +15,6 @@ const nextConfig = {
   revalidate: true,
   redirects: true,
   getStaticProps: true,
-  webpack5: true,
   experimental: {
     scrollRestoration: true,
     newNextLinkBehavior: true,

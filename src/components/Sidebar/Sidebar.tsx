@@ -56,16 +56,6 @@ const Sidebar = () => {
                 </a>
               </div>
             </Link>
-            <Link href="/live">
-            <div className={pathname === '/live' ? activeLink : normalLink}>
-                <p className="text-2xl">
-                <RiLiveLine />
-                </p>
-                <a className="text-md hidden lg:block cursor-pointer">
-                  LIVE
-                </a>
-              </div>
-            </Link>
           </div>
             <div className="px-2 py-4 hidden lg:block">
               <p className="text-gray-400">

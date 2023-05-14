@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import React, { FC } from 'react'
 import Image from 'next/image'
 import getAvatar from '@/lib/getAvatar';
+import Loader from './UI/Loader';
 
 interface Props {
     txn: any
@@ -82,30 +83,7 @@ const QueuedData: FC<Props> = ({ txn }) => {
 
   return (
     <div className="flex gap-2">
-    <Link href={`/u/${currentProfile?.id}`} key={currentProfile?.id}>
-        <div className="flex-shrink-0 rounded-full">
-            <Image
-                width={40}
-                height={40}
-                className="rounded-full cursor-pointer"
-                src={getAvatar(currentProfile)}
-                alt={currentProfile?.handle}
-            />
-        </div>
-    </Link>
-    <div className="flex-grow">
-        <p className="font-bold hover:underline">
-        {currentProfile?.handle}
-        </p>
-        <p
-         style={{
-         wordWrap: "break-word",
-         overflowWrap: "break-word",
-         }}
-        >
-        {txn?.content}
-        </p>
-    </div>
+   <Loader/>
     </div>
   )
 }

@@ -11,10 +11,11 @@ import { useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
-import { CHAIN_ID } from "@/constants";
+import { APP_NAME, CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import MetaTags from "../UI/MetaTags";
 
 
 const Home: NextPage = () => {
@@ -112,6 +113,9 @@ const Home: NextPage = () => {
   
   return (
     <div>
+       <MetaTags
+        title={`Home • ${APP_NAME}`}
+      />
     <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
     <Toaster position="bottom-right" />
       <Navbar />
