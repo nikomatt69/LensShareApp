@@ -51,7 +51,7 @@ const BottomNav: React.FC = () => {
       <Link href='/upload'>
        <button 
        className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <VideoCameraIcon className="h-6 h-6 text-white-500" />{' '}
+        <VideoCameraIcon className="h-6 text-white-500" />{' '}
         </button>  
       </Link>
       {/* //discover page */}
@@ -89,13 +89,6 @@ const BottomNav: React.FC = () => {
       ) : ( 
         <LoginWalletMobile />
       )}
-       <button
-            onClick={() => router.back()}
-            className="bg-[#3D3C3D] w-5px h-5px rounded-md flex justify-center items-center"
-          >
-            <ArrowLeftIcon className="w-5 h-5 fill-white cursor-pointer" />
-          </button>
-
     </nav>
     </div>
   )

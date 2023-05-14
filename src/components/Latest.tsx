@@ -12,6 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loading from "./Loading";
 import Loader from "./UI/Loader";
 import { FC } from "react";
+import { useInView } from "react-cool-inview";
 
 const Latest = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -24,7 +25,7 @@ const Latest = () => {
 
   );
 
-  const { data, loading, error } = useQuery<{
+  const { data, loading, error, fetchMore } = useQuery<{
     explorePublications: ExplorePublicationResult;
   }>(ExplorePublicationsDocument, {
     variables: {
@@ -52,6 +53,20 @@ const Latest = () => {
   });
   const publications = data?.explorePublications.items;
   console.log("DATA", data?.explorePublications.items);
+  const pageInfo = data?.explorePublications?.pageInfo
+
+  const { observe } = useInView({
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            cursor: pageInfo?.next,
+            ...Request
+          }
+        }
+      })
+    }
+  })
 
   const onlyVideoPublications = publications?.filter((publication) => {
     if (
@@ -84,6 +99,11 @@ const Latest = () => {
       {onlyVideoPublications?.map((pub: Publication) => (
         <VideoCard key={pub.id} publication={pub as Publication} />
       ))}
+      {pageInfo?.next && (
+            <span ref={observe} className="flex justify-center p-10">
+              <Loader />
+            </span>
+          )}
       </Card>
       </InfiniteScroll>
     </div>
@@ -91,3 +111,5 @@ const Latest = () => {
 };
 
 export default Latest;
+
+

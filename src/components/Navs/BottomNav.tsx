@@ -8,6 +8,7 @@ import LoginWalletMobile from '../Login/LoginWalletMobile';
 import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon, BellIcon } from '@heroicons/react/24/outline';
 import router from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+import { MdVideoLibrary } from 'react-icons/md';
 
 const BottomNav: React.FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -38,6 +39,15 @@ const BottomNav: React.FC = () => {
       </button>
       </Link>
       )}
+      <div>
+      {/* //feed */}
+     <Link href='/feed'>
+       <button
+       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
+        <MdVideoLibrary className="text-brand-500 h-6 w-6" />{' '}
+        </button>
+      </Link>
+      </div>
        <div>
       {/* //latest */}
      <Link href='/latest'>
@@ -55,15 +65,9 @@ const BottomNav: React.FC = () => {
         <VideoCameraIcon className=" h-6 text-white-500" />{' '}
         </button>  
       </Link>
-      {/* //discover page */}
-      <Link href='/discover'>
-      <button className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-      </button>
-      </Link>
 
       <div>
-      {/* //latest */}
+      {/* //notifications */}
      <Link href='/notifications'>
        <button
        className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">

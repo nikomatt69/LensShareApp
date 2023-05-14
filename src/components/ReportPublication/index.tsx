@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import type { CustomErrorWithData } from '@/utils/custom-types'
-import { ERROR_MESSAGE} from '@/constants'
+import { APP_NAME, ERROR_MESSAGE} from '@/constants'
 
 type Props = {
   publication: Publication
@@ -68,7 +68,7 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
 
   return (
     <>
-      <MetaTags title={`Report Publication`} />
+      <MetaTags title={`Report Publication • ${APP_NAME}`} />
       <div className="flex justify-center">
         <div className="w-full">
           <div className="opacity-60 p-2">
