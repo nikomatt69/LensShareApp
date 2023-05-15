@@ -188,7 +188,6 @@ const VideoDetail: FC<Props> = ({
                             </Modal>
                         </div>
                         </div>
-                        
                         <div className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { (!showReport) }} >
                         <span>Report</span>
                         <ReportModal
@@ -196,7 +195,6 @@ const VideoDetail: FC<Props> = ({
                          setShowReport={setShowReport}
                          video={publication}
                         />
-                        </div>
                       </div>
                       <p
                         className="my-3 pb-3 text-sm text-gray-600"
@@ -283,6 +281,7 @@ const VideoDetail: FC<Props> = ({
           publication={publication as Publication}
         />
       </div>
+    </div>
   );
 };
 

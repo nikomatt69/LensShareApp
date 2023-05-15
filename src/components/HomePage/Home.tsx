@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import MetaTags from "../UI/MetaTags";
 
 
+
 const Home: NextPage = () => {
   const [mounted, setMounted] = useState(false);
 

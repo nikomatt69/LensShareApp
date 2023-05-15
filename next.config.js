@@ -7,33 +7,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  getServerSideProps: true,
-  getInitialProps: true,
-  getStaticPaths: true,
   swcMinify: true,
-  fallback: true,
-  revalidate: true,
   redirects: true,
-  getStaticProps: true,
   experimental: {
     scrollRestoration: true,
     newNextLinkBehavior: true,
-    turbo: {
-      loaders: {
-        // Option format
-        '.md': [
-          {
-            loader: '@mdx-js/loader',
-            options: {
-              format: 'md',
-            },
-          },
-        ],
-        // Option-less format
-        '.mdx': ['@mdx-js/loader'],
-      },
-    },
-
 
   },
   images: {

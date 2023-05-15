@@ -95,10 +95,16 @@ interface Props {
                                 <h1 className="text-lg p-1  font-bold capitalize">
                                 {profile?.name}
                                 </h1>
-                                <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" />
-                     <div className="flex-shrink-0 pl-1.5 pt-1 ">
+                                <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" /> 
+                           
+                               <div className="mr-0 font-semibold sm:mr-10 pt-3 break-word leading-md linkify text-xs"
+                               style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
+                               <text>{profile?.bio}</text>
+                               </div>
+                   </div>
+                       <div className="right-2 pt-1 ">
                            {itsNotMe ? (
-                             <div>
+                             <div className='right-2'>
                             { following ? (
                                 <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
                             ) : (
@@ -107,24 +113,15 @@ interface Props {
                             }
                             </div>
                            ) : (
-                            <div className='flex pl-50'>
+                            <div className='right-2'>
                             <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
                                 <Link href='/live'> View Live</Link>
                             </button>
                             </div>
                            )
-                           } 
-                           
-                               <div className="mr-0 font-semibold sm:mr-10 pt-5 break-word leading-md linkify text-xs"
-                               style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
-                               <text>{profile?.bio}</text>
-
-                     </div>
-                             
-                    </div>
-    
-                            </div>
+                           }    
                         </div> 
+                    </div>
                         <Link href={`/messages`}>
                             <ChatBubbleOvalLeftIcon  className='h-6 w-6 text-black' />
                             
