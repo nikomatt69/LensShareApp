@@ -53,7 +53,7 @@ const SearchBarDiscover: FC<Props> = ({ hideDropdown = false }) => {
     const profiles = isProfileSearchResult ? searchResult.items : []
 
   return (
-    <div className='relative'>
+    <div className='relative items-center justify-center content-center '>
       <form className='absolute md:static top-10 max-w-md' onSubmit={handleKeyDown}>
         <input 
         className='bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'
@@ -78,7 +78,7 @@ const SearchBarDiscover: FC<Props> = ({ hideDropdown = false }) => {
                         {profiles.map((profile: Profile) => (
                             <div className='p-5' key={profile?.id}>
                                 <Link href={`/u/${profile?.id}`}>
-                                    <div className='flex gap-3 rounded-xl hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center'>
+                                    <div className='flex gap-3 rounded-xl hover:bg-primary p-2 cursor-pointer font-semibold  items-center'>
                                         <div>
                                             <Image 
                                                 width={40}

@@ -53,7 +53,7 @@ const SearchBar: FC<Props> = ({ hideDropdown = false }) => {
     const profiles = isProfileSearchResult ? searchResult.items : []
 
   return (
-    <div className='relative items-center hidden md:block'>
+    <div className='relative items-center hidden md:hidden'>
       <form className='absolute md:static top-10 -left-20 max-w-md' onSubmit={handleKeyDown}>
         <input 
         className='justify-content bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'

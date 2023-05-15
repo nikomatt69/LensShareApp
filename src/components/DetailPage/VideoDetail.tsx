@@ -31,7 +31,8 @@ import Following from "../ProfilePage/Following";
 import { Modal } from "../UI/Modal";
 import Followers from "../ProfilePage/Followers";
 import ReportModal from "./ReportModal";
-import Delete from "./Delete";
+import PublicationMenu from "../ProfilePage/Menu";
+
 
 
 
@@ -149,7 +150,6 @@ const VideoDetail: FC<Props> = ({
                 {formatHandle(profile?.handle)}
               </p>
             </div>
-
             {<div className="flex-shrink-0">
           { following ? ( 
             <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
@@ -157,6 +157,11 @@ const VideoDetail: FC<Props> = ({
             <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
           )}
         </div>}
+          </div>
+          <div className="right-2">
+            <PublicationMenu
+            publication={publication}
+            />
           </div>
           <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
@@ -183,14 +188,15 @@ const VideoDetail: FC<Props> = ({
                             </Modal>
                         </div>
                         </div>
-                        <div className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowReport(!showReport) }} >
+                        
+                        <div className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { (!showReport) }} >
                         <span>Report</span>
                         <ReportModal
                          show={showReport}
                          setShowReport={setShowReport}
                          video={publication}
                         />
-                      
+                        </div>
                       </div>
                       <p
                         className="my-3 pb-3 text-sm text-gray-600"
@@ -277,7 +283,6 @@ const VideoDetail: FC<Props> = ({
           publication={publication as Publication}
         />
       </div>
-    </div>
   );
 };
 

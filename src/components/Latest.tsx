@@ -33,7 +33,7 @@ const Latest = () => {
         sortCriteria: "LATEST",
         publicationTypes: ["POST"],
         timestamp: 1,
-        limit: 30,
+        limit: 20,
         excludeProfileIds: [
           //nsfw
           "0x5eaf",
@@ -64,7 +64,7 @@ const Latest = () => {
             sortCriteria: "LATEST",
         publicationTypes: ["POST"],
         timestamp: 1,
-        limit: 30,
+        limit: 20,
         excludeProfileIds: [
           //nsfw
           "0x5eaf",
@@ -107,7 +107,11 @@ const Latest = () => {
         dataLength={publications?.length ?? 0}
         next={() => {}}
         hasMore={true}
-        loader={<Loading/>}
+        loader={pageInfo?.next && (
+          <span ref={observe} className="flex justify-center p-10">
+            <Loading />
+          </span>
+        )}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
@@ -118,11 +122,6 @@ const Latest = () => {
       {onlyVideoPublications?.map((pub: Publication) => (
         <VideoCard key={pub.id} publication={pub as Publication} />
       ))}
-      {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center p-10">
-              <Loader />
-            </span>
-          )}
       </Card>
       </InfiniteScroll>
     </div>

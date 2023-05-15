@@ -39,7 +39,7 @@ const MessageHeader: FC<Props> = ({ profile }) => {
             <img
                         // @ts-ignore
                         src={getAvatar(profile)}
-                        className="mr-2 h-12 w-12 rounded-full border-2 border"
+                        className="mr-2 h-12 w-12 rounded-full border-2 "
                         alt={(profile?.handle)}
                     />
                 

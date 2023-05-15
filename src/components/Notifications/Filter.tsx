@@ -26,7 +26,7 @@ const NotificationsFilter = () => {
             'w-full rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.HIGH_SIGNAL
-              ? 'bg-gray-100 dark:bg-gray-800'
+              ? 'bg-gray-100'
               : 'opacity-60 hover:opacity-100'
           )}
           onClick={() =>
@@ -45,7 +45,7 @@ const NotificationsFilter = () => {
             'w-full rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.ALL_NOTIFICATIONS
-              ? 'bg-gray-100 dark:bg-gray-800'
+              ? 'bg-gray-100'
               : 'opacity-60 hover:opacity-100'
           )}
           onClick={() =>

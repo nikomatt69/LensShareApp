@@ -18,7 +18,7 @@ const Feed = () => {
 
 
   const request = {
-    limit: 50,
+    limit: 20,
     feedEventItemTypes: [FeedEventItemType.Post],
     profileId: currentProfile?.id,
     metadata: {
@@ -66,7 +66,11 @@ const Feed = () => {
   dataLength={pub?.length ?? 0}
   next={() => {}}
   hasMore={true}
-  loader={<Loading/>}
+  loader={pageInfo?.next && (
+    <span ref={observe} className="flex justify-center p-10">
+      <Loading />
+    </span>
+  )}
   endMessage={
     <p style={{ textAlign: "center" }}>
       <b>Yay! You have seen it all</b>
@@ -83,11 +87,6 @@ const Feed = () => {
                 />
               )
             })}
-          {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center p-10">
-              <Loader/>
-            </span>
-          )}
  </Card>
  </InfiniteScroll>
  </div>

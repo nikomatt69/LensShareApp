@@ -46,7 +46,7 @@ const Explore = () => {
       request: {
         sortCriteria: "CURATED_PROFILES",
         publicationTypes: ["POST"],
-        limit: 30,
+        limit: 20,
         metadata: {
           mainContentFocus: ["VIDEO"],
         },
@@ -67,7 +67,7 @@ const Explore = () => {
             cursor: pageInfo?.next,
             sortCriteria: "CURATED_PROFILES",
             publicationTypes: ["POST"],
-            limit: 30,
+            limit: 20,
             metadata: {
               mainContentFocus: ["VIDEO"],
             },
@@ -90,7 +90,11 @@ const Explore = () => {
         dataLength={publications?.length ?? 0}
         next={() => {}}
         hasMore={true}
-        loader={<Loading/>}
+        loader={pageInfo?.next && (
+          <span ref={observe} className="flex justify-center p-10">
+            <Loading />
+          </span>
+        )}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
@@ -101,11 +105,6 @@ const Explore = () => {
       {publications?.map((pub: Publication) => (
         <VideoCard key={pub.id} publication={pub as Publication} />
       ))}
-      {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center p-10">
-              <Loader />
-            </span>
-          )}
       </Card>
       </InfiniteScroll>
     <BottomNav/>

@@ -65,7 +65,7 @@ const DiscoverMain = () => {
         )}
         {selectedTab === "categories" && <Categories />}
         {selectedTab === "search" &&
-        <div className="items-center justify-between">
+        <div className="items-center justify-center content-center">
           <SearchBarDiscover />
           </div> }
       </div>
