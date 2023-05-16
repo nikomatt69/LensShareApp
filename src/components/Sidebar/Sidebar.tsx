@@ -37,20 +37,16 @@ const Sidebar = () => {
       </div>
       {showSidebar && (
         <div className="lg:w-400 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3">
-        <div className="lg:border-b-2 border-gray-200 xl:pb-4">
+        <div className="lg:border-b-2 items-center text-center object-center border-gray-200 xl:pb-4">
             <Link href="/">
             <div className={pathname === '/' ? activeLink : normalLink}>
-                    <p className="text-2xl">
-                        <AiFillHome />
-                    </p>
+                  
                 <a className="text-md hidden lg:block cursor-pointer">For You</a>
               </div>
             </Link>
             <Link href="/latest">
             <div className={pathname === '/latest' ? activeLink : normalLink}>
-                <p className="text-2xl">
-                  <AiFillCalendar />
-                </p>
+            
                 <a className="text-md hidden lg:block cursor-pointer">
                   Latest
                 </a>

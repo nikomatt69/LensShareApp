@@ -4,6 +4,7 @@ import {Modal} from '@/components/UI/Modal'
 import type { Publication } from '@/utils/lens'
 import type { FC } from 'react'
 import React from 'react'
+import { Card } from '../UI/Card'
 
 
 type Props = {
@@ -17,15 +18,19 @@ const ReportModal: FC<Props> = ({ show, setShowReport, video }) => {
   return (
     <Modal
       title={`Report Publication`}
-      onClose={() => setShowReport(false)}
+      onClose={() => setShowReport(true)}
       show={show}
       
     >
-      <div className="mt-2">
+      <div className="text-center">
+        <Card>
+      <div className="mt-2 block ">
         <ReportPublication
           publication={video}
           onSuccess={() => setShowReport(false)}
         />
+      </div>
+      </Card>
       </div>
     </Modal>
   )

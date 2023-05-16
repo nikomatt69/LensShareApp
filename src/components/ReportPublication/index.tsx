@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import type { CustomErrorWithData } from '@/utils/custom-types'
 import { APP_NAME, ERROR_MESSAGE} from '@/constants'
+import { topics } from "@/utils/const";
 
 
 
@@ -68,6 +69,10 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
     setReason(e.target.value)
   }
 
+  function setCategory(value: string): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
     <>
      <MetaTags title={`Report Publication • ${APP_NAME}`} />
@@ -85,64 +90,20 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
               Reason
             </label>
             <div className="mt-1">
-              <select
-                onChange={(e) => handleChange(e)}
-                value={reason}
-                name="report"
-                className="w-full rounded-xl border border-gray-200 bg-white p-2.5 text-sm outline-none disabled:bg-blue-500 disabled:bg-opacity-20 disabled:opacity-6"
-                id="report"
-              >
-                <optgroup label="SPAM">
-                  <option value="SPAM-FAKE_ENGAGEMENT">
-                    Fake Engagement
-                  </option>
-                  <option value="SPAM-MANIPULATION_ALGO">
-                    Algorithm Manipulation
-                  </option>
-                  <option value="SPAM-MISLEADING">
-                    Misleading
-                  </option>
-                  <option value="SPAM-MISUSE_HASHTAGS">
-                    Misuse Hashtags
-                  </option>
-                  <option value="SPAM-REPETITIVE">
-                    Repetitive
-                  </option>
-                  <option value="SPAM-UNRELATED">
-                    Unrelated
-                  </option>
-                  <option value="SPAM-SOMETHING_ELSE">
-                    Something Else
-                  </option>
-                  <option value="ILLEGAL-ANIMAL_ABUSE">
-                    Animal Abuse
-                  </option>
-                  <option value="ILLEGAL-HUMAN_ABUSE">
-                    Human Abuse
-                  </option>
-                  <option value="ILLEGAL-DIRECT_THREAT">
-                    Direct threat
-                  </option>
-                  <option value="ILLEGAL-THREAT_INDIVIDUAL">
-                    Threat Individual
-                  </option>
-                  <option value="ILLEGAL-VIOLENCE">
-                    Violence
-                  </option>
-                  <option value="FRAUD-SCAM">
-                    Scam
-                  </option>
-                  <option value="FRAUD-IMPERSONATION">
-                    Impersonation
-                  </option>
-                  <option value="SENSITIVE-NSFW">
-                    NSFW
-                  </option>
-                  <option value="SENSITIVE-OFFENSIVE">
-                    Offensive
-                  </option>
-                </optgroup>
-              </select>
+            <select
+                  onChange={(e) => setCategory(e.target.value)}
+                  className='outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer'
+                  >
+                    {topics.map((topic) => (
+                      <option
+                      key={topic.name}
+                      className='outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300'
+                      value={topic.name}
+                      >
+                        {topic.name}
+                      </option>
+                     ))};
+                  </select>
             </div>
             <div className="mb-1 mt-4 flex justify-end">
               <Button loading={reporting} onClick={() => onReport()}>

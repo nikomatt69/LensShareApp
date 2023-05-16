@@ -42,47 +42,42 @@ const BottomNav: React.FC = () => {
       <div>
       {/* //feed */}
      <Link href='/feed'>
-       <button
-       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <MdVideoLibrary className="text-brand-500 h-6 w-6" />{' '}
-        </button>
+       
+        <MdVideoLibrary className="text-brand-500 pb-1 h-6 w-6" />{' '}
+       
       </Link>
       </div>
        <div>
       {/* //latest */}
      <Link href='/latest'>
-       <button
-       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <FilmIcon className="text-brand-500 h-6 w-6" />{' '}
-        </button>
+     
+        <FilmIcon className="text-brand-500 pb-1 h-6 w-6" />{' '}
+      
       </Link>
       </div>
 
       {/* //upload */}
       <Link href='/upload'>
-       <button 
-       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <VideoCameraIcon className=" h-6 text-white-500" />{' '}
-        </button>  
+      
+        <VideoCameraIcon className="pb-1 h-6 text-white-500" />{' '}
+         
       </Link>
 
       <div>
       {/* //notifications */}
      <Link href='/notifications'>
-       <button
-       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <BellIcon className="text-brand-500 h-6 w-6" />{' '}
-        </button>
+
+        <BellIcon className="text-brand-500 pb-1 h-6 w-6" />{' '}
+       
       </Link>
       </div>
 
       <div>
       {/* //messages */}
      <Link href='/messages'>
-       <button
-       className="text-black hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <ChatBubbleOvalLeftIcon className="text-brand-500 h-6 w-6" />{' '}
-        </button>
+ 
+        <ChatBubbleOvalLeftIcon className="text-brand-500 pb-1 h-6 w-6" />{' '}
+        
       </Link>
       </div>
         {/* //log into lens & profile page */}

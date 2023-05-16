@@ -18,50 +18,54 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
 
 
   return (
-    <Card>
+    <Card className='rounded-xl object-fill justify-center object-center'>
       {nft?.originalContent?.animatedUrl ? (
-        <div className="grid gap-2 p-1 rounded-xl object-center object-contain mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+        <div className="grid gap-2 p-1 rounded-xl object-center object-fill items-center justify-center mt-2 lg:grid-cols-1 3xl:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 xs:grid-col-1">
           {nft?.originalContent?.animatedUrl?.includes('.gltf') ? (
             <a href={nftURL} target="_blank" rel="noreferrer noopener">
               <div
+                className="rounded-xl object-fill object-center"
                 style={{
                   backgroundImage: `url(${
                     nft.originalContent.uri
                       ? sanitizeIpfsUrl(nft.originalContent.uri)
-                      : `${STATIC_ASSETS_URL}/images/placeholder.webp`
+                      : `${STATIC_ASSETS_URL}/images/icon.png`
                   })`,
                   backgroundSize: 'contain',
-                  backgroundPosition: 'center center',
+                  backgroundPosition: 'rounded-xl object-contain object-fill object-center center',
                   backgroundRepeat: 'no-repeat'
                 }}
               />
             </a>
           ) : (
+            <div className='rounded-xl object-fill object-center'>
             <iframe
+              className="rounded-xl items-center object-center object-fill"
               title={`${nft.contractAddress}:${nft.tokenId}`}
-              sandbox=""
               src={sanitizeIpfsUrl(nft?.originalContent?.animatedUrl)}
             />
+            </div>
           )}
         </div>
       ) : (
         <a href={nftURL} target="_blank" rel="noreferrer noopener">
           <img
+           className='object-fill object-center rounded-xl'
            
             style={{
               backgroundImage: `url(${
                 nft.originalContent.uri
                   ? sanitizeIpfsUrl(nft.originalContent.uri)
-                  : `${STATIC_ASSETS_URL}/images/placeholder.webp`
+                  : `${STATIC_ASSETS_URL}/images/icon.png`
               })`,
-              backgroundSize: ' object-contain contain',
-              backgroundPosition: 'center object-contain center',
+              backgroundSize: ' object-fill object-center contain',
+              backgroundPosition: 'center object-fill object-center',
               backgroundRepeat: 'no-repeat'
             }}
           />
         </a>
       )}
-      <div className="grid gap-2 rounded-xl object-center object-contain mr-2 mt-2 lg:grid-cols-3 md:gap-y-8 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
+      <div className="grid p-1 gap-2 rounded-xl object-center  object-fill text-center  mt-2 lg:grid-cols-1 3xl:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 xs:grid-col-1">
         {nft.collectionName && <div className="lt-text-gray-500 truncate text-sm">{nft.collectionName}</div>}
         <div className="truncate">
           <a className="font-bold" href={nftURL} target="_blank" rel="noreferrer noopener">

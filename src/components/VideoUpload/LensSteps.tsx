@@ -156,7 +156,7 @@ const LensSteps = () => {
             type: uploadedVideo.videoType,
           },
         ],
-        appId: "lensshare",
+        appId: "LensShare",
       };
       const response = await fetch(`${LENSTOK_URL}/api/meta-to-ipfs`, {
         method: "POST",

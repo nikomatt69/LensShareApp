@@ -163,6 +163,17 @@ const VideoDetail: FC<Props> = ({
             publication={publication}
             />
           </div>
+          <div>
+          <button className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => {setShowReport (!showReport) }} >
+                        <span>Report</span>
+                        <ReportModal
+                         show={showReport}
+                         setShowReport={setShowReport}
+                         video={publication}
+                        />
+           </button>
+          </div>
+          
           <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
@@ -188,14 +199,7 @@ const VideoDetail: FC<Props> = ({
                             </Modal>
                         </div>
                         </div>
-                        <div className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { (!showReport) }} >
-                        <span>Report</span>
-                        <ReportModal
-                         show={showReport}
-                         setShowReport={setShowReport}
-                         video={publication}
-                        />
-                      </div>
+                        
                       <p
                         className="my-3 pb-3 text-sm text-gray-600"
                         style={{ wordWrap: "break-word", overflowWrap: "break-word" }}

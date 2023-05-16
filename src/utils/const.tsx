@@ -1,38 +1,47 @@
-import { BsCode, BsEmojiSunglasses } from "react-icons/bs";
+import { BsCode, BsEmojiKissFill, BsEmojiSunglasses } from "react-icons/bs";
 import { GiCakeSlice, GiGalaxy, GiLipstick } from "react-icons/gi";
 import { FaPaw, FaMedal, FaGamepad } from "react-icons/fa";
+import { BellAlertIcon } from "@heroicons/react/24/solid";
 
 export const topics = [
   {
-    name: "coding",
+    name: "Sensitive-NSFW",
+    icon: <BellAlertIcon />,
+  },
+  {
+    name: "Sensitive-OFFENSIVE",
+    icon: <BsEmojiKissFill />,
+  },
+  {
+    name: "Coding",
     icon: <BsCode />,
   },
   {
-    name: "funny",
+    name: "Funny",
     icon: <BsEmojiSunglasses />,
   },
   {
-    name: "gaming",
+    name: "Gaming",
     icon: <FaGamepad />,
   },
   {
-    name: "food",
+    name: "Food",
     icon: <GiCakeSlice />,
   },
   {
-    name: "dance",
+    name: "Dance",
     icon: <GiGalaxy />,
   },
   {
-    name: "beauty",
+    name: "Beauty",
     icon: <GiLipstick />,
   },
   {
-    name: "animals",
+    name: "Animals",
     icon: <FaPaw />,
   },
   {
-    name: "sports",
+    name: "Sports",
     icon: <FaMedal />,
   },
 ];

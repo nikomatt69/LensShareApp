@@ -9,8 +9,6 @@ import { BsPlay } from "react-icons/bs";
 
 
   const MirrorVideos = () => {
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
     const videoRef = useRef<HTMLVideoElement>(null);
     const router = useRouter();
     const { id } = router.query
@@ -33,15 +31,14 @@ import { BsPlay } from "react-icons/bs";
     const publications = data?.publications.items;
     console.log("DATA", data?.publications?.items);
 
-    const onVideoClick = () => {
-        if (isPlaying) {
-          videoRef?.current?.pause();
-          setIsPlaying(false);
-        } else {
-          videoRef?.current?.play();
-          setIsPlaying(true);
-        }
-      };
+
+    const handleOnMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
+      e.currentTarget.play();
+    };
+    const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
+      e.currentTarget.pause();
+    };
+
 
     return (
   <div>
@@ -52,22 +49,25 @@ import { BsPlay } from "react-icons/bs";
             {publications?.map((pub) => (
                 <div key={pub.id}>
                     <Link href={`/post/${pub.id}`} key={pub.id}>
-                        <a className="block h-0 relative pb-[131%]">
+                        <a  className="block h-0 border-2 border-blue-500 rounded-lg relative pb-[131%]">
                         <video
-                        ref={videoRef}
                         loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                        ref={videoRef}
                         src={sanitizeIpfsUrl(pub.metadata.media[0].original.url)}
-                        className="absolute inset-0 h-full w-full object-cover rounded"
-                        
-
-
+                        muted // Needs to be there to be able to play
+                        onMouseOver={handleOnMouseOver}
+                        onMouseOut={handleOnMouseOut}
+                        className="absolute inset-0 h-full w-full object-cover rounded-md transform transition duration-500 md:hover:scale-125 md:hover:z-10 md:hover:border border-white"
                         /> 
-                        <BsPlay onClick={onVideoClick} className="absolute left-3 bottom-3 fill-white w-7 h-7" />
+                         <p className="absolute left-3 bottom-3 text-white font-semibold text-xs">
+                        {pub.metadata.name}
+                        
+                        </p> 
                         </a>
                      </Link>
-                    <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                    {pub.metadata.name}
-                    </p>
                 </div>
              ))}
              </div>

@@ -32,6 +32,8 @@ import { format } from 'url';
 import BottomNav from '../Navs/BottomNav';
 import MetaTags from '../UI/MetaTags';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
+import MirrorVideos from '../Buttons/Mirrors/MirrorVideos';
+import { Card } from '../UI/Card';
 
 
 
@@ -44,12 +46,15 @@ interface Props {
     const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
         const currentProfile = useAppStore((state) => state.currentProfile);
         const [showUserVideos, setShowUserVideos] = useState<Boolean>(true);
+        const [showUserMirrorVideos, setShowUserMirrorVideos] = useState<Boolean>(true);
+        const [showCollectedUserVideosModal, setShowCollectedUserVideosModal] = useState(false);
         const [showFollowersModal, setShowFollowersModal] = useState(false);
         const [showFollowingModal, setShowFollowingModal] = useState(false);
 
         const itsNotMe = profile?.id !== currentProfile?.id
-        const videos = showUserVideos ? 'flex text-center border-2 border-black' : 'border-2 border-black text-center text-black';
-        const liked = !showUserVideos ? 'flex text-center border-2 border-black' : 'border-2 border-black text-center text-black';
+        const videos = showUserVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
+        const mirrorvideos = !showUserMirrorVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
+        const liked = !showUserVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
 
         const [conversationKey, setConversationKey] = useState<string | null>(null);
         const [profileId, setProfileId] = useState<string | null>(null);
@@ -115,18 +120,15 @@ interface Props {
                            ) : (
                             <div className='right-2'>
                             <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
-                                <Link href='/live'> View Live</Link>
+                            <Link href='/live'> View Live</Link>
                             </button>
                             </div>
                            )
                            }    
                         </div> 
                     </div>
-                        <Link href={`/messages`}>
-                            <ChatBubbleOvalLeftIcon  className='h-6 w-6 text-black' />
-                            
-                        </Link>
-                        <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
+                        
+                        <div className="flex items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
                                 <span>Following</span>
@@ -151,17 +153,35 @@ interface Props {
                                 <Followers profile={profile?.id} />
                             </Modal>
                         </div>
-                        </div>
-                        <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5  rounded-full border-black bg-blue-100 w-full'>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center  py-3 px-3  font-semibold cursor-pointer ${videos} mt-2`} onClick={() => setShowUserVideos(true)}>
+                    </div>
+                    <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
                         Videos
                         </span>
-                        <span className={`text-sm bg-blue-500  rounded-full items-center  py-3 px-3 font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(false)}>
-                        Collected
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(false)}>
+                        Mirrors
                         </span>
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => { setShowCollectedUserVideosModal (!showCollectedUserVideosModal) }}>
+                        Collected
+                        </span> 
+
+                        <div className='p-1 items-center rounded-xl'>    
+                        <Modal 
+                         title="Collected Videos"
+                         show={showCollectedUserVideosModal}
+                         onClose={() => setShowCollectedUserVideosModal(false)}
+                         
+                         >
+                        <div className='p-1 items-center rounded-xl'>
+                         <Card className=' w-full object-contain object-center' >
+                            <CollectedVideos profile={profile as Profile} />
+                         </Card >
+                         </div>
+                        </Modal>
                         </div>
-                    {(showUserVideos) ? <ProfileVideos /> : <CollectedVideos profile={profile as Profile} />}
-                </div>
+                    </div>
+                    {(showUserVideos) ? <ProfileVideos /> :  <MirrorVideos /> }
+                   </div>
                 <BottomNav />
             </div>
             )
