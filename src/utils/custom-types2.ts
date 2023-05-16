@@ -45,8 +45,8 @@ export type ReferenceModuleType = {
   } | null
 }
 
-//export type LenstokAttachment = Post & Comment & Mirror
-export type LenstokPublication = Post & Comment & Mirror
+//export type LensshareAttachment = Post & Comment & Mirror
+export type LenssharePublication = Post & Comment & Mirror
 
 export type IPFSUploadResult = {
   hash?: string
@@ -70,7 +70,7 @@ export type ProfileMetadata = {
   attributes: Attribute[]
 }
 
-export type LenstokCollectModule = FreeCollectModuleSettings &
+export type LensshareCollectModule = FreeCollectModuleSettings &
   FeeCollectModuleSettings &
   RevertCollectModuleSettings &
   TimedFeeCollectModuleSettings &
@@ -88,7 +88,7 @@ export interface ProfileInterest {
   subCategories: Array<{ label: string; id: string }>
 }
 
-export type LenstokFollowModule = FeeFollowModuleSettings &
+export type LensshareFollowModule = FeeFollowModuleSettings &
   ProfileFollowModuleSettings &
   RevertFollowModuleSettings;
 
@@ -140,18 +140,18 @@ export type QueuedCommentType = {
 
 export type QueuedPublicationType = {
   publication: CreatePin
-  previews: NewLenstokAttachment[]
+  previews: NewLensshareAttachment[]
   txnId?: string
   txnHash?: string
 }
 
-export interface LenstokAttachment {
+export interface LensshareAttachment {
   item: string;
   type: string;
   altTag: string;
 }
 
-export interface NewLenstokAttachment extends Omit<LenstokAttachment, 'item'> {
+export interface NewLensshareAttachment extends Omit<LensshareAttachment, 'item'> {
   id: string;
   item?: string;
   previewItem?: string;

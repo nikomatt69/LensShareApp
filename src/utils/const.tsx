@@ -2,6 +2,7 @@ import { BsCode, BsEmojiKissFill, BsEmojiSunglasses } from "react-icons/bs";
 import { GiCakeSlice, GiGalaxy, GiLipstick } from "react-icons/gi";
 import { FaPaw, FaMedal, FaGamepad } from "react-icons/fa";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
+import { IoMdAlert } from "react-icons/io";
 
 export const topics = [
   {
@@ -10,7 +11,7 @@ export const topics = [
   },
   {
     name: "Sensitive-OFFENSIVE",
-    icon: <BsEmojiKissFill />,
+    icon: <IoMdAlert />,
   },
   {
     name: "Coding",

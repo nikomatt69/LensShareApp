@@ -9,7 +9,7 @@ import {
   PINSTA_API_URL,
   NEXT_PUBLIC_EVER_BUCKET_NAME
 } from '@/constants'
-import type { IPFSUploadResult, LenstokAttachment } from '../custom-types'
+import type { IPFSUploadResult, LensshareAttachment } from '../custom-types'
 
 export const everland = async (
   file: File,
@@ -64,7 +64,7 @@ export const everland = async (
     }
 }
 
-export const uploadFilesToIPFS = async (data: any): Promise<LenstokAttachment[]> => {
+export const uploadFilesToIPFS = async (data: any): Promise<LensshareAttachment[]> => {
     try {
         const files = Array.from(data);
         const attachments = await Promise.all(

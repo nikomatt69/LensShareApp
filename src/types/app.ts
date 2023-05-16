@@ -88,5 +88,5 @@ export type HLSData = {
   type: string
 }
 
-export type LenstokAttachment = Post & Comment & Mirror & { hls: HLSData }
+export type LensshareAttachment = Post & Comment & Mirror & { hls: HLSData }
 

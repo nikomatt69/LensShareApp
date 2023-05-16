@@ -4,7 +4,7 @@ import { toNanoString } from '@xmtp/xmtp-js';
 import type { Profile } from '@/utils/lens';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { NewLenstokAttachment } from '@/utils/custom-types2';
+import { NewLensshareAttachment } from '@/utils/custom-types2';
 
 type TabValues = 'Following' | 'Requested';
 
@@ -28,8 +28,8 @@ interface MessageState {
     setSelectedProfileId: (selectedProfileId: string) => void;
     selectedTab: TabValues;
     setSelectedTab: (selectedTab: TabValues) => void;
-    attachment: NewLenstokAttachment;
-    setAttachment: (attachment: NewLenstokAttachment) => void;
+    attachment: NewLensshareAttachment;
+    setAttachment: (attachment: NewLensshareAttachment) => void;
     isUploading: boolean;
     setIsUploading: (isUploading: boolean) => void;
 }

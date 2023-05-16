@@ -52,9 +52,9 @@ interface Props {
         const [showFollowingModal, setShowFollowingModal] = useState(false);
 
         const itsNotMe = profile?.id !== currentProfile?.id
-        const videos = showUserVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
-        const mirrorvideos = !showUserMirrorVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
-        const liked = !showUserVideos ? 'text-center border-2 border-black' : 'border-2 border-black text-center text-black';
+        const videos = showUserVideos ? 'text-center border-2 border-black text-white' : 'border-2 border-black text-center text-black';
+        const mirrorvideos = !showUserMirrorVideos ? 'text-center border-2 border-black text-white' : 'border-2 border-black text-center text-black';
+        const liked = !showUserVideos ? 'text-center border-2 border-black text-white' : 'border-2 border-black text-center text-black';
 
         const [conversationKey, setConversationKey] = useState<string | null>(null);
         const [profileId, setProfileId] = useState<string | null>(null);
@@ -155,13 +155,13 @@ interface Props {
                         </div>
                     </div>
                     <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
                         Videos
                         </span>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(false)}>
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(false)}>
                         Mirrors
                         </span>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3  font-semibold cursor-pointer ${liked} mt-2`} onClick={() => { setShowCollectedUserVideosModal (!showCollectedUserVideosModal) }}>
+                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => { setShowCollectedUserVideosModal (!showCollectedUserVideosModal) }}>
                         Collected
                         </span> 
 

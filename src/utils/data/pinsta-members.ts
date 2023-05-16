@@ -1,6 +1,6 @@
-export const lenstokMembers = [
+export const lensshareMembers = [
     '0x016efc', // JsonPreet.lens
-    '0x018ec4', // lenstok.lens
+    '0x018ec4', // lensshare.lens
     '0x010040', // Anku.lens
     '0xacaf', // 0XZelda.lens
     '0x01a2ee', // Wav3s.lens

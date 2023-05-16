@@ -1,5 +1,5 @@
 import { usePublicationStore } from '@/store/publication';
-import { NewLenstokAttachment } from '@/utils/custom-types2';
+import { NewLensshareAttachment } from '@/utils/custom-types2';
 import { uploadIpfs } from '@/utils/functions/uploadToIPFS';
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
@@ -12,7 +12,7 @@ const useUploadAttachments = () => {
     const setIsUploading = usePublicationStore((state) => state.setIsUploading);
 
     const handleUploadAttachments = useCallback(
-        async (attachments: any): Promise<NewLenstokAttachment[]> => {
+        async (attachments: any): Promise<NewLensshareAttachment[]> => {
             setIsUploading(true);
             const files = Array.from(attachments);
             const attachmentIds: string[] = [];
@@ -42,7 +42,7 @@ const useUploadAttachments = () => {
             });
 
             addAttachments;
-            let attachmentsIPFS: NewLenstokAttachment[] = [];
+            let attachmentsIPFS: NewLensshareAttachment[] = [];
             try {
                 if (hasLargeAttachment.includes(false)) {
                     setIsUploading(false);
@@ -52,7 +52,7 @@ const useUploadAttachments = () => {
 
                 const attachmentsUploaded = await uploadIpfs(attachments);
                 if (attachmentsUploaded) {
-                    attachments = ((attachment: NewLenstokAttachment) => ({
+                    attachments = ((attachment: NewLensshareAttachment) => ({
                         ...attachment,
                         
                     }));

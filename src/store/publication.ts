@@ -1,6 +1,6 @@
 
 import { MAINNET_DEFAULT_TOKEN, WMATIC_TOKEN_ADDRESS } from 'src/constants';
-import { CreatePin, NewLenstokAttachment } from '@/utils/custom-types2';
+import { CreatePin, NewLensshareAttachment } from '@/utils/custom-types2';
 import { CREATOR_CATEGORIES } from 'src/utils/data/categories';
 import { create } from 'zustand';
 
@@ -30,10 +30,10 @@ export const UPLOADED_FORM_DEFAULTS = {
 }
 
 interface PublicationState {
-    attachments: NewLenstokAttachment[];
-    setAttachments: (attachments: NewLenstokAttachment[]) => void;
-    addAttachments: (attachments: NewLenstokAttachment[]) => void;
-    updateAttachments: (attachments: NewLenstokAttachment[]) => void;
+    attachments: NewLensshareAttachment[];
+    setAttachments: (attachments: NewLensshareAttachment[]) => void;
+    addAttachments: (attachments: NewLensshareAttachment[]) => void;
+    updateAttachments: (attachments: NewLensshareAttachment[]) => void;
     removeAttachments: (ids: string[]) => void;
     isUploading: boolean;
     setIsUploading: (isUploading: boolean) => void;
