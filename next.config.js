@@ -9,6 +9,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   redirects: true,
+  revalidate: true,
   experimental: {
     scrollRestoration: true,
     newNextLinkBehavior: true,
@@ -60,9 +61,9 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/u/:handle(.+).lens', destination: '/u/:handle', permanent: true },
-      { source: '/u/:handle(.+).test', destination: '/u/:handle', permanent: true },
-      { source: '/u/:handle(.+).dev', destination: '/u/:handle', permanent: true },
+      { source: '/u/:id(.+).lens', destination: '/u/:id', permanent: true },
+      { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
+      { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true },
     ];
   },
 };

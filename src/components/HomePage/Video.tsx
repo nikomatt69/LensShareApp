@@ -71,6 +71,7 @@ const Video: FC<Props> = ({ publication }) => {
             loop
             autoPlay
             playsInline
+            draggable={false}
             muted
             onClick={onVideoClick}
             ref={videoRef}
@@ -79,7 +80,7 @@ const Video: FC<Props> = ({ publication }) => {
             onMouseOut={handleOnMouseOut}
             // className='lg:w-[400px] h-[300px] md:h-[400px] lg:h-[500px] w-[400px] rounded-2xl cursor-pointer bg-gray-100'
             className='lg:w-[410px] lg:h-[547px] md:h-[400px] md:w-[400px] h-[547px] w-full  xs:w-[full] xs:h-[full] shadow-inner rounded-xl
-            object-cover transform transition md:rounded-lg cursor-pointer bg-black pointer-events-auto md:pointer-events-auto'
+            object-cover transform transition  md:rounded-lg cursor-pointer bg-black pointer-events-auto md:pointer-events-auto'
           ></video>
         </Link>
         </div>

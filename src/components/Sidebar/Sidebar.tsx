@@ -38,8 +38,8 @@ const Sidebar = () => {
       {showSidebar && (
         <div className="lg:w-400 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3">
         <div className="lg:border-b-2 items-center text-center object-center border-gray-200 xl:pb-4">
-            <Link href="/feed">
-            <div className={pathname === '/feed' ? activeLink : normalLink}>
+            <Link href="/">
+            <div className={pathname === '/' ? activeLink : normalLink}>
                   
                 <a className="text-md hidden lg:block cursor-pointer">Feed</a>
               </div>
@@ -66,8 +66,6 @@ const Sidebar = () => {
           ) : (
             null) 
           }
-       
-          <Categories />
           <Footer />
         </div>
       )}

@@ -53,6 +53,7 @@ import { BsPlay } from "react-icons/bs";
                         loop
                         autoPlay
                         playsInline
+                        draggable={false}
                         preload="metadata"
                         ref={videoRef}
                         src={sanitizeIpfsUrl(pub.metadata.media[0].original.url)}

@@ -53,6 +53,7 @@ import { BsPlay } from "react-icons/bs";
                         <video
                         loop
                         autoPlay
+                        draggable={false}
                         playsInline
                         preload="metadata"
                         ref={videoRef}

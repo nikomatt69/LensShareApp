@@ -1,0 +1,4 @@
+Sitemap: https://lenshareapp.xyz/sitemap.xml
+
+User-agent: *
+Allow: /*

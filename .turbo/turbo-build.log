@@ -2,12 +2,15 @@ yarn run v1.22.19
 $ next build
 info  - Loaded env from /Users/nikoemme/LensShare/LensShareApp/.env.production
 info  - Loaded env from /Users/nikoemme/LensShare/LensShareApp/.env
+warn  - Invalid next.config.js options detected: 
+  - The root value has an unexpected property, revalidate, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
+
+See more info here: https://nextjs.org/docs/messages/invalid-next-config
 warn  - You have enabled experimental feature (scrollRestoration) in next.config.js.
 warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
 
 info  - Linting and checking validity of types...
 info  - Creating an optimized production build...
-<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (679kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 warn  - Compiled with warnings
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
@@ -63,11 +66,11 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -98,37 +101,37 @@ info  - Generating static pages (9/13)
 info  - Generating static pages (13/13)
 info  - Finalizing page optimization...
 
-Route (pages)                                Size     First Load JS
-┌ ○ / (424 ms)                               271 B           945 kB
-├   /_app                                    0 B             106 kB
-├ ○ /404 (517 ms)                            1.3 kB          109 kB
-├ ℇ /api/corn/route                          0 B             106 kB
-├ λ /api/get-encrypted                       0 B             106 kB
-├ λ /api/get-ipfs-cid                        0 B             106 kB
-├ λ /api/hello                               0 B             106 kB
-├ λ /api/meta-to-ipfs                        0 B             106 kB
-├ ℇ /api/og                                  0 B             106 kB
-├ λ /api/revalidate                          0 B             106 kB
-├ λ /api/store-encrypted                     0 B             106 kB
-├ ○ /discover (505 ms)                       11.9 kB         852 kB
-├ ○ /feed                                    2.95 kB         947 kB
-├ ○ /latest                                  7.47 kB         945 kB
-├ ○ /messages (489 ms)                       6.33 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (354 ms)  16.3 kB        1.09 MB
-├ ○ /notifications (429 ms)                  24.3 kB         872 kB
-├ ○ /post/[id] (368 ms)                      458 kB         1.35 MB
-├ ○ /search                                  6.88 kB         938 kB
-├ ○ /u/[id] (435 ms)                         9.03 kB         880 kB
-└ ○ /upload                                  53.7 kB         909 kB
-+ First Load JS shared by all                115 kB
-  ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
-  ├ chunks/main-d8fa6b61425a8e6e.js          27.4 kB
-  ├ chunks/pages/_app-a31085765d0d7814.js    29.7 kB
-  ├ chunks/webpack-0fb02b2e27b57435.js       3.05 kB
-  └ css/ad9faad4415116c4.css                 8.93 kB
+Route (pages)                              Size     First Load JS
+┌ ○ /                                      6.41 kB         944 kB
+├   /_app                                  0 B             106 kB
+├ ○ /404                                   1.3 kB          109 kB
+├ ℇ /api/corn/route                        0 B             106 kB
+├ λ /api/get-encrypted                     0 B             106 kB
+├ λ /api/get-ipfs-cid                      0 B             106 kB
+├ λ /api/hello                             0 B             106 kB
+├ λ /api/meta-to-ipfs                      0 B             106 kB
+├ ℇ /api/og                                0 B             106 kB
+├ λ /api/revalidate                        0 B             106 kB
+├ λ /api/store-encrypted                   0 B             106 kB
+├ ○ /discover                              11.9 kB         852 kB
+├ ○ /feed                                  7.5 kB          946 kB
+├ ○ /latest                                6.5 kB          945 kB
+├ ○ /messages (307 ms)                     6.33 kB        1.07 MB
+├ ○ /messages/[...conversationKey]         16.3 kB        1.09 MB
+├ ○ /notifications                         24.3 kB         872 kB
+├ ○ /post/[id]                             458 kB         1.35 MB
+├ ○ /search                                6.89 kB         938 kB
+├ ○ /u/[id] (334 ms)                       9.26 kB         881 kB
+└ ○ /upload                                53.7 kB         909 kB
++ First Load JS shared by all              115 kB
+  ├ chunks/framework-1f1fb5c07f2be279.js   45.4 kB
+  ├ chunks/main-d8fa6b61425a8e6e.js        27.4 kB
+  ├ chunks/pages/_app-a31085765d0d7814.js  29.7 kB
+  ├ chunks/webpack-a2e7a064bfd81dfe.js     3.05 kB
+  └ css/efb3c7af8ae676dc.css               8.94 kB
 
 ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 50.71s.
+Done in 16.04s.

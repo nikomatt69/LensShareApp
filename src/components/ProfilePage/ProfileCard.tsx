@@ -97,7 +97,7 @@ interface Props {
                         </div>
                         <div className="flex bg-cyan-200 border-4 border-t-2 h-45 border-black rounded-2xl p-2 gap-0.2">
                             <div className='flex flex-col justify-center p-1'>
-                                <h1 className="text-lg p-1  font-bold capitalize">
+                                <h1 className="text-md p-1  font-bold capitalize">
                                 {profile?.name}
                                 </h1>
                                 <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" /> 
@@ -107,9 +107,9 @@ interface Props {
                                <text>{profile?.bio}</text>
                                </div>
                    </div>
-                       <div className="right-2 pt-1 ">
+                       <div className="right-2 display:inline-block pt-1 ">
                            {itsNotMe ? (
-                             <div className='right-2'>
+                             <div className='right-2 fl'>
                             { following ? (
                                 <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
                             ) : (
@@ -154,7 +154,7 @@ interface Props {
                             </Modal>
                         </div>
                     </div>
-                    <div className='flex-1 text-center gap-10 p-5 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
+                    <div className='flex-1 text-center gap-8 p-4 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
                         <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
                         Videos
                         </span>
@@ -188,4 +188,3 @@ interface Props {
     }
 
 export default ProfileCard;
-
