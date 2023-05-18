@@ -1,6 +1,6 @@
 import type { Profile } from 'src/utils/lens'
 import { getRandomProfilePicture } from './getRandomProfilePicture'
-import sanitizeIpfsUrl from 'src/utils/functions/sanitizeIpfsUrl2'
+import {sanitizeIpfsUrl} from 'src/utils/sanitizeIpfsUrl'
 import imageCdn from '@/lib/imageCdn'
 
 const getProfilePicture = (

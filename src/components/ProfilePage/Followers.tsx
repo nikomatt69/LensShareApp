@@ -13,6 +13,7 @@ import { useAppStore } from "src/store/app";
 import { Profile } from '@/types/lens';
 import Link from 'next/link';
 import formatHandle from '@/utils/functions/formatHandle';
+import Loading from '../Loading';
 
 interface Props {
     profile: string
@@ -64,7 +65,7 @@ const Followers: FC<Props> = ({profile}) => {
             scrollThreshold={0.5}
             hasMore={hasMore}
             next={loadMore}
-            loader={<InfiniteLoader />}
+            loader={<Loading />}
             scrollableTarget="scrollableDiv"
         > 
         <div>

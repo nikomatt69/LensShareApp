@@ -50,7 +50,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
         </div>
       ) : (
         <a href={nftURL} target="_blank" rel="noreferrer noopener">
-          <img
+          <video
            className='object-fill object-center rounded-xl'
            
             style={{

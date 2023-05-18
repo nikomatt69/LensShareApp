@@ -60,18 +60,7 @@ interface Props {
         const [profileId, setProfileId] = useState<string | null>(null);
 
         const [showSearchModal, setShowSearchModal] = useState(false);
-        const onProfileSelected = (profile: Profile) => {
-            const conversationId = buildConversationId(currentProfile?.id, profile.id);
-            const conversationKey = buildConversationKey(profile.ownedBy, conversationId);
-            addProfileAndSelectTab(conversationKey, profile);
-            router.push(`/messages/${conversationKey}`);
-            setShowSearchModal(false);
-        };
-
-        function addProfileAndSelectTab(conversationKey: any, profile: Profile) {
-            throw new Error('Function not implemented.');
-        }
-        
+    
         
         
         
@@ -97,7 +86,7 @@ interface Props {
                         </div>
                         <div className="flex bg-cyan-200 border-4 border-t-2 h-45 border-black rounded-2xl p-2 gap-0.2">
                             <div className='flex flex-col justify-center p-1'>
-                                <h1 className="text-md p-1  font-bold capitalize">
+                                <h1 className="text-lg break-words p-1  font-bold capitalize">
                                 {profile?.name}
                                 </h1>
                                 <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" /> 

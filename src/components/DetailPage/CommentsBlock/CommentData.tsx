@@ -42,7 +42,7 @@ const CommentData: FC<Props> = ({ comment, publication }) => {
         if (ipfsUrl) {
           const body = { url: ipfsUrl };
           const response = await fetch("/api/get-encrypted", {
-            method: "POST",
+            method: "",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(body),
           });
