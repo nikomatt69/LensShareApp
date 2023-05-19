@@ -9,7 +9,6 @@ warn  - Invalid next.config.js options detected:
   - The root value has an unexpected property, getStaticPaths, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The value at .experimental has an unexpected property, turbo, which is not in the list of allowed properties (adjustFontFallbacks, adjustFontFallbacksWithSizeAdjust, amp, cpus, craCompat, disableOptimizedLoading, disablePostcssPresetEnv, esmExternals, appDir, externalDir, fallbackNodePolyfills, fetchCache, forceSwcTransforms, fullySpecified, gzipSize, incrementalCacheHandlerPath, isrFlushToDisk, isrMemoryCacheSize, largePageDataBytes, legacyBrowsers, manualClientBasePath, middlewarePrefetch, newNextLinkBehavior, nextScriptWorkers, optimizeCss, optimisticClientCache, outputFileTracingRoot, outputFileTracingIgnores, pageEnv, profiling, proxyTimeout, runtime, serverComponentsExternalPackages, scrollRestoration, sharedPool, sri, swcFileReading, swcMinify, swcMinifyDebugOptions, swcPlugins, swcTraceProfiling, urlImports, enableUndici, workerThreads, fontLoaders, webVitalsAttribution, mdxRs, turbotrace).
-  - The value at .exportPathMap must be a function that returns a Promise.
 
 See more info here: https://nextjs.org/docs/messages/invalid-next-config
 warn  - You have enabled experimental features (scrollRestoration, turbo) in next.config.js.
@@ -17,7 +16,6 @@ warn  - Experimental features are not covered by semver, and may cause unexpecte
 
 info  - Linting and checking validity of types...
 info  - Creating an optimized production build...
-<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (679kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
 warn  - Compiled with warnings
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
@@ -53,22 +51,22 @@ Import trace for requested module:
 ./src/components/Providers.tsx
 
 ./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/Providers.tsx
-
 info  - Collecting page data...
+Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
+
+Import trace for requested module:
+./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
+./node_modules/@livepeer/react/dist/livepeer-react.esm.js
+./src/components/Providers.tsx
+
+./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
+Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
+
+Import trace for requested module:
+./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
+./node_modules/@livepeer/react/dist/livepeer-react.esm.js
+./src/components/Providers.tsx
+
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -120,15 +118,15 @@ Route (pages)                                Size     First Load JS
 ├ ℇ /api/og                                  0 B             106 kB
 ├ λ /api/revalidate                          0 B             106 kB
 ├ λ /api/store-encrypted                     0 B             106 kB
-├ ○ /discover                                11.9 kB         852 kB
+├ ○ /discover (390 ms)                       11.9 kB         852 kB
 ├ ○ /feed                                    7.5 kB          946 kB
 ├ ○ /latest                                  6.5 kB          945 kB
-├ ○ /messages                                6.34 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (310 ms)  16.3 kB        1.09 MB
-├ ○ /notifications                           24.3 kB         872 kB
-├ ○ /post/[id]                               458 kB         1.35 MB
-├ ○ /search                                  6.89 kB         938 kB
-├ ○ /u/[id]                                  9.01 kB         881 kB
+├ ○ /messages (534 ms)                       6.34 kB        1.07 MB
+├ ○ /messages/[...conversationKey] (459 ms)  16.3 kB        1.09 MB
+├ ○ /notifications (386 ms)                  24.3 kB         872 kB
+├ ○ /post/[id] (483 ms)                      458 kB         1.35 MB
+├ ○ /search (399 ms)                         6.89 kB         938 kB
+├ ○ /u/[id] (481 ms)                         9.01 kB         881 kB
 └ ○ /upload                                  53.7 kB         909 kB
 + First Load JS shared by all                115 kB
   ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
@@ -141,4 +139,4 @@ Route (pages)                                Size     First Load JS
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 17.57s.
+Done in 28.04s.
