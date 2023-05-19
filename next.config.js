@@ -10,7 +10,7 @@ const nextConfig = {
   webpack5: true,
   swcMinify: true,
   redirects: true,
-  imagesUnoptimized: true,
+  exportPathMap: true,
   reactStrictMode: true,
   getServerSideProps: true,
   getInitialProps: true,

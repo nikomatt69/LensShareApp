@@ -9,6 +9,7 @@ warn  - Invalid next.config.js options detected:
   - The root value has an unexpected property, getStaticPaths, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The value at .experimental has an unexpected property, turbo, which is not in the list of allowed properties (adjustFontFallbacks, adjustFontFallbacksWithSizeAdjust, amp, cpus, craCompat, disableOptimizedLoading, disablePostcssPresetEnv, esmExternals, appDir, externalDir, fallbackNodePolyfills, fetchCache, forceSwcTransforms, fullySpecified, gzipSize, incrementalCacheHandlerPath, isrFlushToDisk, isrMemoryCacheSize, largePageDataBytes, legacyBrowsers, manualClientBasePath, middlewarePrefetch, newNextLinkBehavior, nextScriptWorkers, optimizeCss, optimisticClientCache, outputFileTracingRoot, outputFileTracingIgnores, pageEnv, profiling, proxyTimeout, runtime, serverComponentsExternalPackages, scrollRestoration, sharedPool, sri, swcFileReading, swcMinify, swcMinifyDebugOptions, swcPlugins, swcTraceProfiling, urlImports, enableUndici, workerThreads, fontLoaders, webVitalsAttribution, mdxRs, turbotrace).
+  - The value at .exportPathMap must be a function that returns a Promise.
 
 See more info here: https://nextjs.org/docs/messages/invalid-next-config
 warn  - You have enabled experimental features (scrollRestoration, turbo) in next.config.js.
@@ -72,18 +73,7 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -97,8 +87,20 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 info  - Generating static pages (0/13)
+[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 info  - Generating static pages (3/13)
 info  - Generating static pages (6/13)
@@ -109,7 +111,7 @@ info  - Finalizing page optimization...
 Route (pages)                                Size     First Load JS
 ┌ ○ /                                        6.41 kB         944 kB
 ├   /_app                                    0 B             106 kB
-├ ○ /404 (375 ms)                            1.3 kB          109 kB
+├ ○ /404                                     1.3 kB          109 kB
 ├ ℇ /api/corn/route                          0 B             106 kB
 ├ λ /api/get-encrypted                       0 B             106 kB
 ├ λ /api/get-ipfs-cid                        0 B             106 kB
@@ -121,12 +123,12 @@ Route (pages)                                Size     First Load JS
 ├ ○ /discover                                11.9 kB         852 kB
 ├ ○ /feed                                    7.5 kB          946 kB
 ├ ○ /latest                                  6.5 kB          945 kB
-├ ○ /messages (376 ms)                       6.34 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (372 ms)  16.3 kB        1.09 MB
-├ ○ /notifications (335 ms)                  24.3 kB         872 kB
+├ ○ /messages                                6.34 kB        1.07 MB
+├ ○ /messages/[...conversationKey] (310 ms)  16.3 kB        1.09 MB
+├ ○ /notifications                           24.3 kB         872 kB
 ├ ○ /post/[id]                               458 kB         1.35 MB
 ├ ○ /search                                  6.89 kB         938 kB
-├ ○ /u/[id] (301 ms)                         9.01 kB         881 kB
+├ ○ /u/[id]                                  9.01 kB         881 kB
 └ ○ /upload                                  53.7 kB         909 kB
 + First Load JS shared by all                115 kB
   ├ chunks/framework-1f1fb5c07f2be279.js     45.4 kB
@@ -139,4 +141,4 @@ Route (pages)                                Size     First Load JS
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 25.48s.
+Done in 17.57s.
