@@ -10,6 +10,11 @@ const nextConfig = {
   webpack5: true,
   swcMinify: true,
   redirects: true,
+  reactStrictMode: true,
+  getServerSideProps: true,
+  getInitialProps: true,
+  getStaticPaths: true,
+  getStaticProps: true,
   experimental: {
     scrollRestoration: true,
     newNextLinkBehavior: true,

@@ -14,6 +14,7 @@ import formatHandle from "@/utils/functions/formatHandle";
 import Link from "next/link";
 import Image from "next/image";
 import Loading from "../Loading";
+import { useInView } from "react-cool-inview";
 interface Props {
     profile: Profile
     onProfileSelected?: (profile: Profile) => void;
@@ -21,7 +22,7 @@ interface Props {
 
 const Following: FC<Props> = ({profile}) => {
 
-    const request = { address: profile?.ownedBy, limit: 50 }
+    const request = { address: profile?.ownedBy, limit:30 }
 
     const { data, loading, error, fetchMore } = useFollowingQuery({
         variables: { request },
@@ -29,16 +30,23 @@ const Following: FC<Props> = ({profile}) => {
     })
 
     const following = data?.following?.items
-    const pageInfo = data?.following?.pageInfo
-    const hasMore = pageInfo?.next && following?.length !== pageInfo.totalCount
     const currentProfile = useAppStore((state) => state.currentProfile);
     const [selectedTab, setSelectedTab] = useState <"following" | "categories" | "search">("following");
 
-    const loadMore = async () => {
-        await fetchMore({
-            variables: { request: { ...request, cursor: pageInfo?.next} }
-        })
+    const pageInfo = data?.following?.pageInfo
+
+    const { observe } = useInView({
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            cursor: pageInfo?.next,
+            ...request
+          }
+        }
+      })
     }
+    })
 
     if (loading) {
         return <Loader message="Loading Following" />
@@ -56,15 +64,22 @@ const Following: FC<Props> = ({profile}) => {
 
   return (
     <div className="overflow-y-auto max-h-[80vh]" id="scrollableDiv">
-        <InfiniteScroll
-            dataLength={following?.length ?? 0}
-            scrollThreshold={0.5}
-            hasMore={hasMore}
-            next={loadMore}
-            loader={<Loading />}
-            scrollableTarget="scrollableDiv"
-        > 
-        <div>
+      <InfiniteScroll
+        dataLength={following?.length ?? 0}
+        next={() => {}}
+        hasMore={true}
+        loader={pageInfo?.next && (
+          <span ref={observe} className="flex justify-center p-10">
+            <Loading />
+          </span>
+        )}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+      <div>
         {iFollow?.map((following) => (
           <Link href={`/u/${following?.profile.id}`} key={following?.profile.id}>
             <div className="flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center">
@@ -89,9 +104,12 @@ const Following: FC<Props> = ({profile}) => {
           </Link>
         ))}
       </div>
-        </InfiniteScroll>
+      </InfiniteScroll>
+        
     </div>
   )
 }
+
+
 
 export default Following

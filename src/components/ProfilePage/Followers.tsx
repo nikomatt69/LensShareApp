@@ -14,6 +14,7 @@ import { Profile } from '@/types/lens';
 import Link from 'next/link';
 import formatHandle from '@/utils/functions/formatHandle';
 import Loading from '../Loading';
+import { useInView } from 'react-cool-inview';
 
 interface Props {
     profile: string
@@ -22,7 +23,7 @@ interface Props {
 
 const Followers: FC<Props> = ({profile}) => {
 
-    const request = { profileId: profile, limit: 50 }
+    const request = { profileId: profile, limit:30 }
 
     const { data, loading, error, fetchMore } = useFollowersQuery({
         variables: { request },
@@ -31,17 +32,23 @@ const Followers: FC<Props> = ({profile}) => {
 
     const followers = data?.followers?.items
     const pageInfo = data?.followers?.pageInfo
-    const hasMore = pageInfo?.next && followers?.length !== pageInfo.totalCount
     const currentProfile = useAppStore((state) => state.currentProfile);
     const [selectedTab, setSelectedTab] = useState<
      "followers" | "categories" | "search"
     >("followers");
 
-    const loadMore = async () => {
+    const { observe } = useInView({
+      onEnter: async () => {
         await fetchMore({
-            variables: { request: { ...request, cursor: pageInfo?.next} }
+          variables: {
+            request: {
+              cursor: pageInfo?.next,
+              ...request
+            }
+          }
         })
-    }
+      }
+      })
 
     if (loading) {
         return <Loader message="Loading followers" />
@@ -61,14 +68,21 @@ const Followers: FC<Props> = ({profile}) => {
 
     <div className="overflow-y-auto max-h-[80vh]" id="scrollableDiv">
         <InfiniteScroll
-            dataLength={followers?.length ?? 0}
-            scrollThreshold={0.5}
-            hasMore={hasMore}
-            next={loadMore}
-            loader={<Loading />}
-            scrollableTarget="scrollableDiv"
-        > 
-        <div>
+        dataLength={followers?.length ?? 0}
+        next={() => {}}
+        hasMore={true}
+        loader={pageInfo?.next && (
+          <span ref={observe} className="flex justify-center p-10">
+            <Loading />
+          </span>
+        )}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+      <div>
         {areFollowers?.map((followers) => (
           <Link href={`/u/${followers?.wallet?.defaultProfile?.id}`} key={followers?.wallet?.defaultProfile?.id}>
             <div className="flex gap-3 hover:bg-primary p-2 cursor-pointer font-semibold rounded items-center">
@@ -81,7 +95,6 @@ const Followers: FC<Props> = ({profile}) => {
                 />
               </div>
               <div/>
-              <div >
                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
                 {followers?.wallet?.defaultProfile?.name}
                 </p>
@@ -89,7 +102,6 @@ const Followers: FC<Props> = ({profile}) => {
                 {formatHandle(followers?.wallet?.defaultProfile?.handle)} {""}
                 </p>
               </div>
-            </div>
           </Link>
         ))}
       </div>

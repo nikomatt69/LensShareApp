@@ -29,16 +29,16 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
                   backgroundImage: `url(${
                     nft.originalContent.uri
                       ? sanitizeIpfsUrl(nft.originalContent.uri)
-                      : `${STATIC_ASSETS_URL}/images/icon.png`
+                      : `${STATIC_ASSETS_URL}/images/Lenstoklogo.png`
                   })`,
-                  backgroundSize: 'contain',
-                  backgroundPosition: 'rounded-xl object-contain object-fill object-center center',
+                  backgroundSize: 'contain items-center object-center object-fill',
+                  backgroundPosition: 'rounded-xl items-center object-contain object-fill object-center center',
                   backgroundRepeat: 'no-repeat'
                 }}
               />
             </a>
           ) : (
-            <div className='rounded-xl object-fill object-center'>
+            <div className='rounded-xl items-center  object-fill object-center'>
             <iframe
               className="rounded-xl items-center object-center object-fill"
               sandbox=''
@@ -57,10 +57,10 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
               backgroundImage: `url(${
                 nft?.originalContent?.animatedUrl
                   ? sanitizeIpfsUrl(nft?.originalContent?.animatedUrl)
-                  : `${STATIC_ASSETS_URL}/images/icon.png`
+                  : `${STATIC_ASSETS_URL}/images/Lenstoklogo.png`
               })`,
-              backgroundSize: ' object-fill object-center contain',
-              backgroundPosition: 'center object-fill object-center',
+              backgroundSize: ' object-fill items-center object-center contain',
+              backgroundPosition: 'center items-center object-fill object-center',
               backgroundRepeat: 'no-repeat'
             }}
           />
