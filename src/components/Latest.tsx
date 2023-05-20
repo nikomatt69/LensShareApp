@@ -97,6 +97,7 @@ const Latest = () => {
         publication.metadata.media[0].original.url.startsWith("ipfs://") ||
         publication.metadata.media[0].original.url.startsWith("https://arweave") ||
         publication.metadata.media[0].original.url.startsWith("https://lenshareapp.infura-ipfs.io")
+        
       );
     }
   });

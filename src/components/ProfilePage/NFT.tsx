@@ -29,7 +29,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
                   backgroundImage: `url(${
                     nft.originalContent.uri
                       ? sanitizeIpfsUrl(nft.originalContent.uri)
-                      : `${STATIC_ASSETS_URL}/images/Lenstoklogo.png`
+                      : `${STATIC_ASSETS_URL}/images/faviconok.png`
                   })`,
                   backgroundSize: 'contain items-center object-center object-fill',
                   backgroundPosition: 'rounded-xl items-center object-contain object-fill object-center center',
@@ -57,7 +57,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
               backgroundImage: `url(${
                 nft?.originalContent?.animatedUrl
                   ? sanitizeIpfsUrl(nft?.originalContent?.animatedUrl)
-                  : `${STATIC_ASSETS_URL}/images/Lenstoklogo.png`
+                  : `${STATIC_ASSETS_URL}/images/faviconok.png`
               })`,
               backgroundSize: ' object-fill items-center object-center contain',
               backgroundPosition: 'center items-center object-fill object-center',

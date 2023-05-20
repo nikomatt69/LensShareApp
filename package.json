@@ -30,7 +30,7 @@
     "@lens-protocol/sdk-gated": "^1.2.0",
     "@lit-protocol/sdk-browser": "^1.1.238",
     "@livepeer/react": "^1.5.5",
-    "@rainbow-me/rainbowkit": "^0.12.7",
+    "@rainbow-me/rainbowkit": "^0.12.0",
     "@sentry/nextjs": "^7.47.0",
     "@tippyjs/react": "^4.2.6",
     "@vercel/analytics": "^1.0.1",
@@ -87,7 +87,7 @@
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",
     "vercel-storage": "vercel/edge-config",
-    "wagmi": "^0.12.10",
+    "wagmi": "^0.12.0",
     "xmtp": "^0.0.0",
     "zod": "^3.19.1"
   },

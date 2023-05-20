@@ -54,12 +54,18 @@ const { chains, provider } = configureChains(
 //   ];
 // };
 
+
+const projectId = '8974231b47453a6cae531515ed1787c7';
+
 const { wallets } = getDefaultWallets({
   appName: 'LensShare',
-  chains
+  projectId,
+  chains,
 });
 
-const connectors = connectorsForWallets([...wallets])
+const connectors = connectorsForWallets([
+  ...wallets,
+]);
 
 const wagmiClient = createClient({
   autoConnect: true,
