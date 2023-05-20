@@ -1,6 +1,0 @@
-fragment PublicationStatsFields on PublicationStats { 
-  totalAmountOfMirrors
-  totalAmountOfCollects
-  totalAmountOfComments
-  totalUpvotes
-}

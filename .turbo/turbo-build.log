@@ -72,16 +72,16 @@ info  - Collecting page data...
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
 [DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
@@ -109,7 +109,7 @@ info  - Finalizing page optimization...
 Route (pages)                                Size     First Load JS
 ┌ ○ /                                        6.41 kB         944 kB
 ├   /_app                                    0 B             106 kB
-├ ○ /404 (492 ms)                            1.3 kB          109 kB
+├ ○ /404                                     1.3 kB          109 kB
 ├ ℇ /api/corn/route                          0 B             106 kB
 ├ λ /api/get-encrypted                       0 B             106 kB
 ├ λ /api/get-ipfs-cid                        0 B             106 kB
@@ -118,13 +118,13 @@ Route (pages)                                Size     First Load JS
 ├ ℇ /api/og                                  0 B             106 kB
 ├ λ /api/revalidate                          0 B             106 kB
 ├ λ /api/store-encrypted                     0 B             106 kB
-├ ○ /discover (556 ms)                       11.9 kB         852 kB
+├ ○ /discover                                11.9 kB         852 kB
 ├ ○ /feed                                    7.5 kB          946 kB
-├ ○ /latest (464 ms)                         6.5 kB          945 kB
-├ ○ /messages (567 ms)                       6.34 kB        1.07 MB
-├ ○ /messages/[...conversationKey] (648 ms)  16.3 kB        1.09 MB
-├ ○ /notifications (415 ms)                  20.3 kB         875 kB
-├ ○ /post/[id] (512 ms)                      458 kB         1.35 MB
+├ ○ /latest                                  6.5 kB          945 kB
+├ ○ /messages                                6.34 kB        1.07 MB
+├ ○ /messages/[...conversationKey] (311 ms)  16.3 kB        1.09 MB
+├ ○ /notifications                           24.3 kB         872 kB
+├ ○ /post/[id]                               458 kB         1.35 MB
 ├ ○ /search                                  6.89 kB         938 kB
 ├ ○ /u/[id]                                  9 kB            881 kB
 └ ○ /upload                                  53.7 kB         909 kB
@@ -139,4 +139,4 @@ Route (pages)                                Size     First Load JS
 λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)     automatically rendered as static HTML (uses no initial props)
 
-Done in 37.64s.
+Done in 17.92s.

@@ -269,7 +269,9 @@ const Notifications = () => {
         </Tab.Panels>
       </Tab.Group>
       </Card>
+      <div className='block'>
       <BottomNav/>
+      </div>
     </div>
   )
 }

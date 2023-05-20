@@ -3,7 +3,7 @@ schema: ${NEXT_PUBLIC_LENS_API} # required
 documents: ["./src/graphql/**/*.graphql"]
 
 generates:
-  ./src/utils/lens:
+  /src/utils/lens:
     plugins:
       - typescript
       - typescript-operations
@@ -12,3 +12,12 @@ generates:
     config:
       fetcher: fetch
       dedupeFragments: true
+      preResolveTypes: true
+
+
+
+
+
+      
+
+

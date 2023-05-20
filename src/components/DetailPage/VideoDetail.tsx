@@ -261,17 +261,17 @@ const VideoDetail: FC<Props> = ({
             </div>
           </div>
 
-          <div className="flex items-stretch mt-3">
+          <div className="flex  items-stretch mt-3">
             <input
               // @ts-ignore
               onClick={(e) => e.target?.select?.()}
-              className="bg-[#F1F1F2] p-2 flex-grow text-sm border outline-none"
+              className="bg-[#F1F1F2] p-2 rounded-xl flex-grow text-sm border outline-none"
               readOnly
               type="text"
               value={Links}
             />
             <button
-              className="flex-shrink-0 border px-2 active:bg-blue-500 cursor-pointer"
+              className="flex-shrink-0 border rounded-xl px-2 active:bg-blue-500 cursor-pointer"
               onClick={() => {
                 copyToClipboard(Links);
               }}

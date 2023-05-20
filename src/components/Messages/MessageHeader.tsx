@@ -8,6 +8,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { BiChevronLeft } from 'react-icons/bi';
 import getAvatar from '@/lib/getAvatar';
+import { Link } from 'interweave-autolink';
 
 
 interface Props {
@@ -36,12 +37,14 @@ const MessageHeader: FC<Props> = ({ profile }) => {
                 <BiChevronLeft onClick={onBackClick} className="mr-1 text-blue h-6 w-6 cursor-pointer" />
                 
             </div>
-            <img
+            <Link href={`/u/${profile?.id}`} key={profile?.id}>
+                <img 
                         // @ts-ignore
                         src={getAvatar(profile)}
                         className="mr-2 h-12 w-12 rounded-full border-2 "
                         alt={(profile?.handle)}
                     />
+            </Link>
                 
             {!following ? (
                 <FollowButton

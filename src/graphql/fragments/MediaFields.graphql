@@ -1,4 +1,0 @@
-fragment MediaFields on Media {
-  url
-  mimeType
-}

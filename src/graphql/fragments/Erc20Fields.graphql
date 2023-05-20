@@ -1,6 +1,0 @@
-fragment Erc20Fields on Erc20 {
-  name
-  symbol
-  decimals
-  address
-}

@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { RiLiveLine } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go'
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/20/solid';
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleOvalLeftEllipsisIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
@@ -116,8 +116,12 @@ interface Props {
                            }    
                         </div> 
                     </div>
-                        
-                        <div className="flex items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
+                    <div className="flex justify-center">
+                        <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
+                            <ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5 mt-2 cursor-pointer" />
+                        </Link>
+                    </div>       
+                    <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
                                 <span>Following</span>
