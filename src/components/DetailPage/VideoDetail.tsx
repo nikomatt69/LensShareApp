@@ -32,6 +32,10 @@ import { Modal } from "../UI/Modal";
 import Followers from "../ProfilePage/Followers";
 import ReportModal from "./ReportModal";
 import PublicationMenu from "../ProfilePage/Menu";
+import ShareModal from "../HomePage/ShareModal";
+import { ShareIcon } from "@heroicons/react/24/outline";
+import { Button } from "../UI/Button";
+import ShareButton from "../Buttons/ShareButton";
 
 
 
@@ -41,6 +45,8 @@ interface Props {
   profile: Profile;
   setFollowing: Dispatch<boolean>;
   following: boolean;
+  show: boolean
+  setShowShare: React.Dispatch<boolean>
   
 }
 
@@ -50,6 +56,7 @@ const VideoDetail: FC<Props> = ({
   setFollowing,
   following,
 }) => {
+  const [showShare, setShowShare] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(publication?.stats?.totalUpvotes);
@@ -62,6 +69,7 @@ const VideoDetail: FC<Props> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { id } = router.query;
+  
 
   // const { data, loading, error } = useQuery(PublicationDocument, {
   //   variables: {
@@ -158,22 +166,6 @@ const VideoDetail: FC<Props> = ({
           )}
         </div>}
           </div>
-          <div className="right-2">
-            <PublicationMenu
-            publication={publication}
-            />
-          </div>
-          <div>
-          <button className="flex left-3 items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => {setShowReport (!showReport) }} >
-                        <span>Report</span>
-                        <ReportModal
-                         show={showReport}
-                         setShowReport={setShowReport}
-                         video={publication}
-                        />
-           </button>
-          </div>
-          
           <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
@@ -225,6 +217,7 @@ const VideoDetail: FC<Props> = ({
                   {publication?.stats.totalUpvotes}
                 </span>
               </div>
+              
               <div className="flex items-center gap-1">
                <button className="fill-black w-9 h-9 flex md:pb-3 lg:pb-3 justify-center items-center ">
                   {/* // comments button goes here
@@ -236,6 +229,7 @@ const VideoDetail: FC<Props> = ({
                   {publication?.stats.totalAmountOfCollects}
                 </p>
               </div>
+             
               <div className="flex items-center gap-1">
                 <button className="w-9 h-9 bg-[#F1F1F2] fill-black flex justify-center items-center text-center rounded-full">
                   {/* // comments button goes here
@@ -248,18 +242,13 @@ const VideoDetail: FC<Props> = ({
               </div>
             </div>
             <div className="flex gap-1 rounded-xl items-center">
-              <a
-                href={`http://twitter.com/share?text=${encodeURIComponent(
-                  Title
-                )}&url=${encodeURIComponent(Links)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl"
-              >
-                <AiFillTwitterCircle className="fill-[#05AAF4] w-8 h-8" />
-              </a>
+            <div className="flex items-center gap-1">
+              </div>
             </div>
           </div>
+          <div className="flex items-center justify-between">
+          </div>
+
 
           <div className="flex  items-stretch mt-3">
             <input

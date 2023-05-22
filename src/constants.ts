@@ -64,6 +64,9 @@ export const RELAYER_ENABLED = true
 export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz'
 export const BUNDLR_METADATA_UPLOAD_URL = 'https://metadata.lenshareapp.xyz'
 
+
+export const LENSSHARE_EMBED_URL = 'https://embed.lenshareapp.xyz'
+
 export const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz';
 export const STATIC_IMAGES_URL = `${STATIC_ASSETS_URL}/images`;
 
@@ -71,8 +74,13 @@ export const FALLBACK_COVER_URL=`${STATIC_ASSETS_URL}/images/logo.png`;
 
 export const LENS_CUSTOM_FILTERS = [CustomFiltersTypes.Gardeners]
 
+export const LENSSHARE_TWITTER_HANDLE = 'lensshareappxyz'
+
 export const RELAY_ON = true
-export const ERROR_MESSAGE = "Something went wrong!";
+export const ERROR_MESSAGE = "Something went wrong!"
+
+
+;
 
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"

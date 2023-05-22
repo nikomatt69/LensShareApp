@@ -16,13 +16,16 @@ import CollectButton from "../Buttons/Collects/CollectButton";
 import formatHandle from "@/utils/functions/formatHandle";
 import Slug from "../UI/Slug";
 import MetaTags from "../UI/MetaTags";
+import ShareModal from "./ShareModal";
+import { ShareIcon } from "@heroicons/react/24/outline";
+import ShareButton from "../Buttons/ShareButton";
 
 
 interface Props {
   publication: Publication;
 }
 const VideoCard: FC<Props> = ({ publication }) => {
-
+  const [showShare, setShowShare] = useState(false)
   const date = publication.createdAt;
   const timestamp = date.split("T")[0];
   const [following, setFollowing] = useState(false) 
@@ -82,6 +85,8 @@ const VideoCard: FC<Props> = ({ publication }) => {
             <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">See more</span>
           </Link>
         </div>
+
+
         </div>
         
         {<div className="mt-6 mr-6">
@@ -98,7 +103,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
       <p className="text-xs block md:hidden font-semibold text-black-400 pl-1"> {likes} Likes</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {mirrors} Mirrors</p>
-      <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>  
+      <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>
       </div>
       
       <div className='flex ml-auto'>
@@ -113,6 +118,9 @@ const VideoCard: FC<Props> = ({ publication }) => {
         </button>
       <button className="block md:hidden pr-2 pb-2">
       <CollectButton publication={publication as Publication}/>
+      </button>
+      <button className="block md:hidden pr-2 pb-2" onClick={() => setShowShare(true)} >
+        <ShareButton publication={publication as Publication} />
       </button>
       </div>
     </div>

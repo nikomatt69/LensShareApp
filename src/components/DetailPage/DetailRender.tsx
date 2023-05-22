@@ -13,12 +13,13 @@ import VideoDetail from './VideoDetail';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
-const ProfileRender = () => {
+const DetailRender = () => {
     const [mounted, setMounted] = useState(false);
     const currentProfile = useAppStore((state) => state.currentProfile)
     const router = useRouter()
     const { id } = router.query
     const [following, setFollowing] = useState(false)
+    const [showShare, setShowShare] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -88,6 +89,7 @@ const ProfileRender = () => {
   })
 
   const validateAuthentication = () => {
+    
     const currentProfileAddress = currentProfile?.ownedBy;
     const isSwitchedAccount = currentProfileAddress !== undefined && currentProfileAddress !== address
     const isWrongNetworkChain = chain?.id !== CHAIN_ID
@@ -125,10 +127,10 @@ const ProfileRender = () => {
 
   return (
     <div>
-      <VideoDetail publication={publication as Publication} profile={profile as Profile} 
-      setFollowing={setFollowing} following={following}/>
+      <VideoDetail publication={publication as Publication} profile={profile as Profile}
+      setFollowing={setFollowing} following={following} show={showShare} setShowShare={setShowShare} />
     </div>
   )
 }
 
-export default ProfileRender
+export default DetailRender

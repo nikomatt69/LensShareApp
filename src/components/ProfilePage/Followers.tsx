@@ -95,6 +95,7 @@ const Followers: FC<Props> = ({profile}) => {
                 />
               </div>
               <div/>
+              <div>
                 <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
                 {followers?.wallet?.defaultProfile?.name}
                 </p>
@@ -102,6 +103,7 @@ const Followers: FC<Props> = ({profile}) => {
                 {formatHandle(followers?.wallet?.defaultProfile?.handle)} {""}
                 </p>
               </div>
+           </div>
           </Link>
         ))}
       </div>

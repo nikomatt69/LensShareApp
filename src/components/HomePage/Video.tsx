@@ -9,6 +9,8 @@ import CommentButton from  "@/components/Buttons/CommentButton";
 import CollectButton from  "@/components/Buttons/Collects/CollectButton";
 import getMedia from "@/lib/getMedia";
 import { useRouter } from "next/router";
+import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
+import ShareModal from "./ShareModal";
 
 interface Props {
   publication: Publication;
@@ -26,6 +28,7 @@ const Video: FC<Props> = ({ publication }) => {
   const isMirror = publication.__typename === 'Mirror'
   const video = isMirror ? publication.mirrorOf : publication
   const nextRouter = useRouter();
+  const [showShare, setShowShare] = useState(false)
   
 
   const onVideoClick = () => {
@@ -58,6 +61,7 @@ const Video: FC<Props> = ({ publication }) => {
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
+
 
   return (
     <div className="lg:ml-20 md:flex gap-4 relative">
@@ -100,6 +104,13 @@ const Video: FC<Props> = ({ publication }) => {
             <li><CommentButton publication={publication as Publication} /></li>
             <li> <MirrorButton publication={publication as Publication}/></li>
             <li><CollectButton publication={publication as Publication}/></li>
+            <li className=" pt-1">
+              <button className="block  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg  md:p-3" >
+              <ShareIcon onClick={() => setShowShare(true)} className="h-3 w-3 rounded-xl text-black hover:text-gray-500" />
+              <ShareModal publication={publication} show={showShare} setShowShare={setShowShare}/> 
+              </button>
+            </li>
+            
         </ul>
           )}
         </div>
