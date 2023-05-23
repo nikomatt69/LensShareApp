@@ -5,8 +5,6 @@
 /.pnp
 .pnp.js
 
-/storybook
-/storybook-static
 
 # testing
 /coverage
@@ -16,8 +14,7 @@
 
 .next
 
-/storybook
-/storybook-static
+
 
 # production
 /build
@@ -30,8 +27,7 @@
 .DS_Store
 *.pem
 
-/storybook
-/storybook-static
+
 
 # debug
 npm-debug.log*
@@ -50,8 +46,8 @@ src/simplelocalize.yml
 src/sitemap-generator.js
 src/sitemap-routes.js
 
-src/storybook
-src/storybook-static
+
+
 
 # typescript
 *.tsbuildinfo
@@ -60,7 +56,6 @@ next-env.d.ts
 .yarn.lock.turbo
 ./simplelocalize.yml
 
-/storybook
-/storybook-static
+
 /.turbo.json
 .turbo

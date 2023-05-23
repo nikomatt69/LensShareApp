@@ -15,6 +15,8 @@ import { BiCopy } from 'react-icons/bi'
 import { GiMirrorMirror } from 'react-icons/gi'
 import { getSharableLink } from '@/utils/functions/getSharableLink'
 import { Card } from '../UI/Card'
+import imageProxy2 from '@/lib/imageProxy2'
+import imageProxy from '@/lib/imageProxy'
 
 type Props = {
  publication: Publication
@@ -50,12 +52,12 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             href={getSharableLink('lenster', publication)}
           >
             <img
-              src={imageCdn(
+              src={imageProxy(
                 `${STATIC_ASSETS_URL}/images/lenster-logo.svg`,
                 'avatar_lg'
               )}
               className="h-10 w-10 max-w-none rounded-full"
-              loading="eager"
+             
               alt="lenster"
               draggable={false}
             />
@@ -68,11 +70,11 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             href={getSharableLink('twitter', publication)}
           >
             <img
-              src={imageCdn(
-                `${STATIC_ASSETS_URL}/images/social/twitter-logo.png`,
+              src={imageProxy(
+                `${STATIC_ASSETS_URL}/images/social/twitter.png`,
                 'avatar_lg'
               )}
-              loading="eager"
+              
               className="h-10 w-10 max-w-none rounded-full"
               alt="twitter"
               draggable={false}
@@ -84,12 +86,12 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             rel="noreferrer"
           >
             <img
-              src={imageCdn(
-                `${STATIC_ASSETS_URL}/images/social/reddit-logo.webp`,
+              src={imageProxy(
+                `${STATIC_ASSETS_URL}/images/social/reddit-logo.png`,
                 'avatar_lg'
               )}
               className="h-10 w-10 max-w-none rounded-full"
-              loading="eager"
+           
               alt="reddit"
               draggable={false}
             />
@@ -100,11 +102,11 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             rel="noreferrer"
           >
             <img
-              src={imageCdn(
-                `${STATIC_ASSETS_URL}/images/social/linkedin-logo.png`,
+              src={imageProxy(
+                `${STATIC_ASSETS_URL}/images/social/linkedin.png`,
                 'avatar_lg'
               )}
-              loading="eager"
+            
               alt="linkedin"
               className="h-10 w-10 max-w-none rounded-full"
               draggable={false}

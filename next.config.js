@@ -7,7 +7,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  webpack5: true,
   swcMinify: true,
   redirects: true,
   reactStrictMode: true,
