@@ -19,6 +19,9 @@ import MetaTags from "../UI/MetaTags";
 import ShareModal from "./ShareModal";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import ShareButton from "../Buttons/ShareButton";
+import ViewCount from "./ViewCount";
+import { getPublicationMediaCid } from "@/utils/functions/getPublicationMediaUrl";
+
 
 
 interface Props {
@@ -47,6 +50,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
       setFollowing(false)
     }
     }, [profile?.isFollowedByMe])
+
 
   return (
     <div className="flex flex-col bg-[#d9dff1f6] justify-content break-word border-b-2 border-gray-200 pb-0 md:pb-6">
@@ -104,6 +108,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
       <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {mirrors} Mirrors</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>
+      <p className="text-xs block md:hidden font-semibold text-black-400"><ViewCount key={publication.id} cid={getPublicationMediaCid(publication as Publication)} /></p>
       </div>
       
       <div className='flex ml-auto'>

@@ -61,8 +61,8 @@ export const WRONG_NETWORK = IS_MAINNET
 export const SIGN_ERROR = 'Failed to sign data'
 export const RELAYER_ENABLED = true
 
-export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz'
-export const BUNDLR_METADATA_UPLOAD_URL = 'https://metadata.lenshareapp.xyz'
+export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz';
+export const BUNDLR_METADATA_UPLOAD_URL = 'https://metadata.lenshareapp.xyz';
 
 
 export const LENSSHARE_EMBED_URL = 'https://embed.lenshareapp.xyz'

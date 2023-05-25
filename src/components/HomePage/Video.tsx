@@ -104,7 +104,7 @@ const Video: FC<Props> = ({ publication }) => {
             <li><CommentButton publication={publication as Publication} /></li>
             <li> <MirrorButton publication={publication as Publication}/></li>
             <li><CollectButton publication={publication as Publication}/></li>
-            <li className=" pt-1">
+            <li className=" pt-5">
               <button className="block  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg  md:p-3" >
               <ShareIcon onClick={() => setShowShare(true)} className="h-3 w-3 rounded-xl text-black hover:text-gray-500" />
               <ShareModal publication={publication} show={showShare} setShowShare={setShowShare}/> 

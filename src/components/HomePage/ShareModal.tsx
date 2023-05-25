@@ -41,7 +41,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
       show={show}
      
     >
-      <div className="mt-2">
+      <div className="mt-1">
       <Card className='p-2 object-contain border-0 rounded-xl object-center '>
         <div className="no-scrollbar mb-4 flex flex-nowrap items-center space-x-3 overflow-x-auto">
           <EmbedVideo videoId={publication.id} onClose={() => setShowShare(false)} />
@@ -53,7 +53,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
           >
             <img
               src={imageProxy(
-                `${STATIC_ASSETS_URL}/images/lenster-logo.svg`,
+                `${STATIC_ASSETS_URL}/images/social/lenster.png`,
                 'avatar_lg'
               )}
               className="h-10 w-10 max-w-none rounded-full"
@@ -62,7 +62,6 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
               draggable={false}
             />
           </Link>
-          <span className="middot" />
           <Link
             className="rounded-full"
             target="_blank"
