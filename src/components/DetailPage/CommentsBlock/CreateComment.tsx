@@ -22,6 +22,9 @@ import {
 } from "@/types/graph";
 import lit from "@/lib/lit";
 import LitJsSdk from "@lit-protocol/sdk-browser";
+import Link from "next/link";
+import getAvatar from "@/lib/getAvatar";
+import Image from "next/image";
 
 interface Props {
   publication: Publication;
@@ -266,6 +269,18 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
 
   return (
     <div className="flex assolute fixed-bottom p-5 gap-3 border-t">
+            <Link legacyBehavior href={`/u/${currentProfile?.id}`} key={currentProfile?.id}>
+              <a className="mr-3 flex-shrink-0 rounded-full">
+                <Image
+                  src={getAvatar(currentProfile)}
+                  alt="profile pic here"
+                  height={42}
+                  width={42}
+                  className="rounded-full"
+                />
+              </a>
+            </Link>
+
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}

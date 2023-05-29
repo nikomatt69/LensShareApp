@@ -3,6 +3,8 @@ import { CustomFiltersTypes } from '@/utils/lens'
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === "mainnet";
 
+export const LENSSHARE_API_URL = 'https://api.lenshareapp.xyz';
+
 export const APP_ID = "lensshare";
 export const APP_NAME = "LensShare";
 export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
@@ -11,13 +13,15 @@ export const APP_INFOPAGE = "Decentralized Social Video & Message Platform"
 export const EVER_ACCESS_SECRET= process.env.NEXT_PUBLIC_EVER_ACCESS_SECRET;
 export const EVER_ACCESS_KEY= process.env.NEXT_PUBLIC_EVER_ACCESS_KEY;
 
-export const PINSTA_API_URL = 'https://api.lenshareapp.xyz';
+export const PINSTA_API_URL = 'https://apipost.lenshareapp.xyz';
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
 export const NEXT_PUBLIC_EVER_BUCKET_NAME = 'lensshare';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';
+
+export const SCROLL_ROOT_MARGIN = '40% 0px';
 
 
 export const XMTP_ENV = IS_MAINNET ? 'production' : 'dev';
@@ -34,7 +38,7 @@ export const LENS_PERIPHERY = IS_MAINNET
   ? "0xeff187b4190E551FC25a7fA4dFC6cf7fDeF7194f"
   : "0xD5037d72877808cdE7F669563e9389930AF404E8";
 
-export const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_ID || '';
+export const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_ID ;
 export const INFURA_RPC = IS_MAINNET
   ? `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`
   : `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`;
@@ -134,7 +138,11 @@ export const DEFAULT_COLLECT_TOKEN = "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270
 
 export const LIT_PROTOCOL_ENV = IS_MAINNET ? "polygon" : "mumbai"
 
-export const GIPHY_TOKEN = 'mztAE0vdQdlfCYsM11E6UaPjUmjpYDHV'
+export const GIPHY_TOKEN = 'mztAE0vdQdlfCYsM11E6UaPjUmjpYDHV';
+
+
+
+export const OG_IMAGE=`${STATIC_ASSETS_URL}/images/logo.png`;
 
 export const MESSAGE_PAGE_LIMIT = 35;
 export const SCROLL_THRESHOLD = 0.1;

@@ -19,6 +19,7 @@ import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/r
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import SearchBarDiscover from "./Search/SearchBarDiscover";
+import { FaHeadphones } from "react-icons/fa";
 
 
 
@@ -51,16 +52,15 @@ const Navbar: FC = () => {
       </button>
       </Link>
     <div>
-     
-      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
-        <Link href='/upload'>
+     <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
+        <Link href='/listen'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
          rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <VideoCameraIcon className='h-6 text-black' />{' '}
-         <span className='hidden '>Upload </span>
-        </button>  
-      </Link>
+         <FaHeadphones className='h-6 text-black' />{' '}
+          <span className='hidden '>Listen </span>
+        </button>
+        </Link>
       <div className="flex">
         {currentProfile ? (
            <div className='w-12 h-12'>

@@ -74,11 +74,15 @@ interface AppState {
   getBundlrInstance: (signer: FetchSignerResult) => Promise<WebBundlr | null>;
   hasNewNotification: boolean
   setHasNewNotification: (value: boolean) => void
+  activeTagFilter: string
+  setActiveTagFilter: (activeTagFilter: string) => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
   showCreateBoard: false,
+  activeTagFilter: 'all',
   hasNewNotification: false,
+  setActiveTagFilter: (activeTagFilter) => set({ activeTagFilter }),
   setHasNewNotification: (b) => set({ hasNewNotification: b }),
   setShowCreateBoard: (showCreateBoard) => set({ showCreateBoard }),
   uploadedVideo: UPLOADED_VIDEO_FORM_DEFAULTS,

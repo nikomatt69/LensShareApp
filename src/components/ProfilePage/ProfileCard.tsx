@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { RiLiveLine } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go'
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/20/solid';
-import { ChatBubbleOvalLeftEllipsisIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { ChartBarIcon, ChatBubbleOvalLeftEllipsisIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
@@ -34,6 +34,9 @@ import MetaTags from '../UI/MetaTags';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import MirrorVideos from '../Buttons/Mirrors/MirrorVideos';
 import { Card } from '../UI/Card';
+import StatsCard from '@/abi/Stats';
+import { count } from 'console';
+import Stats from '@/abi/Stats';
 
 
 
@@ -42,6 +45,7 @@ interface Props {
     profile: Profile
     setFollowing: Dispatch<boolean>
     following: boolean
+   
 }
     const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
         const currentProfile = useAppStore((state) => state.currentProfile);
@@ -50,6 +54,7 @@ interface Props {
         const [showCollectedUserVideosModal, setShowCollectedUserVideosModal] = useState(false);
         const [showFollowersModal, setShowFollowersModal] = useState(false);
         const [showFollowingModal, setShowFollowingModal] = useState(false);
+        const [showStatsModal, setShowStatsModal] = useState(false);
 
         const itsNotMe = profile?.id !== currentProfile?.id
         const videos = showUserVideos ? 'text-center border-2 border-black text-white' : 'border-2 border-black text-center text-black';
@@ -107,19 +112,45 @@ interface Props {
                             }
                             </div>
                            ) : (
-                            <div className='right-2'>
-                            <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
-                            <Link href='/live'> View Live</Link>
+                            <div className='right-1'>
+                                 <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
+                                <Link href='/live'> View Live</Link>
                             </button>
+                            
                             </div>
                            )
                            }    
                         </div> 
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex gap-4 justify-center">
                         <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
-                            <ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5 mt-2 cursor-pointer" />
+                            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6 font-bold mt-2 cursor-pointer" />
                         </Link>
+                        <button onClick={() => setShowStatsModal(true)} >
+                           <span className="flex justify-center">
+                            <ChartBarIcon className="h-5 w-5 mt-2 cursor-pointer" />
+                          </span>
+                            <Modal
+                                title="Stats"
+                                show={showStatsModal}
+                                onClose={() => setShowStatsModal(!showStatsModal)}
+                            >
+                               <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats.totalPosts} data={{
+                                    publications: profile?.stats.totalPosts,
+                                    totalBurntProfiles: 0,
+
+
+                                    totalCollects: profile?.stats.totalCollects,
+                                    totalComments: profile?.stats.totalComments,
+                                    totalFollows: profile?.stats.totalFollowers,
+                                    totalMirrors: profile?.stats.totalMirrors,
+                                    totalPosts: profile?.stats.totalPosts,
+                                    totalProfiles: 0,
+                                    totalRevenue: []
+                                }} revenue={0} /> 
+                            </Modal>
+                       </button>
+                        
                     </div>       
                     <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">

@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import type { FC } from 'react'
 import React from 'react'
-import { APP_ID, APP_INFOPAGE, APP_NAME, LENSTOK_URL, STATIC_ASSETS_URL} from '@/constants'
+import { APP_ID, APP_INFOPAGE, APP_NAME, LENSSHARE_API_URL, LENSSHARE_EMBED_URL, LENSTOK_URL, STATIC_ASSETS_URL} from '@/constants'
+import { title } from 'process'
 
 type Props = {
   title?: string
@@ -51,8 +52,32 @@ const MetaTags: FC<Props> = (props) => {
             <meta property="twitter:image" content={meta.image} />
             <meta property="twitter:creator" content={APP_NAME} />
             
-        </Head>
-    )
+       
+
+      {router.pathname === '/u/[id]' && router.query?.id && (
+        <>
+          <link
+            rel="iframely player"
+            type="text/html"
+            href={`${LENSSHARE_EMBED_URL}/${router.query?.id}`}
+            media="(aspect-ratio: 1280/720)"
+          />
+          <link
+            rel="alternate"
+            type="text/xml+oembed"
+            href={`${LENSSHARE_API_URL}/oembed?format=xml&id=${router.query?.id}`}
+            title={title}
+          />
+          <link
+            rel="alternate"
+            type="application/json+oembed"
+            href={`${LENSSHARE_API_URL}/oembed?format=json&id=${router.query?.id}`}
+            title={title}
+          />
+        </>
+      )}
+    </Head>
+  )
 }
 
 export default MetaTags

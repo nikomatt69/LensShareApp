@@ -20,10 +20,7 @@ const Latest = () => {
     ? { profileId: currentProfile?.id }
     : null;
   const profileId = currentProfile?.id ?? null;
-  const LoadingMore: FC = () => (
-    <div className="p-1 mt-6 text-center text-gray-500 font-bold text-sm">Loading...</div>
-
-  );
+  
 
   const { data, loading, error, fetchMore } = useQuery<{
     explorePublications: ExplorePublicationResult;
@@ -87,20 +84,6 @@ const Latest = () => {
     }
   })
 
-  const onlyVideoPublications = publications?.filter((publication) => {
-    if (
-      publication.metadata.media[0].original.mimeType.startsWith("video/") &&
-      publication.metadata.media[0].original.url
-    ) {
-      return (
-        publication.metadata.media[0].original.url.startsWith("https://lens.infura-ipfs.io") ||
-        publication.metadata.media[0].original.url.startsWith("ipfs://") ||
-        publication.metadata.media[0].original.url.startsWith("https://arweave") ||
-        publication.metadata.media[0].original.url.startsWith("https://lenshareapp.infura-ipfs.io")
-        
-      );
-    }
-  });
 
   return (
     <div>
@@ -120,7 +103,7 @@ const Latest = () => {
         }
       >
       <Card className="rounded-xl px-3">
-      {onlyVideoPublications?.map((pub: Publication) => (
+      {publications?.map((pub: Publication) => (
         <VideoCard key={pub.id} publication={pub as Publication} />
       ))}
       </Card>

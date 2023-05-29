@@ -76,6 +76,9 @@ const nextConfig = {
       "gateway.ipfscdn.io",
       "ipfs.4everland.io",
       "gateway.ipfscdn.io/ipfs/",
+      "ep-noisy-rice-867852-pooler.us-west-2.postgres.vercel-storage.com",
+      "user-content.lenster.xyz"
+
     ],
   },
   async redirects() {
@@ -85,6 +88,7 @@ const nextConfig = {
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true },
     ];
   },
+  
 };
 
 module.exports = nextConfig;

@@ -19,6 +19,7 @@ import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } fro
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import router from "next/router";
+import { FaHeadphones } from "react-icons/fa";
 
 
 
@@ -44,7 +45,16 @@ const Navbar: FC = () => {
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </button>
       </Link>
-    <div>
+ 
+    <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
+        <Link href='/listen'>
+        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
+         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
+         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
+         <FaHeadphones className='h-6 text-black' />{' '}
+          <span className='hidden '>Listen </span>
+        </button>
+        </Link>
       <div className='flex pl-full centre-item gap-5 md:gap-10 '>
         {currentProfile ? (
            <div className='w-12 h-12'>
