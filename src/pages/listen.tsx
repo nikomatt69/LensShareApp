@@ -1,3 +1,3 @@
-import Echos from "@/components/Echos";
+import AudioRender from "@/components/Echos/EchosPage";
 
-export default Echos;
+export default AudioRender;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, FC, Dispatch } from "react";
+import React, { useEffect, useRef, useState, FC, Dispatch, useCallback } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,11 +11,6 @@ import { usePublicationQuery, useUserProfilesQuery } from "@/types/graph";
 import getAvatar from "@/lib/getAvatar";
 import { copyToClipboard } from "@/utils/clipboard";
 import getMedia from "@/lib/getMedia";
-import { AiFillHeart, AiFillTwitterCircle } from "react-icons/ai";
-import { FaCommentDots, FaTimes } from "react-icons/fa";
-import LikeButton from "../Buttons/Likes/LikeButton";
-import MirrorButton from "../Buttons/Mirrors/MirrorButton";
-import CommentButton from "../Buttons/CommentButton";
 import LoginButton from "../Login/LoginButton";
 import { useAppStore } from "src/store/app";
 import UnfollowButton from "../Buttons/UnfollowButton";
@@ -25,17 +20,16 @@ import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/s
 import formatHandle from "@/utils/functions/formatHandle";
 import CollectButton from "../Buttons/Collects/CollectButton";
 import MetaTags from "../UI/MetaTags";
-import { APP_NAME } from "@/constants";
+import { APP_ID, APP_NAME, IS_MAINNET, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
 import NavbarDetails from "../NavbarDetails";
 import Following from "../ProfilePage/Following";
 import { Modal } from "../UI/Modal";
 import Followers from "../ProfilePage/Followers";
-import ReportModal from "./ReportModal";
-import PublicationMenu from "../ProfilePage/Menu";
-import ShareModal from "../HomePage/ShareModal";
-import { ShareIcon } from "@heroicons/react/24/outline";
-import { Button } from "../UI/Button";
-import ShareButton from "../Buttons/ShareButton";
+import { getPublicationMediaUrl } from "@/utils/functions/getPublicationMediaUrl";
+import imageCdn from "@/utils/functions/imageCdn";
+import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
+import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
+import VideoPlayer from "@/utils/VideoPlayer";
 
 
 
@@ -47,6 +41,8 @@ interface Props {
   following: boolean;
   show: boolean
   setShowShare: React.Dispatch<boolean>
+  isShow: boolean
+
   
 }
 
@@ -55,7 +51,10 @@ const VideoDetail: FC<Props> = ({
   profile,
   setFollowing,
   following,
+  isShow,
+
 }) => {
+  const videoWatchTime = useAppStore((state) => state.videoWatchTime)
   const [showShare, setShowShare] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [liked, setLiked] = useState(false);
@@ -71,18 +70,17 @@ const VideoDetail: FC<Props> = ({
   const { id } = router.query;
   
 
-  // const { data, loading, error } = useQuery(PublicationDocument, {
-  //   variables: {
-  //     request: {
-  //       publicationId: id
-  //     }
-  //    },
-  // });
-  // const profile = data?.publication?.profile
-  // console.log("Profile", profile);
+   const { data, loading, error } = useQuery(PublicationDocument, {
+     variables: {
+       request: {
+         publicationId: id
+         
+       }
+      },
+ });
+  
 
-  // const publication = data?.publication
-  // console.log("Publication", publication)
+   
 
   //CHANGE LINK ON DEPLOYMENT TO NEW DOMAIN!
   const Links = `https://lenshareapp.xyz/post/${publication?.id}`;
@@ -99,6 +97,24 @@ const VideoDetail: FC<Props> = ({
       setIsPlaying(true);
     }
   };
+  const playVideo = () => {
+    if (!videoRef.current || isShow) {
+      return
+    }
+    videoRef.current.currentTime = 0
+    videoRef.current.volume = 1
+    videoRef.current.autoplay = true
+    videoRef.current?.play().catch(() => { })
+    setIsPlaying(true)
+  }
+
+  const refCallback = (ref: HTMLMediaElement) => {
+    if (!ref) {
+      return
+    }
+    videoRef
+  }
+
 
   useEffect(() => {
     if (videoRef?.current) {
@@ -106,25 +122,35 @@ const VideoDetail: FC<Props> = ({
     }
   }, [isVideoMuted]);
 
+  const isBytesVideo = publication.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID
+
   return (
     <div className="flex flex-col lg:flex-row lg:h-screen items-stretch">
       <MetaTags
-        title={`Post • ${APP_NAME}`}
-      />
+        title={`Post • ${APP_NAME}`}     />
       <Toaster position="bottom-right" />
       <div className="lg:flex-grow flex justify-center  items-center relative bg-black">
-        <video
-          className="w-auto h-auto object-cover max-w-full max-h-[450px] "
-          ref={videoRef}
-          onClick={onVideoClick}
-          muted
-          loop
-          src={getMedia(publication)}
-          // poster={video.coverURL}
-          controls
-          playsInline
-          autoPlay
-        ></video>
+      <VideoPlayer
+          currentTime={videoWatchTime}
+          
+          refCallback={refCallback}
+          permanentUrl={getMedia(publication as Publication)}
+          posterUrl={imageCdn(
+            sanitizeIpfsUrl(getThumbnailUrl(publication)),
+            isBytesVideo ? 'thumbnail_v' : 'thumbnail'
+
+            
+          )} options={{
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            loadingSpinner: false,
+            isCurrentlyShown: true
+          }}       
+          
+          
+       
+      />
         <div className="absolute top-5 left-5 flex gap-3">
           <button
             onClick={() => router.back()}
@@ -165,6 +191,7 @@ const VideoDetail: FC<Props> = ({
             <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
           )}
         </div>}
+       
           </div>
           <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
@@ -243,11 +270,11 @@ const VideoDetail: FC<Props> = ({
             </div>
             <div className="flex gap-1 rounded-xl items-center">
             <div className="flex items-center gap-1">
+
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between">
-          </div>
+         
 
 
           <div className="flex  items-stretch mt-3">

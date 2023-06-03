@@ -7,6 +7,7 @@ import {
   CHAIN_ID,
   IS_MAINNET,
   LENSTOK_URL,
+  NEXT_PUBLIC_STUDIO_API_KEY,
 } from "src/constants";
 import {
   LivepeerConfig,
@@ -35,7 +36,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 const { chains, provider } = configureChains(
   [IS_MAINNET ? polygon : polygonMumbai],
-  [infuraProvider({ apiKey: INFURA_ID }), publicProvider()]
+  [infuraProvider({ apiKey: `${INFURA_ID}` }), publicProvider()]
 );
 
 
@@ -75,7 +76,7 @@ const wagmiClient = createClient({
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY,
+    apiKey: NEXT_PUBLIC_STUDIO_API_KEY,
     baseUrl: LENSTOK_URL,
   }),
 });

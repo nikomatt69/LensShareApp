@@ -71,4 +71,4 @@ export const footerList3 = [
   "Creator Portal",
   "Community Guidelines",
 ];
-export const IPFS_GATEWAY = "https://gateway.ipfscdn.io/ipfs/";
+export const IPFS_GATEWAY = "https://gateway.ipfscdn.io/ipfs";

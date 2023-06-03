@@ -9,17 +9,19 @@ type Props = {
   title?: string
   description?: string | null
   image?: string
+
 }
 
 const MetaTags: FC<Props> = (props) => {
-    const { description, title, image } = props
+    const { description, title, image ,} = props
     const router = useRouter()
 
     const meta = {
         title: title ?? APP_NAME,
         description: description ?? APP_INFOPAGE,
         image: image ?? `${STATIC_ASSETS_URL}/images/icon.png`,
-        type: 'website'
+        type: 'website',
+       
     }
 
     return (

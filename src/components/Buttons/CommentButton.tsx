@@ -16,8 +16,8 @@ const CommentButton: FC<Props> = ({ publication }) => {
     const comments = isMirror ? publication.mirrorOf.stats.totalAmountOfComments : publication.stats.totalAmountOfComments
 
     return (
-       <div className="flex gap-6">
-         <Link href={`/post/${publication.id}`}> 
+       <div className="flex block gap-6">
+         <Link href={`/bytes/${publication.id}`}> 
         <a className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">        
         {alreadyCommented ? (
          

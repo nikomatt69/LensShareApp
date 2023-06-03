@@ -4,6 +4,7 @@ import Image from "next/image";
 import imageProxy from "@/lib/imageProxy";
 import { STATIC_ASSETS_URL } from "@/constants";
 import MetaTags from "./UI/MetaTags";
+import imageCdn from "@/lib/imageCdn";
 
 const Loading: FC = () => {
   return (
@@ -11,7 +12,7 @@ const Loading: FC = () => {
   <MetaTags />
   <div className="animate-bounce">
     <img
-      src={imageProxy(`${STATIC_ASSETS_URL}/images/icon.png`)}
+      src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
       draggable={false}
       className="h-12 w-12 md:h-16 md:w-16"
       alt="lensshare"

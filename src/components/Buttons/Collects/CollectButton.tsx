@@ -37,7 +37,7 @@ const CollectButton: FC<Props> = ({publication}) => {
   }, [publication?.hasCollectedByMe])
 
     return (
-      <div className="flex gap-6">
+      <div className="flex block gap-6">
       <div className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">
       {alreadyCollected ? (
        <div 

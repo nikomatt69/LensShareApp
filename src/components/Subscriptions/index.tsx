@@ -124,7 +124,7 @@ const FeedRender = () => {
         <Feed />
         </div>
       </div>
-      <div className="block ">
+      <div className="block overflow-hidden ">
         <BottomNav/>
       </div>
     </div>

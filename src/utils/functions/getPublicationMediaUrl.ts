@@ -1,24 +1,19 @@
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/types/lens'
 
-import  {FALLBACK_COVER_URL}  from '@/constants'
-import sanitizeDStorageUrl from './sanitizeDStorageUrl'
+import { STATIC_ASSETS_URL } from '@/constants'
+import {sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 
 export const getPublicationMediaUrl = (video: Publication) => {
   const url = video?.metadata?.media[0]?.original.url
   if (!url) {
-    return FALLBACK_COVER_URL
+    return `${STATIC_ASSETS_URL}/images/fallbackThumbnail.png`
   }
-  return sanitizeDStorageUrl(url)
+  return sanitizeIpfsUrl(url)
 }
 
-export const getPublicationMediaRawUrl = (video: Publication): string => {
+export const getPublicationMediaRawUrl = (video: Publication) => {
   const url = video?.metadata?.media[0]?.original.url
   return url.replace('https://arweave.net/', 'ar://')
-}
-
-export const getPublicationMediaCid = (video: Publication): string => {
-  const uri = getPublicationMediaRawUrl(video)
-  return uri.replace('ipfs://', '').replace('ar://', '')
 }
 
 export const getIsIPFSUrl = (url: string) => {

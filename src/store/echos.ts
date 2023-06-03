@@ -1,4 +1,4 @@
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/types/lens'
 import { create } from 'zustand'
 
 interface EchoState {

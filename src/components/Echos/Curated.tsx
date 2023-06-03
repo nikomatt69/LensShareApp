@@ -1,5 +1,5 @@
 
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/types/lens'
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
@@ -55,7 +55,7 @@ const Curated = () => {
   })
 
   if (videos?.length === 0) {
-    return <EmptyState message={"No echoes found"} icon={`${STATIC_ASSETS_URL}/images/icon.png`}  />
+    return <EmptyState message={"No echoes found"} icon  />
   }
 
   return (
@@ -64,7 +64,7 @@ const Curated = () => {
       {loading && <EchosShimmer />}
       {!error && !loading && videos && (
         <>
-          <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid grid-cols-2 place-items-center gap-2 md:grid-cols-2 md:gap-3">
+          <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid grid-cols-2 place-items-center gap-2 md:grid-cols-3 md:gap-3">
             {videos?.map((publication: Publication) => (
               <Item publication={publication} key={publication.id} />
             ))}

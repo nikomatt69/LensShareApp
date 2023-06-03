@@ -10,9 +10,13 @@ const formatAddress = (address: string | null): string => {
     return '';
   }
 
+
+
   const regex = ADDRESS_REGEX;
   if (address.match(regex)) {
     return `${address.slice(0, 4)}…${address.slice(address.length - 4, address.length)}`;
+
+
   }
 
   return address;

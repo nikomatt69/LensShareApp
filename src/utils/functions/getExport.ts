@@ -12,11 +12,11 @@ export async function exportPNG({ url, name }: { url: string, name?: string }, s
     setSaving(false);
   });
   
-  // var file = new Blob(
-  //   [url],
-  //   { type: "image/*" }
-  // );
-  // element.href = URL.createObjectURL(file);
-  // element.download = "image.jpg";
-  // element.click();
+   var file = new Blob(
+    [url],
+     { type: "image/*" }
+   );
+  element.href = URL.createObjectURL(file);
+  element.download = "image.jpg";
+  element.click();
 }

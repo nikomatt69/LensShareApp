@@ -13,12 +13,13 @@ import getAvatar from "@/lib/getAvatar";
 import CommentData from "./CommentData";
 import QueuedData from "../../QueuedData";
 import LoginButton from "@/components/Login/LoginButton";
+import Comments from "./Comment";
 
 interface Props {
   publication: Publication;
 }
 
-const Comments: FC<Props> = ({ publication }) => {
+const CommentsVideo: FC<Props> = ({ publication }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
 
@@ -43,40 +44,28 @@ const Comments: FC<Props> = ({ publication }) => {
   };
 
   return (
-    <>
+    
       <div className="overflow-y-auto">
-        <div className=" h-screen text-black flex-grow flex flex-col items-stretch gap-0.3 overflow-y-auto bg-[#F2F4F7] ">
-          {txnQueue.map(
-            (txn) =>
-              txn?.type === "NEW_COMMENT" &&
-              txn?.parent === publication?.id && (
-                <div key={txn.id}>
-                  <QueuedData txn={txn} />
-                </div>
-              )
-          )}
-          {comments?.map((comment) => (
-            <>
-              <CommentData
-                comment={comment as Publication}
-                publication={publication as Publication}
-              />
-            </>
-          ))}
-        </div>
-      </div>
+        <div className=" h-flex text-black flex-grow flex flex-col items-stretch gap-0.3 overflow-y-auto bg-[#F2F4F7] ">
+        {comments?.map((comment) => (
+                <CommentData
+                  key={`${comment?.id}_${comment.createdAt}`}
+                  comment={comment as Publication}
+                  publication={publication?.id as Publication}
+                />
+              ))}
+          
       
-      {currentProfile ? (
-        <CreateComment
+         <CreateComment
           publication={publication as Publication}
           refetchComments={() => refetchComments()}
-        />
-      ) : (
-        <LoginButton />
-      )}
+           />
+           </div>
+     </div>
+ 
       
-    </>
+
   );
 };
 
-export default Comments;
+export default CommentsVideo;

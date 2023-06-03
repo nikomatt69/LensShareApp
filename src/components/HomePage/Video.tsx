@@ -1,8 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { FC } from "react";
-import type { Publication } from "@/utils/lens";
-import { parseArweaveTxId, parseCid } from 'livepeer/media';
+import type { Publication } from "@/types/lens";
 import LikeButton from  "@/components/Buttons/Likes/LikeButton";
 import MirrorButton from  "@/components/Buttons/Mirrors/MirrorButton";
 import CommentButton from  "@/components/Buttons/CommentButton";
@@ -11,16 +10,24 @@ import getMedia from "@/lib/getMedia";
 import { useRouter } from "next/router";
 import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
 import ShareModal from "./ShareModal";
+import { getPublicationMediaUrl } from "@/utils/functions/getPublicationMediaUrl";
+import ViewCount from "./ViewCount";
+import imageCdn from "@/lib/imageCdn";
+import VideoPlayer from "@/utils/VideoPlayer";
+import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
+import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
+import { APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
+import { useAppStore } from "@/store/app";
 
 interface Props {
   publication: Publication;
 }
 const Video: FC<Props> = ({ publication }) => {
+  const videoWatchTime = useAppStore((state) => state.videoWatchTime)
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
   const [url, setUrl] = useState<string>('');
-  const idParsed = useMemo(() => parseCid(url) ?? parseArweaveTxId(url), [url]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -55,12 +62,19 @@ const Video: FC<Props> = ({ publication }) => {
     }
   }, []);
 
+  const refCallback = (ref: HTMLMediaElement) => {
+    if (!ref) {
+      return
+    }
+    videoRef
+  };
   const handleOnMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.play();
   };
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
+  const isBytesVideo = video.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID;
 
 
   return (
@@ -71,21 +85,24 @@ const Video: FC<Props> = ({ publication }) => {
         className="rounded-xl"
       >
         <Link href={`/post/${video.id}`} key={video.id} >
-          <video
-            loop
-            autoPlay
-            playsInline
-            draggable={false}
-            muted
-            onClick={onVideoClick}
-            ref={videoRef}
-            src={getMedia(publication)}
-            onMouseOver={handleOnMouseOver}
-            onMouseOut={handleOnMouseOut}
-            // className='lg:w-[400px] h-[300px] md:h-[400px] lg:h-[500px] w-[400px] rounded-2xl cursor-pointer bg-gray-100'
-            className='lg:w-[410px] lg:h-[547px] md:h-[400px] md:w-[400px] h-[547px] w-full  xs:w-[full] xs:h-[full] shadow-inner rounded-xl
-            object-cover transform transition  md:rounded-lg cursor-pointer bg-black pointer-events-auto md:pointer-events-auto'
-          ></video>
+        <VideoPlayer
+         currentTime={videoWatchTime}
+          publicationId={video?.id}
+          permanentUrl={getMedia(video as Publication)}
+          posterUrl={imageCdn(
+            sanitizeIpfsUrl(getThumbnailUrl(video as Publication)),
+            isBytesVideo ? 'thumbnail_v' : 'thumbnail'
+          )} options={{
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            loadingSpinner: true,
+            isCurrentlyShown: true
+          }}       
+          
+          
+       
+      />
         </Link>
         </div>
         
@@ -100,13 +117,14 @@ const Video: FC<Props> = ({ publication }) => {
   </button>*/ } 
            {showButtons && (
           <ul className="dropdown-menu hidden md:block pt-1">
-            <li><LikeButton publication={publication as Publication}/></li>
-            <li><CommentButton publication={publication as Publication} /></li>
-            <li> <MirrorButton publication={publication as Publication}/></li>
-            <li><CollectButton publication={publication as Publication}/></li>
+            <li><LikeButton publication={video as Publication}/></li>
+            <li><CommentButton publication={video as Publication} /></li>
+            <li> <MirrorButton publication={video as Publication}/></li>
+            <li><CollectButton publication={video as Publication}/></li>
+            
             <li className=" pt-5">
               <button className="block  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg  md:p-3" >
-              <ShareIcon onClick={() => setShowShare(true)} className="h-3 w-3 rounded-xl text-black hover:text-gray-500" />
+              <ShareIcon onClick={() => setShowShare(true)} className="h-5 w-5 rounded-xl text-black hover:text-gray-500" />
               <ShareModal publication={publication} show={showShare} setShowShare={setShowShare}/> 
               </button>
             </li>

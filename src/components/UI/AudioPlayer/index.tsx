@@ -1,4 +1,4 @@
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/types/lens'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React, { useEffect, useRef, useState } from 'react'
@@ -9,12 +9,8 @@ import {getTimeFromSeconds}  from '@/utils/functions/formatTime2'
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl'
 import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
 import type WaveSurfer from 'wavesurfer.js'
-import getAvatar from '@/lib/getAvatar'
-import getMedia from '@/lib/getMedia'
-import imageCdn from '@/lib/imageCdn'
-import imageProxy2 from '@/lib/imageProxy2'
-import imageProxy from '@/lib/imageProxy'
 import Image from 'next/image'
+import imageKit from '@/lib/imageKit'
 
 type Props = {
   selectedTrack: Publication
@@ -129,7 +125,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
         <div className="flex">
           <div className="h-16 w-16 flex-none">
             <Image
-              src={imageProxy(getMedia(selectedTrack),'square')}
+              src={getThumbnailUrl(selectedTrack)}
               width={500}
               height={500}
               className="h-full w-full"

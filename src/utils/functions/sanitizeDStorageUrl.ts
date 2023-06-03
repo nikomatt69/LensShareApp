@@ -9,13 +9,22 @@ const sanitizeIpfsUrl = (url: string) => {
   }
 
   return url
-    .replace(/^Qm[1-9A-Za-z]{44}/gm, `${ipfsGateway}/${url}`)
-    .replace('https://ipfs.io/ipfs', ipfsGateway)
-    .replace('https://ipfs.infura.io/ipfs', ipfsGateway)
-    .replace('https://ipfs.infura.io/ipfs', ipfsGateway)
-    .replace('ipfs://', ipfsGateway)
-    .replace('ipfs://ipfs/', ipfsGateway)
-    .replace('ar://', arweaveGateway)
+  .replace(/^Qm[1-9A-Za-z]{44}/gm, `${ipfsGateway}/${url}`)
+  .replace('https://ipfs.io/ipfs', ipfsGateway)
+  .replace('https://ipfs.infura.io/ipfs', ipfsGateway)
+  .replace('https://lens.ipfs.infura.io/ipfs', ipfsGateway)
+  .replace('https://ipfs-infura.io/ipfs', ipfsGateway)
+  .replace('https://lens.ipfs-infura.io/ipfs', ipfsGateway)
+  .replace('https://lenshareapp.ipfs-infura.io/ipfs', ipfsGateway)
+  .replace('https://lenshareapp.ipfs-infura.io', ipfsGateway)
+  .replace('ipfs://', ipfsGateway)
+  .replace('ipfs://ipfs/', ipfsGateway)
+  .replace('ipfs://ipfs', ipfsGateway)
+  .replace('ar://', arweaveGateway)
+  .replace('https://lp-playback.com/hls', `${arweaveGateway}/${url}`)
+  .replace('https://lp-playback.com/hls', arweaveGateway)
+  .replace('https://lp-playback.com', `${arweaveGateway}/${url}`)
+  .replace('https://lp-playback.com', arweaveGateway)
 }
 
 export default sanitizeIpfsUrl

@@ -15,7 +15,7 @@ const Wrapper: FC<Props> = ({ children }) => {
     <><div className="relative mx-auto max-w-[100rem]">
       {children}
       {selectedTrack && (
-        <div className="sticky bottom-0 z-10 w-full rounded-t-xl border-x border-t bg-white p-2 backdrop-blur-lg dark:bg-black">
+        <div className="sticky bottom-0 z-10 w-full rounded-t-xl border-x border-t border-blue-700 bg-blue-500 p-2 backdrop-blur-lg bg-gradient-to-b from-gray-900 to-transparent">
           <AudioPlayer selectedTrack={selectedTrack} />
         </div>
       )}

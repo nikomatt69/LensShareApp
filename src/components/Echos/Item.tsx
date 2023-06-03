@@ -1,6 +1,6 @@
 import useEchoStore from '@/store/echos'
 import clsx from 'clsx'
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/types/lens'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
@@ -12,6 +12,7 @@ import getAvatar from '@/lib/getAvatar'
 import getMedia from '@/lib/getMedia'
 import imageProxy from '@/lib/imageProxy'
 import Image from 'next/image'
+import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl'
 
 
 type Props = {
@@ -29,7 +30,8 @@ const Item: FC<Props> = ({ publication }) => {
     <div className="flex h-full w-full flex-col rounded-sm p-2">
       <div className="group relative flex justify-center">
         <Image
-          src={imageProxy(getMedia(publication), 'square')}
+          src={getThumbnailUrl(publication)}
+
           className="w-full rounded-lg object-cover transition duration-300 ease-in-out group-hover:scale-105 md:h-[220px]"
           alt={publication?.id.name}
         />
@@ -54,7 +56,7 @@ const Item: FC<Props> = ({ publication }) => {
           {publication?.profile?.handle}
         </Link>
         <Link
-          href={`/listen/${publication?.id}`}
+          href={`/post/${publication?.id}`}
           className="md:text-md line-clamp-1 text-sm font-semibold hover:opacity-70"
         >
           {publication?.metadata?.name}

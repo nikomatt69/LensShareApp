@@ -1,117 +1,195 @@
+
+import type { Publication } from '@/types/lens'
 import {
-  ExplorePublicationsDocument,
-  ExplorePublicationResult,
-  Profile,
-} from "@/types/lens";
-import type { Publication } from "@/utils/lens";
-import { useQuery } from "@apollo/client";
-import VideoCard from "@/components/HomePage/VideoCard";
-import { useAppStore } from "@/store/app";
-import { Card } from "./UI/Card";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Loading from "./Loading";
-import Loader from "./UI/Loader";
-import { FC } from "react";
-import { useInView } from "react-cool-inview";
+  PublicationSortCriteria,
+  PublicationTypes,
+  useExploreLazyQuery,
+  usePublicationDetailsLazyQuery,
+  PublicationMainFocus
+} from '@/utils/lens'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useInView } from 'react-cool-inview'
+
+
+import ByteVideo from '@/components/Bytes/ByteVideo'
+
+import { useAppStore } from '@/store/app'
+import { APP_ID, APP_NAME, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
+import FullScreen from './Bytes/FullScreen'
+import Loader from './UI/Loader'
+import { EmptyState } from './UI/EmptyState'
+import MetaTags from './UI/MetaTags'
+
+
+
 
 const Latest = () => {
-  const currentProfile = useAppStore((state) => state.currentProfile);
-  const reactionRequest = currentProfile
-    ? { profileId: currentProfile?.id }
-    : null;
-  const profileId = currentProfile?.id ?? null;
-  
+  const router = useRouter()
+  const bytesContainer = useRef<HTMLDivElement>(null)
+  const currentProfile = useAppStore((state) => state.currentProfile)
+  const currentViewingId = useAppStore((state) => state.currentviewingId)
+  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
+  const [byte, setByte] = useState<Publication>()
+  const [following, setFollowing] = useState(false) 
 
-  const { data, loading, error, fetchMore } = useQuery<{
-    explorePublications: ExplorePublicationResult;
-  }>(ExplorePublicationsDocument, {
-    variables: {
-      request: {
-        sortCriteria: "LATEST",
-        publicationTypes: ["POST"],
-        timestamp: 1,
-        limit: 20,
-        excludeProfileIds: [
-          //nsfw
-          "0x5eaf",
-          "0x3f7d",
-          "0x5b94",
-          "0x5c7c",
-          "0x62dd",
-          "0x53cd",
-        ],
-        metadata: {
-          mainContentFocus: ["VIDEO"],
-        },
+
+  const activeTagFilter = useAppStore((state) => state.activeTagFilter)
+  const request =
+  {
+    sortCriteria: PublicationSortCriteria.Latest,
+    limit: 30,
+    noRandomize: false,
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID],
+    publicationTypes: [PublicationTypes.Post],
+    customFilters: LENS_CUSTOM_FILTERS,
+    metadata: {
+      tags:
+        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+      mainContentFocus: [PublicationMainFocus.Video]
+    }
+  }
+
+  const [show, setShow] = useState(false)
+
+  const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
+    usePublicationDetailsLazyQuery()
+
+  const [fetchAllBytes, { data, loading, error, fetchMore }] =
+    useExploreLazyQuery({
+      // prevent the query from firing again after the first fetch
+      nextFetchPolicy: 'standby',
+      variables: {
+        request,
+        reactionRequest: currentProfile
+          ? { profileId: currentProfile?.id }
+          : null,
+          profileId: currentProfile?.id ?? null
       },
-      reactionRequest,
-      profileId,
-    },
-  });
-  const publications = data?.explorePublications.items;
-  console.log("DATA", data?.explorePublications.items);
+      onCompleted: ({ explorePublications }) => {
+      }
+    })
+console.log(data)
+
+  const bytes = data?.explorePublications?.items as Publication[]
   const pageInfo = data?.explorePublications?.pageInfo
+  const singleBytePublication = singleByte?.publication as Publication
+
+  const fetchSingleByte = async () => {
+    const publicationId = router.query.id
+    if (!publicationId) {
+      return fetchAllBytes()
+    }
+    await fetchPublication({
+      variables: {
+        request: { publicationId },
+        reactionRequest: currentProfile
+        ? { profileId: currentProfile?.id }
+        : null,
+        profileId: currentProfile?.id ?? null
+    },
+      onCompleted: () => fetchAllBytes()
+    })
+  }
+
+  const openDetail = (byte: Publication) => {
+    const nextUrl = `/${byte.id}`
+    setByte(byte)
+    history.pushState({ path: nextUrl }, '', nextUrl)
+    setShow(!show)
+  }
+
+  const closeDialog = () => {
+    const nextUrl = `/`
+    history.pushState({ path: nextUrl }, '', nextUrl)
+    setShow(false)
+  }
+
+
+  const full = useCallback(() => currentViewingId && byte && router.pathname ?
+    <FullScreen
+      byte={byte}
+      close={closeDialog}
+      isShow={show}
+      bytes={bytes}
+      index={bytes?.findIndex((video) => video.id === currentViewingId)}
+    /> : null, [byte, show, currentViewingId])
+
+  useEffect(() => {
+    if (router.query.id && singleBytePublication) {
+      openDetail(singleBytePublication)
+    }
+  }, [singleByte])
+
+
+  useEffect(() => {
+    if (router.isReady) {
+      fetchSingleByte()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady])
 
   const { observe } = useInView({
+    rootMargin: SCROLL_ROOT_MARGIN,
     onEnter: async () => {
       await fetchMore({
         variables: {
           request: {
-            cursor: pageInfo?.next,
-            sortCriteria: "LATEST",
-        publicationTypes: ["POST"],
-        timestamp: 1,
-        limit: 20,
-        excludeProfileIds: [
-          //nsfw
-          "0x5eaf",
-          "0x3f7d",
-          "0x5b94",
-          "0x5c7c",
-          "0x62dd",
-          "0x53cd",
-        ],
-        metadata: {
-          mainContentFocus: ["VIDEO"],
-        },
-      },
-      reactionRequest,
-      profileId,
-           
-          
+            ...request,
+            cursor: pageInfo?.next
+          }
         }
       })
     }
   })
 
 
+  if (error) {
+    return (
+      <div className="grid h-[80vh] place-items-center">
+        <EmptyState message="No bytes found" icon />
+      </div>
+    )
+  }
+
   return (
     <div>
-      <InfiniteScroll
-        dataLength={publications?.length ?? 0}
-        next={() => {}}
-        hasMore={true}
-        loader={pageInfo?.next && (
+      <Head>
+        <meta name="theme-color" content="#000000" />
+      </Head>
+      <MetaTags title={`Latest • ${APP_NAME} `} />
+      {full()}
+      <div
+        ref={bytesContainer}
+        className="h-[screen] md:h-[calc(100vh-70px)]"
+      >
+        {singleByte && (
+          <ByteVideo
+           setFollowing={ setFollowing } 
+            video={singleBytePublication}
+            key={`${singleBytePublication?.id}_${singleBytePublication.createdAt}0`}
+            onDetail={openDetail}
+            isShow={show}
+            index={-1}
+          />
+        )}
+        {bytes?.map((video: Publication, index) => (
+          <ByteVideo
+            video={video}
+            key={`${video?.id}_${video.createdAt}1`}
+            onDetail={openDetail}
+            isShow={show}
+            index={index} setFollowing={ setFollowing }          />
+        ))}
+        {pageInfo?.next && (
           <span ref={observe} className="flex justify-center p-10">
-            <Loading />
+            <Loader />
           </span>
         )}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-      <Card className="rounded-xl px-3">
-      {publications?.map((pub: Publication) => (
-        <VideoCard key={pub.id} publication={pub as Publication} />
-      ))}
-      </Card>
-      </InfiniteScroll>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default Latest;
-
-
+export default Latest

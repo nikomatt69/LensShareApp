@@ -2,9 +2,11 @@
 // with Sentry.
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-
+const API_KEY = process.env.NEXT_PUBLIC_STUDIO_API_KEY
 
 /** @type {import('next').NextConfig} */
+
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -77,7 +79,11 @@ const nextConfig = {
       "ipfs.4everland.io",
       "gateway.ipfscdn.io/ipfs/",
       "ep-noisy-rice-867852-pooler.us-west-2.postgres.vercel-storage.com",
-      "user-content.lenster.xyz"
+      "user-content.lenster.xyz",
+      "lp-playback.com/hls",
+      "lp-playback.com",
+      "static-asset.lenster.xyz",
+      "static.lenstube.xyz",
 
     ],
   },
@@ -88,6 +94,17 @@ const nextConfig = {
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true },
     ];
   },
+  async headers() {
+    return [{
+      
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'Referrer-Policy', value: 'strict-origin' },
+   
+        ]
+ } ]},
   
 };
 

@@ -28,7 +28,7 @@ const LikeButton: FC<Props> = ({publication }) => {
   
 
   return (
-    <div className="flex gap-6">
+    <div className="flex block gap-6">
     <div className=" md:mt-4 flex flex-col justify-center items-center cursor-pointer">
       <Like setCount={setCount} count={count} setLiked={setLiked} liked={liked} publication={publication as Publication} />
         <p className="text-xs hidden lg:block font-semibold text-gray-400"> {count} </p>

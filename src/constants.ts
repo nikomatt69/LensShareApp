@@ -14,6 +14,14 @@ export const EVER_ACCESS_SECRET= process.env.NEXT_PUBLIC_EVER_ACCESS_SECRET;
 export const EVER_ACCESS_KEY= process.env.NEXT_PUBLIC_EVER_ACCESS_KEY;
 
 export const PINSTA_API_URL = 'https://apipost.lenshareapp.xyz';
+export const MUX_DATA_KEY = '2h11sq1qeahiaejrjegjti847';
+
+export const NEXT_PUBLIC_STUDIO_API_KEY="9e17a7ab-3370-4e31-85c3-43072da2315e";
+
+export const LENS_MEDIA_SNAPSHOT_URL =
+  'https://ik.imagekit.io/lens/media-snapshot';
+
+
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
@@ -51,11 +59,33 @@ export const LS_KEYS = {
   TIMELINE_STORE: "timeline.store",
   MESSAGE_STORE: "message.store",
 };
-
-
-export const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/mpeg', 'video/ogg', 'video/webm', 'video/quicktime'];
-export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-export const ALLOWED_MEDIA_TYPES = [...ALLOWED_VIDEO_TYPES, ...ALLOWED_IMAGE_TYPES];
+export const ALLOWED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif'
+];
+export const ALLOWED_AUDIO_TYPES = [
+  'audio/mpeg',
+  'audio/wav',
+  'audio/mp4',
+  'audio/aac',
+  'audio/ogg',
+  'audio/webm',
+  'audio/flac'
+];
+export const ALLOWED_VIDEO_TYPES = [
+  'video/mp4',
+  'video/mpeg',
+  'video/ogg',
+  'video/webm',
+  'video/quicktime'
+];
+export const ALLOWED_MEDIA_TYPES = [
+  ...ALLOWED_VIDEO_TYPES,
+  ...ALLOWED_IMAGE_TYPES,
+  ...ALLOWED_AUDIO_TYPES
+];
 
 
 export const SIGN_IN_REQUIRED_MESSAGE = 'Sign in required'
@@ -81,10 +111,11 @@ export const LENS_CUSTOM_FILTERS = [CustomFiltersTypes.Gardeners]
 export const LENSSHARE_TWITTER_HANDLE = 'lensshareappxyz'
 
 export const RELAY_ON = true
-export const ERROR_MESSAGE = "Something went wrong!"
+export const ERROR_MESSAGE = "Something went wrong!";
 
-
-;
+export const LENSTUBE_APP_ID = 'lenstube'
+export const LENSTUBE_BYTES_APP_ID = 'lenstube-bytes'
+export const LENSTOK_APP_ID = 'lenstok'
 
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
@@ -111,9 +142,9 @@ export const OPENSEA_MARKETPLACE_URL = IS_MAINNET ? "https://opensea.io" : "http
 
 export const RARIBLE_URL = IS_MAINNET ? 'https://rarible.com' : 'https://testnet.rarible.com';
 
-export const IMAGE_CDN_URL = IS_MAINNET ? "https://user-content.lenster.xyz" : "https://img.lenstube.xyz";
+export const IMAGE_CDN_URL = IS_MAINNET ? "https://img.lenstube.xyz" : "https://img.lenstube.xyz";
 
-export const USER_CONTENT_URL = 'https://user-content.lenster.xyz';
+export const USER_CONTENT_URL = 'https://static-assets.lenster.xyz';
 
 export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET
   ? "0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938"

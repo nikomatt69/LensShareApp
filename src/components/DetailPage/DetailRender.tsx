@@ -128,7 +128,7 @@ const DetailRender = () => {
   return (
     <div>
       <VideoDetail publication={publication as Publication} profile={profile as Profile}
-      setFollowing={setFollowing} following={following} show={showShare} setShowShare={setShowShare} />
+      setFollowing={setFollowing} following={following} show={showShare} setShowShare={setShowShare} isShow={true} />
     </div>
   )
 }

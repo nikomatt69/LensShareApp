@@ -1,3 +1,4 @@
-import DetailRender from "@/components/DetailPage/DetailRender";
+import VideoDetail from "@/components/DetailPage/VideoDetail";
 
-export default DetailRender
+
+export default VideoDetail;

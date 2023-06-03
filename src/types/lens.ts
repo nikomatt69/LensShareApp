@@ -3034,6 +3034,7 @@ export enum PublicationSortCriteria {
 
 /** The publication stats */
 export type PublicationStats = {
+  totalAmountOfUpvotes: string;
   __typename?: 'PublicationStats';
   commentsTotal: Scalars['Int'];
   /** The publication id */

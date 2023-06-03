@@ -136,7 +136,7 @@ interface Props {
                                 onClose={() => setShowStatsModal(!showStatsModal)}
                             >
                                <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats.totalPosts} data={{
-                                    publications: profile?.stats.totalPosts,
+                                    
                                     totalBurntProfiles: 0,
 
 

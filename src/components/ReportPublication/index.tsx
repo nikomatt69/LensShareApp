@@ -65,13 +65,6 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
     })
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setReason(e.target.value)
-  }
-
-  function setCategory(value: string): void {
-    throw new Error('Function not implemented.')
-  }
 
   return (
     <>
@@ -80,7 +73,7 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
         <div className="w-full">
           <div className="opacity-60 p-2">
             <h1>{publication.metadata.name}</h1>
-            <span className="text-sm pl-2">by {publication.profile.handle}</span>
+            <span className="text-sm pl-2">by {publication.profile.id}</span>
           </div>
           <div className="mt-4">
             <label
@@ -91,7 +84,7 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
             </label>
             <div className="mt-1">
             <select
-                  onChange={(e) => setCategory(e.target.value)}
+                  
                   className='outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer'
                   >
                     {topics.map((topic) => (

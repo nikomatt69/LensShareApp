@@ -18,7 +18,7 @@ const EchosShimmer = () => {
   const cards = useMemo(() => Array(24).fill(1), [])
 
   return (
-    <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid max-w-[100rem] grid-cols-2 place-items-center gap-2 md:grid-cols-2 md:gap-3">
+    <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid max-w-[100rem] grid-cols-2 place-items-center gap-2 md:grid-cols-3 md:gap-3">
       {cards.map((i, idx) => (
         <CardShimmer key={`${i}_${idx}`} />
       ))}

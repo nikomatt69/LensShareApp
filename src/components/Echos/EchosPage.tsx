@@ -20,14 +20,15 @@ const Echos = () => {
 
   return (
     <div>
-    <Navbar/>
+    <Navbar />
     <div>
     <Wrapper >
       <Curated />
     </Wrapper>
     </div>
-
     </div>
+
+    
   )
 }
 

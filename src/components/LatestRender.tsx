@@ -112,7 +112,7 @@ const LatestRender = () => {
     <div>
     <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
     <Toaster position="bottom-right" />
-      <Navbar />
+      
       <div className="flex gap-6 md:gap-20">
         <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
           <Sidebar />
@@ -121,7 +121,7 @@ const LatestRender = () => {
           <Latest />
         </div>
       </div>
-      <div className="block ">
+      <div className="block overflow-hidden ">
         <BottomNav/>
       </div>
     </div>

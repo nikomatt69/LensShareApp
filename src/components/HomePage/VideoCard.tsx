@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FC, useEffect, useState } from "react";
-import type { Profile, Publication } from "@/utils/lens";
+import { FC, useEffect, useRef, useState } from "react";
+import type { Profile, Publication } from "@/types/lens";
 import Video from './Video'
 import { GoVerified } from "react-icons/go";
 import getAvatar from "@/lib/getAvatar";
@@ -20,25 +20,38 @@ import ShareModal from "./ShareModal";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import ShareButton from "../Buttons/ShareButton";
 import ViewCount from "./ViewCount";
-import { getPublicationMediaCid } from "@/utils/functions/getPublicationMediaUrl";
+import BytesVideo from "../Bytes";
+import ByteVideo from "../Bytes/ByteVideo";
+import { useRouter } from "next/router";
+
 
 
 
 interface Props {
   publication: Publication;
+  onDetail: (video: Publication) => void;
 }
-const VideoCard: FC<Props> = ({ publication }) => {
+const VideoCard: FC<Props> = ({ publication, onDetail }) => {
+  const router = useRouter()
+  const [following, setFollowing] = useState(false) 
+  const bytesContainer = useRef<HTMLDivElement>(null)
+  const currentProfile = useAppStore((state) => state.currentProfile)
+  const currentViewingId = useAppStore((state) => state.currentviewingId)
+  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
+  const [byte, setByte] = useState<Publication>()
+   
   const [showShare, setShowShare] = useState(false)
   const date = publication.createdAt;
   const timestamp = date.split("T")[0];
-  const [following, setFollowing] = useState(false) 
-  const currentProfile = useAppStore((state) => state.currentProfile);
   const isMirror = publication?.__typename === 'Mirror'
   const profile = isMirror ? publication?.mirrorOf?.profile : publication?.profile 
   const likes = isMirror ? publication?.mirrorOf?.stats?.totalUpvotes : publication?.stats?.totalUpvotes
   const comments = isMirror ? publication.mirrorOf.stats.totalAmountOfComments : publication.stats.totalAmountOfComments
   const mirrors = isMirror ? publication?.mirrorOf?.stats?.totalAmountOfComments : publication?.stats?.totalAmountOfComments
   const collects = isMirror ? publication?.mirrorOf?.stats?.totalAmountOfCollects : publication?.stats?.totalAmountOfCollects
+
+
+
 
   useEffect(() => {
     if(profile?.isFollowedByMe === true) {
@@ -50,6 +63,12 @@ const VideoCard: FC<Props> = ({ publication }) => {
       setFollowing(false)
     }
     }, [profile?.isFollowedByMe])
+
+
+  
+  
+
+
 
 
   return (
@@ -78,7 +97,7 @@ const VideoCard: FC<Props> = ({ publication }) => {
           <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
           <Link 
         className="pointer-events-auto "
-        href={`/post/${publication.id}`} key={publication.id} 
+        href={`/bytes/${publication.id}`} key={publication.id} 
         >
              <div
             className="my-3 pb-3  text-xs break-word text-black font-semibold"
@@ -102,13 +121,16 @@ const VideoCard: FC<Props> = ({ publication }) => {
         </div>} 
       </div>
       <Video
-       publication={publication as Publication} /> 
+        publication={publication as Publication}
+    
+
+        /> 
       <div className='flex flex-row py-3 space-x-3'>
       <p className="text-xs block md:hidden font-semibold text-black-400 pl-1"> {likes} Likes</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {mirrors} Mirrors</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>
-      <p className="text-xs block md:hidden font-semibold text-black-400"><ViewCount key={publication.id} cid={getPublicationMediaCid(publication as Publication)} /></p>
+    
       </div>
       
       <div className='flex ml-auto'>

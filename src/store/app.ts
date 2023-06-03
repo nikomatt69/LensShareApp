@@ -47,6 +47,7 @@ export const UPLOADED_VIDEO_FORM_DEFAULTS = {
     followerOnlyReferenceModule: false,
     degreesOfSeparationReferenceModule: null,
   },
+  isByteVideo: true,
 };
 
 export const UPLOADED_VIDEO_BUNDLR_DEFAULTS = {
@@ -59,6 +60,8 @@ export const UPLOADED_VIDEO_BUNDLR_DEFAULTS = {
 };
 
 interface AppState {
+  currentviewingId: string | null
+  videoWatchTime: number
   showCreateBoard: boolean;
   setShowCreateBoard: (showCreateBoard: boolean) => void
   uploadedVideo: UploadedVideo;
@@ -76,13 +79,23 @@ interface AppState {
   setHasNewNotification: (value: boolean) => void
   activeTagFilter: string
   setActiveTagFilter: (activeTagFilter: string) => void
+  setCurrentviewingId: (id: string) => void
+  setVideoWatchTime: (videoWatchTime: number) => void
+  isMute: boolean
+  setMute: (isOn: boolean) => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
+  videoWatchTime: 0,
+  isMute: true,
+  setMute: (isMute: boolean) => set({ isMute }),
+  currentviewingId: null,
   showCreateBoard: false,
   activeTagFilter: 'all',
   hasNewNotification: false,
+  setVideoWatchTime: (videoWatchTime) => set({ videoWatchTime }),
   setActiveTagFilter: (activeTagFilter) => set({ activeTagFilter }),
+  setCurrentviewingId: (id)=> set({ currentviewingId: id }),
   setHasNewNotification: (b) => set({ hasNewNotification: b }),
   setShowCreateBoard: (showCreateBoard) => set({ showCreateBoard }),
   uploadedVideo: UPLOADED_VIDEO_FORM_DEFAULTS,

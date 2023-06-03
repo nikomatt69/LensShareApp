@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import type { FC } from "react";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import { BsPlay } from "react-icons/bs";
+import { APP_ID, LENSTOK_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
 
 
   const ProfileVideos = () => {
@@ -19,6 +20,7 @@ import { BsPlay } from "react-icons/bs";
   ((PublicationsDocument), {
     variables: { 
       request: {
+        sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID],
         profileId: id,
         publicationTypes: ["POST"],
         limit: 50,
@@ -47,7 +49,7 @@ import { BsPlay } from "react-icons/bs";
             <div className="grid  gap-2 pl-1 pr-1 mt-2 mb-2 lg:grid-cols-3 md:gap-y-6 gap-x-4 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
             {publications?.map((pub) => (
                 <div key={pub.id}>
-                    <Link href={`/post/${pub.id}`} key={pub.id}>
+                    <Link href={`/bytes/${pub.id}`} key={pub.id}>
                         <a  className="block h-0 border-2 border-blue-500 rounded-lg relative pb-[131%]">
                         <video
                         loop

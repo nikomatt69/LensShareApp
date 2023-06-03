@@ -5,9 +5,10 @@ import {
   Publication,
   PublicationSearchResult,
   SearchRequestTypes,
-} from "@/utils/lens";
+} from "@/types/lens";
 import React, { FC } from "react";
 import VideoCard from "../HomePage/VideoCard";
+import Video from "../HomePage/Video";
 
 interface Props {
   query: string | string[];
@@ -41,7 +42,8 @@ const SearchPublications: FC<Props> = ({ query }) => {
   return (
     <div>
       {publications?.map((publication) => (
-        <VideoCard
+        <Video
+          
           key={publication?.id}
           publication={publication}
         />

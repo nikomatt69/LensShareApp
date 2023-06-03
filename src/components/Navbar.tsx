@@ -20,6 +20,7 @@ import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import SearchBarDiscover from "./Search/SearchBarDiscover";
 import { FaHeadphones } from "react-icons/fa";
+import { FcVideoCall } from "react-icons/fc";
 
 
 
@@ -32,7 +33,7 @@ const Navbar: FC = () => {
   console.log('CURRENT PROFILE', currentProfile?.picture)
   
   return (
-    <div className="w-full flex justify-between rounded-lg items-center border-4 border-blue-500 p-2 ">
+    <div className="w-full flex justify-between rounded-lg items-center  border-4 border-blue-500 p-2 ">
       <Link href="/">
         <div className="w-[100px] md:w-[129px]">
           <Image
@@ -59,6 +60,14 @@ const Navbar: FC = () => {
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
          <FaHeadphones className='h-6 text-black' />{' '}
           <span className='hidden '>Listen </span>
+        </button>
+        </Link>
+        <Link href='/live'>
+        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
+         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
+         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
+         <FcVideoCall className='h-6 text-black' />{' '}
+          <span className='hidden '>Live </span>
         </button>
         </Link>
       <div className="flex">

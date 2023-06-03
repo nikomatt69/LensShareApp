@@ -1,0 +1,69 @@
+import { Profile, Publication } from '@/types/lens'
+import { formatNumber } from '@/utils/functions/formatNumber'
+import getProfilePicture from '@/utils/functions/getProfilePicture'
+import Link from 'next/link'
+import { FC, useState } from 'react'
+import React from 'react'
+import UnfollowButton from '../Buttons/UnfollowButton'
+import FollowButton from '../Buttons/FollowButton'
+import { usePublicationDetailsLazyQuery } from '@/utils/lens/generated'
+
+
+type Props = {
+  video: Publication
+  following: boolean
+  setFollowing: (following: boolean) => void
+  profile: Profile
+}
+
+const MobileBottomOverlay: FC<Props> = ({ video }) => {
+  const [following, setFollowing] = useState(false) 
+  const profile = video.profile
+  const subscribeType = video.profile?.followModule?.__typename
+
+  return (
+    <div className="absolute bottom-0  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-3 pt-5 md:rounded-b-xl">
+       <Link href={`/bytes/${video?.id}`} key={video.id}>
+      <div className="pb-2">
+        
+        <h1 className="line-clamp-2 text-white">{video.metadata.name}</h1>
+      </div>
+      </Link>
+      <div className="flex items-center justify-between">
+        <div className="min-w-0">
+          <Link
+            href={`/u/${profile?.id}`}
+            className="flex flex-none cursor-pointer items-center space-x-2"
+          >
+            <img
+              src={getProfilePicture(profile, 'avatar')}
+              className="h-9 w-9 rounded-full"
+              draggable={false}
+              alt={profile?.handle}
+            />
+            <div className="flex min-w-0 flex-col items-start text-white">
+              <h6 className="flex max-w-full items-center space-x-1">
+                <span className="truncate">{profile?.handle}</span>
+                
+              </h6>
+              <span className="inline-flex items-center space-x-1 text-xs">
+                {formatNumber(profile?.stats.totalFollowers)} subscribers
+              </span>
+            </div>
+          </Link>
+        </div>
+        <div className="flex items-center space-x-2">
+        {<div className="flex-shrink-0">
+          { following ? ( 
+            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
+            ) : (
+            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+          )}
+        </div>}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default MobileBottomOverlay

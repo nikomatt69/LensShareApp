@@ -16,6 +16,8 @@ import Loading from "../Loading";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import MetaTags from "../UI/MetaTags";
+import Bytes from "../Bytes";
+import DiscoverMob from "../DiscoverPage/DiscoverMob";
 
 
 
@@ -108,9 +110,7 @@ const Home: NextPage = () => {
     validateAuthentication()
   }, [isDisconnected, address, chain, disconnect, profileId])
 
-  if (loading || !mounted) {
-    return <Loading />
-  }
+ 
   
   return (
     <div>
@@ -127,8 +127,9 @@ const Home: NextPage = () => {
         <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
           <Explore />
         </div>
+        
       </div>
-      <div className="block ">
+      <div className="block overflow-hidden ">
         <BottomNav/>
       </div>
     </div>
