@@ -29,7 +29,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
   const [copy] = useCopyToClipboard()
 
   const onCopyVideoUrl = async () => {
-    await copy(`${LENSTOK_URL}/post/${publication.id}`)
+    await copy(`${LENSTOK_URL}/bytes/${publication.id}`)
     toast.success(`Permalink copied to clipboard`)
     
   }
@@ -52,7 +52,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             href={getSharableLink('lenster', publication)}
           >
             <img
-              src={imageProxy(
+              src={imageCdn(
                 `${STATIC_ASSETS_URL}/images/social/lenster.png`,
                 'avatar_lg'
               )}
@@ -69,7 +69,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             href={getSharableLink('twitter', publication)}
           >
             <img
-              src={imageProxy(
+              src={imageCdn(
                 `${STATIC_ASSETS_URL}/images/social/twitter.png`,
                 'avatar_lg'
               )}
@@ -85,7 +85,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             rel="noreferrer"
           >
             <img
-              src={imageProxy(
+              src={imageCdn(
                 `${STATIC_ASSETS_URL}/images/social/reddit-logo.png`,
                 'avatar_lg'
               )}
@@ -101,7 +101,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
             rel="noreferrer"
           >
             <img
-              src={imageProxy(
+              src={imageCdn(
                 `${STATIC_ASSETS_URL}/images/social/linkedin.png`,
                 'avatar_lg'
               )}
@@ -114,7 +114,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
         </div>
         <div className="flex items-center justify-between rounded-lg border border-gray-200 p-2 dark:border-gray-800">
           <div className="select-all truncate text-sm">
-            {LENSTOK_URL}/post/{publication.id}
+            {LENSTOK_URL}/bytes/{publication.id}
           </div>
           <button
             className="ml-2 hover:opacity-60 focus:outline-none"

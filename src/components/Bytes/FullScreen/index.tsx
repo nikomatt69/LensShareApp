@@ -1,6 +1,6 @@
 
 import clsx from 'clsx'
-import type { Publication } from '@/types/lens'
+import type { Profile, Publication } from '@/types/lens'
 import type { FC } from 'react'
 import React, { useLayoutEffect, useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -10,7 +10,7 @@ import { MdOutlineClose } from 'react-icons/md'
 import TopOverlay from '../TopOverlay'
 import Comments from './Comments'
 import ByteActions from '../ByteActions'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl'
 import { useAppStore } from '@/store/app'
@@ -22,6 +22,7 @@ import VideoPlayer from '@/utils/VideoPlayer'
 import FullScreenModal from '@/components/UI/FullScreenModal'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import useAverageColor from '@/utils/hooks/useAverageColor'
+import MobileBottomOverlay from '../MobileBottomOverlay'
 
 type Props = {
     byte: Publication
@@ -29,12 +30,14 @@ type Props = {
     close: () => void
     isShow: boolean
     index?: number
+    profile?: Profile
 }
 const FullScreen: FC<Props> = ({ byte,
     close,
     bytes,
     isShow,
-    index = 0
+    index = 0,
+    profile
 
 }) => {
     const { pathname, replace, asPath } = useRouter()
@@ -44,6 +47,12 @@ const FullScreen: FC<Props> = ({ byte,
     const intersectionRef = useRef<HTMLDivElement>(null)
     const [playing, setPlaying] = useState(false)
     const [video, setVideo] = useState(byte)
+    const [showComments, setShowComments] = useState(false)
+    const [following, setFollowing] = useState(false)
+    const [show, setShow] = useState(false)
+
+
+
 
     const thumbnailUrl = imageCdn(
         sanitizeIpfsUrl(getThumbnailUrl(video)),
@@ -99,11 +108,12 @@ const FullScreen: FC<Props> = ({ byte,
         posterUrl={thumbnailUrl}
         ratio="9to16"
         publicationId={video.id}
-        showControls={true}
-        
+   
+
+
         options={{
             isCurrentlyShown: true,
-            autoPlay: false,
+            autoPlay: true,
             loop: true,
             loadingSpinner: true,
             muted: mute
@@ -116,7 +126,7 @@ const FullScreen: FC<Props> = ({ byte,
         if (!elVol) {
             return
         }
-        elVol.style.visibility = videoFull ? "visible" : "hidden"
+        elVol.style.visibility = videoFull ? "visible" : "visible"
     }
 
 
@@ -140,39 +150,45 @@ const FullScreen: FC<Props> = ({ byte,
 
     return (<>
 
-        {/* <TopOverlay  onClickVideo={() => setShow(true)} /> */}
+       
         <FullScreenModal
+        
             
 
-            panelClassName="max-w-full"
+            panelClassName="max-w-full  max-h-full"
             show={isShow}
             autoClose
         >
             <div
-                className="flex snap-center justify-between"
+                className="flex bg-cyan-300  snap-center "
                 data-testid="byte-video"
                 id="videoFull"
             >
-                <div className='grow  relative'>
-                    <div className='relative w-full h-full bg-cover bg-center flex' style={{ backgroundImage: `url(${thumbnailUrl})` }} >
+                <div className='grow bg-black relative'>
+                    
+                    <div className='relative  mt-0.5 bg-black  bg-cover bg-center object-contain items-center' style={{ backgroundImage: `url(${thumbnailUrl})` }} >
                         <div className='z-10 absolute'>
                             <button
                                 type="button"
-                                className="p-2 focus:outline-none m-5 rounded-full  bg-slate-600"
-                                onClick={() => close()}
+                                className=" focus:outline-none rounded-full p-3  bg-slate-600"
+                                onClick={() => router.back()}
                             >
                                 <MdOutlineClose className='text-white w-6 h-6' />
                             </button>
                         </div>
-                        <div className={clsx("relative max-md:w-full grow flex  backdrop-blur-md backdrop-brightness-[0.2] ")}
-                            onMouseEnter={() => displayControl(true)}
-                            onMouseLeave={() => displayControl(false)}>
+                        <div className= {clsx("relative backdrop-brightness-[0.2] ")}
+                           onMouseEnter={() => displayControl(true)}
+                           onMouseLeave={() => displayControl(false)}
+                        
+                        >
+                       
                             <div
-                                className="flex  items-center bg-black min-w-[56.25vh] max-w-[1px] md:rounded-sm m-auto"
+                                className="flex  items-center  min-w-[50vh] max-w-[1px] md:rounded-sm m-auto"
                                 style={{
                                     backgroundColor: backgroundColor ? backgroundColor : undefined
                                 }}
                             >
+
                                 <div
                                     className="absolute"
                                     ref={intersectionRef}
@@ -180,20 +196,22 @@ const FullScreen: FC<Props> = ({ byte,
                                 />
                                 {currentViewingId === video.id ? player : (
                                     <img
-                                        className="w-full object-contain"
+                                        className="w-full  object-contain"
                                         src={thumbnailUrl}
                                         alt="thumbnail"
                                         draggable={false}
                                     />
                                 )}
                             </div>
-                            <div className="absolute z-10 right-3 bottom-10 md:hidden">
+                            <div className="absolute z-40 right-3 bottom-40 ">
                                 <ByteActions trigger video={video} inDetail={true} />
                             </div>
-
-                            {/* <TopOverlay onClickVideo={onClickVideo} full={true} id={video.id} /> */}
+                            
 
                         </div>
+                        {<div className="block assolute rounded-b-xl bottom-0.5 left-0 pt-20 mt-4 right-0 ">
+                            <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={false}  />
+                            </div>}
                         <button
                             type="button"
                             onClick={() => onClickReport()}
@@ -202,11 +220,11 @@ const FullScreen: FC<Props> = ({ byte,
                             <BsFlag className="h-3.5 w-3.5" fill='white' />
                             <span className="whitespace-nowrap text-white">Report</span>
                         </button>
-                        <div className='flex flex-col gap-2 justify-center absolute right-0 top-[calc(50vh-5rem)] z-10 mr-5'>
+                        <div className='flex flex-col gap-2 justify-center absolute left-0 top-[calc(50vh-5rem)] z-10 mr-5'>
 
                             <div className="h-[44px]" >
                                 {index > 0 && (<button
-                                    className="rounded-full bg-gray-300/20 pr-3 focus:outline-none dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800"
+                                    className="rounded-full bg-gray-300/20 pl-3 focus:outline-none dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800"
                                     onClick={() => detailNext(-1)}
                                 >
                                     <ChevronUpIcon className="h-5 w-5" />
@@ -214,17 +232,18 @@ const FullScreen: FC<Props> = ({ byte,
                             </div>
                             <div className="h-25 w-25" >
                                 <button
-                                    className="rounded-full bg-gray-300/20 pr-3 focus:outline-none dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-800"
+                                    className="rounded-full bg-gray-300/20 pl-3 focus:outline-none dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-800"
                                     onClick={() => detailNext(1)}
                                 >
                                     <ChevronDownIcon className="h-5 w-5" />
                                 </button>
                             </div>
-
                         </div>
+
+                       
                     </div>
                 </div>
-                <div className='flex flex-col w-[30vw] max-md:hidden max-w-[544px] p-5 flex-shrink-0 h-screen items-stretch'>
+                <div className='flex flex-col w-[30vw] max-w-[544px] p-5 flex-shrink-0 h-screen items-stretch'>
                     <Comments  key={video.profile.id}
                       comment={video as Publication} />
                 </div>

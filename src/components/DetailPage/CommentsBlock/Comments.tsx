@@ -46,7 +46,7 @@ const CommentsVideo: FC<Props> = ({ publication }) => {
   return (
     
       <div className="overflow-y-auto">
-        <div className=" h-flex text-black flex-grow flex flex-col items-stretch gap-0.3 overflow-y-auto bg-[#F2F4F7] ">
+        <div className=" h-flex text-black flex-grow flex rounded-xl object-center justify-center flex-col items-stretch gap-0.3 overflow-y-auto bg-[#F2F4F7] ">
         {comments?.map((comment) => (
                 <CommentData
                   key={`${comment?.id}_${comment.createdAt}`}

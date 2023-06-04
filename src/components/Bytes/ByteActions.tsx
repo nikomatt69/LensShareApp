@@ -43,7 +43,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
       
       <div className="items-center space-y-1.5 pt-2.5 md:flex md:flex-col">
        
-        <div className="w-full overflow-auto text-center text-white md:text-inherit">
+        <div className="w-full  text-center text-white md:text-inherit">
           <LikeButton publication={video as Publication} /> 
            
         </div>
@@ -58,13 +58,13 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
 
        
         
-        <div className="w-full overflow-auto text-center text-white md:text-inherit">
+        <div className="w-full  text-center text-white md:text-inherit">
           <MirrorButton publication={video as Publication} /> 
             
         </div>
 
 
-        <div className="w-full  overflow-auto text-center text-white md:text-inherit">
+        <div className="w-fultext-center text-white md:text-inherit">
           <CollectButton publication={video as Publication} /> 
         </div>
         {/* {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
@@ -75,7 +75,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
             </div>
           </div>
         )} */}
-        <div className="w-full  overflow-auto  text-center text-white md:text-inherit"onClick={() => setShowShare(true)}>
+        <div className="w-full  text-center text-white md:text-inherit"onClick={() => setShowShare(true)}>
           <ShareButton publication={video as Publication} /> 
     </div>
     </div>

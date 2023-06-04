@@ -72,7 +72,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
 
 
   return (
-    <div className="flex flex-col bg-[#d9dff1f6] justify-content break-word border-b-2 border-gray-200 pb-0 md:pb-6">
+    <div className="flex flex-col bg-[#d9dff1f6] justify-content border-0 break-word border-b-2 border-gray-200 pb-0 md:pb-6">
       <div className="flex-row flex break-word ">
         <div className="flex-auto gap-3 p-2 mt-4 cursor-pointer break-word font-semibold rounded">
         <Link href={`/u/${profile.id}`} key={profile.id}/>
@@ -103,7 +103,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
             className="my-3 pb-3  text-xs break-word text-black font-semibold"
             style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
           >
-              {publication?.metadata?.description?.slice(0, 150)} {""}
+              {`${publication?.metadata?.description?.slice(0, 150)}`}
             </div>
             <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">See more</span>
           </Link>
@@ -120,11 +120,13 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           )}
         </div>} 
       </div>
+      <div className="rounded-xl cursor-pointer">
       <Video
         publication={publication as Publication}
     
 
-        /> 
+        />
+        </div> 
       <div className='flex flex-row py-3 space-x-3'>
       <p className="text-xs block md:hidden font-semibold text-black-400 pl-1"> {likes} Likes</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>

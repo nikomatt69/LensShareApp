@@ -7,6 +7,7 @@ import React from 'react'
 import UnfollowButton from '../Buttons/UnfollowButton'
 import FollowButton from '../Buttons/FollowButton'
 import { usePublicationDetailsLazyQuery } from '@/utils/lens/generated'
+import formatAddress from '@/utils/functions/formatAddress'
 
 
 type Props = {
@@ -22,11 +23,11 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
   const subscribeType = video.profile?.followModule?.__typename
 
   return (
-    <div className="absolute bottom-0  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-3 pt-5 md:rounded-b-xl">
+    <div className="absolute bottom-0 rounded-b-xl  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-6 pt-5 md:rounded-b-xl">
        <Link href={`/bytes/${video?.id}`} key={video.id}>
       <div className="pb-2">
         
-        <h1 className="line-clamp-2 text-white">{video.metadata.name}</h1>
+        <h1 className="line-clamp-2 font-bold text-white">{video.metadata.name}</h1>
       </div>
       </Link>
       <div className="flex items-center justify-between">
@@ -41,19 +42,19 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
               draggable={false}
               alt={profile?.handle}
             />
-            <div className="flex min-w-0 flex-col items-start text-white">
+            <div className="flex min-w-0 font-bold flex-col items-start text-white">
               <h6 className="flex max-w-full items-center space-x-1">
-                <span className="truncate">{profile?.handle}</span>
+                <span className="truncate">{formatAddress(profile?.handle)}</span>
                 
               </h6>
               <span className="inline-flex items-center space-x-1 text-xs">
-                {formatNumber(profile?.stats.totalFollowers)} subscribers
+                {formatNumber(profile?.stats.totalFollowers)} Followers
               </span>
             </div>
           </Link>
         </div>
-        <div className="flex items-center space-x-2">
-        {<div className="flex-shrink-0">
+        <div className="flex items-center  space-x-2">
+        {<div className="flex-shrink-0 pr-2">
           { following ? ( 
             <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
             ) : (

@@ -1,13 +1,14 @@
 //mapping for the prfile vids
 import React, { useRef, useState } from 'react';
 import Link from "next/link";
-import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult} from "@/types/lens";
+import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication} from "@/types/lens";
 import { useQuery } from "@apollo/client";
 import { useRouter } from 'next/router';
 import type { FC } from "react";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import { BsPlay } from "react-icons/bs";
 import { APP_ID, LENSTOK_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
+import getMedia from '@/lib/getMedia';
 
 
   const ProfileVideos = () => {
@@ -58,7 +59,7 @@ import { APP_ID, LENSTOK_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
                         draggable={false}
                         preload="metadata"
                         ref={videoRef}
-                        src={sanitizeIpfsUrl(pub.metadata.media[0].original.url)}
+                        src={getMedia(pub as Publication)}
                         muted // Needs to be there to be able to play
                         onMouseOver={handleOnMouseOver}
                         onMouseOut={handleOnMouseOut}

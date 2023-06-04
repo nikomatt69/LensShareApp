@@ -91,7 +91,7 @@ const TopOverlay: FC<Props> = ({ onClickVideo, full, id }) => {
       onMouseEnter={() => setMouseEnter(true)}
       onMouseLeave={() => setMouseEnter(false)}
     >
-      <div className=" items-center hidden justify-between h-full">
+      <div className=" items-center justify-between h-full">
         {!isPlaying && <div className='m-auto p-3 bg-[#b4b4b47d] rounded-md hover:cursor-pointer'>
           <GiPlayButton className="text-2xl text-white" />
         </div>}

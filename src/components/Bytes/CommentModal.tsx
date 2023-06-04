@@ -54,7 +54,7 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
           <MdOutlineClose className='text-white w-4 h-4' />
         </button>
       </div>
-      <div className="no-scrollbar max-h-[40vh]  pt-3">
+      <div className="flex scrollbar max-h-[80%]  pt-3">
       <Comments
           key={video?.profile.id}
           publication={video as Publication}

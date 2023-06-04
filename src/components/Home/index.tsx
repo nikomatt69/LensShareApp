@@ -116,7 +116,7 @@ const Home: NextPage = () => {
     <>
      <MetaTags title={`Home • ${APP_NAME}`} />
       <BytesSection />
-      <Feed />
+
       
     </>
   )

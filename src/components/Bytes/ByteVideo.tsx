@@ -134,7 +134,7 @@ const ByteVideo: FC<Props> = ({
       <div className='h-full w-full relative'>
         {!isMobile && <BottomOverlay video={video}  />}
         <div
-          className="flex snap-center"
+          className="flex object-contain snap-center"
           data-testid="byte-video"
         >
           <div className="relative bottom-0">
@@ -177,7 +177,7 @@ const ByteVideo: FC<Props> = ({
             </div>
             {!isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />}
             {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={false}  />}
-            <div className="absolute right-2 bottom-[15%] z-[1] md:hidden">
+            <div className="absolute inline-block right-3 bottom-[15%] z-[1] md:hidden">
               <ByteActions trigger video={video} showDetail={() => onDetail(video)} />
               {/* {video?.collectModule?.__typename !==
                 'RevertCollectModuleSettings' && (

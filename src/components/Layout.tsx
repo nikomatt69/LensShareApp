@@ -92,7 +92,7 @@ const Layout = ({ children }: Props) => {
   <MetaTags />
   <div className="animate-bounce">
     <img
-      src={imageProxy(`${STATIC_ASSETS_URL}/images/icon.png`)}
+      src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
       draggable={false}
       className="h-12 w-12 md:h-16 md:w-16"
       alt="lensshare"

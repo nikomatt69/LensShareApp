@@ -39,7 +39,7 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
             'comment on'
           )}
           <Link
-            href={`/post/${
+            href={`/bytes/${
               notification.publication.__typename === 'Comment'
                 ? notification.publication?.mainPost?.id
                 : notification?.publication.id

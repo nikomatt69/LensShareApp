@@ -110,13 +110,13 @@ const Feed = () => {
     return <Custom400 />
   }
   return (
-    <div className='mt-2'>
+    <div className='mt-2 border-0'>
       {full()}
       {!error && !loading && (
         <>
           <div
             ref={bytesContainer}
-            className="h-screen md:h-[calc(100vh-70px)]">
+            className="h-screen border-0 md:h-[calc(100vh-70px)]">
             {bytes?.map((video: Publication, index) => (
               <ByteVideo
                 setFollowing={ setFollowing } 
@@ -129,7 +129,7 @@ const Feed = () => {
             ))}
           </div>
           {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center p-10">
+            <span ref={observe} className="flex border-0 justify-center p-10">
               <Loader />
             </span>
           )}

@@ -268,7 +268,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
   }
 
   return (
-    <div className="flex assolute fixed-bottom p-5 gap-3 border-t">
+    <div className="flex assolute rounded-xl fixed-bottom p-5 gap-3 border-t">
             <Link legacyBehavior href={`/u/${currentProfile?.id}`} key={currentProfile?.id}>
               <a className="mr-3 flex-shrink-0 rounded-full">
                 <Image

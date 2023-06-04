@@ -16,7 +16,7 @@ import imageCdn from "@/lib/imageCdn";
 import VideoPlayer from "@/utils/VideoPlayer";
 import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
 import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
-import { APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
+import { APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
 import { useAppStore } from "@/store/app";
 
 interface Props {
@@ -74,39 +74,43 @@ const Video: FC<Props> = ({ publication }) => {
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
-  const isBytesVideo = video.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID;
+  const isBytesVideo = video.appId === LENSTUBE_APP_ID || publication.appId === LENSTOK_APP_ID || publication.appId === APP_ID;
 
 
   return (
-    <div className="lg:ml-20 md:flex gap-4 relative">
+    <div className="lg:ml-20 rounded-xl md:flex gap-4 relative">
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
         className="rounded-xl"
       >
-        <Link href={`/post/${video.id}`} key={video.id} >
+        
         <VideoPlayer
+         
          currentTime={videoWatchTime}
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}
           posterUrl={imageCdn(
             sanitizeIpfsUrl(getThumbnailUrl(video as Publication)),
             isBytesVideo ? 'thumbnail_v' : 'thumbnail'
-          )} options={{
+          )} 
+          
+          options={{
             autoPlay: true,
+            
             muted: true,
             loop: true,
             loadingSpinner: true,
-            isCurrentlyShown: true
+            isCurrentlyShown: true,
           }}       
           
           
        
       />
-        </Link>
+      
         </div>
         
-        <div className='absolute md:relative mr-6 md:flex md:flex-col z-50 top-0 right-0 space-x-6 md:space-x-0 flex flex-row p-2 m-2 mb-10 md:p-0 md:m-0 md:pt-[135px]'>
+        <div className='absolute md:relative mr-6 md:flex md:flex-col top-0 right-0 space-x-6 md:space-x-0 flex flex-row p-2 m-2 md:p-0 md:m-0 md:pt-[50px]'>
         <div className="dropdown inline-block relative">
             {/* <button 
            onClick={() => setShowButtons(!showButtons)}

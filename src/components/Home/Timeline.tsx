@@ -33,7 +33,7 @@ const Timeline: FC<Props> = ({ videos, videoType = 'Post',onDetail }) => {
           <VideoCard
             onDetail={onDetail}
             key={`${video?.id}_${i}`}
-            publication={video as Comment}       />
+            publication={video as Comment}/>
         ) : isPub && isMirror ? (
           <VideoCard
             onDetail={onDetail}

@@ -19,6 +19,7 @@ import { Tooltip } from '@/components/UI/Tooltip'
 import HashExplorerLink from './HashExplorerLink'
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/solid'
 import ReportModal from '../ReportModal'
+import CommentsByte from '@/components/Bytes/FullScreen/Comments'
 
 const CommentOptions = dynamic(() => import('./CommentOptions'))
 const PublicationReaction = dynamic(() => import('./PublicationReaction'))
@@ -62,7 +63,7 @@ const Comments: FC<Props> = ({ comment }) => {
     <div className="flex items-start justify-between mb-5" onMouseEnter={() => setShowOptions(true)} onMouseLeave={() => setShowOptions(false)}>
       <div className="flex items-start justify-between">
         <Link
-          href={`/channel/${comment.profile?.handle}`}
+          href={`/u/${comment.profile?.id}`}
           className="mr-3 mt-0.5 flex-none"
         >
           <img
@@ -75,10 +76,10 @@ const Comments: FC<Props> = ({ comment }) => {
         <div className="mr-2 flex flex-col items-start">
           <span className="mb-1 flex items-center space-x-1">
             <Link
-              href={`/channel/${comment.profile?.handle}`}
+              href={`/u/${comment.profile?.id}`}
               className="flex items-center space-x-1 text-base font-bold"
             >
-              <span>{comment?.profile?.handle}</span>
+              <span>{comment?.profile?.name}</span>
               
             </Link>
             {checkValueInAttributes(
@@ -113,7 +114,7 @@ const Comments: FC<Props> = ({ comment }) => {
                 Comment deleted by user!
               </span>
             ) : getIsVideoComment() ? (
-              <VideoComment comment={comment} />
+              <CommentsByte comment={comment} />
             ) : (
               <InterweaveContent content={comment?.metadata?.content} />
             )}

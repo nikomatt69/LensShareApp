@@ -1,4 +1,4 @@
-import { APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS } from '@/constants'
+import { APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, STATIC_ASSETS_URL } from '@/constants'
 
 
 import type { Publication } from '@/types/lens'
@@ -63,10 +63,15 @@ const BytesSection = () => {
   }
 
   return (
-    <div className="hidden lg:block" data-testid="bytes-section">
+    <div className="block border-0 lg:block" data-testid="bytes-section">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <VideoCameraIcon className="h-4 w-4" />
+        <img
+             src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+             draggable={false}
+             className="h-12 w-12 md:h-16 md:w-16"
+             alt="lensshare"
+        />
           <h1 className="text-xl font-semibold">Bytes</h1>
         </div>
         <div className="flex justify-end space-x-3">

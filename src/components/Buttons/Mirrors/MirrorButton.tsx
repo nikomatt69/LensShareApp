@@ -141,7 +141,7 @@ const MirrorButton: FC<Props> = ({publication}) => {
     const isLoading = typedDataLoading || dispatcherLoading || signLoading || writeLoading || broadcastLoading;
 
     return (
-       <div className="flex block gap-6">
+       <div className="flex gap-6">
         <div className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">
         {alreadyMirrored ? (
          <div className="flex items-center drop-shadow-lg  md:border-none bg-blue-500 border-2 border-black rounded-lg p-2 md:p-3">

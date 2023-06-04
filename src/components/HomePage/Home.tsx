@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import MetaTags from "../UI/MetaTags";
 import Bytes from "../Bytes";
 import DiscoverMob from "../DiscoverPage/DiscoverMob";
+import BytesSection from "../Home/BytesSection";
 
 
 
@@ -124,12 +125,17 @@ const Home: NextPage = () => {
         <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
           <Sidebar />
         </div>
+        
+       
         <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
+          <div className="flex flex-col gap-10">
+        <BytesSection />
+        </div>
           <Explore />
         </div>
         
       </div>
-      <div className="block overflow-hidden ">
+      <div className="block overflow-auto ">
         <BottomNav/>
       </div>
     </div>
