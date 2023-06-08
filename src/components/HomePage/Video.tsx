@@ -16,7 +16,7 @@ import imageCdn from "@/lib/imageCdn";
 import VideoPlayer from "@/utils/VideoPlayer";
 import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
 import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
-import { APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
+import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
 import { useAppStore } from "@/store/app";
 
 interface Props {
@@ -74,11 +74,11 @@ const Video: FC<Props> = ({ publication }) => {
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
-  const isBytesVideo = video.appId === LENSTUBE_APP_ID || publication.appId === LENSTOK_APP_ID || publication.appId === APP_ID;
+  const isBytesVideo = video.appId === LENSTUBE_APP_ID || publication.appId === LENSTOK_APP_ID || publication.appId === APP_ID|| publication.appId === LENSTER_APP_ID
 
 
   return (
-    <div className="lg:ml-20 rounded-xl md:flex gap-4 relative">
+    <div className="lg:ml-20 rounded-xl border-0 md:flex gap-4 relative">
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -124,7 +124,7 @@ const Video: FC<Props> = ({ publication }) => {
             <li><LikeButton publication={video as Publication}/></li>
             <li><CommentButton publication={video as Publication} /></li>
             <li> <MirrorButton publication={video as Publication}/></li>
-            <li><CollectButton publication={video as Publication}/></li>
+            <li><CollectButton  publication={video as Publication}/></li>
             
             <li className=" pt-5">
               <button className="block  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg  md:p-3" >

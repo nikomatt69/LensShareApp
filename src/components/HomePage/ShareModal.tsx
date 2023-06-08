@@ -39,6 +39,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
       title="Share"
       onClose={() => setShowShare(false)}
       show={show}
+      
      
     >
       <div className="mt-1">

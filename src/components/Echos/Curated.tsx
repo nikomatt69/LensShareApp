@@ -70,7 +70,7 @@ const Curated = () => {
             ))}
           </div>
           {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center p-10">
+            <span ref={observe} className="flex border-0 justify-center p-10">
               <Loader />
             </span>
           )}

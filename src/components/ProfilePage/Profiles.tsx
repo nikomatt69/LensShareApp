@@ -53,7 +53,7 @@ const Profile: NextPage = () => {
           <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
             <Sidebar />
           </div>
-          <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
+          <div className="mt-2 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
             <ProfileCard profile={profile as Profile} setFollowing={setFollowing} following={following}  />
           </div>
         </div>

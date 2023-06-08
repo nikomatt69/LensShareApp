@@ -45,7 +45,7 @@ const Collectors: FC<Props> = ({publicationId}) => {
     }
 
   return (
-    <div className="overflow-y-auto max-h-[80vh]" id="scrollableDiv">
+    <div className="overflow-y-auto overflow-auto  max-h-[80vh]" id="scrollableDiv">
         <InfiniteScroll
             dataLength={profiles?.length ?? 0}
             scrollThreshold={0.5}

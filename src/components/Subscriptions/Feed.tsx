@@ -10,7 +10,7 @@ import Custom400 from '@/pages'
 import Loading from '../Loading'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Card } from '../UI/Card'
-import { LENSTUBE_BYTES_APP_ID, APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, SCROLL_ROOT_MARGIN } from '@/constants'
+import { LENSTUBE_BYTES_APP_ID, APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, SCROLL_ROOT_MARGIN, LENSTER_APP_ID } from '@/constants'
 import Video from '../HomePage/Video'
 import Bytes from '../Bytes'
 import ByteVideo from '../Bytes/ByteVideo'
@@ -41,6 +41,7 @@ const Feed = () => {
     limit: 20,
     feedEventItemTypes: [FeedEventItemType.Post, FeedEventItemType.Comment],
     profileId: currentProfile?.id,
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTOK_APP_ID ,LENSTER_APP_ID],
     metadata: {
       tags:
         activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
@@ -59,7 +60,6 @@ const Feed = () => {
   const pageInfo = data?.feed?.pageInfo
 
   const { observe } = useInView({
-    rootMargin: SCROLL_ROOT_MARGIN,
     onEnter: async () => {
       await fetchMore({
         variables: {
@@ -110,13 +110,13 @@ const Feed = () => {
     return <Custom400 />
   }
   return (
-    <div className='mt-2 border-0'>
+    <div className='mt-2 pt-3 border-0'>
       {full()}
       {!error && !loading && (
         <>
           <div
             ref={bytesContainer}
-            className="h-screen border-0 md:h-[calc(100vh-70px)]">
+            className="h-screen border-0 pt-3 mt-3 font-semibold md:h-[calc(100vh-70px)]">
             {bytes?.map((video: Publication, index) => (
               <ByteVideo
                 setFollowing={ setFollowing } 
@@ -124,15 +124,16 @@ const Feed = () => {
                 key={`${video?.id}_${video.createdAt}1`}
                 onDetail={openDetail}
                 isShow={show}
-                index={index} 
-                           />
+            
+              />
             ))}
-          </div>
+          
           {pageInfo?.next && (
             <span ref={observe} className="flex border-0 justify-center p-10">
               <Loader />
             </span>
           )}
+          </div>
         </>
       )}
     </div>

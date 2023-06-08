@@ -37,6 +37,7 @@ import { Card } from '../UI/Card';
 import StatsCard from '@/abi/Stats';
 import { count } from 'console';
 import Stats from '@/abi/Stats';
+import imageCdn from '@/lib/imageCdn';
 
 
 
@@ -76,11 +77,12 @@ interface Props {
              <MetaTags title={`User • ${profile?.name} ${APP_NAME}`}/>
                 <div className="w-full  max-w-[1150px]">   
                 <Cover
+                
                   cover={
                     profile?.coverPicture?.__typename === 'MediaSet'
                       ? profile?.coverPicture?.original?.url
-                      : `${STATIC_IMAGES_URL}`}/>
-                     <div className="flex border-4 rounded-3xl bg-cyan-200 border-black justify-center">
+                      : imageCdn(`${STATIC_IMAGES_URL}`)}/>
+                     <div className="flex border-4 bg-gradient-to-b from-gray-900 to-transparent rounded-3xl bg-blue-500 border-black justify-center">
                             <Image
                             src={getAvatar(profile)}
                             alt={getAvatar(profile)}

@@ -32,7 +32,7 @@ const BytesShimmer = () => {
           </div>
         </div>
       </div>
-      <hr className="border-theme my-8 border-opacity-10 dark:border-gray-700" />
+      <hr className="border-0 my-8 border-opacity-10 " />
     </>
   )
 }

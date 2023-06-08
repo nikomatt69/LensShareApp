@@ -272,7 +272,7 @@ const CollectModule: FC<Props> = ({publication, setCount, count }) => {
           )}
           <div className="space-y-1.5">
             <div className="block space-y-1 sm:flex sm:space-x-5 item-center">
-              <div className="flex items-center space-x-2">
+              <div className="flex overflow-auto items-center space-x-2">
                 <UsersIcon className="w-4 h-4 text-gray-500" />
                 <span className="font-bold text-xs cursor-pointer"
                   onClick={() => {setShowCollectorsModal(!showCollectorsModal)}}

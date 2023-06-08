@@ -20,7 +20,7 @@ import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/s
 import formatHandle from "@/utils/functions/formatHandle";
 import CollectButton from "../Buttons/Collects/CollectButton";
 import MetaTags from "../UI/MetaTags";
-import { APP_ID, APP_NAME, IS_MAINNET, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
+import { APP_ID, APP_NAME, IS_MAINNET, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
 import NavbarDetails from "../NavbarDetails";
 import Following from "../ProfilePage/Following";
 import { Modal } from "../UI/Modal";
@@ -83,7 +83,7 @@ const VideoDetail: FC<Props> = ({
    
 
   //CHANGE LINK ON DEPLOYMENT TO NEW DOMAIN!
-  const Links = `https://lenshareapp.xyz/post/${publication?.id}`;
+  const Links = `https://lenshareapp.xyz/bytes/${publication?.id}`;
   const Title = `${formatHandle(profile?.handle)} on LensShare`;
 
   const itsNotMe = profile?.id !== currentProfile?.id;
@@ -122,7 +122,7 @@ const VideoDetail: FC<Props> = ({
     }
   }, [isVideoMuted]);
 
-  const isBytesVideo = publication.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID
+  const isBytesVideo = publication.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID || publication.appId === LENSTER_APP_ID
 
   return (
     <div className="flex flex-col lg:flex-row lg:h-screen items-stretch">
@@ -250,6 +250,7 @@ const VideoDetail: FC<Props> = ({
                   {/* // comments button goes here
                       <FaCommentDots className="w-5 h-5 scale-x-[-1]" /> */}
                   <CollectButton
+                      
                     publication={publication} />
                     </button>
                 <p className="text-center text-xs font-semibold">
@@ -297,6 +298,7 @@ const VideoDetail: FC<Props> = ({
           </div>
         </div>
         <Comments
+          profile={profile as Profile}
           key={publication?.profile.id}
           publication={publication as Publication}
         />

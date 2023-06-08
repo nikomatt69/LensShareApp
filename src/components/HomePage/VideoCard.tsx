@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState ,} from "react";
 import type { Profile, Publication } from "@/types/lens";
 import Video from './Video'
 import { GoVerified } from "react-icons/go";
@@ -23,6 +23,9 @@ import ViewCount from "./ViewCount";
 import BytesVideo from "../Bytes";
 import ByteVideo from "../Bytes/ByteVideo";
 import { useRouter } from "next/router";
+import InterweaveContent from "../UI/InterweaveContent";
+import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+import clsx from "clsx";
 
 
 
@@ -49,7 +52,15 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   const comments = isMirror ? publication.mirrorOf.stats.totalAmountOfComments : publication.stats.totalAmountOfComments
   const mirrors = isMirror ? publication?.mirrorOf?.stats?.totalAmountOfComments : publication?.stats?.totalAmountOfComments
   const collects = isMirror ? publication?.mirrorOf?.stats?.totalAmountOfCollects : publication?.stats?.totalAmountOfCollects
+  const [clamped, setClamped] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
+  useEffect(() => {
+    if (publication.metadata?.content.trim().length > 500) {
+      setClamped(true)
+      setShowMore(true)
+    }
+  }, [publication.metadata?.content])
 
 
 
@@ -64,9 +75,10 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
     }
     }, [profile?.isFollowedByMe])
 
+  
+  
 
-  
-  
+
 
 
 
@@ -95,17 +107,41 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           </Link>
           <Slug className="pl-1 text-xs text-grey-500 " slug={formatHandle(profile?.handle)} prefix="@" /> 
           <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
-          <Link 
+          
+        <div
+            className="my-3 pb-3  text-xs break-word text-black font-semibold"
+            style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
+        >
+        {publication?.metadata?.content && (
+          <p className={clsx('mt-4 opacity-80', clamped ? 'line-clamp-3' : '')}>
+            <InterweaveContent content={publication.metadata.content} />
+          </p>
+        )}
+        {showMore && (
+          <div className="mt-3 inline-flex">
+            <button
+              type="button"
+              onClick={() => setClamped(!clamped)}
+              className="flex items-center text-sm text-blue-700 opacity-80 outline-none hover:opacity-100 dark:text-blue-700"
+            >
+              {clamped ? (
+                <>
+                  Show more <HiOutlineChevronUp className="ml-1 h-3 w-3" />
+                </>
+              ) : (
+                <>
+                  Show less <HiOutlineChevronDown className="ml-1 h-3 w-3" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
+            </div>
+            <Link 
         className="pointer-events-auto "
         href={`/bytes/${publication.id}`} key={publication.id} 
         >
-             <div
-            className="my-3 pb-3  text-xs break-word text-black font-semibold"
-            style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
-          >
-              {`${publication?.metadata?.description?.slice(0, 150)}`}
-            </div>
-            <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">See more</span>
+            <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">Details</span>
           </Link>
         </div>
 
@@ -120,9 +156,10 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           )}
         </div>} 
       </div>
-      <div className="rounded-xl cursor-pointer">
+      <div className="rounded-xl p-2 cursor-pointer">
       <Video
         publication={publication as Publication}
+        
     
 
         />
@@ -146,7 +183,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           <MirrorButton publication={publication as Publication}/>
         </button>
       <button className="block md:hidden pr-2 pb-2">
-      <CollectButton publication={publication as Publication}/>
+      <CollectButton  publication={publication as Publication}/>
       </button>
       <button className="block md:hidden pr-2 pb-2" onClick={() => setShowShare(true)} >
         <ShareButton publication={publication as Publication} />

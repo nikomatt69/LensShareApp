@@ -131,22 +131,22 @@ const ByteVideo: FC<Props> = ({
           alt={profile?.id}
         />
       </Link>
-      <div className='h-full w-full relative'>
+      <div className='h-full w-full border-0 relative'>
         {!isMobile && <BottomOverlay video={video}  />}
         <div
-          className="flex object-contain snap-center"
+          className="flex object-contain border-0 snap-center"
           data-testid="byte-video"
         >
-          <div className="relative bottom-0">
+          <div className="relative border-0 bottom-0">
             <div
-              className={clsx(!isMobile ? "ultrawide:w-[336px] flex h-screen w-screen min-w-[260px] max-w-[336px] items-center overflow-hidden  bg-black md:w-[19.5vw] md:rounded-xl md:h-[65vh] md:max-xl:h-[30vh] max-h-[600px] min-h-[500px]" : "flex h-screen w-screen")}
+              className={clsx(!isMobile ? "ultrawide:w-[336px] border-0 flex h-screen w-screen min-w-[325px] max-w-[336px] items-center overflow-hidden  bg-black md:w-[19.5vw] md:rounded-xl md:h-[65vh] md:max-xl:h-[30vh] max-h-[600px] min-h-[500px]" : "flex h-screen w-screen")}
               id={currentViewingId === video.id ? "currentVideo" : video.id + "1"}
               style={{
                 backgroundColor: 'transparent'
               }}
             >
               <div
-                className="absolute top-[50%]"
+                className="absolute border-0 top-[50%]"
                 ref={intersectionRef}
                 id={video.id}
               />
@@ -168,14 +168,14 @@ const ByteVideo: FC<Props> = ({
                 />
               ) : (
                 <img
-                  className="w-full object-contain rounded-[10px]"
+                  className="w-full object-contain border-0 rounded-[10px]"
                   src={thumbnailUrl}
                   alt="thumbnail"
                   draggable={false}
                 />
               )}
             </div>
-            {!isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />}
+            {  /* isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />  */} 
             {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={false}  />}
             <div className="absolute inline-block right-3 bottom-[15%] z-[1] md:hidden">
               <ByteActions trigger video={video} showDetail={() => onDetail(video)} />

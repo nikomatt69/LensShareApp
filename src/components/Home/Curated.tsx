@@ -1,5 +1,5 @@
 import Timeline from '@/components/Home/Timeline'
-import { APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
+import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
 
 import {useAppStore} from '@/store/app'
 import type { Publication } from '@/types/lens'
@@ -25,7 +25,7 @@ const Curated = (onDetail: (video: Publication) => void) => {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 32,
     noRandomize: false,
-    sources: [LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID,APP_ID,LENSTOK_APP_ID],
+    sources: [LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID,APP_ID,LENSTOK_APP_ID,LENSTER_APP_ID],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {

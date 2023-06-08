@@ -1,4 +1,4 @@
-import { APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, STATIC_ASSETS_URL } from '@/constants'
+import { APP_ID, LENSTER_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, STATIC_ASSETS_URL } from '@/constants'
 
 
 import type { Publication } from '@/types/lens'
@@ -58,9 +58,6 @@ const BytesSection = () => {
     return <BytesShimmer />
   }
 
-  if (!bytes?.length || error) {
-    return null
-  }
 
   return (
     <div className="block border-0 lg:block" data-testid="bytes-section">
@@ -128,7 +125,7 @@ const BytesSection = () => {
           </div>
         ))}
       </div>
-      <hr className="border-theme my-8 border-opacity-10 dark:border-gray-700" />
+      <hr className="border-0 my-8 border-opacity-10" />
     </div>
   )
 }

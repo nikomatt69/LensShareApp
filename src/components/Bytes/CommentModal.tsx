@@ -56,8 +56,12 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
       </div>
       <div className="flex scrollbar max-h-[80%]  pt-3">
       <Comments
+          profile={profile}
           key={video?.profile.id}
           publication={video as Publication}
+        
+          
+        
         />
       </div>
     </FullScreenModal>

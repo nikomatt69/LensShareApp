@@ -23,6 +23,7 @@ import FullScreenModal from '@/components/UI/FullScreenModal'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import useAverageColor from '@/utils/hooks/useAverageColor'
 import MobileBottomOverlay from '../MobileBottomOverlay'
+import CollectModule from '@/components/Buttons/Collects/CollectModule'
 
 type Props = {
     byte: Publication
@@ -50,6 +51,7 @@ const FullScreen: FC<Props> = ({ byte,
     const [showComments, setShowComments] = useState(false)
     const [following, setFollowing] = useState(false)
     const [show, setShow] = useState(false)
+    const [count, setCount] = useState(byte?.stats?.totalAmountOfCollects);
 
 
 
@@ -155,16 +157,16 @@ const FullScreen: FC<Props> = ({ byte,
         
             
 
-            panelClassName="max-w-full  max-h-full"
+            panelClassName="max-w-full border-0 max-h-full"
             show={isShow}
             autoClose
         >
             <div
-                className="flex bg-cyan-300  snap-center "
+                className="flex bg-cyan-300 border-0 snap-center "
                 data-testid="byte-video"
                 id="videoFull"
             >
-                <div className='grow bg-black relative'>
+                <div className='grow bg-black border-0 relative'>
                     
                     <div className='relative  mt-0.5 bg-black  bg-cover bg-center object-contain items-center' style={{ backgroundImage: `url(${thumbnailUrl})` }} >
                         <div className='z-10 absolute'>
@@ -183,20 +185,20 @@ const FullScreen: FC<Props> = ({ byte,
                         >
                        
                             <div
-                                className="flex  items-center  min-w-[50vh] max-w-[1px] md:rounded-sm m-auto"
+                                className="flex  items-center border-0 min-w-[50vh] max-w-[1px] md:rounded-sm m-auto"
                                 style={{
                                     backgroundColor: backgroundColor ? backgroundColor : undefined
                                 }}
                             >
 
                                 <div
-                                    className="absolute"
+                                    className="absolute border-0"
                                     ref={intersectionRef}
                                     id={video.id}
                                 />
                                 {currentViewingId === video.id ? player : (
                                     <img
-                                        className="w-full  object-contain"
+                                        className="w-full border-0 object-contain"
                                         src={thumbnailUrl}
                                         alt="thumbnail"
                                         draggable={false}
@@ -247,6 +249,7 @@ const FullScreen: FC<Props> = ({ byte,
                     <Comments  key={video.profile.id}
                       comment={video as Publication} />
                 </div>
+              
             </div>
 
             {/* <div className="bg-[url('/compare.png')] bg-cover bg-center absolute z-100 top-0 bottom-0 right-0 left-0"></div> */}

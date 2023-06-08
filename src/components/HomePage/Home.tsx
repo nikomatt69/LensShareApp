@@ -128,7 +128,7 @@ const Home: NextPage = () => {
         
        
         <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col  gap-10">
         <BytesSection />
         </div>
           <Explore />

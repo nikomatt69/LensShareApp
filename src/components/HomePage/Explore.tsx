@@ -16,7 +16,7 @@ import { useInView } from 'react-cool-inview'
 import ByteVideo from '@/components/Bytes/ByteVideo'
 import MetaTags from '../UI/MetaTags'
 import { useAppStore } from '@/store/app'
-import { APP_ID, APP_NAME, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL } from '@/constants'
+import { APP_ID, APP_NAME, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL } from '@/constants'
 import Loader from '../UI/Loader'
 import { EmptyState } from '../UI/EmptyState'
 import FullScreen from '../Bytes/FullScreen'
@@ -40,7 +40,7 @@ const Explore = () => {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 30,
     noRandomize: false,
-    sources: [ APP_ID, LENSTUBE_APP_ID],
+    sources: [ APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
@@ -130,7 +130,6 @@ console.log(data)
   }, [router.isReady])
 
   const { observe } = useInView({
-    rootMargin: SCROLL_ROOT_MARGIN,
     onEnter: async () => {
       await fetchMore({
         variables: {

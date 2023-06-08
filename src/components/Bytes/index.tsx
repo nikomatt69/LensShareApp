@@ -16,7 +16,7 @@ import { useInView } from 'react-cool-inview'
 import ByteVideo from './ByteVideo'
 import MetaTags from '../UI/MetaTags'
 import { useAppStore } from '@/store/app'
-import { APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
+import { APP_ID, LENSTER_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
 import Loader from '../UI/Loader'
 import { EmptyState } from '../UI/EmptyState'
 import FullScreen from './FullScreen'
@@ -39,7 +39,7 @@ const Bytes = () => {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 30,
     noRandomize: false,
-    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID],
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTER_APP_ID ],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
@@ -129,7 +129,6 @@ console.log(data)
   }, [router.isReady])
 
   const { observe } = useInView({
-    rootMargin: SCROLL_ROOT_MARGIN,
     onEnter: async () => {
       await fetchMore({
         variables: {
@@ -159,7 +158,7 @@ console.log(data)
   }
 
   return (
-    <div>
+    <div className='border-0'>
       <Head>
         <meta name="theme-color" content="#000000" />
       </Head>
@@ -168,7 +167,7 @@ console.log(data)
       {full()}
       <div
         ref={bytesContainer}
-        className="h-screen md:h-[calc(100vh-70px)]"
+        className="h-screen border-0 md:h-[calc(100vh-70px)]"
       >
         {singleByte && (
           <ByteVideo
@@ -179,7 +178,7 @@ console.log(data)
             key={`${singleBytePublication?.id}_${singleBytePublication.createdAt}0`}
             onDetail={openDetail}
             isShow={show}
-            index={-1}
+            
           />
         )}
         {bytes?.map((video: Publication, index) => (
@@ -190,10 +189,10 @@ console.log(data)
             key={`${video?.id}_${video.createdAt}1`}
             onDetail={openDetail}
             isShow={show}
-            index={index} setFollowing={ setFollowing }          />
+            setFollowing={ setFollowing }          />
         ))}
         {pageInfo?.next && (
-          <span ref={observe} className="flex justify-center p-10">
+          <span ref={observe} className="flex border-0 justify-center p-10">
             <Loader />
           </span>
         )}

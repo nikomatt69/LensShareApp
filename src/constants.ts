@@ -116,6 +116,7 @@ export const ERROR_MESSAGE = "Something went wrong!";
 export const LENSTUBE_APP_ID = 'lenstube'
 export const LENSTUBE_BYTES_APP_ID = 'lenstube-bytes'
 export const LENSTOK_APP_ID = 'lenstok'
+export const LENSTER_APP_ID = 'lenster'
 
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"

@@ -65,7 +65,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
 
 
         <div className="w-fultext-center text-white md:text-inherit">
-          <CollectButton publication={video as Publication} /> 
+          <CollectButton  publication={video as Publication} /> 
         </div>
         {/* {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
           <div className="hidden w-full pb-3 text-center md:block">

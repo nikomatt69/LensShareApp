@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import type { FC } from "react";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import { BsPlay } from "react-icons/bs";
-import { APP_ID, LENSTOK_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
+import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
 import getMedia from '@/lib/getMedia';
 
 
@@ -21,7 +21,7 @@ import getMedia from '@/lib/getMedia';
   ((PublicationsDocument), {
     variables: { 
       request: {
-        sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID],
+        sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID,LENSTER_APP_ID,LENSTUBE_APP_ID],
         profileId: id,
         publicationTypes: ["POST"],
         limit: 50,

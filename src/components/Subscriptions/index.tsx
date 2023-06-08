@@ -116,15 +116,15 @@ const FeedRender = () => {
     <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]">
     <Toaster position="bottom-right" />
     <NavbarDetails/>
-      <div className="flex gap-6 md:gap-20">
-        <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
+      <div className="flex gap-6 border-0  md:gap-20">
+        <div className="h-[92vh] overflow-hidden hidden lg:block border-0 lg:hover:overflow-auto">
           <Sidebar />
         </div>
         <div className="mt-2 mb-8 pb-8 flex border-0 flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
         <Feed />
         </div>
       </div>
-      <div className="block overflow-hidden ">
+      <div className="block overflow-auto ">
         <BottomNav/>
       </div>
     </div>
