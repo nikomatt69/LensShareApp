@@ -86,7 +86,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
           <span className="font-bold bg-blue-500  rounded-xl text-center mb-3 text-lg p-1   ">Description</span>
           <InterweaveContent content={publication?.metadata?.content} />
         </div>
-        <div className="bg-[#F2F4F7] border-blue-700 border-2 pt-5 mt-2 rounded-xl ">
+        <div className="bg-[#F2F4F7] border-blue-700 border-2 pt-3 mt-2 rounded-xl ">
           <span className="font-bold  rounded-xl object-center bg-blue-500 ml-1 p-1 text-center">Comments</span>
         {comments?.map((comment) => (
                 <CommentData
@@ -100,8 +100,8 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
           refetchComments={() => refetchComments()}
            />
           </div>
-          <div className="bg-[#F2F4F7] border-blue-700 border-2  rounded-xl ">
-            <span className="font-bold rounded-xl bg-blue-500 ml-1 pb-3 p-1  object-center text-center">Collects</span>
+          <div className="bg-[#F2F4F7] border-blue-700 border-2 pt-2 rounded-xl ">
+            <span className="font-bold rounded-xl bg-blue-500 ml-1 pb-1 p-1  object-center text-center">Collects</span>
             <div className="flex display:inline-block font-sans text-blue-700 pt-1  ">{getModule(publication?.collectModule?.type).name}</div>
             <CollectModule 
            setCount={setCount}
