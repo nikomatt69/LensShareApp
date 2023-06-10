@@ -83,7 +83,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
             </div>
         </div>
         </div>
-        <div className="flex-grow text-center bg-[#C0C0C0]  rounded-xl font-sans text-xs border-2 flex flex-col justify-center">
+        <div className="flex-grow text-center bg-[#C0C0C0] mt-3 rounded-xl font-sans text-xs border-2 flex flex-col justify-center">
           <span className="font-bold bg-blue-500 rounded-xl text-center mb-3 text-lg p-1   ">Description</span>
           <InterweaveContent content={publication?.metadata?.content} />
         </div>

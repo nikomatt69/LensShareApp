@@ -121,9 +121,11 @@ const mute = useAppStore((state) => state.isMute)
             </div>
           </Link>
           <Slug className="pl-1 text-xs text-grey-500 " slug={formatHandle(profile?.handle)} prefix="@" /> 
-          <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}
-          <span className="text-xs pl-3 text-blue-700 opacity-50">
-            {getRelativeTime(publication.createdAt)}
+          <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp} 
+          ~
+          <span className="text-xs pl-2 text-blue-700 opacity-50">
+
+            {getRelativeTime(publication.createdAt)} 
           </span></p>
           
         <div
@@ -161,7 +163,7 @@ const mute = useAppStore((state) => state.isMute)
         className="pointer-events-auto "
         href={`/bytes/${publication.id}`} key={publication.id} 
         >
-            <span className="text-black text-xs font-extralight flex-shrink-0 p-1 ">details..</span>
+            <span className="text-black text-sm font-extralight flex-shrink-0 p-1 ">Details...</span>
           </Link>
       </div>
         
