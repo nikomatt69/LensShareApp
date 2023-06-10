@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Publication } from "@/utils/lens";
+import { Publication } from "@/types/lens";
 import { useAppStore } from "src/store/app";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,15 +8,19 @@ import getAvatar from "@/lib/getAvatar";
 import LitJsSdk from "@lit-protocol/sdk-browser";
 import lit from "@/lib/lit";
 import formatHandle from "@/utils/functions/formatHandle";
+import CommentOptions from "./CommentOptions";
 
 interface Props {
   comment: Publication;
-  publication: Publication;
+  video: Publication;
+
 }
 
-const CommentData: FC<Props> = ({ comment, publication }) => {
+const CommentData: FC<Props> = ({ comment, video,}) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [decryptedComment, setDecryptedComment] = useState("");
+  const [showReport, setShowReport] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
    useEffect(() => {
     const decrypted = async () => {
       if (comment.metadata.attributes[0]?.traitType === "encrypted") {
@@ -51,7 +55,7 @@ const CommentData: FC<Props> = ({ comment, publication }) => {
           const message = await lit.decryptString(
             blob,
             jsonLit.litKkey,
-            publication.profile.ownedBy,
+            video.profile.ownedBy,
             currentProfile?.ownedBy
           );
           const decrypted = message.decryptedFile;
@@ -90,6 +94,10 @@ const CommentData: FC<Props> = ({ comment, publication }) => {
         >
           {comment.metadata.content}
         </p>
+        <button className="r-0 t-0 p-1">
+    
+    { <CommentOptions video={video} setShowReport={setShowReport} /> }
+    </button>
       </div>
     </div>
   );

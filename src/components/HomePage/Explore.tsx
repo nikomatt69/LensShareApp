@@ -5,7 +5,8 @@ import {
   PublicationTypes,
   useExploreLazyQuery,
   usePublicationDetailsLazyQuery,
-  PublicationMainFocus
+  PublicationMainFocus,
+  Profile
 } from '@/utils/lens'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -108,6 +109,7 @@ console.log(data)
 
   const full = useCallback(() => currentViewingId && byte && router.pathname ?
     <FullScreen
+    profile={currentProfile as Profile}
       byte={byte}
       close={closeDialog}
       isShow={show}

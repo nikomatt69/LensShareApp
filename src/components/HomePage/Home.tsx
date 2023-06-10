@@ -135,7 +135,7 @@ const Home: NextPage = () => {
         </div>
         
       </div>
-      <div className="block overflow-auto ">
+      <div className="block display:absolute xl:w-[1200px] lg:w-[1100px] m-auto  border-0 h-[100vh] ">
         <BottomNav/>
       </div>
     </div>

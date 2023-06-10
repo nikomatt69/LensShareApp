@@ -30,7 +30,7 @@ const DiscoverMob: NextPage = () => {
             <DiscoverMain />
           </div>
         </div>
-        <div className="block">
+        <div className="block xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]">
           <BottomNav/>
         </div>
       </div>

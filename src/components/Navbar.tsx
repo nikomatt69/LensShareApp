@@ -33,7 +33,7 @@ const Navbar: FC = () => {
   console.log('CURRENT PROFILE', currentProfile?.picture)
   
   return (
-    <div className="w-full flex justify-between rounded-lg items-center  border-4 border-blue-500 p-2 ">
+    <div className="w-full flex justify-between bg-black rounded-lg bg-gradient-to-b from-gray-900 to-transparent items-center  border-4 border-blue-500 p-2 ">
       <Link href="/">
         <div className="w-[100px] md:w-[129px]">
           <Image
@@ -48,7 +48,7 @@ const Navbar: FC = () => {
      {/* //discover page */}
      <Link href='/discover'>
      <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold lg:hidden xl:hidden items-center gap-2 cursor-pointer md:hidden
-         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
+         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </button>
       </Link>
@@ -56,20 +56,13 @@ const Navbar: FC = () => {
      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
         <Link href='/listen'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
+         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <FaHeadphones className='h-6 text-black' />{' '}
+         <FaHeadphones className='h-6 text-blue-500' />{' '}
           <span className='hidden '>Listen </span>
         </button>
         </Link>
-        <Link href='/live'>
-        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-[#000000] hover:bg-[#57B8FF]' >
-         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <FcVideoCall className='h-6 text-black' />{' '}
-          <span className='hidden '>Live </span>
-        </button>
-        </Link>
+       
       <div className="flex">
         {currentProfile ? (
            <div className='w-12 h-12'>

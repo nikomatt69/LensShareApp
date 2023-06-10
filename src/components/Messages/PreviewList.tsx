@@ -119,7 +119,7 @@ const PreviewList: FC<Props> = ({ className, selectedConversationKey }) => {
     return (
         <div
             className={clsx(
-                'w-full h-full flex flex-col justify-between  rounded-3xl',
+                'w-full h-full flex flex-col justify-between   rounded-3xl',
                 className
             )}
         >

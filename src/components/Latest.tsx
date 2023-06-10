@@ -5,7 +5,8 @@ import {
   PublicationTypes,
   useExploreLazyQuery,
   usePublicationDetailsLazyQuery,
-  PublicationMainFocus
+  PublicationMainFocus,
+  Profile
 } from '@/utils/lens'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -109,6 +110,7 @@ console.log(data)
 
   const full = useCallback(() => currentViewingId && byte && router.pathname ?
     <FullScreen
+    profile={currentProfile as Profile}
       byte={byte}
       close={closeDialog}
       isShow={show}
@@ -145,7 +147,7 @@ console.log(data)
   })
 
 
-  if (error) {
+  if (error ) {
     return (
       <div className="grid h-[80vh] place-items-center">
         <EmptyState message="No bytes found" icon />
@@ -156,7 +158,7 @@ console.log(data)
   return (
     <div>
       <Head>
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#fff" />
       </Head>
       <MetaTags title={`Latest • ${APP_NAME} `} />
       {full()}

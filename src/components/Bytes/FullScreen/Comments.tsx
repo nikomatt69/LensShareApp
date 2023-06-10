@@ -10,16 +10,17 @@ import { usePublicationDetailsLazyQuery } from '@/utils/lens/generated'
 
 type Props = {
     comment: Publication
+
 }
 
-const CommentsByte: FC<Props> = ({ comment }) => {
+const CommentsByte: FC<Props> = ({ comment ,}) => {
     const [show, setShow] = useState(false)
 
 
     return (
     
     
-    <Comments  key={`${comment?.id}_${comment.createdAt}`}
+    <Comments key={`${comment?.id}_${comment.createdAt}`}
        comment={comment as Publication} />
        
        

@@ -4,6 +4,7 @@ import { Publication } from '@/utils/lens';
 import { useAppStore } from '@/store/app';
 import ShareModal from '../HomePage/ShareModal';
 import { ShareIcon } from '@heroicons/react/24/solid';
+import ShareOutline from '../Bytes/ShareOutline';
 
 interface Props {
   publication: Publication
@@ -22,9 +23,9 @@ const ShareButton: FC<Props> = ({publication }) => {
 
   return (
     <div className="flex gap-6">
-    <div className=" drop-shadow-lg  md:border-none bg-blue-500 border-2 border-black rounded-lg p-2 md:p-3 md:mt-4 flex flex-col justify-center items-center cursor-pointer" onClick={() => setShowShare(true)}>
+    <div className="  rounded-full md:text-black  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2  md:mt-2 flex flex-col justify-center items-center cursor-pointer" onClick={() => setShowShare(true)}>
       <ShareModal show={showShare} setShowShare={setShowShare}  publication={publication as Publication} />
-       <p><ShareIcon onClick={() => setShowShare(true)} className="h-4 w-4 bg-blue-500 rounded-lg border-2 border-black p-2 text-black hover:text-gray-500" /> </p>
+       <p><ShareOutline onClick={() => setShowShare(true)} className="h-3 w-3  rounded-full  cursor-pointer" /> </p>
       </div>
     </div>
   );

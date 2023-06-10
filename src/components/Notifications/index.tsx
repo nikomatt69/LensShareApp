@@ -119,6 +119,7 @@ const Notifications = () => {
   })
 
   return ( 
+    
     <div className="mx-auto md:container md:max-w-3xl md:p-0">
       <MetaTags title={`Notifications • ${APP_NAME}`} />
     <NavbarDetails/>
@@ -262,14 +263,14 @@ const Notifications = () => {
             </div>
           ))}
           {pageInfo?.next && (
-            <span ref={observe} className="flex border-0 justify-center p-10">
+            <span ref={observe} className="flex  justify-center p-10">
               <Loader />
             </span>
           )}
         </Tab.Panels>
       </Tab.Group>
       </Card>
-      <div className='block'>
+      <div className='block xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]'>
       <BottomNav/>
       </div>
     </div>

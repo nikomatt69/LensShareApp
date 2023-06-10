@@ -298,6 +298,7 @@ const VideoDetail: FC<Props> = ({
           </div>
         </div>
         <Comments
+   
           profile={profile as Profile}
           key={publication?.profile.id}
           publication={publication as Publication}

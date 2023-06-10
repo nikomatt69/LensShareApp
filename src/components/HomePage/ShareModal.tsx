@@ -1,7 +1,7 @@
 import {Modal} from '@/components/UI/Modal'
 import type { Publication } from '@/utils/lens'
 import Link from 'next/link'
-import type { FC } from 'react'
+import { FC, useState } from 'react'
 import React from 'react'
 import toast from 'react-hot-toast'
 import {LENSTOK_URL, STATIC_ASSETS_URL} from '@/constants'
@@ -17,6 +17,8 @@ import { getSharableLink } from '@/utils/functions/getSharableLink'
 import { Card } from '../UI/Card'
 import imageProxy2 from '@/lib/imageProxy2'
 import imageProxy from '@/lib/imageProxy'
+import FullScreenModal from '../UI/FullScreenModal'
+import { MdOutlineClose } from 'react-icons/md'
 
 type Props = {
  publication: Publication
@@ -25,8 +27,9 @@ type Props = {
   
 }
 
-const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
+const ShareModal: FC<Props> = ({ setShowShare, publication,show }) => {
   const [copy] = useCopyToClipboard()
+
 
   const onCopyVideoUrl = async () => {
     await copy(`${LENSTOK_URL}/bytes/${publication.id}`)
@@ -35,14 +38,23 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
   }
 
   return (
-    <Modal
+    <FullScreenModal
       title="Share"
       onClose={() => setShowShare(false)}
       show={show}
       
      
     >
-      <div className="mt-1">
+      <div className='z-10 max-md:absolute'>
+        <button
+          type="button"
+          className="p-1 focus:outline-none m-4 rounded-full right-1  bg-slate-600"
+          onClick={() =>  setShowShare(false)}
+        >
+          <MdOutlineClose className='text-white w-4 h-4' />
+        </button>
+      </div>
+      <div className="mt-20 rounded-xl bg-white">     
       <Card className='p-2 object-contain border-0 rounded-xl object-center '>
         <div className="no-scrollbar mb-4 flex flex-nowrap items-center space-x-3 overflow-x-auto">
           <EmbedVideo videoId={publication.id} onClose={() => setShowShare(false)} />
@@ -128,7 +140,7 @@ const ShareModal: FC<Props> = ({ show, setShowShare, publication }) => {
         </Card>
       </div>
       
-    </Modal>
+    </FullScreenModal>
   )
 }
 

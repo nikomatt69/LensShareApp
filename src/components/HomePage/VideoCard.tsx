@@ -26,6 +26,12 @@ import { useRouter } from "next/router";
 import InterweaveContent from "../UI/InterweaveContent";
 import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
 import clsx from "clsx";
+import ReportModal from "../DetailPage/ReportModal";
+import CommentOptions from "../DetailPage/CommentsBlock/CommentOptions";
+import { SIGN_IN_REQUIRED_MESSAGE } from "@/constants";
+import toast from "react-hot-toast";
+import { getRelativeTime } from "@/utils/functions/formatTime2";
+import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction";
 
 
 
@@ -54,6 +60,8 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   const collects = isMirror ? publication?.mirrorOf?.stats?.totalAmountOfCollects : publication?.stats?.totalAmountOfCollects
   const [clamped, setClamped] = useState(false)
   const [showMore, setShowMore] = useState(false)
+  const [showReport, setShowReport] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
 
   useEffect(() => {
     if (publication.metadata?.content.trim().length > 500) {
@@ -61,7 +69,14 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
       setShowMore(true)
     }
   }, [publication.metadata?.content])
+   
 
+  const onClickReport = () => {
+    if (!currentProfile) {
+        return toast.error(SIGN_IN_REQUIRED_MESSAGE)
+    }
+}
+const mute = useAppStore((state) => state.isMute)
 
 
   useEffect(() => {
@@ -84,7 +99,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
 
 
   return (
-    <div className="flex flex-col bg-[#d9dff1f6] justify-content border-0 break-word border-b-2 border-gray-200 pb-0 md:pb-6">
+    <div className="flex flex-col bg-[#C0C0C0] justify-content border-0 break-word border-b-2 border-gray-200 pb-0 md:pb-6">
       <div className="flex-row flex break-word ">
         <div className="flex-auto gap-3 p-2 mt-4 cursor-pointer break-word font-semibold rounded">
         <Link href={`/u/${profile.id}`} key={profile.id}/>
@@ -106,7 +121,10 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
             </div>
           </Link>
           <Slug className="pl-1 text-xs text-grey-500 " slug={formatHandle(profile?.handle)} prefix="@" /> 
-          <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}</p>
+          <p className="text-xs pl-1 p-1 block font-semibold pt-2 pr-4 pl-full  text-blue-500"> {timestamp}
+          <span className="text-xs pl-3 text-blue-700 opacity-50">
+            {getRelativeTime(publication.createdAt)}
+          </span></p>
           
         <div
             className="my-3 pb-3  text-xs break-word text-black font-semibold"
@@ -136,19 +154,24 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
             </button>
           </div>
         )}
-            </div>
-            <Link 
+         </div>
+          
+        </div>
+        <Link 
         className="pointer-events-auto "
         href={`/bytes/${publication.id}`} key={publication.id} 
         >
-            <span className="text-grey border-2 text-xs flex-shrink-0 p-1 rounded-full bg-blue-300 ">Details</span>
+            <span className="text-black text-xs font-extralight flex-shrink-0 p-1 ">details..</span>
           </Link>
-        </div>
-
-
-        </div>
+      </div>
         
         {<div className="mt-6 mr-6">
+        <div>
+        <button>
+    
+        { <CommentOptions  video={publication} setShowReport={setShowReport} /> }
+        </button>
+      </div>
           { following ? ( 
             <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
             ) : (
@@ -157,22 +180,26 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
         </div>} 
       </div>
       <div className="rounded-xl p-2 cursor-pointer">
-      <Video
-        publication={publication as Publication}
-        
-    
+        {isMirror ? (
+          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><Video
+            publication={publication as Publication} /></>
+        ) : (
+          <Video
+            publication={publication as Publication}
+          />
+        )}
 
-        />
-        </div> 
-      <div className='flex flex-row py-3 space-x-3'>
+      </div>
+     
+   <div className='flex flex-row py-3 space-x-3'>
       <p className="text-xs block md:hidden font-semibold text-black-400 pl-1"> {likes} Likes</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {mirrors} Mirrors</p>
       <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>
     
-      </div>
+    </div>
       
-      <div className='flex ml-auto'>
+    <div className='flex ml-auto'>
       <button className="block md:hidden pr-2 pb-2 ">
         <LikeButton publication={publication as Publication} />
         </button>
@@ -188,6 +215,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
       <button className="block md:hidden pr-2 pb-2" onClick={() => setShowShare(true)} >
         <ShareButton publication={publication as Publication} />
       </button>
+     
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { getModule } from '@/lib/getModule';
 import GetModuleIcon from '@/utils/GetModuleIcon';
 import { useAppStore } from '@/store/app';
 import FullScreenModal from '@/components/UI/FullScreenModal';
+import CollectOutline from './CollectOutline';
 
 
 //should also add authorisation so user cant like posttwice
@@ -44,15 +45,14 @@ const CollectButton: FC<Props> = ({publication}) => {
       {alreadyCollected ? (
        <div 
        onClick={() =>{setShowCollectModal(true)}} 
-       className="flex items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg p-2 md:p-3">
-       <FolderPlusIcon className="w-4 md:h-4 text-[#57B8FF] font-bold"  />
+       className="flex items-center drop-shadow-lg  rounded-full cursor-pointer  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2 ">
+       <CollectOutline className="w-3 md:h-3 text-blue-700 font-bold"  />
        </div>
       ) : (
         <div 
         onClick={() => {setShowCollectModal(true)}} 
-        className="flex  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg p-2 md:p-3
-          md:hover:bg-[#57B8FF] group relative w-max">
-         <FolderPlusIcon className='w-3 h-3 font-bold text-black'  />
+        className="flex items-center drop-shadow-lg  rounded-full cursor-pointer  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2 ">
+         <CollectOutline className='w-3 h-3 cursor-pointer font-bold'  />
          <span className="hidden md:block pointer-events-none absolute -bottom-7 left-7 w-max 
          shadow px-2 py-1 text-xs text-blue-700 opacity-0 group-hover:opacity-100"> Collect </span>
          </div>

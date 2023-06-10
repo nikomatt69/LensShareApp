@@ -18,16 +18,19 @@ import getProfilePicture from '@/utils/functions/getProfilePicture'
 import getMedia from '@/lib/getMedia'
 import CommentsVideo from '../DetailPage/CommentsBlock/Comments'
 import CommentsByte from './FullScreen/Comments'
+import MirroredList from '@/components/Bytes/MirrorList'
+import MirrorOutline from '../Buttons/MirrorOutline'
 type Props = {
   trigger: React.ReactNode
   video: Publication
   profile: Profile 
   setFollowing: Dispatch<boolean>;
   following: boolean;
+  publicationId: Publication
 
 }
 
-const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
+const MirrorModal: FC<Props> = ({ trigger,profile,publicationId, setFollowing,
   following,}) => {
   const [show, setShow] = useState(false)
 
@@ -35,11 +38,11 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
     <>
     <button
       type="button"
-      className="focus:outline-none"
+      className="focus:outline-none cursor-pointer"
       onClick={() => setShow(true)}
     >
-       <div className="flex items-center drop-shadow-lg rounded-full md:bg-gray-200  bg-gray-600/50 dark:bg-gray-600/50 p-2">
-          <FaRegCommentAlt  className="w-3 h-3 font-bold" />
+       <div className="flex items-center drop-shadow-lg border-2 rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2 md:p-3">
+          <MirrorOutline  className="w-3 h-3  font-bold" />
            </div>
       {trigger}
     </button>
@@ -58,12 +61,7 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
         </button>
       </div>
       <div className="flex scrollbar max-h-[80%]  pt-3">
-      <Comments
-          
-          profile={profile}
-          key={video?.profile.id}
-          publication={video as Publication}
-        
+      <MirroredList publication={publicationId as Publication} key={publicationId?.id} publicationId={''}        
           
         
         />
@@ -73,8 +71,4 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
   )
 }
 
-export default CommentModal
-
-
-
-
+export default MirrorModal

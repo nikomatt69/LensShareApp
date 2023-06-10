@@ -20,10 +20,13 @@ import { SIGN_IN_REQUIRED_MESSAGE } from '@/constants'
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl'
 import VideoPlayer from '@/utils/VideoPlayer'
 import FullScreenModal from '@/components/UI/FullScreenModal'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
+
 import useAverageColor from '@/utils/hooks/useAverageColor'
 import MobileBottomOverlay from '../MobileBottomOverlay'
 import CollectModule from '@/components/Buttons/Collects/CollectModule'
+import ChevronUpOutline from './ChevronUpOutline'
+import ChevronDownOutline from './ChevronDownOutline'
+import CommentOptions from '@/components/DetailPage/CommentsBlock/CommentOptions'
 
 type Props = {
     byte: Publication
@@ -52,6 +55,8 @@ const FullScreen: FC<Props> = ({ byte,
     const [following, setFollowing] = useState(false)
     const [show, setShow] = useState(false)
     const [count, setCount] = useState(byte?.stats?.totalAmountOfCollects);
+    const [showOptions, setShowOptions] = useState(false);
+    const [showReport, setShowReport] = useState(false)
 
 
 
@@ -96,9 +101,9 @@ const FullScreen: FC<Props> = ({ byte,
     }
 
 
-    const currentProfileId = usePersistStore((state) => state.currentProfileId)
+    const currentProfile = useAppStore((state) => state.currentProfile)
     const onClickReport = () => {
-        if (!currentProfileId) {
+        if (!currentProfile) {
             return toast.error(SIGN_IN_REQUIRED_MESSAGE)
         }
     }
@@ -118,7 +123,7 @@ const FullScreen: FC<Props> = ({ byte,
             autoPlay: true,
             loop: true,
             loadingSpinner: true,
-            muted: mute
+            muted: true,
         }}
     />
 
@@ -157,25 +162,25 @@ const FullScreen: FC<Props> = ({ byte,
         
             
 
-            panelClassName="max-w-full border-0 max-h-full"
+            panelClassName="max-w-full rounded-xl border-0 max-h-full"
             show={isShow}
             autoClose
         >
             <div
-                className="flex bg-cyan-300 border-0 snap-center "
+                className="flex bg-[#C0C0C0] border-0 snap-center "
                 data-testid="byte-video"
                 id="videoFull"
             >
                 <div className='grow bg-black border-0 relative'>
                     
                     <div className='relative  mt-0.5 bg-black  bg-cover bg-center object-contain items-center' style={{ backgroundImage: `url(${thumbnailUrl})` }} >
-                        <div className='z-10 absolute'>
+                        <div className='z-10 m-3 absolute'>
                             <button
                                 type="button"
-                                className=" focus:outline-none rounded-full p-3  bg-slate-600"
+                                className=" focus:outline-none rounded-full p-1  bg-slate-600"
                                 onClick={() => router.back()}
                             >
-                                <MdOutlineClose className='text-white w-6 h-6' />
+                                <MdOutlineClose className='text-white w-4 h-4' />
                             </button>
                         </div>
                         <div className= {clsx("relative backdrop-brightness-[0.2] ")}
@@ -206,7 +211,7 @@ const FullScreen: FC<Props> = ({ byte,
                                 )}
                             </div>
                             <div className="absolute z-40 right-3 bottom-40 ">
-                                <ByteActions trigger video={video} inDetail={true} />
+                                <ByteActions publicationId={video as Publication} trigger video={video} inDetail={true} />
                             </div>
                             
 
@@ -216,28 +221,31 @@ const FullScreen: FC<Props> = ({ byte,
                             </div>}
                         <button
                             type="button"
-                            onClick={() => onClickReport()}
-                            className=" max-md:hidden inline-flex  bg-gray-300/2 items-center space-x-2 rounded-full px-2 py-1.5 dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800 absolute right-5 top-6"
+                            
+                            className="  inline-flex  bg-gray-300/2 items-center space-x-2 rounded-full px-2 py-1.5 dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800 absolute right-5 top-6"
                         >
-                            <BsFlag className="h-3.5 w-3.5" fill='white' />
-                            <span className="whitespace-nowrap text-white">Report</span>
+                            
+                             
+                                { <CommentOptions video={video} setShowReport={setShowReport} /> }
+                              
+                            
                         </button>
-                        <div className='flex flex-col gap-2 justify-center absolute left-0 top-[calc(50vh-5rem)] z-10 mr-5'>
+                        <div className='flex flex-col gap-2  justify-center absolute left-0 top-[calc(50vh-5rem)] z-10 mr-5'>
 
-                            <div className="h-[44px]" >
+                            <div className="h-[44px] pl-3" >
                                 {index > 0 && (<button
-                                    className="rounded-full bg-gray-300/20 pl-3 focus:outline-none dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800"
+                                    className="rounded-full bg-gray-300/20 focus:outline-none dark:bg-gray-700  hover:bg-gray-800 dark:hover:bg-gray-800"
                                     onClick={() => detailNext(-1)}
                                 >
-                                    <ChevronUpIcon className="h-5 w-5" />
+                                    <ChevronUpOutline className="h-5 p-2 w-5" />
                                 </button>)}
                             </div>
-                            <div className="h-25 w-25" >
+                            <div className="h-25 w-25 pl-3" >
                                 <button
-                                    className="rounded-full bg-gray-300/20 pl-3 focus:outline-none dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-800"
+                                    className="rounded-full bg-gray-300/20  focus:outline-none dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-800"
                                     onClick={() => detailNext(1)}
                                 >
-                                    <ChevronDownIcon className="h-5 w-5" />
+                                    <ChevronDownOutline className="h-5 p-2 w-5" />
                                 </button>
                             </div>
                         </div>

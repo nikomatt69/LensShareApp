@@ -124,7 +124,7 @@ const LatestRender = () => {
       <Latest />
       </div>
     </div>
-    <div className="block overflow-auto ">
+    <div className=" xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh] ">
       <BottomNav/>
     </div>
   </div>

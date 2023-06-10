@@ -18,16 +18,19 @@ import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid'
 import { useAppStore } from '@/store/app'
 import { useRouter } from 'next/router'
 import { profile } from 'console'
+import MirrorModal from './MirrorModal'
 
 type Props = {
   video: Publication
   showDetail?: () => void
   inDetail?: boolean
   trigger: React.ReactNode
+  publicationId: Publication
+
   
 }
 
-const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
+const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger,}) => {
   const [showShare, setShowShare] = useState(false)
   const [showReport, setShowReport] = useState(false)
   const [show, setShow] = useState(false)
@@ -48,23 +51,21 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
            
         </div>
 
-        <div className="w-full text-center text-white md:text-inherit"onClick={() => setShow(true)}>
-         <button className="flex items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg p-2 md:p-3
-          md:hover:bg-[#57B8FF] relative w-max">
+
+        <div className="w-full text-center pr-7 text-white md:text-inherit"onClick={() => setShow(true)}>
+         <button>
             
-            <CommentModal video={video as Publication} trigger={trigger} setFollowing={setFollowing} following={following} profile={profile as Profile}  />
+            <CommentModal  video={video as Publication} trigger={trigger} setFollowing={setFollowing} following={following} profile={profile as Profile}  />
           </button>
         </div>
-
-       
         
         <div className="w-full  text-center text-white md:text-inherit">
-          <MirrorButton publication={video as Publication} /> 
+          <MirrorButton publication={video as Publication}/> 
             
         </div>
 
 
-        <div className="w-fultext-center text-white md:text-inherit">
+        <div className="w-full text-center text-white md:text-inherit">
           <CollectButton  publication={video as Publication} /> 
         </div>
         {/* {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
@@ -75,7 +76,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger }) => {
             </div>
           </div>
         )} */}
-        <div className="w-full  text-center text-white md:text-inherit"onClick={() => setShowShare(true)}>
+        <div className="w-full  text-center text-white md:text-inherit" onClick={() => setShowShare(true)}>
           <ShareButton publication={video as Publication} /> 
     </div>
     </div>

@@ -8,13 +8,13 @@ import NavbarDetails from "@/components/NavbarDetails";
 const Upload: NextPage = () => {
   return (
     <div>
-      <div>
+      <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]">
         <Navbar />
       </div>
       <div>
         <UploadVideo />
       </div>
-      <div>
+      <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]">
         <BottomNav />
       </div>
     </div>

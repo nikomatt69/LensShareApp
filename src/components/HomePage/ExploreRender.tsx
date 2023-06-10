@@ -120,7 +120,7 @@ const ExploreRender = () => {
           <Explore />
         </div>
       </div>
-      <div className="block ">
+      <div className="block display:absolute ">
         <BottomNav/>
       </div>
     </div>

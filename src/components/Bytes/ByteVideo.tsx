@@ -25,6 +25,7 @@ type Props = {
   index?: number
   setFollowing: Dispatch<boolean>
 
+
 }
 
 const ByteVideo: FC<Props> = ({
@@ -32,6 +33,7 @@ const ByteVideo: FC<Props> = ({
   onDetail,
   isShow,
   index,
+
  
 }) => {
   const videoRef = useRef<HTMLMediaElement>()
@@ -139,7 +141,7 @@ const ByteVideo: FC<Props> = ({
         >
           <div className="relative border-0 bottom-0">
             <div
-              className={clsx(!isMobile ? "ultrawide:w-[336px] border-0 flex h-screen w-screen min-w-[325px] max-w-[336px] items-center overflow-hidden  bg-black md:w-[19.5vw] md:rounded-xl md:h-[65vh] md:max-xl:h-[30vh] max-h-[600px] min-h-[500px]" : "flex h-screen w-screen")}
+              className={clsx(!isMobile ? "ultrawide:w-[400px] border-0 flex h-screen w-screen min-w-[380px] max-w-[400px] items-center overflow-hidden  bg-black md:w-[19.5vw] md:rounded-xl md:h-[65vh] md:max-xl:h-[30vh] max-h-[600px] min-h-[500px]" : "flex h-screen w-screen")}
               id={currentViewingId === video.id ? "currentVideo" : video.id + "1"}
               style={{
                 backgroundColor: 'transparent'
@@ -176,9 +178,9 @@ const ByteVideo: FC<Props> = ({
               )}
             </div>
             {  /* isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />  */} 
-            {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={false}  />}
+            {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={following}  />}
             <div className="absolute inline-block right-3 bottom-[15%] z-[1] md:hidden">
-              <ByteActions trigger video={video} showDetail={() => onDetail(video)} />
+              <ByteActions  trigger publicationId={video as Publication} video={video} showDetail={() => onDetail(video)} />
               {/* {video?.collectModule?.__typename !==
                 'RevertCollectModuleSettings' && (
                   <div className="text-center text-white md:text-gray-500">
@@ -191,7 +193,7 @@ const ByteVideo: FC<Props> = ({
             </div>
           </div>
           <div className="hidden md:flex">
-            <ByteActions trigger video={video} showDetail={() => onDetail(video)} />
+            <ByteActions  publicationId={video as Publication} trigger video={video} showDetail={() => onDetail(video)} />
           </div>
 
         </div>

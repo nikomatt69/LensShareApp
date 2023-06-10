@@ -14,6 +14,7 @@ import { useBroadcastMutation, useCreateMirrorTypedDataMutation, useCreateMirror
 import getSignature from '@/lib/getSignature';
 import { splitSignature } from 'ethers/lib/utils';
 import Spinner from '@/components/Spinner';
+import MirrorOutline from '../MirrorOutline';
 
 //should also add authorisation so user cant like posttwice
 
@@ -144,15 +145,13 @@ const MirrorButton: FC<Props> = ({publication}) => {
        <div className="flex gap-6">
         <div className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">
         {alreadyMirrored ? (
-         <div className="flex items-center drop-shadow-lg  md:border-none bg-blue-500 border-2 border-black rounded-lg p-2 md:p-3">
-         <ArrowsRightLeftIcon className="w-3 h-3 text-[#57B8FF] font-bold" />
-          </div>
+          <div className=' rounded-full cursor-pointer  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2'>
+          <MirrorOutline className="h-3 w-3 text-blue-700" />
+        </div>
         ) : (
-        <div 
-        className="flex items-center drop-shadow-lg  md:border-none bg-blue-500 border-2 border-black rounded-lg p-2 md:p-3
-        md:hover:bg-[#57B8FF] group relative w-max">
-        {isLoading ? <Spinner /> : <ArrowsRightLeftIcon onClick={createMirror} className='w-3 h-3 font-bold text-black' /> }
-         <span className="hidden md:block pointer-events-none absolute -bottom-7 left-7 w-max shadow px-2 py-1 
+          <div className=' rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2'>
+        {isLoading ? <Spinner /> : <MirrorOutline onClick={createMirror} className='w-3 h-3 font-bold ' /> }
+         <span className="hidden md:block pointer-events-none absolute -bottom-7 left-7 w-max cursor-pointer shadow px-2 py-1 
           text-xs text-blue-700 opacity-0 group-hover:opacity-100"> Mirror </span>
           </div>
         )}

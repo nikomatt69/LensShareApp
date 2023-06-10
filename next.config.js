@@ -38,6 +38,7 @@ const nextConfig = {
   },
   images: {
     domains: [
+      "nftstorage.link",
       "ik.imagekit.io",
       "asset.lenshareapp.xyz/images/",
       "asset.lenshareapp.xyz",

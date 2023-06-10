@@ -18,6 +18,8 @@ import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
 import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
 import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
 import { useAppStore } from "@/store/app";
+import ShareOutline from "../Bytes/ShareOutline";
+import ShareButton from "../Buttons/ShareButton";
 
 interface Props {
   publication: Publication;
@@ -80,9 +82,7 @@ const Video: FC<Props> = ({ publication }) => {
   return (
     <div className="lg:ml-20 rounded-xl border-0 md:flex gap-4 relative">
       <div
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-        className="rounded-xl"
+      
       >
         
         <VideoPlayer
@@ -94,10 +94,9 @@ const Video: FC<Props> = ({ publication }) => {
             sanitizeIpfsUrl(getThumbnailUrl(video as Publication)),
             isBytesVideo ? 'thumbnail_v' : 'thumbnail'
           )} 
-          
+          showControls={true}
           options={{
             autoPlay: true,
-            
             muted: true,
             loop: true,
             loadingSpinner: true,
@@ -122,16 +121,15 @@ const Video: FC<Props> = ({ publication }) => {
            {showButtons && (
           <ul className="dropdown-menu hidden md:block pt-1">
             <li><LikeButton publication={video as Publication}/></li>
-            <li><CommentButton publication={video as Publication} /></li>
             <li> <MirrorButton publication={video as Publication}/></li>
+            <li><CommentButton publication={video as Publication}/></li>
             <li><CollectButton  publication={video as Publication}/></li>
-            
             <li className=" pt-5">
-              <button className="block  items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg  md:p-3" >
-              <ShareIcon onClick={() => setShowShare(true)} className="h-5 w-5 rounded-xl text-black hover:text-gray-500" />
-              <ShareModal publication={publication} show={showShare} setShowShare={setShowShare}/> 
-              </button>
+             <button className="" onClick={() => setShowShare(true)} >
+              <ShareButton publication={publication as Publication} />
+             </button>
             </li>
+            
             
         </ul>
           )}

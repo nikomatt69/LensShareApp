@@ -6,6 +6,7 @@ import { ApolloCache } from '@apollo/client'
 import { HeartIcon } from '@heroicons/react/24/solid'
 import React, { Dispatch, FC } from 'react'
 import { toast } from 'react-hot-toast'
+import { AiFillHeart } from 'react-icons/ai'
 
 interface Props {
     setCount: Dispatch<number>
@@ -71,13 +72,12 @@ const Like: FC<Props> = ({ setCount, setLiked, count, liked, publication }) => {
       {liked ? 
         <div 
         onClick={createLike} 
-        className="flex items-center drop-shadow-lgborder-2 border-black md:border-none bg-blue-500 rounded-lg p-2 md:p-3"> 
-          <HeartIcon className='w-3 h-3 text-[#57B8FF] font-bold'/> 
+        className=" rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2"> 
+          <AiFillHeart className='w-3 h-3 text-blue-500 font-bold'/> 
         </div>
         :
-        <div onClick={createLike} className="flex items-center drop-shadow-lg border-2 border-black md:border-none bg-blue-500 rounded-lg p-2 md:p-3
-        md:hover:bg-[#57B8FF] group relative w-max">
-          <HeartIcon className='w-3 h-3 font-bold text-black' />
+        <div onClick={createLike} className=" rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2">
+          <AiFillHeart className='w-3 h-3 font-bold ' />
         </div>
       }
     </>

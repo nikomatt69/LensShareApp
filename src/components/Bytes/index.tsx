@@ -1,5 +1,5 @@
 
-import type { Publication } from '@/types/lens'
+import type { Profile, Publication } from '@/types/lens'
 import {
   PublicationSortCriteria,
   PublicationTypes,
@@ -107,12 +107,12 @@ console.log(data)
 
   const full = useCallback(() => currentViewingId && byte && router.pathname ?
     <FullScreen
+      
       byte={byte}
       close={closeDialog}
       isShow={show}
       bytes={bytes}
-      index={bytes?.findIndex((video) => video.id === currentViewingId)}
-    /> : null, [byte, show, currentViewingId])
+      index={bytes?.findIndex((video) => video.id === currentViewingId)} profile={currentProfile as Profile}    /> : null, [byte, show, currentViewingId])
 
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
@@ -172,7 +172,8 @@ console.log(data)
         {singleByte && (
           <ByteVideo
           
-         
+          
+          
            setFollowing={ setFollowing } 
             video={singleBytePublication}
             key={`${singleBytePublication?.id}_${singleBytePublication.createdAt}0`}

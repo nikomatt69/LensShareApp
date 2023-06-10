@@ -3,7 +3,7 @@ import  Loader  from '@/components/UI/Loader'
 import {EmptyState} from '@/components/UI/EmptyState'
 import {useAppStore} from '@/store/app'
 import type { FeedItem, Publication } from '@/types/lens'
-import { FeedEventItemType, PublicationMainFocus, useFeedQuery } from '@/utils/lens'
+import { FeedEventItemType, Profile, PublicationMainFocus, useFeedQuery } from '@/utils/lens'
 import React, { useCallback, useRef, useState } from 'react'
 import { useInView } from 'react-cool-inview'
 import Custom400 from '@/pages'
@@ -21,6 +21,7 @@ import router from 'next/router'
 interface Props {
   publication: Publication
   onDetails?: (publication: Publication) => void
+  profile : Profile | null
   
 }
 
@@ -88,11 +89,12 @@ const Feed = () => {
 
   const full = useCallback(() => currentViewingId && byte && router.pathname ?
     <FullScreen
+      
       byte={byte}
       close={closeDialog}
       isShow={show}
       bytes={bytes}
-      index={bytes?.findIndex((video) => video.id === currentViewingId)}
+      index={bytes?.findIndex((video) => video.id === currentViewingId)} profile={currentProfile as Profile}
     /> : null, [byte, show])
 
 
@@ -119,6 +121,7 @@ const Feed = () => {
             className="h-screen border-0 pt-3 mt-3 font-semibold md:h-[calc(100vh-70px)]">
             {bytes?.map((video: Publication, index) => (
               <ByteVideo
+                
                 setFollowing={ setFollowing } 
                 video={video}
                 key={`${video?.id}_${video.createdAt}1`}

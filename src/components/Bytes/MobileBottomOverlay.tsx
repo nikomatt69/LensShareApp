@@ -9,6 +9,7 @@ import FollowButton from '../Buttons/FollowButton'
 import { usePublicationDetailsLazyQuery } from '@/utils/lens/generated'
 import formatAddress from '@/utils/functions/formatAddress'
 import formatHandle from '@/utils/functions/formatHandle'
+import { useAppStore } from '@/store/app'
 
 
 type Props = {
@@ -16,19 +17,29 @@ type Props = {
   following: boolean
   setFollowing: (following: boolean) => void
   profile: Profile
+  
 }
 
 const MobileBottomOverlay: FC<Props> = ({ video }) => {
+  const currentProfile = useAppStore((state) => state.currentProfile);
   const [following, setFollowing] = useState(false) 
-  const profile = video.profile
+  const isMirror = video?.metadata?.name?.includes('Mirror')
+
   const subscribeType = video.profile?.followModule?.__typename
+  const profile = video.profile 
+
 
   return (
-    <div className="absolute border-b-2 border-l-2 border-r-2 border-blue-700 bottom-0 rounded-b-2xl  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-6 pt-3 md:rounded-b-xl">
+    <div className="absolute border-b-2  border-blue-700 bottom-0 rounded-b-2xl  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-6 pt-3 md:rounded-b-xl">
        <Link href={`/bytes/${video?.id}`} key={video.id}>
       <div className="pb-2">
-        
-        <h1 className="line-clamp-2 font-bold text-white">{video.metadata.name}</h1>
+        {isMirror ? (
+          <div className="flex items-center space-x-2">
+            <span className="text-xs text-gray-500">Mirror by {video?.profile.id}</span>
+            <span className="text-xs text-gray-500">{video.metadata.name}</span>
+          </div>
+        ) :  <h1 className="line-clamp-2 font-bold text-white">{video.metadata.name}</h1>}
+   
       </div>
       </Link>
       <div className="flex items-center justify-between">
@@ -57,7 +68,7 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
         <div className="flex items-center  space-x-2">
         {<div className="flex-shrink-0 pr-3">
           { following ? ( 
-            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
+            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile }  /> 
             ) : (
             <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
           )}

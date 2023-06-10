@@ -26,6 +26,7 @@ const PublicationReaction = dynamic(() => import('./PublicationReaction'))
 
 interface Props {
   comment: Publication
+
 }
 
 const VideoComment: FC<Props> = ({ comment }) => {
@@ -149,7 +150,7 @@ const Comments: FC<Props> = ({ comment }) => {
           showReport={showReport}
           setShowReport={setShowReport}
         />
-        {showOptions ? <CommentOptions comment={comment} setShowReport={setShowReport} /> : <div className='h-[22px]'></div>}
+        {showOptions ? <CommentOptions  video={comment} setShowReport={setShowReport}  /> : <CommentOptions video={comment} setShowReport={setShowReport}  />}
         {!comment.hidden && (
           <div className="">
             <PublicationReaction publication={comment} isVertical={true} />
