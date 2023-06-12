@@ -149,7 +149,7 @@ const MirrorButton: FC<Props> = ({publication}) => {
           <MirrorOutline className="h-3 w-3 text-blue-700" />
         </div>
         ) : (
-          <div className=' rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2'>
+          <div className=' rounded-full cursor-pointer md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2'>
         {isLoading ? <Spinner /> : <MirrorOutline onClick={createMirror} className='w-3 h-3 font-bold ' /> }
          <span className="hidden md:block pointer-events-none absolute -bottom-7 left-7 w-max cursor-pointer shadow px-2 py-1 
           text-xs text-blue-700 opacity-0 group-hover:opacity-100"> Mirror </span>

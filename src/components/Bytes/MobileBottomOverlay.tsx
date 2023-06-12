@@ -23,7 +23,8 @@ type Props = {
 const MobileBottomOverlay: FC<Props> = ({ video }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [following, setFollowing] = useState(false) 
-  const isMirror = video?.metadata?.name?.includes('Mirror')
+  const isMirror = video.__typename === 'Mirror'
+
 
   const subscribeType = video.profile?.followModule?.__typename
   const profile = video.profile 
@@ -35,8 +36,8 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
       <div className="pb-2">
         {isMirror ? (
           <div className="flex items-center space-x-2">
-            <span className="text-xs text-gray-500">Mirror by {video?.profile.id}</span>
-            <span className="text-xs text-gray-500">{video.metadata.name}</span>
+            <span className="text-xs text-blue-700">Mirror by {video?.profile.name}</span>
+            <h1 className="text-xs text-blue-700">{video.metadata.name}</h1>
           </div>
         ) :  <h1 className="line-clamp-2 font-bold text-white">{video.metadata.name}</h1>}
    

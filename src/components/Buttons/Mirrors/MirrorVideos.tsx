@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Link from "next/link";
-import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication} from "@/types/lens";
+import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication, PublicationMainFocus} from "@/types/lens";
 import { useQuery } from "@apollo/client";
 import { useRouter } from 'next/router';
 import type { FC } from "react";
@@ -23,7 +23,7 @@ import getMedia from '@/lib/getMedia';
         publicationTypes: ["MIRROR"],
         limit: 10,
         metadata: {
-          mainContentFocus: ["VIDEO"],
+          mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Image],
         },
       }
      },

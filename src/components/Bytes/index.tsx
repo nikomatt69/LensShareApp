@@ -22,6 +22,10 @@ import { EmptyState } from '../UI/EmptyState'
 import FullScreen from './FullScreen'
 import Link from 'next/link'
 
+interface Props {
+  following?: boolean
+  setFollowing?: (following: boolean) => void
+}
 
 const Bytes = () => {
   const router = useRouter()
@@ -37,7 +41,7 @@ const Bytes = () => {
   const request =
   {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 30,
+    limit: 10,
     noRandomize: false,
     sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTER_APP_ID ],
     publicationTypes: [PublicationTypes.Post],
@@ -45,7 +49,7 @@ const Bytes = () => {
     metadata: {
       tags:
         activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video]
+        mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Image],
     }
   }
 

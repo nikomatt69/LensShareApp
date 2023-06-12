@@ -34,11 +34,12 @@ const BytesSection = () => {
     metadata: {
       tags:
         activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video]
+      mainContentFocus: [PublicationMainFocus.Video],
     }
   }
 
   const { data, error, loading } = useExploreQuery({
+    nextFetchPolicy: 'standby',
     variables: { request }
   })
 
@@ -125,7 +126,7 @@ const BytesSection = () => {
           </div>
         ))}
       </div>
-      <hr className="border-0 my-8 border-opacity-10" />
+      <hr className="border-theme my-8 border-opacity-10" />
     </div>
   )
 }

@@ -32,6 +32,8 @@ import { SIGN_IN_REQUIRED_MESSAGE } from "@/constants";
 import toast from "react-hot-toast";
 import { getRelativeTime } from "@/utils/functions/formatTime2";
 import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction";
+import ProfileVideos from "../ProfilePage/ProfileVideos";
+
 
 
 
@@ -39,16 +41,22 @@ import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction
 interface Props {
   publication: Publication;
   onDetail: (video: Publication) => void;
+  setFollowing: (following: boolean) => void;
+  following: boolean;
+  isShow : boolean;
+  profile : Profile;
+  profileId : string;
 }
-const VideoCard: FC<Props> = ({ publication, onDetail }) => {
-  const router = useRouter()
-  const [following, setFollowing] = useState(false) 
+const VideoCard: FC<Props> = ({ publication, onDetail, setFollowing,following,isShow}) => {
+
   const bytesContainer = useRef<HTMLDivElement>(null)
   const currentProfile = useAppStore((state) => state.currentProfile)
   const currentViewingId = useAppStore((state) => state.currentviewingId)
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
   const [byte, setByte] = useState<Publication>()
-   
+  const router = useRouter();
+  const { id } = router.query
+
   const [showShare, setShowShare] = useState(false)
   const date = publication.createdAt;
   const timestamp = date.split("T")[0];
@@ -182,14 +190,11 @@ const mute = useAppStore((state) => state.isMute)
         </div>} 
       </div>
       <div className="rounded-xl p-2 cursor-pointer">
-        {isMirror ? (
-          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><Video
-            publication={publication as Publication} /></>
-        ) : (
-          <Video
-            publication={publication as Publication}
+        
+          <ProfileVideos
+
           />
-        )}
+      
 
       </div>
      

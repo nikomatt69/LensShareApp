@@ -40,7 +40,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
           ) : (
             <div className='rounded-xl items-center  object-fill object-center'>
             <iframe
-              className="rounded-xl items-center object-center object-fill"
+              className="rounded-xl cursor-pointer items-center object-center object-fill"
               sandbox=''
               title={`${nft.contractAddress}:${nft.tokenId}`}
               src={sanitizeIpfsUrl(nft?.originalContent?.animatedUrl)}
@@ -51,7 +51,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
       ) : (
         <a href={nftURL} target="_blank" rel="noreferrer noopener">
           <video
-           className='object-fill object-center rounded-xl'
+           className='object-fill cursor-pointer object-center rounded-xl'
            
             style={{
               backgroundImage: `url(${

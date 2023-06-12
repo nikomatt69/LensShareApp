@@ -38,6 +38,9 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger,}) => {
   const router = useRouter()
   const { id } = router.query
   const [following, setFollowing] = useState(false)
+  const isMirror = video.__typename === 'Mirror'
+  const comments = isMirror ? video.mirrorOf.stats.totalAmountOfComments : video.stats.totalAmountOfComments
+
   const profile =  id ? currentProfile : video?.profile
  
 
@@ -57,6 +60,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger,}) => {
             
             <CommentModal  video={video as Publication} trigger={trigger} setFollowing={setFollowing} following={following} profile={profile as Profile}  />
           </button>
+          <p className="text-xs hidden lg:block font-semibold text-gray-400">{comments}</p>
         </div>
         
         <div className="w-full  text-center text-white md:text-inherit">

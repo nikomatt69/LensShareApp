@@ -38,11 +38,16 @@ import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction
 
 interface Props {
   publication: Publication;
+  video : Publication;
   onDetail: (video: Publication) => void;
+  following: boolean;
+  setFollowing: (following: boolean) => void;
+
+  isShow : boolean;
 }
-const VideoCard: FC<Props> = ({ publication, onDetail }) => {
+const VideoCard: FC<Props> = ({ publication, onDetail,setFollowing, following }) => {
   const router = useRouter()
-  const [following, setFollowing] = useState(false) 
+
   const bytesContainer = useRef<HTMLDivElement>(null)
   const currentProfile = useAppStore((state) => state.currentProfile)
   const currentViewingId = useAppStore((state) => state.currentviewingId)
@@ -62,6 +67,8 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   const [showMore, setShowMore] = useState(false)
   const [showReport, setShowReport] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
+  const [show, setShow] = useState(false)
+
 
   useEffect(() => {
     if (publication.metadata?.content.trim().length > 500) {
@@ -99,7 +106,7 @@ const mute = useAppStore((state) => state.isMute)
 
 
   return (
-    <div className="flex flex-col bg-[#C0C0C0] justify-content rounded-xl border-0 break-word m-3 border-b-2 border-gray-200 pb-0 md:pb-6">
+    <div className="flex flex-col bg-[#C0C0C0] justify-content rounded-xl border-0 break-word w-full mt-3 border-b-2 border-gray-200 pb-0 md:pb-6">
       <div className="flex-row flex break-word ">
         <div className="flex-auto gap-3 p-2 mt-4 cursor-pointer break-word font-semibold rounded">
         <Link href={`/u/${profile.id}`} key={profile.id}/>
@@ -181,14 +188,29 @@ const mute = useAppStore((state) => state.isMute)
           )}
         </div>} 
       </div>
-      <div className="rounded-xl p-2 cursor-pointer">
+      <div className="rounded-xl cursor-pointer">
         {isMirror ? (
-          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><Video
-            publication={publication as Publication} /></>
+          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><ByteVideo
+          setFollowing={ setFollowing } 
+          
+        
+            key={`${publication?.id}_${publication.createdAt}1`}
+            onDetail={onDetail}
+            isShow={show}
+            
+            
+            video={publication as Publication} /></>
         ) : (
-          <Video
-            publication={publication as Publication}
-          />
+          <ByteVideo
+          setFollowing={ setFollowing } 
+          
+        
+            key={`${publication?.id}_${publication.createdAt}1`}
+            onDetail={onDetail}
+            isShow={show}
+            
+            
+            video={publication as Publication} />
         )}
 
       </div>

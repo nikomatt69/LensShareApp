@@ -1,7 +1,7 @@
 //mapping for the prfile vids
 import React, { useRef, useState } from 'react';
 import Link from "next/link";
-import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication} from "@/types/lens";
+import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication, PublicationMainFocus} from "@/types/lens";
 import { useQuery } from "@apollo/client";
 import { useRouter } from 'next/router';
 import type { FC } from "react";
@@ -15,6 +15,7 @@ import getMedia from '@/lib/getMedia';
     const videoRef = useRef<HTMLVideoElement>(null);
     const router = useRouter();
     const { id } = router.query
+    
 
   const { data, loading, error } = useQuery
   <{publications: PaginatedPublicationResult}>
@@ -26,7 +27,7 @@ import getMedia from '@/lib/getMedia';
         publicationTypes: ["POST"],
         limit: 50,
         metadata: {
-          mainContentFocus: ["VIDEO"],
+          mainContentFocus: [PublicationMainFocus.Video],
         },
       }
      },

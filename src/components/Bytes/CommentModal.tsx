@@ -18,6 +18,7 @@ import getProfilePicture from '@/utils/functions/getProfilePicture'
 import getMedia from '@/lib/getMedia'
 import CommentsVideo from '../DetailPage/CommentsBlock/Comments'
 import CommentsByte from './FullScreen/Comments'
+import { useAppStore } from '@/store/app'
 type Props = {
   trigger: React.ReactNode
   video: Publication
@@ -30,6 +31,8 @@ type Props = {
 const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
   following,}) => {
   const [show, setShow] = useState(false)
+  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
+  const currentViewingId = useAppStore((state) => state.currentviewingId)
 
   return (
     <>
@@ -61,7 +64,7 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
       <Comments
           
           profile={profile}
-          key={video?.profile.id}
+          key={currentViewingId}
           publication={video as Publication}
         
           

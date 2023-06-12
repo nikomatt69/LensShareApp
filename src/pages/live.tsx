@@ -1,6 +1,4 @@
-import Live from "../components/Live/Live";
 
+import ExploreAudioRender from "@/components/HomePage/ExploreAudioRender";
 
-export default Live
-
-
+export default ExploreAudioRender;

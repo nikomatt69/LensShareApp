@@ -22,6 +22,7 @@ import Loader from '../UI/Loader'
 import { EmptyState } from '../UI/EmptyState'
 import FullScreen from '../Bytes/FullScreen'
 import VideoCard from './VideoCard'
+import Loading from '../Loading'
 
 
 
@@ -39,15 +40,15 @@ const Explore = () => {
   const request =
   {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 30,
+    limit : 10,
     noRandomize: false,
     sources: [ APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID],
     publicationTypes: [PublicationTypes.Post],
-    customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
       tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video]
+      activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+        
+      mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Video],
     }
   }
 
@@ -59,7 +60,8 @@ const Explore = () => {
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
     useExploreLazyQuery({
       // prevent the query from firing again after the first fetch
-      nextFetchPolicy: 'standby',
+      
+  
       variables: {
         request,
         reactionRequest: currentProfile
@@ -70,7 +72,7 @@ const Explore = () => {
       onCompleted: ({ explorePublications }) => {
       }
     })
-console.log(data)
+  console.log(data);
 
   const bytes = data?.explorePublications?.items as Publication[]
   const pageInfo = data?.explorePublications?.pageInfo
@@ -91,7 +93,47 @@ console.log(data)
     },
       onCompleted: () => fetchAllBytes()
     })
-  }
+  };
+
+
+  const full = useCallback(() => currentViewingId && byte && router.pathname ?
+    <FullScreen
+      profile={currentProfile as Profile}
+      byte={byte}
+      close={closeDialog}
+      isShow={show}
+      bytes={bytes}
+      
+    /> : null, [byte, show, currentViewingId])
+
+  useEffect(() => {
+    if (router.query.id && singleBytePublication) {
+      openDetail(singleBytePublication)
+    }
+   }, [singleByte])
+
+
+  useEffect(() => {
+    if (router.isReady) {
+      fetchSingleByte()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady])
+
+  const { observe } = useInView({
+    rootMargin: SCROLL_ROOT_MARGIN,
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            ...request,
+            cursor: pageInfo?.next
+          }
+        }
+      })
+    }
+  })
+
 
   const openDetail = (byte: Publication) => {
     const nextUrl = `/${byte.id}`
@@ -105,46 +147,10 @@ console.log(data)
     history.pushState({ path: nextUrl }, '', nextUrl)
     setShow(false)
   }
+   
+ 
 
-
-  const full = useCallback(() => currentViewingId && byte && router.pathname ?
-    <FullScreen
-    profile={currentProfile as Profile}
-      byte={byte}
-      close={closeDialog}
-      isShow={show}
-      bytes={bytes}
-      index={bytes?.findIndex((video) => video.id === currentViewingId)}
-    /> : null, [byte, show, currentViewingId])
-
-  useEffect(() => {
-    if (router.query.id && singleBytePublication) {
-      openDetail(singleBytePublication)
-    }
-  }, [singleByte])
-
-
-  useEffect(() => {
-    if (router.isReady) {
-      fetchSingleByte()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady])
-
-  const { observe } = useInView({
-    onEnter: async () => {
-      await fetchMore({
-        variables: {
-          request: {
-            ...request,
-            cursor: pageInfo?.next
-          }
-        }
-      })
-    }
-  })
-
-  if (loading || singleByteLoading) {
+  if (loading ) {
     return (
       <div className="grid h-[80vh] place-items-center">
         <Loader />
@@ -177,14 +183,11 @@ console.log(data)
           
           publication={video}
           key={`${video?.id}_${video.createdAt}1`}
-          onDetail={openDetail}
-          
-         
-                     />
+          onDetail={openDetail} />
         ))}
         {pageInfo?.next && (
-          <span ref={observe} className="flex border-0 justify-center p-10">
-            <Loader />
+          <span ref={observe} className="flex  justify-center p-10">
+            <Loading />
           </span>
         )}
       </div>

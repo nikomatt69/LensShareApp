@@ -32,6 +32,8 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const [count, setCount] = useState(publication?.stats?.totalAmountOfCollects);
+  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
+  const currentViewingId = useAppStore((state) => state.currentviewingId)
 
   const router = useRouter();
   const { id } = router.query;
@@ -91,9 +93,9 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
           <span className="font-bold  rounded-xl object-center bg-blue-500 ml-1 p-1 text-center">Comments</span>
         {comments?.map((comment) => (
                 <CommentData
-                  key={`${comment?.id}_${comment.createdAt}`}
+                  key={`${currentViewingId}_${comment.createdAt}`}
                   comment={comment as Publication}
-                  video={publication?.id as Publication}
+                  video={publication as Publication}
                 />
               ))}
          <CreateComment

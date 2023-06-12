@@ -122,19 +122,6 @@ const ByteVideo: FC<Props> = ({
   const profile = video.profile
   return (
     <div className={clsx(index != 0 && ' border-t dark:border-slate-600 ', !isMobile && 'flex mt-8 md:ml-2')}>
-      <Link
-        href={`/u/${profile?.id}`}
-        className="flex flex-none cursor-pointer items-top space-x-2 mt-4  max-md:hidden"
-      >
-        <img
-          src={getProfilePicture(profile, 'avatar')}
-          className="h-14 w-14 md:rounded-full md:mr-3"
-          draggable={false}
-          alt={profile?.id}
-        />
-      </Link>
-      <div className='h-full w-full border-0 relative'>
-        {!isMobile && <BottomOverlay video={video}  />}
         <div
           className="flex object-contain border-0 snap-center"
           data-testid="byte-video"
@@ -163,7 +150,7 @@ const ByteVideo: FC<Props> = ({
                   options={{
                     autoPlay: false,
                     loop: true,
-                    loadingSpinner: true,
+                    loadingSpinner: false,
                     muted: true,
                     isCurrentlyShown: true,
                   }}
@@ -180,7 +167,7 @@ const ByteVideo: FC<Props> = ({
             {  /* isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />  */} 
             {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={following}  />}
             <div className="absolute inline-block right-3 bottom-[15%] z-[1] md:hidden">
-              <ByteActions  trigger publicationId={video as Publication} video={video} showDetail={() => onDetail(video)} />
+              <ByteActions  trigger publicationId={video as Publication} key={currentViewingId} video={video} showDetail={() => onDetail(video)} />
               {/* {video?.collectModule?.__typename !==
                 'RevertCollectModuleSettings' && (
                   <div className="text-center text-white md:text-gray-500">
@@ -198,7 +185,7 @@ const ByteVideo: FC<Props> = ({
 
         </div>
       </div>
-    </div>
+    
   )
 }
 

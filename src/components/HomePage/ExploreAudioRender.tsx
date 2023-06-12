@@ -1,9 +1,9 @@
 import * as Apollo from '@apollo/client';
 
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
-import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
+import { Profile, Publication, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
 import { APP_NAME, CHAIN_ID } from "@/constants";
 import Loading from "@/components/Loading";
 
@@ -11,16 +11,20 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import Navbar from '@/components/Navbar';
 import BottomNav from '@/components/Navs/BottomNav';
 import { Toaster } from 'react-hot-toast';
-
-import Wrapper from './Wrapper';
-import Curated from './Curated';
+import Explore from './Explore';
+import ExploreAudio from './ExploreAudio';
+import Wrapper from '../Echos/Wrapper';
+import NavbarDetails from '../NavbarDetails';
 import MetaTags from '../UI/MetaTags';
-import Echos from './EchosPage';
 
+interface Props {
+  profile: Profile
+  publication : Publication
+}
 
-const AudioRender = () => {
+const ExploreAudioRender: FC<Props> = ({ publication ,profile}) => {
     const [mounted, setMounted] = useState(false);
-
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -113,27 +117,23 @@ const AudioRender = () => {
 
   return (
     <div>
-    <MetaTags
-     title={`Sound • ${APP_NAME}`}
-   />
- <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
- <Toaster position="bottom-right" />
- <Navbar />
-   <div className="flex gap-6 md:gap-20">
-     <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
-       <Sidebar />
-     </div>
-     <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
-       <Echos />
-     </div>
-     
-   </div>
-   <div className="block overflow-hidden xl:w-[1200px] lg:w-[1100px] m-auto border-0 h-[100vh] ">
-     <BottomNav/>
-   </div>
- </div>
-</div>
+      <MetaTags title={`MusicFeed • ${APP_NAME} `} />
+    <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden border-0 h-[100vh]">
+    <Toaster position="bottom-right" />
+    <NavbarDetails/>
+      <div className="flex  ">
+        <div className="h-[70vh] overflow-hidden hidden xs:h-[40] sm:h-[40] lg:block border-0 lg:hover:overflow-auto">
+          <Sidebar />
+        </div>
+        <div className="mt-2 flex  flex-col overflow-auto overflow-x-hidden h-[70vh] sm:h-[40] xs:h-[40] videos flex-1">
+        <ExploreAudio publication={publication} profile={profile}/>
+        </div>
+      </div>
+      <Wrapper children publication={publication} />
+    </div>
+ 
+  </div>
   )
 }
 
-export default AudioRender
+export default ExploreAudioRender

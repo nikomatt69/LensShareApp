@@ -16,7 +16,7 @@ import { NextLink2 } from "./UI/NextLink2";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import MessageIcon from "./Messages/MessageIcon";
 import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { Cog6ToothIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import router from "next/router";
 import { FaHeadphones } from "react-icons/fa";
@@ -47,14 +47,14 @@ const Navbar: FC = () => {
       </Link>
  
     <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
-        <Link href='/listen'>
+       <Link href='/listen'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
          rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <FaHeadphones className='h-6 text-blue-500' />{' '}
+         <MusicalNoteIcon className='h-6 text-blue-500' />{' '}
           <span className='hidden '>Listen </span>
         </button>
-        </Link>
+        </Link> 
       <div className='flex pl-full centre-item gap-5 md:gap-10 '>
         {currentProfile ? (
            <div className='w-12 h-12'>

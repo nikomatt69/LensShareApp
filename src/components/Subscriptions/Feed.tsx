@@ -16,13 +16,17 @@ import Bytes from '../Bytes'
 import ByteVideo from '../Bytes/ByteVideo'
 import FullScreen from '../Bytes/FullScreen'
 import router from 'next/router'
+import BytesCard from '../HomePage/BytesCard'
 
 
 interface Props {
   publication: Publication
   onDetails?: (publication: Publication) => void
   profile : Profile | null
-  
+  isShow : boolean
+  video : Publication
+  following : boolean
+
 }
 
 
@@ -30,10 +34,11 @@ const Feed = () => {
   const currentProfile = useAppStore((state) => state.currentProfile)
   const activeTagFilter = useAppStore((state) => state.activeTagFilter)
   const currentViewingId = useAppStore((state) => state.currentviewingId)
-  const [show, setShow] = useState(false)
+
   const bytesContainer = useRef<HTMLDivElement>(null)
   const [byte, setByte] = useState<Publication>()
   const [following, setFollowing] = useState(false) 
+  const [show, setShow] = useState(false)
   
 
 
@@ -44,9 +49,8 @@ const Feed = () => {
     profileId: currentProfile?.id,
     sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTOK_APP_ID ,LENSTER_APP_ID],
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video]
+     
+      mainContentFocus: [PublicationMainFocus.Video],
     }
   }
 
@@ -61,6 +65,7 @@ const Feed = () => {
   const pageInfo = data?.feed?.pageInfo
 
   const { observe } = useInView({
+
     onEnter: async () => {
       await fetchMore({
         variables: {
@@ -112,7 +117,7 @@ const Feed = () => {
     return <Custom400 />
   }
   return (
-    <div className='mt-2 pt-3 border-0'>
+    <div className='mt-2 pt-3  border-0'>
       {full()}
       {!error && !loading && (
         <>
@@ -120,8 +125,9 @@ const Feed = () => {
             ref={bytesContainer}
             className="h-screen border-0 pt-3 mt-3 font-semibold md:h-[calc(100vh-70px)]">
             {bytes?.map((video: Publication, index) => (
-              <ByteVideo
-                
+              <BytesCard
+                publication={video}
+                following={following}
                 setFollowing={ setFollowing } 
                 video={video}
                 key={`${video?.id}_${video.createdAt}1`}
@@ -133,7 +139,7 @@ const Feed = () => {
           
           {pageInfo?.next && (
             <span ref={observe} className="flex border-0 justify-center p-10">
-              <Loader />
+              <Loading />
             </span>
           )}
           </div>

@@ -52,12 +52,12 @@ const Preview: FC<Props> = ({ profile, message, conversationKey, isSelected }) =
               <div className="line-clamp-1 font-bold text-md">{profile?.name ?? profile.handle}</div>
             </div>
             {message.sent && (
-              <span className="min-w-fit pt-0.5 text-xs font-semibold text-gray-500">
+              <span className="min-w-fit pt-0.5 text-xs font-semibold text-blue-500">
                 {dayjs(new Date(message.sent)).fromNow()}
               </span>
             )}
           </div>
-          <span className="text-sm text-gray-500 font-semibold line-clamp-1 break-all">
+          <span className="text-sm text-blue-500 font-semibold line-clamp-1 break-all">
             {address === message.senderAddress && 'You: '} {message.content}
           </span>
         </div>

@@ -9,9 +9,9 @@ import CollectButton from  "@/components/Buttons/Collects/CollectButton";
 import getMedia from "@/lib/getMedia";
 import { useRouter } from "next/router";
 import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
-import ShareModal from "./ShareModal";
+
 import { getPublicationMediaUrl } from "@/utils/functions/getPublicationMediaUrl";
-import ViewCount from "./ViewCount";
+
 import imageCdn from "@/lib/imageCdn";
 import VideoPlayer from "@/utils/VideoPlayer";
 import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
@@ -20,11 +20,13 @@ import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES
 import { useAppStore } from "@/store/app";
 import ShareOutline from "../Bytes/ShareOutline";
 import ShareButton from "../Buttons/ShareButton";
+import Wrapper from "./Wrapper";
+import Item from "./Item";
 
 interface Props {
   publication: Publication;
 }
-const Video: FC<Props> = ({ publication }) => {
+const Audio: FC<Props> = ({ publication }) => {
   const videoWatchTime = useAppStore((state) => state.videoWatchTime)
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -81,34 +83,7 @@ const Video: FC<Props> = ({ publication }) => {
 
   return (
     <div className="lg:ml-20 rounded-xl border-0 md:flex gap-4 relative">
-      <div
-  
-      >
-        
-        <VideoPlayer
-          
-         currentTime={videoWatchTime}
-          publicationId={video?.id}
-          permanentUrl={getMedia(video as Publication)}
-          posterUrl={imageCdn(
-            sanitizeIpfsUrl(getThumbnailUrl(video as Publication)),
-            isBytesVideo ? 'thumbnail_v' : 'thumbnail'
-          )} 
-          showControls={true}
-          options={{
-            autoPlay: true,
-            muted: true,
-            loop: true,
-            loadingSpinner: false,
-            isCurrentlyShown: true,
-          }}       
-          
-          
-       
-      />
-      
-        </div>
-        
+      <Item publication={publication} />
         <div className='absolute md:relative mr-6 md:flex md:flex-col top-0 right-0 space-x-6 md:space-x-0 flex flex-row p-2 m-2 md:p-0 md:m-0 md:pt-[50px]'>
         <div className="dropdown inline-block relative">
             {/* <button 
@@ -142,4 +117,4 @@ const Video: FC<Props> = ({ publication }) => {
   );
 };
 
-export default Video;
+export default Audio;

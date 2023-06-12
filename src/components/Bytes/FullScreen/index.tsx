@@ -122,7 +122,7 @@ const FullScreen: FC<Props> = ({ byte,
             isCurrentlyShown: true,
             autoPlay: true,
             loop: true,
-            loadingSpinner: true,
+            loadingSpinner: false,
             muted: true,
         }}
     />

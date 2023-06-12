@@ -120,7 +120,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
   }
 
   return (
-    <div className="flex w-full flex-row flex-wrap items-center gap-y-2 md:flex-nowrap">
+    <div className="flex w-full flex-row flex-wrap items-center gap-y-2 ">
       <div className="flex w-1/2 items-center">
         <div className="flex">
           <div className="h-16 w-16 flex-none">

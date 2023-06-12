@@ -10,6 +10,7 @@ import formatHandle from "@/utils/functions/formatHandle";
 
 const SuggestedAccounts = () => {
   const { data, loading, error } = useQuery(RecommendedProfilesDocument, {
+    nextFetchPolicy: 'standby',
     variables: { options: { shuffle: true } },
   });
   console.log("Recommended", data);

@@ -18,6 +18,7 @@ const FollowingAccounts = () => {
   const { data, loading, error } = useQuery
   <{following: PaginatedFollowingResult}>
   ((FollowingDocument), {
+    nextFetchPolicy: 'standby',
     variables: { 
       request: {
           address: address,
