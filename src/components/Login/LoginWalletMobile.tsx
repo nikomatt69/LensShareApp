@@ -105,7 +105,7 @@ const LoginWalletMobile: FC = () => {
         </button>
       ) : (
         <button
-          className="flex-1"
+          className="flex-1 text-white"
           onClick={() => {
             if (switchNetwork) {
               switchNetwork(CHAIN_ID);

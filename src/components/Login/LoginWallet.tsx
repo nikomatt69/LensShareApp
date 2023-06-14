@@ -16,8 +16,8 @@ import {
 } from "wagmi";
 import type { Connector } from "wagmi";
 import toast from "react-hot-toast";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { MainButton } from "../Buttons/Rainbow/mainbutton";
+import MainButton from "../Buttons/Rainbow/mainbutton";
+
 
 const LoginWallet: FC = () => {
   const setProfiles = useAppStore((state) => state.setProfiles);

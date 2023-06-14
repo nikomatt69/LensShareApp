@@ -25,6 +25,18 @@ export const LENS_MEDIA_SNAPSHOT_URL =
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
+export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80'
+
+
+export const SPACES_WORKER_URL = IS_MAINNET
+  ? 'https://spaces.lenshareapp.xyz'
+  : 'http://localhost:8089';
+
+export const GROWTHBOOK_KEY = IS_MAINNET
+  ? 'sdk-fDLRMwvpyh4Kq3b'
+  : 'sdk-STENQl8vU1da648';
+
+
 export const NEXT_PUBLIC_EVER_BUCKET_NAME = 'lensshare';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';

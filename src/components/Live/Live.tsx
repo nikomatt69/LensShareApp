@@ -13,11 +13,14 @@ import { Profile, ReferenceModules } from "@/utils/lens";
 import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { useUserProfilesQuery } from '@/types/graph';
+import Space from '../Embed/Space'
+import { Publication } from '@/types/lens'
+import Wrapper from '../Embed/Wrapper'
 
 
 
 
-const Live = () => {
+const Live = (publication:Publication) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -99,9 +102,7 @@ const Live = () => {
     validateAuthentication()
   }, [isDisconnected, address, chain, disconnect, profileId])
 
-  if (loading || !mounted) {
-    return <Loading />
-  }
+
 
   return (
     <div>
@@ -113,7 +114,9 @@ const Live = () => {
             <Sidebar />
           </div>
           <div className="mt-4 flex flex-col items-center  overflow-auto   flex-1">
-            <Toggle/>
+         
+            <Space publication={publication as Publication} />
+
           </div>
         </div>
         <div className="block md:hidden">

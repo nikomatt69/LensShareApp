@@ -1,3 +1,4 @@
+import { Link } from "interweave-autolink";
 import Script from "next/script";
 import React, { useState }  from 'react';
 const List = ({ items, mt }: { items: string[]; mt: Boolean }) => (
@@ -16,6 +17,16 @@ const List = ({ items, mt }: { items: string[]; mt: Boolean }) => (
 const Footer = () => (
   <div className="mt-6 hidden xl:block">
     <p className="text-gray-400 text-sm mt-5">© 2022 LensShare</p>
+    <Link href="/terms">
+      <p className="text-black text-sm mt-1 hover:underline cursor-pointer">
+        Terms of Service
+      </p>
+    </Link>
+    <Link href="/privacy">
+      <p className="text-black text-sm mt-1 hover:underline cursor-pointer">
+        Privacy Policy
+      </p>
+    </Link>
   </div>
 );
 

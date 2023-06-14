@@ -77,11 +77,11 @@ const VideoPlayer: FC<Props> = ({
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full rounded-lg">
       {sensitiveWarning ? (
         <SensitiveWarning acceptWarning={() => setSensitiveWarning(false)} />
       ) : (
-        <div onContextMenu={onContextClick} className="relative">
+        <div onContextMenu={onContextClick} className="relative rounded-xl">
           <PlayerInstance
             posterUrl={posterUrl}
             permanentUrl={permanentUrl}

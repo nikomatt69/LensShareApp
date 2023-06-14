@@ -7,7 +7,7 @@ import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import FollowButton from  "@/components/Buttons/FollowButton";
 import { useAppStore } from "src/store/app";
 import MesssageIcon from 'src/components/Messages/MessageIcon';
-
+import clsx from 'clsx';
 import ProfileVideos from "@/components/ProfilePage/ProfileVideos";
 import UnfollowButton from '../Buttons/UnfollowButton';
 import getAvatar from '@/lib/getAvatar';
@@ -38,6 +38,7 @@ import StatsCard from '@/abi/Stats';
 import { count } from 'console';
 import Stats from '@/abi/Stats';
 import imageCdn from '@/lib/imageCdn';
+import CogOutline from '../UI/Icons/CogOutline';
 
 
 
@@ -68,7 +69,7 @@ interface Props {
         const [showSearchModal, setShowSearchModal] = useState(false);
     
         
-        
+        const isActivePath = (path: string) => router.pathname === path
         
         
 
@@ -116,7 +117,7 @@ interface Props {
                            ) : (
                             <div className='right-1'>
                                  <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
-                                <Link href='/live'> View Live</Link>
+                                <Link href='/live'> View Space</Link>
                             </button>
                             
                             </div>
@@ -127,6 +128,14 @@ interface Props {
                     <div className="flex gap-4 justify-center">
                         <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
                             <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6 font-bold mt-2 cursor-pointer" />
+                        </Link>
+
+                        <Link href='/settings'>
+                        <Cog6ToothIcon
+            className={clsx('h-4 w-4 opacity-80', {
+              'text-green-500 opacity-100': isActivePath('/settings')
+            })}
+          />
                         </Link>
                         <button onClick={() => setShowStatsModal(true)} >
                            <span className="flex justify-center">

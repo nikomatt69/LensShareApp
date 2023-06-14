@@ -13,7 +13,7 @@ import getAvatar from "@/lib/getAvatar";
 import { Menu } from "@headlessui/react";
 import MenuTransition from "./UI/MenuTransition";
 import { NextLink2 } from "./UI/NextLink2";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 import MessageIcon from "./Messages/MessageIcon";
 import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import { Cog6ToothIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
@@ -21,6 +21,8 @@ import { BellIcon } from "@heroicons/react/24/outline";
 import SearchBarDiscover from "./Search/SearchBarDiscover";
 import { FaHeadphones } from "react-icons/fa";
 import { FcVideoCall } from "react-icons/fc";
+import MainButton from "./Buttons/Rainbow/mainbutton";
+
 
 
 
@@ -47,7 +49,7 @@ const Navbar: FC = () => {
     <SearchBar />
      {/* //discover page */}
      <Link href='/discover'>
-     <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold lg:hidden xl:hidden items-center gap-2 cursor-pointer md:hidden
+     <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold   items-center gap-2 cursor-pointer md:hidden
          rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </button>
@@ -55,12 +57,12 @@ const Navbar: FC = () => {
     <div>
      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
        
-        <Link href='/listen'>
+        <Link href='/notifications'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
          rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <MusicalNoteIcon className='h-6 text-blue-500' />{' '}
-          <span className='hidden '>Listen </span>
+         <BellIcon className='h-6 text-blue-500' />{' '}
+       
         </button>
         </Link> 
       <div className="flex">
@@ -92,7 +94,7 @@ const Navbar: FC = () => {
              </div>
         ) : (
           <div className='block'>
-          <ConnectButton />
+            <MainButton/>
           </div>
         )}
         </div>
@@ -103,3 +105,4 @@ const Navbar: FC = () => {
 };
 
 export default Navbar;
+

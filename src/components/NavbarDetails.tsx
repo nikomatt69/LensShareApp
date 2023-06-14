@@ -13,13 +13,15 @@ import getAvatar from "@/lib/getAvatar";
 import { Menu } from "@headlessui/react";
 import MenuTransition from "./UI/MenuTransition";
 import { NextLink2 } from "./UI/NextLink2";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 import MessageIcon from "./Messages/MessageIcon";
 import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from "@heroicons/react/24/solid";
 import { Cog6ToothIcon, MusicalNoteIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import router from "next/router";
 import { FaHeadphones } from "react-icons/fa";
+import { ConnectKitButton } from "connectkit";
+import MainButton from "./Buttons/Rainbow/mainbutton";
 
 
 
@@ -47,12 +49,12 @@ const Navbar: FC = () => {
       </Link>
  
     <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
-       <Link href='/listen'>
+    <Link href='/notifications'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
          rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
          {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <MusicalNoteIcon className='h-6 text-blue-500' />{' '}
-          <span className='hidden '>Listen </span>
+         <BellIcon className='h-6 text-blue-500' />{' '}
+       
         </button>
         </Link> 
       <div className='flex pl-full centre-item gap-5 md:gap-10 '>
@@ -84,7 +86,7 @@ const Navbar: FC = () => {
              </div>
         ) : (
           <div className='block'>
-          <ConnectButton />
+          <MainButton/>
           </div>
         )}
         </div>

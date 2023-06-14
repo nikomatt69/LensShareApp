@@ -1,93 +1,41 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectKitButton } from "connectkit";
+
+import styled from "styled-components";
+const StyledButton = styled.button`
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  background: #000;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 10rem;
+  box-shadow: 0 4px 20px -6px #1a88f8;
+
+  transition: 200ms ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 40px -6px #1a88f8;
+  }
+  &:active {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 26px -6px #1a88f8;
+  }
+`;
 
 export const MainButton = () => {
   return (
-    <ConnectButton.Custom>
-      {({
-        account,
-        chain,
-        openAccountModal,
-        openChainModal,
-        openConnectModal,
-        authenticationStatus,
-        mounted,
-      }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
-        const connected =
-          ready &&
-          account &&
-          chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+    <ConnectKitButton.Custom>
+      {({ isConnected, show, truncatedAddress, ensName }) => {
         return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              'style': {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button onClick={openConnectModal} type="button">
-                    Get Started...
-                  </button>
-                );
-              }
-              if (chain.unsupported) {
-                return (
-                  <button onClick={openChainModal} type="button">
-                    Wrong network
-                  </button>
-                );
-              }
-              return (
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
-                  <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ''}
-                  </button>
-                </div>
-              );
-            })()}
-          </div>
+          <StyledButton onClick={show}>
+            {isConnected ? ensName ?? truncatedAddress : "Connect Wallet"}
+          </StyledButton>
         );
       }}
-    </ConnectButton.Custom>
+    </ConnectKitButton.Custom>
   );
 };
+
+export default MainButton;

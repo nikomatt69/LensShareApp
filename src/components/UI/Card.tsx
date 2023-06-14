@@ -7,6 +7,7 @@ interface CardProps {
   className?: string;
   forceRounded?: boolean;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+    dataTestId?: string;
   
 }
 
@@ -15,6 +16,7 @@ export const Card: FC<CardProps> = ({
   as: Tag = 'div',
   className = '',
   forceRounded = false,
+  dataTestId = '',
   onClick
 }) => {
     return (

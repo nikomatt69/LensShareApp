@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useState } from 'react';
 import ButtonTest from '../Login/ButtonTest';
 import LoginWalletMobile from '../Login/LoginWalletMobile';
-import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon, BellIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon, BellIcon, MusicalNoteIcon } from '@heroicons/react/24/outline';
 import router from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { MdVideoLibrary } from 'react-icons/md';
@@ -64,10 +64,10 @@ const BottomNav: React.FC = () => {
       </Link>
 
       <div>
-      {/* //notifications */}
-     <Link href='/notifications'>
+      {/* //listen */}
+     <Link href='/listen'>
 
-        <BellIcon className="text-blue-500 pb-1 h-6 w-6" />{' '}
+        <MusicalNoteIcon className="text-blue-500 pb-1 h-6 w-6" />{' '}
        
       </Link>
       </div>
