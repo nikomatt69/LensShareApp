@@ -1,3 +1,6 @@
+import 'plyr-react/plyr.css';
+
+
 
 import { Player , AspectRatio} from '@livepeer/react'
 import type { FC } from 'react'
@@ -17,6 +20,8 @@ export interface PlayerProps {
     loop?: boolean
     loadingSpinner: boolean
     isCurrentlyShown: boolean
+    roundCorners?: boolean
+
   }
 }
 
@@ -30,6 +35,7 @@ const PlayerInstance: FC<PlayerProps> = ({
 }) => {
   return (
     <Player
+
       src={permanentUrl}
       poster={posterUrl}
       showTitle={false}
@@ -44,6 +50,8 @@ const PlayerInstance: FC<PlayerProps> = ({
       autoPlay={options.autoPlay ?? true}
       showLoadingSpinner={options.loadingSpinner}
       _isCurrentlyShown={options.isCurrentlyShown}
+     
+
       autoUrlUpload={
         IS_MAINNET && {
           fallback: true,

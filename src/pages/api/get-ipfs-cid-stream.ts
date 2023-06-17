@@ -1,5 +1,7 @@
 import { API_KEY } from "@/constants";
 import { useAppStore } from "@/store/app";
+
+
 import { useCreateStream } from "@livepeer/react";
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -8,6 +10,20 @@ import { useMemo, useState } from "react";
 
 const currentProfile = useAppStore((state) => state.currentProfile);
 const streamName = currentProfile?.handle;
+
+const {
+  mutate: createStream,
+  data: stream,
+  status: createStreamStatus,
+} = useCreateStream(streamName
+  ? {
+      name: streamName,
+      playbackPolicy: { type: "jwt" },
+    }
+    : null);
+  
+console.log(stream);
+
   
 
 export default async function handler(
@@ -19,7 +35,7 @@ export default async function handler(
     console.log("Request Body id:", id);
     // store vide on ipfs
     try {
-      const response = await fetch(`https://livepeer.studio/api/stream/${stream?.playbackId}`, {
+      const response = await fetch(`https://livepeer.studio/api/stream/${stream}`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${API_KEY}`,
@@ -52,8 +68,8 @@ export default async function handler(
 
 
 
-async function CreatedStream(id: string) {
-  const response = await fetch(`https://livepeer.studio/api/stream/${stream?.playbackId}`, {
+async function CreatedStream(stream: string) {
+  const response = await fetch(`https://livepeer.studio/api/stream/${stream}`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${API_KEY}`,
@@ -63,17 +79,3 @@ async function CreatedStream(id: string) {
   const data = await response.json();
   return data;
 }
-
-const {
-  mutate: createStream,
-  data: stream,
-  status: createStreamStatus,
-} = useCreateStream(streamName
-  ? {
-      name: streamName,
-      playbackPolicy: { type: "public" },
-    }
-    : null);
-  
- console.log(stream);
-

@@ -89,6 +89,7 @@ const VideoPlayer: FC<Props> = ({
             playerRef={mediaElementRef}
             options={options}
             showControls={showControls}
+
           />
         </div>
       )}

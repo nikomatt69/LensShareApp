@@ -48,7 +48,7 @@ const SpaceUser: FC<SpaceUserProps> = ({ peer }) => {
       <div className="max-w-[80px] truncate text-sm sm:max-w-[120px]">
         {sanitizeDisplayName(profile?.name) ?? formatHandle(profile?.handle)}
       </div>
-      
+    
     </div>
   );
 

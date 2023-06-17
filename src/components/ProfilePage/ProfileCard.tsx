@@ -2,7 +2,7 @@
 
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Profile} from '@/utils/lens';
+import { Profile, Publication} from '@/utils/lens';
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import FollowButton from  "@/components/Buttons/FollowButton";
 import { useAppStore } from "src/store/app";
@@ -39,6 +39,10 @@ import { count } from 'console';
 import Stats from '@/abi/Stats';
 import imageCdn from '@/lib/imageCdn';
 import CogOutline from '../UI/Icons/CogOutline';
+import { SpaceMetadata } from '@/typesLenster';
+import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
+import { useProfilesQuery } from '@/utils/lens/generatedLenster';
+
 
 
 
@@ -47,9 +51,9 @@ interface Props {
     profile: Profile
     setFollowing: Dispatch<boolean>
     following: boolean
-   
-}
-    const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
+    space: SpaceMetadata
+    }
+    const ProfileCard: FC<Props> = ({ profile, setFollowing, following,space}) => {
         const currentProfile = useAppStore((state) => state.currentProfile);
         const [showUserVideos, setShowUserVideos] = useState<Boolean>(true);
         const [showUserMirrorVideos, setShowUserMirrorVideos] = useState<Boolean>(true);
@@ -57,6 +61,10 @@ interface Props {
         const [showFollowersModal, setShowFollowersModal] = useState(false);
         const [showFollowingModal, setShowFollowingModal] = useState(false);
         const [showStatsModal, setShowStatsModal] = useState(false);
+        
+        
+        
+
 
         const itsNotMe = profile?.id !== currentProfile?.id
         const videos = showUserVideos ? 'text-center border-2 border-black text-white' : 'border-2 border-black text-center text-black';
@@ -70,8 +78,7 @@ interface Props {
     
         
         const isActivePath = (path: string) => router.pathname === path
-        
-        
+
 
         return (
             <div className="flex justify-center mx-4">
@@ -117,7 +124,7 @@ interface Props {
                            ) : (
                             <div className='right-1'>
                                  <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
-                                <Link href='/live'> View Space</Link>
+                                <Link href={`/stream`}>Stream</Link>
                             </button>
                             
                             </div>
@@ -147,18 +154,26 @@ interface Props {
                                 onClose={() => setShowStatsModal(!showStatsModal)}
                             >
                                <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats.totalPosts} data={{
+                                    commentsTotal: profile?.id.stats.totalComments,
+                                    id:currentProfile?.id,
+                                    mirrorsTotal: profile?.id.stats.totalMirrors,
+                                    postsTotal: profile?.id.stats.totalPosts,
+                                    publicationsTotal: profile?.id.stats.totalPublications,
+                                    /** Total collects count */
+                                    totalCollects: profile?.id.stats.totalCollects,
+                                    totalComments: profile?.id.stats.totalComments,
+                                    totalFollowers: profile?.id.stats.totalFollowers,
+                                    totalFollowing: profile?.id.stats.totalFollowing,
+                                    totalMirrors: profile?.id.stats.totalMirrors,
+                                    totalPosts: profile?.id.stats.totalPosts,
+                                    totalPublications: profile?.id.stats.totalPublications,
+                                  
                                     
-                                    totalBurntProfiles: 0,
+                                  
 
 
-                                    totalCollects: profile?.stats.totalCollects,
-                                    totalComments: profile?.stats.totalComments,
-                                    totalFollows: profile?.stats.totalFollowers,
-                                    totalMirrors: profile?.stats.totalMirrors,
-                                    totalPosts: profile?.stats.totalPosts,
-                                    totalProfiles: 0,
-                                    totalRevenue: []
-                                }} revenue={0} /> 
+                                  
+                                }}  revenue={0}  /> 
                             </Modal>
                        </button>
                         

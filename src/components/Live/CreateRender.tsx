@@ -8,9 +8,10 @@ import { useUserProfilesQuery } from '@/types/graph';
 import Live from "./Live";
 import CreateStream from "./CreateStream";
 import Navbar from "../Navbar";
+import { Publication } from "@/types/lens";
 
 
-const CreateRender = () => {
+const CreateRender = (publication:Publication) => {
     const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -99,9 +100,9 @@ const CreateRender = () => {
   return (
     <div>
         <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
-            <Navbar />
+         
             <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
-                <CreateStream/>
+                <Live publication={publication as Publication}/>
             </div>
         </div>
     </div>

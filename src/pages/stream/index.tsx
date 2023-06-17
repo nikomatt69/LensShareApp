@@ -1,3 +1,4 @@
 import Live from "@/components/Live/Live";
 
-export default Live;
+
+export default Live

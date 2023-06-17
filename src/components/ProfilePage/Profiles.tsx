@@ -10,15 +10,21 @@ import { Toaster } from "react-hot-toast";
 import { useAppStore } from "@/store/app";
 import BottomNav from "../Navs/BottomNav";
 import NavbarDetails from "../NavbarDetails";
+import { Publication } from "@/types/lens";
+import { SpaceMetadata } from "@/typesLenster";
+
+interface Props {
+  space: SpaceMetadata;
+}
 
 
 
-const Profile: NextPage = () => {
+const Profile: NextPage = (space) => {
   const router = useRouter();
-  const { id } = router.query
+
   const [following, setFollowing] = useState(false)  
   const currentProfile = useAppStore((state) => state.currentProfile);
-
+  const { id } = router.query
   const { data, loading, error } = useQuery
     (ProfileDocument, {
       variables: { 
@@ -54,7 +60,7 @@ const Profile: NextPage = () => {
             <Sidebar />
           </div>
           <div className="mt-2 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
-            <ProfileCard profile={profile as Profile} setFollowing={setFollowing} following={following}  />
+            <ProfileCard space={space as SpaceMetadata} profile={profile as Profile}  setFollowing={setFollowing} following={following}  />
           </div>
         </div>
         <div className="block md:hidden">

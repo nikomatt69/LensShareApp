@@ -1,4 +1,5 @@
 import { API_KEY } from '@/constants'
+import { useAppStore } from '@/store/app'
 import { Player } from '@livepeer/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -7,6 +8,9 @@ const LiveContent = () => {
     const [stream, setStream] = useState<any[]>()
     const [name, setName] = useState("")
     const [playbackId, setPlaybackId] = useState("")
+    const currentProfile = useAppStore((state) => state.currentProfile);
+
+  const streamName = currentProfile?.id;
 
   useEffect(() => {
     const headers = {
@@ -16,7 +20,7 @@ const LiveContent = () => {
     
     axios({
         method: `get`,
-        url: `https://livepeer.studio/api/stream/${playbackId}`,
+        url: `/api/get-ipfs-cid-stream/${stream}`,
         headers: headers,
         params: {
             filters: JSON.stringify([{
@@ -42,9 +46,9 @@ const LiveContent = () => {
         {stream?.map(stream => (
                 <>
                   {stream?.playbackId && (
-                    <div className='p-5' key={stream?.id}>
+                    <div className='p-5' key={streamName}>
                       <Player 
-                        title={stream?.name}
+                        title={streamName}
                         playbackId={stream?.playbackId}
                         autoPlay
                         muted

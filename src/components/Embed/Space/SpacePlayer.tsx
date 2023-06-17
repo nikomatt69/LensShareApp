@@ -15,12 +15,15 @@ import { useState } from 'react';
 import { useAppStore } from 'src/store/app';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { useAccount, useSignMessage } from 'wagmi';
-import SpaceUser from './SpaceUser';
+
 import { Profile, Publication } from '@/types/lens';
 import SmallUserProfile from './SmallUserProfile';
 import { PencilIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/components/UI/Button';
 import { Spinner } from '@/components/UI/Spinner';
+
+
+import SpaceUser from './SpaceUser';
 
 interface SpacePlayerProps {
   publication: Publication;
@@ -56,7 +59,7 @@ const SpacePlayer: FC<SpacePlayerProps> = ({ publication, space }) => {
   });
 
   useEffectOnce(() => {
-    initialize('3kzet_ujpjtF8dzciFefEOAZqrDNpdQS');
+    initialize('KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR');
   });
 
   useUpdateEffect(() => {

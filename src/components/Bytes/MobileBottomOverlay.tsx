@@ -2,7 +2,7 @@ import { Profile, Publication } from '@/types/lens'
 import { formatNumber } from '@/utils/functions/formatNumber'
 import getProfilePicture from '@/utils/functions/getProfilePicture'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import React from 'react'
 import UnfollowButton from '../Buttons/UnfollowButton'
 import FollowButton from '../Buttons/FollowButton'
@@ -26,9 +26,20 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
   const isMirror = video.__typename === 'Mirror'
 
 
-  const subscribeType = video.profile?.followModule?.__typename
-  const profile = video.profile 
+  const subscriber = video.profile
 
+
+
+  useEffect(() => {
+    if(subscriber?.isFollowedByMe === true) {
+    setFollowing(true) 
+  } else {
+    setFollowing(false)
+  }
+    if (!currentProfile) {
+      setFollowing(false)
+    }
+    }, [subscriber?.isFollowedByMe])
 
   return (
     <div className="absolute border-b-2  border-blue-700 bottom-0 rounded-b-2xl  bg-blue-500 overflow-auto left-0 right-0 z-[1] bg-gradient-to-b from-gray-900 to-transparent px-3 pb-6 pt-3 md:rounded-b-xl">
@@ -46,22 +57,22 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
       <div className="flex items-center justify-between">
         <div className="min-w-0">
           <Link
-            href={`/u/${profile?.id}`}
+            href={`/u/${subscriber?.id}`}
             className="flex flex-none cursor-pointer items-center space-x-2"
           >
             <img
-              src={getProfilePicture(profile, 'avatar')}
+              src={getProfilePicture(subscriber, 'avatar')}
               className="h-9 w-9 rounded-full"
               draggable={false}
-              alt={profile?.handle}
+              alt={subscriber?.handle}
             />
             <div className="flex min-w-0 font-bold flex-col items-start text-white">
               <h6 className="flex max-w-full items-center space-x-1">
-                <span className="truncate">{formatHandle(profile?.handle)}</span>
+                <span className="truncate">{formatHandle(subscriber?.handle)}</span>
                 
               </h6>
               <span className="inline-flex items-center space-x-1 text-xs">
-                {formatNumber(profile?.stats.totalFollowers)} Followers
+                {formatNumber(subscriber?.stats.totalFollowers)} Followers
               </span>
             </div>
           </Link>
@@ -69,9 +80,9 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
         <div className="flex items-center  space-x-2">
         {<div className="flex-shrink-0 pr-3">
           { following ? ( 
-            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile }  /> 
+            <UnfollowButton setFollowing={ setFollowing } profile={ subscriber as Profile }  /> 
             ) : (
-            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+            <FollowButton setFollowing={ setFollowing } profile={ subscriber as Profile } />
           )}
         </div>}
         </div>

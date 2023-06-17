@@ -14,7 +14,7 @@ import {
   createReactClient,
   studioProvider,
 } from "@livepeer/react";
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { apolloClient } from "@/apollo-client";
@@ -24,12 +24,17 @@ import { WagmiConfig, createClient , } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { ConnectKitProvider, getDefaultClient } from 'connectkit';
 
-const chains = [mainnet, polygon, optimism, arbitrum];
+ 
+const chains = [polygon,];
+
+
+const queryClient = new QueryClient();
+
 
 const wagmiClient = createClient(
   getDefaultClient({
     appName: 'LensShare',
-    infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+    infuraId: process.env.NEXT_PUBLIC_INFURA_ID!,
     //alchemyId:  process.env.NEXT_PUBLIC_ALCHEMY_ID,
     chains,
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
@@ -38,7 +43,7 @@ const wagmiClient = createClient(
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: `${NEXT_PUBLIC_STUDIO_API_KEY}`,
+    apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY!,
     baseUrl: LENSTOK_URL,
   }),
 });
@@ -46,8 +51,9 @@ const livepeerClient = createReactClient({
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <WagmiConfig client={wagmiClient}>
-       <ConnectKitProvider debugMode>
+       <ConnectKitProvider options={{initialChainId:137}}  debugMode>
       <ApolloProvider client={apolloClient}>
+      <QueryClientProvider client={queryClient}>
         <LivepeerConfig client={livepeerClient}>
           <ThemeProvider defaultTheme="light" attribute="class">
             {children}
@@ -55,6 +61,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
           <Analytics />
           {/* <Video /> */}
         </LivepeerConfig>
+      </QueryClientProvider>
       </ApolloProvider>
       </ConnectKitProvider>
     </WagmiConfig>

@@ -14,22 +14,23 @@ import { Growthbook } from '@/utils/functions/growthbook';
 import { FeatureFlags } from '@/utils/data/feature-flags';
 import useCreateSpace from './useCreateSpace';
 import { usePublicationQuery } from '@/utils/lens/generatedLenster';
+import { Card } from '@/components/UI/Card';
+
 
 interface SpaceProps {
   publication: Publication;
 
-
+  space: {
+    id: string;
+    host: Profile;
+  };
 }
 
-const Spaces: FC<SpaceProps> = ({ publication }) => {
+const Space: FC<SpaceProps> = ({ publication }) => {
   const [showPlayer, setShowPlayer] = useState(false);
-  const [createSpace] = useCreateSpace();
-  const {metadata} = publication
-  const spaceObject = getPublicationAttribute(metadata.attributes, 'spaces');
-  const { on: isSpacesEnabled } = Growthbook.feature(FeatureFlags.Spaces);
-  const showSpaceEditor = isSpacesEnabled && !Boolean(spaceObject);
+  const { metadata } = publication;
   const space: SpaceMetadata = JSON.parse(
-    getPublicationAttribute(metadata.attributes, 'spaces')
+    getPublicationAttribute(metadata.attributes, 'audioSpace')
   );
 
   const { data, loading } = useProfilesQuery({
@@ -37,16 +38,6 @@ const Spaces: FC<SpaceProps> = ({ publication }) => {
       request: { ownedBy: [space.host] }
     }
   });
-
-
-  let spaceId = null;
-  if (showSpaceEditor) {
-    spaceId =  createSpace();
-  }
-
-
-
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -56,7 +47,10 @@ const Spaces: FC<SpaceProps> = ({ publication }) => {
     (profile) => profile?.ownedBy === space.host && profile?.isDefault
   ) as Profile;
 
+  
+
   return (
+    <Card>
     <Wrapper className=" border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
       <div className="mt-2 space-y-3">
@@ -85,7 +79,9 @@ const Spaces: FC<SpaceProps> = ({ publication }) => {
         />
       </Modal>
     </Wrapper>
+    </Card>
   );
 };
 
-export default Spaces;
+export default Space;
+

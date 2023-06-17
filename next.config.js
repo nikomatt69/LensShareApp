@@ -11,29 +11,30 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   redirects: true,
+  loaders: {
+    // Option format
+    '.md': [
+      {
+        loader: '@mdx-js/loader',
+        options: {
+          format: 'md',
+        },
+      },
+    ],
+    // Option-less format
+    '.mdx': ['@mdx-js/loader'],
+  },
+  experimentstopLevelAwait: true ,
   reactStrictMode: true,
   getServerSideProps: true,
   getInitialProps: true,
   getStaticPaths: true,
   getStaticProps: true,
+  webpack5: true,
   experimental: {
+    topLevelAwait: true, 
     scrollRestoration: true,
     newNextLinkBehavior: true,
-    turbo: {
-      loaders: {
-        // Option format
-        '.md': [
-          {
-            loader: '@mdx-js/loader',
-            options: {
-              format: 'md',
-            },
-          },
-        ],
-        // Option-less format
-        '.mdx': ['@mdx-js/loader'],
-      },
-    },
 
   },
   images: {
@@ -95,18 +96,22 @@ const nextConfig = {
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true },
     ];
   },
+
   async headers() {
     return [{
       
         source: '/(.*)',
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
+
           { key: 'Referrer-Policy', value: 'strict-origin' },
-   
+          
+  
+          
         ]
  } ]},
   
+
 };
 
 module.exports = nextConfig;

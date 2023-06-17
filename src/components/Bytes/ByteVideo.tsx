@@ -121,7 +121,7 @@ const ByteVideo: FC<Props> = ({
 
   const profile = video.profile
   return (
-    <div className={clsx(index != 0 && ' border-t dark:border-slate-600 ', !isMobile && 'flex mt-8 md:ml-2')}>
+    <div className={clsx(index != 0 && ' ', !isMobile && 'flex mt-8 md:ml-2')}>
         <div
           className="flex object-contain border-0 snap-center"
           data-testid="byte-video"

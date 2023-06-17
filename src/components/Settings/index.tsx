@@ -28,15 +28,15 @@ export const SETTINGS = '/settings'
 
 const Settings = () => {
   const router = useRouter()
-  const currentProfile = useAppStore((state: { currentProfile: any}) => state.currentProfile.id)
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   
 
   const { data, loading, error } = useProfileQuery({
     variables: {
-      request: { handle: currentProfile?.handle }
+      request: { handle: currentProfile?.handle}
     },
-    skip: !currentProfile?.handle
+    skip: !currentProfile?.handle,
   })
 
   if (error) {
@@ -46,7 +46,7 @@ const Settings = () => {
     return <SettingsShimmer />
   }
 
-  if (!data?.profile || (!currentProfile.id && router.isReady)) {
+  if (!data?.profile || (!currentProfile && router.isReady)) {
     return <Custom404 />
   }
 
@@ -57,7 +57,7 @@ const Settings = () => {
   return (
     <div className="container mx-auto max-w-full">
       <MetaTags title="Channel Settings" />
-      {!loading && !error && channel ? (
+      {channel ? (
         <div className="grid gap-4 md:grid-cols-4">
           <NavbarDetails/>
 

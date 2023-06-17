@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { FC } from "react";
 import { useAppStore } from "src/store/app";
 import  {sanitizeIpfsUrl}  from '@/utils/sanitizeIpfsUrl';
-import { VideoCameraIcon } from "@heroicons/react/20/solid";
+import { VideoCameraIcon } from "@heroicons/react/24/outline";
 import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import LoginButtonMobile from "./Login/LoginButtonMobile";
@@ -22,6 +22,9 @@ import SearchBarDiscover from "./Search/SearchBarDiscover";
 import { FaHeadphones } from "react-icons/fa";
 import { FcVideoCall } from "react-icons/fc";
 import MainButton from "./Buttons/Rainbow/mainbutton";
+import router from "next/router";
+
+
 
 
 
@@ -30,7 +33,7 @@ import MainButton from "./Buttons/Rainbow/mainbutton";
 
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-
+  const { id } = router.query
   const profilePic = currentProfile?.picture
   console.log('CURRENT PROFILE', currentProfile?.picture)
   
@@ -56,6 +59,16 @@ const Navbar: FC = () => {
       </Link>
     <div>
      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
+     <Link href='/stream'>
+        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
+         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
+         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
+         <VideoCameraIcon className='h-6 text-blue-500' />{' '}
+       
+        </button>
+        </Link> 
+
+    
        
         <Link href='/notifications'>
         <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer

@@ -190,7 +190,8 @@ const mute = useAppStore((state) => state.isMute)
       </div>
       <div className="rounded-xl cursor-pointer">
         {isMirror ? (
-          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span>
+          <>
+          <span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span>
           <ByteVideo
             setFollowing={ setFollowing } 
             key={`${publication?.id}_${publication.createdAt}1`}

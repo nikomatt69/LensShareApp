@@ -86,7 +86,7 @@ const Video: FC<Props> = ({ publication }) => {
       >
         
         <VideoPlayer
-          
+
          currentTime={videoWatchTime}
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}
@@ -101,6 +101,8 @@ const Video: FC<Props> = ({ publication }) => {
             loop: true,
             loadingSpinner: false,
             isCurrentlyShown: true,
+          
+           
           }}       
           
           

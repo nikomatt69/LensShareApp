@@ -11,9 +11,10 @@ import InterestsOutline from '../UI/Icons/InterestsOutline'
 import KeyOutline from '../UI/Icons/KeyOutline'
 import SubscribeOutline from '../UI/Icons/SubscribeOutline'
 import UserOutline from '../UI/Icons/UserOutline'
+import { Profile } from '@/types/lens'
 
 type Props = {
-  channel: any
+  channel: Profile
 }
 
 export const SETTINGS_MEMBERSHIP = '/settings/membership'

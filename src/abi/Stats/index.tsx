@@ -14,13 +14,14 @@ import useIsMounted from '@/utils/hooks/useIsMounted'
 import { useAppStore } from '@/store/app'
 import MetaTags from '@/components/UI/MetaTags'
 import Loader from '@/components/UI/Loader'
+import { useProfileQuery } from '@/utils/lens/generatedLenster'
 
 interface Props {
     icon: React.ReactNode
     count: number
     text: string
     publications: any
-    data : ProfileStats | GlobalProtocolStats
+    data : ProfileStats 
     profileId : string
     revenue : number
    
@@ -36,10 +37,10 @@ const Stats : FC<Props> = (
     const { mounted } = useIsMounted()
     const currentProfile = useAppStore((state) => state.currentProfile)
 
-    const { data, loading  } = useGlobalProtocolStatsQuery({
+    const { data, loading  } = useProfileQuery({
         variables: {
         request: {
-            sources: [APP_ID]
+            profileId: currentProfile?.id,
             
                 
                 
@@ -58,7 +59,7 @@ const Stats : FC<Props> = (
 
 
 
-    const stats = data?.globalProtocolStats as unknown as ProfileStats
+    const stats = data as ProfileStats
 
     return (
         <>

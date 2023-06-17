@@ -9,7 +9,7 @@ export enum FeatureFlags {
   NftDetail = 'nft-detail',
   GatedLocales = 'gated-locales',
   Polls = 'polls',
-  Spaces = 'spaces'
+  Space = 'audioSpace'
 }
 
 type FeatureFlag = {

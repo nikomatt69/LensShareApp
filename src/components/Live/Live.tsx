@@ -6,7 +6,7 @@ import Navbar from '../Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import BottomNav from '../Navs/BottomNav'
 import Toggle from './Toggle'
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { Profile, ReferenceModules } from "@/utils/lens";
@@ -16,11 +16,15 @@ import { useUserProfilesQuery } from '@/types/graph';
 import Space from '../Embed/Space'
 import { Publication } from '@/types/lens'
 import Wrapper from '../Embed/Wrapper'
+import Hero from '../LiveStream/Hero'
+import Hudd from './Hudd'
 
 
+interface Props {
+  publication: Publication
+}
 
-
-const Live = (publication:Publication) => {
+const Live: FC<Props> = ({ publication}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -113,9 +117,9 @@ const Live = (publication:Publication) => {
           <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
             <Sidebar />
           </div>
-          <div className="mt-4 flex flex-col items-center  overflow-auto   flex-1">
+          <div className="mt-4  flex-col items-center  mt-30 h-full  flex-1">
          
-            <Space publication={publication as Publication} />
+            <Hudd/>
 
           </div>
         </div>

@@ -25,11 +25,12 @@ export const LENS_MEDIA_SNAPSHOT_URL =
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
-export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80'
+export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
+export const HUDDLE_API_KEY="wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0";
 
 
 export const SPACES_WORKER_URL = IS_MAINNET
-  ? 'https://spaces.lenshareapp.xyz'
+  ? 'https://space.lenshareapp.xyz'
   : 'http://localhost:8089';
 
 export const GROWTHBOOK_KEY = IS_MAINNET
