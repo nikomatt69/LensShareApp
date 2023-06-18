@@ -42,3 +42,8 @@ a {
   z-index: 9999;
   top: 50px;
 }
+
+/* interweave linkify */
+.interweave-content a {
+  @apply text-blue-700;
+}

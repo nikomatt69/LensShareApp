@@ -20,6 +20,25 @@ import { getCollectModule } from "@/utils/getCollectModule";
 import { Spinner } from "../UI/Spinner";
 import MetaTags from "../UI/MetaTags";
 import { APP_NAME, LENSTOK_URL } from "@/constants";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import InputMentions from "../DetailPage/InputMentions";
+
+export type VideoFormData = z.infer<typeof formSchema>
+
+const formSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(5, { message: 'Title should be atleast 5 characters' })
+    .max(100, { message: 'Title should not exceed 100 characters' }),
+  description: z
+    .string()
+    .trim()
+    .max(5000, { message: 'Description should not exceed 5000 characters' }),
+  isSensitiveContent: z.boolean()
+})
 
 const UploadVideo = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -33,6 +52,23 @@ const UploadVideo = () => {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(topics[0].name); //this is a placeholder for now
+
+  const {
+  
+    getValues,
+    formState: { errors },
+    setValue,
+    watch,
+    clearErrors
+  } = useForm<VideoFormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      isSensitiveContent: uploadedVideo.isSensitiveContent ?? false,
+      title: uploadedVideo.title,
+      description: uploadedVideo.description
+    }
+  })
+
 
   const {
     mutate: createAsset,
@@ -202,6 +238,20 @@ const UploadVideo = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   className='rounded-xl lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
                   ></input>
+
+                <InputMentions
+                  label="Description"
+                  placeholder="Describe more about your video"
+                  autoComplete="off"
+                  validationError={errors.description?.message}
+                  value={watch('description')}
+                  onContentChange={(value) => {
+                    setValue('description', value)
+                    clearErrors('description')
+                  }}
+                  rows={3}
+                  mentionsSelector="input-mentions-textarea"
+                />
 
                   <label className='text-md rounded-xl font-medium'>Choose a Category</label>
                   <select

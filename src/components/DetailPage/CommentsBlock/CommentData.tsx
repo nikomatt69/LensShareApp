@@ -9,6 +9,7 @@ import LitJsSdk from "@lit-protocol/sdk-browser";
 import lit from "@/lib/lit";
 import formatHandle from "@/utils/functions/formatHandle";
 import CommentOptions from "./CommentOptions";
+import InterweaveContent from "@/components/UI/InterweaveContent";
 
 interface Props {
   comment: Publication;
@@ -92,7 +93,8 @@ const CommentData: FC<Props> = ({ comment, video,}) => {
            
           }}
         >
-          {comment.metadata.content}
+          <InterweaveContent content={comment?.metadata?.content}   />
+          
         </p>
         <button className="r-0 t-0 p-1">
     

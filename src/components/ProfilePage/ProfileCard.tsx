@@ -42,6 +42,7 @@ import CogOutline from '../UI/Icons/CogOutline';
 import { SpaceMetadata } from '@/typesLenster';
 import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import { useProfilesQuery } from '@/utils/lens/generatedLenster';
+import InterweaveContent from '../UI/InterweaveContent';
 
 
 
@@ -108,7 +109,7 @@ interface Props {
                            
                                <div className="mr-0 font-semibold sm:mr-10 pt-3 break-word leading-md linkify text-xs"
                                style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
-                               <text>{profile?.bio}</text>
+                               {profile?.bio} 
                                </div>
                    </div>
                        <div className="right-2 display:inline-block pt-1 ">
@@ -153,20 +154,20 @@ interface Props {
                                 show={showStatsModal}
                                 onClose={() => setShowStatsModal(!showStatsModal)}
                             >
-                               <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats.totalPosts} data={{
-                                    commentsTotal: profile?.id.stats.totalComments,
+                               <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats?.totalPosts} data={{
+                                    commentsTotal: profile?.id.stats?.totalComments,
                                     id:currentProfile?.id,
-                                    mirrorsTotal: profile?.id.stats.totalMirrors,
-                                    postsTotal: profile?.id.stats.totalPosts,
-                                    publicationsTotal: profile?.id.stats.totalPublications,
+                                    mirrorsTotal: profile?.id.stats?.totalMirrors,
+                                    postsTotal: profile?.id.stats?.totalPosts,
+                                    publicationsTotal: profile?.id.stats?.totalPublications,
                                     /** Total collects count */
-                                    totalCollects: profile?.id.stats.totalCollects,
-                                    totalComments: profile?.id.stats.totalComments,
-                                    totalFollowers: profile?.id.stats.totalFollowers,
-                                    totalFollowing: profile?.id.stats.totalFollowing,
-                                    totalMirrors: profile?.id.stats.totalMirrors,
-                                    totalPosts: profile?.id.stats.totalPosts,
-                                    totalPublications: profile?.id.stats.totalPublications,
+                                    totalCollects: profile?.id.stats?.totalCollects,
+                                    totalComments: profile?.id.stats?.totalComments,
+                                    totalFollowers: profile?.id.stats?.totalFollowers,
+                                    totalFollowing: profile?.id.stats?.totalFollowing,
+                                    totalMirrors: profile?.id.stats?.totalMirrors,
+                                    totalPosts: profile?.id.stats?.totalPosts,
+                                    totalPublications: profile?.id.stats?.totalPublications,
                                   
                                     
                                   

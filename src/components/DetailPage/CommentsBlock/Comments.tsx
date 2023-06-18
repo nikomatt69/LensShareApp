@@ -96,6 +96,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
                   key={`${currentViewingId}_${comment.createdAt}`}
                   comment={comment as Publication}
                   video={publication as Publication}
+                  
                 />
               ))}
          <CreateComment
