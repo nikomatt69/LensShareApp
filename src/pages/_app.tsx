@@ -1,12 +1,15 @@
 import "../styles/globals.css";
 import Loading from "@/components/Loading";
 import type { AppProps } from "next/app";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Analytics } from '@vercel/analytics/react';
 import MetaTags from "@/components/UI/MetaTags";
 import { STATIC_IMAGES_URL } from "@/constants";
 import Script from "next/script";
 import React from "react";
+import { useRouter } from "next/router";
+import { useAppStore } from "@/store/app";
+import { AUTH_ROUTES } from "@/utils/data/auth-routes";
 
 const Providers = lazy(() => import("@/components/Providers"));
 const Layout = lazy(() => import("@/components/Layout"));
@@ -14,6 +17,13 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const { pathname, replace, asPath } = useRouter();
+  const  currentProfile  = useAppStore((state) => state.currentProfile);
+  useEffect(() => {
+    if (!currentProfile && AUTH_ROUTES.includes(pathname)) {
+      replace(`/auth?next=${asPath}`)
+    }
+  }, [currentProfile, pathname, asPath, replace])
   return (
     <div>
       <MetaTags

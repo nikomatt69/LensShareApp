@@ -37,6 +37,8 @@ interface PublicationState {
     removeAttachments: (ids: string[]) => void;
     isUploading: boolean;
     setIsUploading: (isUploading: boolean) => void;
+    publicationContent: string;
+    setPublicationContent: (publicationContent: string) => void;
     buttonText: string;
     createPin: CreatePin;
     setCreatePin: (publication: { [k: string]: any }) => void;
@@ -50,6 +52,8 @@ export const usePublicationStore = create<PublicationState>((set) => ({
             createPin: { ...state.createPin, ...pinData }
         })),
     attachments: [],
+    publicationContent: '',
+    setPublicationContent: (publicationContent) => set(() => ({ publicationContent })),
     setAttachments: (attachments) => set(() => ({ attachments })),
     addAttachments: (newAttachments) =>
         set((state) => {

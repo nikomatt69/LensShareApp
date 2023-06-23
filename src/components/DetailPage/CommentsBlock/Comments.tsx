@@ -73,7 +73,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
               </a>
             </Link>
             <div className="flex p-1 flex-col flex-grow justify-center">
-              <Link href={`/u/${publication?.profile?.id}`} key={publication?.profile?.id}>
+              <Link legacyBehavior href={`/u/${publication?.profile?.id}`} key={publication?.profile?.id}>
                 <a className="font-bold block hover:underline items-center text-primary">
                   {publication?.profile?.name}
                 </a>

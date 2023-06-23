@@ -44,12 +44,12 @@ const Sidebar = () => {
                 <a className="text-md hidden lg:block cursor-pointer">Feed</a>
               </div>
             </Link>
-            <Link href="/latest">
+            <Link legacyBehavior href="/latest">
             <div className={pathname === '/latest' ? activeLink : normalLink}>
             
-                <a className="text-md hidden lg:block cursor-pointer">
+                <span className="text-md hidden lg:block cursor-pointer">
                   Latest
-                </a>
+                </span>
               </div>
             </Link>
           </div>

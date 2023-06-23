@@ -34,9 +34,9 @@ const Settings = () => {
 
   const { data, loading, error } = useProfileQuery({
     variables: {
-      request: { handle: currentProfile?.handle}
+      request: { profileId: currentProfile?.id}
     },
-    skip: !currentProfile?.handle,
+    skip: !currentProfile?.id,
   })
 
   if (error) {
@@ -50,24 +50,24 @@ const Settings = () => {
     return <Custom404 />
   }
 
-  const channel = data?.profile as Profile & {
+  const profile = data?.profile as Profile & {
     coverPicture: MediaSet
   }
 
   return (
     <div className="container mx-auto max-w-full">
       <MetaTags title="Channel Settings" />
-      {channel ? (
+      {profile ? (
         <div className="grid gap-4 md:grid-cols-4">
           <NavbarDetails/>
 
           <div className="md:col-span-1">
-            <SideNav channel={channel} />
+            <SideNav channel={profile} />
           </div>
           <div className="md:col-span-3">
-            {router.pathname === SETTINGS && <BasicInfo channel={channel} />}
+            {router.pathname === SETTINGS && <BasicInfo channel={profile} />}
             {router.pathname === SETTINGS_MEMBERSHIP && (
-              <Membership channel={channel} />
+              <Membership channel={profile} />
             )}
             {router.pathname === SETTINGS_PERMISSIONS && <Permissions />}
             {router.pathname === SETTINGS_INTERESTS && <ProfileInterests />}

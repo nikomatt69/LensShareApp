@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { Spinner } from "./Spinner";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { POLYGONSCAN_URL } from "@/constants";
+import Link from "next/link";
 
 
 interface Props {
@@ -37,7 +38,7 @@ const IndexStatus: FC<Props> = ({ type = 'Transaction', txHash, reload = false }
   });
 
   return (
-    <a
+    <Link
       className={clsx({ hidden: hide }, 'ml-auto text-sm font-medium')}
       href={`${POLYGONSCAN_URL}/tx/${txHash}`}
       target="_blank"
@@ -56,7 +57,7 @@ const IndexStatus: FC<Props> = ({ type = 'Transaction', txHash, reload = false }
           <div className="text-black dark:text-white">Index Successful</div>
         </div>
       )}
-    </a>
+    </Link>
   );
 };
 

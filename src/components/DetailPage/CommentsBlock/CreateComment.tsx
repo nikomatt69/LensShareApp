@@ -25,6 +25,7 @@ import LitJsSdk from "@lit-protocol/sdk-browser";
 import Link from "next/link";
 import getAvatar from "@/lib/getAvatar";
 import Image from "next/image";
+import { MentionTextArea } from "@/components/UI/MentionTextArea";
 
 interface Props {
   publication: Publication;
@@ -41,6 +42,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const setTxnQueue = useTransactionPersistStore((state) => state.setTxnQueue);
+  const [postContentError, setPostContentError] = useState('');
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
 
@@ -281,7 +283,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
               </a>
             </Link>
 
-      <textarea
+            <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         className="bg-[#F1F1F2] rounded-xl p-2 flex-grow text-sm outline-none placeholder:text-gray-500 border border-transparent focus:border-gray-300 transition"

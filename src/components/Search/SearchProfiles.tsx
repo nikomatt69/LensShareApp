@@ -9,6 +9,8 @@ import getAvatar from '@/lib/getAvatar'
 import { GoVerified } from 'react-icons/go'
 import Link from 'next/link'
 import formatHandle from '@/utils/functions/formatHandle'
+import Loading from '../Loading'
+import { useInView } from 'react-cool-inview'
 
 interface Props {
     query: string | string[]
@@ -18,7 +20,7 @@ const SearchProfiles: FC<Props> = ({ query }) => {
     const request = {
         query,
         type: SearchRequestTypes.Profile,
-        limit: 10
+        limit: 5
     }
 
     const { data, loading, error, fetchMore } = useSearchProfilesQuery({
@@ -27,7 +29,8 @@ const SearchProfiles: FC<Props> = ({ query }) => {
     })
 
     // @ts-ignore
-    const profiles = data?.search?.items
+    
+    const profiles = data?.search?.items as Profile[];
     // @ts-ignore
     const pageInfo = data?.search?.pageInfo
     const hasMore = pageInfo?.next && profiles?.length !== pageInfo.totalCount
@@ -52,11 +55,28 @@ const SearchProfiles: FC<Props> = ({ query }) => {
         })
     }
 
+
     if (loading) {
         <>
         <Spinner size="sm" /><p>Loading profiles </p>
         </>
     }
+
+    const { observe } = useInView({
+
+        onEnter: async () => {
+          await fetchMore({
+            variables: {
+              request: {
+                cursor: pageInfo?.next,
+                ...request
+              }
+            }
+          })
+        }
+    })
+    
+
 
   return (
         <div className='space-y-3 rounded-xl'>
@@ -82,6 +102,12 @@ const SearchProfiles: FC<Props> = ({ query }) => {
                     </Link>
                 </div>
             ))}
+             {pageInfo?.next && (
+            <span ref={observe} className="flex border-0 justify-center p-10">
+              <Loading />
+            </span>
+          )}
+            
         </div>
   )
 }

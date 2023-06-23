@@ -1,60 +1,48 @@
-import Slug from '@/components/UI/Slug';
-import { Matcher } from 'interweave';
-import Link from 'next/link';
-import { createElement } from 'react';
-import type { Profile } from '@/utils/lens';
-import formatHandle from '@/utils/functions/formatHandle';
-import { stopEventPropagation } from '@/lib/stopEventPropagation';
-import type { FC } from 'react';
-import type { MarkupLinkProps } from 'src/types/app';
-import { title } from 'process';
-import { id } from 'ethers/lib/utils.js';
+import { Matcher } from 'interweave'
+import Link from 'next/link'
+import React from 'react'
+import getLensHandle from '@/utils/functions/getLensHandle'
+import { title } from 'process'
+import { MarkupLinkProps } from '@/types/app'
+import { Profile } from '@/types/lens'
+
+interface MentionProps extends MarkupLinkProps {
+  tagProfile: Profile;
+  profileId : string;
+}
 
 
-export const Mention = ({href, title = href }: any) => {
-  const handle = title?.slice(1);
-
-  if (!handle) {
-    return null;
-  }
-
+const ChannelLink = ({ ...props }: any,) => {
   const profile = {
     __typename: 'Profile',
-    handle: handle,
+    handle: props.display,
+
     name: null,
-    id: null
+    id: props.profileId,
   };
+ 
+  
   return (
-    <Link href={`/u/${[id]}`} onClick={stopEventPropagation}>
-      {profile?.handle ? (
-          <Slug slug={formatHandle(handle)} prefix="@" />
-      ) : (
-        <Slug slug={formatHandle(handle)} prefix="@" />
-      )}
+    <Link href={`/u/${profile}`}>
+      {props.display}
     </Link>
-  );
-};
+  )
+}
+
 export class MentionMatcher extends Matcher {
-  replaceWith(match: string, props: any) {
-    return createElement(Mention, props, match);
+  replaceWith(match: string, props:any) {
+    return React.createElement(ChannelLink,  match,props)
   }
 
   asTag(): string {
-    const profile = title?.slice(1);
-    return (
-      
-      `${<Link href={`/u/${[id]}`} onClick={stopEventPropagation}>
-    
-      <Slug slug={profile} prefix="@" />
-    
-  </Link>}`);
+    return 'a'
   }
 
   match(value: string) {
-    return this.doMatch(value, /@[\w.-]+/, (matches) => {
+    return this.doMatch(value, /@[a-zA-Z0-9_.]/, (matches) => {
       return {
         display: matches[0]
-      };
-    });
+      }
+    })
   }
 }

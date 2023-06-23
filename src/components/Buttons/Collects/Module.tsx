@@ -4,6 +4,7 @@ import { ApprovedAllowanceAmount } from "@/utils/lens";
 import GetModuleIcon from "@/utils/GetModuleIcon";
 import { FC, useState } from "react";
 import AllowanceButton from "./AllowanceButton";
+import Link from "next/link";
 
 
 interface Props {
@@ -23,14 +24,14 @@ const Module: FC<Props> = ({ module }) => {
           </div>
           <div className="font-bold whitespace-nowrap">{getModule(module?.module).name}</div>
         </div>
-        <a
+        <Link
           href={`${POLYGONSCAN_URL}/address/${module?.contractAddress}`}
           className="text-sm text-gray-500 truncate"
           target="_blank"
           rel="noreferrer noopener"
         >
           {module?.contractAddress}
-        </a>
+        </Link>
       </div>
       <AllowanceButton module={module} allowed={allowed} setAllowed={setAllowed} />
     </div>

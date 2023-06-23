@@ -39,7 +39,16 @@ const Navbar: FC = () => {
   
   return (
     <div className="w-full flex justify-between bg-black rounded-lg bg-gradient-to-b from-gray-900 to-transparent items-center  border-4 border-blue-500 p-2 ">
-      <Link href="/">
+       <Link href='/discover'>
+     <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold   items-center gap-2 cursor-pointer 
+         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
+        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </button>
+      </Link>
+      {/* //discover page */}
+    <SearchBar />
+     {/* //home */}
+     <Link href="/">
         <div className="w-[100px] md:w-[129px]">
           <Image
             className="cursor-pointer"
@@ -48,14 +57,6 @@ const Navbar: FC = () => {
             layout="responsive"
           />
         </div>
-      </Link>
-    <SearchBar />
-     {/* //discover page */}
-     <Link href='/discover'>
-     <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold   items-center gap-2 cursor-pointer md:hidden
-         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-      </button>
       </Link>
     <div>
      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>

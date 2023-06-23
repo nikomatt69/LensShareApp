@@ -18,13 +18,13 @@ const BottomOverlay: FC<Props> = ({ video, btnSize }) => {
     <div className="z-[1] pb-3 md:rounded-b-xl mr-1">
       <div className="flex justify-between">
         <div>
-          <a href={`/u/${profile?.id}`}>
+          <Link href={`/u/${profile?.id}`}>
             <span className="font-bold text-base">{video.profile.name}</span>
             <span className='text-sm font-thin inline-flex'>@{video.profile.id} &nbsp; <Tooltip content="Verified" placement="right">
              
             </Tooltip>
             </span>
-          </a>
+          </Link>
           <Link href={`/bytes/${video.id}`} key={video.id}> 
           <h1 className="line-clamp-2 text-base mt-2 font-normal">{video.metadata.name} <span>
             {

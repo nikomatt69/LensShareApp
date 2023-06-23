@@ -6,9 +6,11 @@ import {
   PublicationSearchResult,
   SearchRequestTypes,
 } from "@/types/lens";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import VideoCard from "../HomePage/VideoCard";
 import Video from "../HomePage/Video";
+import Loading from "../Loading";
+import { useInView } from "react-cool-inview";
 
 interface Props {
   query: string | string[];
@@ -16,6 +18,8 @@ interface Props {
 
 const SearchPublications: FC<Props> = ({ query }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
+  const [byte, setByte] = useState<Publication>();
+  const [show, setShow] = useState(false);
 
   const request = {
     query,
@@ -39,15 +43,40 @@ const SearchPublications: FC<Props> = ({ query }) => {
     });
   };
 
+  const openDetail = (byte: Publication) => {
+    const nextUrl = `/${byte.id}`
+    setByte(byte)
+    history.pushState({ path: nextUrl }, '', nextUrl)
+    setShow(!show)
+  }
+  const { observe } = useInView({
+
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            cursor: pageInfo?.next,
+            ...request
+          }
+        }
+      })
+    }
+  })
+
   return (
     <div>
       {publications?.map((publication) => (
-        <Video
+        <VideoCard
           
           key={publication?.id}
-          publication={publication}
-        />
+          publication={publication} 
+          onDetail={openDetail}        />
       ))}
+       {pageInfo?.next && (
+            <span ref={observe} className="flex border-0 justify-center p-10">
+              <Loading />
+            </span>
+          )}
     </div>
   );
 };

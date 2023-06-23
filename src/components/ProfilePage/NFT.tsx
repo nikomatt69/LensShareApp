@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { CHAIN_ID } from 'src/constants';
 import { Card } from '@/components/UI/Card';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import Link from 'next/link';
 
 interface Props {
   nft: Nft;
@@ -22,7 +23,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
       {nft?.originalContent?.animatedUrl ? (
         <div className="grid gap-2 p-1 rounded-xl object-center object-fill items-center justify-center mt-2 lg:grid-cols-1 3xl:grid-cols-1 md:grid-cols-1 sm:grid-cols-1 xs:grid-col-1">
           {nft?.originalContent?.animatedUrl?.includes('.gltf') ? (
-            <a href={nftURL} target="_blank" rel="noreferrer noopener">
+            <Link href={nftURL} target="_blank" rel="noreferrer noopener">
               <div
                 className="rounded-xl object-fill object-center"
                 style={{
@@ -36,7 +37,7 @@ const NFT: FC<Props> = ({ nft, linkToDetail = true }) => {
                   backgroundRepeat: 'no-repeat'
                 }}
               />
-            </a>
+            </Link>
           ) : (
             <div className='rounded-xl items-center  object-fill object-center'>
             <iframe

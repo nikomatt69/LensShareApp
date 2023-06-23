@@ -10,6 +10,7 @@ import lit from "@/lib/lit";
 import formatHandle from "@/utils/functions/formatHandle";
 import CommentOptions from "./CommentOptions";
 import InterweaveContent from "@/components/UI/InterweaveContent";
+import { getRelativeTime } from "@/utils/functions/formatTime2";
 
 interface Props {
   comment: Publication;
@@ -84,7 +85,9 @@ const CommentData: FC<Props> = ({ comment, video,}) => {
           />
         </div>
       </Link>
+      {comment?.metadata?.content && (
       <div className="flex text-black flex-col w-[90%]">
+
         <p className="font-bold ">{formatHandle(comment.profile.handle)}</p>
         <p className="text-sm text-black pt-1 pl-1"
           style={{
@@ -93,16 +96,22 @@ const CommentData: FC<Props> = ({ comment, video,}) => {
            
           }}
         >
-          <InterweaveContent content={comment?.metadata?.content}   />
+          <InterweaveContent content={comment.metadata.content}   />
+          <span className="text-xs pl-2 text-blue-700 opacity-50">
+
+           {getRelativeTime(comment.createdAt)} 
+           </span>
           
         </p>
         <button className="r-0 t-0 p-1">
     
-    { <CommentOptions video={video} setShowReport={setShowReport} /> }
+    { <CommentOptions video={comment?.id} key={`${comment?.id}_${comment.createdAt}1`} setShowReport={setShowReport} /> }
     </button>
+      
       </div>
+      )}
     </div>
-  );
-};
+
+)};
 
 export default CommentData;

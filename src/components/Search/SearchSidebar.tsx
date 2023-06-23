@@ -21,16 +21,16 @@ const SearchSidebar = () => {
         {showSidebar ? <ImCancelCircle /> : <AiOutlineMenu />}
       </div>
       {showSidebar && (
-        <div className="lg:w-400 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3">
+        <div className="lg:w-400 w-100 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3">
         <div className="lg:border-b-2 border-gray-200 xl:pb-4">
             <Link href={`/search?q=${query.q}&type=profiles`}>
                 <div className={normalLink}>
-                    <a className="text-md hidden lg:block cursor-pointer">Profiles</a>
+                    <a className="text-md lg:block cursor-pointer">Profiles</a>
                 </div>
             </Link>
             <Link href={`/search?q=${query.q}&type=pubs`}>
               <div className={normalLink}>
-                <a className="text-md hidden lg:block text-[#000000] cursor-pointer">
+                <a className="text-md lg:block text-[#000000] cursor-pointer">
                   Publications
                 </a>
               </div>
