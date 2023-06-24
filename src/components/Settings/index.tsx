@@ -26,7 +26,7 @@ export const SETTINGS_PERMISSIONS = '/settings/permissions'
 export const SETTINGS_DANGER_ZONE = '/settings/danger'
 export const SETTINGS = '/settings'
 
-const Settings = () => {
+const Settings = (channel:Profile) => {
   const router = useRouter()
   const currentProfile = useAppStore((state) => state.currentProfile);
 
@@ -34,40 +34,28 @@ const Settings = () => {
 
   const { data, loading, error } = useProfileQuery({
     variables: {
-      request: { profileId: currentProfile?.id}
+      request: { profileId: currentProfile}
     },
-    skip: !currentProfile?.id,
+    skip: !currentProfile,
   })
 
-  if (error) {
-    return <Custom404 />
-  }
-  if (loading || !data) {
-    return <SettingsShimmer />
-  }
 
-  if (!data?.profile || (!currentProfile && router.isReady)) {
-    return <Custom404 />
-  }
 
-  const profile = data?.profile as Profile & {
-    coverPicture: MediaSet
-  }
 
   return (
     <div className="container mx-auto max-w-full">
       <MetaTags title="Channel Settings" />
-      {profile ? (
+      
         <div className="grid gap-4 md:grid-cols-4">
           <NavbarDetails/>
 
           <div className="md:col-span-1">
-            <SideNav channel={profile} />
+            <SideNav channel={currentProfile as Profile} />
           </div>
           <div className="md:col-span-3">
-            {router.pathname === SETTINGS && <BasicInfo channel={profile} />}
+            {router.pathname === SETTINGS && <BasicInfo channel={currentProfile?.id} />}
             {router.pathname === SETTINGS_MEMBERSHIP && (
-              <Membership channel={profile} />
+              <Membership channel={currentProfile as Profile} />
             )}
             {router.pathname === SETTINGS_PERMISSIONS && <Permissions />}
             {router.pathname === SETTINGS_INTERESTS && <ProfileInterests />}
@@ -75,7 +63,6 @@ const Settings = () => {
           </div>
 
         </div>
-      ) : null}
       <BottomNav/>
     </div>
   )

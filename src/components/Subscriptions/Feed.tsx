@@ -10,7 +10,7 @@ import Custom400 from '@/pages'
 import Loading from '../Loading'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Card } from '../UI/Card'
-import { LENSTUBE_BYTES_APP_ID, APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, SCROLL_ROOT_MARGIN, LENSTER_APP_ID } from '@/constants'
+import { LENSTUBE_BYTES_APP_ID, APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, SCROLL_ROOT_MARGIN, LENSTER_APP_ID, ORB_APP_ID } from '@/constants'
 import Video from '../HomePage/Video'
 import Bytes from '../Bytes'
 import ByteVideo from '../Bytes/ByteVideo'
@@ -47,7 +47,7 @@ const Feed = () => {
     limit: 20,
     feedEventItemTypes: [FeedEventItemType.Post, FeedEventItemType.Comment],
     profileId: currentProfile?.id,
-    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTOK_APP_ID ,LENSTER_APP_ID],
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTOK_APP_ID ,LENSTER_APP_ID,ORB_APP_ID],
     metadata: {
      
       mainContentFocus: [PublicationMainFocus.Video],

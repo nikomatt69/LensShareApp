@@ -7,11 +7,12 @@ import { useRouter } from 'next/router';
 import type { FC } from "react";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import { BsPlay } from "react-icons/bs";
-import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, ORB_APP_ID } from '@/constants';
+import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from '@/constants';
 import getMedia from '@/lib/getMedia';
+import AudioPlayer from '../UI/AudioPlayer';
 
 
-  const ProfileVideos = () => {
+  const ProfileAudioFeed = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const router = useRouter();
     const { id } = router.query
@@ -22,12 +23,12 @@ import getMedia from '@/lib/getMedia';
   ((PublicationsDocument), {
     variables: { 
       request: {
-        sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID,LENSTER_APP_ID,LENSTUBE_APP_ID,ORB_APP_ID],
+        sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID,LENSTER_APP_ID,LENSTUBE_APP_ID],
         profileId: id,
         publicationTypes: ["POST"],
-        limit: 50,
+        limit: 10,
         metadata: {
-          mainContentFocus: [PublicationMainFocus.Video],
+          mainContentFocus: [PublicationMainFocus.Audio],
         },
       }
      },
@@ -46,14 +47,14 @@ import getMedia from '@/lib/getMedia';
     return (
   <div>
         {publications?.length === 0 ? (
-            <p className="text-center">No videos yet</p>
+            <p className="text-center">No Music yet</p>
            ) : (
             <div className="grid  gap-2 pl-1 pr-1 mt-2 mb-2 lg:grid-cols-3 md:gap-y-6 gap-x-4 gap-y-2 3xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-col-1">
             {publications?.map((pub) => (
                 <div key={pub.id}>
                     <Link href={`/bytes/${pub.id}`} key={pub.id}>
                         <a  className="block h-0 border-2 border-blue-500 rounded-lg relative pb-[131%]">
-                        <video
+                        <audio
                         loop
                         autoPlay
                         playsInline
@@ -79,4 +80,4 @@ import getMedia from '@/lib/getMedia';
   </div>
             )}
   
-  export default ProfileVideos;
+  export default ProfileAudioFeed;

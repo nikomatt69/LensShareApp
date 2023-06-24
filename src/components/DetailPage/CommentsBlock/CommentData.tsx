@@ -11,6 +11,8 @@ import formatHandle from "@/utils/functions/formatHandle";
 import CommentOptions from "./CommentOptions";
 import InterweaveContent from "@/components/UI/InterweaveContent";
 import { getRelativeTime } from "@/utils/functions/formatTime2";
+import Like from "@/components/Buttons/Likes/Like";
+import LikeButton from "@/components/Buttons/Likes/LikeButton";
 
 interface Props {
   comment: Publication;
@@ -107,6 +109,10 @@ const CommentData: FC<Props> = ({ comment, video,}) => {
     
     { <CommentOptions video={comment?.id} key={`${comment?.id}_${comment.createdAt}1`} setShowReport={setShowReport} /> }
     </button>
+
+
+
+
       
       </div>
       )}

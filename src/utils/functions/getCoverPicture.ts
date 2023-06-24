@@ -1,7 +1,7 @@
 import type { Profile } from 'src/utils/lens'
 
 const getCoverPicture = (profile: Profile): string => {
-  return profile.coverPicture && profile.coverPicture.__typename === 'MediaSet'
+  return profile?.coverPicture && profile.coverPicture.__typename === 'MediaSet'
     ? profile?.coverPicture?.original?.url
     : `/patterns/9.png`
 }

@@ -1,3 +1,3 @@
-import Settings from '@/components/Settings'
+import Permissions from '@/components/Settings/Permissions'
 
-export default Settings
+export default Permissions

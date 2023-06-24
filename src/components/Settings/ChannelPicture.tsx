@@ -160,7 +160,7 @@ const ChannelPicture: FC<Props> = ({ channel }) => {
         }
         className="h-32 w-32 rounded-full border-2 object-cover"
         draggable={false}
-        alt={selectedPfp ? currentProfile?.handle : channel.handle}
+        alt={selectedPfp ? currentProfile?.id : channel?.id}
       />
       <label
         htmlFor="choosePfp"

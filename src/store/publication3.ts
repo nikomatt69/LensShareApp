@@ -12,6 +12,8 @@ interface PublicationState {
     cover: string;
     coverMimeType: string;
   }) => void;
+  showSpaceEditor: boolean;
+  setShowSpaceEditor: (showSpaceEditor: boolean) => void;
 }
 
 export const usePublicationStore = create<PublicationState>((set) => ({
@@ -20,5 +22,8 @@ export const usePublicationStore = create<PublicationState>((set) => ({
   publicationContent: '',
   setPublicationContent: (publicationContent) => set(() => ({ publicationContent })),
   audioPublication: { title: '', author: '', cover: '', coverMimeType: 'image/jpeg' },
-  setAudioPublication: (audioPublication) => set(() => ({ audioPublication }))
+  setAudioPublication: (audioPublication) => set(() => ({ audioPublication })),
+  showSpaceEditor: false,
+  setShowSpaceEditor: (showSpaceEditor) => set(() => ({ showSpaceEditor }))
 }));
+

@@ -1,3 +1,4 @@
-import Settings from '@/components/Settings'
+import DangerZone from '@/components/Settings/DangerZone'
+import SettingsRender from '@/components/Settings/DangerZone'
 
-export default Settings
+export default DangerZone

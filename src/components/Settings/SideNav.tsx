@@ -26,7 +26,7 @@ export const SETTINGS = '/settings'
 const SideNav: FC<Props> = ({ channel }) => {
   const router = useRouter()
 
-  const isActivePath = (path: string) => router.pathname === path
+
 
   return (
     <div className="rounded-lg pt-2">
@@ -36,55 +36,41 @@ const SideNav: FC<Props> = ({ channel }) => {
       <div className="py-1 ml-[-4px]  border-b dark:border-b-slate-800 mb-3 text-sm">
         <Link
           href={SETTINGS}
-          className={clsx(
-            'flex items-center py-2 px-1 focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg',
-            { 'dark:hover:bg-gray-800 hover:bg-gray-100 rounded-lg': isActivePath(SETTINGS) }
-          )}
+          className=
+            'flex items-center py-2 px-1 focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg'
         >
           <UserOutline className="h-4 w-4 mr-4" /> <span>Basic Info</span>
         </Link>
         <Link
           href={SETTINGS_MEMBERSHIP}
-          className={clsx(
-            'flex items-center py-2 px-1 focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg',
-            {
-              'dark:hover:bg-gray-800 hover:bg-gray-100 rounded-lg': isActivePath(SETTINGS_MEMBERSHIP)
-            }
-          )}
+          className=
+            'flex items-center py-2 px-1 focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg'
+          
+          
         >
           <SubscribeOutline className="h-4 w-4 mr-4" /> <span>Membership</span>
         </Link>
         <Link
           href={SETTINGS_PERMISSIONS}
-          className={clsx(
-            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg',
-            {
-              'dark:hover:bg-gray-800 hover:bg-gray-100 rounded-lg': isActivePath(SETTINGS_PERMISSIONS)
-            }
-          )}
+          className=
+            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg'
         >
           <KeyOutline className="h-4 w-4 mr-4" /> <span>Permissions</span>
         </Link>
         <Link
           href={SETTINGS_INTERESTS}
-          className={clsx(
-            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg',
-            {
-              'dark:hover:bg-gray-800 hover:bg-gray-100 rounded-lg': isActivePath(SETTINGS_INTERESTS)
-            }
-          )}
+          className=
+            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg'
+          
+
         >
           <InterestsOutline className="h-4 w-4 mr-4" /> <span>Interests</span>
         </Link>
         <Link
           href={SETTINGS_DANGER_ZONE}
-          className={clsx(
-            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg',
-            {
-              'bg-red-100 dark:bg-red-900/60 rounded-lg':
-                isActivePath(SETTINGS_DANGER_ZONE)
-            }
-          )}
+          className=
+            'flex items-center py-2 px-1  focus:outline-none my-2 dark:hover:bg-gray-800 hover:bg-gray-100 hover:rounded-lg'
+          
         >
           <RiAlarmWarningFill className="h-4 w-4 mr-4" /> <span>Danger Zone</span>
         </Link>

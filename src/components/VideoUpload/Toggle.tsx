@@ -1,11 +1,6 @@
 import { Player, Stream } from "@livepeer/react";
 import React, { FC, useState } from "react";
-import CreateRender from "./CreateRender";
-import CreateStream from "./CreateStream";
 
-import LiveContent from "./LiveContent";
-
-import Live from "./Live";
 import { Publication } from "@/types/lens";
 
 import Create from "../LiveStream/Create";
@@ -13,9 +8,9 @@ import Watch from "../LiveStream/Watch";
 import Hero from "../LiveStream/Hero";
 import { polygon } from "wagmi/dist/chains";
 import { useAppStore } from "@/store/app";
-import { AccessControl } from "./AccessControl";
-import Huddle from "./Hudd";
-import Hudd from "./Hudd";
+import UploadVideo from ".";
+import Live from "../Live/Live";
+
 
     
 interface Props {
@@ -52,8 +47,8 @@ const Toggle: FC<Props> = ({ publication }) => {
 
       </div>
     </div>
-    {selectedTab === "watch" && <Hudd/>}
-    {selectedTab === "go" && <CreateStream/>}
+    {selectedTab === "watch" && <UploadVideo/>}
+    {selectedTab === "go" && <Live publication={publication}/>}
     </div>
   );
 };

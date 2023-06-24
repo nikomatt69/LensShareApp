@@ -79,17 +79,17 @@ const Stats : FC<Props> = (
                             <div className="grid grid-cols-2 gap-4 text-xs p-3 justify-center center-items object-center md:grid-cols-2 lg:grid-cols-5">
                                 <StatCard
                                     icon={<BsPin size={20} />}
-                                    count={stats?.totalPosts}
+                                    count={currentProfile?.id.stats?.postsTotal}
                                     text="Total Posts"
                                 />
                                 <StatCard
                                     icon={<HiOutlineChatAlt2 size={20} />}
-                                    count={stats?.totalComments}
+                                    count={currentProfile?.id.stats?.commentsTotal}
                                     text="Total Comments"
                                 />
                                 <StatCard
                                     icon={<RiArrowLeftRightFill size={20} />}
-                                    count={stats?.totalMirrors}
+                                    count={currentProfile?.id.stats?.mirrorsTotal}
                                     text="Total Mirrors"
                                 />
                                 

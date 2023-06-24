@@ -1,7 +1,7 @@
 
 import Wrapper from '../Wrapper';
 import SpacePlayer from './SpacePlayer';
-import { Profile, Publication} from '@/types/lens';
+import { MetadataOutput, Profile, Publication} from '@/types/lens';
 import SmallUserProfile from './SmallUserProfile';
 import { MicrophoneIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/components/UI/Button';
@@ -17,8 +17,11 @@ import { usePublicationQuery } from '@/utils/lens/generatedLenster';
 import { Card } from '@/components/UI/Card';
 
 
+
 interface SpaceProps {
   publication: Publication;
+  profile: Profile;
+  metadata: MetadataOutput;
 
   space: {
     id: string;
@@ -26,16 +29,16 @@ interface SpaceProps {
   };
 }
 
-const Space: FC<SpaceProps> = ({ publication }) => {
+const Space: FC<SpaceProps> = ({ publication,metadata }) => {
   const [showPlayer, setShowPlayer] = useState(false);
-  const { metadata } = publication;
+
   const space: SpaceMetadata = JSON.parse(
     getPublicationAttribute(metadata.attributes, 'audioSpace')
   );
 
   const { data, loading } = useProfilesQuery({
     variables: {
-      request: { ownedBy: [space.host] }
+      request: { ownedBy: [space?.host] }
     }
   });
 
@@ -71,6 +74,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
         icon={<MicrophoneIcon className="text-brand h-5 w-5" />}
       >
         <SpacePlayer
+          metadata={metadata}
           publication={publication}
           space={{
             id: space.id,

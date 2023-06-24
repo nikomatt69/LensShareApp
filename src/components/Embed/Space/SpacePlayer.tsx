@@ -16,7 +16,7 @@ import { useAppStore } from 'src/store/app';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { useAccount, useSignMessage } from 'wagmi';
 
-import { Profile, Publication } from '@/types/lens';
+import { MetadataOutput, Profile, Publication } from '@/types/lens';
 import SmallUserProfile from './SmallUserProfile';
 import { PencilIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/components/UI/Button';
@@ -24,16 +24,25 @@ import { Spinner } from '@/components/UI/Spinner';
 
 
 import SpaceUser from './SpaceUser';
+import { SpaceMetadata } from '@/typesLenster';
+import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
+import { usePublicationQuery } from '@/utils/lens/generated';
+
 
 interface SpacePlayerProps {
   publication: Publication;
+  metadata: MetadataOutput;
   space: {
     id: string;
     host: Profile;
   };
 }
 
-const SpacePlayer: FC<SpacePlayerProps> = ({ publication, space }) => {
+
+
+
+const SpacePlayer: FC<SpacePlayerProps> = ({ publication,}) => {
+  
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [accessToken, setAccessToken] = useState('');
   const { initialize, isInitialized } = useHuddle01();
@@ -49,7 +58,12 @@ const SpacePlayer: FC<SpacePlayerProps> = ({ publication, space }) => {
   const { peers } = usePeers();
   const { state, send } = useMeetingMachine();
   const { address } = useAccount();
-  const { metadata } = publication;
+  const { metadata } = publication
+  const space: SpaceMetadata = JSON.parse(
+    getPublicationAttribute(metadata.attributes, 'audioSpace')
+  );
+
+
 
   const { signMessage, isLoading: signing } = useSignMessage({
     onSuccess: async (data) => {
@@ -59,7 +73,7 @@ const SpacePlayer: FC<SpacePlayerProps> = ({ publication, space }) => {
   });
 
   useEffectOnce(() => {
-    initialize('KL1r3E1yHfcrRbXsT4mcE-3mK60Yc3YR');
+    initialize('u7iRM97r22gySZASwaz3kqLdZFFJfqE6');
   });
 
   useUpdateEffect(() => {

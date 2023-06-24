@@ -1,3 +1,4 @@
+import { Profile } from '@/types/lens';
 import type { MediaSet } from '@/utils/lens';
 
 export interface MediaSetWithoutOnChain extends Omit<MediaSet, 'onChain'> {}
@@ -65,5 +66,5 @@ export interface MarkupLinkProps {
 
 export interface SpaceMetadata {
   id: string;
-  host: `0x${string}`;
+  host: Profile;
 }

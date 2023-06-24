@@ -7,7 +7,7 @@ const Hudd = () => {
     useEventListner("lobby:initialized", () => {
         iframeApi.initialize({
           redirectUrlOnLeave: "https://lenshareapp.xyz",
-          wallets: ["lens","walletconnect"],
+          wallets: ['metamask','lens', 'walletconnect'],
 
         });
     });

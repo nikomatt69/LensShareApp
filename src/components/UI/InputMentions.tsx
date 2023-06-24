@@ -119,7 +119,7 @@ const InputMentions: FC<Props> = ({
                   </div>
                   {suggestion?.followers && (
                     <span className="text-xs opacity-80">
-                      {formatNumber(suggestion?.followers)} subscribers
+                      {formatNumber(suggestion?.followers)} followers
                     </span>
                   )}
                 </div>

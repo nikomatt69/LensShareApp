@@ -1,3 +1,2 @@
-import ByteVideo from '@/components/Bytes/ByteVideo'
-
-export default ByteVideo
+import Video from "@/components/HomePage/Video"
+export default Video

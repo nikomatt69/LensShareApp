@@ -88,8 +88,8 @@ const BasicInfo = ({ channel }: Props) => {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      displayName: channel.name || '',
-      description: channel.bio || '',
+      displayName: channel?.name || '',
+      description: channel?.bio || '',
       location: getValueFromKeyInAttributes(channel?.attributes, 'location'),
       twitter: getValueFromKeyInAttributes(channel?.attributes, 'twitter'),
       website: getValueFromKeyInAttributes(channel?.attributes, 'website')
@@ -276,7 +276,7 @@ const BasicInfo = ({ channel }: Props) => {
           }
           className="h-48 w-full rounded bg-white object-cover object-center dark:bg-gray-900 md:h-56"
           draggable={false}
-          alt={`${channel.handle}'s cover`}
+          alt={`${channel?.id}'s cover`}
         />
         <label
           htmlFor="chooseCover"
@@ -304,19 +304,7 @@ const BasicInfo = ({ channel }: Props) => {
           <span>{channel?.handle}</span>
          
         </h6>
-        {IS_MAINNET &&
-          !VERIFIED_CHANNELS.includes(channel?.id) &&
-          channel.stats.totalFollowers > 500 && (
-            <Link
-              href={TALLY_VERIFICATION_FORM_URL}
-            
-              target="_blank"
-              rel="noreferer noreferrer"
-              className="bg-gradient-to-br from-purple-500 to-green-600 bg-clip-text text-sm text-transparent"
-            >
-              ( Get Verified )
-            </Link>
-          )}
+      
       </div>
       <div className="mt-4">
         <div className="mb-1 flex items-center">
@@ -326,12 +314,12 @@ const BasicInfo = ({ channel }: Props) => {
         </div>
         <div className="flex items-center space-x-2">
           <span>
-            {LENSTOK_URL}/u/{channel.id}
+            {LENSTOK_URL}/u/{channel?.id}
           </span>
           <button
             className="hover:opacity-60 focus:outline-none"
             onClick={() =>
-              onCopyChannelUrl(`${LENSTOK_URL}/u/${channel.id}`)
+              onCopyChannelUrl(`${LENSTOK_URL}/u/${channel?.id}`)
             }
             type="button"
           >

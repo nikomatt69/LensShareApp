@@ -60,14 +60,7 @@ const Navbar: FC = () => {
       </Link>
     <div>
      <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
-     <Link href='/stream'>
-        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
-         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <VideoCameraIcon className='h-6 text-blue-500' />{' '}
-       
-        </button>
-        </Link> 
+    
 
     
        

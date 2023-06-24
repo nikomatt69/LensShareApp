@@ -1,3 +1,3 @@
-import Settings from '@/components/Settings'
+import ProfileInterests from '@/components/Settings/ProfileInterests'
 
-export default Settings
+export default ProfileInterests

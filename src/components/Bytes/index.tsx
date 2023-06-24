@@ -43,7 +43,7 @@ const Bytes = () => {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 10,
     noRandomize: false,
-    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTER_APP_ID ],
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {

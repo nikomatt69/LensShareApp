@@ -17,7 +17,7 @@ import { useInView } from 'react-cool-inview'
 import ByteVideo from '@/components/Bytes/ByteVideo'
 
 import { useAppStore } from '@/store/app'
-import { APP_ID, APP_NAME, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
+import { APP_ID, APP_NAME, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, ORB_APP_ID, RIFF_APP_ID, SCROLL_ROOT_MARGIN } from '@/constants'
 import FullScreen from './Bytes/FullScreen'
 import Loader from './UI/Loader'
 import { EmptyState } from './UI/EmptyState'
@@ -44,7 +44,7 @@ const Latest = () => {
     sortCriteria: PublicationSortCriteria.Latest,
     limit: 20,
     noRandomize: false,
-    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID ],
+    sources: [ APP_ID, LENSTUBE_BYTES_APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID,ORB_APP_ID,RIFF_APP_ID ],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {

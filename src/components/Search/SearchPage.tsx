@@ -8,6 +8,7 @@ import Navbar from '../Navbar'
 import SearchSidebar from './SearchSidebar'
 import SearchPublications from './SearchPublications'
 import NavbarDetails from '../NavbarDetails'
+import BottomNav from '../Navs/BottomNav'
 
 const SearchPage: NextPage = () => {
     const { query } = useRouter()
@@ -30,6 +31,7 @@ const SearchPage: NextPage = () => {
             {query.type === 'pubs' && <SearchPublications query={query.q} />}
           </div>
         </div>
+        <BottomNav />
       </div>
  
   )

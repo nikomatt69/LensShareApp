@@ -110,7 +110,7 @@ const Live: FC<Props> = ({ publication}) => {
 
   return (
     <div>
-       <Navbar />
+
       <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
         <Toaster position="bottom-right" />
         <div className="flex gap-6">
@@ -124,7 +124,7 @@ const Live: FC<Props> = ({ publication}) => {
           </div>
         </div>
         <div className="block md:hidden">
-          <BottomNav/>
+
         </div>
       </div>
     </div>

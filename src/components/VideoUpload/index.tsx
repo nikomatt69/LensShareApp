@@ -24,6 +24,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputMentions from "../DetailPage/InputMentions";
+import SpaceSettings from "../Embed/Space/SpaceSettings";
 
 export type VideoFormData = z.infer<typeof formSchema>
 
@@ -239,6 +240,9 @@ const UploadVideo = () => {
                   className='rounded-xl lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2'
                   ></input>
 
+                  <label className='text-md font-medium'>Spaces</label>
+                  <SpaceSettings/>
+
                 <InputMentions
                   label="Description"
                   placeholder="Describe more about your video"
@@ -252,6 +256,8 @@ const UploadVideo = () => {
                   rows={3}
                   mentionsSelector="input-mentions-textarea"
                 />
+
+                
 
                   <label className='text-md rounded-xl font-medium'>Choose a Category</label>
                   <select

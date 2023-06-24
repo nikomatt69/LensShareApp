@@ -19,11 +19,7 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 const App = ({ Component, pageProps }: AppProps) => {
   const { pathname, replace, asPath } = useRouter();
   const  currentProfile  = useAppStore((state) => state.currentProfile);
-  useEffect(() => {
-    if (!currentProfile && AUTH_ROUTES.includes(pathname)) {
-      replace(`/auth?next=${asPath}`)
-    }
-  }, [currentProfile, pathname, asPath, replace])
+
   return (
     <div>
       <MetaTags

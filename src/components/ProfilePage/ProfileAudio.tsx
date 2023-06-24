@@ -1,12 +1,13 @@
 
-import type { Publication } from '@/types/lens'
+import { FeedEventItemType, type Publication } from '@/types/lens'
 import {
   PublicationSortCriteria,
   PublicationTypes,
   useExploreLazyQuery,
   usePublicationDetailsLazyQuery,
   PublicationMainFocus,
-  Profile
+  Profile,
+  useFeedLazyQuery
 } from '@/utils/lens'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -17,14 +18,17 @@ import { useInView } from 'react-cool-inview'
 import ByteVideo from '@/components/Bytes/ByteVideo'
 import MetaTags from '../UI/MetaTags'
 import { useAppStore } from '@/store/app'
-import { APP_ID, APP_NAME, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, RIFF_APP_ID, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL } from '@/constants'
+import { APP_ID, APP_NAME, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, ORB_APP_ID, RIFF_APP_ID, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL } from '@/constants'
 import Loader from '../UI/Loader'
 import { EmptyState } from '../UI/EmptyState'
 import FullScreen from '../Bytes/FullScreen'
-import VideoCard from './VideoCard'
+
 import Loading from '../Loading'
-import AudioCard from './AudioCard'
+
 import Wrapper from '../Echos/Wrapper'
+import AudioCard from '../HomePage/AudioCard'
+import Navbar from '../Navbar'
+import BottomNav from '../Navs/BottomNav'
 
 interface Props {
   profile: Profile
@@ -40,15 +44,17 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
   const [byte, setByte] = useState<Publication>()
   const [following, setFollowing] = useState(false) 
+  const { id } = router.query
 
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter)
   const request =
   {
-    sortCriteria: PublicationSortCriteria.CuratedProfiles,
+    feedEventItemTypes: [FeedEventItemType.Post, FeedEventItemType.Comment],
     limit : 10,
     noRandomize: false,
-    sources: [ APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID,RIFF_APP_ID],
+    sources: [ APP_ID,LENSTUBE_APP_ID,LENSTER_APP_ID,RIFF_APP_ID,ORB_APP_ID],
+    profileId: id,
     publicationTypes: [PublicationTypes.Post],
     metadata: {
       tags:
@@ -64,24 +70,25 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
     usePublicationDetailsLazyQuery()
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
-    useExploreLazyQuery({
+    useFeedLazyQuery({
       // prevent the query from firing again after the first fetch
       
   
       variables: {
         request,
+       
         reactionRequest: currentProfile
           ? { profileId: currentProfile?.id }
           : null,
           profileId: currentProfile?.id ?? null
       },
-      onCompleted: ({ explorePublications }) => {
+      onCompleted: ({ }) => {
       }
     })
   console.log(data);
 
-  const bytes = data?.explorePublications?.items as Publication[]
-  const pageInfo = data?.explorePublications?.pageInfo
+  const bytes = data?.feed?.items.map(item => item.root) as Publication[]
+  const pageInfo = data?.feed?.pageInfo
   const singleBytePublication = singleByte?.publication as Publication
 
   const fetchSingleByte = async () => {
@@ -178,6 +185,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
+      <Navbar />
       {full()}
       <div
         ref={bytesContainer}
@@ -197,6 +205,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
           </span>
         )}
       </div>
+      <BottomNav />
     </div>
   )
 }

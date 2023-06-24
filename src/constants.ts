@@ -130,7 +130,8 @@ export const LENSTUBE_APP_ID = 'lenstube'
 export const LENSTUBE_BYTES_APP_ID = 'lenstube-bytes'
 export const LENSTOK_APP_ID = 'lenstok'
 export const LENSTER_APP_ID = 'lenster'
-
+export const RIFF_APP_ID = 'beats'
+export const ORB_APP_ID = 'orb'
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
   : "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889";

@@ -2,7 +2,7 @@
 
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Profile, Publication} from '@/utils/lens';
+import { Profile, Publication} from '@/types/lens';
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import FollowButton from  "@/components/Buttons/FollowButton";
 import { useAppStore } from "src/store/app";
@@ -43,6 +43,8 @@ import { SpaceMetadata } from '@/typesLenster';
 import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import { useProfilesQuery } from '@/utils/lens/generatedLenster';
 import InterweaveContent from '../UI/InterweaveContent';
+import ProfileAudio from './ProfileAudio';
+import ProfileAudioFeed from './ProfileAudioFeed';
 
 
 
@@ -53,8 +55,9 @@ interface Props {
     setFollowing: Dispatch<boolean>
     following: boolean
     space: SpaceMetadata
+    video : Publication
     }
-    const ProfileCard: FC<Props> = ({ profile, setFollowing, following,space}) => {
+    const ProfileCard: FC<Props> = ({ profile, setFollowing, following,space,video}) => {
         const currentProfile = useAppStore((state) => state.currentProfile);
         const [showUserVideos, setShowUserVideos] = useState<Boolean>(true);
         const [showUserMirrorVideos, setShowUserMirrorVideos] = useState<Boolean>(true);
@@ -62,6 +65,7 @@ interface Props {
         const [showFollowersModal, setShowFollowersModal] = useState(false);
         const [showFollowingModal, setShowFollowingModal] = useState(false);
         const [showStatsModal, setShowStatsModal] = useState(false);
+        const [showUserAudio, setShowUserAudio] = useState<Boolean>(true);
         
         
         
@@ -125,7 +129,7 @@ interface Props {
                            ) : (
                             <div className='right-1'>
                                  <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
-                                <Link href={`/stream`}>Stream</Link>
+                                <Link href={`/musicfeed`}>MusicFeed</Link>
                             </button>
                             
                             </div>
@@ -140,10 +144,8 @@ interface Props {
 
                         <Link href='/settings'>
                         <Cog6ToothIcon
-            className={clsx('h-4 w-4 opacity-80', {
-              'text-green-500 opacity-100': isActivePath('/settings')
-            })}
-          />
+                            className="h-6 w-6 mt-2 cursor-pointer"
+                           />
                         </Link>
                         <button onClick={() => setShowStatsModal(true)} >
                            <span className="flex justify-center">
@@ -214,7 +216,10 @@ interface Props {
                         </span>
                         <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => { setShowCollectedUserVideosModal (!showCollectedUserVideosModal) }}>
                         Collected
-                        </span> 
+                        </span>
+                      
+                       
+
 
                         <div className='p-1 items-center rounded-xl'>    
                         <Modal 
@@ -231,7 +236,9 @@ interface Props {
                         </Modal>
                         </div>
                     </div>
-                    {(showUserVideos) ? <ProfileVideos /> :  <MirrorVideos /> }
+                    {(showUserVideos) ? <ProfileVideos /> :  <MirrorVideos />}
+                    
+                   
                    </div>
                 <BottomNav />
             </div>

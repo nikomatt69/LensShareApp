@@ -26,11 +26,25 @@ import Link from "next/link";
 import getAvatar from "@/lib/getAvatar";
 import Image from "next/image";
 import { MentionTextArea } from "@/components/UI/MentionTextArea";
+import InputMentions from "@/components/UI/InputMentions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 interface Props {
   publication: Publication;
   refetchComments: () => void;
 }
+
+const formSchema = z.object({
+  comment: z
+    .string({ required_error: 'Enter valid comment' })
+    .trim()
+    .min(1, { message: 'Enter valid comment' })
+    .max(5000, { message: 'Comment should not exceed 5000 characters' })
+})
+type FormData = z.infer<typeof formSchema>
+
 
 const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
   const [comment, setComment] = useState("");
@@ -45,6 +59,22 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
   const [postContentError, setPostContentError] = useState('');
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
+
+  const {
+    clearErrors,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+    setValue,
+    getValues
+  } = useForm<FormData>({
+    defaultValues: {
+      comment: ''
+    },
+    resolver: zodResolver(formSchema)
+  })
+  
 
   async function encryptComment(comment: string) {
     try {
@@ -288,7 +318,22 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
         onChange={(e) => setComment(e.target.value)}
         className="bg-[#F1F1F2] rounded-xl p-2 flex-grow text-sm outline-none placeholder:text-gray-500 border border-transparent focus:border-gray-300 transition"
         placeholder="Add comment.."
-      />
+        
+        >
+         <InputMentions
+            placeholder="How's this video?"
+            autoComplete="off"
+            validationError={errors.comment?.message}
+            value={watch('comment')}
+            onContentChange={(value) => {
+              setValue('comment', value)
+              clearErrors('comment')
+            }}
+            mentionsSelector="input-mentions-single"
+          />
+        </textarea>
+      
+      
       <div className="flex flex-col">
         <button
           className="text-md text-black border-gray-600"

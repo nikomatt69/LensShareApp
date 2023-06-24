@@ -1,3 +1,3 @@
-import Settings from '@/components/Settings'
+import Membership from '@/components/Settings/Membership'
 
-export default Settings
+export default Membership
