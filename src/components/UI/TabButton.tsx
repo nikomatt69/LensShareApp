@@ -9,9 +9,10 @@ interface Props {
   count?: number;
   showOnSm?: boolean;
   onClick: () => void;
+  className?: string;
 }
 
-const TabButton: FC<Props> = ({ name, icon, active, count, showOnSm = false, onClick }) => {
+const TabButton: FC<Props> = ({ name, icon, active, count,className, showOnSm = false, onClick }) => {
   return (
     <button
       type="button"

@@ -1,213 +1,219 @@
-import Preview from 'src/components/Messages/Preview';
-import { Card } from 'src/components/UI/Card';
-import { EmptyState } from 'src/components/UI/EmptyState';
-import { ErrorMessage } from 'src/components/UI/ErrorMessage';
-import clsx from 'clsx';
-import { ERROR_MESSAGE,  } from 'src/constants';
-import { Profile, SearchProfilesDocument, SearchPublicationsDocument, SearchRequestTypes } from 'src/utils/lens';
-import { useRouter } from 'next/router';
-import { FC, useRef } from 'react';
-import { useEffect, useState } from 'react';
-import {useAppStore} from 'src/store/app';
-import { useMessagePersistStore, useMessageStore } from 'src/store/message';
-import useMessagePreviews from 'src/utils/hooks/useMessagePreviews';
-import buildConversationId from 'src/utils/functions/buildConversationId';
-import { buildConversationKey } from 'src/utils/functions/conversationKey';
-import  Loader  from 'src/components/UI/Loader';
-import {Modal} from 'src/components/UI/Modal';
-import { BiMessageRoundedDots, BiPlusCircle } from 'react-icons/bi';
-import { HiOutlineUsers } from 'react-icons/hi';
-import Following from 'src/components/ProfilePage/Following';
-import { useLazyQuery } from '@apollo/client';
-import useDebounce from 'src/utils/hooks/useDebounce';
-import { useDetectClickOutside } from 'react-detect-click-outside';
-import { BsSearch } from 'react-icons/bs';
-import  ProfileId from '@/utils/lens';
-import Navbar from '../Navbar';
-import NavbarDetails from '../NavbarDetails';
-import Search from '../Search/Search';
+import Preview from '@/components/Messages/Preview';
 
-interface Props {
+import useGetMessagePreviews from '@/lib/useGetMessagePreviews';
+import { useMessageDb } from '@/lib/useMessageDb';
+import useMessagePreviews from '@/utils/hooks/useMessagePreviews';
+import type { Profile } from '@/utils/lens';
+
+import buildConversationId from '@/utils/functions/buildConversationId';
+import { buildConversationKey } from '@/lib/conversationKey';
+
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import type { FC } from 'react';
+import { useEffect, useState } from 'react';
+import { Virtuoso } from 'react-virtuoso';
+import { MessageTabs } from 'src/enums';
+import { useAppStore } from 'src/store/app';
+import type { TabValues } from 'src/store/message';
+import { useMessagePersistStore, useMessageStore } from 'src/store/message';
+import { GridItemFour } from '../UI/GridLayout';
+import { Card } from '../UI/Card';
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
+import TabButton from '../UI/TabButton';
+import Loader from '../UI/Loader';
+import { ErrorMessage } from '../ErrorMessage';
+import { EmptyState } from '../UI/EmptyState';
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/20/solid';
+import { Modal } from '../UI/Modal';
+import { BiMessageRoundedDots } from 'react-icons/bi';
+import Search from '../Search/Search';
+import Following from '../ProfilePage/Following';
+
+
+interface PreviewListProps {
   className?: string;
   selectedConversationKey?: string;
 }
 
-const PreviewList: FC<Props> = ({ className, selectedConversationKey }) => {
+const PreviewList: FC<PreviewListProps> = ({
+    className,
+    selectedConversationKey
+  }) => {
     const router = useRouter();
     const currentProfile = useAppStore((state) => state.currentProfile);
-    const addProfileAndSelectTab = useMessageStore((state) => state.addProfileAndSelectTab);
+    const { persistProfile } = useMessageDb();
     const selectedTab = useMessageStore((state) => state.selectedTab);
+    const ensNames = useMessageStore((state) => state.ensNames);
     const setSelectedTab = useMessageStore((state) => state.setSelectedTab);
     const [showSearchModal, setShowSearchModal] = useState(false);
-    const [keyword, setKeyword] = useState('')
-    const debouncedValue = useDebounce<string>(keyword, 500)
-    const [showResults, setResults] = useState(false)
-    const [activeSearch, setActiveSearch] = useState(SearchRequestTypes.Profile)
-
-    const { authenticating, loading, messages, profilesToShow, requestedCount, profilesError } = useMessagePreviews();
-    const clearMessagesBadge = useMessagePersistStore((state) => state.clearMessagesBadge);
-
+  
+    const {
+      authenticating,
+      loading,
+      messages,
+      profilesToShow,
+      requestedCount,
+      profilesError
+    } = useMessagePreviews();
+  
+    const { loading: previewsLoading, progress: previewsProgress } =
+      useGetMessagePreviews();
+    const clearMessagesBadge = useMessagePersistStore(
+      (state) => state.clearMessagesBadge
+    );
+  
     const sortedProfiles = Array.from(profilesToShow).sort(([keyA], [keyB]) => {
-        const messageA = messages.get(keyA);
-        const messageB = messages.get(keyB);
-        return (messageA?.sent?.getTime() || 0) >= (messageB?.sent?.getTime() || 0) ? -1 : 1;
+      const messageA = messages.get(keyA);
+      const messageB = messages.get(keyB);
+      return (messageA?.sent?.getTime() || 0) >= (messageB?.sent?.getTime() || 0)
+        ? -1
+        : 1;
     });
-
-    const [getProfiles, { data: searchResults, loading: searchLoading }] = useLazyQuery( SearchProfilesDocument)
-
-    const onDebounce = () => {
-        if (keyword.trim().length) {
-            getProfiles({
-                variables: {
-                    request: {
-                        type: activeSearch,
-                        query: keyword,
-                        limit: 5,
-                        
-                    }
-                }
-            })
-        }
-    }
-
-    useEffect(() => {
-        onDebounce()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debouncedValue, activeSearch])
-
-    const clearSearch = () => {
-        setKeyword('')
-    }
-
-    const onSearchProfile = ((e: any) => {
-        if (e.target.value.length > 0) {
-            e.target.value
-            setActiveSearch(SearchRequestTypes.Profile)
-            setResults(true);
-            setKeyword(e.target.value);
-        } else {
-            setResults(false);
-            setKeyword('');
-        }
-    });
-
-    
+  
     useEffect(() => {
       if (!currentProfile) {
         return;
       }
       clearMessagesBadge(currentProfile.id);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+   
     }, [currentProfile]);
   
     const showAuthenticating = currentProfile && authenticating;
-    const showLoading = loading && (messages.size === 0 || profilesToShow.size === 0);
+    const showLoading =
+      loading && (messages.size === 0 || profilesToShow.size === 0);
   
     const newMessageClick = () => {
       setShowSearchModal(true);
+   
     };
   
-    const onProfileSelected = (profile: Profile) => {
+    const onProfileSelected = async (profile: Profile) => {
       const conversationId = buildConversationId(currentProfile?.id, profile.id);
-      const conversationKey = buildConversationKey(profile.ownedBy, conversationId);
-      addProfileAndSelectTab(conversationKey, profile);
+      const conversationKey = buildConversationKey(
+        profile.ownedBy,
+        conversationId
+      );
+      await persistProfile(conversationKey, profile);
+      const selectedTab: TabValues = profile.isFollowedByMe
+        ? MessageTabs.Lens
+        : MessageTabs.Requests;
+      setSelectedTab(selectedTab);
       router.push(`/messages/${conversationKey}`);
       setShowSearchModal(false);
     };
-
-
+  
     return (
-        <div
-            className={clsx(
-                'w-full h-full flex flex-col justify-between   rounded-3xl',
-                className
+      <GridItemFour
+        className={clsx(
+          'xs:h-[85vh] xs:mx-2 mb-0 sm:mx-2 sm:h-[76vh] md:col-span-4 md:h-[80vh] xl:h-[84vh]',
+          className
+        )}
+      >
+        <Card className="flex h-full flex-col justify-between">
+          <div className="divider relative flex items-center justify-between p-5">
+            <div className="font-bold">Messages</div>
+            {currentProfile && !showAuthenticating && !showLoading && (
+              <button onClick={newMessageClick} type="button">
+                <PlusCircleIcon className="h-6 w-6" />
+              </button>
             )}
-        >
-        <NavbarDetails />
-            <Card className="flex h-full flex-col justify-between !border-r-0 !rounded-tl-3xl !rounded-bl-3xl !rounded-none">
-                <div className="flex items-center justify-between bg-blue-500 border-4 border-black rounded-3xl p-5 ">
-                    <div className="font-bold">Messages</div>
-                    {currentProfile && !showAuthenticating && !showLoading && (
-                        <button onClick={newMessageClick} type="button">
-                            <BiPlusCircle className="h-6 w-6" />
-                        </button>
-                    )}
-                </div>
-                <div className="flex sm:hidden">
-                    <div
-                        onClick={() => setSelectedTab('Following')}
-                        className={clsx(
-                            'text-brand2-500 tab-bg m-2 ml-4 flex flex-1 cursor-pointer items-center justify-center rounded-full p-2 font-bold',
-                            selectedTab === 'Following' ? 'bg-blue-300' : ''
-                        )}
-                    >
-                        <HiOutlineUsers className="mr-2 h-4 w-4" />
-                        Following
-                    </div>
-                    <div
-                        onClick={() => setSelectedTab('Requested')}
-                        className={clsx(
-                        'text-brand2-500 tab-bg m-2 mr-4 flex flex-1 cursor-pointer items-center justify-center rounded-full p-2 font-bold',
-                        selectedTab === 'Requested' ? 'bg-blue-300' : ''
-                        )}
-                    >
-                        Requested
-                        {requestedCount > 0 && (
-                            <span className="bg-brand2-200 ml-2 rounded-2xl px-3 py-0.5 text-sm font-bold">
-                                {requestedCount > 99 ? '99+' : requestedCount}
-                            </span>
-                        )}
-                    </div>
-                </div>
-                {selectedTab === 'Requested' ? (
-                <div className="mt-1 bg-yellow-100 p-2 px-5 text-sm text-yellow-800">
-                    These conversations are from Lens profiles that you don&apos;t currently follow.
-                </div>
-                ) : null}
-                <div className="h-full overflow-y-hidden overflow-x-hidden">
-                {showAuthenticating ? (
-                    <div className="flex h-full flex-grow items-center justify-center">
-                        <Loader/>
-                    </div>
-                ) : showLoading ? (
-                    <div className="flex h-full flex-grow items-center justify-center">
-                        <Loader />
-                    </div>
-                ) : profilesError ? (
-                    <ErrorMessage
-                        className="m-5"
-                        title={`Failed to load messages`}
-                        error={{ message: ERROR_MESSAGE, name: ERROR_MESSAGE }}
+            {previewsLoading && (
+              <progress
+                className="absolute -bottom-1 left-0 h-1 w-full appearance-none border-none bg-transparent"
+                value={previewsProgress}
+                max={100}
+              />
+            )}
+          </div>
+          <div className="flex justify-between px-4 py-3">
+            <div className="flex space-x-2">
+              <TabButton
+                            className="p-2 px-4"
+                            name={'All'}
+                            active={selectedTab === 'All'}
+                            onClick={() => setSelectedTab('All')}
+                            showOnSm icon={undefined}              />
+              <TabButton
+                            className="p-2 px-4"
+                            name={'Lens'}
+                            active={selectedTab === 'Lens'}
+                            onClick={() => setSelectedTab('Lens')}
+                            showOnSm icon={undefined}              />
+              <TabButton
+                            className="p-2 px-4"
+                            name={'Other'}
+                            active={selectedTab === 'Other'}
+                            onClick={() => setSelectedTab('Other')}
+                            showOnSm icon={undefined}              />
+            </div>
+            <TabButton
+                        className="p-2 px-4"
+                        name={requestedCount > 99
+                            ? '99+'
+                            : `${requestedCount.toString()} Requests`}
+                        active={selectedTab === MessageTabs.Requests}
+                        onClick={() => setSelectedTab(MessageTabs.Requests)}
+                        showOnSm icon={undefined}            />
+          </div>
+          {selectedTab === MessageTabs.Requests ? (
+            <div className="bg-yellow-100 p-2 px-5 text-sm text-yellow-800">
+              
+                These conversations are from Lens profiles that you dot
+                currently follow.
+              
+            </div>
+          ) : null}
+          <div className="h-full overflow-y-auto overflow-x-hidden">
+            {showAuthenticating ? (
+              <div className="flex h-full grow items-center justify-center">
+                <Loader message="Awaiting signature to enable DMs" />
+              </div>
+            ) : showLoading ? (
+              <div className="flex h-full grow items-center justify-center">
+                <Loader message={`Loading conversations`} />
+              </div>
+            ) : profilesError ? (
+              <ErrorMessage
+                className="m-5"
+                title={`Failed to load messages`}
+                error={{
+                  message: `Failed to load messages`,
+                  name: `Failed to load messages`}}
+              />
+            ) : sortedProfiles.length === 0 ? (
+              <button
+                className="h-full w-full justify-items-center"
+                onClick={newMessageClick}
+                type="button"
+              >
+                <EmptyState
+                  message={`Start messaging your Lens frens`}
+                  icon={<ChatBubbleLeftEllipsisIcon className="text-brand h-8 w-8" />}
+                  hideCard
+                />
+              </button>
+            ) : (
+              <Virtuoso
+                className="h-full"
+                data={sortedProfiles}
+                itemContent={(_, [key, profile]) => {
+                  const message = messages.get(key);
+                  return (
+                    <Preview
+                      ensName={ensNames.get(key)}
+                      isSelected={key === selectedConversationKey}
+                      key={key}
+                      profile={profile}
+                      conversationKey={key}
+                      message={message}
                     />
-                ) : sortedProfiles.length === 0 ? (
-                    <button className="h-full w-full justify-items-center" onClick={newMessageClick} type="button">
-                        <EmptyState
-                            message={`Start messaging your Lens frens`}
-                            icon={<BiMessageRoundedDots className="text-brand h-8 w-8" />}
-                            hideCard
-                        />
-                    </button>
-                ) : (
-                    sortedProfiles?.map(([key, profile]) => {
-                        const message = messages.get(key);
-                        if (!message) {
-                            return null;
-                        }
-
-                        return (
-                            <Preview
-                                isSelected={key === selectedConversationKey}
-                                key={key}
-                                profile={profile}
-                                conversationKey={key}
-                                message={message}
-                            />
-                        );
-                    })
-                )}
-                </div>
-            </Card>
-        <div className='' >
+                  );
+                }}
+              />
+            )}
+          </div>
+        </Card>
         <Modal
         title={`New message`}
         icon={<BiMessageRoundedDots className="text-brand h-5 w-5" />}
@@ -222,10 +228,14 @@ const PreviewList: FC<Props> = ({ className, selectedConversationKey }) => {
             onProfileSelected={onProfileSelected}
           />
         </div>
-
-         </Modal>
-        </div>
-    </div>
+         {currentProfile && (
+          <Following
+            profile={currentProfile}
+            onProfileSelected={onProfileSelected}
+          />
+        )}
+      </Modal>
+    </GridItemFour>
     );
 };
 

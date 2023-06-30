@@ -1,63 +1,127 @@
 
-import FollowButton from 'src/components/Buttons/FollowButton';
-import UnfollowButton from 'src/components/Buttons/UnfollowButton';
-import Profiles from 'src/components/ProfilePage/Profiles';
-import type { Profile } from 'src/utils/lens';
+import getAvatar from '@/lib/getAvatar';
+import getStampFyiURL from '@/lib/getStampFyiURL';
+import formatAddress from '@/utils/functions/formatAddress';
+import formatHandle from '@/utils/functions/formatHandle';
+import useSendMessage from '@/utils/hooks/useSendMessage';
+import { Profile } from '@/utils/lens';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { ContentTypeText } from '@xmtp/xmtp-js';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
-import { BiChevronLeft } from 'react-icons/bi';
-import getAvatar from '@/lib/getAvatar';
-import { Link } from 'interweave-autolink';
+import { useCallback, useEffect, useState } from 'react';
+import { useMessageStore } from 'src/store/message';
+import UnfollowButton from '../Buttons/UnfollowButton';
+import FollowButton from '../Buttons/FollowButton';
 
+import { Image } from '../UI/Image';
+import UserProfile from '../ProfilePage/UserProfile';
 
-interface Props {
+interface MessageHeaderProps {
   profile?: Profile;
+  conversationKey?: string;
 }
 
-const MessageHeader: FC<Props> = ({ profile }) => {
-    const router = useRouter();
-    const [following, setFollowing] = useState(true);
+const MessageHeader: FC<MessageHeaderProps> = ({
+  profile,
+  conversationKey
+}) => {
+  const router = useRouter();
+  const [following, setFollowing] = useState(true);
+  const unsyncProfile = useMessageStore((state) => state.unsyncProfile);
+  const ensNames = useMessageStore((state) => state.ensNames);
+  const ensName = ensNames.get(conversationKey?.split('/')[0] ?? '');
+  const url =
+    (ensName && getStampFyiURL(conversationKey?.split('/')[0] ?? '')) ?? '';
 
-    const onBackClick = () => {
-        router.push('/messages');
-    };
+  const { sendMessage } = useSendMessage(conversationKey ?? '');
 
-    useEffect(() => {
-        setFollowing(profile?.isFollowedByMe ?? false);
-    }, [profile?.isFollowedByMe, profile]);
+  const setFollowingWrapped = useCallback(
+    (following: boolean) => {
+      setFollowing(following);
+      unsyncProfile(profile?.id ?? '');
+    },
+    [setFollowing, unsyncProfile, profile?.id]
+  );
 
-    if (!profile) {
-        return null;
-    }
+  const onBackClick = () => {
+    router.push('/messages');
+  };
 
-    return (
-        <div className="flex sticky items-center rounded-xl justify-between  bg-blue-500 border-4 border-grey-700  py-4 px-3 ">
-            <div className="flex rounded-xl items-center">
-                <BiChevronLeft onClick={onBackClick} className="mr-1 text-blue h-6 w-6 cursor-pointer" />
-                
-            </div>
-            <Link href={`/u/${profile?.id}`} key={profile?.id}>
-                <img 
-                        // @ts-ignore
-                        src={getAvatar(profile)}
-                        className="mr-2 h-12 w-12 rounded-full border-2 "
-                        alt={(profile?.handle)}
-                    />
-            </Link>
-                
-            {!following ? (
-                <FollowButton
+  useEffect(() => {
+    setFollowing(profile?.isFollowedByMe ?? false);
+  }, [profile?.isFollowedByMe]);
 
-                    
-                    profile={profile}
-                    setFollowing={setFollowing}
-                />
-            ) : (
-                <UnfollowButton  profile={profile} setFollowing={setFollowing} />
-            )}
+  if (!profile && !conversationKey) {
+    return null;
+  }
+
+  return (
+    <div className="divider flex items-center justify-between px-4 py-2">
+      <div className="flex items-center">
+        <ChevronLeftIcon
+          onClick={onBackClick}
+          className="mr-1 h-6 w-6 cursor-pointer lg:hidden"
+        />
+         {profile ? (
+          <UserProfile profile={profile} />
+        ) : (
+        
+          <>
+            <Image
+              src={ensName ? url : getAvatar(profile)}
+              loading="lazy"
+              className="mr-4 h-10 w-10 rounded-full border bg-gray-200 dark:border-gray-700"
+              height={40}
+              width={40}
+              alt={formatHandle('')}
+            />
+            {ensName ?? formatAddress(conversationKey ?? '')}
+          </>
+        )}
+      </div>
+      {profile && (
+        <div className="flex items-center">
+          <img
+            src="/camera-video.svg"
+            onClick={async () => {
+              const apiCall = await fetch(
+                'https://api.huddle01.com/api/v1/create-room',
+                {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    title: 'Huddle01 Meeting'
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': process.env.NEXT_PUBLIC_API_KEY || ''
+                  }
+                }
+              );
+              const data = await apiCall.json();
+              const { meetingLink } = data.data;
+              sendMessage(
+                `Join here for a call: ${meetingLink}`,
+                ContentTypeText,
+                ''
+              );
+              window.open(meetingLink, 'newwindow', 'width=1200, height=800');
+            }}
+            className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
+          />
+
+         
         </div>
-    );
+      )}
+
+      { following ? ( 
+            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile }  /> 
+            ) : (
+            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+          )}
+        
+    </div>
+  );
 };
 
 export default MessageHeader;

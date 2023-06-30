@@ -54,6 +54,7 @@ const MetaTags: FC<Props> = (props) => {
             <meta property="twitter:image" content={meta.image} />
             <meta property="twitter:creator" content={APP_NAME} />
             
+            
        
 
       {router.pathname === '/u/[id]' && router.query?.id && (

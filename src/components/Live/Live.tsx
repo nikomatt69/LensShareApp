@@ -13,7 +13,7 @@ import { Profile, ReferenceModules } from "@/utils/lens";
 import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { useUserProfilesQuery } from '@/types/graph';
-import Space from '../Embed/Space'
+
 import { Publication } from '@/types/lens'
 import Wrapper from '../Embed/Wrapper'
 import Hero from '../LiveStream/Hero'

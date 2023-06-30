@@ -1,3 +1,3 @@
-import Messages from 'src/components/Messages';
+import MessagesRender from 'src/components/Messages';
 
-export default Messages;
+export default MessagesRender;

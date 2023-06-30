@@ -24,7 +24,7 @@ const nextConfig = {
     // Option-less format
     '.mdx': ['@mdx-js/loader'],
   },
-  experimentstopLevelAwait: true ,
+
   reactStrictMode: true,
   getServerSideProps: true,
   getInitialProps: true,
@@ -32,7 +32,8 @@ const nextConfig = {
   getStaticProps: true,
   webpack5: true,
   experimental: {
-    topLevelAwait: true, 
+    swcPlugins: [['@lingui/swc-plugin', {}]],
+
     scrollRestoration: true,
     newNextLinkBehavior: true,
 

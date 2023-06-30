@@ -3,7 +3,7 @@ import type { MediaSet } from '@/utils/lens';
 
 export interface MediaSetWithoutOnChain extends Omit<MediaSet, 'onChain'> {}
 
-export interface NewLensterAttachment extends MediaSetWithoutOnChain {
+export interface NewLensshareAttachment extends MediaSetWithoutOnChain {
   id: string;
   file?: File;
   previewItem: string;

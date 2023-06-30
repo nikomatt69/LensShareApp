@@ -1,154 +1,33 @@
 yarn run v1.22.19
 $ next build
-info  - Loaded env from /Users/nikoemme/LensShare/LensShareApp/.env.production
-info  - Loaded env from /Users/nikoemme/LensShare/LensShareApp/.env
+info  - Loaded env from /Users/nikoemme/LensShare/web/.env.production
+info  - Loaded env from /Users/nikoemme/LensShare/web/.env
 warn  - Invalid next.config.js options detected: 
+  - The root value has an unexpected property, loaders, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getServerSideProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getInitialProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticPaths, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
-  - The value at .experimental has an unexpected property, turbo, which is not in the list of allowed properties (adjustFontFallbacks, adjustFontFallbacksWithSizeAdjust, amp, cpus, craCompat, disableOptimizedLoading, disablePostcssPresetEnv, esmExternals, appDir, externalDir, fallbackNodePolyfills, fetchCache, forceSwcTransforms, fullySpecified, gzipSize, incrementalCacheHandlerPath, isrFlushToDisk, isrMemoryCacheSize, largePageDataBytes, legacyBrowsers, manualClientBasePath, middlewarePrefetch, newNextLinkBehavior, nextScriptWorkers, optimizeCss, optimisticClientCache, outputFileTracingRoot, outputFileTracingIgnores, pageEnv, profiling, proxyTimeout, runtime, serverComponentsExternalPackages, scrollRestoration, sharedPool, sri, swcFileReading, swcMinify, swcMinifyDebugOptions, swcPlugins, swcTraceProfiling, urlImports, enableUndici, workerThreads, fontLoaders, webVitalsAttribution, mdxRs, turbotrace).
+  - The root value has an unexpected property, webpack5, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
 
 See more info here: https://nextjs.org/docs/messages/invalid-next-config
-warn  - You have enabled experimental features (scrollRestoration, turbo) in next.config.js.
+warn  - You have enabled experimental features (swcPlugins, scrollRestoration) in next.config.js.
 warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
 
 info  - Linting and checking validity of types...
-info  - Creating an optimized production build...
-<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (683kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
-warn  - Compiled with warnings
+Failed to compile.
 
-./node_modules/@walletconnect/universal-provider/dist/index.es.js
-Module not found: Can't resolve 'react-native' in '/Users/nikoemme/LensShare/LensShareApp/node_modules/@walletconnect/universal-provider/dist'
+./src/components/Messages/MessageContent.tsx:24:8
+Type error: Type '({ message, profile, sentByMe }: MessageContentProps) => string | number | true | Element | ReactFragment | undefined' is not assignable to type 'FC<MessageContentProps>'.
+  Type 'string | number | true | Element | ReactFragment | undefined' is not assignable to type 'ReactElement<any, any> | null'.
+    Type 'undefined' is not assignable to type 'ReactElement<any, any> | null'.
 
-Import trace for requested module:
-./node_modules/@walletconnect/universal-provider/dist/index.es.js
-./node_modules/@wagmi/connectors/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-./node_modules/@wagmi/connectors/dist/walletConnect.js
-./node_modules/@wagmi/core/dist/connectors/walletConnect.js
-./node_modules/wagmi/dist/connectors/walletConnect.js
-./node_modules/connectkit/build/index.es.js
-./src/components/Providers.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'Events' is not exported from 'hls.js' (imported as 'Events').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-Attempted import error: 'ErrorTypes' is not exported from 'hls.js' (imported as 'ErrorTypes').
-
-Import trace for requested module:
-./node_modules/livepeer/media/hls/dist/livepeer-media-hls.esm.js
-./node_modules/@livepeer/react/dist/livepeer-react.esm.js
-./src/components/VideoUpload/index.tsx
-
-info  - Collecting page data...
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
-info  - Generating static pages (0/13)
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.
-info  - Generating static pages (3/13)
-info  - Generating static pages (6/13)
-info  - Generating static pages (9/13)
-info  - Generating static pages (13/13)
-info  - Finalizing page optimization...
-
-Route (pages)                                 Size     First Load JS
-┌ ○ / (977 ms)                                272 B           939 kB
-├   /_app                                     0 B             105 kB
-├ ○ /404 (1063 ms)                            1.11 kB         108 kB
-├ ℇ /api/corn/route                           0 B             105 kB
-├ λ /api/get-encrypted                        0 B             105 kB
-├ λ /api/get-ipfs-cid                         0 B             105 kB
-├ λ /api/hello                                0 B             105 kB
-├ λ /api/meta-to-ipfs                         0 B             105 kB
-├ ℇ /api/og                                   0 B             105 kB
-├ λ /api/revalidate                           0 B             105 kB
-├ λ /api/store-encrypted                      0 B             105 kB
-├ ○ /discover (988 ms)                        9.18 kB         832 kB
-├ ○ /feed                                     2.96 kB         941 kB
-├ ○ /latest                                   7 kB            939 kB
-├ ○ /messages (1147 ms)                       6.34 kB        1.05 MB
-├ ○ /messages/[...conversationKey] (1034 ms)  14.4 kB        1.07 MB
-├ ○ /notifications (539 ms)                   24.4 kB         851 kB
-├ ○ /post/[id] (596 ms)                       455 kB         1.33 MB
-├ ○ /search                                   1.72 kB         933 kB
-├ ○ /u/[id] (847 ms)                          9.59 kB         861 kB
-└ ○ /upload                                   50.6 kB         888 kB
-+ First Load JS shared by all                 114 kB
-  ├ chunks/framework-1f1fb5c07f2be279.js      45.4 kB
-  ├ chunks/main-d8fa6b61425a8e6e.js           27.4 kB
-  ├ chunks/pages/_app-6ee36e32dca67f1f.js     29.6 kB
-  ├ chunks/webpack-b0bdb6ee13a9a93a.js        2.71 kB
-  └ css/abda84bcd2cc05d5.css                  9.2 kB
-
-ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
-λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
-○  (Static)     automatically rendered as static HTML (uses no initial props)
-
-Done in 33.17s.
+[0m [90m 22 | [39m[0m
+[0m [90m 23 | [39m[0m
+[0m[31m[1m>[22m[39m[90m 24 | [39m[36mconst[39m  [33mMessageContent[39m [33m:[39m [33mFC[39m[33m<[39m[33mMessageContentProps[39m[33m>[39m [33m=[39m ({[0m
+[0m [90m    | [39m       [31m[1m^[22m[39m[0m
+[0m [90m 25 | [39m  message[33m,[39m[0m
+[0m [90m 26 | [39m  profile[33m,[39m[0m
+[0m [90m 27 | [39m  sentByMe[0m
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
