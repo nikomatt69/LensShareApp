@@ -2,7 +2,7 @@ import type {
   AllowedContent,
   SendMessageContent,
   SendMessageOptions
-} from '@/utils/hooks/useSendOptimisticMessage';
+} from '@/lib/useSendOptimisticMessage';
 
 import { MIN_WIDTH_DESKTOP } from '@/constants';
 
@@ -20,7 +20,7 @@ import {
   useAttachmentStore
 } from 'src/store/attachment';
 import { useMessagePersistStore } from 'src/store/message';
-import { useWindowSize } from 'usehooks-ts';
+import { useUpdateEffect, useWindowSize } from 'usehooks-ts';
 import type {
   Attachment as TAttachment,
   RemoteAttachment
@@ -208,7 +208,7 @@ const Composer: FC<ComposerProps> = ({
     setSending(false);
   };
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     setMessage(unsentMessage ?? '');
     // only run this effect when the conversation changes
     // eslint-disable-next-line react-hooks/exhaustive-deps

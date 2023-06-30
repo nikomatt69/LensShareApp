@@ -1,16 +1,17 @@
 import { WebBundlr } from "@bundlr-network/client";
 import { Profile, ReferenceModules } from "@/types/lens";
 import { BundlrDataState, UploadedVideo } from "@/types/app";
-import type { FetchSignerResult } from "@wagmi/core";
+
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import {
-  LS_KEYS,
+
   WMATIC_TOKEN_ADDRESS,
   BUNDLR_NODE_URL,
   BUNDLR_CURRENCY,
   INFURA_RPC,
 } from "@/constants";
+import { Localstorage } from "@/storage";
 
 export const UPLOADED_VIDEO_FORM_DEFAULTS = {
   stream: null,
@@ -74,7 +75,9 @@ interface AppState {
   setCurrentProfile: (currentProfile: Profile | null) => void;
   userSigNonce: number;
   setUserSigNonce: (userSigNonce: number) => void;
-  getBundlrInstance: (signer: FetchSignerResult) => Promise<WebBundlr | null>;
+  getBundlrInstance: (walletClient: {
+    signMessage: (message: string) => Promise<string>
+  }) => Promise<WebBundlr | null>
   hasNewNotification: boolean
   setHasNewNotification: (value: boolean) => void
   activeTagFilter: string
@@ -112,12 +115,12 @@ export const useAppStore = create<AppState>((set) => ({
   setCurrentProfile: (currentProfile) => set(() => ({ currentProfile })),
   userSigNonce: 0,
   setUserSigNonce: (userSigNonce) => set(() => ({ userSigNonce })),
-  getBundlrInstance: async (signer) => {
+  getBundlrInstance: async (walletClient) => {
     try {
       const bundlr = new WebBundlr(
         BUNDLR_NODE_URL,
         BUNDLR_CURRENCY,
-        signer?.provider,
+        walletClient,
         {
           providerUrl: INFURA_RPC,
         }
@@ -146,7 +149,7 @@ export const useAppPersistStore = create(
       profileId: null,
       setProfileId: (profileId) => set(() => ({ profileId })),
     }),
-    { name: "lensshare.store" }
+    { name: Localstorage.LensshareStore }
   )
 );
 
@@ -175,12 +178,18 @@ interface TransactionPersistState {
   setTxnQueue: (txnQueue: any[]) => void;
 }
 
+
+interface TransactionPersistState {
+  txnQueue: any[];
+  setTxnQueue: (txnQueue: any[]) => void;
+}
+
 export const useTransactionPersistStore = create(
   persist<TransactionPersistState>(
     (set) => ({
       txnQueue: [],
       setTxnQueue: (txnQueue) => set(() => ({ txnQueue })),
     }),
-    { name: LS_KEYS.TRANSACTION_STORE }
+    { name: Localstorage.TransactionStore }
   )
 );

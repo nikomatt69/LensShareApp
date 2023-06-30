@@ -46,7 +46,7 @@ const FollowButton: FC<Props> = ({ setFollowing, profile}) => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: "followWithSig",
-    mode: "recklesslyUnprepared",
+    
     onSuccess: onCompleted,
     onError
   })
@@ -70,14 +70,14 @@ const FollowButton: FC<Props> = ({ setFollowing, profile}) => {
           sig
         }
 
-        write?.({ recklesslySetUnpreparedArgs: [inputStruct] })
+        write?.({ args: [inputStruct] })
 
         const {
           data: { broadcast: result }
         } = await broadcast({ request: { id, signature } })
 
         if ('reason' in result) {
-          write?.({ recklesslySetUnpreparedArgs: [inputStruct] })
+          write?.({ args: [inputStruct] })
         }
       } catch {}
     },

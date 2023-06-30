@@ -74,7 +74,7 @@ const CollectModule: FC<Props> = ({publication, setCount, count }) => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: 'collectWithSig',
-    mode: 'recklesslyUnprepared',
+  
     onSuccess: onCompleted,
     onError
   })
@@ -148,7 +148,7 @@ const CollectModule: FC<Props> = ({publication, setCount, count }) => {
 
         setUserSigNonce(userSigNonce + 1)
         if (!RELAY_ON) {
-          return write?.({ recklesslySetUnpreparedArgs: [inputStruct] })
+          return write?.({ args: [inputStruct] })
         }
 
         const {
@@ -156,7 +156,7 @@ const CollectModule: FC<Props> = ({publication, setCount, count }) => {
         } = await broadcast({ request: { id, signature } })
 
         if ('reason' in result) {
-          write?.({ recklesslySetUnpreparedArgs: [inputStruct] })
+          write?.({ args: [inputStruct] })
         }
       } catch {}
     },

@@ -20,9 +20,9 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { apolloClient } from "@/apollo-client";
 import Video from "./HomePage/Video";
 import { Analytics } from '@vercel/analytics/react';
-import { WagmiConfig, createClient , } from 'wagmi';
+import { WagmiConfig, createConfig,} from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
-import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { ConnectKitProvider,  getDefaultConfig } from 'connectkit';
 
  
 const chains = [polygon,];
@@ -31,8 +31,8 @@ const chains = [polygon,];
 const queryClient = new QueryClient();
 
 
-const wagmiClient = createClient(
-  getDefaultClient({
+const wagmiConfig = createConfig(
+  getDefaultConfig({
     appName: 'LensShare',
     infuraId: process.env.NEXT_PUBLIC_INFURA_ID!,
     //alchemyId:  process.env.NEXT_PUBLIC_ALCHEMY_ID,
@@ -50,7 +50,7 @@ const livepeerClient = createReactClient({
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <WagmiConfig client={wagmiClient}>
+    <WagmiConfig config={wagmiConfig}>
        <ConnectKitProvider options={{initialChainId:137}}  debugMode>
       <ApolloProvider client={apolloClient}>
       <QueryClientProvider client={queryClient}>

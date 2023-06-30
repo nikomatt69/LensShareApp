@@ -6,8 +6,8 @@ import { useGetProfile } from '@/lib/useMessageDb';
 import type {
   FailedMessage,
   PendingMessage
-} from '@/utils/hooks/useSendOptimisticMessage';
-import useSendOptimisticMessage from '@/utils/hooks/useSendOptimisticMessage';
+} from '@/lib/useSendOptimisticMessage';
+import useSendOptimisticMessage from '@/lib/useSendOptimisticMessage';
 import useStreamMessages from '@/utils/hooks/useStreamMessages';
 
 import { parseConversationKey } from '@/lib/conversationKey';
@@ -28,6 +28,8 @@ import { APP_NAME } from '@/constants';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import formatHandle from '@/utils/functions/formatHandle';
 import { GridItemEight, GridLayout } from '../UI/GridLayout';
+import Navbar from '../Navbar';
+import BottomNav from '../Navs/BottomNav';
 
 interface MessageProps {
   conversationKey: string;
@@ -144,40 +146,41 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
 
   return (
     
-    <GridLayout classNameChild="md:gap-8">
+    <GridLayout classNameChild="gap-1">
 
       <MetaTags title={title} />
       <PreviewList
-        className="xs:hidden sm:hidden md:hidden lg:block"
+        className="sm:hidden xs:hidden md:hidden hidden lg:block"
         selectedConversationKey={conversationKey}
       />
-      <GridItemEight className="xs:mx-2 relative mb-0 sm:mx-2 md:col-span-8">
+      <GridItemEight className="xs:mx-2  mb-0 sm:mx-2 md:col-span-8">
         <Card className="flex h-[87vh] flex-col justify-between">
           {showLoading ? (
-            <div className="flex h-full grow items-center justify-center">
+            <div className="flex   items-center justify-center">
               <Loader message={`Loading messages`} />
             </div>
           ) : (
-            <>
-              <MessageHeader
-                profile={profile}
-                conversationKey={conversationKey}
-              />
-              <MessagesList
-                conversationKey={conversationKey}
-                currentProfile={currentProfile}
-                profile={profile}
-                fetchNextMessages={fetchNextMessages}
-                messages={allMessages}
-                hasMore={hasMore}
-                missingXmtpAuth={missingXmtpAuth ?? false}
-              />
-              <Composer
-                sendMessage={sendMessage}
-                conversationKey={conversationKey}
-                disabledInput={missingXmtpAuth ?? false}
-              />
-            </>
+            <><div>
+                <Navbar />
+              </div><>
+
+                  <MessageHeader
+                    profile={profile}
+                    conversationKey={conversationKey} />
+                  <MessagesList
+                    conversationKey={conversationKey}
+                    currentProfile={currentProfile}
+                    profile={profile}
+                    fetchNextMessages={fetchNextMessages}
+                    messages={allMessages}
+                    hasMore={hasMore}
+                    missingXmtpAuth={missingXmtpAuth ?? false} />
+                  <Composer
+                    sendMessage={sendMessage}
+                    conversationKey={conversationKey}
+                    disabledInput={missingXmtpAuth ?? false} />
+                  <BottomNav />
+                </></>
           )}
         </Card>
       </GridItemEight>

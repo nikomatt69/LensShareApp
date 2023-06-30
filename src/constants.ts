@@ -1,12 +1,15 @@
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
+import packageJson from '../package.json';
 import { CustomFiltersTypes } from '@/utils/lens'
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === "mainnet";
+export const IS_PRODUCTION = process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true';
 
 export const LENSSHARE_API_URL = 'https://api.lenshareapp.xyz';
 
 export const APP_ID = "lensshare";
 export const APP_NAME = "LensShare";
+export const APP_VERSION = packageJson.version;
 export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
 export const APP_INFOPAGE = "Decentralized Social Video & Message Platform"
 
@@ -17,6 +20,13 @@ export const PINSTA_API_URL = 'https://apipost.lenshareapp.xyz';
 export const MUX_DATA_KEY = '2h11sq1qeahiaejrjegjti847';
 
 export const NEXT_PUBLIC_STUDIO_API_KEY="9e17a7ab-3370-4e31-85c3-43072da2315e";
+
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
+export const MESSAGING_PROVIDER = {
+  XMTP: 'xmtp',
+  PUSH: 'hudd'
+};
 
 export const LENS_MEDIA_SNAPSHOT_URL =
   'https://ik.imagekit.io/lens/media-snapshot';
@@ -71,12 +81,7 @@ export const INFURA_RPC = IS_MAINNET
 
 export const POLYGON_CHAIN_ID = IS_MAINNET ? 137 : 80001
 
-export const LS_KEYS = {
-  LENSTTOK_STORE: "lensshare.store",
-  TRANSACTION_STORE: "transaction.store",
-  TIMELINE_STORE: "timeline.store",
-  MESSAGE_STORE: "message.store",
-};
+
 export const ALLOWED_IMAGE_TYPES = [
   'image/jpeg',
   'image/png',

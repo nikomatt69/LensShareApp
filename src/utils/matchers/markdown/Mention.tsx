@@ -1,6 +1,6 @@
 import type { Profile } from '@/utils/lens';
 import formatHandle from '@/utils/functions/formatHandle';
-import { stopEventPropagation } from '@/lib/stopEventPropagation';
+import  stopEventPropagation  from '@/lib/stopEventPropagation';
 import Link from 'next/link';
 import type { FC } from 'react';
 import type { MarkupLinkProps } from 'src/types/app';

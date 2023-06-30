@@ -24,16 +24,15 @@ const nextConfig = {
     // Option-less format
     '.mdx': ['@mdx-js/loader'],
   },
-
+  experimentstopLevelAwait: true ,
   reactStrictMode: true,
   getServerSideProps: true,
   getInitialProps: true,
   getStaticPaths: true,
   getStaticProps: true,
-  webpack5: true,
-  experimental: {
-    swcPlugins: [['@lingui/swc-plugin', {}]],
 
+  experimental: {
+    topLevelAwait: true, 
     scrollRestoration: true,
     newNextLinkBehavior: true,
 

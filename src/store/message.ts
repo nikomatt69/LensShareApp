@@ -1,17 +1,21 @@
 import type {
   FailedMessage,
   PendingMessage
-} from '@/utils/hooks/useSendOptimisticMessage';
+} from '@/lib/useSendOptimisticMessage';
 
 import getUniqueMessages from '@/lib/getUniqueMessages';
 import type { Client, Conversation, DecodedMessage } from '@xmtp/xmtp-js';
 import { toNanoString } from '@xmtp/xmtp-js';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { Localstorage } from '@/storage';
+import { MESSAGING_PROVIDER } from '@/constants';
 
 export type TabValues = 'All' | 'Lens' | 'Other' | 'Requests';
 
 interface MessageState {
+  chatProvider: string;
+  setChatProvider: (chatProvider: string) => void;
   client: Client | undefined;
   setClient: (client: Client | undefined) => void;
   conversations: Map<string, Conversation>;
@@ -48,6 +52,7 @@ interface MessageState {
   addSyncedProfiles: (profileIds: string[]) => void;
   unsyncProfile: (profileId: string) => void;
   reset: () => void;
+  
 }
 
 export const useMessageStore = create<MessageState>((set) => ({
@@ -62,6 +67,8 @@ export const useMessageStore = create<MessageState>((set) => ({
       return { conversations };
     });
   },
+  chatProvider: MESSAGING_PROVIDER.PUSH,
+  setChatProvider: (chatProvider) => set(() => ({ chatProvider })),
   queuedMessages: new Map(),
   addQueuedMessage: (
     key: string,
@@ -211,7 +218,7 @@ export const useMessagePersistStore = create(
       setUnsentMessages: (unsentMessages) => set(() => ({ unsentMessages }))
     }),
     {
-      name: 'message.store',
+      name: Localstorage.MessageStore,
       storage: {
         // Persist storage doesn't work well with Map by default.
         // Workaround from: https://github.com/pmndrs/zustand/issues/618#issuecomment-954806720.

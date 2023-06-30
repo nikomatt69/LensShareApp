@@ -115,7 +115,7 @@ const BasicInfo = ({ channel }: Props) => {
     address: LENS_PERIPHERY,
     abi: LENS_HUB_ABI,
     functionName: 'setProfileMetadataURIWithSig',
-    mode: 'recklesslyUnprepared',
+  
     onError,
     onSuccess: onCompleted
   })
@@ -139,7 +139,8 @@ const BasicInfo = ({ channel }: Props) => {
           const signature = await signTypedDataAsync({
             domain: omitKey(typedData?.domain, '__typename'),
             types: omitKey(typedData?.types, '__typename'),
-            value: omitKey(typedData?.value, '__typename')
+            primaryType: 'SetProfileMetadata',
+            message: omitKey(typedData?.value, '__typename')
           })
           const { profileId, metadata } = typedData?.value
           const { v, r, s } = utils.splitSignature(signature)
@@ -153,7 +154,7 @@ const BasicInfo = ({ channel }: Props) => {
             variables: { request: { id, signature } }
           })
           if (data?.broadcast?.__typename === 'RelayError') {
-            writeMetaData?.({ recklesslySetUnpreparedArgs: [args] })
+            writeMetaData?.({ args: [args] })
           }
         } catch {
           setLoading(false)

@@ -7,7 +7,6 @@ import type { Profile } from '@/utils/lens';
 
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/lib/conversationKey';
-
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -22,13 +21,15 @@ import { Card } from '../UI/Card';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import TabButton from '../UI/TabButton';
 import Loader from '../UI/Loader';
-import { ErrorMessage } from '../ErrorMessage';
+
 import { EmptyState } from '../UI/EmptyState';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/20/solid';
 import { Modal } from '../UI/Modal';
 import { BiMessageRoundedDots } from 'react-icons/bi';
 import Search from '../Search/Search';
 import Following from '../ProfilePage/Following';
+import { Errors } from '@/lib/errors';
+import { ErrorMessage } from './ErrorMessage';
 
 
 interface PreviewListProps {
@@ -76,6 +77,7 @@ const PreviewList: FC<PreviewListProps> = ({
         return;
       }
       clearMessagesBadge(currentProfile.id);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    
     }, [currentProfile]);
   
@@ -104,15 +106,16 @@ const PreviewList: FC<PreviewListProps> = ({
     };
   
     return (
+      
       <GridItemFour
-        className={clsx(
-          'xs:h-[85vh] xs:mx-2 mb-0 sm:mx-2 sm:h-[76vh] md:col-span-4 md:h-[80vh] xl:h-[84vh]',
-          className
-        )}
-      >
-        <Card className="flex h-full flex-col justify-between">
-          <div className="divider relative flex items-center justify-between p-5">
-            <div className="font-bold">Messages</div>
+      className={clsx(
+        'xs:h-[75vh] xs:mx-2 sm:mx-2 sm:h-[76vh] w-full rounded-xl justify-between xs:col-span-4 md:h-[80vh] xl:h-[84vh]',
+        className
+      )}
+    >
+      <Card className="flex h-full flex-col rounded-xl justify-between">
+        <div className="divider relative flex items-center justify-between p-5">
+          <div className="font-bold">Messages</div>
             {currentProfile && !showAuthenticating && !showLoading && (
               <button onClick={newMessageClick} type="button">
                 <PlusCircleIcon className="h-6 w-6" />
@@ -129,26 +132,26 @@ const PreviewList: FC<PreviewListProps> = ({
           <div className="flex justify-between px-4 py-3">
             <div className="flex space-x-2">
               <TabButton
-                            className="p-2 px-4"
+                            className="p-2 text-blue-500 px-4"
                             name={'All'}
                             active={selectedTab === 'All'}
                             onClick={() => setSelectedTab('All')}
                             showOnSm icon={undefined}              />
               <TabButton
-                            className="p-2 px-4"
+                            className="p-2 text-blue-500 px-4"
                             name={'Lens'}
                             active={selectedTab === 'Lens'}
                             onClick={() => setSelectedTab('Lens')}
                             showOnSm icon={undefined}              />
               <TabButton
-                            className="p-2 px-4"
+                            className="p-2 text-blue-500 px-4"
                             name={'Other'}
                             active={selectedTab === 'Other'}
                             onClick={() => setSelectedTab('Other')}
                             showOnSm icon={undefined}              />
             </div>
             <TabButton
-                        className="p-2 px-4"
+                        className="p-2 text-blue-500 px-4"
                         name={requestedCount > 99
                             ? '99+'
                             : `${requestedCount.toString()} Requests`}
@@ -157,20 +160,20 @@ const PreviewList: FC<PreviewListProps> = ({
                         showOnSm icon={undefined}            />
           </div>
           {selectedTab === MessageTabs.Requests ? (
-            <div className="bg-yellow-100 p-2 px-5 text-sm text-yellow-800">
+            <div className=" p-2 px-5 text-sm text-blue-700">
               
                 These conversations are from Lens profiles that you dot
                 currently follow.
               
             </div>
           ) : null}
-          <div className="h-full overflow-y-auto overflow-x-hidden">
+          <div className="h-full">
             {showAuthenticating ? (
-              <div className="flex h-full grow items-center justify-center">
+              <div className=" items-center justify-center">
                 <Loader message="Awaiting signature to enable DMs" />
               </div>
             ) : showLoading ? (
-              <div className="flex h-full grow items-center justify-center">
+              <div className="flex   items-center justify-center">
                 <Loader message={`Loading conversations`} />
               </div>
             ) : profilesError ? (
@@ -178,24 +181,21 @@ const PreviewList: FC<PreviewListProps> = ({
                 className="m-5"
                 title={`Failed to load messages`}
                 error={{
-                  message: `Failed to load messages`,
-                  name: `Failed to load messages`}}
+                  message: Errors.SomethingWentWrong,
+                  name: Errors.SomethingWentWrong}}
               />
             ) : sortedProfiles.length === 0 ? (
               <button
-                className="h-full w-full justify-items-center"
-                onClick={newMessageClick}
-                type="button"
-              >
-                <EmptyState
-                  message={`Start messaging your Lens frens`}
-                  icon={<ChatBubbleLeftEllipsisIcon className="text-brand h-8 w-8" />}
-                  hideCard
-                />
-              </button>
+              className=" w-full justify-items-center"
+              onClick={newMessageClick}
+              type="button"
+            
+            >
+             
+            </button>
             ) : (
               <Virtuoso
-                className="h-full"
+                className="mb-[70vh] justify-around mx-2"
                 data={sortedProfiles}
                 itemContent={(_, [key, profile]) => {
                   const message = messages.get(key);
@@ -228,12 +228,6 @@ const PreviewList: FC<PreviewListProps> = ({
             onProfileSelected={onProfileSelected}
           />
         </div>
-         {currentProfile && (
-          <Following
-            profile={currentProfile}
-            onProfileSelected={onProfileSelected}
-          />
-        )}
       </Modal>
     </GridItemFour>
     );

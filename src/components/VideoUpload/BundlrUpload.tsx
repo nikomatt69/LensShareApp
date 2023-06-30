@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { useAccount, useConnect, useSigner, useBalance } from "wagmi";
+import { useAccount, useConnect, useWalletClient, useBalance } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { CHAIN_ID } from "@/constants";
 import toast from "react-hot-toast";
 import { WebBundlr } from "@bundlr-network/client";
 import { utils } from "ethers";
 import { useAppStore } from "@/store/app";
+import useEthersWalletClient from "@/utils/hooks/useEthersWalletClient";
+
 
 export default function BundlrUpload() {
   const { address, isConnected } = useAccount();
-  const { data: signer } = useSigner({
-    onError(error) {
-      toast.error(error?.message);
-    },
-  });
+  const { data: signer } = useEthersWalletClient();
   const { data: userBalance } = useBalance({
     address: address,
     chainId: CHAIN_ID,
@@ -50,7 +48,7 @@ export default function BundlrUpload() {
   };
 
   const initBundlr = async () => {
-    if (signer?.provider && address && !bundlrData.instance) {
+    if (signer && address && !bundlrData.instance) {
       toast("Sign to initialize & estimate upload...");
       const bundlr = await getBundlrInstance(signer);
       if (bundlr) {
@@ -66,12 +64,12 @@ export default function BundlrUpload() {
   }, []);
 
   useEffect(() => {
-    if (signer?.provider && mounted) {
+    if (signer && mounted) {
       console.log("INIT BUNDLR INSTANCE");
       initBundlr().catch((error) => toast("[Error Init Bundlr]", error));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [signer?.provider, mounted]);
+  }, [signer, mounted]);
 
   useEffect(() => {
     if (bundlrData.instance && mounted) {

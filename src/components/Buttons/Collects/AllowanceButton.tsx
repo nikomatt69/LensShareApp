@@ -24,11 +24,11 @@ const AllowanceButton: FC<Props> = ({ module, title }) => {
         data: txData,
         isLoading: transactionLoading,
         sendTransaction
-    } = useSendTransaction({
-        request: {},
-        mode: 'recklesslyUnprepared',
-        onError
-    })
+    } = useSendTransaction(
+        {
+       
+        onError }
+    )
 
     const { isLoading: waitLoading } = useWaitForTransaction({
         hash: txData?.hash,
@@ -51,11 +51,11 @@ const AllowanceButton: FC<Props> = ({ module, title }) => {
         }).then((res) => {
             const data = res?.data?.generateModuleCurrencyApprovalData
             sendTransaction?.({
-                recklesslySetUnpreparedRequest: {
-                    from: data?.from,
+               
+                    
                     to: data?.to,
                     data: data?.data
-                }
+                
             })
         })
     }

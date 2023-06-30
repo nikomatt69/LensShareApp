@@ -5,7 +5,7 @@ import {
   useBroadcastMutation,
   useCreateSetDispatcherTypedDataMutation,
   useProfileLazyQuery
-} from '@/utils/lens'
+} from '@/utils/lens/generatedLenster'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -39,7 +39,7 @@ const Toggle = () => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: 'setDispatcherWithSig',
-    mode: 'recklesslyUnprepared',
+
     onError
   })
 
@@ -86,7 +86,8 @@ const Toggle = () => {
         const signature = await signTypedDataAsync({
           domain: omitKey(typedData?.domain, '__typename'),
           types: omitKey(typedData?.types, '__typename'),
-          value: omitKey(typedData?.value, '__typename')
+          primaryType: 'CreateSetDispatcherBroadcastItemResult',
+          message: omitKey(typedData?.value, '__typename')
         })
         const { profileId, dispatcher } = typedData?.value
         const { v, r, s } = utils.splitSignature(signature)
@@ -100,7 +101,7 @@ const Toggle = () => {
           variables: { request: { id, signature } }
         })
         if (data?.broadcast?.__typename === 'RelayError') {
-          writeDispatch?.({ recklesslySetUnpreparedArgs: [args] })
+          writeDispatch?.({ args: [args] })
         }
       } catch {
         setLoading(false)

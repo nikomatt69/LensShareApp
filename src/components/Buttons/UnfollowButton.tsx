@@ -6,10 +6,13 @@ import { CreateBurnEip712TypedData, Profile } from '@/utils/lens'
 import useBroadcast from '@/utils/useBroadcast'
 import { Contract, Signer } from 'ethers'
 import React, { Dispatch, FC, useState } from 'react'
-import { useSigner, useSignTypedData } from 'wagmi'
+import { useSignTypedData, WalletClient } from 'wagmi'
 import getSignature from '@/lib/getSignature'
 import { toast } from 'react-hot-toast'
 import { useCreateUnfollowTypedDataMutation } from '@/types/graph'
+
+import { W } from 'mongodb'
+import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient'
 
 interface Props {
   setFollowing: Dispatch<boolean>
@@ -20,14 +23,14 @@ const UnfollowButton: FC<Props> = ({ setFollowing, profile }) => {
   const currentProfile = useAppStore((state) => state.currentProfile)
   const [writeLoading, setWriteLoading] = useState(false)
   const { isLoading: signLoading, signTypedDataAsync } = useSignTypedData({ onError })
-  const { data: signer } = useSigner()
+  const { data: signer } = useEthersWalletClient()
 
   const burnWithSig = async (signature: string, typedData: CreateBurnEip712TypedData) => {
     const { tokenId, deadline } = typedData.value
     const { v, r, s } = splitSignature(signature)
     const sig = { v, r, s, deadline }
 
-    const followNftContract = new Contract(typedData.domain.verifyingContract, FollowNFT, signer as Signer )
+    const followNftContract = new Contract(typedData.domain.verifyingContract, FollowNFT, signer as Signer  )
 
     const tx = await followNftContract.burnWithSig(tokenId, sig)
   }

@@ -3,12 +3,13 @@ import {
   type FailedMessage,
   isQueuedMessage,
   type PendingMessage
-} from '@/utils/hooks/useSendOptimisticMessage';
+} from '@/lib/useSendOptimisticMessage';
 import type { Profile } from '@/utils/lens';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, } from 'react';
 import { useRef } from 'react';
 import { ContentTypeRemoteAttachment } from 'xmtp-content-type-remote-attachment';
+
 
 import RemoteAttachmentPreview from './RemoteAttachmentPreview';
 
@@ -16,29 +17,26 @@ interface MessageContentProps {
   message: DecodedMessage | PendingMessage | FailedMessage;
   profile: Profile | undefined;
   sentByMe: boolean;
+  preview: ReactNode ;
+
 }
 
 const MessageContent: FC<MessageContentProps> = ({
   message,
   profile,
-  sentByMe
+  sentByMe,
+  preview
 }) => {
-  const previewRef = useRef<ReactNode | undefined>();
+  const  previewRef = useRef<ReactNode>();
+  
 
-  if (message.error) {
-    return <span>Error: {`${message.error}`}</span>;
-  }
-
+  
   const hasQueuedMessagePreview = isQueuedMessage(message);
 
   // if message is pending, render a custom preview if available
   if (hasQueuedMessagePreview && message.render) {
-    if (!previewRef.current) {
-      // store the message preview so that RemoteAttachmentPreview
-      // has access to it
-      previewRef.current = message.render;
-    }
-    return previewRef.current;
+    if (!previewRef) 
+    return previewRef;
   }
 
   if (message.contentType.sameAs(ContentTypeRemoteAttachment)) {
@@ -67,7 +65,7 @@ const MessageContent: FC<MessageContentProps> = ({
       </a>
     </div>
   ) : (
-    <Markup>{message?.content}</Markup>
+    <Markup>{message.content}</Markup>
   );
 };
 

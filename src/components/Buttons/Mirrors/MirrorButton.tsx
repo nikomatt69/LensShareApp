@@ -52,7 +52,7 @@ const MirrorButton: FC<Props> = ({publication}) => {
       address: LENSHUB_PROXY,
       abi: LENS_HUB_ABI,
       functionName: 'mirrorWithSig',
-      mode: 'recklesslyUnprepared',
+ 
       onSuccess: onCompleted,
       onError
     })
@@ -87,7 +87,7 @@ const MirrorButton: FC<Props> = ({publication}) => {
         }
         const { data } = await broadcast({ variables: { request: { id, signature } } })
         if (data?.broadcast.__typename === 'RelayError') {
-          return write?.({ recklesslySetUnpreparedArgs: [ inputStruct ] })
+          return write?.({ args: [ inputStruct ] })
         }
       },
       onError

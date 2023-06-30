@@ -3,7 +3,6 @@ $ next build
 info  - Loaded env from /Users/nikoemme/LensShare/web/.env.production
 info  - Loaded env from /Users/nikoemme/LensShare/web/.env
 warn  - Invalid next.config.js options detected: 
-  - The root value has an unexpected property, loaders, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getServerSideProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getInitialProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticPaths, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
@@ -11,23 +10,19 @@ warn  - Invalid next.config.js options detected:
   - The root value has an unexpected property, webpack5, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
 
 See more info here: https://nextjs.org/docs/messages/invalid-next-config
-warn  - You have enabled experimental features (swcPlugins, scrollRestoration) in next.config.js.
+warn  - You have enabled experimental feature (scrollRestoration) in next.config.js.
 warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
 
 info  - Linting and checking validity of types...
 Failed to compile.
 
-./src/components/Messages/MessageContent.tsx:24:8
-Type error: Type '({ message, profile, sentByMe }: MessageContentProps) => string | number | true | Element | ReactFragment | undefined' is not assignable to type 'FC<MessageContentProps>'.
-  Type 'string | number | true | Element | ReactFragment | undefined' is not assignable to type 'ReactElement<any, any> | null'.
-    Type 'undefined' is not assignable to type 'ReactElement<any, any> | null'.
+./node_modules/abitype/dist/types/human-readable/formatAbi.d.ts:18:35
+Type error: Type parameter declaration expected.
 
-[0m [90m 22 | [39m[0m
-[0m [90m 23 | [39m[0m
-[0m[31m[1m>[22m[39m[90m 24 | [39m[36mconst[39m  [33mMessageContent[39m [33m:[39m [33mFC[39m[33m<[39m[33mMessageContentProps[39m[33m>[39m [33m=[39m ({[0m
-[0m [90m    | [39m       [31m[1m^[22m[39m[0m
-[0m [90m 25 | [39m  message[33m,[39m[0m
-[0m [90m 26 | [39m  profile[33m,[39m[0m
-[0m [90m 27 | [39m  sentByMe[0m
+[0m [90m 16 | [39m[90m * @returns Human-readable ABI[39m[0m
+[0m [90m 17 | [39m[90m */[39m[0m
+[0m[31m[1m>[22m[39m[90m 18 | [39m[36mexport[39m declare [36mfunction[39m formatAbi[33m<[39m[36mconst[39m [33mTAbi[39m [36mextends[39m [33mAbi[39m [33m|[39m readonly unknown[][33m>[39m(abi[33m:[39m [33mTAbi[39m)[33m:[39m [33mFormatAbi[39m[33m<[39m[33mTAbi[39m[33m>[39m[33m;[39m[0m
+[0m [90m    | [39m                                  [31m[1m^[22m[39m[0m
+[0m [90m 19 | [39m[90m//# sourceMappingURL=formatAbi.d.ts.map[39m[0m
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

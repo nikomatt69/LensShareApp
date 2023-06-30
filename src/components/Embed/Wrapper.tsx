@@ -1,5 +1,5 @@
 
-import { stopEventPropagation } from '@/lib/stopEventPropagation';
+import stopEventPropagation from '@/lib/stopEventPropagation';
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 import { Card } from '../UI/Card';

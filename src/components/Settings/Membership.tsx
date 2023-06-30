@@ -98,7 +98,7 @@ const Membership = ({ channel }: Props) => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: 'setFollowModuleWithSig',
-    mode: 'recklesslyUnprepared',
+   
     onError
   })
 
@@ -131,7 +131,8 @@ const Membership = ({ channel }: Props) => {
           const signature = await signTypedDataAsync({
             domain: omitKey(typedData?.domain, '__typename'),
             types: omitKey(typedData?.types, '__typename'),
-            value: omitKey(typedData?.value, '__typename')
+            primaryType: 'CreateSetFollowModuleBroadcastItemResult',
+            message: omitKey(typedData?.value, '__typename')
           })
           const { v, r, s } = utils.splitSignature(signature)
           const args = {
@@ -145,7 +146,7 @@ const Membership = ({ channel }: Props) => {
             variables: { request: { id, signature } }
           })
           if (data?.broadcast?.__typename === 'RelayError') {
-            writeFollow?.({ recklesslySetUnpreparedArgs: [args] })
+            writeFollow?.({ args: [args] })
           }
         } catch {
           setLoading(false)

@@ -1,19 +1,25 @@
+import { Localstorage } from '@/storage';
+import { APP_NAME, APP_VERSION, XMTP_ENV } from '@/constants';
 import { Client } from '@xmtp/xmtp-js';
-import { APP_NAME, XMTP_ENV } from 'src/constants';
 import { useCallback, useEffect, useState } from 'react';
-import { useSigner } from 'wagmi';
-import {useAppStore} from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 import { useMessageStore } from 'src/store/message';
-import { VideoCodec } from './codecs/Video';
-import { ImageCodec } from './codecs/Image';
+import {
+  AttachmentCodec,
+  RemoteAttachmentCodec
+} from 'xmtp-content-type-remote-attachment';
+import useEthersWalletClient from './useEthersWalletClient';
+
+
 
 const ENCODING = 'binary';
 
-const buildLocalStorageKey = (walletAddress: string) => `xmtp:${XMTP_ENV}:keys:${walletAddress}`;
+const buildLocalStorageKey = (walletAddress: string) =>
+  `xmtp:${XMTP_ENV}:keys:${walletAddress}`;
 
 const loadKeys = (walletAddress: string): Uint8Array | null => {
-    const val = localStorage.getItem(buildLocalStorageKey(walletAddress));
-    return val ? Buffer.from(val, ENCODING) : null;
+  const val = localStorage.getItem(buildLocalStorageKey(walletAddress));
+  return val ? Buffer.from(val, ENCODING) : null;
 };
 
 /**
@@ -22,79 +28,93 @@ const loadKeys = (walletAddress: string): Uint8Array | null => {
  * of your LocalStorage before implementing something like this.
  */
 const storeKeys = (walletAddress: string, keys: Uint8Array) => {
-    localStorage.setItem(buildLocalStorageKey(walletAddress), Buffer.from(keys).toString(ENCODING));
+  localStorage.setItem(
+    buildLocalStorageKey(walletAddress),
+    Buffer.from(keys).toString(ENCODING)
+  );
 };
 
+/**
+ * This will clear the conversation cache + the private keys
+ */
 const wipeKeys = (walletAddress: string) => {
-    localStorage.removeItem(buildLocalStorageKey(walletAddress));
+  localStorage.removeItem(buildLocalStorageKey(walletAddress));
 };
 
 const useXmtpClient = (cacheOnly = false) => {
-    const currentProfile = useAppStore((state) => state.currentProfile);
-    const client = useMessageStore((state) => state.client);
-    const setClient = useMessageStore((state) => state.setClient);
-    const [awaitingXmtpAuth, setAwaitingXmtpAuth] = useState<boolean>();
-    const { data: signer, isLoading } = useSigner();
+  const currentProfile = useAppStore((state) => state.currentProfile);
+  const client = useMessageStore((state) => state.client);
+  const setClient = useMessageStore((state) => state.setClient);
+  const [awaitingXmtpAuth, setAwaitingXmtpAuth] = useState<boolean>();
+  const { data: walletClient, isLoading } = useEthersWalletClient();
 
-    useEffect(() => {
-        const initXmtpClient = async () => {
-            if (signer && !client && currentProfile) {
-                let keys = loadKeys(await signer.getAddress());
-                if (!keys) {
-                    if (cacheOnly) {
-                        return;
-                    }
-                    setAwaitingXmtpAuth(true);
-                    keys = await Client.getKeys(signer, {
-                        env: XMTP_ENV,
-                        appVersion: APP_NAME + '/' + APP_NAME
-                    });
-                    storeKeys(await signer.getAddress(), keys);
-                }
-
-                const xmtp = await Client.create(null, {
-                    env: XMTP_ENV,
-                    appVersion: APP_NAME + '/' + APP_NAME,
-                    privateKeyOverride: keys,
-                    codecs: [new VideoCodec(), new ImageCodec()]
-                });
-                setClient(xmtp);
-                setAwaitingXmtpAuth(false);
-            } else {
-                setAwaitingXmtpAuth(false);
-            }
-        };
-        initXmtpClient();
-        if (!signer || !currentProfile) {
-            // eslint-disable-next-line
-            setClient(undefined);
+  useEffect(() => {
+    const initXmtpClient = async () => {
+      if (walletClient && !client && currentProfile) {
+        let keys = loadKeys(await walletClient.getAddress());
+        if (!keys) {
+          if (cacheOnly) {
+            return;
+          }
+          setAwaitingXmtpAuth(true);
+          keys = await Client.getKeys(walletClient, {
+            env: XMTP_ENV,
+            appVersion: APP_NAME + '/' + APP_VERSION,
+            persistConversations: false,
+            skipContactPublishing: true
+          });
+          storeKeys(await walletClient.getAddress(), keys);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [signer, currentProfile]);
 
-    return {
-        client: client,
-        loading: isLoading || awaitingXmtpAuth
+        const xmtp = await Client.create(null, {
+          env: XMTP_ENV,
+          appVersion: APP_NAME + '/' + APP_VERSION,
+          privateKeyOverride: keys,
+          persistConversations: true
+        });
+
+        xmtp.registerCodec(new AttachmentCodec());
+        xmtp.registerCodec(new RemoteAttachmentCodec());
+
+        setClient(xmtp);
+        setAwaitingXmtpAuth(false);
+      } else {
+        setAwaitingXmtpAuth(false);
+      }
     };
+    initXmtpClient();
+    if (!walletClient || !currentProfile) {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setClient(undefined);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProfile]);
+
+  return {
+    client: client,
+    loading: isLoading || awaitingXmtpAuth
+  };
 };
 
 export const useDisconnectXmtp = () => {
-    const { data: signer } = useSigner();
-    const client = useMessageStore((state) => state.client);
-    const setClient = useMessageStore((state) => state.setClient);
-    const disconnect = useCallback(async () => {
-        if (signer) {
-            wipeKeys(await signer.getAddress());
-        }
-        if (client) {
-            // eslint-disable-next-line
-            setClient(undefined);
-        }
-        localStorage.removeItem('lensshare.message.store');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [signer, client]);
+  const { data: walletClient } = useEthersWalletClient();
+  const client = useMessageStore((state) => state.client);
+  const setClient = useMessageStore((state) => state.setClient);
+  const disconnect = useCallback(async () => {
+    if (walletClient) {
+      wipeKeys(await walletClient.getAddress());
+    }
+    if (client) {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setClient(undefined);
+    }
+    localStorage.removeItem(Localstorage.MessageStore);
+    localStorage.removeItem(Localstorage.AttachmentCache);
+    localStorage.removeItem(Localstorage.AttachmentStore);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletClient, client]);
 
-    return disconnect;
+  return disconnect;
 };
 
 export default useXmtpClient;

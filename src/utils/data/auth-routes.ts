@@ -8,4 +8,5 @@ export const AUTH_ROUTES = [
   '/settings/membership',
   '/settings/danger',
   '/settings',
+  '/messages',
 ]

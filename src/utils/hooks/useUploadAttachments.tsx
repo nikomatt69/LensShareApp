@@ -4,6 +4,7 @@ import { uploadIpfs } from '@/utils/functions/uploadToIPFS';
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
+import { uploadFilesToIPFS } from '../functions/uploadToIPFS2';
 
 const useUploadAttachments = () => {
     const addAttachments = usePublicationStore((state) => state.addAttachments);
@@ -50,7 +51,7 @@ const useUploadAttachments = () => {
                     return [];
                 }
 
-                const attachmentsUploaded = await uploadIpfs(attachments);
+                const attachmentsUploaded = await uploadFilesToIPFS(attachments);
                 if (attachmentsUploaded) {
                     attachments = ((attachment: NewLensshareAttachment) => ({
                         ...attachment,

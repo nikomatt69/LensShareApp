@@ -64,7 +64,7 @@ const ChannelPicture: FC<Props> = ({ channel }) => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: 'setProfileImageURIWithSig',
-    mode: 'recklesslyUnprepared',
+
     onError,
     onSuccess: onCompleted
   })
@@ -89,7 +89,8 @@ const ChannelPicture: FC<Props> = ({ channel }) => {
           const signature = await signTypedDataAsync({
             domain: omitKey(typedData?.domain, '__typename'),
             types: omitKey(typedData?.types, '__typename'),
-            value: omitKey(typedData?.value, '__typename')
+            primaryType: 'CreateSetProfileImageUriBroadcastItemResult',
+            message: omitKey(typedData?.value, '__typename')
           })
           const { profileId, imageURI } = typedData?.value
           const { v, r, s } = utils.splitSignature(signature)
@@ -103,7 +104,7 @@ const ChannelPicture: FC<Props> = ({ channel }) => {
             variables: { request: { id, signature } }
           })
           if (data?.broadcast?.__typename === 'RelayError') {
-            writePfpUri?.({ recklesslySetUnpreparedArgs: [args] })
+            writePfpUri?.({ args: [args] })
           }
         } catch {
           setLoading(false)

@@ -40,7 +40,7 @@ const DangerZone = () => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: 'burnWithSig',
-    mode: 'recklesslyUnprepared',
+
     onError,
     onSuccess: (data) => setTxnHash(data.hash)
   })
@@ -65,12 +65,13 @@ const DangerZone = () => {
         const signature = await signTypedDataAsync({
           domain: omitKey(typedData?.domain, '__typename'),
           types: omitKey(typedData?.types, '__typename'),
-          value: omitKey(typedData?.value, '__typename')
+          primaryType: 'CreateBurnProfileBroadcastItemResult',
+          message: omitKey(typedData?.value, '__typename')
         })
         const { tokenId } = typedData?.value
         const { v, r, s } = utils.splitSignature(signature)
         const sig = { v, r, s, deadline: typedData.value.deadline }
-        writeDeleteProfile?.({ recklesslySetUnpreparedArgs: [tokenId, sig] })
+        writeDeleteProfile?.({ args: [tokenId, sig] })
       } catch {
         setLoading(false)
       }

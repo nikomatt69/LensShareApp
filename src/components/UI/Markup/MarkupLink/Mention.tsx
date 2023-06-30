@@ -7,7 +7,7 @@ import type { MarkupLinkProps } from 'src/typesLenster';
 import Slug from '../../Slug';
 import UserPreview from '../../UserPreview';
 import { id } from 'ethers/lib/utils.js';
-import { stopEventPropagation } from '@/lib/stopEventPropagation';
+import stopEventPropagation from '@/lib/stopEventPropagation';
 import formatHandle from '@/utils/functions/formatHandle';
 import { Profile } from '@/utils/lens/generatedLenster';
 

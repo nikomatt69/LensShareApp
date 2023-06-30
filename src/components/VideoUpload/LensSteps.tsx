@@ -10,7 +10,7 @@ import {
   PublicationMainFocus,
   PublicationMetadataDisplayTypes,
   CreatePostTypedDataDocument,
-} from "@/types/lens";
+} from "@/utils/lens";
 import getSignature from "@/lib/getSignature";
 import getUserLocale from "@/lib/getUserLocale";
 import { splitSignature } from "ethers/lib/utils";
@@ -64,7 +64,7 @@ const LensSteps = () => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: "postWithSig",
-    mode: "recklesslyUnprepared",
+   
     onSuccess: onCompleted,
     onError(error) {
       toast.error("You should be logged in with your Lens account to Lens");
@@ -199,6 +199,7 @@ const LensSteps = () => {
       });
       setUploadedVideo({ buttonText: "Posting on Lens" });
       const typedData = result.data?.createPostTypedData.typedData;
+
       const deadline = typedData?.value.deadline;
       const signature = await signTypedDataAsync(getSignature(typedData));
       const { v, r, s } = splitSignature(signature);
@@ -214,7 +215,7 @@ const LensSteps = () => {
         referenceModuleInitData: typedData?.value.referenceModuleInitData,
         sig,
       };
-      const tx = await write?.({ recklesslySetUnpreparedArgs: [inputStruct] });
+      const tx = await write?.({ args: [inputStruct] });
       console.log("TX", tx);
     } catch (error) {
       console.log("Error while posting on lens:", error);

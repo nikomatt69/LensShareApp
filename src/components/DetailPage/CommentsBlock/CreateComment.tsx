@@ -119,7 +119,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
     functionName: "commentWithSig",
-    mode: "recklesslyUnprepared",
+
     onSuccess: ({ hash }) => {
       onCompleted();
       setTxnQueue([generateOpitimisticComment({ txHash: hash }), ...txnQueue]);
@@ -171,7 +171,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
 
         setUserSigNonce(userSigNonce + 1);
         if (!RELAY_ON) {
-          return write?.({ recklesslySetUnpreparedArgs: [inputStruct] });
+          return write?.({ args: [inputStruct] });
         }
 
         const {
@@ -179,7 +179,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
         } = await broadcast({ request: { id, signature } });
 
         if ("reason" in result) {
-          write?.({ recklesslySetUnpreparedArgs: [inputStruct] });
+          write?.({ args: [inputStruct] });
         }
       } catch {}
     },

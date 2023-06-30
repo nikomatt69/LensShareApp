@@ -2,7 +2,7 @@ import {
   type FailedMessage,
   isQueuedMessage,
   type PendingMessage
-} from '@/utils/hooks/useSendOptimisticMessage';
+} from '@/lib/useSendOptimisticMessage';
 import { Image } from '../UI/Image';
 import type { Profile } from '@/utils/lens';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -121,6 +121,8 @@ const MessageTile: FC<MessageTileProps> = ({
               message={message}
               profile={profile}
               sentByMe={address == message.senderAddress}
+              preview
+            
             />
           </span>
         </div>
