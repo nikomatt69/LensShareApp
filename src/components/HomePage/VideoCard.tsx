@@ -127,7 +127,10 @@ const mute = useAppStore((state) => state.isMute)
 
             {getRelativeTime(publication.createdAt)} 
           </span></p>
-          
+      <Link 
+        className="pointer-events-auto "
+        href={`/bytes/${publication.id}`} key={publication.id} 
+        >
         <div
             className="my-3 pb-3  text-xs break-word text-black font-semibold"
             style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
@@ -137,6 +140,9 @@ const mute = useAppStore((state) => state.isMute)
             <InterweaveContent content={publication.metadata.content} />
           </p>
         )}
+        </div>
+                
+   </Link>
         {showMore && (
           <div className="mt-3 inline-flex">
             <button
@@ -157,14 +163,6 @@ const mute = useAppStore((state) => state.isMute)
           </div>
         )}
          </div>
-          
-        </div>
-        <Link 
-        className="pointer-events-auto "
-        href={`/bytes/${publication.id}`} key={publication.id} 
-        >
-            <span className="text-black text-sm font-extralight flex-shrink-0 p-1 ">Details...</span>
-          </Link>
       </div>
         
         {<div className="mt-6 mr-6">

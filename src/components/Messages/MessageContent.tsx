@@ -17,7 +17,7 @@ interface MessageContentProps {
   message: DecodedMessage | PendingMessage | FailedMessage;
   profile: Profile | undefined;
   sentByMe: boolean;
-  preview: ReactNode ;
+  preview?: ReactNode ;
 
 }
 
@@ -51,7 +51,7 @@ const MessageContent: FC<MessageContentProps> = ({
   }
 
   const meetingUrlMatches = message.content.match(
-    /(https:\/\/lenster\.huddle01\.com\/\S+)/gi
+    /(https:\/\/huddle\.lenshareapp\.xyz\/\S+)/gi
   );
   const meetingLink = meetingUrlMatches ? meetingUrlMatches[0] : null;
 

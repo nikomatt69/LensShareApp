@@ -115,12 +115,12 @@ export const useAppStore = create<AppState>((set) => ({
   setCurrentProfile: (currentProfile) => set(() => ({ currentProfile })),
   userSigNonce: 0,
   setUserSigNonce: (userSigNonce) => set(() => ({ userSigNonce })),
-  getBundlrInstance: async (walletClient) => {
+  getBundlrInstance: async (signer) => {
     try {
       const bundlr = new WebBundlr(
         BUNDLR_NODE_URL,
         BUNDLR_CURRENCY,
-        walletClient,
+        signer,
         {
           providerUrl: INFURA_RPC,
         }

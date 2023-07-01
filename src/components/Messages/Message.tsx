@@ -30,6 +30,7 @@ import formatHandle from '@/utils/functions/formatHandle';
 import { GridItemEight, GridLayout } from '../UI/GridLayout';
 import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
+import NavbarDetails from '../NavbarDetails';
 
 interface MessageProps {
   conversationKey: string;
@@ -161,7 +162,7 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
             </div>
           ) : (
             <><div>
-                <Navbar />
+                <NavbarDetails />
               </div><>
 
                   <MessageHeader

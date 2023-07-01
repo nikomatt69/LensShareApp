@@ -57,7 +57,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center justify-between px-4 py-2">
+    <div className="divider flex items-center rounded-md border-2  justify-between px-4 py-2">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}
@@ -81,7 +81,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
         )}
       </div>
       {profile && (
-        <div className="flex items-center">
+        <div className="flex r-0 cursor-pointer items-center">
           <img
             src="/camera-video.svg"
             onClick={async () => {
@@ -112,6 +112,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
 
          
         </div>
+        
       )}
 
       { following ? ( 

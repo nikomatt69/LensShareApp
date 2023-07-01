@@ -108,13 +108,13 @@ const MessageTile: FC<MessageTileProps> = ({
             address === message.senderAddress
               ? 'bg-brand-500'
               : 'bg-gray-100 dark:bg-gray-700',
-            'w-full rounded-lg px-4 py-2'
+            'w-full text-xs font-bold rounded-lg px-4 py-2'
           )}
         >
           <span
             className={clsx(
               address === message.senderAddress && 'text-white',
-              'text-md linkify-message block break-words'
+              'text-xs font-bold linkify-message block break-words'
             )}
           >
             <MessageContent
