@@ -10,7 +10,7 @@ import SuggestedAccounts from "@/components/Sidebar/SuggestedAccounts";
 import FollowingAccounts from "@/components/Sidebar/FollowingAccounts";
 import Categories from "@/components/Sidebar/Categories";
 import { useAppStore } from "src/store/app";
-import { Profile } from '@/types/lens';
+import { Profile } from '@/utils/lens/generatedLenster';
 import Link from 'next/link';
 import formatHandle from '@/utils/functions/formatHandle';
 import Loading from '../Loading';

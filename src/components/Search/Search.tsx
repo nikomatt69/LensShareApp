@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Profile, ProfileInterestsDocument, ProfileSearchResult } from '@/utils/lens';
-import { CustomFiltersTypes, SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens';
+import { Profile, ProfileInterestsDocument, ProfileSearchResult } from '@/utils/lens/generatedLenster';
+import { CustomFiltersTypes, SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import { useRouter } from 'next/router';
 import type { ChangeEvent, FC } from 'react';

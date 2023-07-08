@@ -13,7 +13,7 @@ import type {
 import { RemoteAttachmentCodec } from 'xmtp-content-type-remote-attachment';
 
 import Attachment from './AttachmentView';
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import { Spinner } from '../UI/Spinner';
 interface RemoteAttachmentPreviewProps {
   remoteAttachment: RemoteAttachment;

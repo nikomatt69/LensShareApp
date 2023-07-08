@@ -23,6 +23,7 @@ import { FaHeadphones } from "react-icons/fa";
 import { FcVideoCall } from "react-icons/fc";
 import MainButton from "./Buttons/Rainbow/mainbutton";
 import router from "next/router";
+import NotificationIcon from "./Notifications/NotificationIcon";
 
 
 
@@ -64,14 +65,11 @@ const Navbar: FC = () => {
 
     
        
-        <Link href='/notifications'>
-        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
-         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <BellIcon className='h-6 text-blue-500' />{' '}
-       
+        <button>
+        <NotificationIcon/>
+
+
         </button>
-        </Link> 
       <div className="flex">
         {currentProfile ? (
            <div className='w-12 h-12'>

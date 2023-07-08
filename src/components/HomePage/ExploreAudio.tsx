@@ -1,5 +1,5 @@
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationSortCriteria,
   PublicationTypes,
@@ -104,7 +104,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
 
   const full = useCallback(() => currentViewingId && byte && router.pathname ?
     <FullScreen
-      profile={currentProfile as Profile}
+      
       byte={byte}
       close={closeDialog}
       isShow={show}

@@ -1,5 +1,5 @@
 import useXmtpClient from '@/utils/hooks/useXmtpClient';
-import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
 
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import { fromNanoString, SortDirection } from '@xmtp/xmtp-js';
@@ -133,14 +133,14 @@ const MessageIcon: FC = () => {
   return (
     <Link
       href="/messages"
-      className="hidden min-w-[40px] items-start justify-center rounded-md p-1 hover:bg-gray-300/20 md:flex"
+      className=" min-w-[40px] items-start justify-center rounded-md md:flex"
       onClick={() => {
         currentProfile && clearMessagesBadge(currentProfile.id);
       }}
     >
-      <ChatBubbleLeftEllipsisIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+      <ChatBubbleOvalLeftIcon className="h-6 w-6 pb-1 text-blue-500  " />
       {showMessagesBadge.get(currentProfile?.id) ? (
-        <span className="h-2 w-2 rounded-full bg-red-500" />
+        <span className="h-2 w-2 rounded-full z-[6] text-red-500 bg-red-500" />
       ) : null}
     </Link>
   );

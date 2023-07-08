@@ -2,12 +2,12 @@
 import {useAppStore} from '@/store/app'
 import usePersistStore from '@/store/persist'
 import clsx from 'clsx'
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   ReactionTypes,
   useAddReactionMutation,
   useRemoveReactionMutation
-} from '@/utils/lens'
+} from '@/utils/lens/generatedLenster'
 import type { FC } from 'react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'

@@ -1,6 +1,6 @@
 import React, { Dispatch, FC, useEffect, useState } from "react";
 import Image from "next/image";
-import { Profile } from "@/utils/lens";
+import { Profile } from "@/utils/lens/generatedLenster";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import { useAppStore } from "src/store/app";
 import { Router } from "next/router";

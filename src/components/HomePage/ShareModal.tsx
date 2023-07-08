@@ -1,5 +1,5 @@
 import {Modal} from '@/components/UI/Modal'
-import type { Publication } from '@/utils/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import React from 'react'

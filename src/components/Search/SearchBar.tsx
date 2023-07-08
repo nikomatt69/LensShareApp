@@ -1,5 +1,5 @@
 import { useSearchProfilesLazyQuery } from '@/types/graph'
-import { Profile, ProfileSearchResult, SearchRequestTypes } from '@/utils/lens'
+import { Profile, ProfileSearchResult, SearchRequestTypes } from '@/utils/lens/generatedLenster'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, FC, useRef, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'

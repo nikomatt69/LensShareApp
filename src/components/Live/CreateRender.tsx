@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
-import { Profile, ReferenceModules } from "@/utils/lens";
+import { Profile, ReferenceModules } from "@/utils/lens/generatedLenster";
 import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { useUserProfilesQuery } from '@/types/graph';
 import Live from "./Live";
 import CreateStream from "./CreateStream";
 import Navbar from "../Navbar";
-import { Publication } from "@/types/lens";
+import { Publication } from "@/utils/lens/generatedLenster";
 
 
 const CreateRender = (publication:Publication) => {

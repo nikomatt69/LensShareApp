@@ -1,7 +1,7 @@
 //mapping for the prfile vids
 import React, { useRef, useState } from 'react';
 import Link from "next/link";
-import { PublicationsDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication, PublicationMainFocus} from "@/types/lens";
+import { PublicationDocument, PublicationsQueryRequest, PaginatedPublicationResult, Publication, PublicationMainFocus} from "@/utils/lens/generatedLenster";
 import { useQuery } from "@apollo/client";
 import { useRouter } from 'next/router';
 import type { FC } from "react";
@@ -20,7 +20,7 @@ import AudioPlayer from '../UI/AudioPlayer';
 
   const { data, loading, error } = useQuery
   <{publications: PaginatedPublicationResult}>
-  ((PublicationsDocument), {
+  ((PublicationDocument), {
     variables: { 
       request: {
         sources: [LENSTUBE_BYTES_APP_ID, LENSTOK_APP_ID, APP_ID,LENSTER_APP_ID,LENSTUBE_APP_ID],

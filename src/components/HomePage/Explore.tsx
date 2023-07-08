@@ -1,13 +1,13 @@
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreLazyQuery,
-  usePublicationDetailsLazyQuery,
+  useExploreFeedLazyQuery,
+  usePublicationLazyQuery,
   PublicationMainFocus,
   Profile
-} from '@/utils/lens'
+} from '@/utils/lens/generatedLenster'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -23,6 +23,10 @@ import { EmptyState } from '../UI/EmptyState'
 import FullScreen from '../Bytes/FullScreen'
 import VideoCard from './VideoCard'
 import Loading from '../Loading'
+import NewPost from '../Composer/Post/New'
+import { Modal } from '../UI/Modal'
+import NewPublication from '../Composer/NewPublication'
+import { useGlobalModalStateStore } from '@/store/modals'
 
 
 
@@ -34,6 +38,14 @@ const Explore = () => {
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
   const [byte, setByte] = useState<Publication>()
   const [following, setFollowing] = useState(false) 
+  const setShowNewPostModal = useGlobalModalStateStore(
+    (state) => state.setShowNewPostModal
+    
+  );
+  const showNewPostModal = useGlobalModalStateStore(
+    (state) => state.showNewPostModal
+  );
+
 
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter)
@@ -48,17 +60,17 @@ const Explore = () => {
       tags:
       activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
         
-      mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Video],
+      mainContentFocus: [PublicationMainFocus.Video,PublicationMainFocus.Image,PublicationMainFocus.Article,PublicationMainFocus.Audio,PublicationMainFocus.TextOnly],
     }
   }
 
   const [show, setShow] = useState(false)
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationDetailsLazyQuery()
+    usePublicationLazyQuery()
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
-    useExploreLazyQuery({
+    useExploreFeedLazyQuery({
       // prevent the query from firing again after the first fetch
       
   
@@ -172,6 +184,18 @@ const Explore = () => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
+      <div onClick={() => setShowNewPostModal(true)} >
+      <NewPost/>
+      <Modal
+        title={`Create post`}
+        size="md"
+        show={showNewPostModal}
+        onClose={() => setShowNewPostModal(false)}
+      >
+        
+        <NewPublication />
+      </Modal>
+      </div>
       {full()}
       <div
         ref={bytesContainer}

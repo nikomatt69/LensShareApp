@@ -3,26 +3,230 @@ $ next build
 info  - Loaded env from /Users/nikoemme/LensShare/web/.env.production
 info  - Loaded env from /Users/nikoemme/LensShare/web/.env
 warn  - Invalid next.config.js options detected: 
+  - The root value has an unexpected property, loaders, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
+  - The root value has an unexpected property, experimentstopLevelAwait, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getServerSideProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getInitialProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticPaths, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
   - The root value has an unexpected property, getStaticProps, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
-  - The root value has an unexpected property, webpack5, which is not in the list of allowed properties (amp, analyticsId, assetPrefix, basePath, cleanDistDir, compiler, compress, crossOrigin, devIndicators, distDir, env, eslint, excludeDefaultMomentLocales, experimental, exportPathMap, generateBuildId, generateEtags, headers, httpAgentOptions, i18n, images, modularizeImports, onDemandEntries, optimizeFonts, output, outputFileTracing, pageExtensions, poweredByHeader, productionBrowserSourceMaps, publicRuntimeConfig, reactStrictMode, redirects, rewrites, sassOptions, serverRuntimeConfig, skipMiddlewareUrlNormalize, skipTrailingSlashRedirect, staticPageGenerationTimeout, swcMinify, trailingSlash, transpilePackages, typescript, useFileSystemPublicRoutes, webpack).
+  - The value at .experimental has an unexpected property, topLevelAwait, which is not in the list of allowed properties (adjustFontFallbacks, adjustFontFallbacksWithSizeAdjust, amp, cpus, craCompat, disableOptimizedLoading, disablePostcssPresetEnv, esmExternals, appDir, externalDir, fallbackNodePolyfills, fetchCache, forceSwcTransforms, fullySpecified, gzipSize, incrementalCacheHandlerPath, isrFlushToDisk, isrMemoryCacheSize, largePageDataBytes, legacyBrowsers, manualClientBasePath, middlewarePrefetch, newNextLinkBehavior, nextScriptWorkers, optimizeCss, optimisticClientCache, outputFileTracingRoot, outputFileTracingIgnores, pageEnv, profiling, proxyTimeout, runtime, serverComponentsExternalPackages, scrollRestoration, sharedPool, sri, swcFileReading, swcMinify, swcMinifyDebugOptions, swcPlugins, swcTraceProfiling, urlImports, enableUndici, workerThreads, fontLoaders, webVitalsAttribution, mdxRs, turbotrace).
 
 See more info here: https://nextjs.org/docs/messages/invalid-next-config
-warn  - You have enabled experimental feature (scrollRestoration) in next.config.js.
+warn  - You have enabled experimental features (topLevelAwait, scrollRestoration) in next.config.js.
 warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
 
 info  - Linting and checking validity of types...
-Failed to compile.
+info  - Creating an optimized production build...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (686kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+info  - Compiled successfully
+info  - Collecting page data...
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`.
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+info  - Generating static pages (0/19)
+Warning: fragment with name ProfileFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CollectModuleFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name CommentFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MetadataFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name PostFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+Warning: fragment with name MirrorFields already exists.
+graphql-tag enforces all fragment names across your application to be unique; read more about
+this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names
+info  - Generating static pages (4/19)
+info  - Generating static pages (9/19)
+info  - Generating static pages (14/19)
+info  - Generating static pages (19/19)
+info  - Finalizing page optimization...
 
-./node_modules/abitype/dist/types/human-readable/formatAbi.d.ts:18:35
-Type error: Type parameter declaration expected.
+Route (pages)                              Size     First Load JS
+┌ ○ /                                      282 B          2.23 MB
+├   /_app                                  0 B             769 kB
+├ ○ /404                                   1.31 kB         772 kB
+├ ℇ /api/corn/route                        0 B             769 kB
+├ λ /api/create-room                       0 B             769 kB
+├ λ /api/get-encrypted                     0 B             769 kB
+├ λ /api/get-ipfs-cid                      0 B             769 kB
+├ λ /api/get-ipfs-cid-stream               0 B             769 kB
+├ λ /api/hello                             0 B             769 kB
+├ λ /api/jwt/create                        0 B             769 kB
+├ λ /api/meta-to-ipfs                      0 B             769 kB
+├ ℇ /api/og                                0 B             769 kB
+├ λ /api/revalidate                        0 B             769 kB
+├ λ /api/sign-jwt                          0 B             769 kB
+├ λ /api/store-encrypted                   0 B             769 kB
+├ λ /api/stream/create                     0 B             769 kB
+├ λ /api/stream/get                        0 B             769 kB
+├ λ /api/sts/token                         0 B             769 kB
+├ λ /api/video/views                       0 B             769 kB
+├ ○ /bytes/[id] (335 ms)                   4.05 kB        1.66 MB
+├ ○ /discover                              3.5 kB         1.45 MB
+├ ○ /feed (321 ms)                         5.5 kB         2.24 MB
+├ ○ /latest                                7.74 kB        2.22 MB
+├ ○ /listen                                8.59 kB        2.23 MB
+├ ○ /messages                              5.32 kB        1.52 MB
+├ ○ /messages/[...conversationKey]         23.6 kB        1.65 MB
+├ ○ /musicfeed                             8.84 kB        1.46 MB
+├ ○ /notifications                         16.3 kB        1.48 MB
+├ ○ /post/[id]                             2.54 kB        1.14 MB
+├ ○ /privacy                               2.83 kB         774 kB
+├ ○ /search                                17.6 kB        1.73 MB
+├ ○ /stream                                7.93 kB        1.18 MB
+├ ○ /terms (374 ms)                        3.57 kB         775 kB
+├ ○ /u/[id]                                17.6 kB        1.49 MB
+└ ○ /upload                                30.2 kB        1.64 MB
+    └ css/a8c7d01d323e33e3.css             529 B
++ First Load JS shared by all              781 kB
+  ├ chunks/framework-1f1fb5c07f2be279.js   45.4 kB
+  ├ chunks/main-d8fa6b61425a8e6e.js        27.4 kB
+  ├ chunks/pages/_app-16c8660cfc9d00e3.js  694 kB
+  ├ chunks/webpack-80af58960d217013.js     2.31 kB
+  └ css/eee1b9ac3ad7c28a.css               12.2 kB
 
-[0m [90m 16 | [39m[90m * @returns Human-readable ABI[39m[0m
-[0m [90m 17 | [39m[90m */[39m[0m
-[0m[31m[1m>[22m[39m[90m 18 | [39m[36mexport[39m declare [36mfunction[39m formatAbi[33m<[39m[36mconst[39m [33mTAbi[39m [36mextends[39m [33mAbi[39m [33m|[39m readonly unknown[][33m>[39m(abi[33m:[39m [33mTAbi[39m)[33m:[39m [33mFormatAbi[39m[33m<[39m[33mTAbi[39m[33m>[39m[33m;[39m[0m
-[0m [90m    | [39m                                  [31m[1m^[22m[39m[0m
-[0m [90m 19 | [39m[90m//# sourceMappingURL=formatAbi.d.ts.map[39m[0m
-error Command failed with exit code 1.
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+ℇ  (Streaming)  server-side renders with streaming (uses React 18 SSR streaming or Server Components)
+λ  (Server)     server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)     automatically rendered as static HTML (uses no initial props)
+
+Done in 28.69s.

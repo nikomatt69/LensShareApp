@@ -1,4 +1,4 @@
-import { CollectModules, FollowModules, ReferenceModules } from '@/utils/lens';
+import { CollectModules, FollowModules, ReferenceModules } from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { BiPlusCircle, BiShareAlt, BiStar } from 'react-icons/bi';
 import { BsClock } from 'react-icons/bs';

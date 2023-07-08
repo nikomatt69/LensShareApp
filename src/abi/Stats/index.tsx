@@ -2,8 +2,8 @@ import { APP_ID } from '@/constants'
 
 
 
-import type { GlobalProtocolStats, ProfileStats, Publication } from '@/utils/lens'
-import { useGlobalProtocolStatsQuery } from '@/utils/lens'
+import type { GlobalProtocolStats, ProfileStats, Publication } from '@/utils/lens/generatedLenster'
+
 import dynamic from 'next/dynamic'
 import React, { FC } from 'react'
 import { BsPin, BsPinAngle } from 'react-icons/bs'

@@ -1,4 +1,4 @@
-export const CREATOR_CATEGORIES = [
+export const CREATOR_VIDEO_CATEGORIES = [
   {
     name: 'NFTs',
     tag: 'nfts'

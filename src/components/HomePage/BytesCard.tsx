@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useEffect, useRef, useState ,} from "react";
-import type { Profile, Publication } from "@/types/lens";
+import type { Profile, Publication } from "@/utils/lens/generatedLenster";
 import Video from './Video'
 import { GoVerified } from "react-icons/go";
 import getAvatar from "@/lib/getAvatar";

@@ -1,13 +1,13 @@
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreLazyQuery,
-  usePublicationDetailsLazyQuery,
+  useExploreFeedLazyQuery,
+  usePublicationLazyQuery,
   PublicationMainFocus,
   Profile
-} from '@/utils/lens'
+} from '@/utils/lens/generatedLenster'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -24,6 +24,7 @@ import { EmptyState } from './UI/EmptyState'
 import MetaTags from './UI/MetaTags'
 import Loading from './Loading'
 import BytesCard from './HomePage/BytesCard'
+import VideoCard from './HomePage/VideoCard'
 
 
 
@@ -50,17 +51,17 @@ const Latest = () => {
     metadata: {
       tags:
       activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video],
+      mainContentFocus: [PublicationMainFocus.Video,PublicationMainFocus.Image,PublicationMainFocus.TextOnly,PublicationMainFocus.Article,PublicationMainFocus.Audio],
     }
   }
 
   const [show, setShow] = useState(false)
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-  usePublicationDetailsLazyQuery()
+  usePublicationLazyQuery()
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
-    useExploreLazyQuery({
+    useExploreFeedLazyQuery({
       // prevent the query from firing again after the first fetch
      
       variables: {
@@ -168,14 +169,14 @@ const Latest = () => {
         className="h-[screen] border-0 mt-3 pt-3 font-semibold md:h-[calc(100vh-70px)]"
       >
         {bytes?.map((video: Publication, index) => (
-           <BytesCard
+           <VideoCard
            publication={video}
-           following={following}
-           setFollowing={ setFollowing } 
-           video={video}
+           
+           
+           
            key={`${video?.id}_${video.createdAt}1`}
            onDetail={openDetail}
-           isShow={show}
+         
        
          />
         ))}

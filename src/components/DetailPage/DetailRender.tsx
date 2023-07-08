@@ -3,7 +3,7 @@ import * as Apollo from '@apollo/client';
 import { useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
-import { Profile, Publication, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
+import { Profile, Publication, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/utils/lens/generatedLenster";
 import { usePublicationQuery, useUserProfilesQuery } from '@/types/graph';
 import { CHAIN_ID } from "@/constants";
 import Loading from "../Loading";

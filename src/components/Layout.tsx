@@ -1,7 +1,7 @@
 import { useAppStore, useAppPersistStore } from "@/store/app";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { Profile, ProfilesDocument } from "@/types/lens";
+import { Profile, ProfilesDocument } from "@/utils/lens/generatedLenster";
 import { useQuery } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
 import { CHAIN_ID } from "@/constants";

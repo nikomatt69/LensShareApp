@@ -1,4 +1,4 @@
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import type { Table } from 'dexie';
 import Dexie from 'dexie';
 

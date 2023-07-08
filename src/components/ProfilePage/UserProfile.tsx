@@ -1,5 +1,5 @@
 
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import getAvatar from '@/lib/getAvatar';
 
@@ -148,7 +148,7 @@ const UserProfile: FC<UserProfileProps> = ({
       data-testid={`user-profile-${profile.id}`}
     >
       {linkToProfile ? (
-        <Link href={`/u/${formatHandle(profile?.handle)}`}>
+        <Link href={`/u/${(profile?.id)}`}>
           <UserInfo />
         </Link>
       ) : (

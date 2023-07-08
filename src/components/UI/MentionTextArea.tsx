@@ -8,9 +8,9 @@ import type { Dispatch, FC } from 'react';
 import { useEffect, useRef } from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
 import { AVATAR } from 'src/constants';
-import { usePublicationStore } from 'src/store/publication';
+import { usePublicationStore } from 'src/store/publication4';
 import Slug from './Slug';
-import { MediaSet, NftImage, Profile, SearchProfilesDocument, SearchRequestTypes } from '@/types/lens';
+import { MediaSet, NftImage, Profile, SearchProfilesDocument, SearchRequestTypes } from '@/utils/lens/generatedLenster';
 import getStampFyiURL from '@/lib/getStampFyiURL';
 import imageCdn from '@/lib/imageCdn';
 

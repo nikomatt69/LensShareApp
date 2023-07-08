@@ -1,5 +1,5 @@
 import useXmtpClient from '@/utils/hooks/useXmtpClient';
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import { useProfilesLazyQuery } from '@/utils/lens/generatedLenster';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import chunkArray from '@/utils/functions/chunkArray';

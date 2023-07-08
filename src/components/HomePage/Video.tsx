@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { FC } from "react";
-import type { Publication } from "@/types/lens";
+import type { Publication } from "@/utils/lens/generatedLenster";
 import LikeButton from  "@/components/Buttons/Likes/LikeButton";
 import MirrorButton from  "@/components/Buttons/Mirrors/MirrorButton";
 import CommentButton from  "@/components/Buttons/CommentButton";
@@ -91,7 +91,7 @@ const Video: FC<Props> = ({ publication }) => {
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}
           posterUrl={imageCdn(
-            sanitizeIpfsUrl(getThumbnailUrl(video as Publication)),
+            sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
             isBytesVideo ? 'thumbnail_v' : 'thumbnail'
           )} 
           showControls={true}

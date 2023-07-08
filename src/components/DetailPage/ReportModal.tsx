@@ -1,7 +1,7 @@
 import ReportPublication from '@/components/ReportPublication'
 import {Modal} from '@/components/UI/Modal'
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import type { FC } from 'react'
 import React from 'react'
 import { Card } from '../UI/Card'

@@ -1,5 +1,5 @@
-import { Profile } from '@/types/lens';
-import type { MediaSet } from '@/utils/lens';
+import { Profile } from '@/utils/lens/generatedLenster';
+import type { MediaSet } from '@/utils/lens/generatedLenster';
 
 export interface MediaSetWithoutOnChain extends Omit<MediaSet, 'onChain'> {}
 

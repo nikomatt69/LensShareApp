@@ -40902,6 +40902,7 @@ export type UserProfilesQueryVariables = Exact<{
 }>;
 
 export type UserProfilesQuery = {
+  userSigNonces: any;
   __typename?: 'Query';
   profiles: {
     __typename?: 'PaginatedProfileResult';

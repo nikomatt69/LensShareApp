@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { FC } from 'react';
-import { Publication } from '@/utils/lens';
+import { Publication } from '@/utils/lens/generatedLenster';
 import Like from './Like';
 import { useAppStore } from '@/store/app';
 

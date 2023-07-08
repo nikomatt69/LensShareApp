@@ -1,5 +1,5 @@
 import { RARIBLE_URL, STATIC_IMAGES_URL, USER_CONTENT_URL,OPENSEA_MARKETPLACE_URL, IS_MAINNET, STATIC_ASSETS_URL } from '@/constants';
-import type { Nft } from '@/utils/lens';
+import type { Nft } from '@/utils/lens/generatedLenster';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import type { FC } from 'react';
 import { CHAIN_ID } from 'src/constants';

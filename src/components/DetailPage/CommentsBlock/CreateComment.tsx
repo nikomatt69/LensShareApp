@@ -2,7 +2,7 @@ import {
   CreatePublicCommentRequest,
   Publication,
   PublicationMainFocus,
-} from "@/types/lens";
+} from "@/utils/lens/generatedLenster";
 import React, { Dispatch, FC, useRef, useState, Fragment } from "react";
 import { LENS_HUB_ABI } from "@/abi/abi";
 import { useAppStore, useTransactionPersistStore } from "src/store/app";

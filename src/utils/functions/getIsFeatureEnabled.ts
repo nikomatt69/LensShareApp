@@ -5,7 +5,7 @@ const getIsFeatureEnabled = (flag: string, channelId: string) => {
   if (!channelId) {
     return false
   }
-  const feature = featureFlags.find((f) => f.flag === flag)
+  const feature = featureFlags.find((f) => flag)
 
   return IS_MAINNET ? feature?.enabledFor.includes(channelId) ?? false : false
 }

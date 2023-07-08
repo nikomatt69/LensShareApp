@@ -1,13 +1,13 @@
 import { APP_ID, LENSTER_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, STATIC_ASSETS_URL } from '@/constants'
 
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreQuery
-} from '@/utils/lens'
+  useExploreFeedQuery
+} from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import imageCdn from '@/lib/imageCdn'
@@ -17,6 +17,7 @@ import getProfilePicture from '@/utils/functions/getProfilePicture'
 import { useAppStore } from '@/store/app'
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
 import BytesShimmer from './BytesShimmer'
+import { useExploreQuery } from '@/utils/lens/generated'
 
 
 const BytesSection = () => {
@@ -97,7 +98,7 @@ const BytesSection = () => {
               <div className="aspect-[9/16] h-[280px]">
                 <img
                   className="rounded-sm"
-                  src={imageCdn(getThumbnailUrl(byte), 'thumbnail_v')}
+                  src={imageCdn(getThumbnailUrl(byte.metadata), 'thumbnail_v')}
                   alt="thumbnail"
                   draggable={false}
                 />

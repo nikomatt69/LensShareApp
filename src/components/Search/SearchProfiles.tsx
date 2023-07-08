@@ -1,5 +1,5 @@
 import { useSearchProfilesLazyQuery, useSearchProfilesQuery } from '@/types/graph'
-import { Profile, SearchRequestTypes } from '@/utils/lens'
+import { Profile, SearchRequestTypes } from '@/utils/lens/generatedLenster'
 import React, { FC } from 'react'
 import { Spinner } from '../UI/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'

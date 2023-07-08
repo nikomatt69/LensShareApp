@@ -1,7 +1,7 @@
 
 import clsx from 'clsx'
-import type { Profile } from '@/utils/lens'
-import { SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens'
+import type { Profile } from '@/utils/lens/generatedLenster'
+import { SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generatedLenster'
 import type { ComponentProps, FC } from 'react'
 import React, { useId } from 'react'
 import type { SuggestionDataItem } from 'react-mentions'

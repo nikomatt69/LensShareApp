@@ -1,4 +1,4 @@
-import { CollectModules, FollowModules, ReferenceModules } from '@/types/lens';
+import { CollectModules, FollowModules, ReferenceModules } from '@/utils/lens/generatedLenster';
 import { ClockIcon, PlusCircleIcon, ReceiptRefundIcon, ShareIcon, StarIcon, DocumentPlusIcon, CurrencyDollarIcon  } from '@heroicons/react/24/outline';
 import type { FC } from 'react';
   

@@ -22,6 +22,7 @@ import router from "next/router";
 import { FaHeadphones } from "react-icons/fa";
 import { ConnectKitButton } from "connectkit";
 import MainButton from "./Buttons/Rainbow/mainbutton";
+import NotificationIcon from "./Notifications/NotificationIcon";
 
 
 
@@ -50,14 +51,11 @@ const Navbar: FC = () => {
  
     <div className='flex pl-2 centre-item gap-5 md:gap-10 '>
     
-    <Link href='/notifications'>
-        <button className='flex px-2 pt-3 py-2 md:px-4 text-md font-semibold items-center gap-2 cursor-pointer
-         rounded-full text-md border-[#57B8FF] text-blue-500 hover:bg-[#57B8FF]' >
-         {/*className='border-2 px-2 py-2 md:px-4 text-md font-semibold flex items-center gap-2'*/}
-         <BellIcon className='h-6 text-blue-500' />{' '}
-       
+    <button>
+        <NotificationIcon/>
+
+
         </button>
-        </Link> 
       <div className='flex pl-full centre-item gap-5 md:gap-10 '>
         {currentProfile ? (
            <div className='w-12 h-12'>

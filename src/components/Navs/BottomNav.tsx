@@ -9,6 +9,7 @@ import { ChatBubbleLeftIcon, VideoCameraIcon ,ChatBubbleOvalLeftIcon, FilmIcon, 
 import router from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { MdVideoLibrary } from 'react-icons/md';
+import MessageIcon from '../Messages/MessageIcon';
 
 const BottomNav: React.FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -16,7 +17,7 @@ const BottomNav: React.FC = () => {
 
   return (
     <div>
-    <nav className="fixed  bottom-0 left-0 right-0 h-[70px] border-b-0 border-t border-l border-r border-blue-700 rounded-lg border-2  bg-black bg-gradient-to-b from-gray-900 to-transparent xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden  z-999 flex items-center justify-around px-4 py-3">
+    <nav className="fixed z-[5] bottom-0 left-0 right-0 h-[70px] border-b-0 border-t border-l border-r border-blue-700 rounded-lg border-2  bg-black bg-gradient-to-b from-gray-900 to-transparent xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden  z-999 flex items-center justify-around px-4 py-3">
      {/* //swap timelines */}
     { homePage ? (
       <Link href='/'>
@@ -74,11 +75,7 @@ const BottomNav: React.FC = () => {
 
       <div>
       {/* //messages */}
-     <Link href='/messages'>
- 
-        <ChatBubbleOvalLeftIcon className="text-blue-500 pb-1 h-6 w-6" />{' '}
-        
-      </Link>
+      <MessageIcon />
       </div>
         {/* //log into lens & profile page */}
       {currentProfile ? (

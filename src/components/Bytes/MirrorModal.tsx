@@ -1,5 +1,5 @@
 
-import { Profile, Publication } from '@/types/lens'
+import { Profile, Publication } from '@/utils/lens/generatedLenster'
 import type { Dispatch, FC } from 'react'
 import React, { useState } from 'react'
 import { FaRegCommentAlt } from 'react-icons/fa'

@@ -3,7 +3,7 @@ import Preview from '@/components/Messages/Preview';
 import useGetMessagePreviews from '@/lib/useGetMessagePreviews';
 import { useMessageDb } from '@/lib/useMessageDb';
 import useMessagePreviews from '@/utils/hooks/useMessagePreviews';
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/lib/conversationKey';

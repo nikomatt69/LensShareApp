@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import ProfileCard from "@/components/ProfilePage/ProfileCard";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { Profile, ProfileDocument } from "@/utils/lens";
+import { Profile, ProfileDocument } from "@/utils/lens/generatedLenster";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAppStore } from "@/store/app";

@@ -1,6 +1,6 @@
 
 import Link from 'next/link'
-import type { Profile, Publication } from '@/types/lens'
+import type { Profile, Publication } from '@/utils/lens/generatedLenster'
 import type { Dispatch, FC } from 'react'
 import React, { useEffect, useRef, useState } from 'react'
 import getProfilePicture from '@/utils/functions/getProfilePicture'
@@ -42,7 +42,7 @@ const ByteVideo: FC<Props> = ({
   const intersectionRef = useRef<HTMLDivElement>(null)
   const [playing, setPlaying] = useState(false)
   const thumbnailUrl = imageCdn(
-    sanitizeIpfsUrl(getThumbnailUrl(video)),
+    sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
     'thumbnail_v'
   )
   const handleWindowSizeChange = () => {
@@ -167,7 +167,7 @@ const ByteVideo: FC<Props> = ({
             {  /* isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />  */} 
             {isMobile && <MobileBottomOverlay video={video} setFollowing={setFollowing} profile={profile as Profile} following={following}  />}
             <div className="absolute inline-block right-3 bottom-[15%] z-[1] md:hidden">
-              <ByteActions  trigger publicationId={video as Publication} key={currentViewingId} video={video} showDetail={() => onDetail(video)} />
+              <ByteActions publication={video as Publication}  trigger publicationId={video as Publication} key={currentViewingId} video={video} showDetail={() => onDetail(video)} />
               {/* {video?.collectModule?.__typename !==
                 'RevertCollectModuleSettings' && (
                   <div className="text-center text-white md:text-gray-500">
@@ -180,7 +180,7 @@ const ByteVideo: FC<Props> = ({
             </div>
           </div>
           <div className="hidden md:flex">
-            <ByteActions  publicationId={video as Publication} trigger video={video} showDetail={() => onDetail(video)} />
+            <ByteActions publication={video as Publication}  publicationId={video as Publication} trigger video={video} showDetail={() => onDetail(video)} />
           </div>
 
         </div>

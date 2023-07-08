@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { FC } from 'react';
-import { Publication } from '@/utils/lens';
+import { Publication } from '@/utils/lens/generatedLenster';
 import { useAppStore } from '@/store/app';
 import ShareModal from '../HomePage/ShareModal';
 import { ShareIcon } from '@heroicons/react/24/solid';

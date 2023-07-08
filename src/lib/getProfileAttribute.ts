@@ -1,4 +1,4 @@
-import type { Attribute, Maybe } from '@/utils/lens';
+import type { Attribute, Maybe } from '@/utils/lens/generatedLenster';
 
 type Key =
   | 'hasPrideLogo'

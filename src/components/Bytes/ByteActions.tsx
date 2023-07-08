@@ -6,7 +6,7 @@ import CommentModal from './CommentModal'
 import { FaRegCommentAlt } from 'react-icons/fa'
 import ShareModal from '../HomePage/ShareModal'
 import ReportModal from '../DetailPage/ReportModal'
-import { Profile, Publication } from '@/types/lens'
+import { Profile, Publication } from '@/utils/lens/generatedLenster'
 import MirrorButton from '../Buttons/Mirrors/MirrorButton'
 import Like from '../Buttons/Likes/Like'
 import CollectButton from '../Buttons/Collects/CollectButton'
@@ -26,6 +26,7 @@ type Props = {
   inDetail?: boolean
   trigger: React.ReactNode
   publicationId: Publication
+  publication:Publication
 
   
 }
@@ -58,7 +59,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger,}) => {
         <div className="w-full text-center pr-7 text-white md:text-inherit"onClick={() => setShow(true)}>
          <button>
             
-            <CommentModal  video={video as Publication} trigger={trigger} setFollowing={setFollowing} following={following} profile={profile as Profile}  />
+            <CommentModal  publication={video as Publication} trigger={trigger} setFollowing={setFollowing} following={following} profile={currentProfile as Profile}  />
           </button>
           <p className="text-xs hidden lg:block font-semibold text-gray-400">{comments}</p>
         </div>

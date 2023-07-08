@@ -1,7 +1,7 @@
 
 import { useAppStore } from '@/store/app'
 import usePersistStore from '@/store/persist'
-import type { Comment, Mirror, Publication } from '@/types/lens'
+import type { Comment, Mirror, Publication } from '@/utils/lens/generatedLenster'
 import type { FC } from 'react'
 import React from 'react'
 import VideoCard from '../HomePage/VideoCard'

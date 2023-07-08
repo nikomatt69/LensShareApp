@@ -2,13 +2,13 @@ import Timeline from '@/components/Home/Timeline'
 import { APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN } from '@/constants'
 
 import {useAppStore} from '@/store/app'
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreQuery
-} from '@/utils/lens'
+  useExploreFeedQuery
+} from '@/utils/lens/generatedLenster'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-cool-inview'
 import { EmptyState } from '../UI/EmptyState'
@@ -35,7 +35,7 @@ const Curated = (onDetail: (video: Publication) => void) => {
     }
   }
 
-  const { data, loading, error, fetchMore } = useExploreQuery({
+  const { data, loading, error, fetchMore } = useExploreFeedQuery({
     variables: { request }
   })
 

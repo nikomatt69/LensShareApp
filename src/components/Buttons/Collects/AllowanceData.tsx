@@ -1,8 +1,8 @@
 import Spinner from "@/components/Spinner";
 import { IS_MAINNET } from "@/constants";
 import { useAppStore } from "@/store/app";
-import { useApprovedModuleAllowanceAmountQuery } from "@/types/graph";
-import { CollectModules, Erc20, FollowModules, ReferenceModules } from "@/utils/lens";
+
+import { CollectModules, Erc20, FollowModules, ReferenceModules, useApprovedModuleAllowanceAmountQuery } from "@/utils/lens/generatedLenster";
 import { useState } from "react";
 import Allowance from "./Allowance";
 
@@ -52,11 +52,7 @@ const AllowanceData = () => {
                 }).finally(() => setCurrencyLoading(false));
               }}
             >
-              {data?.enabledModuleCurrencies.map((currency: Erc20) => (
-                <option key={currency.address} value={currency.address}>
-                  {currency.name}
-                </option>
-              ))}
+            yar
             </select>
           </div>
           {currencyLoading ? (

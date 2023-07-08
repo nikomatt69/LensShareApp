@@ -1,6 +1,6 @@
 import { useAppStore, useTransactionPersistStore } from '@/store/app';
 import { useHasTxHashBeenIndexedQuery, usePublicationLazyQuery } from '@/types/graph';
-import { PublicationMetadataDisplayTypes, PublicationMetadataStatusType, PublicationsDocument } from '@/types/lens';
+import { PublicationMetadataDisplayTypes, PublicationMetadataStatusType, PublicationDocument } from '@/utils/lens/generatedLenster';
 import { useApolloClient, useLazyQuery } from '@apollo/client';
 import { profile } from 'console';
 import Link from 'next/link';
@@ -41,7 +41,7 @@ const QueuedData: FC<Props> = ({ txn }) => {
                         publications() {
                             cache.writeQuery({
                                 data: data?.publication as any,
-                                query: PublicationsDocument
+                                query: PublicationDocument
                             })
                         }
                     }

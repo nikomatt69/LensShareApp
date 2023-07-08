@@ -4,7 +4,7 @@ import {
   isQueuedMessage,
   type PendingMessage
 } from '@/lib/useSendOptimisticMessage';
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import type { FC, ReactNode, } from 'react';
 import { useRef } from 'react';

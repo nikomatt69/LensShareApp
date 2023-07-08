@@ -4,7 +4,7 @@ import getStampFyiURL from '@/lib/getStampFyiURL';
 import formatAddress from '@/utils/functions/formatAddress';
 import formatHandle from '@/utils/functions/formatHandle';
 import useSendMessage from '@/utils/hooks/useSendMessage';
-import { Profile } from '@/utils/lens';
+import { Profile } from '@/utils/lens/generatedLenster';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { ContentTypeText } from '@xmtp/xmtp-js';
 import { useRouter } from 'next/router';
@@ -57,13 +57,13 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center rounded-md border-2  justify-between px-4 py-2">
+    <div className="divider flex items-center rounded-xl border  justify-between px-4 py-2">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}
           className="mr-1 h-6 w-6 cursor-pointer lg:hidden"
         />
-         {profile ? (
+         {profile?.id ? (
           <UserProfile profile={profile} />
         ) : (
         

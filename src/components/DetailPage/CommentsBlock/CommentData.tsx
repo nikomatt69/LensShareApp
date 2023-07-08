@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Publication } from "@/types/lens";
+import { Publication } from "@/utils/lens/generatedLenster";
 import { useAppStore } from "src/store/app";
 import Link from "next/link";
 import Image from "next/image";
@@ -107,7 +107,7 @@ const CommentData: FC<Props> = ({ comment, video,}) => {
         </p>
         <button className="r-0 t-0 p-1">
     
-    { <CommentOptions video={comment?.id} key={`${comment?.id}_${comment.createdAt}1`} setShowReport={setShowReport} /> }
+    { <CommentOptions video={comment.id} key={`${comment?.id}_${comment.createdAt}1`} setShowReport={setShowReport} /> }
     </button>
 
 

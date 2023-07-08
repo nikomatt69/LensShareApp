@@ -1,6 +1,6 @@
 import { IS_MAINNET } from "@/constants";
 import { getModule } from "@/lib/getModule";
-import { ApprovedAllowanceAmount } from "@/utils/lens";
+import { ApprovedAllowanceAmount } from "@/utils/lens/generatedLenster";
 import GetModuleIcon from "@/utils/GetModuleIcon";
 import { FC, useState } from "react";
 import AllowanceButton from "./AllowanceButton";

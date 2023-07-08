@@ -5,7 +5,7 @@ import { useAppStore, useTransactionPersistStore } from "src/store/app";
 
 import NoResults from "./NoResults";
 import { useQuery } from "@apollo/client";
-import { Profile, Publication, PublicationsDocument } from "@/types/lens";
+import { Profile, Publication, PublicationDocument } from "@/utils/lens/generatedLenster";
 import { useRouter } from "next/router";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import CreateComment from "./CreateComment";
@@ -43,7 +43,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
     },
   };
 
-  const { data, loading, error, refetch } = useQuery(PublicationsDocument, {
+  const { data, loading, error, refetch } = useQuery(PublicationDocument, {
     variables,
   });
   const comments = data?.publications?.items ?? [];
@@ -91,7 +91,7 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
         </div>
         <div className="bg-[#C0C0C0] border-2 pt-3 mt-3 rounded-xl ">
           <span className="font-bold  rounded-xl object-center bg-blue-500 ml-1 p-1 text-center">Comments</span>
-        {comments?.map((comment) => (
+        {comments?.map((comment: Publication) => (
                 <CommentData
                   key={`${currentViewingId}_${comment.createdAt}`}
                   comment={comment as Publication}

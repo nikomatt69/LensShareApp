@@ -10,7 +10,7 @@ import getSignature from '@/lib/getSignature';
 import onError from '@/lib/onError';
 import { useAppStore } from '@/store/app';
 import { useApprovedModuleAllowanceAmountQuery, useCollectModuleQuery, useCreateCollectTypedDataMutation, useProxyActionMutation, usePublicationRevenueQuery } from '@/types/graph';
-import { CollectModules, Publication } from '@/utils/lens';
+import { CollectModules, Publication } from '@/utils/lens/generatedLenster';
 import useBroadcast from '@/utils/useBroadcast';
 import { CameraIcon, CheckCircleIcon, ClockIcon, CurrencyDollarIcon, FolderPlusIcon, PuzzlePieceIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { BigNumber } from 'ethers';

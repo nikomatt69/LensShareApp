@@ -4,7 +4,7 @@ import {
   type PendingMessage
 } from '@/lib/useSendOptimisticMessage';
 import { Image } from '../UI/Image';
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import getAvatar from '@/lib/getAvatar';
 import getStampFyiURL from '@/lib/getStampFyiURL';

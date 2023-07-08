@@ -1,6 +1,6 @@
 
 import clsx from 'clsx'
-import type { Profile, Publication } from '@/types/lens'
+import type { Profile, Publication } from '@/utils/lens/generatedLenster'
 import type { FC } from 'react'
 import React, { useLayoutEffect, useEffect, useMemo, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -11,7 +11,7 @@ import TopOverlay from '../TopOverlay'
 import Comments from './Comments'
 import ByteActions from '../ByteActions'
 import router, { useRouter } from 'next/router'
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
+
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl'
 import { useAppStore } from '@/store/app'
 import imageCdn from '@/lib/imageCdn'
@@ -27,6 +27,7 @@ import CollectModule from '@/components/Buttons/Collects/CollectModule'
 import ChevronUpOutline from './ChevronUpOutline'
 import ChevronDownOutline from './ChevronDownOutline'
 import CommentOptions from '@/components/DetailPage/CommentsBlock/CommentOptions'
+import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
 
 type Props = {
     byte: Publication
@@ -62,7 +63,7 @@ const FullScreen: FC<Props> = ({ byte,
 
 
     const thumbnailUrl = imageCdn(
-        sanitizeIpfsUrl(getThumbnailUrl(video)),
+        sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
         'thumbnail_v'
     )
     const { color: backgroundColor } = useAverageColor(thumbnailUrl, true)
@@ -211,7 +212,7 @@ const FullScreen: FC<Props> = ({ byte,
                                 )}
                             </div>
                             <div className="absolute z-40 right-3 bottom-40 ">
-                                <ByteActions publicationId={video as Publication} trigger video={video} inDetail={true} />
+                                <ByteActions publication={video as Publication} publicationId={video as Publication} trigger video={video as Publication} inDetail={true} />
                             </div>
                             
 

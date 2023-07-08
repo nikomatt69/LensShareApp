@@ -1,8 +1,8 @@
 import formatHandle from '@/utils/functions/formatHandle';
 import Tippy from '@tippyjs/react';
 import clsx from 'clsx';
-import type { Profile } from '@/utils/lens';
-import { useProfileLazyQuery } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
+import { useProfileLazyQuery } from '@/utils/lens/generatedLenster';
 import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 

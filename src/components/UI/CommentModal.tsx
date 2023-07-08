@@ -5,7 +5,7 @@ import { FaRegCommentAlt } from 'react-icons/fa'
 import { MdOutlineClose } from 'react-icons/md'
 import FullScreenModal from './FullScreenModal'
 import Comments from '../DetailPage/CommentsBlock/Comments'
-import { Profile, Publication } from '@/types/lens'
+import { Profile, Publication } from '@/utils/lens/generatedLenster'
 
 type Props = {
   trigger: React.ReactNode

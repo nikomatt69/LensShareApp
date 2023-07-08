@@ -30,6 +30,7 @@ const nextConfig = {
   getInitialProps: true,
   getStaticPaths: true,
   getStaticProps: true,
+  experimentstopLevelAwait: true,
 
   experimental: {
     topLevelAwait: true, 

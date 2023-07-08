@@ -6,7 +6,7 @@ import CreateStream from "./CreateStream";
 import LiveContent from "./LiveContent";
 
 import Live from "./Live";
-import { Publication } from "@/types/lens";
+import { Publication } from "@/utils/lens/generatedLenster";
 
 import Create from "../LiveStream/Create";
 import Watch from "../LiveStream/Watch";

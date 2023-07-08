@@ -1,4 +1,4 @@
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import { create } from 'zustand'
 
 interface EchoState {

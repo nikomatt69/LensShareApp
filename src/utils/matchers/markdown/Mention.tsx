@@ -1,4 +1,4 @@
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import  stopEventPropagation  from '@/lib/stopEventPropagation';
 import Link from 'next/link';

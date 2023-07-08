@@ -1,14 +1,14 @@
 
-import { FeedEventItemType, type Publication } from '@/types/lens'
+import { FeedEventItemType, type Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreLazyQuery,
-  usePublicationDetailsLazyQuery,
+  useExploreFeedLazyQuery,
+  usePublicationLazyQuery,
   PublicationMainFocus,
   Profile,
-  useFeedLazyQuery
-} from '@/utils/lens'
+
+} from '@/utils/lens/generatedLenster'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -29,6 +29,7 @@ import Wrapper from '../Echos/Wrapper'
 import AudioCard from '../HomePage/AudioCard'
 import Navbar from '../Navbar'
 import BottomNav from '../Navs/BottomNav'
+import { useFeedLazyQuery } from '@/utils/lens/generated'
 
 interface Props {
   profile: Profile
@@ -67,7 +68,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
   const [show, setShow] = useState(false)
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationDetailsLazyQuery()
+    usePublicationLazyQuery()
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
     useFeedLazyQuery({

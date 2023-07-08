@@ -1,7 +1,7 @@
 
 import AddressExplorerLink from './AddressExplorerLink'
 import {useAppStore} from '@/store/app'
-import type { NewFollowerNotification } from '@/utils/lens'
+import type { NewFollowerNotification } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
@@ -65,7 +65,7 @@ const SubscribedNotification: FC<Props> = ({ notification }) => {
           ?.followModule ? `joined` : `followed you`}{' '}
           
         </span>
-        <div className="flex flex-none text-xs items-center text-gray-600">
+        <div className="flex flex-none text-xs items-center text-blue-500">
           <span>{getRelativeTime(notification?.createdAt)}</span>
         </div>
       </div>

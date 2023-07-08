@@ -1,4 +1,4 @@
-import type { Profile } from '@/utils/lens';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useCallback } from 'react';

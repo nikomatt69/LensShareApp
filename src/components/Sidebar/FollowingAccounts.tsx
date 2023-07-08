@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState, useEffect, FC, Key } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FollowingDocument, PaginatedFollowingResult, FollowingRequest, Profile } from "@/utils/lens";
+import { FollowingDocument, PaginatedFollowingResult, FollowingRequest, Profile } from "@/utils/lens/generatedLenster";
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import getAvatar from "@/lib/getAvatar";
 import { useAppStore } from "@/store/app";

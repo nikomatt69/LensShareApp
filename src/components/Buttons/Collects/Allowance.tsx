@@ -1,4 +1,4 @@
-import { ApprovedAllowanceAmount, CollectModules } from "@/utils/lens";
+import { ApprovedAllowanceAmount, CollectModules } from "@/utils/lens/generatedLenster";
 import { FC } from "react";
 import Module from "./Module";
 

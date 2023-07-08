@@ -1,6 +1,6 @@
 import useEchoStore from '@/store/echos'
 import clsx from 'clsx'
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
@@ -30,7 +30,7 @@ const Item: FC<Props> = ({ publication }) => {
     <div className="flex h-full w-full flex-col rounded-sm p-2">
       <div className="group relative flex justify-center">
         <Image
-          src={getThumbnailUrl(publication)}
+          src={getThumbnailUrl(publication.metadata)}
 
           className="w-full rounded-lg object-cover transition duration-300 ease-in-out group-hover:scale-105 md:h-[220px]"
           alt={publication?.id.name}

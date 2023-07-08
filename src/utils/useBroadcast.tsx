@@ -1,7 +1,7 @@
 import type { ApolloCache } from '@apollo/client';
 import toast from 'react-hot-toast';
 import * as Apollo from '@apollo/client';
-import { BroadcastDocument, BroadcastMutation, BroadcastMutationVariables } from '@/types/lens';
+import { BroadcastDocument, BroadcastMutation, BroadcastMutationVariables } from '@/utils/lens/generatedLenster';
 
 interface Props {
   onCompleted?: (data: any) => void;

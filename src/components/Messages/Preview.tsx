@@ -3,7 +3,7 @@ import getAvatar from '@/lib/getAvatar';
 import formatAddress from '@/utils/functions/formatAddress';
 import formatHandle from '@/utils/functions/formatHandle';
 import getStampFyiURL from '@/utils/functions/getStampFyiURL';
-import { Profile } from '@/utils/lens';
+import { Profile } from '@/utils/lens/generatedLenster';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import { ContentTypeText } from '@xmtp/xmtp-js';

@@ -1,4 +1,4 @@
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React, { useEffect, useRef, useState } from 'react'
@@ -125,7 +125,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
         <div className="flex">
           <div className="h-16 w-16 flex-none">
             <Image
-              src={getThumbnailUrl(selectedTrack)}
+              src={getThumbnailUrl(selectedTrack.metadata)}
               width={500}
               height={500}
               className="h-full w-full"

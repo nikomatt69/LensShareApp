@@ -1,25 +1,56 @@
-import { IS_MAINNET } from '@/constants'
+import { lensshareMembers } from "./pinsta-members";
 
-export enum FEATURE_FLAGS {
-  POST_WITH_SOURCE_URL = 'PostWithSource',
-}
-export enum FeatureFlags {
+
+
+
+export enum FeatureFlag {
   TrendingWidget = 'trending-widget',
   NftGallery = 'nft-gallery',
   NftDetail = 'nft-detail',
   GatedLocales = 'gated-locales',
   Polls = 'polls',
-  Space = 'audioSpace'
+  Spaces = 'spaces',
+  ForYou = 'for-you',
+  WTF2 = 'wtf2',
+  ExploreTags = 'explore-tags',
+  POST_WITH_SOURCE_URL = "POST_WITH_SOURCE_URL"
 }
 
-type FeatureFlag = {
-  flag: string
-  enabledFor: string[]
-}
-
-export const featureFlags: FeatureFlag[] = [
+export const featureFlags = [
   {
-    flag: FEATURE_FLAGS.POST_WITH_SOURCE_URL,
-    enabledFor: IS_MAINNET ? ['0x27d4'] : []
+    key: FeatureFlag.TrendingWidget,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.NftGallery,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.NftDetail,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.GatedLocales,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.Polls,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.Spaces,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.ForYou,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.WTF2,
+    enabledFor: [...lensshareMembers]
+  },
+  {
+    key: FeatureFlag.ExploreTags,
+    enabledFor: [...lensshareMembers]
   }
-]
+];

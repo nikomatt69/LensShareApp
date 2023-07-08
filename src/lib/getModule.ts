@@ -1,5 +1,5 @@
 import { FREE_COLLECT_MODULE } from "@/constants";
-import { CollectModules, FollowModules, ReferenceModules } from "@/utils/lens";
+import { CollectModules, FollowModules, ReferenceModules } from "@/utils/lens/generatedLenster";
 
 /**
  *

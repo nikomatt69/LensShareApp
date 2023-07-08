@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useEffect, useRef, useState ,} from "react";
-import type { Profile, Publication } from "@/types/lens";
+import type { Profile, Publication } from "@/utils/lens/generatedLenster";
 import Video from './Video'
 import { GoVerified } from "react-icons/go";
 import getAvatar from "@/lib/getAvatar";
@@ -32,6 +32,8 @@ import { SIGN_IN_REQUIRED_MESSAGE } from "@/constants";
 import toast from "react-hot-toast";
 import { getRelativeTime } from "@/utils/functions/formatTime2";
 import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction";
+import SinglePublication from "../Composer/SinglePublication";
+import CommentModal from "../Bytes/CommentModal";
 
 
 
@@ -48,7 +50,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   const currentViewingId = useAppStore((state) => state.currentviewingId)
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
   const [byte, setByte] = useState<Publication>()
-   
+  const [show, setShow] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const date = publication.createdAt;
   const timestamp = date.split("T")[0];
@@ -127,41 +129,7 @@ const mute = useAppStore((state) => state.isMute)
 
             {getRelativeTime(publication.createdAt)} 
           </span></p>
-      <Link 
-        className="pointer-events-auto "
-        href={`/bytes/${publication.id}`} key={publication.id} 
-        >
-        <div
-            className="my-3 pb-3  text-xs break-word text-black font-semibold"
-            style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
-        >
-        {publication?.metadata?.content && (
-          <p className={clsx('mt-4 opacity-80', clamped ? 'line-clamp-3' : '')}>
-            <InterweaveContent content={publication.metadata.content} />
-          </p>
-        )}
-        </div>
-                
-   </Link>
-        {showMore && (
-          <div className="mt-3 inline-flex">
-            <button
-              type="button"
-              onClick={() => setClamped(!clamped)}
-              className="flex items-center text-sm text-blue-700 opacity-80 outline-none hover:opacity-100 dark:text-blue-700"
-            >
-              {clamped ? (
-                <>
-                  Show more <HiOutlineChevronUp className="ml-1 h-3 w-3" />
-                </>
-              ) : (
-                <>
-                  Show less <HiOutlineChevronDown className="ml-1 h-3 w-3" />
-                </>
-              )}
-            </button>
-          </div>
-        )}
+      
          </div>
       </div>
         
@@ -181,38 +149,40 @@ const mute = useAppStore((state) => state.isMute)
       </div>
       <div className="rounded-xl p-2 cursor-pointer">
         {isMirror ? (
-          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><Video
+          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><SinglePublication
             publication={publication as Publication} /></>
         ) : (
-          <Video
-            publication={publication as Publication}
-          />
+         <SinglePublication publication={publication}/>
         )}
 
       </div>
      
-   <div className='flex flex-row py-3 space-x-3'>
-      <p className="text-xs block md:hidden font-semibold text-black-400 pl-1"> {likes} Likes</p>
-      <p className="text-xs block md:hidden font-semibold text-black-400"> {comments} Comments</p>
-      <p className="text-xs block md:hidden font-semibold text-black-400"> {mirrors} Mirrors</p>
-      <p className="text-xs block md:hidden font-semibold text-black-400"> {collects} Collects</p>
+   <div className='flex flex-row py-3 ml-4 space-x-3'>
+      <p className="text-xs block  font-semibold text-black-400 pl-1"> {likes} Likes</p>
+      <p className="text-xs block  font-semibold text-black-400"> {comments} Comments</p>
+      <p className="text-xs block  font-semibold text-black-400"> {mirrors} Mirrors</p>
+      <p className="text-xs block font-semibold text-black-400"> {collects} Collects</p>
     
     </div>
       
     <div className='flex ml-auto'>
-      <button className="block md:hidden pr-2 pb-2 ">
+      <button className="block pr-2 pb-2 ">
         <LikeButton publication={publication as Publication} />
         </button>
-        <button className="block md:hidden pr-2 pb-2">
-        <CommentButton publication={publication as Publication} />
-        </button>
-        <button className="block md:hidden pr-2 pb-2">
+        <div className="w-full text-center pr-2 md:pt-4 lg:pt-4 md:text-inherit"onClick={() => setShow(true)}>
+         <button>
+            
+            <CommentModal  publication={publication as Publication} trigger setFollowing={setFollowing} following={following} profile={currentProfile as Profile}  />
+          </button>
+          <p className="text-xs hidden lg:block font-semibold text-gray-400">{comments}</p>
+        </div>
+        <button className="block  pr-2 pb-2">
           <MirrorButton publication={publication as Publication}/>
         </button>
-      <button className="block md:hidden pr-2 pb-2">
+      <button className="block md:mb-3.5  lg:mb-3.5  xl:mb-3.5 pr-2 pb-2">
       <CollectButton  publication={publication as Publication}/>
       </button>
-      <button className="block md:hidden pr-2 pb-2" onClick={() => setShowShare(true)} >
+      <button className="block md:mb-2 lg:mb-2 xl:mb-2 pr-2 pb-2" onClick={() => setShowShare(true)} >
         <ShareButton publication={publication as Publication} />
       </button>
      

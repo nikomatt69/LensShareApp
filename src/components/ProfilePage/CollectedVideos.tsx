@@ -1,7 +1,7 @@
 import { CHAIN_ID } from '@/constants';
 import { useAppStore } from '@/store/app';
 import { useNftFeedQuery } from '@/types/graph';
-import { Nft, Profile } from '@/utils/lens';
+import { Nft, Profile } from '@/utils/lens/generatedLenster';
 import Link from 'next/link';
 import React, { FC, useState } from 'react'
 import { BsPlay } from 'react-icons/bs';

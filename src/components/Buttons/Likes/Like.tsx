@@ -1,7 +1,7 @@
 import onError from '@/lib/onError'
 import { useAppStore } from '@/store/app'
 import { useAddReactionMutation, useRemoveReactionMutation } from '@/types/graph'
-import { Publication, ReactionTypes } from '@/utils/lens'
+import { Publication, ReactionTypes } from '@/utils/lens/generatedLenster'
 import { ApolloCache } from '@apollo/client'
 import { HeartIcon } from '@heroicons/react/24/solid'
 import React, { Dispatch, FC } from 'react'

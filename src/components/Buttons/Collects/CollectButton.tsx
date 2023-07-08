@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { FC } from 'react'
 import { FolderPlusIcon } from '@heroicons/react/24/solid';
-import { CollectModules, Publication } from '@/utils/lens';
+import { CollectModules, Publication } from '@/utils/lens/generatedLenster';
 import CollectModule from './CollectModule';
 import { Modal } from '../../UI/Modal';
 import { getModule } from '@/lib/getModule';

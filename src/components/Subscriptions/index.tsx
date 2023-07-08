@@ -9,7 +9,7 @@ import * as Apollo from '@apollo/client';
 import { useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
-import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
+import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/utils/lens/generatedLenster";
 import { CHAIN_ID } from "@/constants";
 import { Toaster } from 'react-hot-toast';
 import Sidebar from '../Sidebar/Sidebar'

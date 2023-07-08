@@ -5,7 +5,7 @@ import {
   Publication,
   PublicationSearchResult,
   SearchRequestTypes,
-} from "@/types/lens";
+} from "@/utils/lens/generatedLenster";
 import React, { FC, useState } from "react";
 import VideoCard from "../HomePage/VideoCard";
 import Video from "../HomePage/Video";

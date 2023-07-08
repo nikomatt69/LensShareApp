@@ -24,11 +24,16 @@ import { WagmiConfig, createConfig,} from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { ConnectKitProvider,  getDefaultConfig } from 'connectkit';
 
+
  
 const chains = [polygon,];
 
 
+
+
 const queryClient = new QueryClient();
+
+
 
 
 const wagmiConfig = createConfig(

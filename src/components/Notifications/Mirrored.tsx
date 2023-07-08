@@ -1,5 +1,5 @@
 
-import type { NewMirrorNotification } from '@/utils/lens'
+import type { NewMirrorNotification } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
@@ -42,7 +42,7 @@ const MirroredNotification: FC<Props> = ({ notification }) => {
             video
           </Link>
         </span>
-        <div className="flex flex-none text-xs items-center text-gray-600">
+        <div className="flex flex-none text-xs items-center text-blue-500">
           <span>{getRelativeTime(notification?.createdAt)}</span>
         </div>
       </div>

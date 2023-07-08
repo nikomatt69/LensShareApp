@@ -1,11 +1,11 @@
 
-import type { Publication } from '@/types/lens'
+import type { Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreQuery
-} from '@/utils/lens'
+  useExploreFeedQuery
+} from '@/utils/lens/generatedLenster'
 import React from 'react'
 import { useInView } from 'react-cool-inview'
 import { LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL, STATIC_IMAGES_URL } from '@/constants'
@@ -16,6 +16,7 @@ import MetaTags from '../UI/MetaTags'
 import Loader from '../UI/Loader'
 import EchosShimmer from './EchosShimmer'
 import { EmptyState } from '../UI/EmptyState'
+import { useExploreQuery } from '@/utils/lens/generated'
 
 const Curated = () => {
   const activeTagFilter = useAppStore((state) => state.activeTagFilter)

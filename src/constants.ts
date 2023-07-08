@@ -1,6 +1,6 @@
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
 import packageJson from '../package.json';
-import { CustomFiltersTypes } from '@/utils/lens'
+import { CustomFiltersTypes } from '@/utils/lens/generatedLenster'
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === "mainnet";
 export const IS_PRODUCTION = process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true';
@@ -13,10 +13,13 @@ export const APP_VERSION = packageJson.version;
 export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
 export const APP_INFOPAGE = "Decentralized Social Video & Message Platform"
 
-export const EVER_ACCESS_SECRET= process.env.NEXT_PUBLIC_EVER_ACCESS_SECRET;
-export const EVER_ACCESS_KEY= process.env.NEXT_PUBLIC_EVER_ACCESS_KEY;
 
-export const PINSTA_API_URL = 'https://apipost.lenshareapp.xyz';
+
+export const LENSSHARE_TAIL_INGEST_URL = 'https://tail.lenshareapp.xyz'
+
+export const IPFS_FREE_UPLOAD_LIMIT = IS_MAINNET ? 5000 : 100 // in MB
+
+
 export const MUX_DATA_KEY = '2h11sq1qeahiaejrjegjti847';
 
 export const NEXT_PUBLIC_STUDIO_API_KEY="9e17a7ab-3370-4e31-85c3-43072da2315e";
@@ -28,34 +31,58 @@ export const MESSAGING_PROVIDER = {
   PUSH: 'hudd'
 };
 
+export const REQUESTING_SIGNATURE_MESSAGE = 'Requesting signature...'
+
 export const LENS_MEDIA_SNAPSHOT_URL =
-  'https://ik.imagekit.io/lens/media-snapshot';
+  '"https://ik.imagekit.io/lens/media-snapshot"';
 
 
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
-
-export const ENS_RESOLVER_WORKER_URL = IS_MAINNET
+export const STS_GENERATOR_WORKER_URL = IS_PRODUCTION
+  ? 'https://sts.lenster.xyz'
+  : 'http://localhost:8082';
+export const METADATA_WORKER_URL = IS_PRODUCTION
+  ? 'https://metadata.lenster.xyz'
+  : 'http://localhost:8083';
+export const FRESHDESK_WORKER_URL = IS_PRODUCTION
+  ? 'https://freshdesk.lenster.xyz'
+  : 'http://localhost:8084';
+export const SNAPSHOR_RELAY_WORKER_URL = IS_PRODUCTION
+  ? 'https://snapshot-relay.lenster.xyz'
+  : 'http://localhost:8085';
+export const ENS_RESOLVER_WORKER_URL = IS_PRODUCTION
   ? 'https://ens-resolver.lenster.xyz'
-  : 'https://ens-resolver.lenster.xyz';
+  : 'http://localhost:8086';
+export const OEMBED_WORKER_URL = IS_PRODUCTION
+  ? 'https://oembed.lenster.xyz'
+  : 'http://localhost:8087';
+export const SPACES_WORKER_URL = IS_PRODUCTION
+  ? 'https://spaces.lenster.xyz'
+  : 'http://localhost:8088';
+export const LEAFWATCH_WORKER_URL = IS_PRODUCTION
+  ? 'https://leafwatch.lenster.xyz'
+  : 'http://localhost:8089';
+
+
+export const S3_BUCKET = {
+  LENSTER_MEDIA: 'lenster-media'
+};
+
 
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
 export const HUDDLE_API_KEY="wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0";
 
 
-export const SPACES_WORKER_URL = IS_MAINNET
-  ? 'https://space.lenshareapp.xyz'
-  : 'http://localhost:8089';
 
 export const GROWTHBOOK_KEY = IS_MAINNET
   ? 'sdk-fDLRMwvpyh4Kq3b'
   : 'sdk-STENQl8vU1da648';
 
 
-export const NEXT_PUBLIC_EVER_BUCKET_NAME = 'lensshare';
-export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
-export const EVER_REGION = 'us-west-2';
+export const EVER_BUCKET_NAME = 'lensshare';
+
 
 export const SCROLL_ROOT_MARGIN = '40% 0px';
 
@@ -110,6 +137,12 @@ export const ALLOWED_MEDIA_TYPES = [
   ...ALLOWED_AUDIO_TYPES
 ];
 
+export const IPFS_GATEWAY = 'https://gateway.ipfscdn.io/ipfs'
+export const EVER_ENDPOINT = 'https://endpoint.4everland.co'
+export const EVER_REGION = 'us-west-2'
+export const EVER_ACCESS_KEY = process.env.EVER_ACCESS_KEY as string
+export const EVER_ACCESS_SECRET = process.env.EVER_ACCESS_SECRET as string
+
 
 export const SIGN_IN_REQUIRED_MESSAGE = 'Sign in required'
 export const WRONG_NETWORK = IS_MAINNET
@@ -119,7 +152,10 @@ export const SIGN_ERROR = 'Failed to sign data'
 export const RELAYER_ENABLED = true
 
 export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz';
-export const BUNDLR_METADATA_UPLOAD_URL = 'https://metadata.lenshareapp.xyz';
+
+
+
+
 
 
 export const LENSSHARE_EMBED_URL = 'https://embed.lenshareapp.xyz'
@@ -162,7 +198,7 @@ export const IMAGEPROXY_URL = IS_MAINNET ? "https://img.lenstube.xyz" : "https:/
 export const API_ORIGINS = "https://lenshareapp.xyz/*";
 
 export const ARWEAVE_WEBSITE_URL = "https://arweave.net";
-export const ARWEAVE_GATEWAY = 'https://arweave.net/';
+export const ARWEAVE_GATEWAY = 'https://arweave.net';
 export const OPENSEA_MARKETPLACE_URL = IS_MAINNET ? "https://opensea.io" : "https://testnets.opensea.io";
 
 export const RARIBLE_URL = IS_MAINNET ? 'https://rarible.com' : 'https://testnet.rarible.com';

@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 
 import Comments from "./CommentsBlock/Comments";
 import { useQuery } from "@apollo/client";
-import { Publication, PublicationDocument, Profile } from "@/types/lens";
+import { Publication, PublicationDocument, Profile } from "@/utils/lens/generatedLenster";
 import { usePublicationQuery, useUserProfilesQuery } from "@/types/graph";
 import getAvatar from "@/lib/getAvatar";
 import { copyToClipboard } from "@/utils/clipboard";
@@ -136,7 +136,7 @@ const VideoDetail: FC<Props> = ({
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageCdn(
-            sanitizeIpfsUrl(getThumbnailUrl(publication)),
+            sanitizeIpfsUrl(getThumbnailUrl(publication.metadata)),
             isBytesVideo ? 'thumbnail_v' : 'thumbnail'
 
             

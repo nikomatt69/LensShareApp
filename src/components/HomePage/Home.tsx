@@ -10,7 +10,7 @@ import * as Apollo from '@apollo/client';
 import { useEffect, useState } from "react";
 import { useAppPersistStore, useAppStore, useReferenceModuleStore } from "@/store/app";
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
-import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/types/lens";
+import { Profile, ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from "@/utils/lens/generatedLenster";
 import { APP_NAME, CHAIN_ID } from "@/constants";
 import Loading from "../Loading";
 import { Toaster } from "react-hot-toast";
@@ -19,6 +19,7 @@ import MetaTags from "../UI/MetaTags";
 import Bytes from "../Bytes";
 import DiscoverMob from "../DiscoverPage/DiscoverMob";
 import BytesSection from "../Home/BytesSection";
+import NewPost from "../Composer/Post/New";
 
 
 
@@ -127,10 +128,15 @@ const Home: NextPage = () => {
         </div>
         
        
-        <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
+        <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 cursor-pointer overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
+  
           <div className="flex flex-col  gap-10">
         <BytesSection />
         </div>
+        
+         
+     
+        <div className='onesignal-customlink-container'></div>
           <Explore />
         </div>
         

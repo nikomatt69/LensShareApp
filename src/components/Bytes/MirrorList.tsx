@@ -9,8 +9,9 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import formatHandle from '@/utils/functions/formatHandle'
 import Link from 'next/link'
 import { usePublicationQuery } from '@/types/graph'
-import { Profile, useAllProfilesQuery } from '@/utils/lens/generated'
+import { Profile, useProfilesQuery } from '@/utils/lens/generatedLenster'
 import { useInView } from 'react-cool-inview'
+import { useAllProfilesQuery } from '@/utils/lens/generated'
 
 interface Props {
     publicationId: string

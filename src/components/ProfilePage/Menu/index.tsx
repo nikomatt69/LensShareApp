@@ -1,7 +1,7 @@
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
-import type { Publication } from '@/utils/lens';
+import type { Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import type { FC } from 'react';
 import { Fragment } from 'react';

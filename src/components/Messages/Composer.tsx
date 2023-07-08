@@ -35,7 +35,7 @@ import Attachment from './AttachmentView';
 import { ArrowRightIcon, PhotoIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Input } from '../UI/Input';
 import { Button } from '../UI/Button';
-import { uploadToIPFS } from '@/utils/functions/uploadToIPFS2';
+import  uploadFilesToIPFS, { uploadFileToIPFS }  from '@/lib/uploadToIPFS3';
 
 interface ComposerProps {
   sendMessage: <T extends AllowedContent = string>(
@@ -149,8 +149,8 @@ const Composer: FC<ComposerProps> = ({
             }
           );
 
-          const uploadedAttachment = await uploadToIPFS(file);
-          const url = sanitizeDStorageUrl(uploadedAttachment.url);
+          const uploadedAttachment = await uploadFileToIPFS(file);
+          const url = sanitizeDStorageUrl(uploadedAttachment.original.url);
 
           const remoteAttachment: RemoteAttachment = {
             url,
@@ -253,7 +253,7 @@ const Composer: FC<ComposerProps> = ({
   };
 
   return (
-    <div className="bg-brand-100/75">
+    <div className="bg-brand-100/75 border rounded-xl">
       {attachment && !sending ? (
         <AttachmentPreview
           onDismiss={onDismiss}

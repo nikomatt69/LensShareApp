@@ -1,5 +1,5 @@
 
-import type { NewCommentNotification } from '@/utils/lens'
+import type { NewCommentNotification } from '@/utils/lens/generatedLenster'
 import Link from 'next/link'
 import type { FC } from 'react'
 import React from 'react'
@@ -54,7 +54,7 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
         >
           {notification?.comment?.metadata?.content}
         </Link>
-        <div className="flex flex-none text-xs items-center text-gray-600">
+        <div className="flex flex-none text-xs items-center text-blue-500">
           <span>{getRelativeTime(notification?.createdAt)}</span>
         </div>
       </div>

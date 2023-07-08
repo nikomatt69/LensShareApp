@@ -1,7 +1,7 @@
 import getAvatar from "@/lib/getAvatar"
 import { Dispatch, FC, useEffect, useState } from "react";
 import { useFollowingQuery } from "@/types/graph"
-import { Profile } from "@/utils/lens"
+import { Profile } from "@/utils/lens/generatedLenster"
 import { GoVerified } from "react-icons/go"
 import InfiniteScroll from "react-infinite-scroll-component"
 import InfiniteLoader from "../UI/InfiniteLoader"

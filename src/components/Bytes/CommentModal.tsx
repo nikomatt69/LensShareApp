@@ -1,5 +1,5 @@
 
-import { Profile, Publication } from '@/types/lens'
+import { Profile, Publication } from '@/utils/lens/generatedLenster'
 import type { Dispatch, FC } from 'react'
 import React, { useState } from 'react'
 import { FaRegCommentAlt } from 'react-icons/fa'
@@ -21,14 +21,14 @@ import CommentsByte from './FullScreen/Comments'
 import { useAppStore } from '@/store/app'
 type Props = {
   trigger: React.ReactNode
-  video: Publication
+  publication: Publication
   profile: Profile 
   setFollowing: Dispatch<boolean>;
   following: boolean;
 
 }
 
-const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
+const CommentModal: FC<Props> = ({ trigger, publication ,profile, setFollowing,
   following,}) => {
   const [show, setShow] = useState(false)
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId)
@@ -64,8 +64,8 @@ const CommentModal: FC<Props> = ({ trigger, video ,profile, setFollowing,
       <Comments
           
           profile={profile}
-          key={currentViewingId}
-          publication={video as Publication}
+          publication={publication as Publication} 
+          key={`${publication}_${publication.createdAt}1`}
         
           
         

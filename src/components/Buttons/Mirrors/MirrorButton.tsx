@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
 import { MdFavorite } from 'react-icons/md';
 import { NextPage } from 'next';
-import type { CreateMirrorRequest, Publication } from '@/utils/lens';
+import type { CreateMirrorRequest, Publication } from '@/utils/lens/generatedLenster';
 import { useAppStore } from '@/store/app';
 import { useContractWrite, useSignTypedData } from 'wagmi';
 import onError from '@/lib/onError';

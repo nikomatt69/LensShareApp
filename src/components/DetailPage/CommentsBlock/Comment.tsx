@@ -1,8 +1,8 @@
 
 
 import clsx from 'clsx'
-import type { Attribute, Publication } from '@/types/lens'
-import { PublicationMainFocus } from '@/types/lens'
+import type { Attribute, Publication } from '@/utils/lens/generatedLenster'
+import { PublicationMainFocus } from '@/utils/lens/generatedLenster'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import type { FC } from 'react'

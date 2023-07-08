@@ -1,12 +1,12 @@
 
-import type { Profile, Publication } from '@/types/lens'
+import type { Profile, Publication } from '@/utils/lens/generatedLenster'
 import {
   PublicationSortCriteria,
   PublicationTypes,
-  useExploreLazyQuery,
-  usePublicationDetailsLazyQuery,
+  useExploreFeedLazyQuery,
+  usePublicationLazyQuery,
   PublicationMainFocus
-} from '@/utils/lens'
+} from '@/utils/lens/generatedLenster'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -21,6 +21,7 @@ import Loader from '../UI/Loader'
 import { EmptyState } from '../UI/EmptyState'
 import FullScreen from './FullScreen'
 import Link from 'next/link'
+import { useExploreLazyQuery, usePublicationDetailsLazyQuery } from '@/utils/lens/generated'
 
 interface Props {
   following?: boolean

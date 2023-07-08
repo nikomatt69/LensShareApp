@@ -2,7 +2,7 @@
 
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Profile, Publication} from '@/types/lens';
+import { Profile, Publication} from '@/utils/lens/generatedLenster';
 import{ sanitizeIpfsUrl} from '@/utils/sanitizeIpfsUrl'
 import FollowButton from  "@/components/Buttons/FollowButton";
 import { useAppStore } from "src/store/app";
@@ -45,6 +45,10 @@ import { useProfilesQuery } from '@/utils/lens/generatedLenster';
 import InterweaveContent from '../UI/InterweaveContent';
 import ProfileAudio from './ProfileAudio';
 import ProfileAudioFeed from './ProfileAudioFeed';
+import { useCounter } from 'usehooks-ts';
+import NewPost from '../Composer/Post/New';
+import NewPublication from '../Composer/NewPublication';
+import { useGlobalModalStateStore } from '@/store/modals';
 
 
 
@@ -66,6 +70,13 @@ interface Props {
         const [showFollowingModal, setShowFollowingModal] = useState(false);
         const [showStatsModal, setShowStatsModal] = useState(false);
         const [showUserAudio, setShowUserAudio] = useState<Boolean>(true);
+        const setShowNewPostModal = useGlobalModalStateStore(
+            (state) => state.setShowNewPostModal
+            
+          );
+          const showNewPostModal = useGlobalModalStateStore(
+            (state) => state.showNewPostModal
+          );
         
         
         
@@ -137,50 +148,8 @@ interface Props {
                            }    
                         </div> 
                     </div>
+                    
                     <div className="flex gap-4 justify-center">
-                        <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
-                            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6 font-bold mt-2 cursor-pointer" />
-                        </Link>
-
-                        <Link href='/settings'>
-                        <Cog6ToothIcon
-                            className="h-6 w-6 mt-2 cursor-pointer"
-                           />
-                        </Link>
-                        <button onClick={() => setShowStatsModal(true)} >
-                           <span className="flex justify-center">
-                            <ChartBarIcon className="h-5 w-5 mt-2 cursor-pointer" />
-                          </span>
-                            <Modal
-                                title="Stats"
-                                show={showStatsModal}
-                                onClose={() => setShowStatsModal(!showStatsModal)}
-                            >
-                               <Stats profileId={profile?.id} icon={undefined} count={0} text={`Stats • ${profile?.name}`} publications={profile?.stats?.totalPosts} data={{
-                                    commentsTotal: profile?.id.stats?.totalComments,
-                                    id:currentProfile?.id,
-                                    mirrorsTotal: profile?.id.stats?.totalMirrors,
-                                    postsTotal: profile?.id.stats?.totalPosts,
-                                    publicationsTotal: profile?.id.stats?.totalPublications,
-                                    /** Total collects count */
-                                    totalCollects: profile?.id.stats?.totalCollects,
-                                    totalComments: profile?.id.stats?.totalComments,
-                                    totalFollowers: profile?.id.stats?.totalFollowers,
-                                    totalFollowing: profile?.id.stats?.totalFollowing,
-                                    totalMirrors: profile?.id.stats?.totalMirrors,
-                                    totalPosts: profile?.id.stats?.totalPosts,
-                                    totalPublications: profile?.id.stats?.totalPublications,
-                                  
-                                    
-                                  
-
-
-                                  
-                                }}  revenue={0}  /> 
-                            </Modal>
-                       </button>
-                        
-                    </div>       
                     <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
                             <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
@@ -194,8 +163,11 @@ interface Props {
                                     <Following profile={profile as Profile} />
                                 </Modal>
                             </div>
+
+                        </div>    
                             
-                        <div className="flex items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
+                    <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
+                        <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
                             <span className="font-bold text-sx">{profile?.stats.totalFollowers}</span>
                             <span>Followers</span>
                             <Modal
@@ -207,6 +179,60 @@ interface Props {
                             </Modal>
                         </div>
                     </div>
+                        <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
+                            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6 font-bold mt-2 cursor-pointer" />
+                        </Link>
+
+                        <button onClick={() => setShowStatsModal(true)} >
+                           <span className="flex justify-center">
+                            <ChartBarIcon className="h-5 w-5 mt-2 cursor-pointer" />
+                          </span>
+                            <Modal
+                                title="Stats"
+                                show={showStatsModal}
+                                onClose={() => setShowStatsModal(!showStatsModal)}
+                                
+                            >
+                               <Stats profileId={currentProfile?.id} icon={undefined} count={0} text={`Stats • ${currentProfile?.name}`} publications={currentProfile?.stats?.totalPosts} data={{
+                                    commentsTotal: currentProfile?.id.stats?.totalComments,
+                                    id:currentProfile?.id,
+                                    mirrorsTotal: currentProfile?.id.stats?.totalMirrors,
+                                    postsTotal: currentProfile?.id.stats?.totalPosts,
+                                    publicationsTotal: currentProfile?.id.stats?.totalPublications,
+                                    /** Total collects count */
+                                    totalCollects: currentProfile?.id.stats?.totalCollects,
+                                    totalComments: currentProfile?.id.stats?.totalComments,
+                                    totalFollowers: currentProfile?.id.stats?.totalFollowers,
+                                    totalFollowing: currentProfile?.id.stats?.totalFollowing,
+                                    totalMirrors: currentProfile?.id.stats?.totalMirrors,
+                                    totalPosts: currentProfile?.id.stats?.totalPosts,
+                                    totalPublications: currentProfile?.id.stats?.totalPublications,
+                                  
+                                    
+                                  
+
+
+                                  
+                                }}  revenue={0}  /> 
+                            </Modal>
+                       </button>
+                       </div>
+                    
+                       <div className='rounded-xl' onClick={() => setShowNewPostModal(true)} >
+                       {currentProfile?.id === profile?.id ? <NewPost /> : null}
+                        <Modal
+                            title={`Create post`}
+                            size="md"
+                            show={showNewPostModal}
+                            onClose={() => setShowNewPostModal(false)}
+                         >
+        
+                         <NewPublication />
+                       </Modal>
+                      
+                       </div>
+                        
+                         
                     <div className='flex-1 text-center gap-8 p-4 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
                         <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
                         Videos
@@ -226,6 +252,7 @@ interface Props {
                          title="Collected Videos"
                          show={showCollectedUserVideosModal}
                          onClose={() => setShowCollectedUserVideosModal(false)}
+              
                          
                          >
                         <div className='p-1 items-center rounded-xl'>

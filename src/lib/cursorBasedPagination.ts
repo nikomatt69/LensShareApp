@@ -1,4 +1,4 @@
-import { PaginatedResultInfo } from "@/utils/lens";
+import { PaginatedResultInfo } from "@/utils/lens/generatedLenster";
 import type { FieldPolicy, StoreValue } from "@apollo/client/core";
 
 interface CursorBasedPagination<T = StoreValue> {

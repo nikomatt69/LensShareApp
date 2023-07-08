@@ -3,8 +3,11 @@ import dynamic from 'next/dynamic';
 import type { ComponentProps, ReactNode } from 'react';
 import { forwardRef, useId } from 'react';
 
+import { FieldError } from './Form';
 
-interface Props extends Omit<ComponentProps<'input'>, 'prefix'> {
+const HelpTooltip = dynamic(() => import('./HelpTooltip'));
+
+interface InputProps extends Omit<ComponentProps<'input'>, 'prefix'> {
   label?: string;
   prefix?: string | ReactNode;
   iconLeft?: ReactNode;
@@ -14,64 +17,78 @@ interface Props extends Omit<ComponentProps<'input'>, 'prefix'> {
   error?: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, Props>(function Input(
-  { label, prefix, type = 'text', iconLeft, iconRight, error, className = '', helper, ...props },
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  {
+    label,
+    prefix,
+    type = 'text',
+    iconLeft,
+    iconRight,
+    error,
+    className = '',
+    helper,
+    ...props
+  },
   ref
 ) {
-    const id = useId();
+  const id = useId();
 
-    const iconStyles = [
-        'text-zinc-500 [&>*]:peer-focus:text-brand-500 [&>*]:h-5',
-        { '!text-red-500 [&>*]:peer-focus:!text-red-500': error }
-    ];
+  const iconStyles = [
+    'text-zinc-500 [&>*]:peer-focus:text-brand [&>*]:h-5',
+    { '!text-red-500 [&>*]:peer-focus:!text-red-500': error }
+  ];
 
-    return (
-        <label className="w-full" htmlFor={id}>
-        {label && (
-            <div className="flex items-center mb-1 space-x-1.5">
-                <div className="font-medium text-gray-800 dark:text-gray-200">{label}</div>
-            </div>
-        )}
-        <div className="flex">
-            {prefix && (
-                <span className="inline-flex items-center px-3 lt-text-gray-500 bg-gray-100 rounded-l-xl border border-r-0 border-gray-300 dark:bg-gray-900 ">
-                    {prefix}
-                </span>
-            )}
-            <div
-                className={clsx(
-                    { '!border-red-500': error },
-                    { 'focus-within:ring-1': !error },
-                    { 'rounded-r-lg': prefix },
-                    { 'rounded-lg': !prefix },
-                    {
-                    'opacity-60 bg-gray-500 bg-opacity-20': props.disabled
-                    },
-                    'flex items-center border bg-white  border-gray-300  w-full  ring-0 focus-within:ring-0 focus-visible:ring-0'
-                )}
-            >
-                <input
-                    id={id}
-                    className={clsx(
-                        { 'placeholder-red-500': error },
-                        { 'rounded-r-lg': prefix },
-                        { 'rounded-lg': !prefix },
-                        'peer border-none focus:ring-0 outline-none px-4 ring-0 focus-within:ring-0 focus-visible:ring-0 py-2 bg-transparent w-full',
-                        className
-                    )}
-                    type={type}
-                    ref={ref}
-                    {...props}
-                />
-                <span tabIndex={-1} className={clsx({ 'order-first pl-3': iconLeft }, iconStyles)}>
-                    {iconLeft}
-                </span>
-                <span tabIndex={-1} className={clsx({ 'order-last pr-3': iconRight }, iconStyles)}>
-                    {iconRight}
-                </span>
-            </div>
+  return (
+    <label className="w-full" htmlFor={id}>
+      {label && (
+        <div className="mb-1 flex items-center space-x-1.5">
+          <div className="font-medium text-gray-800 dark:text-gray-200">
+            {label}
+          </div>
+          <HelpTooltip content={helper} />
         </div>
-            
-        </label>
-    );
+      )}
+      <div className="flex">
+        {prefix && (
+          <span className="lt-text-gray-500 inline-flex items-center rounded-l-xl border border-r-0 border-gray-300 px-3 dark:border-gray-700 bg-gray-100">
+            {prefix}
+          </span>
+        )}
+        <div
+          className={clsx(
+            { 'bg-gray-500/20 opacity-60': props.disabled },
+            error ? '!border-red-500' : 'focus-within:ring-1',
+            prefix ? 'rounded-r-xl' : 'rounded-xl',
+            'focus-within:border-brand-500 focus-within:ring-brand-400 flex w-full items-center border p-3 border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-100'
+          )}
+        >
+          <input
+            id={id}
+            className={clsx(
+              { 'placeholder:text-red-500': error },
+              prefix ? 'rounded-r-xl' : 'rounded-xl',
+              'peer w-full border-none bg-transparent outline-none focus:ring-0',
+              className
+            )}
+            type={type}
+            ref={ref}
+            {...props}
+          />
+          <span
+            tabIndex={-1}
+            className={clsx({ 'order-first pl-3': iconLeft }, iconStyles)}
+          >
+            {iconLeft}
+          </span>
+          <span
+            tabIndex={-1}
+            className={clsx({ 'order-last pr-3': iconRight }, iconStyles)}
+          >
+            {iconRight}
+          </span>
+        </div>
+      </div>
+      {props.name && <FieldError name={props.name} />}
+    </label>
+  );
 });

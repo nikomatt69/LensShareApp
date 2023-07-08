@@ -1,7 +1,7 @@
 import { LENS_HUB_ABI } from "@/abi/abi";
 import { LENSHUB_PROXY } from "@/constants";
 import onError from "@/lib/onError";
-import { Profile } from "@/utils/lens";
+import { Profile } from "@/utils/lens/generatedLenster";
 import useBroadcast from "@/utils/useBroadcast";
 import { ApolloCache } from "@apollo/client";
 import { Dispatch, FC, useEffect } from "react";

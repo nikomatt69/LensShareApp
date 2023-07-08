@@ -1,23 +1,43 @@
+
+
 import { Dialog, Transition } from '@headlessui/react';
+import { XCircleIcon } from '@heroicons/react/24/outline';
+
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 import { Fragment } from 'react';
-import { FaTimes } from 'react-icons/fa';
 
-interface Props {
+interface ModalProps {
   icon?: ReactNode;
-  title: ReactNode;
-  size?: 'sm' | 'md' | 'lg';
+  title?: ReactNode;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   show: boolean;
   children: ReactNode[] | ReactNode;
-  onClose: () => void;
+  dataTestId?: string;
+  onClose?: () => void;
+
 }
 
-export const Modal: FC<Props> = ({ icon, title, size = 'sm', show, children, onClose }) => {
+export const Modal: FC<ModalProps> = ({
+  icon,
+  title,
+  size = 'sm',
+  show,
+  children,
+  dataTestId = '',
+  onClose,
+ 
+}) => {
   return (
     <Transition.Root show={show} as={Fragment}>
-      <Dialog as="div" className="overflow-y-auto fixed inset-0 z-10" onClose={onClose}>
-        <div className="flex justify-center items-center p-4 min-h-screen text-center sm:block sm:p-0">
+      <Dialog
+        as="div"
+        className="fixed inset-0 z-[20] overflow-y-auto"
+        onClose={() => onClose?.()}
+        data-testid={dataTestId}
+      
+      >
+        <div className="flex min-h-screen items-center justify-center p-4 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-100"
@@ -27,9 +47,12 @@ export const Modal: FC<Props> = ({ icon, title, size = 'sm', show, children, onC
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500/75 transition-opacity " />
           </Transition.Child>
-          <span className="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true" />
+          <span
+            className=" sm:inline-block sm:h-screen sm:align-middle"
+            aria-hidden="true"
+          />
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-100"
@@ -44,22 +67,27 @@ export const Modal: FC<Props> = ({ icon, title, size = 'sm', show, children, onC
                 { 'sm:max-w-5xl': size === 'lg' },
                 { 'sm:max-w-3xl': size === 'md' },
                 { 'sm:max-w-lg': size === 'sm' },
-                'inline-block align-bottom bg-white text-left shadow-xl transform transition-all sm:my-8 sm:align-middle w-full rounded-xl'
+                { 'sm:max-w-sm': size === 'xs' },
+                'inline-block w-full scale-100 rounded-xl bg-blue-500/75 text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle'
               )}
             >
-              <div className="flex justify-between items-center py-3.5 px-5 divider">
-                <div className="flex items-center space-x-2 font-bold">
-                  {icon}
-                  <div>{title}</div>
+              {title && (
+                <div className="divider flex items-center justify-between px-5 py-3.5">
+                  <div className="flex items-center space-x-2 font-bold">
+                    {icon}
+                    <div>{title}</div>
+                  </div>
+                  {onClose ? (
+                    <button
+                      type="button"
+                      className="rounded-full p-1 text-gray-800 hover:bg-gray-200 dark:text-gray-100 dark:hover:bg-gray-500"
+                      onClick={onClose}
+                    >
+                      <XCircleIcon className="h-5 w-5" />
+                    </button>
+                  ) : null}
                 </div>
-                <button
-                  type="button"
-                  className="p-1 text-gray-800 rounded-full hover:bg-gray-200"
-                  onClick={onClose}
-                >
-                  <FaTimes className="w-5 h-5" />
-                </button>
-              </div>
+              )}
               {children}
             </div>
           </Transition.Child>
