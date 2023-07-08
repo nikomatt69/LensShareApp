@@ -169,7 +169,7 @@ const mute = useAppStore((state) => state.isMute)
         </div>
         <Link 
         className="pointer-events-auto "
-        href={`/bytes/${publication.id}`} key={publication.id} 
+        href={`/post/${publication.id}`} key={publication.id} 
         >
             <span className="text-black text-sm font-extralight flex-shrink-0 p-1 ">Details...</span>
           </Link>

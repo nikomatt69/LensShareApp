@@ -32,6 +32,7 @@ import { SIGN_IN_REQUIRED_MESSAGE } from "@/constants";
 import toast from "react-hot-toast";
 import { getRelativeTime } from "@/utils/functions/formatTime2";
 import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction";
+import CommentModal from "../Bytes/CommentModal";
 
 
 
@@ -224,9 +225,13 @@ const mute = useAppStore((state) => state.isMute)
       <button className="block md:hidden pr-2 pb-2 ">
         <LikeButton publication={publication as Publication} />
         </button>
-        <button className="block md:hidden pr-2 pb-2">
-        <CommentButton publication={publication as Publication} />
-        </button>
+        <div className="w-full text-center pr-2 md:pt-4 lg:pt-4 md:text-inherit"onClick={() => setShow(true)}>
+         <button>
+            
+            <CommentModal  publication={publication as Publication} trigger setFollowing={setFollowing} following={following} profile={currentProfile as Profile}  />
+          </button>
+          <p className="text-xs hidden lg:block font-semibold text-gray-400">{comments}</p>
+        </div>
         <button className="block md:hidden pr-2 pb-2">
           <MirrorButton publication={publication as Publication}/>
         </button>

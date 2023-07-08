@@ -23,7 +23,7 @@ import { ChartBarIcon, ChatBubbleOvalLeftEllipsisIcon, Cog6ToothIcon } from "@he
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import Cover from './Cover';
 import { APP_NAME, STATIC_IMAGES_URL } from '@/constants';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -49,6 +49,14 @@ import { useCounter } from 'usehooks-ts';
 import NewPost from '../Composer/Post/New';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
+import Message from '../Profile/Message';
+import { TabValues, useMessageStore } from '@/store/message';
+import { useTheme } from 'next-themes';
+import { useMessageDb } from '@/lib/useMessageDb';
+import { MessageTabs } from '@/enums';
+import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
+import { LightBox } from '../UI/LightBox';
+import formatAddress from '@/lib/formatAddress';
 
 
 
@@ -58,10 +66,9 @@ interface Props {
     profile: Profile
     setFollowing: Dispatch<boolean>
     following: boolean
-    space: SpaceMetadata
-    video : Publication
+
     }
-    const ProfileCard: FC<Props> = ({ profile, setFollowing, following,space,video}) => {
+    const ProfileCard: FC<Props> = ({ profile, setFollowing, following}) => {
         const currentProfile = useAppStore((state) => state.currentProfile);
         const [showUserVideos, setShowUserVideos] = useState<Boolean>(true);
         const [showUserMirrorVideos, setShowUserMirrorVideos] = useState<Boolean>(true);
@@ -73,11 +80,12 @@ interface Props {
         const setShowNewPostModal = useGlobalModalStateStore(
             (state) => state.setShowNewPostModal
             
-          );
+        );
+        
           const showNewPostModal = useGlobalModalStateStore(
             (state) => state.showNewPostModal
-          );
-        
+        );
+        const [expandedImage, setExpandedImage] = useState<string | null>(null);
         
         
 
@@ -91,6 +99,29 @@ interface Props {
         const [profileId, setProfileId] = useState<string | null>(null);
 
         const [showSearchModal, setShowSearchModal] = useState(false);
+
+        const router = useRouter();
+      
+        const { persistProfile } = useMessageDb();
+        const setSelectedTab = useMessageStore((state) => state.setSelectedTab);
+
+        const onMessageClick = () => {
+            if (!currentProfile) {
+              return;
+            }
+            const conversationId = buildConversationId(currentProfile.id, profile.id);
+            const conversationKey = buildConversationKey(
+              profile.ownedBy,
+              conversationId
+            );
+            persistProfile(conversationKey, profile);
+            const selectedTab: TabValues = profile.isFollowedByMe
+              ? MessageTabs.Lens
+              : MessageTabs.Requests;
+            setSelectedTab(selectedTab);
+            router.push(`/messages/${conversationKey}`);
+          };
+        
     
         
         const isActivePath = (path: string) => router.pathname === path
@@ -100,43 +131,70 @@ interface Props {
             <div className="flex justify-center mx-4">
              <MetaTags title={`User • ${profile?.name} ${APP_NAME}`}/>
                 <div className="w-full  max-w-[1150px]">   
-                <Cover
                 
-                  cover={
-                    profile?.coverPicture?.__typename === 'MediaSet'
-                      ? profile?.coverPicture?.original?.url
-                      : imageCdn(`${STATIC_IMAGES_URL}`)}/>
-                     <div className="flex border-4 bg-gradient-to-b from-gray-900 to-transparent rounded-3xl bg-blue-500 border-black justify-center">
-                            <Image
-                            src={getAvatar(profile)}
-                            alt={getAvatar(profile)}
-                            height={80}
-                            width={80}
-                            className="rounded-full intrinsic border-2 border-blue-500"
-                            />
-                        </div>
-                        <div className="flex bg-cyan-200 border-4 border-t-2 h-45 border-black rounded-2xl p-2 gap-0.2">
-                            <div className='flex flex-col justify-center p-1'>
-                                <h1 className="text-lg break-words p-1  font-bold capitalize">
-                                {profile?.name}
-                                </h1>
-                                <Slug className=" pl-1.5 xs:text-base" slug={formatHandle(profile?.handle)} prefix="@" /> 
-                           
-                               <div className="mr-0 font-semibold sm:mr-10 pt-3 break-word leading-md linkify text-xs"
-                               style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
-                               {profile?.bio} 
-                               </div>
-                   </div>
+                <div className="relative -mt-24 h-32 w-32 sm:-mt-32 sm:h-52 sm:w-52">
+        <Image
+          onClick={() => setExpandedImage(getAvatar(profile))}
+          src={getAvatar(profile)}
+          className="h-32 w-32 cursor-pointer rounded-xl bg-gray-200 ring-8 ring-gray-50 dark:bg-gray-700 dark:ring-black sm:h-52 sm:w-52"
+          height={128}
+          width={128}
+          alt={formatHandle(profile?.handle)}
+          data-testid="profile-avatar"
+        />
+        <LightBox
+          show={Boolean(expandedImage)}
+          url={expandedImage}
+          onClose={() => setExpandedImage(null)}
+        />
+      </div>
+      <div className="space-y-1 py-2">
+        <div className="flex items-center gap-1.5 text-2xl font-bold">
+          <div className="truncate" data-testid="profile-name">
+            {sanitizeDisplayName(profile?.name) ??
+              formatHandle(profile?.handle)}
+          </div>
+          
+          
+        </div>
+        <div
+          className="flex items-center space-x-3"
+          data-testid="profile-handle"
+        >
+          {profile?.name ? (
+            <Slug
+              className="text-sm sm:text-base"
+              slug={formatHandle(profile?.handle)}
+              prefix="@"
+            />
+          ) : (
+            <Slug
+              className="text-sm sm:text-base"
+              slug={formatAddress(profile?.ownedBy)}
+            />
+          )}
+          {currentProfile &&
+            currentProfile?.id !== profile?.id &&
+            profile?.isFollowing && (
+              <div className="rounded-full bg-gray-200 px-2 py-0.5 text-xs dark:bg-gray-700">
+               Follows you
+              </div>
+            )}
+        </div>
+           
                        <div className="right-2 display:inline-block pt-1 ">
                            {itsNotMe ? (
-                             <div className='right-2 fl'>
+                             <div className='right-2 text-md  fl'>
                             { following ? (
-                                <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+                                <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile }  />
                             ) : (
                                <FollowButton setFollowing={ setFollowing } profile={ profile as Profile }/>
                             )
                             }
+                            
                             </div>
+
+                       
                            ) : (
                             <div className='right-1'>
                                  <button className='active:bg-violet-600 py-1 px-1 drop-shadow-xl rounded-full text-xs mt-2 border-2 border-black  hover:text-[#000000] hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-semibold'>
@@ -145,13 +203,14 @@ interface Props {
                             
                             </div>
                            )
-                           }    
+                           }  
+                          
                         </div> 
                     </div>
                     
-                    <div className="flex gap-4 justify-center">
+                    <div className="flex gap-4 mb-4 justify-center">
                     <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
-                            <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
+                            <div className="flex items-center text-md margin-1 rounded-3xl gap-2">
                                 <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
                                 <span>Following</span>
                                 <Modal
@@ -167,7 +226,7 @@ interface Props {
                         </div>    
                             
                     <div className="flex justify-center items-center text-center object-center gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
-                        <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
+                        <div className="flex items-center text-md margin-1 rounded-3xl gap-2">
                             <span className="font-bold text-sx">{profile?.stats.totalFollowers}</span>
                             <span>Followers</span>
                             <Modal
@@ -179,95 +238,14 @@ interface Props {
                             </Modal>
                         </div>
                     </div>
-                        <Link href={(profileId ? `/messages/${conversationKey}` : '/messages')} >
-                            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6 font-bold mt-2 cursor-pointer" />
-                        </Link>
+                        <Message  onClick={onMessageClick}/>
 
-                        <button onClick={() => setShowStatsModal(true)} >
-                           <span className="flex justify-center">
-                            <ChartBarIcon className="h-5 w-5 mt-2 cursor-pointer" />
-                          </span>
-                            <Modal
-                                title="Stats"
-                                show={showStatsModal}
-                                onClose={() => setShowStatsModal(!showStatsModal)}
-                                
-                            >
-                               <Stats profileId={currentProfile?.id} icon={undefined} count={0} text={`Stats • ${currentProfile?.name}`} publications={currentProfile?.stats?.totalPosts} data={{
-                                    commentsTotal: currentProfile?.id.stats?.totalComments,
-                                    id:currentProfile?.id,
-                                    mirrorsTotal: currentProfile?.id.stats?.totalMirrors,
-                                    postsTotal: currentProfile?.id.stats?.totalPosts,
-                                    publicationsTotal: currentProfile?.id.stats?.totalPublications,
-                                    /** Total collects count */
-                                    totalCollects: currentProfile?.id.stats?.totalCollects,
-                                    totalComments: currentProfile?.id.stats?.totalComments,
-                                    totalFollowers: currentProfile?.id.stats?.totalFollowers,
-                                    totalFollowing: currentProfile?.id.stats?.totalFollowing,
-                                    totalMirrors: currentProfile?.id.stats?.totalMirrors,
-                                    totalPosts: currentProfile?.id.stats?.totalPosts,
-                                    totalPublications: currentProfile?.id.stats?.totalPublications,
-                                  
-                                    
-                                  
-
-
-                                  
-                                }}  revenue={0}  /> 
-                            </Modal>
-                       </button>
-                       </div>
-                    
-                       <div className='rounded-xl' onClick={() => setShowNewPostModal(true)} >
-                       {currentProfile?.id === profile?.id ? <NewPost /> : null}
-                        <Modal
-                            title={`Create post`}
-                            size="md"
-                            show={showNewPostModal}
-                            onClose={() => setShowNewPostModal(false)}
-                         >
-        
-                         <NewPublication />
-                       </Modal>
-                      
-                       </div>
                         
-                         
-                    <div className='flex-1 text-center gap-8 p-4 border-4 mb-5 mt-5 items-center content-center  rounded-full border-black bg-blue-100 w-full'>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(true)}>
-                        Videos
-                        </span>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => setShowUserVideos(false)}>
-                        Mirrors
-                        </span>
-                        <span className={`text-sm  bg-blue-500  rounded-full items-center content-center py-3 px-3 hover:text-white font-semibold cursor-pointer ${liked} mt-2`} onClick={() => { setShowCollectedUserVideosModal (!showCollectedUserVideosModal) }}>
-                        Collected
-                        </span>
-                      
-                       
-
-
-                        <div className='p-1 items-center rounded-xl'>    
-                        <Modal 
-                         title="Collected Videos"
-                         show={showCollectedUserVideosModal}
-                         onClose={() => setShowCollectedUserVideosModal(false)}
-              
-                         
-                         >
-                        <div className='p-1 items-center rounded-xl'>
-                         <Card className=' w-full object-contain object-center' >
-                            <CollectedVideos profile={profile as Profile} />
-                         </Card >
-                         </div>
-                        </Modal>
-                        </div>
-                    </div>
-                    {(showUserVideos) ? <ProfileVideos /> :  <MirrorVideos />}
-                    
-                   
+                       </div>
                    </div>
-                <BottomNav />
+                    
+                     
+              
             </div>
             )
     }

@@ -1,8 +1,9 @@
 
 import ToggleWithHelper from '@/components/ToggleWithHelper';
+import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 import { Input } from '@/components/UI/Input';
 import { CollectModules } from '@/utils/lens/generatedLenster';
-import { SwatchIcon } from '@heroicons/react/24/outline';
+
 
 
 
@@ -30,7 +31,7 @@ const ReferralConfig: FC<ReferralConfigProps> = ({ setCollectType }) => {
         }
         heading={`Mirror referral reward`}
         description={`Share your fee with people who amplify your content`}
-        icon={<SwatchIcon className="h-4 w-4" />}
+        icon={<MirrorOutline className="h-4 w-4" />}
       />
       {collectModule.referralFee ? (
         <div className="flex space-x-2 pt-4 text-sm">

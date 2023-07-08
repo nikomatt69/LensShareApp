@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
@@ -14,10 +14,10 @@ dayjs.extend(dayjsTwitter);
  * @param date The date to format.
  * @returns The formatted date and time.
  */
-export const formatTime = (date: Date | undefined): string => {
-  return date
-    ? i18n.date(date, { dateStyle: 'medium', timeStyle: 'medium' })
-    : '';
+export const formatTime = (date: Date | undefined) => {
+    date
+    
+    
 };
 
 /**

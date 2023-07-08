@@ -23,7 +23,7 @@ const PublicationWrapper: FC<PublicationWrapperProps> = ({
       onClick={() => {
         const selection = window.getSelection();
         if (!selection || selection.toString().length === 0) {
-          push(`/bytes/${publication?.id}`);
+          push(`/post/${publication?.id}`);
         }
       }}
       data-testid={`publication-${publication.id}`}

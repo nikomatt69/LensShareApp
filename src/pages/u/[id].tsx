@@ -1,3 +1,3 @@
-import ProfileRender from "@/components/ProfilePage/ProfileRender";
+import ViewProfile from '@/components/Profile';
 
-export default ProfileRender;
+export default ViewProfile;

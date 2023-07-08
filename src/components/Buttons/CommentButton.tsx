@@ -18,7 +18,7 @@ const CommentButton: FC<Props> = ({ publication }) => {
 
     return (
        <div className="flex block gap-6">
-         <Link legacyBehavior href={`/bytes/${publication.id}`}> 
+         <Link legacyBehavior href={`/post/${publication.id}`}> 
         <a className="md:mt-4 flex flex-col justify-center items-center cursor-pointer">        
         {alreadyCommented ? (
          

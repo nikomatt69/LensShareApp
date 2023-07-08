@@ -34,7 +34,7 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
         <span className="truncate text-gray-600 dark:text-gray-400">
           commented on your
           <Link
-            href={`/bytes/${
+            href={`/post/${
               notification?.comment?.commentOn &&
               notification?.comment?.commentOn?.id
             }`}
@@ -46,7 +46,7 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
       </div>
       <div className="flex items-center justify-between">
         <Link
-          href={`/bytes/${
+          href={`/post/${
             notification?.comment?.commentOn &&
             notification?.comment?.commentOn?.id
           }`}

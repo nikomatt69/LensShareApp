@@ -169,20 +169,16 @@ const mute = useAppStore((state) => state.isMute)
       <button className="block pr-2 pb-2 ">
         <LikeButton publication={publication as Publication} />
         </button>
-        <div className="w-full text-center pr-2 md:pt-4 lg:pt-4 md:text-inherit"onClick={() => setShow(true)}>
-         <button>
-            
-            <CommentModal  publication={publication as Publication} trigger setFollowing={setFollowing} following={following} profile={currentProfile as Profile}  />
-          </button>
-          <p className="text-xs hidden lg:block font-semibold text-gray-400">{comments}</p>
-        </div>
+        <button className="block  pr-2 pb-2">
+        <CommentButton publication={publication as Publication} />
+        </button>
         <button className="block  pr-2 pb-2">
           <MirrorButton publication={publication as Publication}/>
         </button>
-      <button className="block md:mb-3.5  lg:mb-3.5  xl:mb-3.5 pr-2 pb-2">
+      <button className="block   lg:mb-3.5  xl:mb-3.5 pr-2 pb-2">
       <CollectButton  publication={publication as Publication}/>
       </button>
-      <button className="block md:mb-2 lg:mb-2 xl:mb-2 pr-2 pb-2" onClick={() => setShowShare(true)} >
+      <button className="block md:mt-2 lg:mb-2 xl:mb-2 pr-2 pb-2" onClick={() => setShowShare(true)} >
         <ShareButton publication={publication as Publication} />
       </button>
      

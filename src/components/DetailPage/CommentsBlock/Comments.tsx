@@ -22,6 +22,7 @@ import formatHandle from "@/utils/functions/formatHandle";
 import UnfollowButton from "@/components/Buttons/UnfollowButton";
 import FollowButton from "@/components/Buttons/FollowButton";
 import { getModule } from "@/lib/getModule";
+import Feed from "@/components/Comment/Feed";
 
 interface Props {
   publication: Publication;
@@ -91,12 +92,8 @@ const CommentsVideo: FC<Props> = ({ publication,profile }) => {
         </div>
         <div className="bg-[#C0C0C0] border-2 pt-3 mt-3 rounded-xl ">
           <span className="font-bold  rounded-xl object-center bg-blue-500 ml-1 p-1 text-center">Comments</span>
-        {comments?.map((comment: Publication) => (
-                <CommentData
-                  key={`${currentViewingId}_${comment.createdAt}`}
-                  comment={comment as Publication}
-                  video={publication as Publication}
-                  
+        {comments?.map((publication: Comment) => (
+                <Feed 
                 />
               ))}
          <CreateComment

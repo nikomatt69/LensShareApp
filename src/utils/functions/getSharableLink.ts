@@ -9,7 +9,7 @@ import {
 import getLensHandle from './getLensHandle'
 
 const getViewUrl = (video: Publication) => {
-  return `${LENSTOK_URL}/bytes/${video.id}`
+  return `${LENSTOK_URL}/post/${video.id}`
 }
 
 type Link = 'lenster' | 'twitter' | 'reddit' | 'linkedin'

@@ -31,6 +31,8 @@ export const MESSAGING_PROVIDER = {
   PUSH: 'hudd'
 };
 
+export const ALCHEMY_KEY = '7jxlM7yIx-aJXDivcEZxsLFFRKQS6-ue';
+
 export const REQUESTING_SIGNATURE_MESSAGE = 'Requesting signature...'
 
 export const LENS_MEDIA_SNAPSHOT_URL =

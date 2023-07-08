@@ -51,7 +51,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
     <div
       className={clsx(
         quoted ? 'pb-2' : 'pb-4',
-        'relative flex justify-between space-x-1.5'
+        'relative flex justify-between m-2 pt-3 space-x-1.5'
       )}
       data-testid={`publication-${publication.id}-header`}
     >
@@ -63,11 +63,11 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
         )}
       </span>
       <div className="!-mr-[7px] flex items-center space-x-1">
-        { <Source publication={publication} />}
+       
        
         {quoted && isNew && (
           <button
-            className="rounded-full border p-1.5"
+            className="rounded-full  p-1.5"
             onClick={(event) => {
               stopEventPropagation(event);
               setQuotedPublication(null);

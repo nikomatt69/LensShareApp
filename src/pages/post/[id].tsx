@@ -1,2 +1,3 @@
-import Video from "@/components/HomePage/Video"
-export default Video
+import ViewPublication from "@/components/Publication";
+
+export default ViewPublication

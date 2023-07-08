@@ -13,7 +13,8 @@ import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
 import { useCollectModuleStore } from 'src/store/collect-module';
 import Beta from './Beta';
-import { PlusIcon, SwatchIcon, UsersIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, UsersIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 
 interface SplitConfigProps {
   isRecipientsDuplicated: () => boolean;
@@ -181,7 +182,7 @@ const SplitConfig: FC<SplitConfigProps> = ({
             <Button
               size="sm"
               outline
-              icon={<SwatchIcon className="h-3 w-3" />}
+              icon={<MirrorOutline className="h-3 w-3" />}
               onClick={splitEvenly}
             >
               Split evenly

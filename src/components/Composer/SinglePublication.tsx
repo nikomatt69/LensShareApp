@@ -25,6 +25,8 @@ interface SinglePublicationProps {
 const SinglePublication: FC<SinglePublicationProps> = ({
   publication,
   feedItem,
+  showThread = true,
+
 
   showMore = true,
   isFirst = false,
@@ -42,7 +44,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
       
        
      
-      <div className="ml-[20px] ">
+      <div className="ml-[20px] mt-2 border-2 bg-[#C0C0C0] rounded-xl vh-88% p-2">
         {publication?.hidden ? (
           <HiddenPublication type={publication.__typename} />
         ) : (

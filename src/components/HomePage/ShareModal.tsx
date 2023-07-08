@@ -32,7 +32,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication,show }) => {
 
 
   const onCopyVideoUrl = async () => {
-    await copy(`${LENSTOK_URL}/bytes/${publication.id}`)
+    await copy(`${LENSTOK_URL}/post/${publication.id}`)
     toast.success(`Permalink copied to clipboard`)
     
   }
@@ -127,7 +127,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication,show }) => {
         </div>
         <div className="flex items-center justify-between rounded-lg border border-gray-200 p-2 dark:border-gray-800">
           <div className="select-all truncate text-sm">
-            {LENSTOK_URL}/bytes/{publication.id}
+            {LENSTOK_URL}/post/{publication.id}
           </div>
           <button
             className="ml-2 hover:opacity-60 focus:outline-none"

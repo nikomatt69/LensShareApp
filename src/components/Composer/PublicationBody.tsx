@@ -82,7 +82,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {canShowMore && (
         <div className="lt-text-gray-500 mt-4 flex items-center space-x-1 text-sm font-bold">
           <EyeIcon className="h-4 w-4" />
-          <Link href={`/bytes/${id}`}>
+          <Link href={`/post/${id}`}>
             Show more
           </Link>
         </div>

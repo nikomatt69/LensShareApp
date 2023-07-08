@@ -48,7 +48,7 @@ const VideoPlayer: FC<Props> = ({
         video_id: publicationId,
         video_stream_type: VIDEO_TYPE,
         player_init_time: initTime,
-        video_title: `${LENSTOK_URL}/bytes/${publicationId ?? router.query?.id}`,
+        video_title: `${LENSTOK_URL}/post/${publicationId ?? router.query?.id}`,
         page_type: IS_BYTE ? 'bytespage' : 'bytespage',
         video_duration: ref?.duration
       }

@@ -334,7 +334,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication }) => {
         data?.broadcastDataAvailability.__typename ===
         'CreateDataAvailabilityPublicationResult'
       ) {
-        push(`/bytes/${data?.broadcastDataAvailability.id}`);
+        push(`/post/${data?.broadcastDataAvailability.id}`);
       }
     },
     onError
@@ -459,7 +459,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication }) => {
         ) {
           onCompleted();
           const { id } = data.createDataAvailabilityPostViaDispatcher;
-          push(`/bytes/${id}`);
+          push(`/post/${id}`);
         }
       },
       onError

@@ -83,7 +83,7 @@ const VideoDetail: FC<Props> = ({
    
 
   //CHANGE LINK ON DEPLOYMENT TO NEW DOMAIN!
-  const Links = `https://lenshareapp.xyz/bytes/${publication?.id}`;
+  const Links = `https://lenshareapp.xyz/post/${publication?.id}`;
   const Title = `${formatHandle(profile?.handle)} on LensShare`;
 
   const itsNotMe = profile?.id !== currentProfile?.id;
