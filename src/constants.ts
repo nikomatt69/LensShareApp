@@ -13,6 +13,10 @@ export const APP_VERSION = packageJson.version;
 export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
 export const APP_INFOPAGE = "Decentralized Social Video & Message Platform"
 
+export const OLD_LENS_RELAYER_ADDRESS =
+  '0xD1FecCF6881970105dfb2b654054174007f0e07E';
+
+
 
 
 export const LENSSHARE_TAIL_INGEST_URL = 'https://tail.lenshareapp.xyz'

@@ -3,7 +3,7 @@ import { SpaceMetadata } from '@/typesLenster';
 import { FeatureFlag } from '@/utils/data/feature-flags';
 import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import isFeatureEnabled from '@/utils/functions/isFeatureEnabled';
-import { Publication } from '@/utils/lens/generatedLenster';
+import { Profile, Publication } from '@/utils/lens/generatedLenster';
 
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -20,10 +20,12 @@ interface PublicationBodyProps {
   publication: Publication;
   showMore?: boolean;
   quoted?: boolean;
+  profile:Profile
 }
 
 const PublicationBody: FC<PublicationBodyProps> = ({
   publication,
+  profile,
   showMore = false,
   quoted = false
 }) => {
@@ -70,7 +72,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     !quoted;
 
   return (
-    <div className="break-words">
+    <div className="break-words ">
       <Markup
         className={clsx(
           { 'line-clamp-5': canShowMore },
@@ -93,7 +95,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       ) : null}
       {showOembed ? <Oembed url={urls[0]} /> : null}
       {showQuotedPublication ? (
-        <Quote publicationId={quotedPublicationId} />
+        <Quote profile={profile as Profile} publicationId={quotedPublicationId} />
       ) : null}
       
     </div>

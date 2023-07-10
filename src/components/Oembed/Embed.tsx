@@ -52,13 +52,13 @@ const Embed: FC<EmbedProps> = ({ og }) => {
                 alt="Thumbnail"
               />
             )}
-            <div className="truncate p-5">
+            <div className="truncate p-2">
               <div className="space-y-1.5">
                 {og.title && (
                   <div className="line-clamp-1 font-bold">{og.title}</div>
                 )}
                 {og.description && (
-                  <div className="lt-text-gray-500 line-clamp-2">
+                  <div className="lt-text-gray-500 line-clamp-4">
                     {og.description}
                   </div>
                 )}

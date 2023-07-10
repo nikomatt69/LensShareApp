@@ -1,6 +1,6 @@
 
 import stopEventPropagation from '@/lib/stopEventPropagation';
-import { FeedItem, Publication } from '@/utils/lens/generatedLenster';
+import { FeedItem, Profile, Publication } from '@/utils/lens/generatedLenster';
 import clsx from 'clsx';
 import type { FC } from 'react';
 import { usePublicationStore } from 'src/store/publication4';
@@ -9,6 +9,7 @@ import PublicationMenu from '../ProfilePage/Menu';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import Source from './Source';
 import useModMode from '@/lib/useModMode';
+import Profiles from '../ProfilePage/Profiles';
 
 
 
@@ -17,6 +18,7 @@ interface PublicationHeaderProps {
   feedItem?: FeedItem;
   quoted?: boolean;
   isNew?: boolean;
+  profile: Profile
 }
 
 const PublicationHeader: FC<PublicationHeaderProps> = ({
@@ -57,9 +59,9 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
     >
       <span onClick={stopEventPropagation} aria-hidden="true">
         {quoted ? (
-          <UserProfile profile={profile} timestamp={timestamp} />
+          <UserProfile profile={profile as Profiles} timestamp={timestamp} />
         ) : (
-          <UserProfile profile={profile} timestamp={timestamp} showStatus />
+          <UserProfile profile={profile as Profiles} timestamp={timestamp} showStatus />
         )}
       </span>
       <div className="!-mr-[7px] flex items-center space-x-1">

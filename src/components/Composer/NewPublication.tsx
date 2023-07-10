@@ -25,6 +25,7 @@ import {
 import type {
   CreatePublicCommentRequest,
   MetadataAttributeInput,
+  Profile,
   Publication,
   PublicationMetadataMediaInput,
   PublicationMetadataV2Input
@@ -136,9 +137,10 @@ const PollSettings = dynamic(
 
 interface NewPublicationProps {
   publication: Publication;
+  profile : Profile
 }
 
-const NewPublication: FC<NewPublicationProps> = ({ publication }) => {
+const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -907,7 +909,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication }) => {
       {showPollEditor && <PollEditor />}
       {quotedPublication ? (
         <Wrapper className="m-5" zeroPadding>
-          <QuotedPublication publication={quotedPublication} isNew />
+          <QuotedPublication profile={profile as Profile} publication={quotedPublication} isNew />
         </Wrapper>
       ) : null}
       <div className="block items-center px-5 sm:flex">

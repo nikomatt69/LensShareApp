@@ -36,7 +36,7 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
           {notification.reaction === 'DOWNVOTE' ? `dislisked` : `liked`}{' '}
           'your'{' '}
           {notification.publication.__typename === 'Comment' && (
-            'Comment On'
+            'comment on'
           )}
           <Link
             href={`/post/${
@@ -46,7 +46,7 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
             }`}
             className="ml-1 text-indigo-500"
           >
-            Post
+            post
           </Link>
         </span>
         <div className="flex flex-none text-xs items-center text-blue-500 ">

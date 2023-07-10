@@ -105,7 +105,7 @@ const SplitConfig: FC<SplitConfigProps> = ({
             <span>
               Split revenue
             </span>
-            <Beta />
+          
           </div>
         }
         description={`Set multiple recipients for the collect fee`}

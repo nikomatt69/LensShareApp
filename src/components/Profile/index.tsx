@@ -26,6 +26,8 @@ import MetaTags from '../UI/MetaTags';
 import { Modal } from '../UI/Modal';
 import { useQuery } from '@apollo/client';
 import ProfileCard from '../ProfilePage/ProfileCard';
+import Navbar from '../Navbar';
+import BottomNav from '../Navs/BottomNav';
 
 
 const ViewProfile: NextPage = () => {
@@ -130,14 +132,16 @@ const ViewProfile: NextPage = () => {
       ) : (
         <MetaTags title={`@${formatHandle(profile?.handle)} • ${APP_NAME}`} />
       )}
+      <Navbar/>
       <Cover
+      
         cover={
           profile?.coverPicture?.__typename === 'MediaSet'
             ? profile?.coverPicture?.original?.url
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         }
       />
-      <GridLayout className="pt-6">
+      <GridLayout className="pt-6 max-w-[1200px]">
         <GridItemFour>
           <ProfileCard
             profile={profile as Profile}
@@ -148,7 +152,7 @@ const ViewProfile: NextPage = () => {
         </GridItemFour>
         <GridItemEight className="space-y-5">
           <FeedType setFeedType={setFeedType} feedType={feedType} />
-          {currentProfile?.id === profile?.id ? <NewPost /> : null}
+          
           {(feedType === ProfileFeedType.Feed ||
             feedType === ProfileFeedType.Replies ||
             feedType === ProfileFeedType.Media ||
@@ -158,6 +162,7 @@ const ViewProfile: NextPage = () => {
           
         </GridItemEight>
       </GridLayout>
+      <BottomNav/>
     </>
   );
 };

@@ -1,5 +1,5 @@
 
-import type { ElectedMirror, FeedItem, Publication } from '@/utils/lens/generatedLenster';
+import type { ElectedMirror, FeedItem, Profile, Publication } from '@/utils/lens/generatedLenster';
 import clsx from 'clsx';
 import type { FC } from 'react';
 
@@ -20,13 +20,18 @@ interface SinglePublicationProps {
   showMore?: boolean;
   isFirst?: boolean;
   isLast?: boolean;
+  profile :Profile
 }
 
 const SinglePublication: FC<SinglePublicationProps> = ({
   publication,
   feedItem,
   showThread = true,
-
+  profile,
+  
+    showType = true,
+  showActions = true,
+  showModActions = false,
 
   showMore = true,
   isFirst = false,
@@ -52,6 +57,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
             <PublicationBody
               publication={rootPublication}
               showMore={showMore}
+              profile={profile as Profile}
             />
            
           </>

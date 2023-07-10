@@ -34,6 +34,8 @@ import { getRelativeTime } from "@/utils/functions/formatTime2";
 import PublicationReaction from "../DetailPage/CommentsBlock/PublicationReaction";
 import SinglePublication from "../Composer/SinglePublication";
 import CommentModal from "../Bytes/CommentModal";
+import ShareMenu from "../Publication/Actions/Share";
+import PublicationMenu from "../Publication/Actions/Menu";
 
 
 
@@ -137,7 +139,7 @@ const mute = useAppStore((state) => state.isMute)
         <div>
         <button>
     
-        { <CommentOptions  video={publication} setShowReport={setShowReport} /> }
+        { <PublicationMenu  publication={publication}  /> }
         </button>
       </div>
           { following ? ( 
@@ -149,10 +151,10 @@ const mute = useAppStore((state) => state.isMute)
       </div>
       <div className="rounded-xl p-2 cursor-pointer">
         {isMirror ? (
-          <><span className="text-xs text-gray-500 font-semibold">'Mirror by {profile?.id}'</span><SinglePublication
+          <><span className="text-sm text-black font-semibold">'Mirror from @{profile?.handle}'</span><SinglePublication profile={profile}
             publication={publication as Publication} /></>
         ) : (
-         <SinglePublication publication={publication}/>
+         <SinglePublication profile={profile} publication={publication}/>
         )}
 
       </div>
@@ -169,17 +171,18 @@ const mute = useAppStore((state) => state.isMute)
       <button className="block pr-2 pb-2 ">
         <LikeButton publication={publication as Publication} />
         </button>
-        <button className="block  pr-2 pb-2">
-        <CommentButton publication={publication as Publication} />
+        <button className="block mt-0.5 pr-2 pb-2">
+        <ShareMenu publication={publication as Publication} showCount={true} />
+        
         </button>
         <button className="block  pr-2 pb-2">
-          <MirrorButton publication={publication as Publication}/>
+        <CommentButton publication={publication as Publication} />
         </button>
       <button className="block   lg:mb-3.5  xl:mb-3.5 pr-2 pb-2">
       <CollectButton  publication={publication as Publication}/>
       </button>
-      <button className="block md:mt-2 lg:mb-2 xl:mb-2 pr-2 pb-2" onClick={() => setShowShare(true)} >
-        <ShareButton publication={publication as Publication} />
+      <button className="block md:mt-2 lg:mb-3 xl:mb-3 pr-2 pb-2" onClick={() => setShowShare(true)} >
+        <ShareButton publication={publication as Publication}  />
       </button>
      
       </div>

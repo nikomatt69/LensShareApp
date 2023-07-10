@@ -1,4 +1,4 @@
-import { Publication } from "@/utils/lens/generatedLenster";
+import { Profile, Publication } from "@/utils/lens/generatedLenster";
 import HiddenPublication from "../Composer/HiddenPublication";
 import PublicationBody from "../Composer/PublicationBody";
 import PublicationHeader from "../Composer/PublicationHeader";
@@ -8,12 +8,13 @@ import { FC } from "react";
 
 interface ThreadBodyProps {
   publication: Publication;
+  profile:Profile
 }
 
-const ThreadBody: FC<ThreadBodyProps> = ({ publication }) => {
+const ThreadBody: FC<ThreadBodyProps> = ({ publication,profile }) => {
   return (
     <PublicationWrapper publication={publication}>
-      <PublicationHeader publication={publication} />
+      <PublicationHeader profile={profile} publication={publication} />
       <div className="flex">
         <div className="-my-6 ml-5 mr-8 border-[0.8px] border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700" />
         <div className="w-full max-w-[calc(100%_-_53px)] pb-5">
@@ -21,7 +22,7 @@ const ThreadBody: FC<ThreadBodyProps> = ({ publication }) => {
             <HiddenPublication type={publication.__typename} />
           ) : (
             <>
-              <PublicationBody publication={publication} />
+              <PublicationBody profile={profile} publication={publication} />
               <PublicationActions publication={publication} />
             </>
           )}

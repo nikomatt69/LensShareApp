@@ -40,7 +40,7 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
             }`}
             className="ml-1 text-indigo-500"
           >
-           video
+           post
           </Link>
         </span>
       </div>

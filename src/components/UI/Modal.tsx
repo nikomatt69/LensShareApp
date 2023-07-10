@@ -68,7 +68,7 @@ export const Modal: FC<ModalProps> = ({
                 { 'sm:max-w-3xl': size === 'md' },
                 { 'sm:max-w-lg': size === 'sm' },
                 { 'sm:max-w-sm': size === 'xs' },
-                'inline-block w-full scale-100 rounded-xl bg-blue-500/75 text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle'
+                'inline-block w-full scale-100 rounded-xl bg-blue-700/80 text-left align-bottom shadow-xl transition-all sm:my-8 sm:align-middle'
               )}
             >
               {title && (

@@ -58,11 +58,7 @@ const BottomNav: React.FC = () => {
       </div>
 
       {/* //upload */}
-      <Link href='/upload'>
-      
-        <VideoCameraIcon className="pb-1 h-6 text-blue-500" />{' '}
-         
-      </Link>
+     
 
       <div>
       {/* //listen */}

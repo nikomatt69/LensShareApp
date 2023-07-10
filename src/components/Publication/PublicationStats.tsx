@@ -11,6 +11,7 @@ import MirroredList from '../Bytes/MirrorList';
 import { MdCollections } from 'react-icons/md';
 import Like from './Actions/Like';
 import MirrorOutline from '../UI/Icons/MirrorOutline';
+import Mirrores from '../ProfilePage/ Mirrores';
 
 interface PublicationStatsProps {
   publication: Publication;
@@ -66,7 +67,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             show={showMirrorsModal}
             onClose={() => setShowMirrorsModal(false)}
           >
-            <MirroredList publication={publication} publicationId={publicationId} />
+            <Mirrores  publicationId={publicationId} />
           </Modal>
         </>
       )}

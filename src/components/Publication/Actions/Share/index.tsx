@@ -32,7 +32,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
     ? publication?.mirrorOf?.mirrors?.length > 0
     : // @ts-expect-error
       publication?.mirrors?.length > 0;
-  const iconClassName = 'w-[15px] sm:w-[18px]';
+  const iconClassName = 'w-[15px] sm:w-[18px] m-1 ';
 
   return (
     <div className="flex items-center space-x-1">
@@ -41,7 +41,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
           <button
             className={clsx(
               mirrored ? 'text-green-500' : 'text-brand',
-              'rounded-full p-1.5 hover:bg-gray-300/20'
+              'rounded-full  hover:bg-gray-300/20'
             )}
             onClick={stopEventPropagation}
             aria-label="Mirror"

@@ -9,15 +9,16 @@ import PublicationStats from './PublicationStats';
 import PublicationHeader from '../Composer/PublicationHeader';
 import HiddenPublication from '../Composer/HiddenPublication';
 import PublicationBody from '../Composer/PublicationBody';
-import { Publication } from '@/utils/lens/generatedLenster';
+import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import getAppName from '@/utils/functions/getAppName';
 import { formatTime } from '@/lib/formatTime4';
 
 interface FullPublicationProps {
   publication: Publication;
+  profile : Profile
 }
 
-const FullPublication: FC<FullPublicationProps> = ({ publication }) => {
+const FullPublication: FC<FullPublicationProps> = ({ publication,profile }) => {
   const isMirror = publication.__typename === 'Mirror';
   const timestamp = isMirror
     ? publication?.mirrorOf?.createdAt
@@ -39,13 +40,13 @@ const FullPublication: FC<FullPublicationProps> = ({ publication }) => {
     <article className="p-5" data-testid={`publication-${publication.id}`}>
   
       <div>
-        <PublicationHeader publication={publication} />
+        <PublicationHeader profile={profile} publication={publication} />
         <div className="ml-[53px]">
           {publication?.hidden ? (
             <HiddenPublication type={publication.__typename} />
           ) : (
             <>
-              <PublicationBody publication={publication} />
+              <PublicationBody profile={profile} publication={publication} />
               <div className="lt-text-gray-500 my-3 text-sm">
                 <span >
                   {dayjs(new Date(timestamp)).format('hh:mm A · MMM D, YYYY')}

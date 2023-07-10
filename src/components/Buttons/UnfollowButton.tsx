@@ -79,7 +79,7 @@ const UnfollowButton: FC<Props> = ({ setFollowing, profile }) => {
   return (
     <div>
       <button onClick={createUnfollow} 
-        className='active:bg-violet-600 py-1 px-1 drop-shadow-xl lg:text-lg xl:text-lg rounded-full border-2 border-black text-xs mt-2 p-3 hover:text-white hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-helvetica font-semibold'>
+        className='active:bg-violet-600 py-1 px-1 drop-shadow-xl lg:text-md xl:text-md rounded-full border-2 border-black text-xs mt-2 p-3 hover:text-white hover:bg-[#57B8FF] transition cursor-pointer bg-blue-500 text-[#000000] font-helvetica font-semibold'>
         Unfollow
       </button>
     </div>

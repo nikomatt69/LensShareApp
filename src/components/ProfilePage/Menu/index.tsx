@@ -7,8 +7,8 @@ import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useAppStore } from 'src/store/app';
 
-import Delete from './Delete';
 import { BiDotsVertical } from 'react-icons/bi';
+import Delete from '@/components/Publication/Actions/Menu/Delete';
 
 interface Props {
   publication: Publication;

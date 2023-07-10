@@ -8,7 +8,7 @@ import { usePublicationStore } from 'src/store/publication4';
 import { useUpdateEffect } from 'usehooks-ts';
 
 import Audio from './Audio';
-import Video from './Video';
+
 import { MediaSet, Publication } from '@/utils/lens/generatedLenster';
 import { ALLOWED_AUDIO_TYPES, ALLOWED_VIDEO_TYPES, ATTACHMENT, STATIC_IMAGES_URL } from '@/constants';
 import { NewLensshareAttachment } from '@/typesLenster';
@@ -20,6 +20,8 @@ import imageKit from '@/lib/imageKit';
 import { LightBox } from '../UI/LightBox';
 import { Image } from '../UI/Image';
 import { LinkIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import VideoPlayer from '@/utils/VideoPlayer';
+import Video from '../HomePage/Video';
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
     return {
@@ -165,7 +167,7 @@ const Attachments: FC<AttachmentsProps> = ({
                       <ChooseThumbnail />
                     </>
                   ) : (
-                    <Video src={url} poster={getThumbnailUrl()} />
+                    <Video publication={publication as Publication} />
                   )
                 ) : isAudio ? (
                   <Audio

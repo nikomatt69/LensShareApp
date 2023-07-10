@@ -2,6 +2,8 @@
 import type {
   Comment,
   FeedItem,
+  Profile,
+  ProfilesQuery,
   Publication,
   PublicationsQueryRequest
 } from '@/utils/lens/generatedLenster';
@@ -9,6 +11,7 @@ import {
   CommentOrderingTypes,
   CommentRankingFilter,
   CustomFiltersTypes,
+  ProfileDocument,
   useCommentFeedQuery
 } from '@/utils/lens/generatedLenster';
 
@@ -21,7 +24,7 @@ import PublicationsShimmer from '../Composer/PublicationsShimmer';
 import { ErrorMessage } from '../ErrorMessage';
 import { EmptyState } from '../UI/EmptyState';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline';
-import SinglePublication from '../Composer/SinglePublication';
+import SinglePublication from '../Composer/SinglePublication2';
 import QueuedPublication from '../Composer/QueuedPublication';
 import { Card } from '../UI/Card';
 import PublicationHeader from '../Composer/PublicationHeader';
@@ -30,6 +33,7 @@ import PublicationHeader from '../Composer/PublicationHeader';
 interface FeedProps {
   publication?: Publication;
   feedItem?: FeedItem;
+ 
 }
 
 const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
@@ -52,7 +56,7 @@ const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
   const reactionRequest = currentProfile
     ? { profileId: currentProfile?.id }
     : null;
-  const profileId = currentProfile?.id ?? null;
+  const profileId = currentProfile?.id ?? ProfileDocument;
 
   const { data, loading, error, fetchMore } = useCommentFeedQuery({
     variables: { request, reactionRequest, profileId },
@@ -131,15 +135,13 @@ const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
       )}
       {comments?.map((comment, index) =>
         comment?.__typename === 'Comment' && comment.hidden ? null : (
-          <><div className='p-2'>
-          <PublicationHeader publication={rootPublication as Comment} feedItem={feedItem}  />
-        </div><SinglePublication
+          <SinglePublication
             key={`${publicationId}_${index}`}
             isFirst={index === 0}
-            
+            profile={profileId}
             isLast={index === comments.length - 1}
             publication={comment as Comment}
-            showType={false} /></>
+            showType={false} />
         )
       )}
       {hasMore && <span ref={observe} />}

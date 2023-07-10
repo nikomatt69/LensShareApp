@@ -47,13 +47,7 @@ const BottomNav: React.FC = () => {
         </button>
       </Link>
       </div>
-      {/* //upload */}
-      <Link href='/upload'>
-       <button 
-       className="text-blue-500 hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-        <VideoCameraIcon className="h-6 text-white-500" />{' '}
-        </button>  
-      </Link>
+    
       {/* //discover page */}
       <Link href='/discover'>
       <button className="text-blue-500 hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">

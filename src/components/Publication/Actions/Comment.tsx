@@ -25,7 +25,7 @@ const Comment: FC<CommentProps> = ({ publication, showCount }) => {
   return (
     <div className="flex items-center space-x-1 text-blue-500">
       <motion.button whileTap={{ scale: 0.9 }} aria-label="Comment">
-        <Link href={`/posts/${publication.id}`}>
+        <Link href={`/post/${publication.id}`}>
           <div className="rounded-full p-1.5 hover:bg-blue-300/20">
             <Tooltip
               placement="top"

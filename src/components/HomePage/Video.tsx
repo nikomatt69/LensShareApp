@@ -120,21 +120,7 @@ const Video: FC<Props> = ({ publication }) => {
                 <ChevronDoubleDownIcon className='w-4 h-4'/>
                </span>
   </button>*/ } 
-           {showButtons && (
-          <ul className="dropdown-menu hidden md:block pt-1">
-            <li><LikeButton publication={video as Publication}/></li>
-            <li> <MirrorButton publication={video as Publication}/></li>
-            <li><CommentButton publication={video as Publication}/></li>
-            <li><CollectButton  publication={video as Publication}/></li>
-            <li className=" pt-5">
-             <button className="" onClick={() => setShowShare(true)} >
-              <ShareButton publication={publication as Publication} />
-             </button>
-            </li>
-            
-            
-        </ul>
-          )}
+          
         </div>
         </div>
         

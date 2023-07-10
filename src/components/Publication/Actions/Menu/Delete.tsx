@@ -1,11 +1,10 @@
-
-import stopEventPropagation from '@/lib/stopEventPropagation';
-import { Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import type { Publication } from '@/utils/lens/generatedLenster';
+import stopEventPropagation  from '@/lib/stopEventPropagation';
 import type { FC } from 'react';
 import { useGlobalAlertStateStore } from 'src/store/alerts';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface DeleteProps {
   publication: Publication;

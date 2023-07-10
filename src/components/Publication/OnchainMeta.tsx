@@ -51,7 +51,7 @@ const OnchainMeta: FC<OnchainMetaProps> = ({ publication }) => {
 
   return (
     <Card as="aside" dataTestId="onchain-meta">
-      <div className="lt-text-gray-500 divide-y dark:divide-gray-700">
+      <div className="lt-text-gray-500 divide-y bg-[#C0C0C0] rounded-lg dark:divide-gray-700">
         {isArweaveHash ? (
           <Meta
             name={`ARWEAVE TRANSACTION`}

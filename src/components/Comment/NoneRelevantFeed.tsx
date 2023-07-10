@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { useAppStore } from 'src/store/app';
 import { Card } from '../UI/Card';
-import SinglePublication from '../Composer/SinglePublication';
+import SinglePublication from '../Composer/SinglePublication2';
 import PublicationHeader from '../Composer/PublicationHeader';
 
 interface NoneRelevantFeedProps {
@@ -84,14 +84,13 @@ const NoneRelevantFeed: FC<NoneRelevantFeedProps> = ({ publication }) => {
         <Card className="divide-y-[1px] dark:divide-gray-700">
           {comments?.map((comment, index) =>
             comment?.__typename === 'Comment' && comment.hidden ? null : (
-              <><div>
-                <PublicationHeader publication={publication as Comment}  />
-              </div><SinglePublication
+             <SinglePublication
                   key={`${publicationId}_${index}`}
                   isFirst={index === 0}
+                  profile={profileId}
                   isLast={index === comments.length - 1}
                   publication={comment as Comment}
-                  showType={false} /></>
+                  showType={false} />
             )
           )}
           {hasMore && <span ref={observe} />}

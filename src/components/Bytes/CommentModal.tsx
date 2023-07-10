@@ -1,5 +1,5 @@
 
-import { Profile, Publication } from '@/utils/lens/generatedLenster'
+import { Comment, Profile, Publication } from '@/utils/lens/generatedLenster'
 import type { Dispatch, FC } from 'react'
 import React, { useState } from 'react'
 import { FaRegCommentAlt } from 'react-icons/fa'
@@ -19,6 +19,9 @@ import getMedia from '@/lib/getMedia'
 import CommentsVideo from '../DetailPage/CommentsBlock/Comments'
 import CommentsByte from './FullScreen/Comments'
 import { useAppStore } from '@/store/app'
+import PublicationActions from '../Publication/Actions'
+import Feed from '../Comment/Feed'
+import NewPublication from '../Composer/NewPublication'
 type Props = {
   trigger: React.ReactNode
   publication: Publication
@@ -41,13 +44,13 @@ const CommentModal: FC<Props> = ({ trigger, publication ,profile, setFollowing,
       className="focus:outline-none"
       onClick={() => setShow(true)}
     >
-       <div className="flex items-center drop-shadow-lg rounded-full md:bg-gray-200  bg-gray-600/50 dark:bg-gray-600/50 p-2">
+       <div className="flex items-center drop-shadow-lg rounded-full overflow-y-auto md:bg-gray-200  bg-gray-600/50 dark:bg-gray-600/50 p-2">
           <FaRegCommentAlt  className="w-3 h-3 font-bold" />
            </div>
       {trigger}
     </button>
     <FullScreenModal
-      panelClassName="max-w-lg lg:ml-9"
+      panelClassName="max-w-lg bg-[#C0C0C0] overflow-y-hidden overflow-y-auto rounded-xl lg:ml-9"
       show={show}
       autoClose
     >
@@ -60,17 +63,14 @@ const CommentModal: FC<Props> = ({ trigger, publication ,profile, setFollowing,
           <MdOutlineClose className='text-white w-4 h-4' />
         </button>
       </div>
-      <div className="flex scrollbar max-h-[80%]  pt-3">
-      <Comments
-          
-          profile={profile}
-          publication={publication as Publication} 
-          key={`${publication}_${publication.createdAt}1`}
-        
-          
-        
-        />
+      <div className='text-center justify-center ml-12 mt-5 p-5 items-center'>
+      <PublicationActions publication={publication}/>
       </div>
+      <div className="flex scrollbar-text-blue max-h-[75%] overflow-y-auto  bg-white  pt-3">
+       
+      <Feed publication={publication as Comment} />
+      </div>
+      <NewPublication publication={publication}/>
     </FullScreenModal>
   </>
   )

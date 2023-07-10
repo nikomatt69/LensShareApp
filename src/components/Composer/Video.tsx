@@ -1,6 +1,6 @@
 import 'plyr-react/plyr.css';
 
-import { Player } from '@livepeer/react';
+import { PlayButton, Player } from '@livepeer/react';
 import type { FC } from 'react';
 import { memo } from 'react';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
@@ -20,9 +20,11 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
         poster={imageKit(sanitizeDStorageUrl(poster))}
         objectFit="contain"
         showLoadingSpinner
+        autoPlay
+        muted
         showPipButton={false}
         showUploadingIndicator={false}
-        controls={{ defaultVolume: 1 }}
+        controls={{ defaultVolume: 0 } }
         autoUrlUpload={{ fallback: true, ipfsGateway: IPFS_GATEWAY }}
       />
     </div>

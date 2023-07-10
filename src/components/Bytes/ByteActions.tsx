@@ -19,6 +19,7 @@ import { useAppStore } from '@/store/app'
 import { useRouter } from 'next/router'
 import { profile } from 'console'
 import MirrorModal from './MirrorModal'
+import ShareMenu from '../Publication/Actions/Share'
 
 type Props = {
   video: Publication
@@ -65,7 +66,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail,trigger,}) => {
         </div>
         
         <div className="w-full  text-center text-white md:text-inherit">
-          <MirrorButton publication={video as Publication}/> 
+        <ShareMenu publication={video as Publication} showCount={true} />
             
         </div>
 

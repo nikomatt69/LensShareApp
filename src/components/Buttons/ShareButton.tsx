@@ -24,7 +24,7 @@ const ShareButton: FC<Props> = ({publication }) => {
   return (
     <div className="flex gap-6">
     <div className="  rounded-full md:text-black  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2  md:mt-2 flex flex-col justify-center items-center cursor-pointer" onClick={() => setShowShare(true)}>
-      <ShareModal show={showShare} setShowShare={setShowShare}  publication={publication as Publication} />
+      <ShareModal show={showShare} setShowShare={setShowShare}  publication={publication} />
        <p><ShareOutline onClick={() => setShowShare(true)} className="h-3 w-3  rounded-full  cursor-pointer" /> </p>
       </div>
     </div>

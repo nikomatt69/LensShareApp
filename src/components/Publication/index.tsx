@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import PublicationPageShimmer from './Shimmer';
 import { useAppStore } from '@/store/app';
 import { useRouter } from 'next/router';
-import { usePublicationQuery } from '@/utils/lens/generatedLenster';
+import { Profile, usePublicationQuery } from '@/utils/lens/generatedLenster';
 import Custom404 from '@/pages/404';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import MetaTags from '../UI/MetaTags';
@@ -21,7 +21,7 @@ import Footer from '../Sidebar/Footer';
 import BottomNav from '../Navs/BottomNav';
 import Navbar from '../Navbar';
 
-const ViewPublication: NextPage = () => {
+const ViewPublication: NextPage = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   
   const {
@@ -69,9 +69,9 @@ const ViewPublication: NextPage = () => {
             : APP_NAME
         }
       />
-      <GridItemEight className="space-y-5  h-[vh-80]">
+      <GridItemEight className="space-y-5 bg-[#C0C0C0] rounded-xl h-[vh-80]">
         <Card>
-          <FullPublication publication={publication} />
+          <FullPublication profile={profile as Profile} publication={publication} />
         </Card>
         {currentProfile && !publication?.hidden }
          
@@ -82,7 +82,7 @@ const ViewPublication: NextPage = () => {
         <NoneRelevantFeed publication={publication} />
       </GridItemEight>
       <GridItemFour className="space-y-5">
-        <Card as="aside" className="p-5" dataTestId="poster-profile">
+        <Card as="aside" className="p-5 bg-[#C0C0C0]" dataTestId="poster-profile">
           <UserProfile
             profile={
               publication.__typename === 'Mirror'
