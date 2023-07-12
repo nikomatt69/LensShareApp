@@ -1,7 +1,7 @@
-import type { Profile } from 'src/utils/lens'
-import { getRandomProfilePicture } from './getRandomProfilePicture'
-import {sanitizeIpfsUrl} from 'src/utils/sanitizeIpfsUrl'
-import imageCdn from '@/lib/imageCdn'
+import type { Profile } from 'src/utils/lens';
+import { getRandomProfilePicture } from './getRandomProfilePicture';
+import { sanitizeIpfsUrl } from 'src/utils/sanitizeIpfsUrl';
+import imageCdn from '@/lib/imageCdn';
 
 const getProfilePicture = (
   profile: Profile,
@@ -12,9 +12,9 @@ const getProfilePicture = (
       ? imageCdn(sanitizeIpfsUrl(profile?.picture?.original?.url))
       : profile?.picture?.__typename === 'NftImage'
       ? imageCdn(sanitizeIpfsUrl(profile?.picture?.uri))
-      : getRandomProfilePicture(profile?.handle)
-  const sanitized = imageCdn(sanitizeIpfsUrl(url))
-  return url
-}
+      : getRandomProfilePicture(profile?.handle);
+  const sanitized = imageCdn(sanitizeIpfsUrl(url));
+  return url;
+};
 
-export default getProfilePicture
+export default getProfilePicture;

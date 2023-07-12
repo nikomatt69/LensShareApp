@@ -1,8 +1,10 @@
-
 import { Button } from '@/components/UI/Button';
 import { Card } from '@/components/UI/Card';
 import downloadJson from '@/lib/downloadJson';
-import { NotificationRequest, useNotificationsLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  NotificationRequest,
+  useNotificationsLazyQuery
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppStore } from 'src/store/app';
@@ -23,7 +25,6 @@ const Notifications: FC = () => {
   });
 
   const handleExportClick = async () => {
-    
     setExporting(true);
     const fetchNotifications = async (cursor?: string) => {
       const { data } = await exportNotificiations({
@@ -68,23 +69,15 @@ const Notifications: FC = () => {
 
   return (
     <Card className="space-y-2 p-5">
-      <div className="text-lg font-bold">
-        Export notifications
-      </div>
-      <div className="pb-2">
-        Export all your notifications to a JSON file.
-      </div>
+      <div className="text-lg font-bold">Export notifications</div>
+      <div className="pb-2">Export all your notifications to a JSON file.</div>
       {notifications.length > 0 ? (
         <div className="pb-2">
-          
-            Exported <b>{notifications.length}</b> notifications
-          
+          Exported <b>{notifications.length}</b> notifications
         </div>
       ) : null}
       {fetchCompleted ? (
-        <Button onClick={download}>
-          Download notifications
-        </Button>
+        <Button onClick={download}>Download notifications</Button>
       ) : (
         <Button onClick={handleExportClick} disabled={exporting}>
           {exporting ? 'Exporting...' : 'Export now'}

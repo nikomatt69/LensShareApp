@@ -24,7 +24,7 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
         muted
         showPipButton={false}
         showUploadingIndicator={false}
-        controls={{ defaultVolume: 0 } }
+        controls={{ defaultVolume: 0 }}
         autoUrlUpload={{ fallback: true, ipfsGateway: IPFS_GATEWAY }}
       />
     </div>

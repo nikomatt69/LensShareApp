@@ -1,4 +1,3 @@
-
 import dayjs from 'dayjs';
 import type { FC } from 'react';
 
@@ -12,13 +11,17 @@ import PublicationBody from '../Composer/PublicationBody';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import getAppName from '@/utils/functions/getAppName';
 import { formatTime } from '@/lib/formatTime4';
+import PublicationType from './Type';
 
 interface FullPublicationProps {
   publication: Publication;
-  profile : Profile
+  profile: Profile;
 }
 
-const FullPublication: FC<FullPublicationProps> = ({ publication,profile }) => {
+const FullPublication: FC<FullPublicationProps> = ({
+  publication,
+  profile
+}) => {
   const isMirror = publication.__typename === 'Mirror';
   const timestamp = isMirror
     ? publication?.mirrorOf?.createdAt
@@ -38,7 +41,8 @@ const FullPublication: FC<FullPublicationProps> = ({ publication,profile }) => {
 
   return (
     <article className="p-5" data-testid={`publication-${publication.id}`}>
-  
+      <PublicationType profile={profile} publication={publication} showType />
+
       <div>
         <PublicationHeader profile={profile} publication={publication} />
         <div className="ml-[53px]">
@@ -47,8 +51,8 @@ const FullPublication: FC<FullPublicationProps> = ({ publication,profile }) => {
           ) : (
             <>
               <PublicationBody profile={profile} publication={publication} />
-              <div className="lt-text-gray-500 my-3 text-sm">
-                <span >
+              <div className="lt-text-blue-500 my-3 text-sm">
+                <span>
                   {dayjs(new Date(timestamp)).format('hh:mm A · MMM D, YYYY')}
                 </span>
                 {publication?.appId ? (

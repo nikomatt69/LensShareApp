@@ -1,5 +1,3 @@
-
-
 import clsx from 'clsx';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
@@ -10,7 +8,12 @@ import { useUpdateEffect } from 'usehooks-ts';
 import Audio from './Audio';
 
 import { MediaSet, Publication } from '@/utils/lens/generatedLenster';
-import { ALLOWED_AUDIO_TYPES, ALLOWED_VIDEO_TYPES, ATTACHMENT, STATIC_IMAGES_URL } from '@/constants';
+import {
+  ALLOWED_AUDIO_TYPES,
+  ALLOWED_VIDEO_TYPES,
+  ATTACHMENT,
+  STATIC_IMAGES_URL
+} from '@/constants';
 import { NewLensshareAttachment } from '@/typesLenster';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import stopEventPropagation from '@/lib/stopEventPropagation';
@@ -148,9 +151,7 @@ const Attachments: FC<AttachmentsProps> = ({
                     icon={<LinkIcon className="h-4 w-4" />}
                     onClick={() => window.open(url, '_blank')}
                   >
-                    <span>
-                      Open Image in new tab
-                    </span>
+                    <span>Open Image in new tab</span>
                   </Button>
                 ) : isVideo ? (
                   isNew ? (
@@ -188,7 +189,6 @@ const Attachments: FC<AttachmentsProps> = ({
                     }}
                     onClick={() => {
                       setExpandedImage(url);
-                    
                     }}
                     src={isNew ? url : imageKit(url, ATTACHMENT)}
                     alt={isNew ? url : imageKit(url, ATTACHMENT)}

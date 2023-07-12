@@ -1,5 +1,10 @@
 import { S3 } from '@aws-sdk/client-s3';
-import { EVER_BUCKET_NAME, EVER_ENDPOINT, S3_BUCKET, STS_GENERATOR_WORKER_URL} from '@/constants';
+import {
+  EVER_BUCKET_NAME,
+  EVER_ENDPOINT,
+  S3_BUCKET,
+  STS_GENERATOR_WORKER_URL
+} from '@/constants';
 import axios from 'axios';
 
 import { v4 as uuid } from 'uuid';

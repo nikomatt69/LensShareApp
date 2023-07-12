@@ -1,7 +1,5 @@
-
 import ToggleWithHelper from '@/components/ToggleWithHelper';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
-
 
 import type { FC } from 'react';
 import { useCollectModuleStore } from 'src/store/collect-module';

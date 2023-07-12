@@ -1,10 +1,12 @@
-
 import { Button } from '@/components/UI/Button';
 import { Modal } from '@/components/UI/Modal';
 import { Spinner } from '@/components/UI/Spinner';
 import { WarningMessage } from '@/components/UI/WarningMessage';
 import getAllowanceModule from '@/lib/getAllowanceModule';
-import { ApprovedAllowanceAmount, useGenerateModuleCurrencyApprovalDataLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  ApprovedAllowanceAmount,
+  useGenerateModuleCurrencyApprovalDataLazyQuery
+} from '@/utils/lens/generatedLenster';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import type { Dispatch, FC } from 'react';
 import { useState } from 'react';
@@ -30,7 +32,7 @@ const AllowanceButton: FC<AllowanceButtonProps> = ({
     useGenerateModuleCurrencyApprovalDataLazyQuery();
 
   const onError = (error: any) => {
-    (error);
+    error;
   };
 
   const {
@@ -51,7 +53,6 @@ const AllowanceButton: FC<AllowanceButtonProps> = ({
       );
       setShowWarningModal(false);
       setAllowed(!allowed);
-     
     },
     onError
   });
@@ -112,11 +113,9 @@ const AllowanceButton: FC<AllowanceButtonProps> = ({
             title={`Handle with care!`}
             message={
               <div className="leading-6">
-                
-                  Please be aware that by allowing this module, the amount
-                  indicated will be automatically deducted when you{' '}
-                  <b>collect</b> and <b>super follow</b>.
-                
+                Please be aware that by allowing this module, the amount
+                indicated will be automatically deducted when you <b>collect</b>{' '}
+                and <b>super follow</b>.
               </div>
             }
           />

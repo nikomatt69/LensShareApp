@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { Tooltip } from '../UI/Tooltip';
 import { STATIC_IMAGES_URL } from '@/constants';

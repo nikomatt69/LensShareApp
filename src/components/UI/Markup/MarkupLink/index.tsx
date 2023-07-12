@@ -1,4 +1,3 @@
-
 import type { MarkupLinkProps } from 'src/typesLenster';
 
 import ExternalLink from './ExternalLink';

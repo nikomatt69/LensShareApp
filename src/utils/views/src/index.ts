@@ -1,12 +1,12 @@
 export interface Env {
-  LIVEPEER_API_TOKEN: string
+  LIVEPEER_API_TOKEN: string;
 }
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Content-Type': 'application/json'
-}
+};
 
 const handleRequest = async (request: Request, env: Env) => {
   if (request.method !== 'POST') {
@@ -18,16 +18,16 @@ const handleRequest = async (request: Request, env: Env) => {
       {
         headers
       }
-    )
+    );
   }
   try {
-    const payload = (await request.json()) as any
+    const payload = (await request.json()) as any;
 
     if (!payload.cid) {
       return new Response(
         JSON.stringify({ success: false, message: 'No asset cid provided' }),
         { headers }
-      )
+      );
     }
 
     const response = await fetch(
@@ -37,8 +37,8 @@ const handleRequest = async (request: Request, env: Env) => {
           Authorization: `Bearer ${env.LIVEPEER_API_TOKEN}`
         }
       }
-    )
-    const viewsRes = (await response.json()) as any
+    );
+    const viewsRes = (await response.json()) as any;
 
     if (!viewsRes.viewCount) {
       return new Response(
@@ -49,7 +49,7 @@ const handleRequest = async (request: Request, env: Env) => {
         {
           headers
         }
-      )
+      );
     }
     return new Response(
       JSON.stringify({
@@ -59,7 +59,7 @@ const handleRequest = async (request: Request, env: Env) => {
       {
         headers
       }
-    )
+    );
   } catch {
     return new Response(
       JSON.stringify({
@@ -68,12 +68,12 @@ const handleRequest = async (request: Request, env: Env) => {
         views: 0
       }),
       { headers }
-    )
+    );
   }
-}
+};
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    return await handleRequest(request, env)
+    return await handleRequest(request, env);
   }
-}
+};

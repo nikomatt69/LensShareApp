@@ -1,40 +1,39 @@
+import { Button } from '@/components/UI/Button';
+import CheckOutline from '@/components/UI/Icons/CheckOutline';
+import { Modal } from '@/components/UI/Modal';
+import { useAppStore } from '@/store/app';
+import { ReferenceModuleType } from '@/custom-types';
 
-import { Button } from '@/components/UI/Button'
-import CheckOutline from '@/components/UI/Icons/CheckOutline'
-import { Modal } from '@/components/UI/Modal'
-import { useAppStore } from '@/store/app'
-import { ReferenceModuleType } from '@/custom-types'
-
-import clsx from 'clsx'
-import React, { useState } from 'react'
+import clsx from 'clsx';
+import React, { useState } from 'react';
 
 const ReferenceModule = () => {
-  const [showModal, setShowModal] = useState(false)
-  const uploadedVideo = useAppStore((state) => state.uploadedVideo)
-  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo)
+  const [showModal, setShowModal] = useState(false);
+  const uploadedVideo = useAppStore((state) => state.uploadedVideo);
+  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo);
 
   const setReferenceType = (data: ReferenceModuleType) => {
     setUploadedVideo({
       referenceModule: { ...uploadedVideo.collectModule, ...data }
-    })
-  }
+    });
+  };
 
   const getSelectedReferenceType = () => {
     const followerOnlyReferenceModule =
-      uploadedVideo?.referenceModule?.followerOnlyReferenceModule
+      uploadedVideo?.referenceModule?.followerOnlyReferenceModule;
     const degreesOfSeparationReferenceModule =
-      uploadedVideo?.referenceModule?.degreesOfSeparationReferenceModule
+      uploadedVideo?.referenceModule?.degreesOfSeparationReferenceModule;
     if (!followerOnlyReferenceModule && !degreesOfSeparationReferenceModule) {
-      return `Anyone can comment and mirror`
+      return `Anyone can comment and mirror`;
     } else if (followerOnlyReferenceModule) {
-      return `Only my subscribers can comment and mirror`
+      return `Only my subscribers can comment and mirror`;
     } else if (
       degreesOfSeparationReferenceModule &&
       degreesOfSeparationReferenceModule.degreesOfSeparation < 5
     ) {
-      return `Channels subscribed upto ${degreesOfSeparationReferenceModule.degreesOfSeparation} degrees away from my network`
+      return `Channels subscribed upto ${degreesOfSeparationReferenceModule.degreesOfSeparation} degrees away from my network`;
     }
-  }
+  };
 
   const onSelectReferenceDegree = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -46,8 +45,8 @@ const ReferenceModule = () => {
         mirrorsRestricted: true,
         degreesOfSeparation: Number(event.target.value)
       }
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -66,7 +65,6 @@ const ReferenceModule = () => {
       </button>
       <Modal
         title="Who can comment and mirror this publication?"
-
         onClose={() => setShowModal(false)}
         show={showModal}
       >
@@ -91,9 +89,7 @@ const ReferenceModule = () => {
                 }
               )}
             >
-              <span>
-                Anyone
-              </span>
+              <span>Anyone</span>
               {!uploadedVideo?.referenceModule?.followerOnlyReferenceModule &&
                 !uploadedVideo?.referenceModule
                   ?.degreesOfSeparationReferenceModule?.degreesOfSeparation && (
@@ -152,10 +148,8 @@ const ReferenceModule = () => {
             )}
           >
             <span className="max-w-[95%]">
-              
-                Only channels that I subscribed and their subscriptions, so on
-                upto
-              
+              Only channels that I subscribed and their subscriptions, so on
+              upto
               <select
                 onChange={onSelectReferenceDegree}
                 onClick={(e) => e.preventDefault()}
@@ -186,7 +180,7 @@ const ReferenceModule = () => {
         </div>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ReferenceModule
+export default ReferenceModule;

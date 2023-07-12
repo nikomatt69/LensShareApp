@@ -1,7 +1,9 @@
-import { ApprovedAllowanceAmount, CollectModules } from "@/utils/lens/generatedLenster";
-import { FC } from "react";
-import Module from "./Module";
-
+import {
+  ApprovedAllowanceAmount,
+  CollectModules
+} from '@/utils/lens/generatedLenster';
+import { FC } from 'react';
+import Module from './Module';
 
 interface Props {
   allowance: any;
@@ -10,13 +12,14 @@ interface Props {
 const Allowance: FC<Props> = ({ allowance }) => {
   return (
     <div className="space-y-4 p-5">
-      {allowance?.approvedModuleAllowanceAmount?.map((item: ApprovedAllowanceAmount) =>
-        item?.module === CollectModules.RevertCollectModule ||
-        item?.module === CollectModules.FreeCollectModule ? (
-          ''
-        ) : (
-          <Module key={item?.contractAddress} module={item} />
-        )
+      {allowance?.approvedModuleAllowanceAmount?.map(
+        (item: ApprovedAllowanceAmount) =>
+          item?.module === CollectModules.RevertCollectModule ||
+          item?.module === CollectModules.FreeCollectModule ? (
+            ''
+          ) : (
+            <Module key={item?.contractAddress} module={item} />
+          )
       )}
     </div>
   );

@@ -10,9 +10,7 @@ const validateLensAccount = async (accessToken: string, isMainnet: boolean) => {
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        
-       
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `

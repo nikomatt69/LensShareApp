@@ -1,13 +1,15 @@
-
 import { Button } from '@/components/UI/Button';
 import Loader from '@/components/UI/Loader';
 import sanitizeProfileInterests from '@/utils/functions/sanitizeProfileInterests';
-import { useAddProfileInterestMutation, useProfileInterestsQuery, useRemoveProfileInterestMutation } from '@/utils/lens/generatedLenster';
+import {
+  useAddProfileInterestMutation,
+  useProfileInterestsQuery,
+  useRemoveProfileInterestMutation
+} from '@/utils/lens/generatedLenster';
 import { useApolloClient } from '@apollo/client';
 import { CheckCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
-
 
 const MAX_TOPICS_ALLOWED = 12;
 
@@ -23,16 +25,14 @@ const Interests: FC = () => {
   };
 
   const onError = (error: any) => {
-    (error);
+    error;
   };
 
   const { data, loading } = useProfileInterestsQuery();
   const [addProfileInterests] = useAddProfileInterestMutation({
-  
     onError
   });
   const [removeProfileInterests] = useRemoveProfileInterestMutation({
-   
     onError
   });
 

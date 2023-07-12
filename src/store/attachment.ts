@@ -1,4 +1,3 @@
-
 import { Localstorage } from '@/storage';
 import { del, get, set } from 'idb-keyval';
 import type { Attachment } from 'xmtp-content-type-remote-attachment';
@@ -85,7 +84,7 @@ export const useAttachmentStore = create(
         })
     }),
     {
-      name: Localstorage.AttachmentStore,
+      name: Localstorage.AttachmentStore
     }
   )
 );

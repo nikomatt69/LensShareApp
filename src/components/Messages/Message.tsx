@@ -146,42 +146,39 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
     : APP_NAME;
 
   return (
-    
     <GridLayout classNameChild="gap-1">
-
       <MetaTags title={title} />
       <PreviewList
-        className="sm:hidden xs:hidden md:hidden hidden lg:block"
+        className="xs:hidden hidden sm:hidden md:hidden lg:block"
         selectedConversationKey={conversationKey}
       />
-      <GridItemEight className="xs:mx-2  mb-0 sm:mx-2 md:col-span-8">
+      <GridItemEight className="xs:mx-2  mb-5 sm:mx-2 md:col-span-8">
         <Card className="flex h-[87vh] flex-col justify-between">
           {showLoading ? (
             <div className="flex   items-center justify-center">
               <Loader message={`Loading messages`} />
             </div>
           ) : (
-            <><div>
-                <NavbarDetails />
-              </div><>
-
-                  <MessageHeader
-                    profile={profile}
-                    conversationKey={conversationKey} />
-                  <MessagesList
-                    conversationKey={conversationKey}
-                    currentProfile={currentProfile}
-                    profile={profile}
-                    fetchNextMessages={fetchNextMessages}
-                    messages={allMessages}
-                    hasMore={hasMore}
-                    missingXmtpAuth={missingXmtpAuth ?? false} />
-                  <Composer
-                    sendMessage={sendMessage}
-                    conversationKey={conversationKey}
-                    disabledInput={missingXmtpAuth ?? false} />
-                  <BottomNav />
-                </></>
+            <>
+              <MessageHeader
+                profile={profile}
+                conversationKey={conversationKey}
+              />
+              <MessagesList
+                conversationKey={conversationKey}
+                currentProfile={currentProfile}
+                profile={profile}
+                fetchNextMessages={fetchNextMessages}
+                messages={allMessages}
+                hasMore={hasMore}
+                missingXmtpAuth={missingXmtpAuth ?? false}
+              />
+              <Composer
+                sendMessage={sendMessage}
+                conversationKey={conversationKey}
+                disabledInput={missingXmtpAuth ?? false}
+              />
+            </>
           )}
         </Card>
       </GridItemEight>

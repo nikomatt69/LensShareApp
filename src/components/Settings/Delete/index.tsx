@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -16,7 +15,11 @@ import { LENS_HUB_ABI } from '@/abi/abi';
 import { useCreateBurnProfileTypedDataMutation } from '@/utils/lens/generatedLenster';
 import { Errors } from '@/lib/errors';
 import MetaTags from '@/components/UI/MetaTags';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import UserProfile from '@/components/ProfilePage/UserProfile';
 import { Card } from '@/components/UI/Card';
 import { Button } from '@/components/UI/Button';
@@ -37,8 +40,6 @@ const DeleteSettings: FC = () => {
   const disconnectXmtp = useDisconnectXmtp();
   const { disconnect } = useDisconnect();
 
-  
-
   const onCompleted = () => {
     setCurrentProfile(null);
     setProfileId(null);
@@ -50,7 +51,7 @@ const DeleteSettings: FC = () => {
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { write } = useContractWrite({
@@ -111,32 +112,24 @@ const DeleteSettings: FC = () => {
             This will delete your Lens profile
           </div>
           <p>
-            
-              This will permanently delete your Profile NFT on the Lens
-              Protocol. You will not be able to use any apps built on Lens,
-              including Lenster. All your data will be wiped out immediately and
-              you won't be able to get it back.
-            
+            This will permanently delete your Profile NFT on the Lens Protocol.
+            You will not be able to use any apps built on Lens, including
+            Lenster. All your data will be wiped out immediately and you won't
+            be able to get it back.
           </p>
           <div className="text-lg font-bold">What else you should know</div>
           <div className="lt-text-gray-500 divide-y text-sm dark:divide-gray-700">
             <p className="pb-3">
-              
-                You cannot restore your Lens profile if it was accidentally or
-                wrongfully deleted.
-              
+              You cannot restore your Lens profile if it was accidentally or
+              wrongfully deleted.
             </p>
             <p className="py-3">
-              
-                Some account information may still be available in search
-                engines, such as Google or Bing.
-              
+              Some account information may still be available in search engines,
+              such as Google or Bing.
             </p>
             <p className="py-3">
-              
-                Your @handle will be released immediately after deleting the
-                account.
-              
+              Your @handle will be released immediately after deleting the
+              account.
             </p>
           </div>
           <Button
@@ -164,10 +157,8 @@ const DeleteSettings: FC = () => {
                 title="Are you sure?"
                 message={
                   <div className="leading-6">
-                    
-                      Confirm that you have read all consequences and want to
-                      delete your account anyway
-                    
+                    Confirm that you have read all consequences and want to
+                    delete your account anyway
                   </div>
                 }
               />

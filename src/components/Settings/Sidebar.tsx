@@ -1,9 +1,15 @@
-
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
 import UserProfile from '../ProfilePage/UserProfile';
 import { Profile } from '@/utils/lens/generatedLenster';
-import { BookmarkIcon, ChartPieIcon, FingerPrintIcon, ShareIcon, SparklesIcon, UserIcon } from '@heroicons/react/24/outline';
+import {
+  BookmarkIcon,
+  ChartPieIcon,
+  FingerPrintIcon,
+  ShareIcon,
+  SparklesIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
 import { BsDatabaseFill, BsExclamation } from 'react-icons/bs';
 import Sidebar from '../UI/Sidebar';
 import Navbar from '../Navbar';
@@ -13,12 +19,8 @@ const SettingsSidebar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   return (
-    
-  
     <div className="mb-4 space-y-1.5 px-3 sm:px-0">
-       <div>
-    <Navbar/>
-    </div>
+      <div></div>
       <div className="pb-3">
         <UserProfile
           profile={currentProfile as Profile}
@@ -63,21 +65,16 @@ const SettingsSidebar: FC = () => {
             url: '/settings/export'
           },
           {
-            title: (
-              <div className="text-red-500">
-                Danger Zone
-              </div>
-            ),
+            title: <div className="text-red-500">Danger Zone</div>,
             icon: <BsExclamation className="h-4 w-4 text-red-500" />,
             url: '/settings/delete'
           }
         ]}
       />
-       <div>
-      <BottomNav/>
+      <div>
+        <BottomNav />
+      </div>
     </div>
-    </div>
-   
   );
 };
 

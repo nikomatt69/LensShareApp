@@ -1,49 +1,49 @@
-import LitJsSdk from "@lit-protocol/sdk-browser";
+import LitJsSdk from '@lit-protocol/sdk-browser';
 
 const client = new LitJsSdk.LitNodeClient({ alertWhenUnauthorized: true });
 // For all EVM compatible chain
-const chain = "mainnet";
+const chain = 'mainnet';
 
-const address1 = "FirstAddress";
-const address2 = "SecondAddress";
+const address1 = 'FirstAddress';
+const address2 = 'SecondAddress';
 
 const accessControlConditions = [
   {
     // check if the author of the post is in possession
     // of a specific wallet address
     // https://developer.litprotocol.com/AccessControlConditions/EVM/basicExamples
-    contractAddress: "",
-    standardContractType: "",
+    contractAddress: '',
+    standardContractType: '',
     chain,
-    method: "",
-    parameters: [":userAddress"],
+    method: '',
+    parameters: [':userAddress'],
     returnValueTest: {
-      comparator: "=",
+      comparator: '=',
       // post author address
-      value: "0x1" || undefined,
-    },
+      value: '0x1' || undefined
+    }
   },
-  { operator: "or" },
+  { operator: 'or' },
   {
-    contractAddress: "",
-    standardContractType: "",
-    chain: "mainnet",
-    method: "",
-    parameters: [":userAddress"],
+    contractAddress: '',
+    standardContractType: '',
+    chain: 'mainnet',
+    method: '',
+    parameters: [':userAddress'],
     returnValueTest: {
-      comparator: "=",
+      comparator: '=',
       // comment author address
-      value: "0x2",
-    },
-  },
+      value: '0x2'
+    }
+  }
 ];
 
 const setAccessControlConditions = (address_1: string, address_2: string) => {
-  console.log("Set access control conditions, address 1:", address_1);
+  console.log('Set access control conditions, address 1:', address_1);
 
   accessControlConditions[0].returnValueTest!.value = address_1;
   accessControlConditions[2].returnValueTest!.value = address_2;
-  console.log("Access control conditions:", accessControlConditions);
+  console.log('Access control conditions:', accessControlConditions);
   return accessControlConditions;
 };
 
@@ -55,12 +55,12 @@ class Lit {
       await client.connect();
       this.litNodeClient = client;
     } catch (err) {
-      console.log("Error while connecting to Lit nodes", err);
+      console.log('Error while connecting to Lit nodes', err);
     }
   }
 
   async encryptString(text: string, address1: string, address2: string) {
-    console.log("Encrypt string address 1:", address1);
+    console.log('Encrypt string address 1:', address1);
     if (!this.litNodeClient) {
       await this.connect();
     }
@@ -68,7 +68,7 @@ class Lit {
     const { encryptedString, symmetricKey } = await LitJsSdk.encryptString(
       text
     );
-    console.log("encrypted string:", encryptedString);
+    console.log('encrypted string:', encryptedString);
 
     const conditions = await setAccessControlConditions(address1, address2);
 
@@ -76,10 +76,10 @@ class Lit {
       accessControlConditions: conditions,
       symmetricKey,
       authSig,
-      chain,
+      chain
     });
     console.log(
-      "access control conditions",
+      'access control conditions',
       setAccessControlConditions(address1, address2)
     );
 
@@ -87,8 +87,8 @@ class Lit {
       encryptedFile: encryptedString,
       encryptedSymmetricKey: LitJsSdk.uint8arrayToString(
         encryptedSymmetricKey,
-        "base16"
-      ),
+        'base16'
+      )
     };
   }
 
@@ -106,7 +106,7 @@ class Lit {
       accessControlConditions: setAccessControlConditions(address1, address2),
       toDecrypt: encryptedSymmetricKey,
       chain,
-      authSig,
+      authSig
     });
     const decryptedFile = await LitJsSdk.decryptString(
       encryptedStr,
@@ -114,7 +114,7 @@ class Lit {
     );
     // eslint-disable-next-line no-console
     console.log({
-      decryptedFile,
+      decryptedFile
     });
     return { decryptedFile };
   }

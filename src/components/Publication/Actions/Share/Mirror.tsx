@@ -1,14 +1,20 @@
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 import { LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
 import { publicationKeyFields } from '@/utils/functions/publicationKeyFields';
-import { CreateDataAvailabilityMirrorRequest, CreateMirrorRequest, Publication, useBroadcastMutation, useCreateDataAvailabilityMirrorViaDispatcherMutation, useCreateMirrorTypedDataMutation, useCreateMirrorViaDispatcherMutation } from '@/utils/lens/generatedLenster';
+import {
+  CreateDataAvailabilityMirrorRequest,
+  CreateMirrorRequest,
+  Publication,
+  useBroadcastMutation,
+  useCreateDataAvailabilityMirrorViaDispatcherMutation,
+  useCreateMirrorTypedDataMutation,
+  useCreateMirrorViaDispatcherMutation
+} from '@/utils/lens/generatedLenster';
 import { useApolloClient } from '@apollo/client';
 import { Menu } from '@headlessui/react';
-
 
 import clsx from 'clsx';
 import type { FC } from 'react';
@@ -68,12 +74,11 @@ const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
     setIsLoading(false);
     setMirrored(true);
     toast.success(`Post has been mirrored!`);
-    
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-   (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
@@ -209,7 +214,7 @@ const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
     >
       <div className="flex items-center space-x-2">
         <MirrorOutline className="h-4 w-4" />
-        <div>{mirrored ? 'Unmirror': 'Mirror'}</div>
+        <div>{mirrored ? 'Unmirror' : 'Mirror'}</div>
       </div>
     </Menu.Item>
   );

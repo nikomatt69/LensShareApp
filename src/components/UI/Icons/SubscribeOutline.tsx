@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const SubscribeOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -39,6 +39,6 @@ const SubscribeOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default SubscribeOutline
+export default SubscribeOutline;

@@ -1,11 +1,11 @@
-import clsx from 'clsx'
-import type { FC, ReactNode } from 'react'
-import React from 'react'
+import clsx from 'clsx';
+import type { FC, ReactNode } from 'react';
+import React from 'react';
 
 type Props = {
-  children: ReactNode
-  variant?: 'warning' | 'danger' | 'success'
-}
+  children: ReactNode;
+  variant?: 'warning' | 'danger' | 'success';
+};
 
 const Alert: FC<Props> = ({ children, variant = 'warning' }) => {
   return (
@@ -18,7 +18,7 @@ const Alert: FC<Props> = ({ children, variant = 'warning' }) => {
     >
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Alert
+export default Alert;

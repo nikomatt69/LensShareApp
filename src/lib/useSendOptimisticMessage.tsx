@@ -1,4 +1,3 @@
-
 import { parseConversationKey } from '@/lib/conversationKey';
 import type {
   ContentTypeId,
@@ -10,7 +9,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useMessageStore } from 'src/store/message';
 import { v4 as uuid } from 'uuid';
 import type { RemoteAttachment } from 'xmtp-content-type-remote-attachment';
-
 
 type ResolveReject<T = void> = (value: T | PromiseLike<T>) => void;
 
@@ -104,7 +102,7 @@ const useSendOptimisticMessage = (
       return false;
     }
 
-    let conversation
+    let conversation;
 
     if (!missingXmtpAuth && !conversations.has(conversationKey)) {
       const conversationId = conversationKey?.split('/')[0];
@@ -148,7 +146,7 @@ const useSendOptimisticMessage = (
       options: sendOptions,
       sent,
       senderAddress,
-      render: sendOptions?.renderPreview 
+      render: sendOptions?.renderPreview
     } satisfies PendingMessage;
     options?.onQueue?.(msg);
 

@@ -1,4 +1,3 @@
-
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -8,7 +7,6 @@ import { ATTACHMENT } from '@/constants';
 import { OG } from '@/typesLenster';
 import { Image } from '../UI/Image';
 
-
 interface EmbedProps {
   og: OG;
 }
@@ -16,14 +14,13 @@ interface EmbedProps {
 const Embed: FC<EmbedProps> = ({ og }) => {
   return (
     <div
-      className="mt-4 text-sm sm:w-4/6"
+      className="mt-4 text-sm sm:w-5/6"
       data-testid={`normal-oembed-${og.url}`}
     >
       <Link
         href={og.url}
         onClick={(event) => {
           stopEventPropagation(event);
-          
         }}
         target={og.url.includes(location.host) ? '_self' : '_blank'}
         rel="noreferrer noopener"
@@ -31,7 +28,7 @@ const Embed: FC<EmbedProps> = ({ og }) => {
         <Card forceRounded>
           {og.isLarge && og.thumbnail && (
             <Image
-              className="divider w-full rounded-t-xl"
+              className="divider w-full  rounded-t-xl"
               onError={({ currentTarget }) => {
                 currentTarget.src = og.thumbnail;
               }}
@@ -39,10 +36,10 @@ const Embed: FC<EmbedProps> = ({ og }) => {
               alt="Thumbnail"
             />
           )}
-          <div className="flex items-center">
+          <div className="flex  items-center">
             {!og.isLarge && og.thumbnail && (
               <Image
-                className="h-36 w-36 rounded-l-xl border-r"
+                className="h-34 w-34 flex  rounded-l-xl border-r"
                 height={144}
                 width={144}
                 onError={({ currentTarget }) => {
@@ -55,11 +52,8 @@ const Embed: FC<EmbedProps> = ({ og }) => {
             <div className="truncate p-2">
               <div className="space-y-1.5">
                 {og.title && (
-                  <div className="line-clamp-1 font-bold">{og.title}</div>
-                )}
-                {og.description && (
-                  <div className="lt-text-gray-500 line-clamp-4">
-                    {og.description}
+                  <div className="line-clamp-2 truncate break-words font-bold">
+                    {og.title}
                   </div>
                 )}
                 {og.site && (

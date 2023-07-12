@@ -1,4 +1,3 @@
-
 import nFormatter from '@/lib/nFormatter';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -35,7 +34,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
   const collectCount = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfCollects
     : publication?.stats?.totalAmountOfCollects;
-  
+
   const publicationId = isMirror ? publication?.mirrorOf?.id : publication?.id;
 
   return (
@@ -46,20 +45,17 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             <b className="text-black dark:text-white">
               {nFormatter(commentsCount)}
             </b>{' '}
-           
           </span>
           <button
             type="button"
             onClick={() => {
               setShowMirrorsModal(true);
-              
             }}
             data-testid="mirror-stats"
           >
             <b className="text-black dark:text-white">
               {nFormatter(mirrorCount)}
             </b>{' '}
-            
           </button>
           <Modal
             title={`Mirrored by`}
@@ -67,7 +63,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             show={showMirrorsModal}
             onClose={() => setShowMirrorsModal(false)}
           >
-            <Mirrores  publicationId={publicationId} />
+            <Mirrores publicationId={publicationId} />
           </Modal>
         </>
       )}
@@ -77,14 +73,12 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             type="button"
             onClick={() => {
               setShowLikesModal(true);
-              
             }}
             data-testid="like-stats"
           >
             <b className="text-black dark:text-white">
               {nFormatter(reactionCount)}
             </b>{' '}
-            
           </button>
           <Modal
             title={`Liked by`}
@@ -102,14 +96,12 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             type="button"
             onClick={() => {
               setShowCollectorsModal(true);
-              
             }}
             data-testid="collect-stats"
           >
             <b className="text-black dark:text-white">
               {nFormatter(collectCount)}
             </b>{' '}
-           
           </button>
           <Modal
             title={`Collected by`}
@@ -121,7 +113,6 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
           </Modal>
         </>
       )}
-      
     </div>
   );
 };

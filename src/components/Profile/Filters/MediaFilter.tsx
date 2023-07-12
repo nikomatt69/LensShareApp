@@ -1,4 +1,3 @@
-
 import { Checkbox } from '@/components/UI/Checkbox';
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Tooltip } from '@/components/UI/Tooltip';
@@ -7,7 +6,6 @@ import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
 import type { ChangeEvent } from 'react';
 import { HiAdjustments } from 'react-icons/hi';
-
 
 const MediaFilter = () => {
   const mediaFeedFilters = useProfileFeedStore(

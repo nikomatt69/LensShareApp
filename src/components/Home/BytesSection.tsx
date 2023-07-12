@@ -1,29 +1,36 @@
-import { APP_ID, LENSTER_APP_ID, LENSTUBE_BYTES_APP_ID, LENS_CUSTOM_FILTERS, STATIC_ASSETS_URL } from '@/constants'
+import {
+  APP_ID,
+  LENSTER_APP_ID,
+  LENSTUBE_BYTES_APP_ID,
+  LENS_CUSTOM_FILTERS,
+  STATIC_ASSETS_URL
+} from '@/constants';
 
-
-import type { Publication } from '@/utils/lens/generatedLenster'
+import type { Publication } from '@/utils/lens/generatedLenster';
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
   PublicationTypes,
   useExploreFeedQuery
-} from '@/utils/lens/generatedLenster'
-import Link from 'next/link'
-import React, { useEffect, useRef } from 'react'
-import imageCdn from '@/lib/imageCdn'
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
-import getLensHandle from '@/utils/functions/getLensHandle'
-import getProfilePicture from '@/utils/functions/getProfilePicture'
-import { useAppStore } from '@/store/app'
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
-import BytesShimmer from './BytesShimmer'
-import { useExploreQuery } from '@/utils/lens/generated'
-
+} from '@/utils/lens/generatedLenster';
+import Link from 'next/link';
+import React, { useEffect, useRef } from 'react';
+import imageCdn from '@/lib/imageCdn';
+import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import getLensHandle from '@/utils/functions/getLensHandle';
+import getProfilePicture from '@/utils/functions/getProfilePicture';
+import { useAppStore } from '@/store/app';
+import {
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon,
+  VideoCameraIcon
+} from '@heroicons/react/24/outline';
+import BytesShimmer from './BytesShimmer';
+import { useExploreQuery } from '@/utils/lens/generated';
 
 const BytesSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter)
-
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -35,42 +42,40 @@ const BytesSection = () => {
     metadata: {
       tags:
         activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video],
+      mainContentFocus: [PublicationMainFocus.Video]
     }
-  }
+  };
 
   const { data, error, loading } = useExploreQuery({
     nextFetchPolicy: 'standby',
     variables: { request }
-  })
+  });
 
-  const bytes = data?.explorePublications?.items as Publication[]
+  const bytes = data?.explorePublications?.items as Publication[];
 
-  const sectionOffsetWidth = sectionRef.current?.offsetWidth ?? 1000
-  const scrollOffset = sectionOffsetWidth / 1.2
+  const sectionOffsetWidth = sectionRef.current?.offsetWidth ?? 1000;
+  const scrollOffset = sectionOffsetWidth / 1.2;
 
   const scroll = (offset: number) => {
-   
     if (sectionRef.current) {
-      sectionRef.current.scrollLeft += offset
+      sectionRef.current.scrollLeft += offset;
     }
-  }
+  };
 
   if (loading) {
-    return <BytesShimmer />
+    return <BytesShimmer />;
   }
-
 
   return (
     <div className="block border-0 lg:block" data-testid="bytes-section">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-        <img
-             src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
-             draggable={false}
-             className="h-12 w-12 md:h-16 md:w-16"
-             alt="lensshare"
-        />
+          <img
+            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            draggable={false}
+            className="h-12 w-12 md:h-16 md:w-16"
+            alt="lensshare"
+          />
           <h1 className="text-xl font-semibold">Bytes</h1>
         </div>
         <div className="flex justify-end space-x-3">
@@ -92,7 +97,7 @@ const BytesSection = () => {
         ref={sectionRef}
         className="no-scrollbar relative mb-3 flex touch-pan-x items-start space-x-4 overflow-x-auto scroll-smooth"
       >
-        {bytes.map((byte) => (
+        {bytes?.map((byte) => (
           <div key={byte.id} className="w-44 space-y-1">
             <Link href={`/bytes/${byte.id}`}>
               <div className="aspect-[9/16] h-[280px]">
@@ -129,7 +134,7 @@ const BytesSection = () => {
       </div>
       <hr className="border-theme my-8 border-opacity-10" />
     </div>
-  )
-}
+  );
+};
 
-export default BytesSection
+export default BytesSection;

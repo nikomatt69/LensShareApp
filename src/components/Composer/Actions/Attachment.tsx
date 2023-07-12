@@ -1,13 +1,19 @@
-
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Spinner } from '@/components/UI/Spinner';
 import { Tooltip } from '@/components/UI/Tooltip';
-import { ALLOWED_AUDIO_TYPES, ALLOWED_IMAGE_TYPES, ALLOWED_MEDIA_TYPES, ALLOWED_VIDEO_TYPES } from '@/constants';
+import {
+  ALLOWED_AUDIO_TYPES,
+  ALLOWED_IMAGE_TYPES,
+  ALLOWED_MEDIA_TYPES,
+  ALLOWED_VIDEO_TYPES
+} from '@/constants';
 import useUploadAttachments from '@/utils/hooks/useUploadAttachments';
 import { Menu } from '@headlessui/react';
-import { MusicalNoteIcon, PhotoIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
-
-
+import {
+  MusicalNoteIcon,
+  PhotoIcon,
+  VideoCameraIcon
+} from '@heroicons/react/24/outline';
 
 import clsx from 'clsx';
 import type { ChangeEvent, FC } from 'react';

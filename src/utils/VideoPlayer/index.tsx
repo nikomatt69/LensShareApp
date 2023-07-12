@@ -1,24 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import mux from 'mux-embed'
-import { useRouter } from 'next/router'
-import type { FC } from 'react'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  IS_MAINNET,
-  MUX_DATA_KEY
-} from '@/constants'
+import mux from 'mux-embed';
+import { useRouter } from 'next/router';
+import type { FC } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { IS_MAINNET, MUX_DATA_KEY } from '@/constants';
 
-import type { PlayerProps } from './Player'
-import PlayerInstance from './Player'
-import SensitiveWarning from './SensitiveWarning'
-import { LENSTOK_URL } from '@/constants'
+import type { PlayerProps } from './Player';
+import PlayerInstance from './Player';
+import SensitiveWarning from './SensitiveWarning';
+import { LENSTOK_URL } from '@/constants';
 
 interface Props extends PlayerProps {
-  refCallback?: (ref: HTMLMediaElement) => void
-  currentTime?: number
-  publicationId?: string
-  isSensitiveContent?: boolean
+  refCallback?: (ref: HTMLMediaElement) => void;
+  currentTime?: number;
+  publicationId?: string;
+  isSensitiveContent?: boolean;
 }
 
 const VideoPlayer: FC<Props> = ({
@@ -32,14 +29,14 @@ const VideoPlayer: FC<Props> = ({
   options,
   showControls = true
 }) => {
-  const router = useRouter()
-  const playerRef = useRef<HTMLMediaElement>()
-  const [sensitiveWarning, setSensitiveWarning] = useState(isSensitiveContent)
+  const router = useRouter();
+  const playerRef = useRef<HTMLMediaElement>();
+  const [sensitiveWarning, setSensitiveWarning] = useState(isSensitiveContent);
 
   const analyseVideo = (ref: HTMLMediaElement) => {
-    const initTime = mux.utils.now()
-    const VIDEO_TYPE = 'on-demand'
-    const IS_BYTE = ratio === '9to16'
+    const initTime = mux.utils.now();
+    const VIDEO_TYPE = 'on-demand';
+    const IS_BYTE = ratio === '9to16';
     mux.monitor(ref, {
       debug: false,
       data: {
@@ -52,29 +49,29 @@ const VideoPlayer: FC<Props> = ({
         page_type: IS_BYTE ? 'bytespage' : 'bytespage',
         video_duration: ref?.duration
       }
-    })
-  }
+    });
+  };
 
   const mediaElementRef = useCallback((ref: HTMLMediaElement) => {
-    refCallback?.(ref)
-    playerRef.current = ref
-    playerRef.current.currentTime = Number(currentTime || 0)
-    if (IS_MAINNET ) {
-      analyseVideo(playerRef.current)
+    refCallback?.(ref);
+    playerRef.current = ref;
+    playerRef.current.currentTime = Number(currentTime || 0);
+    if (IS_MAINNET) {
+      analyseVideo(playerRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!playerRef.current) {
-      return
+      return;
     }
-    playerRef.current.currentTime = Number(currentTime || 0)
-  }, [currentTime])
+    playerRef.current.currentTime = Number(currentTime || 0);
+  }, [currentTime]);
 
   const onContextClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   return (
     <div className="w-full rounded-lg">
@@ -89,12 +86,11 @@ const VideoPlayer: FC<Props> = ({
             playerRef={mediaElementRef}
             options={options}
             showControls={showControls}
-
           />
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(VideoPlayer)
+export default React.memo(VideoPlayer);

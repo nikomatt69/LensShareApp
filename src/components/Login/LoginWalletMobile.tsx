@@ -1,21 +1,21 @@
-import { FC, useState, useEffect } from "react";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { FC, useState, useEffect } from 'react';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import {
   AuthenticateDocument,
   GetChallengeDocument,
-  ProfilesDocument,
-} from "@/types/lens";
-import { CHAIN_ID } from "src/constants";
-import { useAppPersistStore, useAppStore } from "src/store/app";
+  ProfilesDocument
+} from '@/types/lens';
+import { CHAIN_ID } from 'src/constants';
+import { useAppPersistStore, useAppStore } from 'src/store/app';
 import {
   useAccount,
   useNetwork,
   useConnect,
   useSignMessage,
-  useSwitchNetwork,
-} from "wagmi";
-import type { Connector } from "wagmi";
-import toast from "react-hot-toast";
+  useSwitchNetwork
+} from 'wagmi';
+import type { Connector } from 'wagmi';
+import toast from 'react-hot-toast';
 
 const LoginWalletMobile: FC = () => {
   const setProfiles = useAppStore((state) => state.setProfiles);
@@ -31,7 +31,7 @@ const LoginWalletMobile: FC = () => {
   const { signMessageAsync, isLoading: signLoading } = useSignMessage();
   const [loadChallenge, { error: errorChallenge, loading: challengeLoading }] =
     useLazyQuery(GetChallengeDocument, {
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache'
     });
   const [authenticate, { error: errorAuthenticate, loading: authLoading }] =
     useMutation(AuthenticateDocument);
@@ -47,7 +47,7 @@ const LoginWalletMobile: FC = () => {
       const account = await connectAsync({ connector });
       if (account) {
         setHasConnected(true);
-        console.log("Account", account);
+        console.log('Account', account);
       }
     } catch {}
   };
@@ -57,36 +57,36 @@ const LoginWalletMobile: FC = () => {
       // Get challenge
       const challenge = await loadChallenge({
         variables: {
-          request: { address },
-        },
+          request: { address }
+        }
       });
 
       if (!challenge?.data?.challenge?.text) {
-        return toast.error("ERROR_MESSAGE");
+        return toast.error('ERROR_MESSAGE');
       }
 
       // Get signature
       const signature = await signMessageAsync({
-        message: challenge?.data?.challenge?.text,
+        message: challenge?.data?.challenge?.text
       });
 
       // Auth user and set cookies
       const auth = await authenticate({
-        variables: { request: { address, signature } },
+        variables: { request: { address, signature } }
       });
-      localStorage.setItem("accessToken", auth.data?.authenticate.accessToken);
+      localStorage.setItem('accessToken', auth.data?.authenticate.accessToken);
       localStorage.setItem(
-        "refreshToken",
+        'refreshToken',
         auth.data?.authenticate.refreshToken
       );
 
       // Get authed profiles
       const { data: profilesData } = await getUserProfiles({
-        variables: { request: { ownedBy: [address] } },
+        variables: { request: { ownedBy: [address] } }
       });
 
       if (profilesData?.profiles?.items?.length === 0) {
-        return toast.error("You have no lens profile yet, please create one");
+        return toast.error('You have no lens profile yet, please create one');
       } else {
         const profiles: any = profilesData?.profiles?.items;
         const currentProfile = profiles[0];
@@ -101,7 +101,7 @@ const LoginWalletMobile: FC = () => {
     <div>
       {chain?.id === CHAIN_ID ? (
         <button className="flex-1 text-white" onClick={() => handleLogin()}>
-          {mounted ? "Log In" : ""}
+          {mounted ? 'Log In' : ''}
         </button>
       ) : (
         <button
@@ -110,7 +110,7 @@ const LoginWalletMobile: FC = () => {
             if (switchNetwork) {
               switchNetwork(CHAIN_ID);
             } else {
-              toast.error("Please change your network!");
+              toast.error('Please change your network!');
             }
           }}
         >
@@ -119,12 +119,28 @@ const LoginWalletMobile: FC = () => {
       )}
     </div>
   ) : (
-        <button 
-      onClick= {() => {
-        {toast.error("Log in to view profile", {duration: 1000});}
-       }}
-      className="text-white hover:text-gray-100 focus:outline-none focus:text-gray-100 border-gray-800">
-      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+    <button
+      onClick={() => {
+        {
+          toast.error('Log in to view profile', { duration: 1000 });
+        }
+      }}
+      className="border-gray-800 text-white hover:text-gray-100 focus:text-gray-100 focus:outline-none"
+    >
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        ></path>
+      </svg>
     </button>
   );
 };

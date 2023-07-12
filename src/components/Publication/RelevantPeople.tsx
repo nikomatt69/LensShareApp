@@ -1,6 +1,9 @@
-
 import formatHandle from '@/utils/functions/formatHandle';
-import { Profile, Publication, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  Publication,
+  useProfilesQuery
+} from '@/utils/lens/generatedLenster';
 import { Regex } from '@/utils/regex';
 import type { FC } from 'react';
 import UserProfileShimmer from '../Composer/UserProfileShimmer';
@@ -48,7 +51,7 @@ const RelevantPeople: FC<RelevantPeopleProps> = ({ publication }) => {
 
   if (loading) {
     return (
-      <Card as="aside" className="space-y-4 p-5">
+      <Card as="aside" className="space-y-4 rounded-3xl p-5">
         <UserProfileShimmer showFollow />
         <UserProfileShimmer showFollow />
         <UserProfileShimmer showFollow />
@@ -63,7 +66,11 @@ const RelevantPeople: FC<RelevantPeopleProps> = ({ publication }) => {
   }
 
   return (
-    <Card as="aside" className="space-y-4 bg-[#C0C0C0] p-5" dataTestId="relevant-profiles">
+    <Card
+      as="aside"
+      className="space-y-4 rounded-3xl bg-[#C0C0C0] p-5"
+      dataTestId="relevant-profiles"
+    >
       <ErrorMessage title={`Failed to load relevant people`} error={error} />
       {data?.profiles?.items?.map((profile, index) => (
         <div key={profile?.id} className="truncate">
@@ -71,7 +78,6 @@ const RelevantPeople: FC<RelevantPeopleProps> = ({ publication }) => {
             profile={profile as Profile}
             isFollowing={profile.isFollowedByMe}
             followUnfollowPosition={index + 1}
-            
             showUserPreview={false}
             showFollow
           />

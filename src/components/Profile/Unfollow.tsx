@@ -1,7 +1,10 @@
-
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
-import { Profile, useBroadcastMutation, useCreateUnfollowTypedDataMutation } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  useBroadcastMutation,
+  useCreateUnfollowTypedDataMutation
+} from '@/utils/lens/generatedLenster';
 import { ApolloCache } from '@apollo/client';
 
 import type { Dispatch, FC } from 'react';
@@ -45,18 +48,17 @@ const Unfollow: FC<UnfollowProps> = ({
     setIsLoading(false);
     setFollowing(false);
     toast.success(`Unfollowed successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { write } = useContractWrite({
     address: profile.followNftAddress,
-    abi: FollowNFT ,
+    abi: FollowNFT,
     functionName: 'burn',
     onSuccess: () => onCompleted(),
     onError

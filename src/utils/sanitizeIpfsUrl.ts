@@ -1,11 +1,11 @@
-import { ARWEAVE_WEBSITE_URL } from '@/constants'
-import { IPFS_GATEWAY} from '@/utils/const'
+import { ARWEAVE_WEBSITE_URL } from '@/constants';
+import { IPFS_GATEWAY } from '@/utils/const';
 
 export const sanitizeIpfsUrl = (url: string) => {
-  const ipfsGateway = `${IPFS_GATEWAY}/`
-  const arweaveGateway = `${ARWEAVE_WEBSITE_URL}/`
+  const ipfsGateway = `${IPFS_GATEWAY}/`;
+  const arweaveGateway = `${ARWEAVE_WEBSITE_URL}/`;
   if (!url) {
-    return url
+    return url;
   }
 
   return url
@@ -21,5 +21,5 @@ export const sanitizeIpfsUrl = (url: string) => {
     .replace('ipfs://ipfs/', ipfsGateway)
     .replace('ipfs://ipfs', ipfsGateway)
     .replace('ar://', arweaveGateway)
-    .replace('ar://arweave.net/', arweaveGateway)
-}
+    .replace('ar://arweave.net/', arweaveGateway);
+};

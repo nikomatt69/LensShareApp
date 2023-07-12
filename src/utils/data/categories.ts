@@ -140,4 +140,4 @@ export const CREATOR_VIDEO_CATEGORIES = [
     name: 'Anime',
     tag: 'anime'
   }
-]
+];

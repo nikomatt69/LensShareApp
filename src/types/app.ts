@@ -1,4 +1,4 @@
-import type { WebBundlr } from "@bundlr-network/client";
+import type { WebBundlr } from '@bundlr-network/client';
 import type {
   Attribute,
   Comment,
@@ -9,14 +9,13 @@ import type {
   Mirror,
   Post,
   RevertCollectModuleSettings,
-  TimedFeeCollectModuleSettings,
-} from "./lens";
+  TimedFeeCollectModuleSettings
+} from './lens';
 
 export interface MarkupLinkProps {
   href?: string;
   title?: string;
 }
-
 
 export type CollectModuleType = {
   isTimedFeeCollect?: boolean;
@@ -83,10 +82,9 @@ export type BundlrDataState = {
 };
 
 export type HLSData = {
-  hrn: string
-  url: string
-  type: string
-}
+  hrn: string;
+  url: string;
+  type: string;
+};
 
-export type LensshareAttachment = Post & Comment & Mirror & { hls: HLSData }
-
+export type LensshareAttachment = Post & Comment & Mirror & { hls: HLSData };

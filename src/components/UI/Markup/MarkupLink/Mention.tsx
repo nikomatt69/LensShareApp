@@ -1,5 +1,3 @@
-
-
 import Link from 'next/link';
 import type { FC } from 'react';
 import type { MarkupLinkProps } from 'src/typesLenster';
@@ -14,7 +12,7 @@ import { Profile } from '@/utils/lens/generatedLenster';
 const Mention: FC<MarkupLinkProps> = ({ href, title = href }) => {
   const handle = title?.slice(1);
 
-  if (!(handle)) {
+  if (!handle) {
     return null;
   }
 
@@ -22,7 +20,7 @@ const Mention: FC<MarkupLinkProps> = ({ href, title = href }) => {
     __typename: 'Profile',
     handle: handle,
     name: null,
-    id: null,
+    id: null
   };
 
   return (
@@ -30,7 +28,6 @@ const Mention: FC<MarkupLinkProps> = ({ href, title = href }) => {
       href={`/u/${profile.id}`}
       onClick={(event) => {
         stopEventPropagation(event);
-        
       }}
     >
       {profile.id ? (

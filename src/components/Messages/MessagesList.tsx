@@ -9,7 +9,7 @@ import formatHandle from '@/utils/functions/formatHandle';
 import getAvatar from '@/lib/getAvatar';
 import getStampFyiURL from '@/lib/getStampFyiURL';
 
-import  formatTime  from '@/utils/functions/formatTime';
+import formatTime from '@/utils/functions/formatTime';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
@@ -107,14 +107,14 @@ const MessageTile: FC<MessageTileProps> = ({
           className={clsx(
             address === message.senderAddress
               ? 'bg-brand-500'
-              : 'bg-gray-100 dark:bg-gray-700',
-            'w-full text-xs font-bold rounded-lg px-4 py-2'
+              : 'bg-gray-100 dark:bg-blue-500',
+            'w-full rounded-lg px-4 py-2 text-xs font-bold'
           )}
         >
           <span
             className={clsx(
-              address === message.senderAddress && 'text-white',
-              'text-xs font-bold linkify-message block break-words'
+              address === message.senderAddress && 'text-black',
+              'linkify-message block break-words text-xs font-bold'
             )}
           >
             <MessageContent
@@ -122,7 +122,6 @@ const MessageTile: FC<MessageTileProps> = ({
               profile={profile}
               sentByMe={address == message.senderAddress}
               preview
-            
             />
           </span>
         </div>
@@ -172,9 +171,7 @@ const MissingXmtpAuth: FC = () => (
   >
     <div className="flex items-center space-x-2 font-bold">
       <EmojiOutline className="h-5 w-5" />
-      <p>
-        This fren hasn enabled DMs yet
-      </p>
+      <p>This fren hasn enabled DMs yet</p>
     </div>
     <p className="text-sm leading-[22px]">
       You can send them a message until they enable DMs.

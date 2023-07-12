@@ -1,17 +1,17 @@
-import { Dialog, Transition } from '@headlessui/react'
-import clsx from 'clsx'
-import type { FC } from 'react'
-import React, { Fragment } from 'react'
-import { MdOutlineClose } from 'react-icons/md'
+import { Dialog, Transition } from '@headlessui/react';
+import clsx from 'clsx';
+import type { FC } from 'react';
+import React, { Fragment } from 'react';
+import { MdOutlineClose } from 'react-icons/md';
 
 type Props = {
-  show: boolean
-  title?: React.ReactNode
-  children: React.ReactNode
-  panelClassName?: string
-  autoClose?: boolean
-  onClose?: () => void
-}
+  show: boolean;
+  title?: React.ReactNode;
+  children: React.ReactNode;
+  panelClassName?: string;
+  autoClose?: boolean;
+  onClose?: () => void;
+};
 
 const FullScreenModal: FC<Props> = ({
   show,
@@ -28,7 +28,6 @@ const FullScreenModal: FC<Props> = ({
         className="relative z-20"
         onClose={() => (onClose && !autoClose ? onClose?.() : null)}
       >
-
         <div className="fixed inset-0 ">
           <div className="flex h-full min-h-full items-center justify-center text-center">
             <Transition.Child
@@ -42,7 +41,7 @@ const FullScreenModal: FC<Props> = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  'bg-secondary w-full transform text-left align-middle shadow-xl transition-all h-full',
+                  'bg-secondary h-full w-full transform text-left align-middle shadow-xl transition-all',
                   panelClassName
                 )}
               >
@@ -53,7 +52,7 @@ const FullScreenModal: FC<Props> = ({
         </div>
       </Dialog>
     </Transition>
-  )
-}
+  );
+};
 
-export default FullScreenModal
+export default FullScreenModal;

@@ -3,8 +3,6 @@ import { FeatureFlag } from '@/utils/data/feature-flags';
 import isFeatureEnabled from '@/utils/functions/isFeatureEnabled';
 import { MicrophoneIcon } from '@heroicons/react/24/outline';
 
-
-
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { usePublicationStore } from 'src/store/publication4';

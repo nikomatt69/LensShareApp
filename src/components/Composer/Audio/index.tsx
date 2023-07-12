@@ -1,5 +1,3 @@
-
-
 import type { APITypes } from 'plyr-react';
 import type { ChangeEvent, FC } from 'react';
 import { useRef, useState } from 'react';
@@ -17,15 +15,9 @@ import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 
 export const AudioPublicationSchema = object({
-  title: string()
-    .trim()
-    .min(1, { message: `Invalid audio title` }),
-  author: string()
-    .trim()
-    .min(1, { message: `Invalid author name` }),
-  cover: string()
-    .trim()
-    .min(1, { message: `Invalid cover image` })
+  title: string().trim().min(1, { message: `Invalid audio title` }),
+  author: string().trim().min(1, { message: `Invalid author name` }),
+  cover: string().trim().min(1, { message: `Invalid cover image` })
 });
 
 interface AudioProps {
@@ -59,13 +51,11 @@ const Audio: FC<AudioProps> = ({
     }
     if (playerRef.current?.plyr.paused && !playing) {
       setPlaying(true);
-    
 
       return playerRef.current?.plyr.play();
     }
     setPlaying(false);
     playerRef.current?.plyr.pause();
-   
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +67,7 @@ const Audio: FC<AudioProps> = ({
 
   return (
     <div
-      className="bg-brand-500 overflow-hidden rounded-xl border px-3.5 pt-3.5 dark:border-gray-700 md:p-0"
+      className="bg-brand-500 overflow-hidden rounded-xl border-2  px-3.5 pt-3.5 dark:border-blue-700 md:p-0"
       data-testid={`attachment-audio-${src}`}
     >
       <div className="flex flex-wrap md:flex-nowrap md:space-x-2">
@@ -98,21 +88,21 @@ const Audio: FC<AudioProps> = ({
           imageRef={imageRef}
           expandCover={expandCover}
         />
-        <div className="flex w-full flex-col justify-between truncate py-1 md:px-3">
+        <div className="flex w-full flex-col  justify-between truncate py-1 md:px-3">
           <div className="mt-3 flex justify-between md:mt-7">
             <div className="flex w-full items-center space-x-2.5 truncate">
               <button type="button" onClick={handlePlayPause}>
                 {playing && !playerRef.current?.plyr.paused ? (
-                  <PauseIcon className="h-[50px] w-[50px] text-gray-100 hover:text-white" />
+                  <PauseIcon className="h-[50px] w-[50px] text-blue-600 hover:text-white" />
                 ) : (
-                  <PlayIcon className="h-[50px] w-[50px] text-gray-100 hover:text-white" />
+                  <PlayIcon className="h-[50px] w-[50px] text-blue-600 hover:text-white" />
                 )}
               </button>
               <div className="w-full truncate pr-3">
                 {isNew && !txn ? (
                   <div className="flex w-full flex-col">
                     <input
-                      className="border-none bg-transparent text-lg text-white outline-none placeholder:text-white"
+                      className="border-none bg-transparent text-lg text-blue-600 outline-none placeholder:text-white"
                       placeholder={`Add title`}
                       name="title"
                       value={audioPublication.title}
@@ -120,7 +110,7 @@ const Audio: FC<AudioProps> = ({
                       onChange={handleChange}
                     />
                     <input
-                      className="border-none bg-transparent text-white/70 outline-none placeholder:text-white/70"
+                      className="border-none bg-transparent text-blue-600/70 outline-none placeholder:text-white/70"
                       placeholder={`Add author`}
                       name="author"
                       value={audioPublication.author}
@@ -130,10 +120,10 @@ const Audio: FC<AudioProps> = ({
                   </div>
                 ) : (
                   <>
-                    <h5 className="truncate text-lg text-white">
+                    <h5 className="truncate text-lg text-blue-600">
                       {publication?.metadata.name ?? txn.title}
                     </h5>
-                    <h6 className="truncate text-white/70">
+                    <h6 className="truncate text-blue-600/70">
                       {txn?.author ??
                         getPublicationAttribute(
                           publication?.metadata.attributes,

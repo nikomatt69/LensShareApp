@@ -1,5 +1,3 @@
-
-
 import { useMessageDb } from '@/lib/useMessageDb';
 import type { Conversation, DecodedMessage } from '@xmtp/xmtp-js';
 import { SortDirection } from '@xmtp/xmtp-js';

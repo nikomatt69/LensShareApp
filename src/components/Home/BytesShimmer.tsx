@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { useMemo } from 'react';
 
 const BytesShimmer = () => {
-  const cards = useMemo(() => Array(15).fill(1), [])
+  const cards = useMemo(() => Array(15).fill(1), []);
   return (
     <>
       <div className="mb-4 animate-pulse">
@@ -32,9 +32,9 @@ const BytesShimmer = () => {
           </div>
         </div>
       </div>
-      <hr className="border-0 my-8 border-opacity-10 " />
+      <hr className="my-8 border-0 border-opacity-10 " />
     </>
-  )
-}
+  );
+};
 
-export default BytesShimmer
+export default BytesShimmer;

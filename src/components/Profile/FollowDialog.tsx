@@ -1,4 +1,3 @@
-
 import { Profile } from '@/utils/lens/generatedLenster';
 import type { Dispatch, FC } from 'react';
 import { Button } from '../UI/Button';
@@ -37,16 +36,15 @@ const FollowModal: FC<FollowModalProps> = ({
           />{' '}
         </span>
         <span className="flex">
-          
-            <div className="flex space-x-2">
-              <Follow
-                profile={profile}
-                setFollowing={setFollowing}
-                showText
-                outline={false}
-              />
-            </div>
-          
+          <div className="flex space-x-2">
+            <Follow
+              profile={profile}
+              setFollowing={setFollowing}
+              showText
+              outline={false}
+            />
+          </div>
+
           <Button
             className="ml-3 !px-3 !py-1.5 text-sm"
             outline

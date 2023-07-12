@@ -1,8 +1,12 @@
-
 import { LIT_PROTOCOL_ENV, POLYGONSCAN_URL, RARIBLE_URL } from '@/constants';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
-import { DecryptFailReason, Publication, PublicationMetadataV2Input, useCanDecryptStatusQuery } from '@/utils/lens/generatedLenster';
+import {
+  DecryptFailReason,
+  Publication,
+  PublicationMetadataV2Input,
+  useCanDecryptStatusQuery
+} from '@/utils/lens/generatedLenster';
 import type { LensEnvironment } from '@lens-protocol/sdk-gated';
 import { LensGatedSDK } from '@lens-protocol/sdk-gated';
 import type {
@@ -23,7 +27,13 @@ import { usePublicClient, useToken } from 'wagmi';
 import { Card } from '../UI/Card';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { RiLogoutCircleFill } from 'react-icons/ri';
-import { EyeIcon, FingerPrintIcon, LockClosedIcon, PhotoIcon, UsersIcon } from '@heroicons/react/24/outline';
+import {
+  EyeIcon,
+  FingerPrintIcon,
+  LockClosedIcon,
+  PhotoIcon,
+  UsersIcon
+} from '@heroicons/react/24/outline';
 import { BsCollection, BsDatabaseFill } from 'react-icons/bs';
 import formatHandle from '@/utils/functions/formatHandle';
 import { Tooltip } from '../UI/Tooltip';
@@ -201,7 +211,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         <div className="flex items-center space-x-2 font-bold">
           <LockClosedIcon className="h-5 w-5 text-green-300" />
           <span className="text-base font-black text-white">
-           To view this...
+            To view this...
           </span>
         </div>
         <div className="space-y-2 pt-3.5 text-white">
@@ -212,7 +222,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               <Link
                 href={`/post/${collectCondition?.publicationId}`}
                 className="font-bold lowercase underline"
-               
               >
                 {encryptedPublication?.__typename}
               </Link>
@@ -231,9 +240,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage icon={<UsersIcon className="h-4 w-4" />}>
               Follow{' '}
               <Link
-                href={`/u/${
-                  encryptedPublication?.profile?.id
-                }`}
+                href={`/u/${encryptedPublication?.profile?.id}`}
                 className="font-bold"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
@@ -255,7 +262,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}
                 className="font-bold underline"
-               
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -276,7 +282,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
                   className="font-bold underline"
-                 
                   target="_blank"
                   rel="noreferrer noopener"
                 >
@@ -313,11 +318,10 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         onClick={async (event) => {
           stopEventPropagation(event);
           await getDecryptedData();
-         
         }}
       >
-        <div className="flex items-center space-x-1 font-bold text-white">
-          <FingerPrintIcon className="h-5 w-5" />
+        <div className="flex items-center space-x-1 border-blue-600 font-bold text-blue-600">
+          <LockClosedIcon className="h-5 w-5" />
           <span>
             Decrypt{' '}
             <span className="lowercase">{encryptedPublication.__typename}</span>
@@ -342,9 +346,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       {showMore && (
         <div className="mt-4 flex items-center space-x-1 text-sm font-bold text-gray-500">
           <EyeIcon className="h-4 w-4" />
-          <Link href={`/post/${encryptedPublication?.id}`}>
-            Show more
-          </Link>
+          <Link href={`/post/${encryptedPublication?.id}`}>Show more</Link>
         </div>
       )}
       {publication?.media?.length ? (

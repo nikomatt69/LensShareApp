@@ -1,6 +1,6 @@
-import { ConnectKitButton } from "connectkit";
+import { ConnectKitButton } from 'connectkit';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 const StyledButton = styled.button`
   cursor: pointer;
   position: relative;
@@ -30,7 +30,7 @@ export const MainButton = () => {
       {({ isConnected, show, truncatedAddress, ensName }) => {
         return (
           <StyledButton onClick={show}>
-            {isConnected ? ensName ?? truncatedAddress : "Connect Wallet"}
+            {isConnected ? ensName ?? truncatedAddress : 'Connect Wallet'}
           </StyledButton>
         );
       }}

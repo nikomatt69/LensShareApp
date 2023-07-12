@@ -1,4 +1,3 @@
-
 import type {
   Comment,
   FeedItem,
@@ -20,7 +19,7 @@ import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
 import { useAppStore, useTransactionPersistStore } from 'src/store/app';
-import PublicationsShimmer from '../Composer/PublicationsShimmer';
+
 import { ErrorMessage } from '../ErrorMessage';
 import { EmptyState } from '../UI/EmptyState';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline';
@@ -29,14 +28,12 @@ import QueuedPublication from '../Composer/QueuedPublication';
 import { Card } from '../UI/Card';
 import PublicationHeader from '../Composer/PublicationHeader';
 
-
 interface FeedProps {
   publication?: Publication;
   feedItem?: FeedItem;
- 
 }
 
-const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
+const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
   const publicationId =
     publication?.__typename === 'Mirror'
       ? publication?.mirrorOf?.id
@@ -100,28 +97,13 @@ const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
     }
   });
 
-  if (loading) {
-    return <PublicationsShimmer />;
-  }
-
   if (error) {
-    return (
-      <ErrorMessage title={`Failed to load comment feed`} error={error} />
-    );
-  }
-
-  if (!publication?.hidden && totalComments === 0) {
-    return (
-      <EmptyState
-        message={`Be the first one to comment!`}
-        icon={<ChatBubbleLeftEllipsisIcon className="text-brand h-8 w-8" />}
-      />
-    );
+    return <ErrorMessage title={`Failed to load comment feed`} error={error} />;
   }
 
   return (
     <Card
-      className="divide-y-[1px] dark:divide-gray-700"
+      className="divide-y-[2px] divide-blue-700 border-2 border-blue-700"
       dataTestId="comments-feed"
     >
       {txnQueue.map(
@@ -141,10 +123,11 @@ const Feed: FC<FeedProps> = ({ publication,feedItem }) => {
             profile={profileId}
             isLast={index === comments.length - 1}
             publication={comment as Comment}
-            showType={false} />
+            showType={false}
+          />
         )
       )}
-      {hasMore && <span ref={observe} />}
+      {hasMore && <span className="" ref={observe} />}
     </Card>
   );
 };

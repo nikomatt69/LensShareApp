@@ -5,8 +5,8 @@
  * @returns object with property removed
  */
 const omit = (object: Record<string, any>, name: string) => {
-    delete object[name];
-    return object;
+  delete object[name];
+  return object;
 };
 
 export default omit;

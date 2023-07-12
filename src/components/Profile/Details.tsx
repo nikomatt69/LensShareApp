@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
@@ -23,7 +22,12 @@ import Slug from '../UI/Slug';
 import formatAddress from '@/lib/formatAddress';
 import Markup from '../UI/Markup';
 import { Button } from '../UI/Button';
-import { CogIcon, HashtagIcon, MapIcon, UsersIcon } from '@heroicons/react/24/outline';
+import {
+  CogIcon,
+  HashtagIcon,
+  MapIcon,
+  UsersIcon
+} from '@heroicons/react/24/outline';
 import Unfollow from './Unfollow';
 import Message from './Message';
 import Follow from './Follow';
@@ -32,7 +36,6 @@ import { Tooltip } from '../UI/Tooltip';
 import { RARIBLE_URL, STATIC_IMAGES_URL } from '@/constants';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Image } from '../UI/Image';
-
 
 interface DetailsProps {
   profile: Profile;
@@ -45,7 +48,7 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
   const [showMutualFollowersModal, setShowMutualFollowersModal] =
     useState(false);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
-  
+
   const { resolvedTheme } = useTheme();
   const router = useRouter();
 
@@ -110,8 +113,6 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
             {sanitizeDisplayName(profile?.name) ??
               formatHandle(profile?.handle)}
           </div>
-          
-          
         </div>
         <div
           className="flex items-center space-x-3"
@@ -133,7 +134,7 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
             currentProfile?.id !== profile?.id &&
             profile?.isFollowing && (
               <div className="rounded-full bg-gray-200 px-2 py-0.5 text-xs dark:bg-gray-700">
-               Follows you
+                Follows you
               </div>
             )}
         </div>
@@ -167,15 +168,14 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
                   setFollowing={setFollowing}
                   showText
                 />
-                
+
                 {currentProfile && <Message onClick={onMessageClick} />}
               </div>
-            ) :  (
+            ) : (
               <div className="flex space-x-2">
                 <Follow
                   profile={profile}
                   setFollowing={setFollowing}
-                  
                   showText
                 />
                 {currentProfile && <Message onClick={onMessageClick} />}
@@ -183,10 +183,9 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
             )
           ) : null}
         </div>
-       
+
         <div className="divider w-full" />
         <div className="space-y-2">
-         
           {getProfileAttribute(profile?.attributes, 'location') && (
             <MetaDetails
               icon={<MapIcon className="h-4 w-4" />}
@@ -285,7 +284,6 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
           )}
         </div>
       </div>
-      
     </div>
   );
 };

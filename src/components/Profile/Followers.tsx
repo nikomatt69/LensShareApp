@@ -1,6 +1,10 @@
-
 import formatHandle from '@/utils/functions/formatHandle';
-import { FollowersRequest, Profile, Wallet, useFollowersQuery } from '@/utils/lens/generatedLenster';
+import {
+  FollowersRequest,
+  Profile,
+  Wallet,
+  useFollowersQuery
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
@@ -55,9 +59,7 @@ const Followers: FC<FollowersProps> = ({ profile }) => {
             <span className="mr-1 font-bold">
               @{formatHandle(profile?.handle)}
             </span>
-            <span>
-              doesn’t have any followers yet.
-            </span>
+            <span>doesn’t have any followers yet.</span>
           </div>
         }
         icon={<UsersIcon className="text-brand h-8 w-8" />}
@@ -85,7 +87,6 @@ const Followers: FC<FollowersProps> = ({ profile }) => {
                   profile={follower?.wallet?.defaultProfile as Profile}
                   isFollowing={follower?.wallet?.defaultProfile?.isFollowedByMe}
                   followUnfollowPosition={index + 1}
-                  
                   showBio
                   showFollow={
                     currentProfile?.id !== follower?.wallet?.defaultProfile?.id

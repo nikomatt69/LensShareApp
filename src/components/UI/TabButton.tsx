@@ -12,14 +12,22 @@ interface Props {
   className?: string;
 }
 
-const TabButton: FC<Props> = ({ name, icon, active, count,className, showOnSm = false, onClick }) => {
+const TabButton: FC<Props> = ({
+  name,
+  icon,
+  active,
+  count,
+  className,
+  showOnSm = false,
+  onClick
+}) => {
   return (
     <button
       type="button"
       onClick={onClick}
       className={clsx(
-        { 'text-brand bg-brand-100 dark:bg-opacity-20 bg-opacity-100': active },
-        'flex items-center space-x-2 rounded-lg text-sm px-4 sm:px-3 font-medium py-2 sm:py-1.5 text-gray-500 hover:bg-brand-100 dark:hover:bg-opacity-20 hover:bg-opacity-100'
+        { 'text-brand bg-brand-100 bg-opacity-100 dark:bg-opacity-20': active },
+        'hover:bg-brand-100 flex items-center space-x-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-opacity-100 dark:hover:bg-opacity-20 sm:px-3 sm:py-1.5'
       )}
       aria-label={name}
     >
@@ -29,7 +37,7 @@ const TabButton: FC<Props> = ({ name, icon, active, count,className, showOnSm = 
         <span
           className={clsx(
             { 'bg-brand-200 dark:bg-brand-800': active },
-            'px-2 text-xs rounded-full bg-gray-200 dark:bg-gray-800'
+            'rounded-full bg-gray-200 px-2 text-xs dark:bg-gray-800'
           )}
         >
           {nFormatter(count)}

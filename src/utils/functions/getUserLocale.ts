@@ -1,7 +1,7 @@
 const getUserLocale = () => {
   return navigator?.languages?.length
     ? navigator.languages[0]
-    : navigator.language
-}
+    : navigator.language;
+};
 
-export default getUserLocale
+export default getUserLocale;

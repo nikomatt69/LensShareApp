@@ -1,5 +1,3 @@
-
-
 import type { Dispatch, FC } from 'react';
 import toast from 'react-hot-toast';
 import { useAccessSettingsStore } from '@/store/access';
@@ -86,9 +84,7 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
         <Button className="ml-auto" variant="danger" outline onClick={onSave}>
           Cancel
         </Button>
-        <Button onClick={onSave}>
-          Save
-        </Button>
+        <Button onClick={onSave}>Save</Button>
       </div>
     </div>
   );

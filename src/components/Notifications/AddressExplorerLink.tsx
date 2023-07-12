@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import type { ReactElement } from 'react'
-import React from 'react'
-import { POLYGONSCAN_URL } from '@/constants'
+import Link from 'next/link';
+import type { ReactElement } from 'react';
+import React from 'react';
+import { POLYGONSCAN_URL } from '@/constants';
 
 const AddressExplorerLink = ({
   address,
   children
 }: {
-  address: string
-  children: ReactElement
+  address: string;
+  children: ReactElement;
 }) => {
   return (
     <Link
@@ -18,7 +18,7 @@ const AddressExplorerLink = ({
     >
       {children}
     </Link>
-  )
-}
+  );
+};
 
-export default AddressExplorerLink
+export default AddressExplorerLink;

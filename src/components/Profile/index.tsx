@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -14,11 +13,15 @@ import Feed from './Feed';
 import FeedType from './FeedType';
 import FollowDialog from './FollowDialog';
 
-import ProfilePageShimmer from './Shimmer';
 import isFeatureEnabled from '@/utils/functions/isFeatureEnabled';
 import { FeatureFlag } from '@/utils/data/feature-flags';
 import formatHandle from '@/utils/functions/formatHandle';
-import { Profile, ProfileDocument, Publication, useProfileQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  ProfileDocument,
+  Publication,
+  useProfileQuery
+} from '@/utils/lens/generatedLenster';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import NewPost from '../Composer/Post/New';
 import { APP_NAME, STATIC_IMAGES_URL } from '@/constants';
@@ -28,7 +31,7 @@ import { useQuery } from '@apollo/client';
 import ProfileCard from '../ProfilePage/ProfileCard';
 import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
-
+import Loading from '../Loading';
 
 const ViewProfile: NextPage = () => {
   const {
@@ -42,36 +45,34 @@ const ViewProfile: NextPage = () => {
       : ProfileFeedType.Feed
   );
 
-  
-
   const isNftGalleryEnabled = isFeatureEnabled(FeatureFlag.NftGallery);
-  
-  const { data, loading, error } = useQuery
-    (ProfileDocument, {
-      variables: { 
-        request: {
-          profileId: id,
-        }
-      },
-    });
-    
-    const profile = data?.profile
-    console.log("Profile", profile);
 
-    useEffect(() => {
-      if(profile?.isFollowedByMe === true) {
-      setFollowing(true) 
-    } else {
-      setFollowing(false)
-    }
-      if (!currentProfile) {
-        setFollowing(false)
+  const { data, loading, error } = useQuery(ProfileDocument, {
+    variables: {
+      request: {
+        profileId: id
       }
-      }, 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [profile?.isFollowedByMe])
+    }
+  });
 
-  
+  const profile = data?.profile;
+  console.log('Profile', profile);
+
+  useEffect(
+    () => {
+      if (profile?.isFollowedByMe === true) {
+        setFollowing(true);
+      } else {
+        setFollowing(false);
+      }
+      if (!currentProfile) {
+        setFollowing(false);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [profile?.isFollowedByMe]
+  );
+
   const [following, setFollowing] = useState<boolean | null>(null);
   const [showFollowModal, setShowFollowModal] = useState(false);
   const isFollowedByMe =
@@ -107,7 +108,7 @@ const ViewProfile: NextPage = () => {
   }
 
   if (loading || !data) {
-    return <ProfilePageShimmer />;
+    return <Loading />;
   }
 
   if (!data?.profile) {
@@ -132,37 +133,34 @@ const ViewProfile: NextPage = () => {
       ) : (
         <MetaTags title={`@${formatHandle(profile?.handle)} • ${APP_NAME}`} />
       )}
-      <Navbar/>
+
       <Cover
-      
         cover={
           profile?.coverPicture?.__typename === 'MediaSet'
             ? profile?.coverPicture?.original?.url
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         }
       />
-      <GridLayout className="pt-6 max-w-[1200px]">
+      <GridLayout className="max-w-[1200px] pt-6">
         <GridItemFour>
           <ProfileCard
             profile={profile as Profile}
             following={Boolean(following)}
             setFollowing={setFollowing}
-            
           />
         </GridItemFour>
         <GridItemEight className="space-y-5">
           <FeedType setFeedType={setFeedType} feedType={feedType} />
-          
+
           {(feedType === ProfileFeedType.Feed ||
             feedType === ProfileFeedType.Replies ||
             feedType === ProfileFeedType.Media ||
             feedType === ProfileFeedType.Collects) && (
             <Feed profile={profile as Profile} type={feedType} />
           )}
-          
         </GridItemEight>
       </GridLayout>
-      <BottomNav/>
+      <BottomNav />
     </>
   );
 };

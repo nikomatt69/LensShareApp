@@ -1,16 +1,18 @@
-import { useAppStore } from "@/store/app";
-import type { FC } from "react";
-import LoginWallet from "./LoginWallet";
+import { useAppStore } from '@/store/app';
+import type { FC } from 'react';
+import LoginWallet from './LoginWallet';
 
 const ButtonTest: FC = () => {
-  const currentProfile = useAppStore((state) => state.currentProfile)
+  const currentProfile = useAppStore((state) => state.currentProfile);
   return (
     <>
-        <div className="px-6 py-3 h-12 border-solid inline-flex justify-center 
-      items-center rounded-full text-[#000000] font-bold w-[284px] drop-shadow-lg 
-      bg-blue-500 border-grey-300 border-2 cursor-pointer mt-3 hover:text-white
-       hover:bg-[#57B8FF]">
-      {currentProfile ? (
+      <div
+        className="border-grey-300 mt-3 inline-flex h-12 w-[284px] cursor-pointer 
+      items-center justify-center rounded-full border-2 border-solid bg-blue-500 
+      px-6 py-3 font-bold text-[#000000] drop-shadow-lg hover:bg-[#57B8FF]
+       hover:text-white"
+      >
+        {currentProfile ? (
           <div className="flex justify-center">{currentProfile.handle}</div>
         ) : (
           <LoginWallet />

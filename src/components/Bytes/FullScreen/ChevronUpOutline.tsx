@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const ChevronUpOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -15,6 +15,6 @@ const ChevronUpOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="white"
     />
   </svg>
-)
+);
 
-export default ChevronUpOutline
+export default ChevronUpOutline;

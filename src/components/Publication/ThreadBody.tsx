@@ -1,17 +1,17 @@
-import { Profile, Publication } from "@/utils/lens/generatedLenster";
-import HiddenPublication from "../Composer/HiddenPublication";
-import PublicationBody from "../Composer/PublicationBody";
-import PublicationHeader from "../Composer/PublicationHeader";
-import PublicationWrapper from "../Composer/PublicationWrapper";
-import PublicationActions from "./Actions";
-import { FC } from "react";
+import { Profile, Publication } from '@/utils/lens/generatedLenster';
+import HiddenPublication from '../Composer/HiddenPublication';
+import PublicationBody from '../Composer/PublicationBody';
+import PublicationHeader from '../Composer/PublicationHeader';
+import PublicationWrapper from '../Composer/PublicationWrapper';
+import PublicationActions from './Actions';
+import { FC } from 'react';
 
 interface ThreadBodyProps {
   publication: Publication;
-  profile:Profile
+  profile: Profile;
 }
 
-const ThreadBody: FC<ThreadBodyProps> = ({ publication,profile }) => {
+const ThreadBody: FC<ThreadBodyProps> = ({ publication, profile }) => {
   return (
     <PublicationWrapper publication={publication}>
       <PublicationHeader profile={profile} publication={publication} />

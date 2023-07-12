@@ -1,11 +1,10 @@
-import { useHasTxHashBeenIndexedQuery } from "@/types/graph";
-import { FC, useState } from "react";
+import { useHasTxHashBeenIndexedQuery } from '@/types/graph';
+import { FC, useState } from 'react';
 import clsx from 'clsx';
-import { Spinner } from "./Spinner";
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { POLYGONSCAN_URL } from "@/constants";
-import Link from "next/link";
-
+import { Spinner } from './Spinner';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { POLYGONSCAN_URL } from '@/constants';
+import Link from 'next/link';
 
 interface Props {
   type?: string;
@@ -13,7 +12,11 @@ interface Props {
   reload?: boolean;
 }
 
-const IndexStatus: FC<Props> = ({ type = 'Transaction', txHash, reload = false }) => {
+const IndexStatus: FC<Props> = ({
+  type = 'Transaction',
+  txHash,
+  reload = false
+}) => {
   const [hide, setHide] = useState(false);
   const [pollInterval, setPollInterval] = useState(500);
   const { data, loading } = useHasTxHashBeenIndexedQuery({
@@ -53,7 +56,7 @@ const IndexStatus: FC<Props> = ({ type = 'Transaction', txHash, reload = false }
         </div>
       ) : (
         <div className="flex items-center space-x-1">
-          <CheckCircleIcon className="w-5 h-5 text-green-500" />
+          <CheckCircleIcon className="h-5 w-5 text-green-500" />
           <div className="text-black dark:text-white">Index Successful</div>
         </div>
       )}

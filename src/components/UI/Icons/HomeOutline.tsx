@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const HomeOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -19,6 +19,6 @@ const HomeOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default HomeOutline
+export default HomeOutline;

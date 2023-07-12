@@ -1,16 +1,11 @@
 import NewPublication from '@/components/Composer/NewPublication';
 
-
-
 import type { FC } from 'react';
 import { useGlobalModalStateStore } from 'src/store/modals';
 import { Modal } from './UI/Modal';
 
-
-
 const GlobalModals: FC = () => {
   // Report modal state
-
 
   const showNewPostModal = useGlobalModalStateStore(
     (state) => state.showNewPostModal
@@ -19,15 +14,10 @@ const GlobalModals: FC = () => {
     (state) => state.setShowNewPostModal
   );
 
-
   return (
     <>
-      
-     
-     
       <Modal
         title={`Create post`}
-      
         show={showNewPostModal}
         onClose={() => setShowNewPostModal(false)}
       >

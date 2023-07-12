@@ -1,5 +1,3 @@
-
-
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 
@@ -15,7 +13,6 @@ interface ModalProps {
   children: ReactNode[] | ReactNode;
   dataTestId?: string;
   onClose?: () => void;
-
 }
 
 export const Modal: FC<ModalProps> = ({
@@ -25,8 +22,7 @@ export const Modal: FC<ModalProps> = ({
   show,
   children,
   dataTestId = '',
-  onClose,
- 
+  onClose
 }) => {
   return (
     <Transition.Root show={show} as={Fragment}>
@@ -35,7 +31,6 @@ export const Modal: FC<ModalProps> = ({
         className="fixed inset-0 z-[20] overflow-y-auto"
         onClose={() => onClose?.()}
         data-testid={dataTestId}
-      
       >
         <div className="flex min-h-screen items-center justify-center p-4 text-center sm:block sm:p-0">
           <Transition.Child

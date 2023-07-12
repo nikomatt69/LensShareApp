@@ -4,7 +4,6 @@ import { GiphyFetch } from '@giphy/js-fetch-api';
 import type { IGif } from '@giphy/js-types';
 import { Grid } from '@giphy/react-components';
 
-
 import type { ChangeEvent, Dispatch, FC } from 'react';
 import { useState } from 'react';
 import { useDebounce, useEffectOnce } from 'usehooks-ts';

@@ -1,5 +1,5 @@
-import clsx from 'clsx'
-import React from 'react'
+import clsx from 'clsx';
+import React from 'react';
 
 export const CardShimmer = ({ rounded = true }) => {
   return (
@@ -13,8 +13,8 @@ export const CardShimmer = ({ rounded = true }) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const VideoCardShimmer = () => {
   return (
@@ -37,7 +37,7 @@ const VideoCardShimmer = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoCardShimmer
+export default VideoCardShimmer;

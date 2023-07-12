@@ -1,5 +1,4 @@
-
-import {METADATA_WORKER_URL} from '@/constants';
+import { METADATA_WORKER_URL } from '@/constants';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Errors } from './errors';

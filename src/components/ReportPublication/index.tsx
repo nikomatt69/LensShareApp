@@ -1,54 +1,51 @@
-import MetaTags from '@/components/UI/MetaTags'
-import { Button } from '@/components/UI/Button'
-import type { Publication } from '@/utils/lens/generatedLenster'
-import { useReportPublicationMutation } from '@/utils/lens/generatedLenster'
-import type { FC } from 'react'
-import React, { useState } from 'react'
-import toast from 'react-hot-toast'
-import type { CustomErrorWithData } from '@/utils/custom-types'
-import { APP_NAME, ERROR_MESSAGE} from '@/constants'
-import { topics } from "@/utils/const";
-
-
+import MetaTags from '@/components/UI/MetaTags';
+import { Button } from '@/components/UI/Button';
+import type { Publication } from '@/utils/lens/generatedLenster';
+import { useReportPublicationMutation } from '@/utils/lens/generatedLenster';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import type { CustomErrorWithData } from '@/utils/custom-types';
+import { APP_NAME, ERROR_MESSAGE } from '@/constants';
+import { topics } from '@/utils/const';
 
 type Props = {
-  publication: Publication
-  onSuccess: () => void
-}
+  publication: Publication;
+  onSuccess: () => void;
+};
 
 const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
-  const [reason, setReason] = useState('ILLEGAL')
+  const [reason, setReason] = useState('ILLEGAL');
 
   const [createReport, { loading: reporting }] = useReportPublicationMutation({
     onError: (error: CustomErrorWithData) => {
-      toast.error(error?.data?.message ?? error?.message ?? ERROR_MESSAGE)
+      toast.error(error?.data?.message ?? error?.message ?? ERROR_MESSAGE);
     },
     onCompleted: () => {
-      toast.success(`Publication reported successfully.`)
-      onSuccess()
-     
+      toast.success(`Publication reported successfully.`);
+      onSuccess();
     }
-  })
+  });
 
   const getReasonType = (type: string) => {
     if (type === 'ILLEGAL') {
-      return 'illegalReason'
+      return 'illegalReason';
     }
     if (type === 'FRAUD') {
-      return 'fraudReason'
+      return 'fraudReason';
     }
     if (type === 'SENSITIVE') {
-      return 'sensitiveReason'
+      return 'sensitiveReason';
     }
     if (type === 'SPAM') {
-      return 'spamReason'
+      return 'spamReason';
     }
-    return 'illegalReason'
-  }
+    return 'illegalReason';
+  };
 
   const onReport = () => {
-    const type = reason.split('-')[0]
-    const subReason = reason.split('-')[1]
+    const type = reason.split('-')[0];
+    const subReason = reason.split('-')[1];
     createReport({
       variables: {
         request: {
@@ -62,18 +59,17 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
           additionalComments: `${type} - ${subReason}`
         }
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <>
-     <MetaTags title={`Report Publication • ${APP_NAME}`} />
-     <div className="flex justify-center">
+      <MetaTags title={`Report Publication • ${APP_NAME}`} />
+      <div className="flex justify-center">
         <div className="w-full">
-          <div className="opacity-60 p-2">
+          <div className="p-2 opacity-60">
             <h1>{publication.metadata.name}</h1>
-            <span className="text-sm pl-2">by {publication.profile.id}</span>
+            <span className="pl-2 text-sm">by {publication.profile.id}</span>
           </div>
           <div className="mt-4">
             <label
@@ -83,20 +79,18 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
               Reason
             </label>
             <div className="mt-1">
-            <select
-                  
-                  className='outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer'
+              <select className="text-md cursor-pointer rounded border-2 border-gray-200 p-2 capitalize outline-none lg:p-4">
+                {topics.map((topic) => (
+                  <option
+                    key={topic.name}
+                    className="text-md bg-white p-2 capitalize text-gray-700 outline-none hover:bg-slate-300"
+                    value={topic.name}
                   >
-                    {topics.map((topic) => (
-                      <option
-                      key={topic.name}
-                      className='outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300'
-                      value={topic.name}
-                      >
-                        {topic.name}
-                      </option>
-                     ))};
-                  </select>
+                    {topic.name}
+                  </option>
+                ))}
+                ;
+              </select>
             </div>
             <div className="mb-1 mt-4 flex justify-end">
               <Button loading={reporting} onClick={() => onReport()}>
@@ -107,7 +101,7 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ReportPublication
+export default ReportPublication;

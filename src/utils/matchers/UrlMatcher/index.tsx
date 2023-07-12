@@ -20,7 +20,12 @@ const Url = ({ children, url }: UrlProps) => {
 
   return (
     // eslint-disable-next-line react/jsx-no-target-blank
-    <Link href={href} target="_blank" onClick={(event) => event.stopPropagation()} rel="noopener">
+    <Link
+      href={href}
+      target="_blank"
+      onClick={(event) => event.stopPropagation()}
+      rel="noopener"
+    >
       {children}
     </Link>
   );
@@ -38,7 +43,12 @@ export class UrlMatcher extends Matcher<UrlProps> {
   }
 
   match(string: string): MatchResponse<UrlMatch> | null {
-    const response = this.doMatch(string, URL_PATTERN, this.handleMatches, true);
+    const response = this.doMatch(
+      string,
+      URL_PATTERN,
+      this.handleMatches,
+      true
+    );
 
     if (response?.valid) {
       const { host } = response;

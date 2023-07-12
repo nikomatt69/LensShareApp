@@ -1,7 +1,6 @@
 import { GROWTHBOOK_KEY } from '@/constants';
 import { GrowthBook } from '@growthbook/growthbook';
 
-
 const growthbook = new GrowthBook({
   clientKey: GROWTHBOOK_KEY,
   enableDevMode: false

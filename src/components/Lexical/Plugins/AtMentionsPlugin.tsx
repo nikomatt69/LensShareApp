@@ -1,4 +1,3 @@
-
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import type { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {
@@ -15,7 +14,14 @@ import { useUpdateEffect } from 'usehooks-ts';
 
 import { $createMentionNode } from '../Nodes/MentionsNode';
 import formatHandle from '@/utils/functions/formatHandle';
-import { MediaSet, NftImage, Profile, ProfileSearchResult, SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  MediaSet,
+  NftImage,
+  Profile,
+  ProfileSearchResult,
+  SearchRequestTypes,
+  useSearchProfilesLazyQuery
+} from '@/utils/lens/generatedLenster';
 import getStampFyiURL from '@/lib/getStampFyiURL';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
@@ -153,7 +159,6 @@ const MentionsTypeaheadMenuItem: FC<MentionsTypeaheadMenuItemProps> = ({
         <div className="flex flex-col truncate">
           <div className="flex items-center space-x-1 text-sm">
             <span>{option.name}</span>
-          
           </div>
           <span className="text-xs">{formatHandle(option.handle)}</span>
         </div>

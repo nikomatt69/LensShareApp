@@ -1,4 +1,3 @@
-
 import { IPFS_GATEWAY, POLYGONSCAN_URL } from '@/constants';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { LinkIcon } from '@heroicons/react/24/outline';
@@ -20,7 +19,7 @@ const Meta: FC<MetaProps> = ({ name, uri, hash }) => (
       target="_blank"
       rel="noreferrer noopener"
     >
-      <div className="flex items-center space-x-1">
+      <div className="flex  items-center space-x-1">
         <div className="text-[10px]">{name}</div>
         <LinkIcon className="h-4 w-4" />
       </div>
@@ -51,7 +50,7 @@ const OnchainMeta: FC<OnchainMetaProps> = ({ publication }) => {
 
   return (
     <Card as="aside" dataTestId="onchain-meta">
-      <div className="lt-text-gray-500 divide-y bg-[#C0C0C0] rounded-lg dark:divide-gray-700">
+      <div className="lt-text-gray-500 divide-y rounded-xl border-2 border-blue-700 bg-[#C0C0C0] dark:divide-blue-700">
         {isArweaveHash ? (
           <Meta
             name={`ARWEAVE TRANSACTION`}

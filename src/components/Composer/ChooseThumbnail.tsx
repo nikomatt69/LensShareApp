@@ -1,4 +1,3 @@
-
 import { MediaSetWithoutOnChain } from '@/typesLenster';
 
 import type { ChangeEvent, FC } from 'react';
@@ -146,9 +145,7 @@ const ChooseThumbnail: FC = () => {
 
   return (
     <div className="mt-5">
-      <b>
-        Choose Thumbnail
-      </b>
+      <b>Choose Thumbnail</b>
       <div className="mt-1 grid grid-cols-3 gap-3 py-0.5 md:grid-cols-5">
         <label
           htmlFor="chooseThumbnail"
@@ -166,9 +163,7 @@ const ChooseThumbnail: FC = () => {
           ) : (
             <>
               <PhotoIcon className="mb-1 h-5 w-5" />
-              <span className="text-sm">
-                Upload
-              </span>
+              <span className="text-sm">Upload</span>
             </>
           )}
         </label>

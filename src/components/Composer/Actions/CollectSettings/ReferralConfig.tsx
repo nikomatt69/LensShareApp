@@ -1,11 +1,7 @@
-
 import ToggleWithHelper from '@/components/ToggleWithHelper';
 import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 import { Input } from '@/components/UI/Input';
 import { CollectModules } from '@/utils/lens/generatedLenster';
-
-
-
 
 import type { FC } from 'react';
 import { useCollectModuleStore } from 'src/store/collect-module';

@@ -1,5 +1,3 @@
-
-
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import Custom404 from 'src/pages/404';
@@ -10,9 +8,12 @@ import { useEffectOnce } from 'usehooks-ts';
 import SettingsSidebar from '../Sidebar';
 import NftPicture from './NftPicture';
 
-
 import { useProfileSettingsQuery } from '@/utils/lens/generatedLenster';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import MetaTags from '@/components/UI/MetaTags';
 import Loading from '@/components/Loading';
 import { APP_NAME } from '@/constants';
@@ -24,7 +25,6 @@ import ProfileSettingsForm from './Profile';
 const ProfileSettings: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [settingsType, setSettingsType] = useState<'NFT' | 'AVATAR'>('AVATAR');
-
 
   const { data, loading, error } = useProfileSettingsQuery({
     variables: { request: { profileId: currentProfile?.id } },
@@ -72,9 +72,8 @@ const ProfileSettings: NextPage = () => {
               onClick={() => setSettingsType('NFT')}
             />
           </div>
-          {settingsType === 'NFT' }
-            <NftPicture profile={profile as any} />
-         
+          {settingsType === 'NFT'}
+          <NftPicture profile={profile as any} />
         </Card>
       </GridItemEight>
     </GridLayout>

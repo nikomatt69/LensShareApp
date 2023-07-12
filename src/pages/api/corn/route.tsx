@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'edge'
 };
 
 export async function GET() {

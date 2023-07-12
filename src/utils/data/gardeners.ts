@@ -20,7 +20,7 @@ export const mainnetGardeners = [
   '0xabd0', // helpfulbrother
   '0x01b430', // cantech
   '0x73', // cesare
-  '0x3a' ,// pawel
+  '0x3a', // pawel
   '0x933b' //nikoemme
 ];
 

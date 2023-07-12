@@ -6,8 +6,13 @@ interface CombinePatternsOptions {
   nonCapture?: boolean;
 }
 
-const combinePatterns = (patterns: RegExp[], options: CombinePatternsOptions = {}) => {
-  let regex = patterns.map((pattern) => pattern.source).join(options.join ?? '');
+const combinePatterns = (
+  patterns: RegExp[],
+  options: CombinePatternsOptions = {}
+) => {
+  let regex = patterns
+    .map((pattern) => pattern.source)
+    .join(options.join ?? '');
 
   if (options.capture) {
     regex = `(${regex})`;
@@ -76,8 +81,9 @@ const URL_FRAGMENT = combinePatterns(
   { capture: true, match: '?' }
 );
 
-export const URL_PATTERN = combinePatterns([URL_SCHEME, URL_HOST, URL_PATH, URL_QUERY, URL_FRAGMENT], {
-  flags: 'i'
-});
-
-
+export const URL_PATTERN = combinePatterns(
+  [URL_SCHEME, URL_HOST, URL_PATH, URL_QUERY, URL_FRAGMENT],
+  {
+    flags: 'i'
+  }
+);

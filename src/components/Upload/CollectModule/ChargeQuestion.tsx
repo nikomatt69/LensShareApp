@@ -1,29 +1,26 @@
+import CheckOutline from '@/components/UI/Icons/CheckOutline';
+import { CollectModuleType, UploadedVideo } from '@/custom-types';
 
-import CheckOutline from '@/components/UI/Icons/CheckOutline'
-import { CollectModuleType, UploadedVideo } from '@/custom-types'
-
-import clsx from 'clsx'
-import type { FC } from 'react'
-import React from 'react'
+import clsx from 'clsx';
+import type { FC } from 'react';
+import React from 'react';
 
 type Props = {
-  uploadedVideo: UploadedVideo
-  setCollectType: (data: CollectModuleType) => void
-}
+  uploadedVideo: UploadedVideo;
+  setCollectType: (data: CollectModuleType) => void;
+};
 
 const ChargeQuestion: FC<Props> = ({ uploadedVideo, setCollectType }) => {
   return (
     <div className="space-y-2">
-      <h6>
-        Would you like to set collect price for this video?
-      </h6>
+      <h6>Would you like to set collect price for this video?</h6>
       <div className="flex flex-wrap gap-1.5 md:flex-nowrap">
         <button
           type="button"
           onClick={() =>
             setCollectType({
               isFreeCollect: true,
-            
+
               isFeeCollect: false
             })
           }
@@ -34,9 +31,7 @@ const ChargeQuestion: FC<Props> = ({ uploadedVideo, setCollectType }) => {
             }
           )}
         >
-          <span>
-     Collect for Free
-          </span>
+          <span>Collect for Free</span>
           {!uploadedVideo.collectModule.isFeeCollect && (
             <CheckOutline className="h-3 w-3" />
           )}
@@ -56,16 +51,14 @@ const ChargeQuestion: FC<Props> = ({ uploadedVideo, setCollectType }) => {
             }
           )}
         >
-          <span>
-           Yes, Some Price
-          </span>
+          <span>Yes, Some Price</span>
           {uploadedVideo.collectModule.isFeeCollect && (
             <CheckOutline className="h-3 w-3" />
           )}
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChargeQuestion
+export default ChargeQuestion;

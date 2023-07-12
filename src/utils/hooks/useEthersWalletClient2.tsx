@@ -1,19 +1,19 @@
-import type { TypedDataDomain } from 'viem'
-import { usePublicClient, useWalletClient } from 'wagmi'
+import type { TypedDataDomain } from 'viem';
+import { usePublicClient, useWalletClient } from 'wagmi';
 
 const useEthersWalletClient = (): {
   data: {
-    signMessage: (message: string) => Promise<string>
-  }
-  isLoading: boolean
+    signMessage: (message: string) => Promise<string>;
+  };
+  isLoading: boolean;
 } => {
-  const { data: signer, isLoading } = useWalletClient()
-  const { estimateGas, getGasPrice, getTransaction } = usePublicClient()
+  const { data: signer, isLoading } = useWalletClient();
+  const { estimateGas, getGasPrice, getTransaction } = usePublicClient();
 
   const ethersWalletClient = {
     signMessage: async (message: string): Promise<string> => {
-      const signature = await signer?.signMessage({ message })
-      return signature ?? ''
+      const signature = await signer?.signMessage({ message });
+      return signature ?? '';
     },
     getSigner: () => {
       return {
@@ -25,31 +25,31 @@ const useEthersWalletClient = (): {
           message: any
         ) => {
           message['Transaction hash'] =
-            '0x' + Buffer.from(message['Transaction hash']).toString('hex')
+            '0x' + Buffer.from(message['Transaction hash']).toString('hex');
           const r = await signer?.signTypedData({
             domain,
             message,
             types,
             primaryType: 'Bundlr'
-          })
-          return r
+          });
+          return r;
         }
-      }
+      };
     },
     estimateGas: () => estimateGas,
     getGasPrice: () => getGasPrice,
     getTransaction: () => getTransaction
-  }
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { signMessage, ...rest } = signer ?? {}
+  const { signMessage, ...rest } = signer ?? {};
 
   const mergedWalletClient = {
     ...ethersWalletClient,
     ...rest
-  }
+  };
 
-  return { data: mergedWalletClient, isLoading }
-}
+  return { data: mergedWalletClient, isLoading };
+};
 
-export default useEthersWalletClient
+export default useEthersWalletClient;

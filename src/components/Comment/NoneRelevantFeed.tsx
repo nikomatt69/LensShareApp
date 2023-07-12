@@ -1,5 +1,12 @@
-
-import { Comment, CommentOrderingTypes, CommentRankingFilter, CustomFiltersTypes, Publication, PublicationsQueryRequest, useCommentFeedQuery } from '@/utils/lens/generatedLenster';
+import {
+  Comment,
+  CommentOrderingTypes,
+  CommentRankingFilter,
+  CustomFiltersTypes,
+  Publication,
+  PublicationsQueryRequest,
+  useCommentFeedQuery
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
@@ -68,29 +75,26 @@ const NoneRelevantFeed: FC<NoneRelevantFeedProps> = ({ publication }) => {
   return (
     <>
       <Card
-        className="cursor-pointer p-5 text-center"
+        className="cursor-pointer  p-5 text-center"
         onClick={() => {
           setShowMore(!showMore);
         }}
         dataTestId="none-relevant-feed"
       >
-        {showMore ? (
-          'Hide more comments'
-        ) : (
-          'Show more comments'
-        )}
+        {showMore ? 'Hide more comments' : 'Show more comments'}
       </Card>
       {showMore ? (
-        <Card className="divide-y-[1px] dark:divide-gray-700">
+        <Card className="divide-y-[2px] divide-blue-700">
           {comments?.map((comment, index) =>
             comment?.__typename === 'Comment' && comment.hidden ? null : (
-             <SinglePublication
-                  key={`${publicationId}_${index}`}
-                  isFirst={index === 0}
-                  profile={profileId}
-                  isLast={index === comments.length - 1}
-                  publication={comment as Comment}
-                  showType={false} />
+              <SinglePublication
+                key={`${publicationId}_${index}`}
+                isFirst={index === 0}
+                profile={profileId}
+                isLast={index === comments.length - 1}
+                publication={comment as Comment}
+                showType={false}
+              />
             )
           )}
           {hasMore && <span ref={observe} />}

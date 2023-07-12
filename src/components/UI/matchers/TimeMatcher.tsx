@@ -1,25 +1,25 @@
-import { Matcher } from 'interweave'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
-import { getSecondsFromTime } from '@/utils/functions/formatTime2'
+import { Matcher } from 'interweave';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { getSecondsFromTime } from '@/utils/functions/formatTime2';
 
 const TimeLink = ({ ...props }: any) => {
-  const { query } = useRouter()
+  const { query } = useRouter();
   return (
     <Link href={`/${query.id}?t=${getSecondsFromTime(props.display)}`}>
       {props.display}
     </Link>
-  )
-}
+  );
+};
 
 export class TimeMatcher extends Matcher {
   replaceWith(match: string, props: any) {
-    return React.createElement(TimeLink, props, match)
+    return React.createElement(TimeLink, props, match);
   }
 
   asTag(): string {
-    return 'a'
+    return 'a';
   }
 
   match(value: string) {
@@ -29,8 +29,8 @@ export class TimeMatcher extends Matcher {
       (matches) => {
         return {
           display: matches[0]
-        }
+        };
       }
-    )
+    );
   }
 }

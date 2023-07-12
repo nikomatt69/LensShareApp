@@ -1,5 +1,8 @@
 import useXmtpClient from '@/utils/hooks/useXmtpClient';
-import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import {
+  ChatBubbleLeftEllipsisIcon,
+  ChatBubbleOvalLeftIcon
+} from '@heroicons/react/24/outline';
 
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import { fromNanoString, SortDirection } from '@xmtp/xmtp-js';
@@ -87,7 +90,7 @@ const MessageIcon: FC = () => {
     let messageStream: AsyncGenerator<DecodedMessage>;
     const closeMessageStream = async () => {
       if (messageStream) {
-        await messageStream.return(undefined); 
+        await messageStream.return(undefined);
       }
     };
 
@@ -140,7 +143,7 @@ const MessageIcon: FC = () => {
     >
       <ChatBubbleOvalLeftIcon className="h-6 w-6 pb-1 text-blue-500  " />
       {showMessagesBadge.get(currentProfile?.id) ? (
-        <span className="h-2 w-2 rounded-full z-[6] text-red-500 bg-red-500" />
+        <span className="z-[6] h-2 w-2 rounded-full bg-red-500 text-red-500" />
       ) : null}
     </Link>
   );

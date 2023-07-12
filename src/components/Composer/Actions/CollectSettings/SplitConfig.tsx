@@ -1,13 +1,13 @@
-
 import ToggleWithHelper from '@/components/ToggleWithHelper';
 import { Button } from '@/components/UI/Button';
 import { Input } from '@/components/UI/Input';
 import { HANDLE_SUFFIX, LENSPROTOCOL_HANDLE } from '@/constants';
 import isValidEthAddress from '@/utils/functions/isValidEthAddress';
 import splitNumber from '@/utils/functions/splitNumber';
-import { CollectModules, useProfileLazyQuery } from '@/utils/lens/generatedLenster';
-
-
+import {
+  CollectModules,
+  useProfileLazyQuery
+} from '@/utils/lens/generatedLenster';
 
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
@@ -102,10 +102,7 @@ const SplitConfig: FC<SplitConfigProps> = ({
         }}
         heading={
           <div className="flex items-center space-x-2">
-            <span>
-              Split revenue
-            </span>
-          
+            <span>Split revenue</span>
           </div>
         }
         description={`Set multiple recipients for the collect fee`}
@@ -190,9 +187,7 @@ const SplitConfig: FC<SplitConfigProps> = ({
           </div>
           {splitTotal > 100 ? (
             <div className="text-sm font-bold text-red-500">
-              
-                Splits cannot exceed 100%. Total: <span>{splitTotal}</span>%
-              
+              Splits cannot exceed 100%. Total: <span>{splitTotal}</span>%
             </div>
           ) : null}
           {isRecipientsDuplicated() ? (

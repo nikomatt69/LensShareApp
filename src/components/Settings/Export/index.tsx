@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import Custom404 from 'src/pages/404';
 import { useAppStore } from 'src/store/app';
@@ -11,14 +10,16 @@ import Following from './Following';
 import Notifications from './Notifications';
 import Profile from './Profile';
 import Publications from './Publications';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import MetaTags from '@/components/UI/MetaTags';
 import { APP_NAME } from '@/constants';
 
 const ExportSettings: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-
- 
 
   if (!currentProfile) {
     return <Custom404 />;

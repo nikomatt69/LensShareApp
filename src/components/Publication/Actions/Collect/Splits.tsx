@@ -1,4 +1,3 @@
-
 import Slug from '@/components/UI/Slug';
 import { POLYGONSCAN_URL } from '@/constants';
 import formatAddress from '@/lib/formatAddress';
@@ -6,7 +5,11 @@ import getAvatar from '@/lib/getAvatar';
 import getStampFyiURL from '@/lib/getStampFyiURL';
 
 import formatHandle from '@/utils/functions/formatHandle';
-import { Profile, RecipientDataOutput, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  RecipientDataOutput,
+  useProfilesQuery
+} from '@/utils/lens/generatedLenster';
 import Link from 'next/link';
 import type { FC } from 'react';
 
@@ -33,9 +36,7 @@ const Splits: FC<SplitsProps> = ({ recipients }) => {
 
   return (
     <div className="space-y-2 pt-3">
-      <div className="mb-2 font-bold">
-        Fee recipients
-      </div>
+      <div className="mb-2 font-bold">Fee recipients</div>
       {recipients.map((recipient) => {
         const { recipient: address, split } = recipient;
         const profile = getProfileByAddress(address) as Profile;
@@ -59,7 +60,7 @@ const Splits: FC<SplitsProps> = ({ recipients }) => {
                     alt="Avatar"
                   />
                   {profile ? (
-                    <Link href={`/u/${(profile?.id)}`}>
+                    <Link href={`/u/${profile?.id}`}>
                       <Slug slug={formatHandle(profile?.handle)} prefix="@" />
                     </Link>
                   ) : (

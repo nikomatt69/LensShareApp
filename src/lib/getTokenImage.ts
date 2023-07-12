@@ -1,4 +1,4 @@
-const STATIC_ASSETS_URL = "https://asset.lenshareapp.xyz/images";
+const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz/images';
 /**
  *
  * @param symbol - Token symbol

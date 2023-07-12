@@ -1,23 +1,25 @@
-
-import clsx from 'clsx'
-import type { Profile } from '@/utils/lens/generatedLenster'
-import { SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generatedLenster'
-import type { ComponentProps, FC } from 'react'
-import React, { useId } from 'react'
-import type { SuggestionDataItem } from 'react-mentions'
-import { Mention, MentionsInput } from 'react-mentions'
-import getProfilePicture from '@/utils/functions/getProfilePicture'
-import { formatNumber } from '@/utils/functions/formatNumber'
-import { LENS_CUSTOM_FILTERS } from '@/constants'
+import clsx from 'clsx';
+import type { Profile } from '@/utils/lens/generatedLenster';
+import {
+  SearchRequestTypes,
+  useSearchProfilesLazyQuery
+} from '@/utils/lens/generatedLenster';
+import type { ComponentProps, FC } from 'react';
+import React, { useId } from 'react';
+import type { SuggestionDataItem } from 'react-mentions';
+import { Mention, MentionsInput } from 'react-mentions';
+import getProfilePicture from '@/utils/functions/getProfilePicture';
+import { formatNumber } from '@/utils/functions/formatNumber';
+import { LENS_CUSTOM_FILTERS } from '@/constants';
 
 interface Props extends ComponentProps<'textarea'> {
-  label?: string
-  type?: string
-  className?: string
-  validationError?: string
-  value: string
-  onContentChange: (value: string) => void
-  mentionsSelector: string
+  label?: string;
+  type?: string;
+  className?: string;
+  validationError?: string;
+  value: string;
+  onContentChange: (value: string) => void;
+  mentionsSelector: string;
 }
 
 const InputMentions: FC<Props> = ({
@@ -28,15 +30,15 @@ const InputMentions: FC<Props> = ({
   mentionsSelector,
   ...props
 }) => {
-  const id = useId()
-  const [searchChannels] = useSearchProfilesLazyQuery()
+  const id = useId();
+  const [searchChannels] = useSearchProfilesLazyQuery();
 
   const fetchSuggestions = async (
     query: string,
     callback: (data: SuggestionDataItem[]) => void
   ) => {
     if (!query) {
-      return
+      return;
     }
     try {
       const { data } = await searchChannels({
@@ -48,22 +50,22 @@ const InputMentions: FC<Props> = ({
             customFilters: LENS_CUSTOM_FILTERS
           }
         }
-      })
+      });
       if (data?.search.__typename === 'ProfileSearchResult') {
-        const profiles = data?.search?.items as Profile[]
+        const profiles = data?.search?.items as Profile[];
         const channels = profiles?.map((channel: Profile) => ({
           id: channel.handle,
           display: channel.handle,
           profileId: channel.id,
           picture: getProfilePicture(channel),
           followers: channel.stats.totalFollowers
-        }))
-        callback(channels)
+        }));
+        callback(channels);
       }
     } catch {
-      callback([])
+      callback([]);
     }
-  }
+  };
 
   return (
     <label className="w-full" htmlFor={id}>
@@ -89,9 +91,9 @@ const InputMentions: FC<Props> = ({
             appendSpaceOnAdd
             renderSuggestion={(
               suggestion: SuggestionDataItem & {
-                picture?: string
-                followers?: number
-                profileId?: string
+                picture?: string;
+                followers?: number;
+                profileId?: string;
               },
               _search,
               _highlightedDisplay,
@@ -114,7 +116,6 @@ const InputMentions: FC<Props> = ({
                     <p className="truncate font-medium leading-4">
                       {suggestion?.id}
                     </p>
-             
                   </div>
                   {suggestion?.followers && (
                     <span className="text-xs opacity-80">
@@ -134,7 +135,7 @@ const InputMentions: FC<Props> = ({
         </div>
       )}
     </label>
-  )
-}
+  );
+};
 
-export default InputMentions
+export default InputMentions;

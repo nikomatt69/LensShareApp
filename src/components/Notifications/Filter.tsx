@@ -1,26 +1,27 @@
+import DropMenu from '@/components/UI/DropMenu';
+import { Menu } from '@headlessui/react';
+import usePersistStore from '@/store/persist';
 
-import DropMenu from '@/components/UI/DropMenu'
-import { Menu } from '@headlessui/react'
-import usePersistStore from '@/store/persist'
-
-import clsx from 'clsx'
-import React from 'react'
-import { CustomNotificationsFilterEnum } from '@/utils/custom-types'
-import { Cog6ToothIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx';
+import React from 'react';
+import { CustomNotificationsFilterEnum } from '@/utils/custom-types';
+import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 const NotificationsFilter = () => {
   const selectedNotificationsFilter = usePersistStore(
     (state) => state.selectedNotificationsFilter
-  )
+  );
   const setSelectedNotificationsFilter = usePersistStore(
     (state) => state.setSelectedNotificationsFilter
-  )
+  );
 
   return (
     <DropMenu
-      trigger={<Cog6ToothIcon className="h-4 w-4 opacity-70 hover:opacity-100" />}
+      trigger={
+        <Cog6ToothIcon className="h-4 w-4 opacity-70 hover:opacity-100" />
+      }
     >
-      <div className="bg-blue-500 mt-1 overflow-hidden rounded-xl border border-gray-200 p-1 text-sm shadow dark:border-gray-800">
+      <div className="mt-1 overflow-hidden rounded-xl border border-gray-200 bg-blue-500 p-1 text-sm shadow dark:border-gray-800">
         <Menu.Item
           className={clsx(
             'w-full rounded-lg px-3 py-1.5 text-left',
@@ -36,9 +37,7 @@ const NotificationsFilter = () => {
           }
           as="button"
         >
-          <span className="whitespace-nowrap">
-           High signal
-          </span>
+          <span className="whitespace-nowrap">High signal</span>
         </Menu.Item>
         <Menu.Item
           className={clsx(
@@ -55,13 +54,11 @@ const NotificationsFilter = () => {
           }
           as="button"
         >
-          <span className="whitespace-nowrap">
-           Show all
-          </span>
+          <span className="whitespace-nowrap">Show all</span>
         </Menu.Item>
       </div>
     </DropMenu>
-  )
-}
+  );
+};
 
-export default NotificationsFilter
+export default NotificationsFilter;

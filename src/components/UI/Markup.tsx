@@ -5,7 +5,7 @@ import { MDItalicMatcher } from '@/utils/matchers/markdown/MDItalicMatcher';
 import { MDLinkMatcher } from '@/utils/matchers/markdown/MDLinkMatcher';
 import { MDQuoteMatcher } from '@/utils/matchers/markdown/MDQuoteMatcher';
 import { MDStrikeMatcher } from '@/utils/matchers/markdown/MDStrikeMatcher';
-import { MentionMatcher}  from '@/utils/matchers/MentionMatcher';
+import { MentionMatcher } from '@/utils/matchers/MentionMatcher';
 import { UrlMatcher } from '@/utils/matchers/UrlMatcher';
 import trimify from '@/lib/trimify';
 import { Interweave } from 'interweave';

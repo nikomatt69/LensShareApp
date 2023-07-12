@@ -1,4 +1,3 @@
-
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
@@ -27,14 +26,11 @@ const Share: FC<ShareProps> = ({ publication }) => {
           `${location.origin}/post/${publication?.id}`
         );
         toast.success(`Copied to clipboard!`);
-       
       }}
     >
       <div className="flex items-center space-x-2">
         <ClipboardIcon className="h-4 w-4" />
-        <div>
-        Share
-        </div>
+        <div>Share</div>
       </div>
     </Menu.Item>
   );

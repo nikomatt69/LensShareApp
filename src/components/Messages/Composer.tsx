@@ -8,8 +8,6 @@ import { MIN_WIDTH_DESKTOP } from '@/constants';
 
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 
-
-
 import type { ContentTypeId } from '@xmtp/xmtp-js';
 import { ContentTypeText } from '@xmtp/xmtp-js';
 import type { ChangeEvent, FC } from 'react';
@@ -32,10 +30,14 @@ import {
 } from 'xmtp-content-type-remote-attachment';
 
 import Attachment from './AttachmentView';
-import { ArrowRightIcon, PhotoIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRightIcon,
+  PhotoIcon,
+  XCircleIcon
+} from '@heroicons/react/24/outline';
 import { Input } from '../UI/Input';
 import { Button } from '../UI/Button';
-import  uploadFilesToIPFS, { uploadFileToIPFS }  from '@/lib/uploadToIPFS3';
+import uploadFilesToIPFS, { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 
 interface ComposerProps {
   sendMessage: <T extends AllowedContent = string>(
@@ -189,7 +191,6 @@ const Composer: FC<ComposerProps> = ({
 
     if (sentAttachment !== null) {
       if (sentAttachment) {
-       
       } else {
         toast.error(`Error sending attachment`);
       }
@@ -199,7 +200,6 @@ const Composer: FC<ComposerProps> = ({
 
     if (sentText !== null) {
       if (sentText) {
-        
       } else {
         toast.error(`Error sending message`);
       }
@@ -253,7 +253,7 @@ const Composer: FC<ComposerProps> = ({
   };
 
   return (
-    <div className="bg-brand-100/75 border rounded-xl">
+    <div className="bg-brand-100/75 mb-16 rounded-xl border">
       {attachment && !sending ? (
         <AttachmentPreview
           onDismiss={onDismiss}
@@ -288,11 +288,7 @@ const Composer: FC<ComposerProps> = ({
           aria-label="Send message"
         >
           <div className="flex items-center space-x-2">
-            {Number(width) > MIN_WIDTH_DESKTOP ? (
-              <span>
-                Send
-              </span>
-            ) : null}
+            {Number(width) > MIN_WIDTH_DESKTOP ? <span>Send</span> : null}
             <ArrowRightIcon className="h-5 w-5" />
           </div>
         </Button>

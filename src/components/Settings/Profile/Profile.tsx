@@ -1,4 +1,3 @@
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Button } from '@/components/UI/Button';
@@ -16,7 +15,14 @@ import imageKit from '@/lib/imageKit';
 import uploadToArweave from '@/lib/uploadToArweave';
 import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
-import { CreatePublicSetProfileMetadataUriRequest, MediaSet, Profile, useBroadcastMutation, useCreateSetProfileMetadataTypedDataMutation, useCreateSetProfileMetadataViaDispatcherMutation } from '@/utils/lens/generatedLenster';
+import {
+  CreatePublicSetProfileMetadataUriRequest,
+  MediaSet,
+  Profile,
+  useBroadcastMutation,
+  useCreateSetProfileMetadataTypedDataMutation,
+  useCreateSetProfileMetadataViaDispatcherMutation
+} from '@/utils/lens/generatedLenster';
 import { Regex } from '@/utils/regex';
 import { PencilIcon } from '@heroicons/react/24/outline';
 
@@ -30,7 +36,6 @@ import { v4 as uuid } from 'uuid';
 import { useContractWrite, useSignTypedData } from 'wagmi';
 import { object, string, union } from 'zod';
 import { Image } from '@/components/UI/Image';
-
 
 const editProfileSchema = object({
   name: string()
@@ -79,12 +84,11 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
 
     setIsLoading(false);
     toast.success(`Profile updated successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-   (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
@@ -186,7 +190,7 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
           { key: 'location', value: location },
           { key: 'website', value: website },
           { key: 'twitter', value: twitter },
-         
+
           {
             key: 'statusEmoji',
             value: getProfileAttribute(profile?.attributes, 'statusEmoji')
@@ -217,12 +221,6 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
       onError(error);
     }
   };
-
-  
-
-    
-
- 
 
   const coverPictureUrl = profile?.coverPicture?.original?.url;
   const coverPictureIpfsUrl = coverPictureUrl
@@ -296,17 +294,12 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
                 />
               </div>
               <div className="flex items-center space-x-3">
-                
                 {uploading && <Spinner size="sm" />}
               </div>
             </div>
           </div>
           <div className="space-y-2 pt-4">
-            
-            <div className="flex items-center space-x-2">
-              
-              
-            </div>
+            <div className="flex items-center space-x-2"></div>
           </div>
           <Button
             className="ml-auto"
@@ -338,11 +331,9 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
         }
       >
         <div className="p-5 text-right">
-       
           <Button
             type="submit"
             disabled={uploading || !imageSrc}
-            
             icon={
               uploading ? (
                 <Spinner size="xs" />

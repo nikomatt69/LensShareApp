@@ -10,8 +10,6 @@ import {
 } from 'xmtp-content-type-remote-attachment';
 import useEthersWalletClient from './useEthersWalletClient';
 
-
-
 const ENCODING = 'binary';
 
 const buildLocalStorageKey = (walletAddress: string) =>

@@ -1,4 +1,4 @@
-import {Image} from '@/components/UI/Image';
+import { Image } from '@/components/UI/Image';
 import Link from 'next/link';
 import type { FC } from 'react';
 import type { Attachment as TAttachment } from 'xmtp-content-type-remote-attachment';

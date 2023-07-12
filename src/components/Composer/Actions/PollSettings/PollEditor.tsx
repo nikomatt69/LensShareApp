@@ -5,8 +5,6 @@ import { Modal } from '@/components/UI/Modal';
 import { Tooltip } from '@/components/UI/Tooltip';
 import { ClockIcon, PlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
-
-
 import type { FC } from 'react';
 import { useState } from 'react';
 import { HiMenuAlt1 } from 'react-icons/hi';
@@ -37,7 +35,6 @@ const PollEditor: FC = () => {
             outline
           >
             {pollConfig.length}{' '}
-           
           </Button>
           <Modal
             title={`Poll length`}
@@ -132,9 +129,7 @@ const PollEditor: FC = () => {
             }}
           >
             <PlusIcon className="h-4 w-4" />
-            <span>
-              Add another option
-            </span>
+            <span>Add another option</span>
           </button>
         )}
       </div>

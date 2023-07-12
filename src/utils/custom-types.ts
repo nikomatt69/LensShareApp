@@ -13,79 +13,79 @@ import type {
   RevertFollowModuleSettings,
   FeeFollowModuleSettings,
   TimedFeeCollectModuleSettings
-} from 'src/utils/lens'
+} from 'src/utils/lens';
 
 export type FileReaderStreamType = NodeJS.ReadableStream & {
-  name: string
-  size: number
-  type: string
-  lastModified: string
-}
+  name: string;
+  size: number;
+  type: string;
+  lastModified: string;
+};
 
 export type CollectModuleType = {
-  isTimedFeeCollect?: boolean
-  isFreeCollect?: boolean
-  isFeeCollect?: boolean
-  isRevertCollect?: boolean
-  isLimitedFeeCollect?: boolean
-  isLimitedTimeFeeCollect?: boolean
-  amount?: { currency?: string; value: string }
-  referralFee?: number
-  collectLimit?: string
-  followerOnlyCollect?: boolean
-  recipient?: string
-}
+  isTimedFeeCollect?: boolean;
+  isFreeCollect?: boolean;
+  isFeeCollect?: boolean;
+  isRevertCollect?: boolean;
+  isLimitedFeeCollect?: boolean;
+  isLimitedTimeFeeCollect?: boolean;
+  amount?: { currency?: string; value: string };
+  referralFee?: number;
+  collectLimit?: string;
+  followerOnlyCollect?: boolean;
+  recipient?: string;
+};
 
 export type ReferenceModuleType = {
-  followerOnlyReferenceModule: boolean
+  followerOnlyReferenceModule: boolean;
   degreesOfSeparationReferenceModule?: {
-    commentsRestricted: boolean
-    mirrorsRestricted: boolean
-    degreesOfSeparation: number
-  } | null
-}
+    commentsRestricted: boolean;
+    mirrorsRestricted: boolean;
+    degreesOfSeparation: number;
+  } | null;
+};
 
 //export type LenssharePublication = Post & Comment & Mirror
-export type LenssharePublication = Post & Comment & Mirror
+export type LenssharePublication = Post & Comment & Mirror;
 
 export type IPFSUploadResult = {
-  hash?: string
-  url: string
-  type: string
-}
+  hash?: string;
+  url: string;
+  type: string;
+};
 
 export type StreamData = {
-  streamKey: string
-  hostUrl: string
-  playbackId: string
-  streamId: string
-}
+  streamKey: string;
+  hostUrl: string;
+  playbackId: string;
+  streamId: string;
+};
 
 export type ProfileMetadata = {
-  version: string
-  metadata_id: string
-  name: string | null
-  bio: string | null
-  cover_picture: string | null
-  attributes: Attribute[]
-}
+  version: string;
+  metadata_id: string;
+  name: string | null;
+  bio: string | null;
+  cover_picture: string | null;
+  attributes: Attribute[];
+};
 
 export type LensshareCollectModule = FreeCollectModuleSettings &
   FeeCollectModuleSettings &
   RevertCollectModuleSettings &
   TimedFeeCollectModuleSettings &
   LimitedFeeCollectModuleSettings &
-  LimitedTimedFeeCollectModuleSettings
+  LimitedTimedFeeCollectModuleSettings;
 
 export interface CustomErrorWithData extends Error {
   data?: {
-    message: string
-  }
+    message: string;
+  };
 }
 
 export interface ProfileInterest {
-  category: { label: string; id: string }
-  subCategories: Array<{ label: string; id: string }>
+  category: { label: string; id: string };
+  subCategories: Array<{ label: string; id: string }>;
 }
 
 export type LensshareFollowModule = FeeFollowModuleSettings &
@@ -119,31 +119,31 @@ export type BoardPinsType = {
 };
 
 export type CreatePin = {
-  title: string
-  description: string
-  category: { tag: string; name: string }
-  isSensitiveContent: boolean
-  board: BoardType
-  buttonText: string
-  collectModule: CollectModuleType
-  referenceModule: ReferenceModuleType
-  isNSFW: boolean
-  isNSFWThumbnail: boolean
-}
+  title: string;
+  description: string;
+  category: { tag: string; name: string };
+  isSensitiveContent: boolean;
+  board: BoardType;
+  buttonText: string;
+  collectModule: CollectModuleType;
+  referenceModule: ReferenceModuleType;
+  isNSFW: boolean;
+  isNSFWThumbnail: boolean;
+};
 
 export type QueuedCommentType = {
-  comment: string
-  pubId: string
-  txnId?: string
-  txnHash?: string
-}
+  comment: string;
+  pubId: string;
+  txnId?: string;
+  txnHash?: string;
+};
 
 export type QueuedPublicationType = {
-  publication: CreatePin
-  previews: NewLensshareAttachment[]
-  txnId?: string
-  txnHash?: string
-}
+  publication: CreatePin;
+  previews: NewLensshareAttachment[];
+  txnId?: string;
+  txnHash?: string;
+};
 
 export interface LensshareAttachment {
   item: string;
@@ -151,16 +151,19 @@ export interface LensshareAttachment {
   altTag: string;
 }
 
-export interface NewLensshareAttachment extends Omit<LensshareAttachment, 'item'> {
+export interface NewLensshareAttachment
+  extends Omit<LensshareAttachment, 'item'> {
   id: string;
   item?: string;
   previewItem?: string;
 }
-
 
 export enum CustomNotificationsFilterEnum {
   HIGH_SIGNAL = 'HighSignal',
   ALL_NOTIFICATIONS = 'AllNotifications'
 }
 
-export const LensshareMainContentFocus = [PublicationMainFocus.Image , PublicationMainFocus.Video];
+export const LensshareMainContentFocus = [
+  PublicationMainFocus.Image,
+  PublicationMainFocus.Video
+];

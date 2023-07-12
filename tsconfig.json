@@ -2,24 +2,41 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+  
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "strictNullChecks": true,
+ 
     "resolveJsonModule": true,
-    "isolatedModules": true,
+  
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@/images/*": ["public/images/*"]
-    }
+    },
+  
+   "plugins": [{ "name": "next" }],
+ 
+
+    "allowJs": true,
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
+
+   
 }

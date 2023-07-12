@@ -1,14 +1,14 @@
-import { NEXT_PUBLIC_STUDIO_API_KEY } from '@/constants'
-import type { ThemeConfig } from '@livepeer/react'
-import { createReactClient, studioProvider } from '@livepeer/react'
+import { NEXT_PUBLIC_STUDIO_API_KEY } from '@/constants';
+import type { ThemeConfig } from '@livepeer/react';
+import { createReactClient, studioProvider } from '@livepeer/react';
 
 export const getLivepeerClient = () => {
   return createReactClient({
     provider: studioProvider({
       apiKey: NEXT_PUBLIC_STUDIO_API_KEY
     })
-  })
-}
+  });
+};
 
 export const videoPlayerTheme: ThemeConfig = {
   colors: {
@@ -35,4 +35,4 @@ export const videoPlayerTheme: ThemeConfig = {
   radii: {
     containerBorderRadius: '0px'
   }
-}
+};

@@ -1,4 +1,4 @@
-import type { WebBundlr } from '@bundlr-network/client'
+import type { WebBundlr } from '@bundlr-network/client';
 import type {
   Attribute,
   FeeCollectModuleSettings,
@@ -7,129 +7,129 @@ import type {
   LimitedTimedFeeCollectModuleSettings,
   RevertCollectModuleSettings,
   TimedFeeCollectModuleSettings
-} from '@/utils/lens/generatedLenster'
+} from '@/utils/lens/generatedLenster';
 
 export type VideoDraft = {
-  preview: string
-  title: string
-  description: string
-}
+  preview: string;
+  title: string;
+  description: string;
+};
 
 export type BundlrDataState = {
-  instance: WebBundlr | null
-  balance: string
-  estimatedPrice: string
-  deposit: string | null
-  depositing: boolean
-  showDeposit: boolean
-}
+  instance: WebBundlr | null;
+  balance: string;
+  estimatedPrice: string;
+  deposit: string | null;
+  depositing: boolean;
+  showDeposit: boolean;
+};
 
 export type FileReaderStreamType = NodeJS.ReadableStream & {
-  name: string
-  size: number
-  type: string
-  lastModified: string
-}
+  name: string;
+  size: number;
+  type: string;
+  lastModified: string;
+};
 
 export type CollectModuleType = {
-  isTimedFeeCollect?: boolean
-  isFreeCollect?: boolean
-  isFeeCollect?: boolean
-  isRevertCollect?: boolean
-  isLimitedFeeCollect?: boolean
-  isLimitedTimeFeeCollect?: boolean
-  amount?: { currency?: string; value: string }
-  referralFee?: number
-  collectLimit?: string
-  followerOnlyCollect?: boolean
-  recipient?: string
-}
+  isTimedFeeCollect?: boolean;
+  isFreeCollect?: boolean;
+  isFeeCollect?: boolean;
+  isRevertCollect?: boolean;
+  isLimitedFeeCollect?: boolean;
+  isLimitedTimeFeeCollect?: boolean;
+  amount?: { currency?: string; value: string };
+  referralFee?: number;
+  collectLimit?: string;
+  followerOnlyCollect?: boolean;
+  recipient?: string;
+};
 
 export type ReferenceModuleType = {
-  followerOnlyReferenceModule: boolean
+  followerOnlyReferenceModule: boolean;
   degreesOfSeparationReferenceModule?: {
-    commentsRestricted: boolean
-    mirrorsRestricted: boolean
-    degreesOfSeparation: number
-  } | null
-}
+    commentsRestricted: boolean;
+    mirrorsRestricted: boolean;
+    degreesOfSeparation: number;
+  } | null;
+};
 
 export type UploadedVideo = {
-  stream: FileReaderStreamType | null
-  preview: string
-  videoType: string
-  file: File | null
-  title: string
-  description: string
-  thumbnail: string
-  thumbnailType: string
-  videoCategory: { tag: string; name: string }
-  percent: number
-  isSensitiveContent: boolean
-  isUploadToIpfs: boolean
-  loading: boolean
-  uploadingThumbnail: boolean
-  videoSource: string
-  buttonText: string
-  durationInSeconds: string | null
-  collectModule: CollectModuleType
-  referenceModule: ReferenceModuleType
-  isByteVideo: boolean
-}
+  stream: FileReaderStreamType | null;
+  preview: string;
+  videoType: string;
+  file: File | null;
+  title: string;
+  description: string;
+  thumbnail: string;
+  thumbnailType: string;
+  videoCategory: { tag: string; name: string };
+  percent: number;
+  isSensitiveContent: boolean;
+  isUploadToIpfs: boolean;
+  loading: boolean;
+  uploadingThumbnail: boolean;
+  videoSource: string;
+  buttonText: string;
+  durationInSeconds: string | null;
+  collectModule: CollectModuleType;
+  referenceModule: ReferenceModuleType;
+  isByteVideo: boolean;
+};
 
 export type IPFSUploadResult = {
-  url: string
-  type: string
-}
+  url: string;
+  type: string;
+};
 
 export type VideoUploadForm = {
-  videoThumbnail: IPFSUploadResult | null
-  videoSource: string | null
-  title: string
-  description: string
-  adultContent: boolean
-}
+  videoThumbnail: IPFSUploadResult | null;
+  videoSource: string | null;
+  title: string;
+  description: string;
+  adultContent: boolean;
+};
 
 export type ProfileMetadata = {
-  version: string
-  metadata_id: string
-  name: string | null
-  bio: string | null
-  cover_picture: string | null
-  attributes: Attribute[]
-}
+  version: string;
+  metadata_id: string;
+  name: string | null;
+  bio: string | null;
+  cover_picture: string | null;
+  attributes: Attribute[];
+};
 
 export type CollectModule = FreeCollectModuleSettings &
   FeeCollectModuleSettings &
   RevertCollectModuleSettings &
   TimedFeeCollectModuleSettings &
   LimitedFeeCollectModuleSettings &
-  LimitedTimedFeeCollectModuleSettings
+  LimitedTimedFeeCollectModuleSettings;
 
 export interface CustomErrorWithData extends Error {
   data?: {
-    message: string
-  }
+    message: string;
+  };
 }
 
 export interface ProfileInterest {
-  category: { label: string; id: string }
-  subCategories: Array<{ label: string; id: string }>
+  category: { label: string; id: string };
+  subCategories: Array<{ label: string; id: string }>;
 }
 
 export type QueuedVideoType = {
-  thumbnailUrl: string
-  title: string
-  txnId?: string
-  txnHash?: string
-}
+  thumbnailUrl: string;
+  title: string;
+  txnId?: string;
+  txnHash?: string;
+};
 
 export type QueuedCommentType = {
-  comment: string
-  pubId: string
-  txnId?: string
-  txnHash?: string
-}
+  comment: string;
+  pubId: string;
+  txnId?: string;
+  txnHash?: string;
+};
 export enum CustomCommentsFilterEnum {
   RELEVANT_COMMENTS = 'RelevantComments',
   NEWEST_COMMENTS = 'NewestComments'

@@ -1,27 +1,26 @@
-
-import {useAppStore} from '@/store/app'
-import usePersistStore from '@/store/persist'
-import clsx from 'clsx'
-import type { Publication } from '@/utils/lens/generatedLenster'
+import { useAppStore } from '@/store/app';
+import usePersistStore from '@/store/persist';
+import clsx from 'clsx';
+import type { Publication } from '@/utils/lens/generatedLenster';
 import {
   ReactionTypes,
   useAddReactionMutation,
   useRemoveReactionMutation
-} from '@/utils/lens/generatedLenster'
-import type { FC } from 'react'
-import React, { useState } from 'react'
-import toast from 'react-hot-toast'
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-import {  SIGN_IN_REQUIRED_MESSAGE} from '@/constants'
-import {formatNumber} from '@/utils/functions/formatNumber'
+} from '@/utils/lens/generatedLenster';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { SIGN_IN_REQUIRED_MESSAGE } from '@/constants';
+import { formatNumber } from '@/utils/functions/formatNumber';
 
 type Props = {
-  publication: Publication
-  iconSize?: 'sm' | 'base' | 'lg'
-  textSize?: 'sm' | 'base'
-  isVertical?: boolean
-  showLabel?: boolean
-}
+  publication: Publication;
+  iconSize?: 'sm' | 'base' | 'lg';
+  textSize?: 'sm' | 'base';
+  isVertical?: boolean;
+  showLabel?: boolean;
+};
 
 const PublicationReaction: FC<Props> = ({
   publication,
@@ -30,36 +29,36 @@ const PublicationReaction: FC<Props> = ({
   isVertical = false,
   showLabel = true
 }) => {
-  const currentProfileId = usePersistStore((state) => state.currentProfileId)
-  const currentProfile = useAppStore((state) => state.currentProfile)
+  const currentProfileId = usePersistStore((state) => state.currentProfileId);
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   const [reaction, setReaction] = useState({
     isLiked: publication.reaction === 'UPVOTE',
     isDisliked: publication.reaction === 'DOWNVOTE',
     likeCount: publication.stats?.totalUpvotes
-  })
+  });
 
   const [addReaction] = useAddReactionMutation({
     onError: (error) => {
-      toast.error(error?.message)
+      toast.error(error?.message);
     }
-  })
+  });
   const [removeReaction] = useRemoveReactionMutation({
     onError: (error) => {
-      toast.error(error?.message)
+      toast.error(error?.message);
     }
-  })
+  });
 
   const likeVideo = () => {
     if (!currentProfileId) {
-      return toast.error(SIGN_IN_REQUIRED_MESSAGE)
+      return toast.error(SIGN_IN_REQUIRED_MESSAGE);
     }
-    
+
     setReaction((prev) => ({
       likeCount: prev.isLiked ? prev.likeCount - 1 : prev.likeCount + 1,
       isLiked: !prev.isLiked,
       isDisliked: false
-    }))
+    }));
     if (reaction.isLiked) {
       removeReaction({
         variables: {
@@ -69,7 +68,7 @@ const PublicationReaction: FC<Props> = ({
             publicationId: publication.id
           }
         }
-      })
+      });
     } else {
       addReaction({
         variables: {
@@ -79,20 +78,20 @@ const PublicationReaction: FC<Props> = ({
             publicationId: publication.id
           }
         }
-      })
+      });
     }
-  }
+  };
 
   const dislikeVideo = () => {
     if (!currentProfileId) {
-      return toast.error(SIGN_IN_REQUIRED_MESSAGE)
+      return toast.error(SIGN_IN_REQUIRED_MESSAGE);
     }
-   
+
     setReaction((prev) => ({
       likeCount: prev.isLiked ? prev.likeCount - 1 : prev.likeCount,
       isLiked: false,
       isDisliked: !prev.isDisliked
-    }))
+    }));
     if (reaction.isDisliked) {
       removeReaction({
         variables: {
@@ -102,7 +101,7 @@ const PublicationReaction: FC<Props> = ({
             publicationId: publication.id
           }
         }
-      })
+      });
     } else {
       addReaction({
         variables: {
@@ -112,9 +111,9 @@ const PublicationReaction: FC<Props> = ({
             publicationId: publication.id
           }
         }
-      })
+      });
     }
-  }
+  };
 
   return (
     <div
@@ -134,26 +133,29 @@ const PublicationReaction: FC<Props> = ({
             'flex items-center focus:outline-none',
             {
               'font-semibold text-green-500': reaction.isLiked
-            }, isVertical ? 'flex-col' : 'gap-1'
+            },
+            isVertical ? 'flex-col' : 'gap-1'
           )}
         >
-
-          <div className=' rounded-full  md:bg-gray-200 bg-gray-600/50 dark:bg-gray-600/50 p-2'>
-            {reaction.isLiked ? <AiFillHeart
-              className={clsx({
-                'h-3.5 w-3.5': iconSize === 'sm',
-                'h-6 w-6': iconSize === 'lg',
-                'h-4 w-4': iconSize === 'base',
-              },)}
-            /> :
+          <div className=" rounded-full  bg-gray-600/50 p-2 dark:bg-gray-600/50 md:bg-gray-200">
+            {reaction.isLiked ? (
+              <AiFillHeart
+                className={clsx({
+                  'h-3.5 w-3.5': iconSize === 'sm',
+                  'h-6 w-6': iconSize === 'lg',
+                  'h-4 w-4': iconSize === 'base'
+                })}
+              />
+            ) : (
               <AiOutlineHeart
                 className={clsx({
                   'h-3.5 w-3.5': iconSize === 'sm',
                   'h-6 w-6': iconSize === 'lg',
                   'h-4 w-4': iconSize === 'base',
                   'text-green-500': reaction.isLiked
-                },)}
-              />}
+                })}
+              />
+            )}
           </div>
           {showLabel && (
             <span
@@ -169,7 +171,7 @@ const PublicationReaction: FC<Props> = ({
         </span>
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default PublicationReaction
+export default PublicationReaction;

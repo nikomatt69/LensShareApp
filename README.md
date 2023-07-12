@@ -1,13 +1,9 @@
-
 # LensShare
 
 ![icon](https://user-images.githubusercontent.com/94803063/221370747-a450cbdd-ed7c-4467-875d-030c3c9c3b4d.png)
 
-
-A decentralised video sharing social platform built on Lens Protocol. 
+A decentralised video sharing social platform built on Lens Protocol.
 With LensShare, users can share and discover short videos through live streaming, uploads, and social shares. (TL:DR a decentralised TikTok)
-
-
 
 For the best experience view on web (although mobile works too just not as much, autoplay not compatible on iOS, although android should be fine.)
 
@@ -19,14 +15,15 @@ LensShare offers a variety of features, including the ability to upload videos v
 
 ## Table of Contents
 
-  * [Overview](#overview)
-  * [Features Summary](#features-summary)
-  * [Stack](#stack)
-  * [Setup](#setup)
-  * [Conclusion](#conclusion)
-  * [Credits](#credits)
+- [Overview](#overview)
+- [Features Summary](#features-summary)
+- [Stack](#stack)
+- [Setup](#setup)
+- [Conclusion](#conclusion)
+- [Credits](#credits)
 
 ## Stack
+
 - Nextjs
 - Tailwind CSS
 - Lens Protocol
@@ -36,7 +33,7 @@ LensShare offers a variety of features, including the ability to upload videos v
 - Lit Protocol
 - Livepeer
 - Xmtp
-- 
+-
 
 ## Setup
 
@@ -53,12 +50,14 @@ npm run dev
 ```
 
 ## Conclusion
-Our aim when building LensShare was to try and make a contribution to a more decentralised social media, where users don’t have to worry about their data, and where they have full control over their content. 
+
+Our aim when building LensShare was to try and make a contribution to a more decentralised social media, where users don’t have to worry about their data, and where they have full control over their content.
 
 LensShare is built on chain and so is by nature decentralised, it uses decentralised protocols such as Lens and Livepeer. This means greater privacy and security for users, as their data is not stored on a central server that could be vulnerable to hacking or other security threats.
 
 In addition to the core social features, LensShare also includes the Lens collect module. This feature allows users to take more control over their content.
-Comments, encrypted with Lit Protocol give further user control on both the creator and user side. 
+Comments, encrypted with Lit Protocol give further user control on both the creator and user side.
 
 ## Credits
+
 LensShare was created by @Nikoemme @N44TS, @driespindola, @PaoloCalzone# LensShare

@@ -1,4 +1,3 @@
-
 import getAvatar from '@/lib/getAvatar';
 import formatAddress from '@/utils/functions/formatAddress';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -16,7 +15,7 @@ import { ContentTypeRemoteAttachment } from 'xmtp-content-type-remote-attachment
 
 import { Image } from '../UI/Image';
 import formatTime from '@/utils/functions/formatTime';
-import  getTimeFromNow  from '@/utils/functions/formatTime';
+import getTimeFromNow from '@/utils/functions/formatTime';
 
 interface PreviewProps {
   ensName?: string;
@@ -88,7 +87,6 @@ const Preview: FC<PreviewProps> = ({
                       formatHandle(profile.handle)
                     : ensName ?? formatAddress(conversationKey?.split('/')[0])}
                 </div>
-               
               </div>
               {message?.sent && (
                 <span

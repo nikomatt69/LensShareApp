@@ -1,28 +1,28 @@
-import type { Publication } from '@/utils/lens/generatedLenster'
-import Link from 'next/link'
-import type { FC } from 'react'
-import React, { useEffect, useRef, useState } from 'react'
-import { BiPause, BiPlay } from 'react-icons/bi'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi'
-import {getTimeFromSeconds}  from '@/utils/functions/formatTime2'
-import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl'
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl'
-import type WaveSurfer from 'wavesurfer.js'
-import Image from 'next/image'
-import imageKit from '@/lib/imageKit'
+import type { Publication } from '@/utils/lens/generatedLenster';
+import Link from 'next/link';
+import type { FC } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { BiPause, BiPlay } from 'react-icons/bi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
+import { getTimeFromSeconds } from '@/utils/functions/formatTime2';
+import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
+import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import type WaveSurfer from 'wavesurfer.js';
+import Image from 'next/image';
+import imageKit from '@/lib/imageKit';
 
 type Props = {
-  selectedTrack: Publication
-}
+  selectedTrack: Publication;
+};
 
 const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
-  const waveformRef = useRef<HTMLDivElement>(null)
-  const waveSurfer = useRef<WaveSurfer>()
-  const [playing, setPlaying] = useState(false)
-  const [volume, setVolume] = useState(0.5)
-  const [currentPlayingTime, setCurrentPlayingTime] = useState('00:00')
-  const [duration, setDuration] = useState('00:00')
+  const waveformRef = useRef<HTMLDivElement>(null);
+  const waveSurfer = useRef<WaveSurfer>();
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const [currentPlayingTime, setCurrentPlayingTime] = useState('00:00');
+  const [duration, setDuration] = useState('00:00');
 
   const getAudioPlayerOptions = (ref: HTMLDivElement) => ({
     container: ref,
@@ -37,86 +37,86 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
     height: 20,
     normalize: true,
     partialRender: true
-  })
+  });
 
   const playTrack = () => {
-    waveSurfer.current?.play()
-    setPlaying(true)
-  }
+    waveSurfer.current?.play();
+    setPlaying(true);
+  };
 
   const setPlayerVolume = (volumeToSet: number) => {
-    const userVolume = volumeToSet ?? volume
-    waveSurfer.current?.setVolume(userVolume)
-    setVolume(userVolume)
-  }
+    const userVolume = volumeToSet ?? volume;
+    waveSurfer.current?.setVolume(userVolume);
+    setVolume(userVolume);
+  };
 
   const createPlayer = async () => {
-    const WaveSurferInstance = (await import('wavesurfer.js')).default
+    const WaveSurferInstance = (await import('wavesurfer.js')).default;
     if (!waveformRef.current) {
-      return
+      return;
     }
-    const options = getAudioPlayerOptions(waveformRef.current)
-    waveSurfer.current = WaveSurferInstance.create(options)
+    const options = getAudioPlayerOptions(waveformRef.current);
+    waveSurfer.current = WaveSurferInstance.create(options);
     if (selectedTrack) {
-      waveSurfer.current?.load(getPublicationMediaUrl(selectedTrack))
+      waveSurfer.current?.load(getPublicationMediaUrl(selectedTrack));
     }
 
     waveSurfer.current.on('ready', () => {
-      playTrack()
-      setPlayerVolume(volume)
+      playTrack();
+      setPlayerVolume(volume);
       const trackDuration = getTimeFromSeconds(
         waveSurfer.current?.getDuration().toString() ?? '0'
-      )
-      setDuration(trackDuration ?? '0')
-    })
+      );
+      setDuration(trackDuration ?? '0');
+    });
     waveSurfer.current.on('audioprocess', (time) => {
-      setCurrentPlayingTime(getTimeFromSeconds(time.toString()) ?? '0')
-    })
+      setCurrentPlayingTime(getTimeFromSeconds(time.toString()) ?? '0');
+    });
     waveSurfer.current.on('finish', () => {
-      setPlaying(false)
-    })
-  }
+      setPlaying(false);
+    });
+  };
 
   useEffect(() => {
-    setPlaying(false)
-    createPlayer()
+    setPlaying(false);
+    createPlayer();
     return () => {
       if (waveSurfer.current) {
-        waveSurfer.current.destroy()
+        waveSurfer.current.destroy();
       }
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTrack])
+  }, [selectedTrack]);
 
   const handlePlayPause = () => {
-    setPlaying(!playing)
-    waveSurfer.current?.playPause()
-  }
+    setPlaying(!playing);
+    waveSurfer.current?.playPause();
+  };
 
   const rewind = () => {
     if (waveSurfer.current) {
-      const current = waveSurfer.current.getCurrentTime()
-      waveSurfer.current?.setCurrentTime(current > 5 ? Number(current - 5) : 0)
+      const current = waveSurfer.current.getCurrentTime();
+      waveSurfer.current?.setCurrentTime(current > 5 ? Number(current - 5) : 0);
     }
-  }
+  };
 
   const forward = () => {
     if (waveSurfer.current) {
-      const current = waveSurfer.current.getCurrentTime()
-      waveSurfer.current?.setCurrentTime(Number(current + 5))
+      const current = waveSurfer.current.getCurrentTime();
+      waveSurfer.current?.setCurrentTime(Number(current + 5));
     }
-  }
+  };
 
   const onChangeVolume = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPlayerVolume(Number(event.target.value) / 100)
-  }
+    setPlayerVolume(Number(event.target.value) / 100);
+  };
 
   const onClickVolume = () => {
-    waveSurfer.current?.toggleMute()
-  }
+    waveSurfer.current?.toggleMute();
+  };
 
   if (!selectedTrack) {
-    return null
+    return null;
   }
 
   return (
@@ -132,11 +132,11 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
               alt={selectedTrack.profile.id}
             />
           </div>
-          <div className="mx-4 flex text-white flex-col justify-between">
+          <div className="mx-4 flex flex-col justify-between text-white">
             <h5 className="line-clamp-1">{selectedTrack.metadata.name}</h5>
             <Link
               href={`/u/${selectedTrack?.profile?.id}`}
-              className="truncate text-[11px] text-white font-medium uppercase opacity-90 hover:underline"
+              className="truncate text-[11px] font-medium uppercase text-white opacity-90 hover:underline"
             >
               {selectedTrack.profile.handle}
             </Link>
@@ -148,17 +148,24 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
           </div>
         </div>
       </div>
-      <div className="flex w-full text-white flex-col items-center">
-        <div id="waveform" className="m-2 text-white  w-full" ref={waveformRef} />
-        <div className="flex text-white w-full items-center justify-between">
+      <div className="flex w-full flex-col items-center text-white">
+        <div
+          id="waveform"
+          className="m-2 w-full  text-white"
+          ref={waveformRef}
+        />
+        <div className="flex w-full items-center justify-between text-white">
           {/* <Reactions selectedTrack={selectedTrack} /> */}
-          <div className="flex text-white items-center space-x-4">
-            <button onClick={rewind} className="flex items-center text-white space-x-1">
+          <div className="flex items-center space-x-4 text-white">
+            <button
+              onClick={rewind}
+              className="flex items-center space-x-1 text-white"
+            >
               <FiChevronLeft /> <span>5</span>
             </button>
             <button
               onClick={handlePlayPause}
-              className="mx-4 rounded-full  p-2 text-white outline-none bg-blue-500"
+              className="mx-4 rounded-full  bg-blue-500 p-2 text-white outline-none"
             >
               {playing ? (
                 <BiPause className="text-xl" />
@@ -166,7 +173,10 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
                 <BiPlay className="pl-0.5 text-xl" />
               )}
             </button>
-            <button onClick={forward} className="flex text-white items-center space-x-1">
+            <button
+              onClick={forward}
+              className="flex items-center space-x-1 text-white"
+            >
               <span>5</span>
               <FiChevronRight />
             </button>
@@ -190,7 +200,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AudioPlayer
+export default AudioPlayer;

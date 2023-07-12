@@ -1,4 +1,3 @@
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Button } from '@/components/UI/Button';
@@ -8,7 +7,15 @@ import { Spinner } from '@/components/UI/Spinner';
 import { IS_MAINNET, LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
-import { NftImage, Profile, UpdateProfileImageRequest, useBroadcastMutation, useCreateSetProfileImageUriTypedDataMutation, useCreateSetProfileImageUriViaDispatcherMutation, useNftChallengeLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  NftImage,
+  Profile,
+  UpdateProfileImageRequest,
+  useBroadcastMutation,
+  useCreateSetProfileImageUriTypedDataMutation,
+  useCreateSetProfileImageUriViaDispatcherMutation,
+  useNftChallengeLazyQuery
+} from '@/utils/lens/generatedLenster';
 import { Regex } from '@/utils/regex';
 import { PencilIcon } from '@heroicons/react/24/outline';
 import type { FC } from 'react';
@@ -60,12 +67,11 @@ const NftPicture: FC<NftPictureProps> = ({ profile }) => {
 
     setIsLoading(false);
     toast.success(`Avatar updated successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });

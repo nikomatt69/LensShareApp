@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
 
@@ -21,7 +20,6 @@ const PublicationActions: FC<PublicationActionsProps> = ({
   electedMirror,
   showCount = false
 }) => {
-  
   const currentProfile = useAppStore((state) => state.currentProfile);
   const collectModuleType = publication?.collectModule?.__typename;
   const canMirror = currentProfile ? publication?.canMirror?.result : true;
@@ -44,7 +42,6 @@ const PublicationActions: FC<PublicationActionsProps> = ({
           showCount={showCount}
         />
       )}
-      
     </span>
   );
 };

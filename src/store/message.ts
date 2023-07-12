@@ -52,7 +52,6 @@ interface MessageState {
   addSyncedProfiles: (profileIds: string[]) => void;
   unsyncProfile: (profileId: string) => void;
   reset: () => void;
-  
 }
 
 export const useMessageStore = create<MessageState>((set) => ({

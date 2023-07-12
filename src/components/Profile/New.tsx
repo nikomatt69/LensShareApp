@@ -1,4 +1,3 @@
-
 import { APP_NAME } from '@/constants';
 
 import type { NextPage } from 'next';
@@ -12,8 +11,6 @@ import SettingsHelper from './SettingsHelper';
 
 const NewProfile: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-
- 
 
   if (!currentProfile) {
     return <Custom404 />;

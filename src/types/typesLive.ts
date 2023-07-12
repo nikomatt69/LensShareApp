@@ -1,4 +1,3 @@
-
 export type StreamRequirements = {
   assetAddress: string | null;
   isAssetAddress: boolean;

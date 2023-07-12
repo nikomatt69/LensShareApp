@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const Verified = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -17,6 +17,6 @@ const Verified = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default Verified
+export default Verified;

@@ -3,7 +3,6 @@ import { Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import { ClipboardIcon } from '@heroicons/react/24/outline';
 
-
 import clsx from 'clsx';
 import type { FC } from 'react';
 import toast from 'react-hot-toast';
@@ -33,17 +32,14 @@ const CopyPostText: FC<CopyPostTextProps> = ({ publication }) => {
           publication?.metadata?.content || ''
         );
         toast.success(`Copied to clipboard!`);
-       
       }}
     >
       <div className="flex items-center space-x-2">
         <ClipboardIcon className="h-4 w-4" />
         <div>
-          {publicationType === 'Comment' ? (
-            'Copy comment text'
-          ) : (
-           'Copy post text'
-          )}
+          {publicationType === 'Comment'
+            ? 'Copy comment text'
+            : 'Copy post text'}
         </div>
       </div>
     </Menu.Item>

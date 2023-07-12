@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const TrashOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -29,6 +29,6 @@ const TrashOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default TrashOutline
+export default TrashOutline;

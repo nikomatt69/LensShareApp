@@ -2,7 +2,10 @@ import type { ChildrenNode } from 'interweave';
 import { Matcher } from 'interweave';
 import { v4 as uuid } from 'uuid';
 
-const createHyperlink = (href: string | undefined, title: string | undefined) => {
+const createHyperlink = (
+  href: string | undefined,
+  title: string | undefined
+) => {
   const keyId = '_' + href + '-' + uuid().slice(-7);
   return (
     <a key={keyId} href={href} target="_blank" rel="noopener noreferrer">

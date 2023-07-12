@@ -40,11 +40,7 @@ const Quote: FC<QuoteProps> = ({ publication }) => {
       <div className="flex items-center space-x-2">
         <HiAnnotation className="h-4 w-4" />
         <div>
-          {publicationType === 'Comment' ? (
-            'Quote comment'
-          ) : (
-            'Quote post'
-          )}
+          {publicationType === 'Comment' ? 'Quote comment' : 'Quote post'}
         </div>
       </div>
     </Menu.Item>

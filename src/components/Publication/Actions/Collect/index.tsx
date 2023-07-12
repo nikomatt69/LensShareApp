@@ -1,4 +1,3 @@
-
 import Loader from '@/components/UI/Loader';
 import { Modal } from '@/components/UI/Modal';
 import { Tooltip } from '@/components/UI/Tooltip';
@@ -60,16 +59,11 @@ const Collect: FC<CollectProps> = ({
           whileTap={{ scale: 0.9 }}
           onClick={() => {
             setShowCollectModal(true);
-            
           }}
           aria-label="Collect"
         >
           <div className="rounded-full p-1.5 hover:bg-red-300/20">
-            <Tooltip
-              placement="top"
-              content={`${humanize(count)} `}
-              withDelay
-            >
+            <Tooltip placement="top" content={`${humanize(count)} `} withDelay>
               {hasCollected ? (
                 <BsCollection className={iconClassName} />
               ) : (
@@ -89,7 +83,6 @@ const Collect: FC<CollectProps> = ({
         onClose={() => setShowCollectModal(false)}
       >
         <CollectModule
-         
           publication={publication}
           count={count}
           setCount={setCount}

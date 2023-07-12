@@ -1,7 +1,6 @@
-import { Localstorage } from "@/storage";
-import { featureFlags } from "../data/feature-flags";
-import { IS_MAINNET } from "@/constants";
-
+import { Localstorage } from '@/storage';
+import { featureFlags } from '../data/feature-flags';
+import { IS_MAINNET } from '@/constants';
 
 /**
  * Returns whether a given feature is enabled for a given profile ID.

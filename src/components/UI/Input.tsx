@@ -50,7 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       )}
       <div className="flex">
         {prefix && (
-          <span className="lt-text-gray-500 inline-flex items-center rounded-l-xl border border-r-0 border-gray-300 px-3 dark:border-gray-700 bg-gray-100">
+          <span className="lt-text-gray-500 inline-flex items-center rounded-l-xl border border-r-0 border-gray-300 bg-gray-100 px-3 dark:border-gray-700">
             {prefix}
           </span>
         )}
@@ -59,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             { 'bg-gray-500/20 opacity-60': props.disabled },
             error ? '!border-red-500' : 'focus-within:ring-1',
             prefix ? 'rounded-r-xl' : 'rounded-xl',
-            'focus-within:border-brand-500 focus-within:ring-brand-400 flex w-full items-center border p-3 border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-100'
+            'focus-within:border-brand-500 focus-within:ring-brand-400 flex w-full items-center border border-gray-300 bg-white p-3 dark:border-gray-700 dark:bg-gray-100'
           )}
         >
           <input

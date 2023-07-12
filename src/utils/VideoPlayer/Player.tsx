@@ -1,28 +1,25 @@
 import 'plyr-react/plyr.css';
 
-
-
-import { Player , AspectRatio} from '@livepeer/react'
-import type { FC } from 'react'
-import React from 'react'
-import {  IS_MAINNET, STATIC_ASSETS_URL } from '@/constants'
-import {IPFS_GATEWAY } from '@/utils/const'
+import { Player, AspectRatio } from '@livepeer/react';
+import type { FC } from 'react';
+import React from 'react';
+import { IS_MAINNET, STATIC_ASSETS_URL } from '@/constants';
+import { IPFS_GATEWAY } from '@/utils/const';
 
 export interface PlayerProps {
-  playerRef?: (ref: HTMLMediaElement) => void
-  permanentUrl: string
-  posterUrl?: string
-  ratio?: AspectRatio
-  showControls?: boolean
+  playerRef?: (ref: HTMLMediaElement) => void;
+  permanentUrl: string;
+  posterUrl?: string;
+  ratio?: AspectRatio;
+  showControls?: boolean;
   options: {
-    autoPlay?: boolean
-    muted?: boolean
-    loop?: boolean
-    loadingSpinner: boolean
-    isCurrentlyShown: boolean
-    roundCorners?: boolean
-
-  }
+    autoPlay?: boolean;
+    muted?: boolean;
+    loop?: boolean;
+    loadingSpinner: boolean;
+    isCurrentlyShown: boolean;
+    roundCorners?: boolean;
+  };
 }
 
 const PlayerInstance: FC<PlayerProps> = ({
@@ -35,7 +32,6 @@ const PlayerInstance: FC<PlayerProps> = ({
 }) => {
   return (
     <Player
-
       src={permanentUrl}
       poster={posterUrl}
       showTitle={false}
@@ -50,8 +46,6 @@ const PlayerInstance: FC<PlayerProps> = ({
       autoPlay={options.autoPlay ?? true}
       showLoadingSpinner={options.loadingSpinner}
       _isCurrentlyShown={options.isCurrentlyShown}
-     
-
       autoUrlUpload={
         IS_MAINNET && {
           fallback: true,
@@ -62,7 +56,7 @@ const PlayerInstance: FC<PlayerProps> = ({
       {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
       {!showControls ? <></> : null}
     </Player>
-  )
-}
+  );
+};
 
-export default React.memo(PlayerInstance)
+export default React.memo(PlayerInstance);

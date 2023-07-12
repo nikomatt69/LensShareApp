@@ -1,17 +1,18 @@
-
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Tooltip } from '@/components/UI/Tooltip';
 import { useReferenceModuleStore } from '@/store/app';
 import { ReferenceModules } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
-import { CheckCircleIcon, GlobeAltIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/24/outline';
-
-
+import {
+  CheckCircleIcon,
+  GlobeAltIcon,
+  UserGroupIcon,
+  UsersIcon
+} from '@heroicons/react/24/outline';
 
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import type { FC, ReactNode } from 'react';
-
 
 const ReferenceSettings: FC = () => {
   const selectedReferenceModule = useReferenceModuleStore(
@@ -101,7 +102,7 @@ const ReferenceSettings: FC = () => {
       <MenuTransition>
         <Menu.Items
           static
-          className="absolute z-[5] mt-2 rounded-xl border bg-white py-1 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-grey-500"
+          className="dark:bg-grey-500 absolute z-[5] mt-2 rounded-xl border bg-white py-1 shadow-sm focus:outline-none dark:border-gray-700"
         >
           <Module
             title={EVERYONE}

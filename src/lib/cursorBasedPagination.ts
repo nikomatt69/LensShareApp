@@ -1,5 +1,5 @@
-import { PaginatedResultInfo } from "@/utils/lens/generatedLenster";
-import type { FieldPolicy, StoreValue } from "@apollo/client/core";
+import { PaginatedResultInfo } from '@/utils/lens/generatedLenster';
+import type { FieldPolicy, StoreValue } from '@apollo/client/core';
 
 interface CursorBasedPagination<T = StoreValue> {
   items: T[];
@@ -9,7 +9,7 @@ interface CursorBasedPagination<T = StoreValue> {
 type SafeReadonly<T> = T extends object ? Readonly<T> : T;
 
 export const cursorBasedPagination = <T extends CursorBasedPagination>(
-  keyArgs: FieldPolicy["keyArgs"]
+  keyArgs: FieldPolicy['keyArgs']
 ): FieldPolicy<T> => {
   return {
     keyArgs,
@@ -27,8 +27,8 @@ export const cursorBasedPagination = <T extends CursorBasedPagination>(
           ...pageInfo,
           totalCount: pageInfo?.totalCount
             ? pageInfo.totalCount - removedItems?.length
-            : null,
-        },
+            : null
+        }
       } as SafeReadonly<T>;
     },
 
@@ -41,9 +41,9 @@ export const cursorBasedPagination = <T extends CursorBasedPagination>(
       return {
         ...incoming,
         items: existingItems?.concat(incomingItems),
-        pageInfo: incoming.pageInfo,
+        pageInfo: incoming.pageInfo
       } as SafeReadonly<T>;
-    },
+    }
   };
 };
 

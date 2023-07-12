@@ -1,5 +1,4 @@
-import { Regex } from "./regex";
-
+import { Regex } from './regex';
 
 /**
  * Remove restricted symbols from profile name

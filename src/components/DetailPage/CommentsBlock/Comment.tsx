@@ -1,67 +1,68 @@
-
-
-import clsx from 'clsx'
-import type { Attribute, Publication } from '@/utils/lens/generatedLenster'
-import { PublicationMainFocus } from '@/utils/lens/generatedLenster'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import type { FC } from 'react'
-import React, { useEffect, useState } from 'react'
-import { AiFillHeart, AiOutlinePlayCircle } from 'react-icons/ai'
-import getRelativeTime  from '@/utils/functions/formatTime'
+import clsx from 'clsx';
+import type { Attribute, Publication } from '@/utils/lens/generatedLenster';
+import { PublicationMainFocus } from '@/utils/lens/generatedLenster';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import type { FC } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AiFillHeart, AiOutlinePlayCircle } from 'react-icons/ai';
+import getRelativeTime from '@/utils/functions/formatTime';
 import {
   checkValueInAttributes,
   getValueFromTraitType
-} from '@/utils/functions/getFromAttributes'
-import getProfilePicture from '@/utils/functions/getProfilePicture'
-import InterweaveContent from '@/components/UI/InterweaveContent'
-import { Tooltip } from '@/components/UI/Tooltip'
-import HashExplorerLink from './HashExplorerLink'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/solid'
-import ReportModal from '../ReportModal'
-import CommentsByte from '@/components/Bytes/FullScreen/Comments'
+} from '@/utils/functions/getFromAttributes';
+import getProfilePicture from '@/utils/functions/getProfilePicture';
+import InterweaveContent from '@/components/UI/InterweaveContent';
+import { Tooltip } from '@/components/UI/Tooltip';
+import HashExplorerLink from './HashExplorerLink';
+import {
+  ArrowDownCircleIcon,
+  ArrowUpCircleIcon
+} from '@heroicons/react/24/solid';
+import ReportModal from '../ReportModal';
+import CommentsByte from '@/components/Bytes/FullScreen/Comments';
 
-const CommentOptions = dynamic(() => import('./CommentOptions'))
-const PublicationReaction = dynamic(() => import('./PublicationReaction'))
+const CommentOptions = dynamic(() => import('./CommentOptions'));
+const PublicationReaction = dynamic(() => import('./PublicationReaction'));
 
 interface Props {
-  comment: Publication
-
+  comment: Publication;
 }
 
 const VideoComment: FC<Props> = ({ comment }) => {
   return (
-    <div className="my-2 rounded-sm border py-3 px-4 dark:border-gray-700">
-      <Link
-        href={`/${comment.id}`}
-        className="flex items-center space-x-2.5"
-      >
+    <div className="my-2 rounded-sm border px-4 py-3 dark:border-gray-700">
+      <Link href={`/${comment.id}`} className="flex items-center space-x-2.5">
         <AiOutlinePlayCircle className="h-5 w-5" />
         <span>Watch Video</span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 const Comments: FC<Props> = ({ comment }) => {
-  const [clamped, setClamped] = useState(false)
-  const [showMore, setShowMore] = useState(false)
-  const [showReport, setShowReport] = useState(false)
-  const [showOptions, setShowOptions] = useState(false)
+  const [clamped, setClamped] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [showReport, setShowReport] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     if (comment?.metadata?.content.trim().length > 500) {
-      setClamped(true)
-      setShowMore(true)
+      setClamped(true);
+      setShowMore(true);
     }
-  }, [comment?.metadata?.content])
+  }, [comment?.metadata?.content]);
 
   const getIsVideoComment = () => {
-    return comment.metadata.mainContentFocus === PublicationMainFocus.Video
-  }
+    return comment.metadata.mainContentFocus === PublicationMainFocus.Video;
+  };
 
   return (
-    <div className="flex items-start justify-between mb-5" onMouseEnter={() => setShowOptions(true)} onMouseLeave={() => setShowOptions(false)}>
+    <div
+      className="mb-5 flex items-start justify-between"
+      onMouseEnter={() => setShowOptions(true)}
+      onMouseLeave={() => setShowOptions(false)}
+    >
       <div className="flex items-start justify-between">
         <Link
           href={`/u/${comment.profile?.id}`}
@@ -81,28 +82,26 @@ const Comments: FC<Props> = ({ comment }) => {
               className="flex items-center space-x-1 text-base font-bold"
             >
               <span>{comment?.profile?.name}</span>
-              
             </Link>
             {checkValueInAttributes(
               comment?.metadata.attributes as Attribute[],
               'tip'
             ) && (
-                <Tooltip placement="top" content="Tipper">
-                  <span>
-                    <HashExplorerLink
-                      hash={
-                        getValueFromTraitType(
-                          comment?.metadata.attributes as Attribute[],
-                          'hash'
-                        ) || ''
-                      }
-                    >
-                      <AiFillHeart className="text-sm text-pink-500" />
-                    </HashExplorerLink>
-                  </span>
-                </Tooltip>
-              )}
-
+              <Tooltip placement="top" content="Tipper">
+                <span>
+                  <HashExplorerLink
+                    hash={
+                      getValueFromTraitType(
+                        comment?.metadata.attributes as Attribute[],
+                        'hash'
+                      ) || ''
+                    }
+                  >
+                    <AiFillHeart className="text-sm text-pink-500" />
+                  </HashExplorerLink>
+                </span>
+              </Tooltip>
+            )}
           </span>
           <div
             className={clsx(
@@ -150,7 +149,11 @@ const Comments: FC<Props> = ({ comment }) => {
           showReport={showReport}
           setShowReport={setShowReport}
         />
-        {showOptions ? <CommentOptions  video={comment} setShowReport={setShowReport}  /> : <CommentOptions video={comment} setShowReport={setShowReport}  />}
+        {showOptions ? (
+          <CommentOptions video={comment} setShowReport={setShowReport} />
+        ) : (
+          <CommentOptions video={comment} setShowReport={setShowReport} />
+        )}
         {!comment.hidden && (
           <div className="">
             <PublicationReaction publication={comment} isVertical={true} />
@@ -158,7 +161,7 @@ const Comments: FC<Props> = ({ comment }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Comments
+export default Comments;

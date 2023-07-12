@@ -1,10 +1,8 @@
-
 import Loader from '@/components/UI/Loader';
 import { Modal } from '@/components/UI/Modal';
 import Tooltip from '@/components/Upload/Tooltip';
 import type { IGif } from '@giphy/js-types';
 import { PhotoIcon } from '@heroicons/react/24/outline';
-
 
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -32,7 +30,6 @@ const Giphy: FC<GiphyProps> = ({ setGifAttachment }) => {
           type="button"
           onClick={() => {
             setShowModal(!showModal);
-           
           }}
           disabled={attachments.length >= 4}
           aria-label="Choose GIFs"

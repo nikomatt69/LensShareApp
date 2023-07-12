@@ -1,4 +1,4 @@
-import { Db, MongoClient } from "mongodb";
+import { Db, MongoClient } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const MONGODB_DB = process.env.MONGODB_DB;
@@ -12,23 +12,23 @@ export async function connectToDatabase() {
     // load from cache
     return {
       client: cachedClient,
-      db: cachedDb,
+      db: cachedDb
     };
   }
 
   // set the connection options
   const opts = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   };
 
   // check the MongoDB URI
   if (!MONGODB_URI) {
-    throw new Error("Define the MONGODB_URI environmental variable");
+    throw new Error('Define the MONGODB_URI environmental variable');
   }
   // check the MongoDB DB
   if (!MONGODB_DB) {
-    throw new Error("Define the MONGODB_DB environmental variable");
+    throw new Error('Define the MONGODB_DB environmental variable');
   }
 
   // Connect to cluster
@@ -42,6 +42,6 @@ export async function connectToDatabase() {
 
   return {
     client: cachedClient,
-    db: cachedDb,
+    db: cachedDb
   };
 }

@@ -38,7 +38,7 @@ const TabButton: FC<TabButtonProps> = ({
       }}
       className={clsx(
         { 'text-brand bg-brand-100 dark:bg-brand-300/20': active },
-        'flex items-center space-x-2 rounded-lg px-4 py-2 text-sm font-medium border-2 border-blue-500 text-blue-500/90 sm:px-3 sm:py-1.5',
+        'flex items-center space-x-2 rounded-lg border-2 border-blue-500 px-4 py-2 text-sm font-medium text-blue-500/90 sm:px-3 sm:py-1.5',
         'hover:bg-brand-100/80 dark:hover:bg-brand-300/30 justify-center',
         className
       )}

@@ -1,24 +1,29 @@
-import { EVER_ACCESS_KEY, EVER_ACCESS_SECRET, EVER_BUCKET_NAME, EVER_ENDPOINT, EVER_REGION } from '@/constants'
-import { logger } from '@/utils/functions/logger'
-import { AssumeRoleCommand, STSClient } from '@aws-sdk/client-sts'
-import type { NextApiRequest, NextApiResponse } from 'next'
-
+import {
+  EVER_ACCESS_KEY,
+  EVER_ACCESS_SECRET,
+  EVER_BUCKET_NAME,
+  EVER_ENDPOINT,
+  EVER_REGION
+} from '@/constants';
+import { logger } from '@/utils/functions/logger';
+import { AssumeRoleCommand, STSClient } from '@aws-sdk/client-sts';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
-  accessKeyId?: string
-  secretAccessKey?: string
-  sessionToken?: string
-  bucketName?: string
-  dir?: string
-  success: boolean
-}
+  accessKeyId?: string;
+  secretAccessKey?: string;
+  sessionToken?: string;
+  bucketName?: string;
+  dir?: string;
+  success: boolean;
+};
 
 const token = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === 'OPTIONS') {
-    return res.status(200).end()
+    return res.status(200).end();
   }
   if (req.method !== 'POST') {
-    return res.status(400).json({ success: false })
+    return res.status(400).json({ success: false });
   }
   try {
     const stsClient = new STSClient({
@@ -28,7 +33,7 @@ const token = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         accessKeyId: EVER_ACCESS_KEY!,
         secretAccessKey: EVER_ACCESS_SECRET!
       }
-    })
+    });
     const params = {
       DurationSeconds: 3600,
       Policy: `{
@@ -47,7 +52,7 @@ const token = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
                 }
             ]
         }`
-    }
+    };
 
     const data = await stsClient.send(
       new AssumeRoleCommand({
@@ -55,17 +60,17 @@ const token = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         RoleArn: undefined,
         RoleSessionName: undefined
       })
-    )
+    );
     return res.json({
       success: true,
       accessKeyId: data.Credentials?.AccessKeyId,
       secretAccessKey: data.Credentials?.SecretAccessKey,
       sessionToken: data.Credentials?.SessionToken
-    })
+    });
   } catch (error) {
-    logger.error('[API Error Get STS]', error)
-    return res.status(200).json({ success: false })
+    logger.error('[API Error Get STS]', error);
+    return res.status(200).json({ success: false });
   }
-}
+};
 
-export default token
+export default token;

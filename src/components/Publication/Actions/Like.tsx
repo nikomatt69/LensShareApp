@@ -1,11 +1,16 @@
-
 import { Tooltip } from '@/components/UI/Tooltip';
 import { Errors } from '@/lib/errors';
 import nFormatter from '@/lib/nFormatter';
 import { publicationKeyFields } from '@/utils/functions/publicationKeyFields';
-import { Publication, ReactionTypes, useAddReactionMutation, useRemoveReactionMutation } from '@/utils/lens/generatedLenster';
+import {
+  Publication,
+  ReactionTypes,
+  useAddReactionMutation,
+  useRemoveReactionMutation
+} from '@/utils/lens/generatedLenster';
 import { ApolloCache } from '@apollo/client';
-import { HeartIcon } from '@heroicons/react/24/solid';
+
+import { HeartIcon } from '@heroicons/react/24/outline';
 
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -14,6 +19,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppStore } from 'src/store/app';
+import HeartOutline from '@/components/UI/Icons/HeartOutline';
 
 interface LikeProps {
   publication: Publication;
@@ -35,7 +41,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
   );
 
   const onError = (error: any) => {
-   (error);
+    error;
   };
 
   const updateCache = (
@@ -80,9 +86,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
   };
 
   const [addReaction] = useAddReactionMutation({
-    onCompleted: () => {
-     
-    },
+    onCompleted: () => {},
     onError: (error) => {
       setLiked(!liked);
       setCount(count - 1);
@@ -92,7 +96,6 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
   });
 
   const [removeReaction] = useRemoveReactionMutation({
-
     onError: (error) => {
       setLiked(!liked);
       setCount(count + 1);
@@ -133,40 +136,27 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
   const iconClassName = showCount
     ? 'w-[17px] sm:w-[20px]'
     : 'w-[15px] sm:w-[18px]';
-  
 
   return (
-    <div
-      className={clsx(
-         'text-pink-500',
-        'flex items-center space-x-1'
-      )}
-    >
+    <div className={clsx('text-pink-500', 'flex items-center space-x-1')}>
       <motion.button
         whileTap={{ scale: 0.9 }}
         animate={{
-          rotate:  liked ? 90 : 0
+          rotate: liked ? 90 : 0
         }}
         onClick={createLike}
         aria-label="Like"
       >
-        <div
-          className={clsx(
-            'hover:bg-pink-300/20',
-            'rounded-full p-1.5'
-          )}
-        >
+        <div className={clsx('hover:bg-pink-300/20', 'rounded-full p-1.5')}>
           <Tooltip
             placement="top"
             content={liked ? `Unlike` : `Like`}
             withDelay
           >
             {liked ? (
-             
-                <HeartIcon className={iconClassName} />
-              )
-             : (
               <HeartIcon className={iconClassName} />
+            ) : (
+              <HeartOutline className={iconClassName} />
             )}
           </Tooltip>
         </div>

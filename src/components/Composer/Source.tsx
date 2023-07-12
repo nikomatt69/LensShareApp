@@ -1,4 +1,3 @@
-
 import { STATIC_IMAGES_URL } from '@/constants';
 import { Publication } from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';

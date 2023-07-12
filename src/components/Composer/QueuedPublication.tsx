@@ -1,15 +1,20 @@
-import { useAppStore, useTransactionPersistStore } from "@/store/app";
-import { OptimisticTransaction } from "@/typesLenster";
-import { Profile, PublicationDocument, PublicationMetadataStatusType, useHasTxHashBeenIndexedQuery, usePublicationLazyQuery } from "@/utils/lens/generatedLenster";
-import { useApolloClient } from "@apollo/client";
-import { FC } from "react";
-import UserProfile from "../ProfilePage/UserProfile";
-import Markup from "../UI/Markup";
-import { Tooltip } from "../UI/Tooltip";
-import Attachments from "./Attachments";
-import Oembed from "../Oembed";
-import getURLs from "./getURLs";
-
+import { useAppStore, useTransactionPersistStore } from '@/store/app';
+import { OptimisticTransaction } from '@/typesLenster';
+import {
+  Profile,
+  PublicationDocument,
+  PublicationMetadataStatusType,
+  useHasTxHashBeenIndexedQuery,
+  usePublicationLazyQuery
+} from '@/utils/lens/generatedLenster';
+import { useApolloClient } from '@apollo/client';
+import { FC } from 'react';
+import UserProfile from '../ProfilePage/UserProfile';
+import Markup from '../UI/Markup';
+import { Tooltip } from '../UI/Tooltip';
+import Attachments from './Attachments';
+import Oembed from '../Oembed';
+import getURLs from './getURLs';
 
 interface QueuedPublicationProps {
   txn: OptimisticTransaction;
@@ -83,7 +88,7 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
   });
 
   return (
-    <article className="p-5">
+    <article className="border-blue-500 p-5">
       <div className="flex items-start justify-between pb-4">
         <UserProfile profile={currentProfile as Profile} />
         <Tooltip content={`Indexing`} placement="top">
@@ -93,7 +98,7 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
         </Tooltip>
       </div>
       <div className="ml-[53px]">
-        <div className="markup linkify text-md break-words">
+        <div className="markup linkify text-md break-words border-blue-500">
           <Markup>{txn?.content}</Markup>
         </div>
         {txn?.attachments?.length > 0 ? (

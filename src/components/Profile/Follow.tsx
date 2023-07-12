@@ -1,11 +1,15 @@
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { LENSHUB_PROXY } from '@/constants';
 import getSignature from '@/lib/getSignature';
 import { useAppStore } from '@/store/app';
 import { useGlobalModalStateStore } from '@/store/modals';
 import { useNonceStore } from '@/store/nonce';
-import { Profile, useBroadcastMutation, useCreateFollowTypedDataMutation, useProxyActionMutation } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  useBroadcastMutation,
+  useCreateFollowTypedDataMutation,
+  useProxyActionMutation
+} from '@/utils/lens/generatedLenster';
 import { ApolloCache } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Dispatch, FC, useState } from 'react';
@@ -60,12 +64,11 @@ const Follow: FC<FollowProps> = ({
     setIsLoading(false);
     setFollowing(true);
     toast.success(`Followed successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });

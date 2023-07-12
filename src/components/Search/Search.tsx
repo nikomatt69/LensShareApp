@@ -1,11 +1,18 @@
 import clsx from 'clsx';
-import { Profile, ProfileInterestsDocument, ProfileSearchResult } from '@/utils/lens/generatedLenster';
-import { CustomFiltersTypes, SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  ProfileInterestsDocument,
+  ProfileSearchResult
+} from '@/utils/lens/generatedLenster';
+import {
+  CustomFiltersTypes,
+  SearchRequestTypes,
+  useSearchProfilesLazyQuery
+} from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import { useRouter } from 'next/router';
 import type { ChangeEvent, FC } from 'react';
 import { useRef, useState } from 'react';
-
 
 import Profiles from '@/components/ProfilePage/Profiles';
 import { Input } from '../UI/Input';
@@ -38,7 +45,8 @@ const Search: FC<SearchProps> = ({
 
   useOnClickOutside(dropdownRef, () => setSearchText(''));
 
-  const [searchUsers, { data: searchUsersData, loading: searchUsersLoading }] = useSearchProfilesLazyQuery();
+  const [searchUsers, { data: searchUsersData, loading: searchUsersLoading }] =
+    useSearchProfilesLazyQuery();
 
   const handleSearch = (evt: ChangeEvent<HTMLInputElement>) => {
     const keyword = evt.target.value;
@@ -68,7 +76,8 @@ const Search: FC<SearchProps> = ({
   };
 
   const searchResult = searchUsersData?.search as ProfileSearchResult;
-  const isProfileSearchResult = searchResult && searchResult.hasOwnProperty('items');
+  const isProfileSearchResult =
+    searchResult && searchResult.hasOwnProperty('items');
   const profiles = isProfileSearchResult ? searchResult.items : [];
 
   return (
@@ -82,7 +91,10 @@ const Search: FC<SearchProps> = ({
           iconLeft={<HiSearchCircle />}
           iconRight={
             <XMarkIcon
-              className={clsx('cursor-pointer', searchText ? 'visible' : 'invisible')}
+              className={clsx(
+                'cursor-pointer',
+                searchText ? 'visible' : 'invisible'
+              )}
               onClick={() => setSearchText('')}
             />
           }
@@ -91,43 +103,42 @@ const Search: FC<SearchProps> = ({
       </form>
       {pathname !== '/search' && !hideDropdown && searchText.length > 0 && (
         <div
-          className={clsx('absolute mt-2 flex w-[90%] text-xs rounded-xl  justify-content items-center flex-col', modalWidthClassName)}
+          className={clsx(
+            'justify-content absolute mt-2 flex w-[90%] flex-col  items-center rounded-xl text-xs',
+            modalWidthClassName
+          )}
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="max-h-[80vh] rounded-xl text-xs items-center justify-content bg-white overflow-y-auto py-2">
+          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white py-2 text-xs">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />
-                <div>
-                  Searching users
-                </div>
+                <div>Searching users</div>
               </div>
             ) : (
               <>
                 {profiles.map((profile: Profile) => (
                   <div
                     key={profile?.handle}
-                    className="cursor-pointer px-4 py-2 bg-white "
+                    className="cursor-pointer bg-white px-4 py-2 "
                     onClick={() => {
                       if (onProfileSelected) {
                         onProfileSelected(profile);
                       }
                       setSearchText('');
                     }}
-                    data-testid={`search-profile-${formatHandle(profile?.handle)}`}
+                    data-testid={`search-profile-${formatHandle(
+                      profile?.handle
+                    )}`}
                   >
                     <SearchProfiles
                       query={`${formatHandle(profile?.handle)}`}
-                      
-
                     />
                   </div>
                 ))}
                 {profiles.length === 0 && (
-                  <div className="px-4 py-2">
-                   No matching users
-                  </div>
+                  <div className="px-4 py-2">No matching users</div>
                 )}
               </>
             )}

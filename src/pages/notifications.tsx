@@ -1,4 +1,3 @@
-import Notifications from '@/components/Notifications'
+import Notifications from '@/components/Notifications';
 
-
-export default Notifications
+export default Notifications;

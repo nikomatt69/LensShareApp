@@ -1,51 +1,47 @@
+import { logger } from '@/logger';
+import { useAppStore } from '@/store/app';
 
-import { logger } from '@/logger'
-import { useAppStore } from '@/store/app'
+import clsx from 'clsx';
+import type { ChangeEvent, FC } from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import Loader from '../UI/Loader';
 
+import AddImageOutline from './AddImageOutline';
+import { getFileFromDataURL } from './getFileFromDataURL';
+import { generateVideoThumbnails } from './generateVideoThumbnails';
+import uploadToIPFS, { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 
-
-import clsx from 'clsx'
-import type { ChangeEvent, FC } from 'react'
-import React, { useEffect, useState } from 'react'
-import { toast } from 'react-hot-toast'
-import Loader from '../UI/Loader'
-
-import AddImageOutline from './AddImageOutline'
-import { getFileFromDataURL } from './getFileFromDataURL'
-import { generateVideoThumbnails } from './generateVideoThumbnails'
-import uploadToIPFS, { uploadFileToIPFS }  from '@/lib/uploadToIPFS3'
-
-import ThumbnailsShimmer from './ThumbnailsShimmer'
-import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl'
-import { IPFSUploadResult } from '@/custom-types'
-import { MediaSetWithoutOnChain } from '@/typesLenster'
-import { usePublicationStore } from '@/store/publication4'
-
+import ThumbnailsShimmer from './ThumbnailsShimmer';
+import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
+import { IPFSUploadResult } from '@/custom-types';
+import { MediaSetWithoutOnChain } from '@/typesLenster';
+import { usePublicationStore } from '@/store/publication4';
 
 interface Props {
-  label: string
-  file: File | null
+  label: string;
+  file: File | null;
 }
 
-const DEFAULT_THUMBNAIL_INDEX = 0
-export const THUMBNAIL_GENERATE_COUNT = 8
+const DEFAULT_THUMBNAIL_INDEX = 0;
+export const THUMBNAIL_GENERATE_COUNT = 8;
 
 type Thumbnail = {
-  blobUrl: string
-  ipfsUrl: string
-  mimeType: string
-}
+  blobUrl: string;
+  ipfsUrl: string;
+  mimeType: string;
+};
 
 const ChooseThumbnail: FC<Props> = () => {
-  const [thumbnails, setThumbnails] = useState<Thumbnail[]>([])
-  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(-1)
-  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo)
+  const [thumbnails, setThumbnails] = useState<Thumbnail[]>([]);
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(-1);
+  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo);
 
   const [imageUploading, setImageUploading] = useState(false);
 
   const attachments = usePublicationStore((state) => state.attachments);
   const videoThumbnail = usePublicationStore((state) => state.videoThumbnail);
-  const uploadedVideo = useAppStore((state) => state.uploadedVideo)
+  const uploadedVideo = useAppStore((state) => state.uploadedVideo);
   const setVideoThumbnail = usePublicationStore(
     (state) => state.setVideoThumbnail
   );
@@ -102,37 +98,37 @@ const ChooseThumbnail: FC<Props> = () => {
       const thumbnailArray = await generateVideoThumbnails(
         fileToGenerate,
         THUMBNAIL_GENERATE_COUNT
-      )
-      const thumbnailList: Thumbnail[] = []
+      );
+      const thumbnailList: Thumbnail[] = [];
       thumbnailArray.forEach((thumbnailBlob) => {
         thumbnailList.push({
           blobUrl: thumbnailBlob,
           ipfsUrl: '',
           mimeType: 'image/jpeg'
-        })
-      })
-      setThumbnails(thumbnailList)
-      setSelectedThumbnailIndex(DEFAULT_THUMBNAIL_INDEX)
-    } catch { }
-  }
+        });
+      });
+      setThumbnails(thumbnailList);
+      setSelectedThumbnailIndex(DEFAULT_THUMBNAIL_INDEX);
+    } catch {}
+  };
 
   useEffect(() => {
-    onSelectThumbnail(selectedThumbnailIndex)
+    onSelectThumbnail(selectedThumbnailIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedThumbnailIndex])
+  }, [selectedThumbnailIndex]);
 
   useEffect(() => {
     if (file) {
       generateThumbnails(file).catch((error) =>
         logger.error('[Error Generate Thumbnails from File]', error)
-      )
+      );
     }
     return () => {
-      setSelectedThumbnailIndex(-1)
-      setThumbnails([])
-    }
+      setSelectedThumbnailIndex(-1);
+      setThumbnails([]);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [file])
+  }, [file]);
 
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
@@ -164,11 +160,8 @@ const ChooseThumbnail: FC<Props> = () => {
 
   return (
     <div className="w-full">
-     
-      <div className="flex p-0.5 gap-1 justify-between border rounded-lg">
-        {!thumbnails.length && (
-          <ThumbnailsShimmer />
-        )}
+      <div className="flex justify-between gap-1 rounded-lg border p-0.5">
+        {!thumbnails.length && <ThumbnailsShimmer />}
         {thumbnails.map((thumbnail, idx) => {
           return (
             <button
@@ -179,14 +172,18 @@ const ChooseThumbnail: FC<Props> = () => {
                 selectedThumbnailIndex === idx
               }
               onClick={() => onSelectThumbnail(idx)}
-              className={clsx("h-32 max-w-[5rem]",
-                selectedThumbnailIndex === idx ? 'rounded-lg  brightness-100' : 'brightness-50'
-
+              className={clsx(
+                'h-32 max-w-[5rem]',
+                selectedThumbnailIndex === idx
+                  ? 'rounded-lg  brightness-100'
+                  : 'brightness-50'
               )}
             >
               <img
                 className={clsx(
-                  'h-32 w-18 object-cover rounded-lg', selectedThumbnailIndex === idx && 'min-w-[4rem] scale-105 !ring !ring-[#30BFA8] ',
+                  'w-18 h-32 rounded-lg object-cover',
+                  selectedThumbnailIndex === idx &&
+                    'min-w-[4rem] scale-105 !ring !ring-[#30BFA8] '
                 )}
                 src={sanitizeDStorageUrl(thumbnail.blobUrl)}
                 alt="thumbnail"
@@ -194,19 +191,18 @@ const ChooseThumbnail: FC<Props> = () => {
               />
               {uploadedVideo.uploadingThumbnail &&
                 selectedThumbnailIndex === idx && (
-                  <div className="absolute top-1 right-1">
+                  <div className="absolute right-1 top-1">
                     <span>
-                      <Loader  />
+                      <Loader />
                     </span>
                   </div>
                 )}
             </button>
-          )
+          );
         })}
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default ChooseThumbnail
+export default ChooseThumbnail;

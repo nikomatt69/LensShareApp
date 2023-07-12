@@ -23,9 +23,17 @@ const shortUrl = (props: UrlProps): string => {
     return props.host + props.fullPath;
   }
 
-  const truncatedPathLength = Math.max(URL_TRUNCATE_LENGTH - props.host.length, PATH_MIN_LENGTH);
+  const truncatedPathLength = Math.max(
+    URL_TRUNCATE_LENGTH - props.host.length,
+    PATH_MIN_LENGTH
+  );
   let doTruncate = props.fullPath.length - truncatedPathLength > 3;
-  return props.host + (doTruncate ? props.fullPath.substring(0, truncatedPathLength) + '…' : props.fullPath);
+  return (
+    props.host +
+    (doTruncate
+      ? props.fullPath.substring(0, truncatedPathLength) + '…'
+      : props.fullPath)
+  );
 };
 
 const Url = ({ children, url }: UrlProps) => {
@@ -63,7 +71,12 @@ export class UrlMatcher extends Matcher<UrlProps> {
   }
 
   match(string: string): MatchResponse<UrlMatch> | null {
-    const response = this.doMatch(string, this.getPattern(), this.handleMatches, true);
+    const response = this.doMatch(
+      string,
+      this.getPattern(),
+      this.handleMatches,
+      true
+    );
 
     if (response?.valid) {
       const { host } = response;

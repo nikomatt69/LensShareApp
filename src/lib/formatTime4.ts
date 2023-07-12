@@ -1,4 +1,3 @@
-
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
@@ -15,9 +14,7 @@ dayjs.extend(dayjsTwitter);
  * @returns The formatted date and time.
  */
 export const formatTime = (date: Date | undefined) => {
-    date
-    
-    
+  date;
 };
 
 /**

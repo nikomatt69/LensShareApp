@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import Custom404 from 'src/pages/404';
 import { useAppStore } from 'src/store/app';
@@ -8,7 +7,11 @@ import SettingsSidebar from '../Sidebar';
 import ToggleDispatcher from './ToggleDispatcher';
 import getIsDispatcherEnabled from '@/lib/getIsDispatcherEnabled';
 import { APP_NAME, OLD_LENS_RELAYER_ADDRESS } from '@/constants';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import MetaTags from '@/components/UI/MetaTags';
 import { Card } from '@/components/UI/Card';
 
@@ -18,8 +21,6 @@ const DispatcherSettings: FC = () => {
   const isOldDispatcherEnabled =
     currentProfile?.dispatcher?.address?.toLocaleLowerCase() ===
     OLD_LENS_RELAYER_ADDRESS.toLocaleLowerCase();
-
- 
 
   const getTitleText = () => {
     if (canUseRelay) {
@@ -33,17 +34,9 @@ const DispatcherSettings: FC = () => {
 
   const getDescription = () => {
     if (isOldDispatcherEnabled) {
-      return (
-        
-         ' Upgrade your dispatcher to the latest version for better faster stronger signless transactions.'
-       
-      );
+      return ' Upgrade your dispatcher to the latest version for better faster stronger signless transactions.';
     }
-    return (
-     
-       ' You can enable dispatcher to interact with `${APP_NAME}` without signing any of your transactions.'
-     
-    );
+    return ' You can enable dispatcher to interact with `${APP_NAME}` without signing any of your transactions.';
   };
 
   if (!currentProfile) {

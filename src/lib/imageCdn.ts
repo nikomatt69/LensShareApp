@@ -1,9 +1,9 @@
-import { IMAGE_CDN_URL } from "@/constants";
-import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
+import { IMAGE_CDN_URL } from '@/constants';
+import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 
 const imageCdn = (
   url: string,
-  type?: "thumbnail" | "avatar" | "avatar_lg" | "square" | "thumbnail_v"
+  type?: 'thumbnail' | 'avatar' | 'avatar_lg' | 'square' | 'thumbnail_v'
 ): string => {
   if (!url || !IMAGE_CDN_URL) return url;
   return type

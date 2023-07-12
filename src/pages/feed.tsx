@@ -1,3 +1,3 @@
-import FeedRender from "@/components/Subscriptions";
+import FeedRender from '@/components/Subscriptions';
 
-export default FeedRender
+export default FeedRender;

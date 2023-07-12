@@ -1,14 +1,14 @@
-import type { NewReactionNotification } from '@/utils/lens/generatedLenster'
-import Link from 'next/link'
-import type { FC } from 'react'
-import React from 'react'
-import  getRelativeTime  from '@/utils/functions/formatTime'
-import getProfilePicture from '@/utils/functions/getProfilePicture'
-import getAvatar from '@/lib/getAvatar'
-import formatHandle from '@/utils/functions/formatHandle'
+import type { NewReactionNotification } from '@/utils/lens/generatedLenster';
+import Link from 'next/link';
+import type { FC } from 'react';
+import React from 'react';
+import getRelativeTime from '@/utils/functions/formatTime';
+import getProfilePicture from '@/utils/functions/getProfilePicture';
+import getAvatar from '@/lib/getAvatar';
+import formatHandle from '@/utils/functions/formatHandle';
 
 interface Props {
-  notification: NewReactionNotification
+  notification: NewReactionNotification;
 }
 
 const ReactedNotification: FC<Props> = ({ notification }) => {
@@ -27,17 +27,13 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
           />
           <div className="flex items-center space-x-0.5">
             <span>{formatHandle(notification?.profile?.handle)}</span>
-            
           </div>
         </Link>
       </div>
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
-          {notification.reaction === 'DOWNVOTE' ? `dislisked` : `liked`}{' '}
-          'your'{' '}
-          {notification.publication.__typename === 'Comment' && (
-            'comment on'
-          )}
+          {notification.reaction === 'DOWNVOTE' ? `dislisked` : `liked`} 'your'{' '}
+          {notification.publication.__typename === 'Comment' && 'comment on'}
           <Link
             href={`/post/${
               notification.publication.__typename === 'Comment'
@@ -49,12 +45,12 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
             post
           </Link>
         </span>
-        <div className="flex flex-none text-xs items-center text-blue-500 ">
+        <div className="flex flex-none items-center text-xs text-blue-500 ">
           <span>{getRelativeTime(notification?.createdAt)}</span>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ReactedNotification
+export default ReactedNotification;

@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { useState } from 'react';
 
@@ -24,32 +23,26 @@ const Followerings: FC<FolloweringsProps> = ({ profile }) => {
         className="text-left"
         onClick={() => {
           setShowFollowingModal(!showFollowingModal);
-         
         }}
         data-testid="profile-followings"
       >
         <div className="text-xl">
           {humanize(profile?.stats?.totalFollowing)}
         </div>
-        <div className="lt-text-gray-500">
-          
-        </div>
+        <div className="lt-text-gray-500"></div>
       </button>
       <button
         type="button"
         className="text-left"
         onClick={() => {
           setShowFollowersModal(!showFollowersModal);
-         
         }}
         data-testid="profile-followers"
       >
         <div className="text-xl">
           {humanize(profile?.stats?.totalFollowers)}
         </div>
-        <div className="lt-text-gray-500">
-          
-        </div>
+        <div className="lt-text-gray-500"></div>
       </button>
       <Modal
         title={`Following`}

@@ -1,4 +1,3 @@
-
 import { Card } from '@/components/UI/Card';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -13,7 +12,7 @@ import { useEffectOnce } from 'usehooks-ts';
 import { Image } from '@/components/UI/Image';
 
 const NewPost: FC = () => {
-  const { query,  push } = useRouter();
+  const { query, push } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setShowNewPostModal = useGlobalModalStateStore(
     (state) => state.setShowNewPostModal
@@ -22,10 +21,8 @@ const NewPost: FC = () => {
     (state) => state.setPublicationContent
   );
 
-
-
   useEffectOnce(() => {
-    if ( query.text) {
+    if (query.text) {
       const { text, url, via, hashtags } = query;
       let processedHashtags;
 
@@ -46,7 +43,10 @@ const NewPost: FC = () => {
   });
 
   return (
-    <Card className="space-y-3 rounded-xl p-5" onClick={() => setShowNewPostModal(true)}>
+    <Card
+      className="space-y-3 rounded-xl border-blue-600 p-5"
+      onClick={() => setShowNewPostModal(true)}
+    >
       <div className="flex items-center  space-x-3">
         <Image
           src={getAvatar(currentProfile)}
@@ -59,11 +59,8 @@ const NewPost: FC = () => {
           type="button"
           onClick={() => setShowNewPostModal(true)}
         >
-        <PencilIcon className="h-5 w-5" />
-        <span>
-            New Post...
-          </span>
-          
+          <PencilIcon className="h-5 w-5" />
+          <span>New Post...</span>
         </button>
       </div>
     </Card>

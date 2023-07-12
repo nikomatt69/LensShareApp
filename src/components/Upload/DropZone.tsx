@@ -1,19 +1,18 @@
+import { ALLOWED_VIDEO_TYPES } from '@/constants';
+import { useAppStore } from '@/store/app';
+import useDragAndDrop from '@/utils/hooks/useDragAndDrop';
 
-import { ALLOWED_VIDEO_TYPES } from '@/constants'
-import { useAppStore } from '@/store/app'
-import useDragAndDrop from '@/utils/hooks/useDragAndDrop'
-
-import clsx from 'clsx'
-import fileReaderStream from 'filereader-stream'
-import React, { useEffect } from 'react'
-import toast from 'react-hot-toast'
-import MetaTags from '../UI/MetaTags'
-import UploadOutline from '../UI/Icons/UploadOutline'
-import { canUploadedToIpfs } from './canUploadedToIpfs'
-import { logger } from '@/logger'
+import clsx from 'clsx';
+import fileReaderStream from 'filereader-stream';
+import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import MetaTags from '../UI/MetaTags';
+import UploadOutline from '../UI/Icons/UploadOutline';
+import { canUploadedToIpfs } from './canUploadedToIpfs';
+import { logger } from '@/logger';
 
 const DropZone = () => {
-  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo)
+  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo);
 
   const {
     dragOver,
@@ -22,49 +21,47 @@ const DropZone = () => {
     onDragLeave,
     fileDropError,
     setFileDropError
-  } = useDragAndDrop()
-
-  
+  } = useDragAndDrop();
 
   const uploadVideo = (file: File) => {
     try {
       if (file) {
-        const preview = URL.createObjectURL(file)
-        const isUnderFreeLimit = canUploadedToIpfs(file?.size)
+        const preview = URL.createObjectURL(file);
+        const isUnderFreeLimit = canUploadedToIpfs(file?.size);
         setUploadedVideo({
           stream: fileReaderStream(file),
           preview,
           videoType: file?.type || 'video/mp4',
           file,
           isUploadToIpfs: isUnderFreeLimit
-        })
+        });
       }
     } catch (error) {
-      toast.error(`Error uploading file`)
-      logger.error('[Error Upload Video]', error)
+      toast.error(`Error uploading file`);
+      logger.error('[Error Upload Video]', error);
     }
-  }
+  };
 
   const validateFile = (file: File) => {
     if (!ALLOWED_VIDEO_TYPES.includes(file?.type)) {
-      const errorMessage = `Video format not supported`
-      toast.error(errorMessage)
-      return setFileDropError(errorMessage)
+      const errorMessage = `Video format not supported`;
+      toast.error(errorMessage);
+      return setFileDropError(errorMessage);
     }
-    uploadVideo(file)
-  }
+    uploadVideo(file);
+  };
 
   const onDrop = (e: React.DragEvent<HTMLLabelElement>) => {
-    e.preventDefault()
-    setDragOver(false)
-    validateFile(e?.dataTransfer?.files[0])
-  }
+    e.preventDefault();
+    setDragOver(false);
+    validateFile(e?.dataTransfer?.files[0]);
+  };
 
   const onChooseFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      validateFile(e?.target?.files[0])
+      validateFile(e?.target?.files[0]);
     }
-  }
+  };
 
   return (
     <div>
@@ -119,8 +116,7 @@ const DropZone = () => {
         </label>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DropZone
-
+export default DropZone;

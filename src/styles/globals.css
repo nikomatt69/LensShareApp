@@ -7,7 +7,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: rgba(75, 85, 99, 0.761);
+  background-color: rgba(252, 245, 245, 0.761);
 }
 
 a {
@@ -19,21 +19,25 @@ a {
   box-sizing: border-box;
 }
 
-.videos::-webkit-scrollbar {
-  width: 0px;
+
+
+.linkify a {
+  @apply text-blue-700;
+  @apply hover:text-blue-500 dark:hover:text-blue-500;
 }
 
-::-webkit-scrollbar {
-  width: 4px;
+.linkify-message a {
+  @apply hover:decoration-2;
+  @apply underline;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: rgb(237, 237, 237);
-  border-radius: 40px;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background-color: transparent;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -62,7 +66,7 @@ a {
 }
 
 .page-center {
-  @apply flex h-[calc(100vh-65px)] items-center justify-center;
+  @apply  h-[calc(100vh-65px)] items-center justify-center;
 }
 
 .tippy-content {
@@ -74,7 +78,7 @@ a {
 }
 
 .dropdown-active {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply !bg-transparent;
 }
 
 .divider {
@@ -85,18 +89,16 @@ a {
   @apply text-gray-500 ;
 }
 
-.text-md {
-  @apply !text-sm sm:!text-base;
-}
+
 
 .oembed-player,
 iframe {
-  @apply rounded-xl;
+  @apply rounded-xl flex h-[flex] w-full ;
 }
 
 /** CSS overrides for plyr audio **/
 .plyr--audio .plyr__controls {
-  @apply !bg-transparent !text-white;
+  @apply !bg-transparent !text-blue-700;
 }
 
 .plyr--audio .plyr__control {
@@ -108,21 +110,7 @@ iframe {
 }
 
 
-i.bold {
-  background-image: url(/assets/type-bold.svg);
-}
 
-i.italic {
-  background-image: url(/assets/type-italic.svg);
-}
-
-i.code {
-  background-image: url(/assets/type-code.svg);
-}
-
-div[data-lexical-editor='true'] {
-  @apply outline-none;
-}
 
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom);

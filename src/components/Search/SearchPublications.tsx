@@ -1,16 +1,16 @@
-import { useAppStore } from "@/store/app";
-import { useSearchPublicationsQuery } from "@/types/graph";
+import { useAppStore } from '@/store/app';
+import { useSearchPublicationsQuery } from '@/types/graph';
 import {
   Profile,
   Publication,
   PublicationSearchResult,
-  SearchRequestTypes,
-} from "@/utils/lens/generatedLenster";
-import React, { FC, useState } from "react";
-import VideoCard from "../HomePage/VideoCard";
-import Video from "../HomePage/Video";
-import Loading from "../Loading";
-import { useInView } from "react-cool-inview";
+  SearchRequestTypes
+} from '@/utils/lens/generatedLenster';
+import React, { FC, useState } from 'react';
+import VideoCard from '../HomePage/VideoCard';
+import Video from '../HomePage/Video';
+import Loading from '../Loading';
+import { useInView } from 'react-cool-inview';
 
 interface Props {
   query: string | string[];
@@ -24,11 +24,11 @@ const SearchPublications: FC<Props> = ({ query }) => {
   const request = {
     query,
     type: SearchRequestTypes.Publication,
-    limit: 10,
+    limit: 10
   };
 
   const { data, loading, error, fetchMore } = useSearchPublicationsQuery({
-    variables: { request },
+    variables: { request }
   });
 
   const search = data?.search as PublicationSearchResult;
@@ -39,18 +39,17 @@ const SearchPublications: FC<Props> = ({ query }) => {
 
   const loadMore = async () => {
     await fetchMore({
-      variables: { request: { ...request, cursor: pageInfo?.next } },
+      variables: { request: { ...request, cursor: pageInfo?.next } }
     });
   };
 
   const openDetail = (byte: Publication) => {
-    const nextUrl = `/${byte.id}`
-    setByte(byte)
-    history.pushState({ path: nextUrl }, '', nextUrl)
-    setShow(!show)
-  }
+    const nextUrl = `/${byte.id}`;
+    setByte(byte);
+    history.pushState({ path: nextUrl }, '', nextUrl);
+    setShow(!show);
+  };
   const { observe } = useInView({
-
     onEnter: async () => {
       await fetchMore({
         variables: {
@@ -59,24 +58,24 @@ const SearchPublications: FC<Props> = ({ query }) => {
             ...request
           }
         }
-      })
+      });
     }
-  })
+  });
 
   return (
     <div>
       {publications?.map((publication) => (
         <VideoCard
-          
           key={publication?.id}
-          publication={publication} 
-          onDetail={openDetail}        />
+          publication={publication}
+          onDetail={openDetail}
+        />
       ))}
-       {pageInfo?.next && (
-            <span ref={observe} className="flex border-0 justify-center p-10">
-              <Loading />
-            </span>
-          )}
+      {pageInfo?.next && (
+        <span ref={observe} className="flex justify-center border-0 p-10">
+          <Loading />
+        </span>
+      )}
     </div>
   );
 };

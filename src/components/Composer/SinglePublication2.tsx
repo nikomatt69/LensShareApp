@@ -1,15 +1,18 @@
-
-import type { ElectedMirror, FeedItem, Profile, Publication } from '@/utils/lens/generatedLenster';
+import type {
+  ElectedMirror,
+  FeedItem,
+  Profile,
+  Publication
+} from '@/utils/lens/generatedLenster';
 import clsx from 'clsx';
 import type { FC } from 'react';
-
 
 import HiddenPublication from './HiddenPublication';
 import PublicationBody from './PublicationBody';
 import PublicationHeader from './PublicationHeader';
 import PublicationWrapper from './PublicationWrapper';
 import PublicationActions from '../Publication/Actions';
-
+import PublicationType from '../Publication/Type';
 
 interface SinglePublicationProps {
   publication: Publication;
@@ -21,7 +24,7 @@ interface SinglePublicationProps {
   showMore?: boolean;
   isFirst?: boolean;
   isLast?: boolean;
-  profile :Profile
+  profile: Profile;
 }
 
 const SinglePublication: FC<SinglePublicationProps> = ({
@@ -32,7 +35,6 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   showType = true,
   showActions = true,
   showModActions = false,
-
 
   showMore = true,
   isFirst = false,
@@ -47,40 +49,45 @@ const SinglePublication: FC<SinglePublicationProps> = ({
 
   return (
     <PublicationWrapper
-    className={clsx(
-      isFirst && 'rounded-t-xl',
-      isLast && 'rounded-b-xl',
-      'cursor-pointer p-5 hover:bg-gray-100 dark:hover:bg-gray-300'
-    )}
-    publication={rootPublication}
-  >
-  
-      
-    
-    <PublicationHeader publication={rootPublication} feedItem={feedItem} profile={profile} />
-    <div className="ml-[53px]">
-      {publication?.hidden ? (
-        <HiddenPublication type={publication.__typename} />
-      ) : (
-        <>
-          <PublicationBody
-            publication={rootPublication}
-            showMore={showMore}
-            profile={profile} 
-          />
-          {showActions && (
-            <PublicationActions
-              publication={rootPublication}
-              electedMirror={feedItem?.electedMirror as ElectedMirror}
-            />
-          )}
-          
-          
-        </>
+      className={clsx(
+        isFirst && 'rounded-t-xl',
+        isLast && 'rounded-b-xl',
+        'cursor-pointer p-5 hover:bg-gray-100 dark:hover:bg-gray-300'
       )}
-    </div>
-  </PublicationWrapper>
+      publication={rootPublication}
+    >
+      <PublicationType
+        publication={publication}
+        showType={showType}
+        showThread={showThread}
+        profile={profile}
+      />
 
+      <PublicationHeader
+        publication={rootPublication}
+        feedItem={feedItem}
+        profile={profile}
+      />
+      <div className="ml-[53px] border-blue-500">
+        {publication?.hidden ? (
+          <HiddenPublication type={publication.__typename} />
+        ) : (
+          <>
+            <PublicationBody
+              publication={rootPublication}
+              showMore={showMore}
+              profile={profile}
+            />
+            {showActions && (
+              <PublicationActions
+                publication={rootPublication}
+                electedMirror={feedItem?.electedMirror as ElectedMirror}
+              />
+            )}
+          </>
+        )}
+      </div>
+    </PublicationWrapper>
   );
 };
 

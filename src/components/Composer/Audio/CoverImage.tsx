@@ -1,4 +1,3 @@
-
 import { Spinner } from '@/components/UI/Spinner';
 import { ATTACHMENT } from '@/constants';
 import imageKit from '@/lib/imageKit';
@@ -29,7 +28,6 @@ const CoverImage: FC<CoverImageProps> = ({
 
   const onError = (error: any) => {
     setLoading(false);
-   
   };
 
   const onChange = async (event: ChangeEvent<HTMLInputElement>) => {

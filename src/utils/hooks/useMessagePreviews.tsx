@@ -19,8 +19,6 @@ import { useMessageDb } from '@/lib/useMessageDb';
 import { useStreamConversations } from './useStreamConversations';
 import { useStreamAllMessages } from './useStreamAllMessages';
 
-
-
 const MAX_PROFILES_PER_REQUEST = 50;
 
 const useMessagePreviews = () => {

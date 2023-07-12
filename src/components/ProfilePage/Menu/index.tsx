@@ -25,7 +25,6 @@ const PublicationMenu: FC<Props> = ({ publication }) => {
           className="rounded-full p-1.5 hover:bg-gray-300/20"
           onClick={stopEventPropagation}
           aria-label="More"
-      
         >
           <BiDotsVertical
             className={clsx('lt-text-gray-500 right-2', iconClassName)}
@@ -35,11 +34,11 @@ const PublicationMenu: FC<Props> = ({ publication }) => {
       <MenuTransition>
         <Menu.Item>
           <div className="absolute right-0 z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none">
-          {currentProfile?.id === publication?.profile?.id ? (
-            <Delete publication={publication} />
-          ) : (
-            <Delete publication={publication} />
-          )}
+            {currentProfile?.id === publication?.profile?.id ? (
+              <Delete publication={publication} />
+            ) : (
+              <Delete publication={publication} />
+            )}
           </div>
         </Menu.Item>
       </MenuTransition>

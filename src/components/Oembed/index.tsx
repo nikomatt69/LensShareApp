@@ -1,8 +1,6 @@
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import type { FC } from 'react';
-
 
 import Embed from './Embed';
 import Player from './Player';
@@ -35,7 +33,7 @@ const Oembed: FC<OembedProps> = ({ url }) => {
     site: data?.site,
     favicon: `https://www.google.com/s2/favicons?domain=${data.url}`,
     thumbnail: data?.image,
-    isLarge: data?.isLarge,
+    isLarge: false,
     html: data?.html
   };
 

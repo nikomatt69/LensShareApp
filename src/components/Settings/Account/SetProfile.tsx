@@ -1,5 +1,3 @@
-
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import UserProfile from '@/components/ProfilePage/UserProfile';
@@ -10,7 +8,12 @@ import { APP_NAME, LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
 import formatHandle from '@/utils/functions/formatHandle';
-import { CreateSetDefaultProfileRequest, Profile, useBroadcastMutation, useCreateSetDefaultProfileTypedDataMutation } from '@/utils/lens/generatedLenster';
+import {
+  CreateSetDefaultProfileRequest,
+  Profile,
+  useBroadcastMutation,
+  useCreateSetDefaultProfileTypedDataMutation
+} from '@/utils/lens/generatedLenster';
 import { PencilIcon } from '@heroicons/react/24/outline';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -37,12 +40,11 @@ const SetProfile: FC = () => {
 
     setIsLoading(false);
     toast.success(`Default profile updated successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });
@@ -118,46 +120,30 @@ const SetProfile: FC = () => {
       {error && <ErrorMessage title={`Transaction failed!`} error={error} />}
       {hasDefaultProfile ? (
         <>
-          <div className="text-lg font-bold">
-            Your default profile
-          </div>
+          <div className="text-lg font-bold">Your default profile</div>
           <UserProfile profile={sortedProfiles[0]} />
         </>
       ) : (
         <div className="flex items-center space-x-1.5 font-bold text-yellow-500">
           <BsExclamation className="h-5 w-5" />
-          <div>
-           You don't have any default profile set!
-          </div>
+          <div>You don't have any default profile set!</div>
         </div>
       )}
-      <div className="text-lg font-bold">
-        Select default profile
-      </div>
+      <div className="text-lg font-bold">Select default profile</div>
       <p>
-        
-          Selecting your default account helps to display the selected profile
-          across {APP_NAME}, you can change your default profile anytime.
-        
+        Selecting your default account helps to display the selected profile
+        across {APP_NAME}, you can change your default profile anytime.
       </p>
-      <div className="text-lg font-bold">
-        What else you should know
-      </div>
+      <div className="text-lg font-bold">What else you should know</div>
       <div className="lt-text-gray-500 divide-y text-sm dark:divide-gray-700">
         <p className="pb-3">
-          
-            Only the default profile will be visible across the {APP_NAME},
-            example notifications, follow etc.
-          
+          Only the default profile will be visible across the {APP_NAME},
+          example notifications, follow etc.
         </p>
-        <p className="py-3">
-          You can change default profile anytime here.
-        </p>
+        <p className="py-3">You can change default profile anytime here.</p>
       </div>
       <div>
-        <div className="label">
-          Select profile
-        </div>
+        <div className="label">Select profile</div>
         <select
           className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 "
           onChange={(e) => setSelectedUser(e.target.value)}

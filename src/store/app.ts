@@ -1,19 +1,18 @@
-import { WebBundlr } from "@bundlr-network/client";
-import { Profile, ReferenceModules } from "@/utils/lens/generatedLenster";
-import { BundlrDataState, UploadedVideo } from "@/custom-types";
+import { WebBundlr } from '@bundlr-network/client';
+import { Profile, ReferenceModules } from '@/utils/lens/generatedLenster';
+import { BundlrDataState, UploadedVideo } from '@/custom-types';
 
-import create from "zustand";
-import { persist } from "zustand/middleware";
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
 import {
-
   WMATIC_TOKEN_ADDRESS,
   BUNDLR_NODE_URL,
   BUNDLR_CURRENCY,
-  INFURA_RPC,
-} from "@/constants";
-import { Localstorage } from "@/storage";
-import { logger } from "@/utils/functions/logger";
-import { CREATOR_VIDEO_CATEGORIES } from "@/utils/data/categories";
+  INFURA_RPC
+} from '@/constants';
+import { Localstorage } from '@/storage';
+import { logger } from '@/utils/functions/logger';
+import { CREATOR_VIDEO_CATEGORIES } from '@/utils/data/categories';
 
 export const UPLOADED_VIDEO_FORM_DEFAULTS = {
   stream: null,
@@ -48,24 +47,23 @@ export const UPLOADED_VIDEO_FORM_DEFAULTS = {
     followerOnlyReferenceModule: false,
     degreesOfSeparationReferenceModule: null
   },
- 
-  isByteVideo: true
 
+  isByteVideo: true
 };
 
 export const UPLOADED_VIDEO_BUNDLR_DEFAULTS = {
-  balance: "0",
-  estimatedPrice: "0",
+  balance: '0',
+  estimatedPrice: '0',
   deposit: null,
   instance: null,
   depositing: false,
-  showDeposit: false,
+  showDeposit: false
 };
 interface AppState {
-  currentviewingId: string | null
-  videoWatchTime: number
+  currentviewingId: string | null;
+  videoWatchTime: number;
   showCreateBoard: boolean;
-  setShowCreateBoard: (showCreateBoard: boolean) => void
+  setShowCreateBoard: (showCreateBoard: boolean) => void;
   uploadedVideo: UploadedVideo;
   setUploadedVideo: (video: { [k: string]: any }) => void;
   bundlrData: BundlrDataState;
@@ -77,16 +75,16 @@ interface AppState {
   userSigNonce: number;
   setUserSigNonce: (userSigNonce: number) => void;
   getBundlrInstance: (signer: {
-    signMessage: (message: string) => Promise<string>
-  }) => Promise<WebBundlr | null>
-  hasNewNotification: boolean
-  setHasNewNotification: (value: boolean) => void
-  activeTagFilter: string
-  setActiveTagFilter: (activeTagFilter: string) => void
-  setCurrentviewingId: (id: string) => void
-  setVideoWatchTime: (videoWatchTime: number) => void
-  isMute: boolean
-  setMute: (isOn: boolean) => void
+    signMessage: (message: string) => Promise<string>;
+  }) => Promise<WebBundlr | null>;
+  hasNewNotification: boolean;
+  setHasNewNotification: (value: boolean) => void;
+  activeTagFilter: string;
+  setActiveTagFilter: (activeTagFilter: string) => void;
+  setCurrentviewingId: (id: string) => void;
+  setVideoWatchTime: (videoWatchTime: number) => void;
+  isMute: boolean;
+  setMute: (isOn: boolean) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -99,7 +97,7 @@ export const useAppStore = create<AppState>((set) => ({
   hasNewNotification: false,
   setVideoWatchTime: (videoWatchTime) => set({ videoWatchTime }),
   setActiveTagFilter: (activeTagFilter) => set({ activeTagFilter }),
-  setCurrentviewingId: (id)=> set({ currentviewingId: id }),
+  setCurrentviewingId: (id) => set({ currentviewingId: id }),
   setHasNewNotification: (b) => set({ hasNewNotification: b }),
   setShowCreateBoard: (showCreateBoard) => set({ showCreateBoard }),
   uploadedVideo: UPLOADED_VIDEO_FORM_DEFAULTS,
@@ -118,21 +116,15 @@ export const useAppStore = create<AppState>((set) => ({
   setUserSigNonce: (userSigNonce) => set(() => ({ userSigNonce })),
   getBundlrInstance: async (signer) => {
     try {
-      const bundlr = new WebBundlr(
-        BUNDLR_NODE_URL,
-        BUNDLR_CURRENCY,
-        signer,
-       
-        
-      );
+      const bundlr = new WebBundlr(BUNDLR_NODE_URL, BUNDLR_CURRENCY, signer);
       bundlr.utils.getBundlerAddress(BUNDLR_CURRENCY);
       bundlr.ready();
       return bundlr;
     } catch (error) {
-      logger.error("[Error Init Bundlr]", error);
+      logger.error('[Error Init Bundlr]', error);
       return null;
     }
-  },
+  }
 }));
 
 interface AppPersistState {
@@ -144,7 +136,7 @@ export const useAppPersistStore = create(
   persist<AppPersistState>(
     (set) => ({
       profileId: null,
-      setProfileId: (profileId) => set(() => ({ profileId })),
+      setProfileId: (profileId) => set(() => ({ profileId }))
     }),
     { name: Localstorage.LensshareStore }
   )
@@ -167,21 +159,19 @@ export const useReferenceModuleStore = create<ReferenceModuleState>((set) => ({
   setOnlyFollowers: (onlyFollowers) => set(() => ({ onlyFollowers })),
   degreesOfSeparation: 2,
   setDegreesOfSeparation: (degreesOfSeparation) =>
-    set(() => ({ degreesOfSeparation })),
+    set(() => ({ degreesOfSeparation }))
 }));
-
 
 interface TransactionPersistState {
   txnQueue: any[];
   setTxnQueue: (txnQueue: any[]) => void;
 }
 
-
 export const useTransactionPersistStore = create(
   persist<TransactionPersistState>(
     (set) => ({
       txnQueue: [],
-      setTxnQueue: (txnQueue) => set(() => ({ txnQueue })),
+      setTxnQueue: (txnQueue) => set(() => ({ txnQueue }))
     }),
     { name: Localstorage.TransactionStore }
   )

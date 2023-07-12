@@ -1,4 +1,4 @@
-import { Regex } from '@/utils/regex'; 
+import { Regex } from '@/utils/regex';
 import trimify from '@/lib/trimify';
 import type { FC } from 'react';
 import ReactMarkdown from 'react-markdown';

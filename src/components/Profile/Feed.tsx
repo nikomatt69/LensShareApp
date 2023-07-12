@@ -1,12 +1,18 @@
-
-import { Profile, Publication, PublicationMainFocus, PublicationTypes, PublicationsQueryRequest, useProfileFeedQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  Publication,
+  PublicationMainFocus,
+  PublicationTypes,
+  PublicationsQueryRequest,
+  useProfileFeedQuery
+} from '@/utils/lens/generatedLenster';
 
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { ProfileFeedType } from 'src/enums';
 import { useAppStore } from 'src/store/app';
-import PublicationsShimmer from '../Composer/PublicationsShimmer';
+
 import { EmptyState } from '../UI/EmptyState';
 import formatHandle from '@/utils/functions/formatHandle';
 import { BsCollection } from 'react-icons/bs';
@@ -19,10 +25,9 @@ import PublicationActions from '../Publication/Actions';
 import VideoCard from '../HomePage/VideoCard';
 import Loading from '../Loading';
 
-
 interface FeedProps {
   profile: Profile;
-  
+
   type:
     | ProfileFeedType.Feed
     | ProfileFeedType.Replies
@@ -30,7 +35,7 @@ interface FeedProps {
     | ProfileFeedType.Collects;
 }
 
-const Feed: FC<FeedProps> = ({ profile, type, }) => {
+const Feed: FC<FeedProps> = ({ profile, type }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const mediaFeedFilters = useProfileFeedStore(
     (state) => state.mediaFeedFilters
@@ -110,7 +115,7 @@ const Feed: FC<FeedProps> = ({ profile, type, }) => {
   });
 
   if (loading) {
-    return <PublicationsShimmer />;
+    return <Loading />;
   }
 
   if (publications?.length === 0) {
@@ -141,44 +146,29 @@ const Feed: FC<FeedProps> = ({ profile, type, }) => {
   }
 
   if (error) {
-    return (
-      <ErrorMessage title={`Failed to load profile feed`} error={error} />
-    );
+    return <ErrorMessage title={`Failed to load profile feed`} error={error} />;
   }
 
   return (
     <Card
-      className=" m-1 p-2 border-2 divide-y-4 rounded-xl"
+      className=" m-1 divide-y-4 rounded-xl border-2 p-2"
       dataTestId={`profile-feed-type-${type.toLowerCase()}`}
     >
-      
+      {publications?.map((publication, index) => (
+        <VideoCard
+          publication={publication as Publication}
+          key={`${publication.id}_${index}`}
+          onDetail={function (video: Publication): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
+      ))}
+      {pageInfo?.next && (
+        <span ref={observe} className="flex  justify-center p-10">
+          <Loading />
+        </span>
+      )}
 
-         
-
-      
-       
-       {publications?.map((publication, index) => (
-          <VideoCard
-          
-           publication={publication as Publication}
-
-
-           key={`${publication.id}_${index}`} onDetail={function (video: Publication): void {
-             throw new Error('Function not implemented.');
-           } }          
-          
-         
-          
-           />
-        ))}
-        {pageInfo?.next && (
-          <span ref={observe} className="flex  justify-center p-10">
-            <Loading />
-          </span>
-        )}
-      
-      
-       
       {hasMore && <span ref={observe} />}
     </Card>
   );

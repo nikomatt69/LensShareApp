@@ -19,7 +19,7 @@ interface RemoteAttachmentPreviewProps {
   remoteAttachment: RemoteAttachment;
   profile: Profile | undefined;
   sentByMe: boolean;
-  preview : ReactNode;
+  preview: ReactNode;
 }
 
 enum Status {
@@ -51,7 +51,7 @@ const RemoteAttachmentPreview: FC<RemoteAttachmentPreviewProps> = ({
   );
 
   const redactionReason = useMemo<string | null>(() => {
-    const cached = cachedAttachments.get(remoteAttachment.url);
+    const cached = cachedAttachments.get(remoteAttachment?.url);
 
     // We've already got it, no need to show loading
     if (cached) {
@@ -63,7 +63,7 @@ const RemoteAttachmentPreview: FC<RemoteAttachmentPreviewProps> = ({
     }
 
     // if it's bigger than 100 megabytes
-    if (remoteAttachment.contentLength > 104857600 && !sentByMe) {
+    if (remoteAttachment?.contentLength > 104857600 && !sentByMe) {
       return `Large attachments are not loaded automatically.`;
     }
 
@@ -72,7 +72,7 @@ const RemoteAttachmentPreview: FC<RemoteAttachmentPreviewProps> = ({
 
   const load = useCallback(
     async function () {
-      const cachedAttachment = cachedAttachments.get(remoteAttachment.url);
+      const cachedAttachment = cachedAttachments.get(remoteAttachment?.url);
 
       if (cachedAttachment) {
         setAttachment(cachedAttachment);

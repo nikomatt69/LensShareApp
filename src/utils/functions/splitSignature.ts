@@ -6,7 +6,7 @@ import { utils } from 'ethers';
  * @returns signature parts
  */
 const splitSignature = (signature: string) => {
-    return utils.splitSignature(signature);
+  return utils.splitSignature(signature);
 };
 
 export default splitSignature;

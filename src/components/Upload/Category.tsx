@@ -1,13 +1,12 @@
-
-import { useAppStore } from '@/store/app'
-import { Trans } from '@lingui/macro'
-import React, { Fragment } from 'react'
-import CheckOutline from '../UI/Icons/CheckOutline'
-import { Listbox, Transition } from '@headlessui/react'
+import { useAppStore } from '@/store/app';
+import { Trans } from '@lingui/macro';
+import React, { Fragment } from 'react';
+import CheckOutline from '../UI/Icons/CheckOutline';
+import { Listbox, Transition } from '@headlessui/react';
 
 const Category = () => {
-  const uploadedVideo = useAppStore((state) => state.uploadedVideo)
-  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo)
+  const uploadedVideo = useAppStore((state) => state.uploadedVideo);
+  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo);
 
   return (
     <>
@@ -22,9 +21,7 @@ const Category = () => {
       >
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full rounded-xl border border-gray-300 py-2.5 pl-4 pr-10 text-left focus:outline-none dark:border-gray-700 sm:text-sm">
-            <span className="block truncate">
-              {uploadedVideo?.title}
-            </span>
+            <span className="block truncate">{uploadedVideo?.title}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4">
               <CheckOutline className="h-3 w-3" />
             </span>
@@ -36,40 +33,38 @@ const Category = () => {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute z-[1] mt-1 max-h-52 w-full overflow-auto rounded-xl bg-white py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 sm:text-sm">
-             
-                <Listbox.Option
-                  key={Category?.name}
-                  className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? 'bg-gray-100 dark:bg-gray-800' : ''
-                    }`
-                  }
-                  value={Category}
-                >
-                  {({ selected }) => (
-                    <>
-                      <span
-                        className={`block truncate ${
-                          selected ? 'font-medium' : 'font-normal'
-                        }`}
-                      >
-                        {Category.name}
+              <Listbox.Option
+                key={Category?.name}
+                className={({ active }) =>
+                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    active ? 'bg-gray-100 dark:bg-gray-800' : ''
+                  }`
+                }
+                value={Category}
+              >
+                {({ selected }) => (
+                  <>
+                    <span
+                      className={`block truncate ${
+                        selected ? 'font-medium' : 'font-normal'
+                      }`}
+                    >
+                      {Category.name}
+                    </span>
+                    {selected ? (
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <CheckOutline className="h-3 w-3" />
                       </span>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                          <CheckOutline className="h-3 w-3" />
-                        </span>
-                      ) : null}
-                    </>
-                  )}
-                </Listbox.Option>
-              
+                    ) : null}
+                  </>
+                )}
+              </Listbox.Option>
             </Listbox.Options>
           </Transition>
         </div>
       </Listbox>
     </>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

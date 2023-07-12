@@ -1,5 +1,5 @@
-import type { SVGProps } from 'react'
-import React from 'react'
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const GraphOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -31,6 +31,6 @@ const GraphOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default GraphOutline
+export default GraphOutline;

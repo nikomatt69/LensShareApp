@@ -1,5 +1,3 @@
-
-
 import type { FC } from 'react';
 import { Card } from '../UI/Card';
 
@@ -12,9 +10,7 @@ const HiddenPublication: FC<HiddenPublicationProps> = ({
 }) => {
   return (
     <Card className="!bg-gray-100 dark:!bg-gray-800">
-      <div className="px-4 py-3 text-sm">
-        {type} was hidden by the author
-      </div>
+      <div className="px-4 py-3 text-sm">{type} was hidden by the author</div>
     </Card>
   );
 };

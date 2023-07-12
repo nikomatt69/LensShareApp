@@ -1,26 +1,26 @@
-import { API_KEY } from "@/constants";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { API_KEY } from '@/constants';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "PATCH") {
+  if (req.method === 'PATCH') {
     const { id } = req.body;
-    console.log("Request Body id:", id);
+    console.log('Request Body id:', id);
     // store vide on ipfs
     try {
       const response = await fetch(`https://livepeer.studio/api/asset/${id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${API_KEY}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           storage: {
-            ipfs: true,
-          },
-        }),
+            ipfs: true
+          }
+        })
       });
       const data = await response.json();
       // wait until ipfs cid is generated
@@ -43,14 +43,12 @@ export default async function handler(
 
 async function getAsset(id: string) {
   const response = await fetch(`https://livepeer.studio/api/asset/${id}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
       Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
+      'Content-Type': 'application/json'
+    }
   });
   const data = await response.json();
   return data;
 }
-
-

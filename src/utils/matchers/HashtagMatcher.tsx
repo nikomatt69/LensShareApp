@@ -1,13 +1,11 @@
-
 import { STATIC_IMAGES_URL } from '@/constants';
 import { Matcher } from 'interweave';
 import Link from 'next/link';
 import { createElement } from 'react';
 
-
 export const Hashtag = ({ ...props }: any) => {
   const hashflag = props.display.slice(1).toLowerCase();
- 
+
   return (
     <span className="inline-flex items-center space-x-1">
       <span>
@@ -15,7 +13,6 @@ export const Hashtag = ({ ...props }: any) => {
           href={`/search?q=${props.display.slice(1)}&type=pubs&src=link_click`}
           onClick={(event) => {
             event.stopPropagation();
-            
           }}
         >
           {props.display}

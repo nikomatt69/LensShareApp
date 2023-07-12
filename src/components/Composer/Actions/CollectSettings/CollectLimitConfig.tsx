@@ -1,9 +1,6 @@
-
 import ToggleWithHelper from '@/components/ToggleWithHelper';
 import { Input } from '@/components/UI/Input';
 import { StarIcon } from '@heroicons/react/24/outline';
-
-
 
 import type { FC } from 'react';
 import { useCollectModuleStore } from 'src/store/collect-module';

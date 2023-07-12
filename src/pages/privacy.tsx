@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
 
 const terms = () => {
   return (
@@ -153,13 +153,15 @@ const terms = () => {
             If you have any questions or comments about this Privacy Policy, our
             data practices, or our compliance with applicable law, please
             contact us at{' '}
-            <Link href="mailto:hello@lenshareapp.xyz">hello@lenshareapp.xyz</Link>
+            <Link href="mailto:hello@lenshareapp.xyz">
+              hello@lenshareapp.xyz
+            </Link>
             .
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default terms
+export default terms;

@@ -1,5 +1,3 @@
-
-
 import type { Dispatch, FC } from 'react';
 import type { CollectModuleType } from 'src/store/collect-module';
 import { useCollectModuleStore } from 'src/store/collect-module';
@@ -10,14 +8,15 @@ import FollowersConfig from './FollowersConfig';
 import ReferralConfig from './ReferralConfig';
 import SplitConfig from './SplitConfig';
 import TimeLimitConfig from './TimeLimitConfig';
-import { CollectModules, useEnabledModulesQuery } from '@/utils/lens/generatedLenster';
+import {
+  CollectModules,
+  useEnabledModulesQuery
+} from '@/utils/lens/generatedLenster';
 import { Button } from '@/components/UI/Button';
 import ToggleWithHelper from '@/components/ToggleWithHelper';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import isValidEthAddress from '@/utils/functions/isValidEthAddress';
 import { Spinner } from '@/components/UI/Spinner';
-
-
 
 interface CollectFormProps {
   setShowModal: Dispatch<boolean>;
@@ -61,9 +60,7 @@ const CollectForm: FC<CollectFormProps> = ({ setShowModal }) => {
     return (
       <div className="space-y-2 px-5 py-3.5 text-center font-bold">
         <Spinner size="md" className="mx-auto" />
-        <div>
-          Loading collect settings
-        </div>
+        <div>Loading collect settings</div>
       </div>
     );
   }

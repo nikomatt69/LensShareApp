@@ -1,11 +1,10 @@
-
 import getAvatar from '@/lib/getAvatar';
 import getStampFyiURL from '@/lib/getStampFyiURL';
 import formatAddress from '@/utils/functions/formatAddress';
 import formatHandle from '@/utils/functions/formatHandle';
 import useSendMessage from '@/utils/hooks/useSendMessage';
 import { Profile } from '@/utils/lens/generatedLenster';
-import { ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 import { ContentTypeText } from '@xmtp/xmtp-js';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -16,6 +15,14 @@ import FollowButton from '../Buttons/FollowButton';
 
 import { Image } from '../UI/Image';
 import UserProfile from '../ProfilePage/UserProfile';
+import { Modal } from '../UI/Modal';
+import FullScreenModal from '../UI/FullScreenModal';
+import Link from 'next/link';
+import MeetRoom from '../Meet';
+import Lobby from '../Meet/Lobby';
+import Follow from '../Profile/Follow';
+import Unfollow from '../Profile/Unfollow';
+import { Button } from '../UI/Button';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -35,6 +42,11 @@ const MessageHeader: FC<MessageHeaderProps> = ({
     (ensName && getStampFyiURL(conversationKey?.split('/')[0] ?? '')) ?? '';
 
   const { sendMessage } = useSendMessage(conversationKey ?? '');
+  const [show, setShow] = useState(false);
+
+  const currentProfile = profile;
+
+  const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
 
   const setFollowingWrapped = useCallback(
     (following: boolean) => {
@@ -57,16 +69,15 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center rounded-xl border  justify-between px-4 py-2">
+    <div className="divider flex items-center justify-between rounded-xl  border px-4 py-2">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}
           className="mr-1 h-6 w-6 cursor-pointer lg:hidden"
         />
-         {profile?.id ? (
+        {profile?.id ? (
           <UserProfile profile={profile} />
         ) : (
-        
           <>
             <Image
               src={ensName ? url : getAvatar(profile)}
@@ -80,49 +91,59 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
-      {profile && (
-        <div className="flex r-0 cursor-pointer items-center">
-          <img
-            src="/camera-video.svg"
-            onClick={async () => {
-              const apiCall = await fetch(
-                'https://api.huddle01.com/api/v1/create-room',
-                {
-                  method: 'POST',
-                  body: JSON.stringify({
-                    title: 'Huddle01 Meeting'
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': process.env.NEXT_PUBLIC_HUDDLE_API_KEY!
+      {currentProfile && (
+        <div>
+          <button>
+            <img
+              src="/images/icon.png"
+              onClick={async () => {
+                const apiCall = await fetch(
+                  'https://api.huddle01.com/api/v1/create-room',
+                  {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      title: 'Huddle01 Meeting'
+                    }),
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'x-api-key': process.env.NEXT_PUBLIC_API_KEY! || '',
+                      'Content-Type-Options': 'no-cors'
+                    }
                   }
-                }
-              );
-              const data = await apiCall.json();
-              const { meetingLink } = data.data;
-              sendMessage(
-                `Join here for a call: ${meetingLink}`,
-                ContentTypeText,
-                ''
-              );
-              window.open(meetingLink, 'newwindow', 'width=1200, height=800');
-            }}
-            className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
-          />
-
-         
-        </div>
-        
-      )}
-
-      { following ? ( 
-            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile }  /> 
-            ) : (
-            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
+                );
+                const data = await apiCall.json();
+                const { roomId } = data.data;
+                const currentUrl = window.location.href;
+                const url = currentUrl.match('(^https?:\\/\\/([^/]+)*)')?.[0];
+                sendMessage(
+                  `Join here for a call: ${url}/meet/${roomId}`,
+                  ContentTypeText,
+                  ''
+                );
+                window.open(
+                  `/meet/${roomId}`,
+                  'newwindow',
+                  'width=1200, height=800'
+                );
+              }}
+              className="cursor-pointer-auto mb-2 mr-4 inline h-8  w-8 cursor-pointer"
+              draggable="false"
+            />
+          </button>
+          {!following ? (
+            <FollowButton
+              profile={profile}
+              setFollowing={setFollowingWrapped}
+            />
+          ) : (
+            <UnfollowButton
+              profile={profile}
+              setFollowing={setFollowingWrapped}
+            />
           )}
-        
+        </div>
+      )}
     </div>
   );
 };
-
 export default MessageHeader;

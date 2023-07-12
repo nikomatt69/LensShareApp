@@ -1,9 +1,9 @@
 import { ImageResponse } from '@vercel/og';
- 
+
 export const config = {
-  runtime: 'edge',
+  runtime: 'edge'
 };
- 
+
 export default function () {
   return new ImageResponse(
     (
@@ -16,11 +16,11 @@ export default function () {
           display: 'flex',
           textAlign: 'center',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}
       >
         Hello world!
       </div>
-    ),
+    )
   );
 }

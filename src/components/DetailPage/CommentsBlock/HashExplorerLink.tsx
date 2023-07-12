@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import type { ReactElement } from 'react'
-import React from 'react'
-import { POLYGONSCAN_URL } from '@/constants'
+import Link from 'next/link';
+import type { ReactElement } from 'react';
+import React from 'react';
+import { POLYGONSCAN_URL } from '@/constants';
 
 const HashExplorerLink = ({
   hash,
   children
 }: {
-  hash: string
-  children: ReactElement
+  hash: string;
+  children: ReactElement;
 }) => {
   return (
     <Link
@@ -18,7 +18,7 @@ const HashExplorerLink = ({
     >
       {children}
     </Link>
-  )
-}
+  );
+};
 
-export default HashExplorerLink
+export default HashExplorerLink;

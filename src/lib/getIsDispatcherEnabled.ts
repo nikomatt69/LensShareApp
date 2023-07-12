@@ -1,5 +1,5 @@
-import { OLD_LENS_RELAYER_ADDRESS } from "@/constants";
-import { Profile } from "@/utils/lens/generatedLenster";
+import { OLD_LENS_RELAYER_ADDRESS } from '@/constants';
+import { Profile } from '@/utils/lens/generatedLenster';
 
 const getIsDispatcherEnabled = (profile: Profile | null): boolean => {
   if (!profile?.dispatcher?.canUseRelay) {

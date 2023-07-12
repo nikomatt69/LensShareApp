@@ -1,8 +1,10 @@
-
 import { Button } from '@/components/UI/Button';
 import { Card } from '@/components/UI/Card';
 import downloadJson from '@/lib/downloadJson';
-import { FollowingRequest, useFollowingLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  FollowingRequest,
+  useFollowingLazyQuery
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppStore } from 'src/store/app';
@@ -23,7 +25,6 @@ const Following: FC = () => {
   });
 
   const handleExportClick = async () => {
-    
     setExporting(true);
     const fetchFollowing = async (cursor?: string) => {
       const { data } = await exportFollowing({
@@ -64,23 +65,15 @@ const Following: FC = () => {
 
   return (
     <Card className="space-y-2 p-5">
-      <div className="text-lg font-bold">
-        Export following
-      </div>
-      <div className="pb-2">
-        Export all your following to a JSON file.
-      </div>
+      <div className="text-lg font-bold">Export following</div>
+      <div className="pb-2">Export all your following to a JSON file.</div>
       {following.length > 0 ? (
         <div className="pb-2">
-          
-            Exported <b>{following.length}</b> following
-          
+          Exported <b>{following.length}</b> following
         </div>
       ) : null}
       {fetchCompleted ? (
-        <Button onClick={download}>
-          Download following
-        </Button>
+        <Button onClick={download}>Download following</Button>
       ) : (
         <Button onClick={handleExportClick} disabled={exporting}>
           {exporting ? 'Exporting...' : 'Export now'}

@@ -1,43 +1,39 @@
-import {Modal} from '@/components/UI/Modal'
-import {Tooltip} from '@/components/UI/Tooltip'
-import type { FC } from 'react'
-import React, { useState } from 'react'
-import toast from 'react-hot-toast'
-import { LENSSHARE_EMBED_URL} from '@/constants'
-import useCopyToClipboard from '@/utils/hooks/useCopyToClipboard'
-import { AiOutlineCode } from 'react-icons/ai'
-import { PlayIcon } from '@heroicons/react/24/outline'
-import FullScreenModal from '../UI/FullScreenModal'
-import { MdOutlineClose } from 'react-icons/md'
-
-
+import { Modal } from '@/components/UI/Modal';
+import { Tooltip } from '@/components/UI/Tooltip';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { LENSSHARE_EMBED_URL } from '@/constants';
+import useCopyToClipboard from '@/utils/hooks/useCopyToClipboard';
+import { AiOutlineCode } from 'react-icons/ai';
+import { PlayIcon } from '@heroicons/react/24/outline';
+import FullScreenModal from '../UI/FullScreenModal';
+import { MdOutlineClose } from 'react-icons/md';
 
 type Props = {
-  videoId: string
-  onClose: () => void
-}
+  videoId: string;
+  onClose: () => void;
+};
 
 const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
-  const [showModal, setShowModal] = useState(false)
-  const [copy] = useCopyToClipboard()
+  const [showModal, setShowModal] = useState(false);
+  const [copy] = useCopyToClipboard();
 
-  const iframeCode = `<iframe width="560" height="315" src="${LENSSHARE_EMBED_URL}/${videoId}?autoplay=1&t=0&loop=0" title="LensShare video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;" allowfullscreen></iframe>`
+  const iframeCode = `<iframe width="560" height="315" src="${LENSSHARE_EMBED_URL}/${videoId}?autoplay=1&t=0&loop=0" title="LensShare video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;" allowfullscreen></iframe>`;
 
   const onCopyCode = () => {
-  
-    copy(iframeCode)
-    toast.success(`Copied to clipboard`)
-  }
+    copy(iframeCode);
+    toast.success(`Copied to clipboard`);
+  };
 
   const closeModal = () => {
-    setShowModal(false)
-    onClose()
-  }
+    setShowModal(false);
+    onClose();
+  };
 
   const openModal = () => {
-    setShowModal(true)
-   
-  }
+    setShowModal(true);
+  };
 
   return (
     <div>
@@ -45,23 +41,22 @@ const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
         title="Embed Video"
         onClose={closeModal}
         show={showModal}
-       
       >
-        <div className="mt-40 rounded-xl bg-white display:absolute ">
-        <div className='z-10 max-md:absolute'>
-        <button
-          type="button"
-          className="p-1 focus:outline-none m-4 rounded-full right-1  bg-slate-600"
-          onClick={() =>  setShowModal(false)}
-        >
-          <MdOutlineClose className='text-white w-4 h-4' />
-        </button>
-      </div>
+        <div className="display:absolute mt-40 rounded-xl bg-white ">
+          <div className="z-10 max-md:absolute">
+            <button
+              type="button"
+              className="right-1 m-4 rounded-full bg-slate-600 p-1  focus:outline-none"
+              onClick={() => setShowModal(false)}
+            >
+              <MdOutlineClose className="h-4 w-4 text-white" />
+            </button>
+          </div>
           <div className="flex flex-col space-y-3">
             <div className="w-full break-words">
               <iframe
                 sandbox="allow-scripts allow-same-origin"
-                className="aspect-[16/9] mt-24 break-words w-full"
+                className="mt-24 aspect-[16/9] w-full break-words"
                 src={`${LENSSHARE_EMBED_URL}/${videoId}`}
                 title="LensShare video player"
                 allow="accelerometer; autoplay; clipboard-write; gyroscope;"
@@ -92,7 +87,7 @@ const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
         </button>
       </Tooltip>
     </div>
-  )
-}
+  );
+};
 
-export default EmbedVideo
+export default EmbedVideo;

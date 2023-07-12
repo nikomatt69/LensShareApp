@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { Button } from '../UI/Button';
 import { BsMailbox } from 'react-icons/bs';
@@ -13,7 +12,6 @@ const Message: FC<MessageProps> = ({ onClick }) => {
     <Button
       className="!px-3 !py-1.5 text-sm"
       icon={<ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5" />}
-      
       onClick={onClick}
       aria-label="Message"
     />

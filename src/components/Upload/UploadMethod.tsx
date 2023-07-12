@@ -1,32 +1,31 @@
+import { Trans } from '@lingui/macro';
+import clsx from 'clsx';
+import React, { useEffect } from 'react';
 
-import { Trans } from '@lingui/macro'
-import clsx from 'clsx'
-import React, { useEffect } from 'react'
+import BundlrInfo from './BundlrInfo';
+import { useAppStore } from '@/store/app';
+import { canUploadedToIpfs } from './canUploadedToIpfs';
+import { Tab } from '@headlessui/react';
 
-import BundlrInfo from './BundlrInfo'
-import { useAppStore } from '@/store/app'
-import { canUploadedToIpfs } from './canUploadedToIpfs'
-import { Tab } from '@headlessui/react'
-
-import { IPFS_FREE_UPLOAD_LIMIT } from '@/constants'
-import Tooltip from './Tooltip'
+import { IPFS_FREE_UPLOAD_LIMIT } from '@/constants';
+import Tooltip from './Tooltip';
 
 const UploadMethod = () => {
-  const uploadedVideo = useAppStore((state) => state.uploadedVideo)
-  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo)
+  const uploadedVideo = useAppStore((state) => state.uploadedVideo);
+  const setUploadedVideo = useAppStore((state) => state.setUploadedVideo);
 
-  const isUnderFreeLimit = canUploadedToIpfs(uploadedVideo.file?.size)
+  const isUnderFreeLimit = canUploadedToIpfs(uploadedVideo.file?.size);
 
   const onClickArweave = () => {
-    setUploadedVideo({ isUploadToIpfs: false })
-  }
+    setUploadedVideo({ isUploadToIpfs: false });
+  };
 
   useEffect(() => {
     if (isUnderFreeLimit && !uploadedVideo.isUploadToIpfs) {
-      setUploadedVideo({ isUploadToIpfs: true })
+      setUploadedVideo({ isUploadToIpfs: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <Tab.Group
@@ -62,7 +61,6 @@ const UploadMethod = () => {
             visible={!isUnderFreeLimit}
             content={`Video size under ${IPFS_FREE_UPLOAD_LIMIT}mb can be uploaded to IPFS for free`}
             placement="top-end"
-           
           >
             <div className="py-2.5">Upload to IPFS</div>
           </Tooltip>
@@ -74,7 +72,7 @@ const UploadMethod = () => {
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
-  )
-}
+  );
+};
 
-export default UploadMethod
+export default UploadMethod;

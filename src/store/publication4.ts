@@ -1,5 +1,3 @@
-
-
 import { NewLensshareAttachment } from '@/typesLenster';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { create } from 'zustand';

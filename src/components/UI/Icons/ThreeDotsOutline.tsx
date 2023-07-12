@@ -1,6 +1,6 @@
-import clsx from 'clsx'
-import type { SVGProps } from 'react'
-import React from 'react'
+import clsx from 'clsx';
+import type { SVGProps } from 'react';
+import React from 'react';
 
 const ThreeDotsOutline = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -29,6 +29,6 @@ const ThreeDotsOutline = (props: SVGProps<SVGSVGElement>) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
-export default ThreeDotsOutline
+export default ThreeDotsOutline;

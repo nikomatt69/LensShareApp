@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import toast from 'react-hot-toast';
 import Custom404 from 'src/pages/404';
@@ -7,7 +6,11 @@ import { useEffectOnce } from 'usehooks-ts';
 
 import SettingsSidebar from '../Sidebar';
 import { useDisconnectXmtp } from '@/utils/hooks/useXmtpClient';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import { APP_NAME } from '@/constants';
 import MetaTags from '@/components/UI/MetaTags';
 import { Card } from '@/components/UI/Card';
@@ -18,7 +21,6 @@ const CleanupSettings: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const disconnectXmtp = useDisconnectXmtp();
 
-  
   if (!currentProfile) {
     return <Custom404 />;
   }
@@ -37,28 +39,20 @@ const CleanupSettings: NextPage = () => {
       <GridItemEight>
         <Card className="p-5">
           <div className="space-y-5">
-            <div className="text-lg font-bold">
-              Cleanup Localstorage
-            </div>
+            <div className="text-lg font-bold">Cleanup Localstorage</div>
             <p>
-              
-                If you stuck with some issues, you can try to clean up the
-                localstorage. This will remove all the data stored in your
-                browser.
-              
+              If you stuck with some issues, you can try to clean up the
+              localstorage. This will remove all the data stored in your
+              browser.
             </p>
           </div>
           <div className="divider my-5" />
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <b>
-                  Optimistic publications
-                </b>
+                <b>Optimistic publications</b>
                 <div className="lt-text-gray-500 text-xs font-bold">
-                  
-                    Clean your posts or comments that are not indexed
-                  
+                  Clean your posts or comments that are not indexed
                 </div>
               </div>
               <Button onClick={() => cleanup(Localstorage.TransactionStore)}>
@@ -67,9 +61,7 @@ const CleanupSettings: NextPage = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <b>
-                  Timeline settings
-                </b>
+                <b>Timeline settings</b>
                 <div className="lt-text-gray-500 text-xs font-bold">
                   Clean your timeline filter settings
                 </div>
@@ -80,9 +72,7 @@ const CleanupSettings: NextPage = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <b>
-                  Direct message keys
-                </b>
+                <b>Direct message keys</b>
                 <div className="lt-text-gray-500 text-xs font-bold">
                   Clean your DM encryption key
                 </div>
@@ -98,9 +88,7 @@ const CleanupSettings: NextPage = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <b>
-                  Feature flags cache
-                </b>
+                <b>Feature flags cache</b>
                 <div className="lt-text-gray-500 text-xs font-bold">
                   Clean your feature flags cache
                 </div>
@@ -111,9 +99,7 @@ const CleanupSettings: NextPage = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <b className="text-red-500">
-                  App settings
-                </b>
+                <b className="text-red-500">App settings</b>
                 <div className="lt-text-gray-500 text-xs font-bold">
                   Note: Cleaning will log you out
                 </div>

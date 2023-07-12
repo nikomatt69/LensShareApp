@@ -1,5 +1,3 @@
-
-
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState } from 'react';

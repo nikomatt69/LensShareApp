@@ -1,31 +1,25 @@
+import { FastAverageColor } from 'fast-average-color';
+import { useCallback, useEffect, useState } from 'react';
 
-import { FastAverageColor } from 'fast-average-color'
-import { useCallback, useEffect, useState } from 'react'
-
-
-
-const fac = new FastAverageColor()
+const fac = new FastAverageColor();
 
 const useAverageColor = (src: string, check: boolean) => {
-  const [color, setColor] = useState('')
+  const [color, setColor] = useState('');
 
   const getColors = useCallback(async () => {
     if (!check) {
-      return
+      return;
     }
-    return fac
-      .getColorAsync(src)
-      .then((color) => {
-        setColor(color.hex)
-      })
-      
-  }, [src, check])
+    return fac.getColorAsync(src).then((color) => {
+      setColor(color.hex);
+    });
+  }, [src, check]);
 
   useEffect(() => {
-    getColors()
-  }, [getColors])
+    getColors();
+  }, [getColors]);
 
-  return { color }
-}
+  return { color };
+};
 
-export default useAverageColor
+export default useAverageColor;

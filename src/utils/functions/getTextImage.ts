@@ -1,6 +1,10 @@
-import {encode} from 'html-entities';
+import { encode } from 'html-entities';
 
-const getTextImage = async (content: string, username: string, timestamp: string) => {
+const getTextImage = async (
+  content: string,
+  username: string,
+  timestamp: string
+) => {
   const svg = `<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <style>
       .content {
@@ -20,7 +24,10 @@ const getTextImage = async (content: string, username: string, timestamp: string
     <g clip-path="url(#clip0_1_2)">
     <path d="M475 0H25C11.1929 0 0 11.1929 0 25V475C0 488.807 11.1929 500 25 500H475C488.807 500 500 488.807 500 475V25C500 11.1929 488.807 0 475 0Z" fill="white"/>
     <foreignObject x="30" y="90" width="440" height="300">
-    <p class="content" xmlns="http://www.w3.org/1999/xhtml">${encode(content, {mode: 'nonAsciiPrintable', level: 'xml'} )}}</p>
+    <p class="content" xmlns="http://www.w3.org/1999/xhtml">${encode(content, {
+      mode: 'nonAsciiPrintable',
+      level: 'xml'
+    })}}</p>
     </foreignObject>
     <path d="M0 25C0 11.1929 11.1929 0 25 0H475C488.807 0 500 11.1929 500 25V78H0V25Z" fill="#ec1e25" fill-opacity="0.90"/>
     <path d="M500.06 474.236C500.026 488.043 488.806 499.208 474.999 499.174L24.9999 498.062C11.193 498.027 0.0276556 486.807 0.0617778 473L0.192759 420L500.191 421.236L500.06 474.236Z" fill="#ec1e25" fill-opacity="0.90"/>
@@ -39,7 +46,10 @@ const getTextImage = async (content: string, username: string, timestamp: string
 </svg>
 `;
   const blob = new Blob([svg], { type: 'image/svg+xml' });
-  const file = new File([blob], 'post.svg', { lastModified: new Date().getTime(), type: blob.type });
+  const file = new File([blob], 'post.svg', {
+    lastModified: new Date().getTime(),
+    type: blob.type
+  });
   return URL.createObjectURL(file);
 };
 

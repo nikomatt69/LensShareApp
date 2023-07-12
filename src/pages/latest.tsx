@@ -1,3 +1,3 @@
-import LatestRender from "@/components/LatestRender";
+import LatestRender from '@/components/LatestRender';
 
-export default LatestRender
+export default LatestRender;

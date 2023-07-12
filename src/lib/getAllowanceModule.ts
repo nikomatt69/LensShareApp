@@ -1,5 +1,8 @@
-import { CollectModules, FollowModules, ReferenceModules } from "@/utils/lens/generatedLenster";
-
+import {
+  CollectModules,
+  FollowModules,
+  ReferenceModules
+} from '@/utils/lens/generatedLenster';
 
 /**
  * Returns the name and field of the specified module.

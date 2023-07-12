@@ -1,7 +1,4 @@
-import { lensshareMembers } from "./pinsta-members";
-
-
-
+import { lensshareMembers } from './pinsta-members';
 
 export enum FeatureFlag {
   TrendingWidget = 'trending-widget',
@@ -13,7 +10,7 @@ export enum FeatureFlag {
   ForYou = 'for-you',
   WTF2 = 'wtf2',
   ExploreTags = 'explore-tags',
-  POST_WITH_SOURCE_URL = "POST_WITH_SOURCE_URL"
+  POST_WITH_SOURCE_URL = 'POST_WITH_SOURCE_URL'
 }
 
 export const featureFlags = [

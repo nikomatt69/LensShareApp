@@ -1,4 +1,3 @@
-
 import { t, Trans } from '@lingui/macro';
 import type { NextPage } from 'next';
 import { useState } from 'react';
@@ -9,9 +8,20 @@ import { useEffectOnce } from 'usehooks-ts';
 
 import SettingsSidebar from '../Sidebar';
 import Allowance from './Allowance';
-import { CollectModules, Erc20, FollowModules, ReferenceModules, useApprovedModuleAllowanceAmountQuery, useEnabledModulesQuery } from '@/utils/lens/generatedLenster';
+import {
+  CollectModules,
+  Erc20,
+  FollowModules,
+  ReferenceModules,
+  useApprovedModuleAllowanceAmountQuery,
+  useEnabledModulesQuery
+} from '@/utils/lens/generatedLenster';
 import { APP_NAME, DEFAULT_COLLECT_TOKEN } from '@/constants';
-import { GridItemEight, GridItemFour, GridLayout } from '@/components/UI/GridLayout';
+import {
+  GridItemEight,
+  GridItemFour,
+  GridLayout
+} from '@/components/UI/GridLayout';
 import MetaTags from '@/components/UI/MetaTags';
 import { Card } from '@/components/UI/Card';
 import Loader from '@/components/UI/Loader';
@@ -39,8 +49,6 @@ const AllowanceSettings: NextPage = () => {
     error: enabledModulesError
   } = useEnabledModulesQuery();
 
-
-
   const { data, loading, error, refetch } =
     useApprovedModuleAllowanceAmountQuery({
       variables: { request: getAllowancePayload(DEFAULT_COLLECT_TOKEN) },
@@ -65,20 +73,14 @@ const AllowanceSettings: NextPage = () => {
         <Card>
           <div className="mx-5 mt-5">
             <div className="space-y-5">
-              <div className="text-lg font-bold">
-                Allow / Revoke modules
-              </div>
+              <div className="text-lg font-bold">Allow / Revoke modules</div>
               <p>
-                
-                  In order to use collect feature you need to allow the module
-                  you use, you can allow and revoke the module anytime.
-                
+                In order to use collect feature you need to allow the module you
+                use, you can allow and revoke the module anytime.
               </p>
             </div>
             <div className="divider my-5" />
-            <div className="label mt-6">
-              Select Currency
-            </div>
+            <div className="label mt-6">Select Currency</div>
             <select
               className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 "
               onChange={(e) => {

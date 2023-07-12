@@ -1,8 +1,11 @@
-
 import type { FC } from 'react';
 
 import Module from './Module';
-import { ApprovedAllowanceAmount, ApprovedModuleAllowanceAmountQuery, CollectModules } from '@/utils/lens/generatedLenster';
+import {
+  ApprovedAllowanceAmount,
+  ApprovedModuleAllowanceAmountQuery,
+  CollectModules
+} from '@/utils/lens/generatedLenster';
 
 interface AllowanceProps {
   allowance: ApprovedModuleAllowanceAmountQuery | undefined;

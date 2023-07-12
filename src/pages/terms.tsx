@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
 
 const terms = () => {
   return (
@@ -210,13 +210,15 @@ const terms = () => {
           <h2>11. Contact Information</h2>
           <p>
             Questions about the Terms should be sent to us at{' '}
-            <Link href="mailto:hello@lenshareapp.xyz">hello@lenshareapp.xyz</Link>
+            <Link href="mailto:hello@lenshareapp.xyz">
+              hello@lenshareapp.xyz
+            </Link>
             .
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default terms
+export default terms;

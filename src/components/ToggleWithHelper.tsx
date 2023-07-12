@@ -1,4 +1,3 @@
-
 import type { FC, ReactNode } from 'react';
 import { Toggle } from './UI/Toggle';
 

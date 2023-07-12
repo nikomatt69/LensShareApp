@@ -1,4 +1,3 @@
-
 import { Trans } from '@lingui/macro';
 import type { FC } from 'react';
 
@@ -14,10 +13,8 @@ const Fingerprint: FC = () => {
 
   return (
     <Card className="space-y-2 p-5">
-      <div className="pb-1 text-lg font-bold">
-        Your unique fingerprint
-      </div>
-      <span className="rounded-md bg-gray-300 px-1.5 py-0.5 text-sm font-bold 0">
+      <div className="pb-1 text-lg font-bold">Your unique fingerprint</div>
+      <span className="0 rounded-md bg-gray-300 px-1.5 py-0.5 text-sm font-bold">
         {fingerprint}
       </span>
     </Card>

@@ -1,49 +1,65 @@
-import React, { useEffect, useRef, useState, FC, Dispatch, useCallback } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
-import { Toaster } from "react-hot-toast";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  FC,
+  Dispatch,
+  useCallback
+} from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Toaster } from 'react-hot-toast';
 
-import Comments from "./CommentsBlock/Comments";
-import { useQuery } from "@apollo/client";
-import { Publication, PublicationDocument, Profile } from "@/utils/lens/generatedLenster";
-import { usePublicationQuery, useUserProfilesQuery } from "@/types/graph";
-import getAvatar from "@/lib/getAvatar";
-import { copyToClipboard } from "@/utils/clipboard";
-import getMedia from "@/lib/getMedia";
-import LoginButton from "../Login/LoginButton";
-import { useAppStore } from "src/store/app";
-import UnfollowButton from "../Buttons/UnfollowButton";
-import FollowButton from "../Buttons/FollowButton";
-import Like from "../Buttons/Likes/Like";
-import { ArrowLeftIcon, ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/solid";
-import formatHandle from "@/utils/functions/formatHandle";
-import CollectButton from "../Buttons/Collects/CollectButton";
-import MetaTags from "../UI/MetaTags";
-import { APP_ID, APP_NAME, IS_MAINNET, LENSTER_APP_ID, LENSTUBE_APP_ID, LENSTUBE_BYTES_APP_ID } from "@/constants";
-import NavbarDetails from "../NavbarDetails";
-import Following from "../ProfilePage/Following";
-import { Modal } from "../UI/Modal";
-import Followers from "../ProfilePage/Followers";
-import { getPublicationMediaUrl } from "@/utils/functions/getPublicationMediaUrl";
-import imageCdn from "@/utils/functions/imageCdn";
-import { sanitizeIpfsUrl } from "@/utils/sanitizeIpfsUrl";
-import getThumbnailUrl from "@/utils/functions/getThumbnailUrl";
-import VideoPlayer from "@/utils/VideoPlayer";
-
-
-
+import Comments from './CommentsBlock/Comments';
+import { useQuery } from '@apollo/client';
+import {
+  Publication,
+  PublicationDocument,
+  Profile
+} from '@/utils/lens/generatedLenster';
+import { usePublicationQuery, useUserProfilesQuery } from '@/types/graph';
+import getAvatar from '@/lib/getAvatar';
+import { copyToClipboard } from '@/utils/clipboard';
+import getMedia from '@/lib/getMedia';
+import LoginButton from '../Login/LoginButton';
+import { useAppStore } from 'src/store/app';
+import UnfollowButton from '../Buttons/UnfollowButton';
+import FollowButton from '../Buttons/FollowButton';
+import Like from '../Buttons/Likes/Like';
+import {
+  ArrowLeftIcon,
+  ChatBubbleLeftEllipsisIcon
+} from '@heroicons/react/24/solid';
+import formatHandle from '@/utils/functions/formatHandle';
+import CollectButton from '../Buttons/Collects/CollectButton';
+import MetaTags from '../UI/MetaTags';
+import {
+  APP_ID,
+  APP_NAME,
+  IS_MAINNET,
+  LENSTER_APP_ID,
+  LENSTUBE_APP_ID,
+  LENSTUBE_BYTES_APP_ID
+} from '@/constants';
+import NavbarDetails from '../NavbarDetails';
+import Following from '../ProfilePage/Following';
+import { Modal } from '../UI/Modal';
+import Followers from '../ProfilePage/Followers';
+import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
+import imageCdn from '@/utils/functions/imageCdn';
+import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import VideoPlayer from '@/utils/VideoPlayer';
 
 interface Props {
   publication: Publication;
   profile: Profile;
   setFollowing: Dispatch<boolean>;
   following: boolean;
-  show: boolean
-  setShowShare: React.Dispatch<boolean>
-  isShow: boolean
-
-  
+  show: boolean;
+  setShowShare: React.Dispatch<boolean>;
+  isShow: boolean;
 }
 
 const VideoDetail: FC<Props> = ({
@@ -51,10 +67,9 @@ const VideoDetail: FC<Props> = ({
   profile,
   setFollowing,
   following,
-  isShow,
-
+  isShow
 }) => {
-  const videoWatchTime = useAppStore((state) => state.videoWatchTime)
+  const videoWatchTime = useAppStore((state) => state.videoWatchTime);
   const [showShare, setShowShare] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [liked, setLiked] = useState(false);
@@ -63,24 +78,19 @@ const VideoDetail: FC<Props> = ({
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
-  const [showReport, setShowReport] = useState(false)
+  const [showReport, setShowReport] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { id } = router.query;
-  
 
-   const { data, loading, error } = useQuery(PublicationDocument, {
-     variables: {
-       request: {
-         publicationId: id
-         
-       }
-      },
- });
-  
-
-   
+  const { data, loading, error } = useQuery(PublicationDocument, {
+    variables: {
+      request: {
+        publicationId: id
+      }
+    }
+  });
 
   //CHANGE LINK ON DEPLOYMENT TO NEW DOMAIN!
   const Links = `https://lenshareapp.xyz/post/${publication?.id}`;
@@ -99,22 +109,21 @@ const VideoDetail: FC<Props> = ({
   };
   const playVideo = () => {
     if (!videoRef.current || isShow) {
-      return
+      return;
     }
-    videoRef.current.currentTime = 0
-    videoRef.current.volume = 1
-    videoRef.current.autoplay = true
-    videoRef.current?.play().catch(() => { })
-    setIsPlaying(true)
-  }
+    videoRef.current.currentTime = 0;
+    videoRef.current.volume = 1;
+    videoRef.current.autoplay = true;
+    videoRef.current?.play().catch(() => {});
+    setIsPlaying(true);
+  };
 
   const refCallback = (ref: HTMLMediaElement) => {
     if (!ref) {
-      return
+      return;
     }
-    videoRef
-  }
-
+    videoRef;
+  };
 
   useEffect(() => {
     if (videoRef?.current) {
@@ -122,46 +131,44 @@ const VideoDetail: FC<Props> = ({
     }
   }, [isVideoMuted]);
 
-  const isBytesVideo = publication.appId === LENSTUBE_BYTES_APP_ID || publication.appId === LENSTUBE_APP_ID || publication.appId === APP_ID || publication.appId === LENSTER_APP_ID
+  const isBytesVideo =
+    publication.appId === LENSTUBE_BYTES_APP_ID ||
+    publication.appId === LENSTUBE_APP_ID ||
+    publication.appId === APP_ID ||
+    publication.appId === LENSTER_APP_ID;
 
   return (
-    <div className="flex flex-col lg:flex-row lg:h-screen items-stretch">
-      <MetaTags
-        title={`Post • ${APP_NAME}`}     />
+    <div className="flex flex-col items-stretch lg:h-screen lg:flex-row">
+      <MetaTags title={`Post • ${APP_NAME}`} />
       <Toaster position="bottom-right" />
-      <div className="lg:flex-grow flex justify-center  items-center relative bg-black">
-      <VideoPlayer
+      <div className="relative flex items-center  justify-center bg-black lg:flex-grow">
+        <VideoPlayer
           currentTime={videoWatchTime}
-          
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageCdn(
             sanitizeIpfsUrl(getThumbnailUrl(publication.metadata)),
             isBytesVideo ? 'thumbnail_v' : 'thumbnail'
-
-            
-          )} options={{
+          )}
+          options={{
             autoPlay: true,
             muted: true,
             loop: true,
             loadingSpinner: false,
             isCurrentlyShown: true
-          }}       
-          
-          
-       
-      />
-        <div className="absolute top-5 left-5 flex gap-3">
+          }}
+        />
+        <div className="absolute left-5 top-5 flex gap-3">
           <button
             onClick={() => router.back()}
-            className="w-[40px] h-[40px] rounded-md flex justify-center items-center"
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-md"
           >
-            <ArrowLeftIcon className="w-5 h-5 fill-white font-semibold cursor-pointer" />
+            <ArrowLeftIcon className="h-5 w-5 cursor-pointer fill-white font-semibold" />
           </button>
         </div>
       </div>
-      <div className="w-full lg:w-[500px] flex-shrink-0 flex flex-col items-stretch h-screen">
-        <div className="px-4 pt-10 pb-4 flex-shrink-0 border-b">
+      <div className="flex h-screen w-full flex-shrink-0 flex-col items-stretch lg:w-[500px]">
+        <div className="flex-shrink-0 border-b px-4 pb-4 pt-10">
           <div className="flex">
             <Link legacyBehavior href={`/u/${profile?.id}`} key={profile?.id}>
               <a className="mr-3 flex-shrink-0 rounded-full">
@@ -174,62 +181,86 @@ const VideoDetail: FC<Props> = ({
                 />
               </a>
             </Link>
-            <div className="flex p-1 flex-col flex-grow justify-center">
+            <div className="flex flex-grow flex-col justify-center p-1">
               <Link href={`/u/${profile?.id}`} key={profile?.id}>
-                <a className="font-bold block hover:underline items-center text-primary">
+                <a className="block items-center font-bold text-primary hover:underline">
                   {profile?.name}
                 </a>
               </Link>
-              <p prefix="@" className="capitalize font-medium text-sm text-gray-500">
+              <p
+                prefix="@"
+                className="text-sm font-medium capitalize text-gray-500"
+              >
                 {formatHandle(profile?.handle)}
               </p>
             </div>
-            {<div className="flex-shrink-0">
-          { following ? ( 
-            <UnfollowButton setFollowing={ setFollowing } profile={ profile as Profile } /> 
-            ) : (
-            <FollowButton setFollowing={ setFollowing } profile={ profile as Profile } />
-          )}
-        </div>}
-       
+            {
+              <div className="flex-shrink-0">
+                {following ? (
+                  <UnfollowButton
+                    setFollowing={setFollowing}
+                    profile={profile as Profile}
+                  />
+                ) : (
+                  <FollowButton
+                    setFollowing={setFollowing}
+                    profile={profile as Profile}
+                  />
+                )}
+              </div>
+            }
           </div>
-          <div className="flex gap-4 mt-3 cursor-pointer" onClick={() => { setShowFollowingModal(!showFollowingModal) }}>
-                            <div className="flex items-center text-sm margin-1 rounded-3xl gap-2">
-                                <span className="font-bold text-sx"> {profile?.stats.totalFollowing} </span>
-                                <span>Following</span>
-                                <Modal
-                                title="Following"
-                                show={showFollowingModal}
-                                onClose={() => setShowFollowingModal(false)}
-                                
-                                >
-                                    <Following profile={profile as Profile} />
-                                </Modal>
-                            </div>
-                        <div className="flex items-center text-sm  margin-1 rounded-3xl gap-2 cursor-pointer" onClick={() => { setShowFollowersModal(!showFollowersModal) }}>
-                            <span className="font-bold text-sx">{profile?.stats.totalFollowers}</span>
-                            <span>Followers</span>
-                            <Modal
-                                title="Followers"
-                                show={showFollowersModal}
-                                onClose={() => setShowFollowersModal(false)}
-                            >
-                                <Followers profile={profile?.id} />
-                            </Modal>
-                        </div>
-                        </div>
-                        
-                      <p
-                        className="my-3 pb-3 text-sm text-gray-600"
-                        style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
-                      >
-                      {publication?.metadata.description?.slice(0, 500)}
-                    </p>
+          <div
+            className="mt-3 flex cursor-pointer gap-4"
+            onClick={() => {
+              setShowFollowingModal(!showFollowingModal);
+            }}
+          >
+            <div className="margin-1 flex items-center gap-2 rounded-3xl text-sm">
+              <span className="text-sx font-bold">
+                {' '}
+                {profile?.stats.totalFollowing}{' '}
+              </span>
+              <span>Following</span>
+              <Modal
+                title="Following"
+                show={showFollowingModal}
+                onClose={() => setShowFollowingModal(false)}
+              >
+                <Following profile={profile as Profile} />
+              </Modal>
+            </div>
+            <div
+              className="margin-1 flex cursor-pointer  items-center gap-2 rounded-3xl text-sm"
+              onClick={() => {
+                setShowFollowersModal(!showFollowersModal);
+              }}
+            >
+              <span className="text-sx font-bold">
+                {profile?.stats.totalFollowers}
+              </span>
+              <span>Followers</span>
+              <Modal
+                title="Followers"
+                show={showFollowersModal}
+                onClose={() => setShowFollowersModal(false)}
+              >
+                <Followers profile={profile?.id} />
+              </Modal>
+            </div>
+          </div>
+
+          <p
+            className="my-3 pb-3 text-sm text-gray-600"
+            style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
+          >
+            {publication?.metadata.description?.slice(0, 500)}
+          </p>
           {/* BUTTONS */}
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <div className="flex gap-5">
               <div className="flex items-center gap-1">
-                <button className="w-9 h-9 p-2 bg-[#F1F1F2] fill-black flex justify-center items-center rounded-full">
+                <button className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F1F1F2] fill-black p-2">
                   {/* // Like button goes here
                       <AiFillHeart className='w-5 h-5' /> */}
                   <Like
@@ -244,51 +275,45 @@ const VideoDetail: FC<Props> = ({
                   {publication?.stats.totalUpvotes}
                 </span>
               </div>
-              
+
               <div className="flex items-center gap-1">
-               <button className="fill-black w-9 h-9 flex md:pb-3 lg:pb-3 justify-center items-center ">
+                <button className="flex h-9 w-9 items-center justify-center fill-black md:pb-3 lg:pb-3 ">
                   {/* // comments button goes here
                       <FaCommentDots className="w-5 h-5 scale-x-[-1]" /> */}
-                  <CollectButton
-                      
-                    publication={publication} />
-                    </button>
+                  <CollectButton publication={publication} />
+                </button>
                 <p className="text-center text-xs font-semibold">
                   {publication?.stats.totalAmountOfCollects}
                 </p>
               </div>
-             
+
               <div className="flex items-center gap-1">
-                <button className="w-9 h-9 bg-[#F1F1F2] fill-black flex justify-center items-center text-center rounded-full">
+                <button className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F1F1F2] fill-black text-center">
                   {/* // comments button goes here
                       <FaCommentDots className="w-5 h-5 scale-x-[-1]" /> */}
-                  <ChatBubbleLeftEllipsisIcon className="w-4 h-4 text-[#57B8FF] font-bold md:text-white" />
+                  <ChatBubbleLeftEllipsisIcon className="h-4 w-4 font-bold text-[#57B8FF] md:text-white" />
                 </button>
                 <p className="text-center text-xs font-semibold">
                   {publication?.stats.totalAmountOfComments}
                 </p>
               </div>
             </div>
-            <div className="flex gap-1 rounded-xl items-center">
-            <div className="flex items-center gap-1">
-
-              </div>
+            <div className="flex items-center gap-1 rounded-xl">
+              <div className="flex items-center gap-1"></div>
             </div>
           </div>
-         
 
-
-          <div className="flex  items-stretch mt-3">
+          <div className="mt-3  flex items-stretch">
             <input
               // @ts-ignore
               onClick={(e) => e.target?.select?.()}
-              className="bg-[#F1F1F2] p-2 rounded-xl flex-grow text-sm border outline-none"
+              className="flex-grow rounded-xl border bg-[#F1F1F2] p-2 text-sm outline-none"
               readOnly
               type="text"
               value={Links}
             />
             <button
-              className="flex-shrink-0 border rounded-xl px-2 active:bg-blue-500 cursor-pointer"
+              className="flex-shrink-0 cursor-pointer rounded-xl border px-2 active:bg-blue-500"
               onClick={() => {
                 copyToClipboard(Links);
               }}
@@ -298,7 +323,6 @@ const VideoDetail: FC<Props> = ({
           </div>
         </div>
         <Comments
-   
           profile={profile as Profile}
           key={publication?.profile.id}
           publication={publication as Publication}

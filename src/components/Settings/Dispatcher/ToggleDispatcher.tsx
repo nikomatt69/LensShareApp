@@ -1,4 +1,3 @@
-
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { Button } from '@/components/UI/Button';
 import IndexStatus from '@/components/UI/IndexStatus';
@@ -6,7 +5,10 @@ import { Spinner } from '@/components/UI/Spinner';
 import { LENSHUB_PROXY, OLD_LENS_RELAYER_ADDRESS } from '@/constants';
 import getIsDispatcherEnabled from '@/lib/getIsDispatcherEnabled';
 import getSignature from '@/lib/getSignature';
-import { useBroadcastMutation, useCreateSetDispatcherTypedDataMutation } from '@/utils/lens/generatedLenster';
+import {
+  useBroadcastMutation,
+  useCreateSetDispatcherTypedDataMutation
+} from '@/utils/lens/generatedLenster';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import type { FC } from 'react';
@@ -37,12 +39,11 @@ const ToggleDispatcher: FC<ToggleDispatcherProps> = ({ buttonSize = 'md' }) => {
 
     setIsLoading(false);
     toast.success(`Profile updated successfully!`);
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-    (error);
+    error;
   };
 
   const { signTypedDataAsync } = useSignTypedData({ onError });

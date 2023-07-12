@@ -1,11 +1,7 @@
-
-
-
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState } from 'react';
-
 
 import BasicSettings from './BasicSettings';
 import { useAccessSettingsStore } from '@/store/access';
@@ -40,9 +36,7 @@ const AccessSettings: FC = () => {
       <Modal
         title={
           <div className="flex items-center space-x-2">
-            <span>
-              Access settings
-            </span>
+            <span>Access settings</span>
             <HelpTooltip
               content={`Add restrictions on who can view your content, and who can't. For instance - token gate your posts on the condition of owning specific NFTs or tokens.`}
             />

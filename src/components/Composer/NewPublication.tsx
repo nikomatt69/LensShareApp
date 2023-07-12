@@ -1,4 +1,3 @@
-
 import type { IGif } from '@giphy/js-types';
 
 import type {
@@ -52,7 +51,6 @@ import {
 import { $convertFromMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-
 import clsx from 'clsx';
 import { $getRoot } from 'lexical';
 import dynamic from 'next/dynamic';
@@ -62,7 +60,11 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { OptmisticPublicationType } from 'src/enums';
 
-import { useAppStore, useReferenceModuleStore, useTransactionPersistStore } from 'src/store/app';
+import {
+  useAppStore,
+  useReferenceModuleStore,
+  useTransactionPersistStore
+} from 'src/store/app';
 import { useCollectModuleStore } from 'src/store/collect-module';
 
 import { usePublicationStore } from 'src/store/publication4';
@@ -137,10 +139,10 @@ const PollSettings = dynamic(
 
 interface NewPublicationProps {
   publication: Publication;
-  profile : Profile
+  profile: Profile;
 }
 
-const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
+const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -219,7 +221,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
   const canUseRelay = currentProfile?.dispatcher?.canUseRelay;
   const isSponsored = currentProfile?.dispatcher?.sponsor;
 
-
   const onCompleted = (__typename?: 'RelayError' | 'RelayerResult') => {
     if (__typename === 'RelayError') {
       return;
@@ -262,12 +263,10 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
           ? attachments.map((attachment) => attachment.original.mimeType)
           : null
     };
-   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
-   
   };
 
   useUpdateEffect(() => {
@@ -909,7 +908,11 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
       {showPollEditor && <PollEditor />}
       {quotedPublication ? (
         <Wrapper className="m-5" zeroPadding>
-          <QuotedPublication profile={profile as Profile} publication={quotedPublication} isNew />
+          <QuotedPublication
+            profile={profile as Profile}
+            publication={quotedPublication}
+            isNew
+          />
         </Wrapper>
       ) : null}
       <div className="block items-center px-5 sm:flex">
@@ -947,11 +950,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile }) => {
             }
             onClick={createPublication}
           >
-            {isComment
-              ? `Comment`
-              : showSpaceEditor
-              ? `Start Space`
-              : `Post`}
+            {isComment ? `Comment` : showSpaceEditor ? `Start Space` : `Post`}
           </Button>
         </div>
       </div>

@@ -1,18 +1,22 @@
-"use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+'use strict';
+var __spreadArrays =
+  (this && this.__spreadArrays) ||
+  function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+      s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
+      for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+        r[k] = a[j];
     return r;
-};
+  };
 exports.__esModule = true;
 exports.VERIFIED_CHANNELS = void 0;
-var constants_1 = require("src/constants");
-var aave_members_1 = require("./aave-members");
-var lensshare_members_1 = require("./lensshare-members");
+var constants_1 = require('src/constants');
+var aave_members_1 = require('./aave-members');
+var lensshare_members_1 = require('./lensshare-members');
 exports.VERIFIED_CHANNELS = constants_1.IS_MAINNET
-    ? __spreadArrays([
+  ? __spreadArrays(
+      [
         '0x0d',
         '0x0c',
         '0x8d68',
@@ -220,8 +224,8 @@ exports.VERIFIED_CHANNELS = constants_1.IS_MAINNET
         '0x38',
         '0x0210',
         '0x0160'
-    ], aave_members_1.aaveMembers, lensshare_members_1.lensshareMembers) : [
-    '0x5f8e',
-    '0x57a4',
-    '0x62fa',
-];
+      ],
+      aave_members_1.aaveMembers,
+      lensshare_members_1.lensshareMembers
+    )
+  : ['0x5f8e', '0x57a4', '0x62fa'];

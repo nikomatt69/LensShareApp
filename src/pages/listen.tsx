@@ -1,4 +1,3 @@
-
-import ExploreAudioRender from "@/components/HomePage/ExploreAudioRender";
+import ExploreAudioRender from '@/components/HomePage/ExploreAudioRender';
 
 export default ExploreAudioRender;

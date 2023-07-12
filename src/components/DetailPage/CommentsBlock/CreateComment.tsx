@@ -1,35 +1,35 @@
 import {
   CreatePublicCommentRequest,
   Publication,
-  PublicationMainFocus,
-} from "@/utils/lens/generatedLenster";
-import React, { Dispatch, FC, useRef, useState, Fragment } from "react";
-import { LENS_HUB_ABI } from "@/abi/abi";
-import { useAppStore, useTransactionPersistStore } from "src/store/app";
-import { useContractWrite, useSignTypedData } from "wagmi";
-import onError from "@/lib/onError";
-import toast from "react-hot-toast";
-import { Switch } from "@headlessui/react";
-import { APP_NAME, LENSHUB_PROXY, RELAY_ON } from "@/constants";
-import getSignature from "@/lib/getSignature";
-import { splitSignature } from "ethers/lib/utils";
-import { uploadIpfs } from "@/utils/functions/uploadToIPFS";
-import { v4 as uuid } from "uuid";
-import useBroadcast from "@/utils/useBroadcast";
+  PublicationMainFocus
+} from '@/utils/lens/generatedLenster';
+import React, { Dispatch, FC, useRef, useState, Fragment } from 'react';
+import { LENS_HUB_ABI } from '@/abi/abi';
+import { useAppStore, useTransactionPersistStore } from 'src/store/app';
+import { useContractWrite, useSignTypedData } from 'wagmi';
+import onError from '@/lib/onError';
+import toast from 'react-hot-toast';
+import { Switch } from '@headlessui/react';
+import { APP_NAME, LENSHUB_PROXY, RELAY_ON } from '@/constants';
+import getSignature from '@/lib/getSignature';
+import { splitSignature } from 'ethers/lib/utils';
+import { uploadIpfs } from '@/utils/functions/uploadToIPFS';
+import { v4 as uuid } from 'uuid';
+import useBroadcast from '@/utils/useBroadcast';
 import {
   useCreateCommentTypedDataMutation,
-  useCreateCommentViaDispatcherMutation,
-} from "@/types/graph";
-import lit from "@/lib/lit";
-import LitJsSdk from "@lit-protocol/sdk-browser";
-import Link from "next/link";
-import getAvatar from "@/lib/getAvatar";
-import Image from "next/image";
-import { MentionTextArea } from "@/components/UI/MentionTextArea";
-import InputMentions from "@/components/UI/InputMentions";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+  useCreateCommentViaDispatcherMutation
+} from '@/types/graph';
+import lit from '@/lib/lit';
+import LitJsSdk from '@lit-protocol/sdk-browser';
+import Link from 'next/link';
+import getAvatar from '@/lib/getAvatar';
+import Image from 'next/image';
+import { MentionTextArea } from '@/components/UI/MentionTextArea';
+import InputMentions from '@/components/UI/InputMentions';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 interface Props {
   publication: Publication;
@@ -42,12 +42,11 @@ const formSchema = z.object({
     .trim()
     .min(1, { message: 'Enter valid comment' })
     .max(5000, { message: 'Comment should not exceed 5000 characters' })
-})
-type FormData = z.infer<typeof formSchema>
-
+});
+type FormData = z.infer<typeof formSchema>;
 
 const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isEncrypted, setIsEncrypted] = useState(false);
 
@@ -73,8 +72,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
       comment: ''
     },
     resolver: zodResolver(formSchema)
-  })
-  
+  });
 
   async function encryptComment(comment: string) {
     try {
@@ -87,20 +85,20 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
       const encryptedComment = await LitJsSdk.blobToBase64String(encryptedFile);
       return { encryptedComment, encryptedSymmetricKey };
     } catch (err) {
-      console.log("Error during encryption", err);
+      console.log('Error during encryption', err);
     }
   }
   const onCompleted = () => {
-    toast.success("Post has been commented!");
-    setComment("");
+    toast.success('Post has been commented!');
+    setComment('');
   };
 
-  console.log("PUBLICATION ADDRESS", publication?.profile?.ownedBy);
-  console.log("CURRENT PROFILE ADDRESS", currentProfile?.ownedBy);
+  console.log('PUBLICATION ADDRESS', publication?.profile?.ownedBy);
+  console.log('CURRENT PROFILE ADDRESS', currentProfile?.ownedBy);
 
   const generateOpitimisticComment = ({
     txHash,
-    txId,
+    txId
   }: {
     txHash?: string;
     txId?: string;
@@ -108,23 +106,23 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
     return {
       id: uuid(),
       parent: publication.id,
-      type: "NEW_COMMENT",
+      type: 'NEW_COMMENT',
       content: comment,
       txHash,
-      txId,
+      txId
     };
   };
 
   const { error, write } = useContractWrite({
     address: LENSHUB_PROXY,
     abi: LENS_HUB_ABI,
-    functionName: "commentWithSig",
+    functionName: 'commentWithSig',
 
     onSuccess: ({ hash }) => {
       onCompleted();
       setTxnQueue([generateOpitimisticComment({ txHash: hash }), ...txnQueue]);
     },
-    onError,
+    onError
   });
 
   const { broadcast } = useBroadcast({
@@ -132,9 +130,9 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
       onCompleted();
       setTxnQueue([
         generateOpitimisticComment({ txId: data?.broadcast?.txId }),
-        ...txnQueue,
+        ...txnQueue
       ]);
-    },
+    }
   });
 
   const [createCommentTypedData] = useCreateCommentTypedDataMutation({
@@ -151,7 +149,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
           referenceModule,
           referenceModuleData,
           referenceModuleInitData,
-          deadline,
+          deadline
         } = typedData.value;
         const signature = await signTypedDataAsync(getSignature(typedData));
         const { v, r, s } = splitSignature(signature);
@@ -166,7 +164,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
           referenceModule,
           referenceModuleData,
           referenceModuleInitData,
-          sig,
+          sig
         };
 
         setUserSigNonce(userSigNonce + 1);
@@ -175,43 +173,43 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
         }
 
         const {
-          data: { broadcast: result },
+          data: { broadcast: result }
         } = await broadcast({ request: { id, signature } });
 
-        if ("reason" in result) {
+        if ('reason' in result) {
           write?.({ args: [inputStruct] });
         }
       } catch {}
     },
-    onError,
+    onError
   });
 
   const [createCommentViaDispatcher] = useCreateCommentViaDispatcherMutation({
     onCompleted,
-    onError,
+    onError
   });
 
   const createViaDispatcher = async (request: any) => {
     const { data } = await createCommentViaDispatcher({
-      variables: { request },
+      variables: { request }
     });
-    if (data?.createCommentViaDispatcher.__typename === "RelayError") {
+    if (data?.createCommentViaDispatcher.__typename === 'RelayError') {
       createCommentTypedData({
         variables: {
           options: { overrideSigNonce: userSigNonce },
-          request,
-        },
+          request
+        }
       });
     }
   };
 
   async function createComment() {
-    let encryptedComment = "";
-    let encryptedUri = "";
+    let encryptedComment = '';
+    let encryptedUri = '';
     if (!currentProfile) {
-      return toast.error("Please connect your Wallet!");
+      return toast.error('Please connect your Wallet!');
     }
-    console.log("Is encryped toggle", isEncrypted);
+    console.log('Is encryped toggle', isEncrypted);
     // 1. Encrypt comment with Lit
     if (isEncrypted) {
       setIsSubmitting(true);
@@ -224,52 +222,52 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
       // 2. Store encrypted File and encrypted Key and retrieve URI
       const body = {
         litComment: encryptedComment,
-        litKkey: encryptedKey,
+        litKkey: encryptedKey
       };
       try {
-        console.log("Fetch api route");
-        const response = await fetch("/api/store-encrypted", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(body),
+        console.log('Fetch api route');
+        const response = await fetch('/api/store-encrypted', {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify(body)
         });
 
         if (response.status !== 200) {
-          alert("Something went wrong while creating CID");
+          alert('Something went wrong while creating CID');
         } else {
           let responseJSON = await response.json();
           const cid = responseJSON.cid;
-          console.log("Encrypted URI", cid);
+          console.log('Encrypted URI', cid);
           encryptedUri = `https://ipfs/${responseJSON.cid}`;
         }
       } catch (err) {
-        console.log("Error while uploading encrypted comment to ipfs", err);
+        console.log('Error while uploading encrypted comment to ipfs', err);
       }
     }
     try {
       setIsSubmitting(true);
       const ipfsResult = await uploadIpfs({
-        version: "2.0.0",
+        version: '2.0.0',
         mainContentFocus: PublicationMainFocus.TextOnly,
         metadata_id: uuid(),
-        description: "Description",
-        locale: "en-US",
+        description: 'Description',
+        locale: 'en-US',
         content: isEncrypted ? encryptedComment : comment,
         external_url: null,
         image: null,
         imageMimeType: null,
-        name: "Name",
+        name: 'Name',
         attributes: isEncrypted
           ? [
               {
-                displayType: "string",
-                traitType: "encrypted",
-                value: encryptedUri,
-              },
+                displayType: 'string',
+                traitType: 'encrypted',
+                value: encryptedUri
+              }
             ]
           : [],
         tags: [],
-        appId: APP_NAME,
+        appId: APP_NAME
       });
 
       const request = {
@@ -277,11 +275,11 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
         publicationId: publication.id,
         contentURI: `ipfs://${ipfsResult.path}`,
         collectModule: {
-          revertCollectModule: true,
+          revertCollectModule: true
         },
         referenceModule: {
-          followerOnlyReferenceModule: false,
-        },
+          followerOnlyReferenceModule: false
+        }
       };
       if (currentProfile?.dispatcher?.canUseRelay) {
         await createViaDispatcher(request);
@@ -289,8 +287,8 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
         await createCommentTypedData({
           variables: {
             options: { overrideSigNonce: userSigNonce },
-            request: request as CreatePublicCommentRequest,
-          },
+            request: request as CreatePublicCommentRequest
+          }
         });
       }
     } catch {
@@ -300,47 +298,55 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
   }
 
   return (
-    <div className="flex assolute rounded-xl fixed-bottom p-5 gap-3 border-t">
-            <Link legacyBehavior href={`/u/${currentProfile?.id}`} key={currentProfile?.id}>
-              <a className="mr-3 flex-shrink-0 rounded-full">
-                <Image
-                  src={getAvatar(currentProfile)}
-                  alt="profile pic here"
-                  height={42}
-                  width={42}
-                  className="rounded-full"
-                />
-              </a>
-            </Link>
+    <div className="assolute fixed-bottom flex gap-3 rounded-xl border-t p-5">
+      <Link
+        legacyBehavior
+        href={`/u/${currentProfile?.id}`}
+        key={currentProfile?.id}
+      >
+        <a className="mr-3 flex-shrink-0 rounded-full">
+          <Image
+            src={getAvatar(currentProfile)}
+            alt="profile pic here"
+            height={42}
+            width={42}
+            className="rounded-full"
+          />
+        </a>
+      </Link>
 
-            <textarea
+      <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        className="bg-[#F1F1F2] rounded-xl p-2 flex-grow text-sm outline-none placeholder:text-gray-500 border border-transparent focus:border-gray-300 transition"
+        className="flex-grow rounded-xl border border-transparent bg-[#F1F1F2] p-2 text-sm outline-none transition placeholder:text-gray-500 focus:border-gray-300"
         placeholder="Add comment.."
-        
-        >
-         <InputMentions
-            placeholder="How's this video?"
-            autoComplete="off"
-            validationError={errors.comment?.message}
-            value={watch('comment')}
-            onContentChange={(value) => {
-              setValue('comment', value)
-              clearErrors('comment')
-            }}
-            mentionsSelector="input-mentions-single"
-          />
-        </textarea>
-      
-      
+      >
+        <InputMentions
+          placeholder="How's this video?"
+          autoComplete="off"
+          validationError={errors.comment?.message}
+          value={watch('comment')}
+          onContentChange={(value) => {
+            setValue('comment', value);
+            clearErrors('comment');
+          }}
+          mentionsSelector="input-mentions-single"
+        />
+      </textarea>
+
       <div className="flex flex-col">
         <button
-          className="text-md text-black border-gray-600"
+          className="text-md border-gray-600 text-black"
           onClick={createComment}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Commenting..." : <div className="cursor-pointer border-1 hover:text-[#57B8FF]">Comment</div>}
+          {isSubmitting ? (
+            'Commenting...'
+          ) : (
+            <div className="border-1 cursor-pointer hover:text-[#57B8FF]">
+              Comment
+            </div>
+          )}
         </button>
         <Switch.Group>
           <div className="flex items-center">
@@ -354,12 +360,12 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
                 /* Use the `checked` state to conditionally style the button. */
                 <button
                   className={`${
-                    checked ? "bg-blue-600" : "bg-gray-400"
+                    checked ? 'bg-blue-600' : 'bg-gray-400'
                   } relative inline-flex h-4 w-8 items-center rounded-full`}
                 >
                   <span
                     className={`${
-                      checked ? "translate-x-5" : "translate-x-1"
+                      checked ? 'translate-x-5' : 'translate-x-1'
                     } inline-block h-2 w-2 transform rounded-full bg-white transition`}
                   />
                 </button>

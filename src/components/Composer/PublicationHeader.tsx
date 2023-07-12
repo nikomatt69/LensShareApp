@@ -1,4 +1,3 @@
-
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { FeedItem, Profile, Publication } from '@/utils/lens/generatedLenster';
 import clsx from 'clsx';
@@ -11,14 +10,12 @@ import Source from './Source';
 import useModMode from '@/lib/useModMode';
 import Profiles from '../ProfilePage/Profiles';
 
-
-
 interface PublicationHeaderProps {
   publication: Publication;
   feedItem?: FeedItem;
   quoted?: boolean;
   isNew?: boolean;
-  profile: Profile
+  profile: Profile;
 }
 
 const PublicationHeader: FC<PublicationHeaderProps> = ({
@@ -53,7 +50,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
     <div
       className={clsx(
         quoted ? 'pb-2' : 'pb-4',
-        'relative flex justify-between m-2 pt-3 space-x-1.5'
+        'relative m-2 flex justify-between space-x-1.5 pt-3'
       )}
       data-testid={`publication-${publication.id}-header`}
     >
@@ -61,12 +58,14 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
         {quoted ? (
           <UserProfile profile={profile as Profiles} timestamp={timestamp} />
         ) : (
-          <UserProfile profile={profile as Profiles} timestamp={timestamp} showStatus />
+          <UserProfile
+            profile={profile as Profiles}
+            timestamp={timestamp}
+            showStatus
+          />
         )}
       </span>
       <div className="!-mr-[7px] flex items-center space-x-1">
-       
-       
         {quoted && isNew && (
           <button
             className="rounded-full  p-1.5"

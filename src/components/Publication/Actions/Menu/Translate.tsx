@@ -31,15 +31,12 @@ const Translate: FC<TranslateProps> = ({ publication }) => {
       href={getGoogleTranslateUrl(publication?.metadata?.content)}
       onClick={(event) => {
         stopEventPropagation(event);
-       
       }}
       target="_blank"
     >
       <div className="flex items-center space-x-2">
         <BsTranslate className="h-4 w-4" />
-        <div>
-          Translate
-        </div>
+        <div>Translate</div>
       </div>
     </Menu.Item>
   );

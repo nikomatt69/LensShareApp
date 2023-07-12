@@ -6,10 +6,9 @@ import {
 } from '@/lib/useSendOptimisticMessage';
 import type { Profile } from '@/utils/lens/generatedLenster';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
-import type { FC, ReactNode, } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useRef } from 'react';
 import { ContentTypeRemoteAttachment } from 'xmtp-content-type-remote-attachment';
-
 
 import RemoteAttachmentPreview from './RemoteAttachmentPreview';
 
@@ -17,8 +16,7 @@ interface MessageContentProps {
   message: DecodedMessage | PendingMessage | FailedMessage;
   profile: Profile | undefined;
   sentByMe: boolean;
-  preview?: ReactNode ;
-
+  preview?: ReactNode;
 }
 
 const MessageContent: FC<MessageContentProps> = ({
@@ -27,16 +25,13 @@ const MessageContent: FC<MessageContentProps> = ({
   sentByMe,
   preview
 }) => {
-  const  previewRef = useRef<ReactNode>();
-  
+  const previewRef = useRef<ReactNode>();
 
-  
   const hasQueuedMessagePreview = isQueuedMessage(message);
 
   // if message is pending, render a custom preview if available
   if (hasQueuedMessagePreview && message.render) {
-    if (!previewRef) 
-    return previewRef;
+    if (!previewRef) return previewRef;
   }
 
   if (message.contentType.sameAs(ContentTypeRemoteAttachment)) {
@@ -50,9 +45,7 @@ const MessageContent: FC<MessageContentProps> = ({
     );
   }
 
-  const meetingUrlMatches = message.content.match(
-    /(https:\/\/huddle\.lenshareapp\.xyz\/\S+)/gi
-  );
+  const meetingUrlMatches = message.content.match(/(https?:\/\/.*)/);
   const meetingLink = meetingUrlMatches ? meetingUrlMatches[0] : null;
 
   return meetingLink ? (

@@ -1,4 +1,3 @@
-
 import type { Profile } from '@/utils/lens/generatedLenster';
 import formatHandle from '@/utils/functions/formatHandle';
 import getAvatar from '@/lib/getAvatar';
@@ -18,7 +17,6 @@ import UnfollowButton from '../Buttons/UnfollowButton';
 import FollowButton from '../Buttons/FollowButton';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { getTwitterFormat } from '@/lib/formatTime4';
-
 
 interface UserProfileProps {
   profile: Profile;
@@ -82,7 +80,7 @@ const UserProfile: FC<UserProfileProps> = ({
               formatHandle(profile?.handle)}
           </div>
         </div>
-      
+
         {showStatus && hasStatus ? (
           <div className="lt-text-gray-500 flex items-center">
             <span className="mx-1.5">·</span>
@@ -148,13 +146,12 @@ const UserProfile: FC<UserProfileProps> = ({
       data-testid={`user-profile-${profile.id}`}
     >
       {linkToProfile ? (
-        <Link href={`/u/${(profile?.id)}`}>
+        <Link href={`/u/${profile?.id}`}>
           <UserInfo />
         </Link>
       ) : (
         <UserInfo />
       )}
-      
     </div>
   );
 };

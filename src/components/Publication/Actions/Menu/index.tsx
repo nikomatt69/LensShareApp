@@ -1,11 +1,9 @@
-
 import { Menu } from '@headlessui/react';
 
 import clsx from 'clsx';
 import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useAppStore } from 'src/store/app';
-
 
 import CopyPostText from './CopyPostText';
 import Delete from './Delete';
@@ -35,9 +33,7 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
           aria-label="More"
           data-testid={`publication-${publication.id}-menu`}
         >
-          <BiDotsVertical
-            className={clsx('lt-text-gray-500', iconClassName)}
-          />
+          <BiDotsVertical className={clsx('lt-text-gray-500', iconClassName)} />
         </button>
       </Menu.Button>
       <MenuTransition>
@@ -51,7 +47,7 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
           ) : (
             <Report publication={publication} />
           )}
-         
+
           <Share publication={publication} />
           <Translate publication={publication} />
           <CopyPostText publication={publication} />

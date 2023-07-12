@@ -1,25 +1,29 @@
-
-import type { Publication } from '@/utils/lens/generatedLenster'
+import type { Publication } from '@/utils/lens/generatedLenster';
 import {
   PublicationMainFocus,
   PublicationSortCriteria,
   PublicationTypes,
   useExploreFeedQuery
-} from '@/utils/lens/generatedLenster'
-import React from 'react'
-import { useInView } from 'react-cool-inview'
-import { LENS_CUSTOM_FILTERS, SCROLL_ROOT_MARGIN, STATIC_ASSETS_URL, STATIC_IMAGES_URL } from '@/constants'
+} from '@/utils/lens/generatedLenster';
+import React from 'react';
+import { useInView } from 'react-cool-inview';
+import {
+  LENS_CUSTOM_FILTERS,
+  SCROLL_ROOT_MARGIN,
+  STATIC_ASSETS_URL,
+  STATIC_IMAGES_URL
+} from '@/constants';
 
-import Item from './Item'
-import { useAppStore } from '@/store/app'
-import MetaTags from '../UI/MetaTags'
-import Loader from '../UI/Loader'
-import EchosShimmer from './EchosShimmer'
-import { EmptyState } from '../UI/EmptyState'
-import { useExploreQuery } from '@/utils/lens/generated'
+import Item from './Item';
+import { useAppStore } from '@/store/app';
+import MetaTags from '../UI/MetaTags';
+import Loader from '../UI/Loader';
+import EchosShimmer from './EchosShimmer';
+import { EmptyState } from '../UI/EmptyState';
+import { useExploreQuery } from '@/utils/lens/generated';
 
 const Curated = () => {
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter)
+  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -32,14 +36,14 @@ const Curated = () => {
         activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
       mainContentFocus: [PublicationMainFocus.Audio]
     }
-  }
+  };
 
   const { data, loading, error, fetchMore } = useExploreQuery({
     variables: { request }
-  })
+  });
 
-  const pageInfo = data?.explorePublications?.pageInfo
-  const videos = data?.explorePublications?.items as Publication[]
+  const pageInfo = data?.explorePublications?.pageInfo;
+  const videos = data?.explorePublications?.items as Publication[];
 
   const { observe } = useInView({
     rootMargin: SCROLL_ROOT_MARGIN,
@@ -51,12 +55,12 @@ const Curated = () => {
             cursor: pageInfo?.next
           }
         }
-      })
+      });
     }
-  })
+  });
 
   if (videos?.length === 0) {
-    return <EmptyState message={"No echoes found"} icon  />
+    return <EmptyState message={'No echoes found'} icon />;
   }
 
   return (
@@ -71,14 +75,14 @@ const Curated = () => {
             ))}
           </div>
           {pageInfo?.next && (
-            <span ref={observe} className="flex border-0 justify-center p-10">
+            <span ref={observe} className="flex justify-center border-0 p-10">
               <Loader />
             </span>
           )}
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Curated
+export default Curated;

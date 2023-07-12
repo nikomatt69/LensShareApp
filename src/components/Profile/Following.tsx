@@ -1,5 +1,8 @@
-
-import { FollowingRequest, Profile, useFollowingQuery } from '@/utils/lens/generatedLenster';
+import {
+  FollowingRequest,
+  Profile,
+  useFollowingQuery
+} from '@/utils/lens/generatedLenster';
 
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -54,9 +57,7 @@ const Following: FC<FollowingProps> = ({ profile, onProfileSelected }) => {
             <span className="mr-1 font-bold">
               @{formatHandle(profile?.handle)}
             </span>
-            <span>
-              doesn’t follow anyone.
-            </span>
+            <span>doesn’t follow anyone.</span>
           </div>
         }
         icon={<UsersIcon className="text-brand h-8 w-8" />}
@@ -100,7 +101,6 @@ const Following: FC<FollowingProps> = ({ profile, onProfileSelected }) => {
                 linkToProfile={!onProfileSelected}
                 isFollowing={following?.profile?.isFollowedByMe}
                 followUnfollowPosition={index + 1}
-         
                 showBio
                 showFollow
                 showUserPreview={false}

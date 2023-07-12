@@ -1,4 +1,3 @@
-
 import { ENS_RESOLVER_WORKER_URL } from '@/constants';
 import axios from 'axios';
 
