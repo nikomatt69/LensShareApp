@@ -24,7 +24,7 @@ const Delete: FC<DeleteProps> = ({ publication }) => {
           'm-2 block cursor-pointer rounded-lg px-4 py-1.5 text-sm text-red-500'
         )
       }
-      onClick={(event) => {
+      onClick={(event:any) => {
         stopEventPropagation(event);
         setShowPublicationDeleteAlert(true, publication);
       }}

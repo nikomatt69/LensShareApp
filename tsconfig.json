@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
   
     "skipLibCheck": true,
@@ -26,7 +26,6 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
     "isolatedModules": true,
     "module": "ESNext",
     "moduleResolution": "node",

@@ -1,3 +1,4 @@
+import { Web3Button } from '@web3modal/react';
 import { ConnectKitButton } from 'connectkit';
 
 import styled from 'styled-components';
@@ -26,15 +27,7 @@ const StyledButton = styled.button`
 
 export const MainButton = () => {
   return (
-    <ConnectKitButton.Custom>
-      {({ isConnected, show, truncatedAddress, ensName }) => {
-        return (
-          <StyledButton onClick={show}>
-            {isConnected ? ensName ?? truncatedAddress : 'Connect Wallet'}
-          </StyledButton>
-        );
-      }}
-    </ConnectKitButton.Custom>
+    <Web3Button />
   );
 };
 

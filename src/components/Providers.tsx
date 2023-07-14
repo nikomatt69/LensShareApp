@@ -22,9 +22,7 @@ import { apolloClient } from '@/apollo-client';
 import Video from './HomePage/Video';
 import { Analytics } from '@vercel/analytics/react';
 
-import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
+
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
@@ -32,26 +30,26 @@ import getRpc from '@/lib/getRpc';
 import UserSigNoncesProvider from './UserSigNoncesProvider';
 import LeafwatchProvider from './LeafwatchProvider';
 
-const queryClient = new QueryClient();
 
-const { chains, publicClient } = configureChains(
-  [IS_MAINNET ? polygon : polygonMumbai, mainnet],
-  [jsonRpcProvider({ rpc: (chain) => ({ http: getRpc(chain.id) }) })]
-);
 
-const connectors: any = [
-  new InjectedConnector({ chains, options: { shimDisconnect: false } }),
-  new WalletConnectConnector({
-    options: { projectId: WALLETCONNECT_PROJECT_ID },
-    chains
-  })
-];
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal } from '@web3modal/react'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 
+const chains = [polygon]
+const projectId =  WALLETCONNECT_PROJECT_ID
+
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors,
+  connectors: w3mConnectors({ projectId, chains }),
   publicClient
-});
+})
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
+
+
+
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
@@ -60,10 +58,12 @@ const livepeerClient = createReactClient({
   })
 });
 
+
+const queryClient = new QueryClient();
+
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <ConnectKitProvider options={{ initialChainId: 137 }} debugMode>
         <ApolloProvider client={apolloClient}>
           <UserSigNoncesProvider />
           <QueryClientProvider client={queryClient}>
@@ -76,7 +76,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
             </LivepeerConfig>
           </QueryClientProvider>
         </ApolloProvider>
-      </ConnectKitProvider>
+        <Web3Modal themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
     </WagmiConfig>
   );
 };

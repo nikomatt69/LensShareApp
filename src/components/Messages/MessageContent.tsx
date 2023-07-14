@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import { ContentTypeRemoteAttachment } from 'xmtp-content-type-remote-attachment';
 
 import RemoteAttachmentPreview from './RemoteAttachmentPreview';
+import Link from 'next/link';
 
 interface MessageContentProps {
   message: DecodedMessage | PendingMessage | FailedMessage;
@@ -51,11 +52,11 @@ const MessageContent: FC<MessageContentProps> = ({
   return meetingLink ? (
     <div>
       {'Join here for a call: '}
-      <a
+      <Link
         href={`javascript:window.open('${meetingLink}', 'newwindow', 'height=800,width=1200');`}
       >
         Click here
-      </a>
+      </Link>
     </div>
   ) : (
     <Markup>{message.content}</Markup>

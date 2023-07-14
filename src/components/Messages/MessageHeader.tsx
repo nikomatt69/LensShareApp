@@ -23,6 +23,7 @@ import Lobby from '../Meet/Lobby';
 import Follow from '../Profile/Follow';
 import Unfollow from '../Profile/Unfollow';
 import { Button } from '../UI/Button';
+import { LENSTOK_URL } from '@/constants';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -91,30 +92,31 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
-      {currentProfile && (
-        <div>
-          <button>
-            <img
-              src="/images/icon.png"
-              onClick={async () => {
+      <button>
+       {profile && (
+     
+    
+        <img
+              src='/images/icon.png'
+               onClick={async () => {
                 const apiCall = await fetch(
                   'https://api.huddle01.com/api/v1/create-room',
                   {
                     method: 'POST',
                     body: JSON.stringify({
-                      title: 'Huddle01 Meeting'
+                      title: 'LensShare Meet'
                     }),
                     headers: {
                       'Content-Type': 'application/json',
-                      'x-api-key': process.env.NEXT_PUBLIC_API_KEY! || '',
-                      'Content-Type-Options': 'no-cors'
+                      'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '',
+
                     }
                   }
                 );
                 const data = await apiCall.json();
                 const { roomId } = data.data;
                 const currentUrl = window.location.href;
-                const url = currentUrl.match('(^https?:\\/\\/([^/]+)*)')?.[0];
+                const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
                 sendMessage(
                   `Join here for a call: ${url}/meet/${roomId}`,
                   ContentTypeText,
@@ -125,24 +127,25 @@ const MessageHeader: FC<MessageHeaderProps> = ({
                   'newwindow',
                   'width=1200, height=800'
                 );
+           
+
+              
               }}
-              className="cursor-pointer-auto mb-2 mr-4 inline h-8  w-8 cursor-pointer"
+              className=" mb-2 mr-4 inline h-8  w-8 cursor-pointer"
               draggable="false"
-            />
-          </button>
+        /> )}
+        </button>
           {!following ? (
             <FollowButton
-              profile={profile}
+              profile={profile as Profile}
               setFollowing={setFollowingWrapped}
             />
           ) : (
             <UnfollowButton
-              profile={profile}
+              profile={profile as Profile}
               setFollowing={setFollowingWrapped}
             />
           )}
-        </div>
-      )}
     </div>
   );
 };
