@@ -121,7 +121,7 @@ const MessagePage: FC<Props> = ({ publication }) => {
           <div className="hidden h-[92vh] overflow-hidden lg:block lg:hover:overflow-auto">
             <Sidebar />
           </div>
-          <div className="mt-30  mt-4 h-full  flex-1 flex-col  items-center">
+          <div className=" mt-4 h-full  flex-1 flex-col  items-center">
             <Messages />
           </div>
         </div>

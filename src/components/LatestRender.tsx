@@ -137,7 +137,7 @@ const LatestRender = () => {
     <div>
       <MetaTags title={`Latest • ${APP_NAME} `} />
       <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
-        <Toaster position="bottom-right" />
+        
 
         <div className="flex gap-6 border-0  md:gap-20">
           <div className="hidden h-[92vh] overflow-hidden border-0  lg:block lg:hover:overflow-auto">

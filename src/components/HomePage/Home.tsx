@@ -138,7 +138,7 @@ const Home: NextPage = () => {
     <div>
       <MetaTags title={`Home • ${APP_NAME}`} />
       <div className="m-auto h-[100vh] overflow-hidden lg:w-[1100px] xl:w-[1200px]">
-        <Toaster position="bottom-right" />
+     
 
         <div className="flex gap-6 md:gap-20">
           <div className="hidden h-[92vh] overflow-hidden lg:block lg:hover:overflow-auto">

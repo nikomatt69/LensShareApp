@@ -75,6 +75,14 @@ nextConfig = {
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true }
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ]
+  },
 
   async headers() {
     return [
@@ -89,7 +97,8 @@ nextConfig = {
             value: 'SAMEORIGIN'
           },
           { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' }
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
         ]
       },
       {
@@ -97,8 +106,8 @@ nextConfig = {
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Max-Age', value: '1728000' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
-          { key: 'Access-Control-Allow-Methods', value: 'Content-Type' }
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
         ]
       },
       {
@@ -106,8 +115,8 @@ nextConfig = {
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Max-Age', value: '1728000' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
-          { key: 'Access-Control-Allow-Methods', value: 'Content-Type' }
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
         ]
       }
     ];

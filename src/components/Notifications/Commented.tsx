@@ -42,15 +42,15 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
           </Link>
         </span>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center line-clamp-2 truncate break-words justify-between">
         <Link
           href={`/post/${
             notification?.comment?.commentOn &&
             notification?.comment?.commentOn?.id
           }`}
-          className="truncate py-1 text-gray-600 dark:text-gray-400"
+          className="line-clamp-2 truncate break-words py-1 text-gray-600 dark:text-gray-400"
         >
-          {notification?.comment?.metadata?.content}
+          
         </Link>
         <div className="flex flex-none items-center text-xs text-blue-500">
           <span>{getRelativeTime(notification?.createdAt)}</span>

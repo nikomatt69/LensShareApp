@@ -36,6 +36,7 @@ import { Tooltip } from '../UI/Tooltip';
 import { RARIBLE_URL, STATIC_IMAGES_URL } from '@/constants';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Image } from '../UI/Image';
+import Sidebar from '../Sidebar/Sidebar';
 
 interface DetailsProps {
   profile: Profile;
@@ -282,6 +283,7 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
               </Link>
             </MetaDetails>
           )}
+     
         </div>
       </div>
     </div>

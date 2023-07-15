@@ -38,8 +38,8 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
       </Menu.Button>
       <MenuTransition>
         <Menu.Items
-          static
-          className="absolute right-0 z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-300"
+          
+          className="absolute right-0 cursor-pointer z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-300"
           data-testid={`publication-${publication.id}-menu-items`}
         >
           {currentProfile?.id === publication?.profile?.id ? (

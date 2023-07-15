@@ -144,7 +144,7 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
     <div>
       <MetaTags title={`MusicFeed • ${APP_NAME} `} />
       <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
-        <Toaster position="bottom-right" />
+        
 
         <div className="flex  ">
           <div className="xs:h-[40] hidden h-[70vh] overflow-hidden border-0 sm:h-[40] lg:block lg:hover:overflow-auto">
