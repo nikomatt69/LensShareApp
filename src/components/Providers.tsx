@@ -33,11 +33,11 @@ import LeafwatchProvider from './LeafwatchProvider';
 
 
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Modal } from '@web3modal/react'
+import { W3mQrCode, Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 
-const chains = [polygon]
+const chains = [polygon,mainnet]
 const projectId =  WALLETCONNECT_PROJECT_ID
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
@@ -76,7 +76,13 @@ const Providers = ({ children }: { children: ReactNode }) => {
             </LivepeerConfig>
           </QueryClientProvider>
         </ApolloProvider>
-        <Web3Modal themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
+        <Web3Modal  themeVariables={{
+                     '--w3m-font-family': 'Roboto, sans-serif',
+                     '--w3m-accent-color': '#000fff',
+                     '--w3m-background-color':'#FFFF',
+                     '--w3m-logo-image-url':'https://lenshareapp.xyz/images/icon.png',
+                      '--w3m-container-border-radius': '25px',
+                     '--w3m-background-border-radius':'25px' }} themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
     </WagmiConfig>
   );
 };

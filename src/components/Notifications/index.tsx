@@ -125,7 +125,7 @@ const Notifications = () => {
   });
 
   return (
-    <div className="mx-auto md:container md:max-w-3xl md:p-0">
+    <div className="mx-auto md:container truncate break-words md:max-w-3xl md:p-0">
       <MetaTags title={`Notifications • ${APP_NAME}`} />
 
       <Card className="p-2">

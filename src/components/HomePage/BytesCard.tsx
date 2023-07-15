@@ -108,7 +108,7 @@ const VideoCard: FC<Props> = ({
   }, [profile?.isFollowedByMe]);
 
   return (
-    <div className="justify-content break-word mt-3 flex w-full flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#C0C0C0] pb-0 md:pb-6">
+    <div className="justify-content break-word mt-3 flex w-full flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#F2F6F9] pb-0 md:pb-6">
       <div className="break-word flex flex-row ">
         <div className="break-word mt-4 flex-auto cursor-pointer gap-3 rounded p-2 font-semibold">
           <Link href={`/u/${profile.id}`} key={profile.id} />

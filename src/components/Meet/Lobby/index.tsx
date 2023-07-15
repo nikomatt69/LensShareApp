@@ -196,7 +196,7 @@ const Lobby: NextPage = () => {
             Set a display name
             <div
               className={clsx(
-                resolvedTheme == 'dark' ? 'text-slate-300' : 'text-gray-900',
+                resolvedTheme == 'dark' ? 'text-gray-900' : 'text-gray-900',
                 'gap- flex w-full items-center rounded-[10px] border border-zinc-800 pl-3 backdrop-blur-[400px]'
               )}
             >
@@ -222,7 +222,7 @@ const Lobby: NextPage = () => {
         </div>
         <div className="flex w-full items-center">
           <button
-            className="bg- bg-brand-500 mt-2 flex w-full items-center justify-center rounded-md p-2 text-slate-100"
+            className="bg- bg-brand-500 mt-2 flex w-full items-center justify-center rounded-md p-2 'text-gray-900'"
             onClick={async () => {
               if (isLobbyJoined) {
                 joinRoom();

@@ -27,6 +27,8 @@ import { FcVideoCall } from 'react-icons/fc';
 import MainButton from './Buttons/Rainbow/mainbutton';
 import router from 'next/router';
 import NotificationIcon from './Notifications/NotificationIcon';
+import MeetingIcon from './Messages/MeetingIcon';
+
 
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);

@@ -98,13 +98,13 @@ const CommentsVideo: FC<Props> = ({ publication, profile }) => {
           </div>
         </div>
       </div>
-      <div className="mt-3 flex flex-grow flex-col justify-center rounded-xl border-2 bg-[#C0C0C0] text-center font-sans text-xs">
+      <div className="mt-3 flex flex-grow flex-col justify-center rounded-xl border-2 bg-[#F2F6F9] text-center font-sans text-xs">
         <span className="mb-3 rounded-xl bg-blue-500 p-1 text-center text-lg font-bold   ">
           Description
         </span>
         <InterweaveContent content={publication?.metadata?.content} />
       </div>
-      <div className="mt-3 rounded-xl border-2 bg-[#C0C0C0] pt-3 ">
+      <div className="mt-3 rounded-xl border-2 bg-[#F2F6F9] pt-3 ">
         <span className="ml-1  rounded-xl bg-blue-500 object-center p-1 text-center font-bold">
           Comments
         </span>
@@ -116,7 +116,7 @@ const CommentsVideo: FC<Props> = ({ publication, profile }) => {
           refetchComments={() => refetchComments()}
         />
       </div>
-      <div className="mt-3 rounded-xl border-2 bg-[#C0C0C0] pt-2 ">
+      <div className="mt-3 rounded-xl border-2 bg-[#F2F6F9] pt-2 ">
         <span className="ml-1 rounded-xl bg-blue-500 object-center p-1 pb-1  text-center font-bold">
           Collects
         </span>

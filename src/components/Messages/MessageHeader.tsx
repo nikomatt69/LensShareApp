@@ -92,15 +92,13 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
-      <button>
        {profile && (
      
     
-        <img
-              src='/images/icon.png'
+        <div
                onClick={async () => {
                 const apiCall = await fetch(
-                  'https://api.huddle01.com/api/v1/create-room',
+                  '/api/create-room',
                   {
                     method: 'POST',
                     body: JSON.stringify({
@@ -110,31 +108,29 @@ const MessageHeader: FC<MessageHeaderProps> = ({
                       'Content-Type': 'application/json',
                       'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '',
 
+
                     }
                   }
                 );
                 const data = await apiCall.json();
                 const { roomId } = data.data;
-                const currentUrl = window.location.href;
-                const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+
                 sendMessage(
-                  `Join here for a call: ${url}/meet/${roomId}`,
+                  `Join here for a call: ${LENSTOK_URL}/meet/${roomId}`,
                   ContentTypeText,
                   ''
+               
+                
                 );
-                window.open(
-                  `/meet/${roomId}`,
-                  'newwindow',
-                  'width=1200, height=800'
-                );
-           
-
               
               }}
               className=" mb-2 mr-4 inline h-8  w-8 cursor-pointer"
               draggable="false"
-        /> )}
-        </button>
+         >
+          <VideoCameraIcon/>
+         </div>
+         )}
+   
           {!following ? (
             <FollowButton
               profile={profile as Profile}

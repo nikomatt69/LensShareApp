@@ -164,7 +164,7 @@ const FullScreen: FC<Props> = ({
         autoClose
       >
         <div
-          className="flex snap-center border-0 bg-[#C0C0C0] "
+          className="flex snap-center border-0 bg-[#F2F6F9] "
           data-testid="byte-video"
           id="videoFull"
         >

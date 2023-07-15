@@ -116,7 +116,7 @@ const Layout = ({ children }: Props) => {
       <GlobalModals />
 
       <div className="flex min-h-screen flex-col pb-14 md:pb-0">
-        {!pathname.includes('meet') && (
+        {pathname.includes('/',) && (
           <>
             <Navbar />
             <BottomNav />{' '}

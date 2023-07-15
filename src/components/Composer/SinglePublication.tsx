@@ -47,7 +47,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
     : publication;
 
   return (
-    <div className="vh-88% ml-[20px] mt-2 rounded-xl border-2 border-blue-600 bg-[#C0C0C0] p-3 ">
+    <div className="vh-88% ml-[20px] mt-2 rounded-xl border-2 border-blue-600 bg-[#F2F6F9] p-3 ">
       {publication?.hidden ? (
         <HiddenPublication type={publication.__typename} />
       ) : (

@@ -51,9 +51,9 @@ const MessageContent: FC<MessageContentProps> = ({
 
   return meetingLink ? (
     <div>
-      {'Join here for a call: '}
+ 
       <Link
-        href={`javascript:window.open('${meetingLink}', 'newwindow', 'height=800,width=1200');`}
+        href={`${meetingLink}`}
       >
         Click here
       </Link>

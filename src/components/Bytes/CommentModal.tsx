@@ -53,7 +53,7 @@ const CommentModal: FC<Props> = ({
         {trigger}
       </button>
       <FullScreenModal
-        panelClassName="max-w-lg bg-[#C0C0C0] overflow-y-hidden overflow-y-auto rounded-xl lg:ml-9"
+        panelClassName="max-w-lg bg-[#F2F6F9] overflow-y-hidden overflow-y-auto rounded-xl lg:ml-9"
         show={show}
         autoClose
       >

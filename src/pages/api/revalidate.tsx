@@ -19,7 +19,8 @@ export default async function handle(
         '/feed' ||
         '/bytes/[id]' ||
         '/listen' ||
-        '/post/[id]'
+        '/post/[id]'||
+        '/meet/[roomId]'
     );
     return res.json({ revalidated: true });
   } catch (err) {
