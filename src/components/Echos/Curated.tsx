@@ -21,6 +21,8 @@ import Loader from '../UI/Loader';
 import EchosShimmer from './EchosShimmer';
 import { EmptyState } from '../UI/EmptyState';
 import { useExploreQuery } from '@/utils/lens/generated';
+import Search from '../Search/Search';
+import SearchAudio from '../Search/SearchAudio';
 
 const Curated = () => {
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
@@ -70,6 +72,7 @@ const Curated = () => {
       {!error && !loading && videos && (
         <>
           <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid grid-cols-2 place-items-center gap-2 md:grid-cols-3 md:gap-3">
+            <SearchAudio/>
             {videos?.map((publication: Publication) => (
               <Item publication={publication} key={publication.id} />
             ))}

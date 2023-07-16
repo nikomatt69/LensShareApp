@@ -68,3 +68,11 @@ export interface SpaceMetadata {
   id: string;
   host: Profile;
 }
+
+
+export interface InflowType {
+  id: string;
+  sender: {
+    id: string;
+  };
+}

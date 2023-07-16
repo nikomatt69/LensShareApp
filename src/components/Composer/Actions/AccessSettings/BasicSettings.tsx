@@ -7,7 +7,7 @@ import { Card } from '@/components/UI/Card';
 import { CollectModules } from '@/utils/lens/generatedLenster';
 
 import { Button } from '@/components/UI/Button';
-import { UsersIcon } from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { MdCollections } from 'react-icons/md';
 
 interface BasicSettingsProps {
@@ -24,6 +24,12 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
   const collectToView = useAccessSettingsStore((state) => state.collectToView);
   const setCollectToView = useAccessSettingsStore(
     (state) => state.setCollectToView
+  );
+  const superfluidToView = useAccessSettingsStore(
+    (state) => state.superfluidToView
+  );
+  const setSuperfluidToView = useAccessSettingsStore(
+    (state) => state.setSuperfluidToView
   );
   const hasConditions = useAccessSettingsStore((state) => state.hasConditions);
   const reset = useAccessSettingsStore((state) => state.reset);
@@ -50,6 +56,15 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
       />
       {restricted && (
         <>
+        <Card className="mt-5 p-5">
+            <ToggleWithHelper
+              on={superfluidToView}
+              setOn={() => setSuperfluidToView(!superfluidToView)}
+              heading={`Superfluid Subscribers`}
+              description={`People need to subscribe to your content to be able to view it`}
+              icon={<CurrencyDollarIcon className="h-4 w-4" />}
+            />
+          </Card>
           <Card className="mt-5 p-5">
             <ToggleWithHelper
               on={collectToView}

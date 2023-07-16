@@ -1,4 +1,9 @@
+import 'plyr-react/plyr.css';
+
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
+
 // @ts-ignore
 import mux from 'mux-embed';
 import { useRouter } from 'next/router';
@@ -41,7 +46,7 @@ const VideoPlayer: FC<Props> = ({
       debug: false,
       data: {
         env_key: MUX_DATA_KEY,
-        player_name: 'Lensshare Player',
+        player_name: 'Lensshare-player',
         video_id: publicationId,
         video_stream_type: VIDEO_TYPE,
         player_init_time: initTime,
@@ -78,7 +83,7 @@ const VideoPlayer: FC<Props> = ({
       {sensitiveWarning ? (
         <SensitiveWarning acceptWarning={() => setSensitiveWarning(false)} />
       ) : (
-        <div onContextMenu={onContextClick} className="relative rounded-xl">
+        <div onContextMenu={onContextClick} className="lensshare-player">
           <PlayerInstance
             posterUrl={posterUrl}
             permanentUrl={permanentUrl}

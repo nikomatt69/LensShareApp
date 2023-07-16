@@ -45,7 +45,7 @@ const NewPost: FC = () => {
   return (
     <Card
       className="space-y-3 rounded-xl border-blue-600 p-5"
-      onClick={() => setShowNewPostModal(true)}
+     
     >
       <div className="flex items-center  space-x-3">
         <Image

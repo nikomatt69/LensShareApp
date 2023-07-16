@@ -52,8 +52,8 @@ const Lobby: NextPage = () => {
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    if (query.roomid) {
-      initialize('3kzet_ujpjtF8dzciFefEOAZqrDNpdQS');
+    if (query.roomid && process.env.NEXT_PUBLIC_PROJECT_ID) {
+      initialize(process.env.NEXT_PUBLIC_PROJECT_ID);
     }
   }, [query.roomid]);
 

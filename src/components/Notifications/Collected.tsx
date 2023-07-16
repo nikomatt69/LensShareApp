@@ -57,7 +57,7 @@ const CollectedNotification: FC<Props> = ({ notification }) => {
         <span className="text-gray-600 dark:text-gray-400">
           Collected your
           {notification.collectedPublication.__typename === 'Comment' &&
-            'Comment on'}
+            'comment'}
           <Link
             href={`/post/${notification?.collectedPublication.id}`}
             className="ml-1 text-indigo-500"

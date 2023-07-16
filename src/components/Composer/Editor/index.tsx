@@ -70,15 +70,17 @@ const Editor: FC = () => {
       <ToolbarPlugin />
       <RichTextPlugin
         contentEditable={
-          <ContentEditable className="my-4 block min-h-[65px] overflow-auto  rounded-lg bg-white px-5" />
+          <ContentEditable className="my-4 block min-h-[65px] rounded-lg  bg-white overflow-auto px-5" />
         }
         placeholder={
-          <div className="pointer-events-none absolute top-[65px] whitespace-nowrap bg-white px-5 text-gray-400">
-            {showSpaceEditor
-              ? 'What do you want to talk about?'
-              : showPollEditor
-              ? 'Ask a question...'
-              : ' Whats happening?'}
+          <div className="pointer-events-none absolute top-[65px] bg-white whitespace-nowrap px-5 text-gray-400">
+            {showSpaceEditor ? (
+             'What do you want to talk about?'
+            ) : showPollEditor ? (
+              'Ask a question...'
+            ) : (
+             ' New Post?'
+            )}
           </div>
         }
         ErrorBoundary={() => <div>{Errors.SomethingWentWrong}</div>}

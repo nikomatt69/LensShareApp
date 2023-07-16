@@ -52,11 +52,8 @@ const MessageContent: FC<MessageContentProps> = ({
   return meetingLink ? (
     <div>
  
-      <Link
-        href={`${meetingLink}`}
-      >
-        Click here
-      </Link>
+      
+      <Markup>{message.content}</Markup>
     </div>
   ) : (
     <Markup>{message.content}</Markup>

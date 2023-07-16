@@ -30,5 +30,6 @@ export const testnetGardeners = [
   '0x18', // devjoshstevens.test
   '0x15', // yoginth.test
   '0x038b', // 1653392689544.test
+  '0x933b', // nikoemme
   0x933b
 ];

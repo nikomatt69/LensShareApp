@@ -148,3 +148,13 @@ ul {
   @apply [&>div>div]:divide-y;
   @apply [&>div>div]:dark:divide-gray-700;
 }
+
+
+.lensshare-player {
+  @apply rounded-xl flex h-[flex] w-full ;
+  @apply relative gap-4 rounded-xl border-0 md:flex flex ;
+  @apply [&>div>div]:shadow-none;
+
+  @layer border-radius-10px;
+
+}

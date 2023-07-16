@@ -1,13 +1,13 @@
-import { IS_MAINNET } from '@/constants';
-import { featureFlags } from '../data/feature-flags';
+import { IS_MAINNET } from '@/constants'
+import { featureFlags } from '../data/feature-flags'
 
 const getIsFeatureEnabled = (flag: string, channelId: string) => {
   if (!channelId) {
-    return false;
+    return false
   }
-  const feature = featureFlags.find((f) => flag);
+  const feature = featureFlags.find((f) => flag)
 
-  return IS_MAINNET ? feature?.enabledFor.includes(channelId) ?? false : false;
-};
+  return IS_MAINNET ? feature?.enabledFor.includes(channelId) ?? false : false
+}
 
-export default getIsFeatureEnabled;
+export default getIsFeatureEnabled

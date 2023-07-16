@@ -32,6 +32,7 @@ import ProfileCard from '../ProfilePage/ProfileCard';
 import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import Loading from '../Loading';
+import SubscribersFeed from './SubscribersFeed';
 
 const ViewProfile: NextPage = () => {
   const {
@@ -40,7 +41,9 @@ const ViewProfile: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [feedType, setFeedType] = useState(
     type &&
-      ['feed', 'replies', 'media', 'collects', 'nft'].includes(type as string)
+    ['feed', 'replies', 'media', 'collects', 'nft', 'subscribers'].includes(
+      type as string
+    )
       ? type.toString().toUpperCase()
       : ProfileFeedType.Feed
   );
@@ -157,6 +160,9 @@ const ViewProfile: NextPage = () => {
             feedType === ProfileFeedType.Media ||
             feedType === ProfileFeedType.Collects) && (
             <Feed profile={profile as Profile} type={feedType} />
+          )}
+          {feedType === ProfileFeedType.Subscribers && (
+            <SubscribersFeed profile={profile as Profile} />
           )}
         </GridItemEight>
       </GridLayout>

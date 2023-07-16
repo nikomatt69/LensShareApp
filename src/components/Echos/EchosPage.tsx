@@ -9,6 +9,7 @@ import getIsFeatureEnabled from '@/utils/functions/getIsFeatureEnabled';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import Navbar from '../NavbarDetails';
 import BottomNav from '../Navs/BottomNavDetails';
+import Search from '../Search/Search';
 
 const Echos = (publication: Publication) => {
   return (

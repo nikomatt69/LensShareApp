@@ -4,7 +4,8 @@ import type {
   CollectCondition,
   EncryptedMetadata,
   FollowCondition,
-  LensEnvironment
+  LensEnvironment,
+  EoaOwnership,
 } from '@lens-protocol/sdk-gated';
 import { LensGatedSDK } from '@lens-protocol/sdk-gated';
 import type {
@@ -47,6 +48,7 @@ import {
   useCreatePostViaDispatcherMutation,
   usePublicationLazyQuery
 } from '@/utils/lens/generatedLenster';
+import {SuperfluidInflowsDocument} from '@/utils/lens/generated4'
 
 import { $convertFromMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -72,7 +74,7 @@ import { usePublicationStore } from 'src/store/publication4';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { v4 as uuid } from 'uuid';
 import { useContractWrite, usePublicClient, useSignTypedData } from 'wagmi';
-
+import { superfluidClient} from '@/utils/lens/apollo'
 import PollEditor from './Actions/PollSettings/PollEditor';
 import SpaceSettings from './Actions/SpaceSettings';
 import Editor from './Editor';
@@ -86,7 +88,7 @@ import uploadToArweave from '@/lib/uploadToArweave';
 import getTextNftUrl from '@/utils/functions/getTextNftUrl';
 import getUserLocale from '@/lib/getUserLocale';
 import getSignature from '@/lib/getSignature';
-import { NewLensshareAttachment } from '@/typesLenster';
+import { NewLensshareAttachment, InflowType } from '@/typesLenster';
 import { ErrorMessage } from '../ErrorMessage';
 import { Card } from '../UI/Card';
 import { Spinner } from '../UI/Spinner';
@@ -140,9 +142,10 @@ const PollSettings = dynamic(
 interface NewPublicationProps {
   publication: Publication;
   profile: Profile;
+  onDetail: (video: Publication) => void;
 }
 
-const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
+const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail }) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -196,6 +199,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     restricted,
     followToView,
     collectToView,
+    superfluidToView,
     reset: resetAccessSettings
   } = useAccessSettingsStore((state) => state);
 
@@ -623,21 +627,60 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     };
 
     // Create the access condition
+    const currentAddress = await walletClient.getAddress();
+    const { data: superfluidInflowsData } = await superfluidClient.query({
+      query: SuperfluidInflowsDocument,
+      variables: { id: !currentAddress.toString().toLowerCase() }
+    });
+    console.log('superfluidInflowsData', superfluidInflowsData, !currentAddress);
+
+    const listOfSuperfluidAddresses = superfluidInflowsData.account.inflows.map(
+      (inflow: InflowType) => inflow.sender.id
+    );
+
+    const eoaAccessCondition: EoaOwnership = {
+      address: listOfSuperfluidAddresses
+    };
+
+
     let accessCondition: AccessConditionOutput = {};
-    if (collectToView && followToView) {
-      accessCondition = {
-        and: {
-          criteria: [
-            { collect: collectAccessCondition },
-            { follow: followAccessCondition }
-          ]
-        }
-      };
-    } else if (collectToView) {
-      accessCondition = { collect: collectAccessCondition };
-    } else if (followToView) {
-      accessCondition = { follow: followAccessCondition };
+    if (collectToView || followToView || superfluidToView) {
+      const criteria = [];
+
+      if (collectToView) {
+        criteria.push({ collect: collectAccessCondition });
+      }
+
+      if (followToView) {
+        criteria.push({ follow: followAccessCondition });
+      }
+      
+      if (criteria.length === 1) {
+        accessCondition = criteria[0];
+      } else {
+        accessCondition = { and: { criteria } };
+      }
+    } else {
+      if (collectToView) {
+        accessCondition = { collect: collectAccessCondition };
+      } else if (followToView) {
+        accessCondition = { follow: followAccessCondition };
+      }
     }
+    if (superfluidToView) {
+      if (listOfSuperfluidAddresses.length > 1) {
+        accessCondition = {
+          or: {
+            criteria: listOfSuperfluidAddresses.map((address: string) => {
+              return { eoa: { address } };
+            })
+          }
+        };
+      } else if (listOfSuperfluidAddresses.length === 1) {
+        accessCondition = { eoa: { address: listOfSuperfluidAddresses[0] } };
+      }
+    }
+    console.log('accessCondition', accessCondition);
 
     // Generate the encrypted metadata and upload it to Arweave
     const { contentURI } = await tokenGatedSdk.gated.encryptMetadata(
@@ -798,6 +841,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
           : isRevertCollectModule);
 
       let arweaveId = null;
+      console.log('restricted', restricted);
       if (restricted) {
         arweaveId = await createTokenGatedMetadata(metadata);
       } else {
@@ -909,6 +953,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
       {quotedPublication ? (
         <Wrapper className="m-5" zeroPadding>
           <QuotedPublication
+          
             profile={profile as Profile}
             publication={quotedPublication}
             isNew

@@ -1,3 +1,6 @@
+import 'plyr-react/plyr.css';
+
+
 import { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -82,15 +85,15 @@ const Video: FC<Props> = ({ publication }) => {
     e.currentTarget.pause();
   };
   const isBytesVideo =
-    video.appId === LENSTUBE_APP_ID ||
-    publication.appId === LENSTOK_APP_ID ||
-    publication.appId === APP_ID ||
-    publication.appId === LENSTER_APP_ID;
+    video.appId === LENSTUBE_APP_ID ||   
+    publication.appId === APP_ID
+   
 
   return (
-    <div className="relative gap-4 rounded-xl border-0 md:flex lg:ml-20">
+    <div className="lenshare-player">
       <div>
         <VideoPlayer
+      
           currentTime={videoWatchTime}
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}

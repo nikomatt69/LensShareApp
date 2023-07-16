@@ -3,8 +3,10 @@ import { API_URL } from 'src/constants';
 
 const getApolloClient = () => {
   return new ApolloClient({
+  
     uri: API_URL,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    
   });
 };
 

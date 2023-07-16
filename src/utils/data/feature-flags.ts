@@ -1,4 +1,5 @@
 import { lensshareMembers } from './pinsta-members';
+import {mainnetVerified} from './verified'
 
 export enum FeatureFlag {
   TrendingWidget = 'trending-widget',
@@ -16,38 +17,38 @@ export enum FeatureFlag {
 export const featureFlags = [
   {
     key: FeatureFlag.TrendingWidget,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.NftGallery,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.NftDetail,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.GatedLocales,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.Polls,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.Spaces,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.ForYou,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.WTF2,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   },
   {
     key: FeatureFlag.ExploreTags,
-    enabledFor: [...lensshareMembers]
+    enabledFor: [...lensshareMembers,...mainnetVerified]
   }
 ];

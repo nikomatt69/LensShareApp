@@ -31,6 +31,7 @@ const PlayerInstance: FC<PlayerProps> = ({
   showControls
 }) => {
   return (
+    <div className='lensshare-player'>
     <Player
       src={permanentUrl}
       poster={posterUrl}
@@ -56,6 +57,7 @@ const PlayerInstance: FC<PlayerProps> = ({
       {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
       {!showControls ? <></> : null}
     </Player>
+    </div>
   );
 };
 

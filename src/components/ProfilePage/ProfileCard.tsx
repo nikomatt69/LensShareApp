@@ -65,6 +65,7 @@ import { LightBox } from '../UI/LightBox';
 import formatAddress from '@/lib/formatAddress';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Button } from '../UI/Button';
+import SuperfluidSubscribe from '../Superfluid';
 
 interface Props {
   profile: Profile;
@@ -275,6 +276,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             </div>
           </div>
           <Message onClick={onMessageClick} />
+          <SuperfluidSubscribe profile={profile} />
         </div>
 
         {getProfileAttribute(profile?.attributes, 'location') && (

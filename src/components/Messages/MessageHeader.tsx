@@ -92,45 +92,6 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
-       {profile && (
-     
-    
-        <div
-               onClick={async () => {
-                const apiCall = await fetch(
-                  '/api/create-room',
-                  {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      title: 'LensShare Meet'
-                    }),
-                    headers: {
-                      'Content-Type': 'application/json',
-                      'x-api-key': process.env.NEXT_PUBLIC_API_KEY || '',
-
-
-                    }
-                  }
-                );
-                const data = await apiCall.json();
-                const { roomId } = data.data;
-
-                sendMessage(
-                  `Join here for a call: ${LENSTOK_URL}/meet/${roomId}`,
-                  ContentTypeText,
-                  ''
-               
-                
-                );
-              
-              }}
-              className=" mb-2 mr-4 inline h-8  w-8 cursor-pointer"
-              draggable="false"
-         >
-          <VideoCameraIcon/>
-         </div>
-         )}
-   
           {!following ? (
             <FollowButton
               profile={profile as Profile}
