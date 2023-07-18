@@ -43,23 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
          gtag('config', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
-      <Script
-        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
-        defer
-      ></Script>
-
-      <Script>
-        {` window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "d89b58ae-0822-43bc-a73f-6f61ed8257b9",
-    });
-  });`}
-      </Script>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover" /> 
 
       <Suspense fallback={<Loading />}>
         <Providers>

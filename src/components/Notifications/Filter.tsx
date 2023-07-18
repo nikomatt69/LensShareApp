@@ -24,7 +24,7 @@ const NotificationsFilter = () => {
       <div className="mt-1 overflow-hidden rounded-xl border border-gray-200 bg-blue-500 p-1 text-sm shadow dark:border-gray-800">
         <Menu.Item
           className={clsx(
-            'w-full rounded-lg px-3 py-1.5 text-left',
+            ' rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.HIGH_SIGNAL
               ? 'bg-gray-100'
@@ -41,7 +41,7 @@ const NotificationsFilter = () => {
         </Menu.Item>
         <Menu.Item
           className={clsx(
-            'w-full rounded-lg px-3 py-1.5 text-left',
+            ' rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.ALL_NOTIFICATIONS
               ? 'bg-gray-100'

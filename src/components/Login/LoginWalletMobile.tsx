@@ -100,12 +100,12 @@ const LoginWalletMobile: FC = () => {
   return activeConnector?.id ? (
     <div>
       {chain?.id === CHAIN_ID ? (
-        <button className="flex-1 text-white" onClick={() => handleLogin()}>
+        <button className="flex-1 text-blue-700" onClick={() => handleLogin()}>
           {mounted ? 'Log In' : ''}
         </button>
       ) : (
         <button
-          className="flex-1 text-white"
+          className="flex-1 text-blue-700"
           onClick={() => {
             if (switchNetwork) {
               switchNetwork(CHAIN_ID);
@@ -125,7 +125,7 @@ const LoginWalletMobile: FC = () => {
           toast.error('Log in to view profile', { duration: 1000 });
         }
       }}
-      className="border-gray-800 text-white hover:text-gray-100 focus:text-gray-100 focus:outline-none"
+      className="border-gray-800 text-blue-700 hover:text-gray-600 focus:text-black focus:outline-none"
     >
       <svg
         className="h-6 w-6"

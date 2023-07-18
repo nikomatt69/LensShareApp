@@ -19,7 +19,7 @@ const Cover: FC<CoverProps> = ({ cover }) => {
             ? imageKit(sanitizeDStorageUrl(cover), COVER)
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         })`,
-        backgroundColor: colors.violet[500],
+        backgroundColor: colors.blue[100],
         backgroundSize: cover ? 'cover' : '30%',
         backgroundPosition: 'center center',
         backgroundRepeat: cover ? 'no-repeat' : 'repeat'

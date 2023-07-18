@@ -9,7 +9,7 @@ const LoginButton: FC = () => {
   return (
     <>
       <div className="">
-        <button className="text-md flex items-center gap-2 border-2 border-[#57B8FF] px-2 py-2 font-semibold text-[#000000] md:px-4">
+        <button className="text-md flex items-center gap-2 border-2 border-[#57B8FF] px-2 py-2 font-semibold text-blue-700 md:px-4">
           <LoginWalletMobile />
           <IoIosContact className="text-xl" />{' '}
         </button>

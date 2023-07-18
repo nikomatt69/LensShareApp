@@ -18,6 +18,7 @@ import { getToastOptions } from '@/utils/functions/getToastOptions';
 import Head from 'next/head';
 import { useTheme } from 'next-themes';
 import GlobalModals from './GlobalModals';
+import GlobalAlerts from './Publication/Actions/Menu/GlobalAlerts';
 
 interface Props {
   children: ReactNode;
@@ -114,15 +115,17 @@ const Layout = ({ children }: Props) => {
         toastOptions={getToastOptions(resolvedTheme)}
       />
       <GlobalModals />
+      <GlobalAlerts/>
 
-      <div className="flex min-h-screen flex-col pb-14 md:pb-0">
+      <div className="flex  flex-col min-h-screen pb-16 md:pb-0">
         {pathname.includes('/',) && (
           <>
             <Navbar />
-            <BottomNav />{' '}
+            <BottomNav />
+            {children}
           </>
         )}
-        {children}
+       
       </div>
     </>
   );

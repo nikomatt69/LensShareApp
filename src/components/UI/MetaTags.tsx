@@ -35,10 +35,7 @@ const MetaTags: FC<Props> = (props) => {
       <title>{meta.title}</title>
       <meta name="robots" content="follow, index" />
       <meta content={meta.description} name="description" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=5"
-      />
+      <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0 viewport-fit=cover"/>
       <link rel="canonical" href={`${LENSTOK_URL}${router.asPath}`} />
       <meta property="og:url" content={`${LENSTOK_URL}${router.asPath}`} />
       <meta property="og:type" content={meta.type} />
@@ -63,7 +60,7 @@ const MetaTags: FC<Props> = (props) => {
             rel="iframely player"
             type="text/html"
             href={`${LENSSHARE_EMBED_URL}/${router.query?.id}`}
-            media="(aspect-ratio: 880/640)"
+            media="(aspect-ratio: 16/9)"
           />
           <link
             rel="alternate"

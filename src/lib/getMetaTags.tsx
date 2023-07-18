@@ -31,7 +31,7 @@ const getMetaTags = ({ title, description, image, page, id, pubId }: Args) => {
               <meta charset="UTF-8" />
               <meta content="${meta.description}" name="description" />
               <meta name="robots" content="follow, index" />
-              <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" viewport-fit=cover />
               <meta property="og:url" content="${meta.url}" />
               <meta property="og:site_name" content="${APP_NAME}" />
               <meta property="og:description" content="${meta.description}" />

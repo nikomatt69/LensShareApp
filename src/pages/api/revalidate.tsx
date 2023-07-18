@@ -13,14 +13,8 @@ export default async function handle(
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
     await res.revalidate(
-      '/' ||
-        '/u/[id]' ||
-        '/latest' ||
-        '/feed' ||
-        '/bytes/[id]' ||
-        '/listen' ||
-        '/post/[id]'||
-        '/meet/[roomId]'
+      '/'
+   
     );
     return res.json({ revalidated: true });
   } catch (err) {

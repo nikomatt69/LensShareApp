@@ -200,10 +200,16 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
                 </div>
               )}
           </div>
+          <div className='flex mt-4 pt-2  '>
+          <SuperfluidSubscribe profile={profile} />
+                <Message onClick={onMessageClick} />
+                </div>
 
           <div className="display:inline-block right-2 pt-1 ">
+    
             {itsNotMe ? (
               <div className="text-md fl  right-2">
+               
                 {following ? (
                   <UnfollowButton
                     setFollowing={setFollowing}
@@ -275,8 +281,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
               </Modal>
             </div>
           </div>
-          <Message onClick={onMessageClick} />
-          <SuperfluidSubscribe profile={profile} />
+
         </div>
 
         {getProfileAttribute(profile?.attributes, 'location') && (

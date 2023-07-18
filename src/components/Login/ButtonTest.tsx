@@ -1,6 +1,7 @@
 import { useAppStore } from '@/store/app';
 import type { FC } from 'react';
 import LoginWallet from './LoginWallet';
+import MainButton from '../Buttons/Rainbow/mainbutton';
 
 const ButtonTest: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -8,12 +9,12 @@ const ButtonTest: FC = () => {
     <>
       <div
         className="border-grey-300 mt-3 inline-flex h-12 w-[284px] cursor-pointer 
-      items-center justify-center rounded-full border-2 border-solid bg-blue-500 
-      px-6 py-3 font-bold text-[#000000] drop-shadow-lg hover:bg-[#57B8FF]
+      items-center justify-center rounded-full border-2 border-solid bg-[#000fff]
+      px-6 py-3 font-bold text-[#000000] drop-shadow-lg hover:bg-blue-500
        hover:text-white"
       >
         {currentProfile ? (
-          <div className="flex justify-center">{currentProfile.handle}</div>
+          <div className="flex justify-center">{<MainButton/>}</div>
         ) : (
           <LoginWallet />
         )}

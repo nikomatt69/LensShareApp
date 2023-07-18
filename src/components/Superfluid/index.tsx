@@ -22,7 +22,7 @@ export function SuperfluidSubscribe({ profile }: SuperfluidSubscribeProps) {
   const customPaymentDetails = paymentDetails.paymentOptions.map((option) => {
     return {
       ...option,
-      receiverAddress: profile.ownedBy
+      receiverAddress: profile?.ownedBy
     };
   });
 
@@ -45,7 +45,7 @@ export function SuperfluidSubscribe({ profile }: SuperfluidSubscribeProps) {
           <Button
             type="button"
             onClick={() => openModal()}
-            className="w-full px-4 py-2 text-sm font-bold text-white hover:bg-blue-700"
+            className=" px-4 py-2 text-sm font-bold text-white hover:bg-blue-700"
           >
             {`$`}
           </Button>
