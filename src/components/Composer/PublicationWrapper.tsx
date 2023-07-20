@@ -11,7 +11,7 @@ interface PublicationWrapperProps {
 
 const PublicationWrapper: FC<PublicationWrapperProps> = ({
   publication,
-  className = '',
+  className = 'line-clamp-5 break-words truncate',
   children
 }) => {
   const { push } = useRouter();

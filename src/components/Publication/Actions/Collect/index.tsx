@@ -1,15 +1,16 @@
+
 import Loader from '@/components/UI/Loader';
 import { Modal } from '@/components/UI/Modal';
 import { Tooltip } from '@/components/UI/Tooltip';
 import humanize from '@/lib/humanize';
 import nFormatter from '@/lib/nFormatter';
 import { ElectedMirror, Publication } from '@/utils/lens/generatedLenster';
-
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import { BsCollection } from 'react-icons/bs';
+import { BsCollection, BsCollectionFill } from 'react-icons/bs';
+
 
 const CollectModule = dynamic(() => import('./CollectModule'), {
   loading: () => <Loader message={`Loading collect`} />
@@ -59,13 +60,22 @@ const Collect: FC<CollectProps> = ({
           whileTap={{ scale: 0.9 }}
           onClick={() => {
             setShowCollectModal(true);
+           
           }}
           aria-label="Collect"
         >
           <div className="rounded-full p-1.5 hover:bg-red-300/20">
-            <Tooltip placement="top" content={`${humanize(count)} `} withDelay>
+            <Tooltip
+              placement="top"
+              content={`${humanize(count)} count, {
+                zero: 'Collect',
+                one: 'Collect',
+                other: 'Collects'
+              })}`}
+              withDelay
+            >
               {hasCollected ? (
-                <BsCollection className={iconClassName} />
+                <BsCollectionFill className={iconClassName} />
               ) : (
                 <BsCollection className={iconClassName} />
               )}
@@ -83,6 +93,7 @@ const Collect: FC<CollectProps> = ({
         onClose={() => setShowCollectModal(false)}
       >
         <CollectModule
+          electedMirror={electedMirror}
           publication={publication}
           count={count}
           setCount={setCount}

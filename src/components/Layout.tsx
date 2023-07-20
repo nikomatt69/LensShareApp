@@ -117,14 +117,13 @@ const Layout = ({ children }: Props) => {
       <GlobalModals />
       <GlobalAlerts/>
 
-      <div className="flex  flex-col min-h-screen pb-16 md:pb-0">
-        {pathname.includes('/',) && (
-          <>
-            <Navbar />
-            <BottomNav />
+      <div className="flex  flex-col min-h-screen md:pb-0">
+
+        
+          <BottomNav/>
             {children}
-          </>
-        )}
+
+
        
       </div>
     </>

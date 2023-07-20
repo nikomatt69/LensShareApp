@@ -138,14 +138,15 @@ const Home: NextPage = () => {
     <div>
       <MetaTags title={`Home • ${APP_NAME}`} />
       <div className="m-auto h-[100vh] overflow-hidden lg:w-[1100px] xl:w-[1200px]">
+        <Navbar/>
      
 
         <div className="flex gap-6 md:gap-20">
-          <div className="hidden h-[92vh] overflow-hidden lg:block lg:hover:overflow-auto">
+          <div className="hidden  overflow-hidden lg:block lg:hover:overflow-auto">
             <Sidebar />
           </div>
 
-          <div className="videos mb-8 mt-2 flex h-[88vh] flex-1 cursor-pointer flex-col gap-10 overflow-auto overflow-x-hidden pb-8">
+          <div className="videos mt-2 flex  flex-1 cursor-pointer flex-col gap-10 overflow-auto overflow-x-hidden ">
             <div className="flex flex-col  gap-10">
               <BytesSection />
             </div>

@@ -144,6 +144,7 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
     <div>
       <MetaTags title={`MusicFeed • ${APP_NAME} `} />
       <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
+        <Navbar/>
         
 
         <div className="flex  ">

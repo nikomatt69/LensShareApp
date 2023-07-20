@@ -80,7 +80,7 @@ import SpaceSettings from './Actions/SpaceSettings';
 import Editor from './Editor';
 import { useApolloClient } from '@apollo/client/react';
 import { useGlobalModalStateStore } from '@/store/modals';
-import { useNonceStore } from '@/store/nonce';
+
 import { useAccessSettingsStore } from '@/store/access';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
 import { Errors } from '@/lib/errors';
@@ -104,6 +104,7 @@ import useCreateSpace from '@/lib/useCreateSpace';
 import QuotedPublication from './QuotedPublication';
 import { MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
+import { LensHub } from '@/abi/LensHub';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -156,7 +157,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   );
 
   // Nonce store
-  const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
+  const { userSigNonce, setUserSigNonce } = useAppStore((state) => state);
 
   // Publication store
   const {
@@ -312,7 +313,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
 
   const { error, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: isComment ? 'comment' : 'post',
     onSuccess: ({ hash }) => {
       onCompleted();

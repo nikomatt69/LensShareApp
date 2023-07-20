@@ -1,3 +1,4 @@
+import { LensHub } from '@/abi/LensHub';
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import UserProfile from '@/components/ProfilePage/UserProfile';
@@ -21,15 +22,15 @@ import toast from 'react-hot-toast';
 import { BsExclamation } from 'react-icons/bs';
 import Custom404 from 'src/pages/404';
 import { useAppStore } from 'src/store/app';
-import { useNonceStore } from 'src/store/nonce';
+
 import { useEffectOnce } from 'usehooks-ts';
 import { useContractWrite, useSignTypedData } from 'wagmi';
 
 const SetProfile: FC = () => {
   const profiles = useAppStore((state) => state.profiles);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const [selectedUser, setSelectedUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +51,7 @@ const SetProfile: FC = () => {
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { error, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'setDefaultProfile',
     onSuccess: () => {
       onCompleted();

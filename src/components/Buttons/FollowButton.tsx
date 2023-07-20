@@ -16,6 +16,7 @@ import {
   useCreateFollowTypedDataMutation,
   useProxyActionMutation
 } from '@/types/graph';
+import { LensHub } from '@/abi/LensHub';
 
 interface Props {
   setFollowing: Dispatch<boolean>;
@@ -49,7 +50,7 @@ const FollowButton: FC<Props> = ({ setFollowing, profile }) => {
 
   const { isLoading: writeLoading, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'followWithSig',
 
     onSuccess: onCompleted,

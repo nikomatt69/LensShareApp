@@ -1,6 +1,7 @@
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
 import packageJson from '../package.json';
 import { CustomFiltersTypes } from '@/utils/lens/generatedLenster';
+import getEnvConfig from './utils/data/getEnvConfig';
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === 'mainnet';
 export const IS_PRODUCTION = process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true';
@@ -12,10 +13,19 @@ export const APP_NAME = 'LensShare';
 export const APP_VERSION = packageJson.version;
 export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
 export const APP_INFOPAGE = 'Decentralized Social Video & Message Platform';
+export const LENS_NETWORK = process.env.NEXT_PUBLIC_LENS_NETWORK ?? 'mainnet';
 
-export const SUPERFLUID_SUBGRAPH = 'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic';
+export const API_URL = getEnvConfig().apiEndpoint;
 
-export const OLD_LENS_RELAYER_ADDRESS = '0xD1FecCF6881970105dfb2b654054174007f0e07E';
+export const LENSHUB_PROXY = getEnvConfig().lensHubProxyAddress;
+export const LENS_PERIPHERY = getEnvConfig().lensPeripheryAddress;
+export const DEFAULT_COLLECT_TOKEN = getEnvConfig().defaultCollectToken;
+export const LIT_PROTOCOL_ENVIRONMENT = getEnvConfig().litProtocolEnvironment;
+
+export const SUPERFLUID_SUBGRAPH ='https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic';
+
+export const OLD_LENS_RELAYER_ADDRESS =
+  '0xD1FecCF6881970105dfb2b654054174007f0e07E';
 
 export const LENSSHARE_TAIL_INGEST_URL = 'https://tail.lenshareapp.xyz';
 
@@ -86,14 +96,12 @@ export const XMTP_ENV = IS_MAINNET ? 'production' : 'dev';
 export const XMTP_PREFIX = 'lens.dev/dm';
 
 export const CHAIN_ID = IS_MAINNET ? polygon.id : polygon.id;
-export const API_URL = IS_MAINNET ? 'https://api.lens.dev' : 'https://api-mumbai.lens.dev';
 
-
-export const LENSHUB_PROXY = IS_MAINNET ? '0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d' : '0x60Ae865ee4C725cd04353b5AAb364553f56ceF82';
-export const LENS_PERIPHERY = IS_MAINNET ? '0xeff187b4190E551FC25a7fA4dFC6cf7fDeF7194f': '0xD5037d72877808cdE7F669563e9389930AF404E8';
 
 export const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_ID;
-export const INFURA_RPC = IS_MAINNET ? `https://polygon-mainnet.infura.io/v3/${INFURA_ID}` : `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`;
+export const INFURA_RPC = IS_MAINNET
+  ? `https://polygon-mainnet.infura.io/v3/${INFURA_ID}`
+  : `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`;
 
 export const POLYGON_CHAIN_ID = IS_MAINNET ? 137 : 137;
 
@@ -160,9 +168,13 @@ export const LENSTOK_APP_ID = 'lenstok';
 export const LENSTER_APP_ID = 'lenster';
 export const RIFF_APP_ID = 'beats';
 export const ORB_APP_ID = 'orb';
-export const WMATIC_TOKEN_ADDRESS = IS_MAINNET ? '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270' : '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
+export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
+  ? '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'
+  : '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 
-export const BUNDLR_NODE_URL = IS_MAINNET ? 'https://node1.bundlr.network' : 'https://devnet.bundlr.network';
+export const BUNDLR_NODE_URL = IS_MAINNET
+  ? 'https://node1.bundlr.network'
+  : 'https://devnet.bundlr.network';
 
 export const BUNDLR_CURRENCY = 'matic';
 export const BUNDLR_CONNECT_MESSAGE = 'Sign to initialize & estimate upload...';
@@ -177,9 +189,13 @@ export const API_ORIGINS = 'https://lenshareapp.xyz/*';
 
 export const ARWEAVE_WEBSITE_URL = 'https://arweave.net';
 export const ARWEAVE_GATEWAY = 'https://arweave.net';
-export const OPENSEA_MARKETPLACE_URL = IS_MAINNET ? 'https://opensea.io' : 'https://testnets.opensea.io';
+export const OPENSEA_MARKETPLACE_URL = IS_MAINNET
+  ? 'https://opensea.io'
+  : 'https://testnets.opensea.io';
 
-export const RARIBLE_URL = IS_MAINNET ? 'https://rarible.com' : 'https://testnet.rarible.com';
+export const RARIBLE_URL = IS_MAINNET
+  ? 'https://rarible.com'
+  : 'https://testnet.rarible.com';
 
 export const IMAGE_CDN_URL = IS_MAINNET
   ? 'https://img.lenstube.xyz'
@@ -187,11 +203,16 @@ export const IMAGE_CDN_URL = IS_MAINNET
 
 export const USER_CONTENT_URL = 'https://static-assets.lenster.xyz';
 
-export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET ? '0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938' : '0xA78E4a4D0367f0f4674130F0Bb2653957ab5917e';
+export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET
+  ? '0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938'
+  : '0xA78E4a4D0367f0f4674130F0Bb2653957ab5917e';
 
-export const FREE_COLLECT_MODULE = IS_MAINNET ? '0x23b9467334bEb345aAa6fd1545538F3d54436e96' : '0x0BE6bD7092ee83D44a6eC1D949626FeE48caB30c';
+export const FREE_COLLECT_MODULE = IS_MAINNET
+  ? '0x23b9467334bEb345aAa6fd1545538F3d54436e96'
+  : '0x0BE6bD7092ee83D44a6eC1D949626FeE48caB30c';
 
-export const MAINNET_DEFAULT_TOKEN ='0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270';
+export const MAINNET_DEFAULT_TOKEN =
+  '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270';
 
 export const POLYGONSCAN_URL = IS_MAINNET
   ? 'https://polygonscan.com'
@@ -201,8 +222,7 @@ export const API_KEY = process.env.NEXT_PUBLIC_STUDIO_API_KEY;
 
 export const LIVE_API_KEY = process.env.NEXT_PUBLIC_LIVE_STUDIO_API_KEY;
 
-export const DEFAULT_COLLECT_TOKEN =
-  '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270';
+
 
 export const LIT_PROTOCOL_ENV = IS_MAINNET ? 'polygon' : 'mumbai';
 
@@ -228,7 +248,8 @@ export const LENSPROTOCOL_HANDLE = 'lensprotocol';
 export const HANDLE_SUFFIX = IS_MAINNET ? '.lens' : '.test';
 
 // Regex
-export const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[\da-z]+([.\-][\da-z]+)*\.[a-z]{2,63}(:\d{1,5})?(\/.*)?$/;
+export const URL_REGEX =
+  /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[\da-z]+([.\-][\da-z]+)*\.[a-z]{2,63}(:\d{1,5})?(\/.*)?$/;
 export const ADDRESS_REGEX = /^(0x)?[\da-f]{40}$/i;
 export const HANDLE_REGEX = /^[\da-z]+$/;
 export const ALL_HANDLES_REGEX = /([\s+])@(\S+)/g;

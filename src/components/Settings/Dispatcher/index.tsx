@@ -36,7 +36,7 @@ const DispatcherSettings: FC = () => {
     if (isOldDispatcherEnabled) {
       return ' Upgrade your dispatcher to the latest version for better faster stronger signless transactions.';
     }
-    return ' You can enable dispatcher to interact with `${APP_NAME}` without signing any of your transactions.';
+    return  `${APP_NAME}`;
   };
 
   if (!currentProfile) {

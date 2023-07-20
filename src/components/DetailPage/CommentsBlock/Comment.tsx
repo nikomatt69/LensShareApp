@@ -106,7 +106,7 @@ const Comments: FC<Props> = ({ comment }) => {
           <div
             className={clsx(
               'text-base opacity-80',
-              clamped ? 'line-clamp-2' : ''
+              clamped ? 'line-clamp-3' : ''
             )}
           >
             {comment?.hidden ? (

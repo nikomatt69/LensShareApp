@@ -32,17 +32,20 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
       </div>
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
-          {notification.reaction === 'DOWNVOTE' ? `dislisked` : `liked`} 'your'{' '}
-          {notification.publication.__typename === 'Comment' && 'comment on'}
+          {notification.reaction === 'UPVOTE' ? `liked` : `disliked`}{' '}
+          'your'{' '}
+          {notification.publication.__typename === 'Comment' && (
+            'comment on'
+          )}
           <Link
             href={`/post/${
               notification.publication.__typename === 'Comment'
-                ? notification.publication?.mainPost?.id
-                : notification?.publication.id
+              ? notification.publication?.mainPost?.id
+              : notification?.publication.id
             }`}
             className="ml-1 text-indigo-500"
           >
-            post
+            Post
           </Link>
         </span>
         <div className="flex flex-none items-center text-xs text-blue-500 ">

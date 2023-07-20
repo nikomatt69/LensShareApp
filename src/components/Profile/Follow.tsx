@@ -3,7 +3,7 @@ import { LENSHUB_PROXY } from '@/constants';
 import getSignature from '@/lib/getSignature';
 import { useAppStore } from '@/store/app';
 import { useGlobalModalStateStore } from '@/store/modals';
-import { useNonceStore } from '@/store/nonce';
+
 import {
   Profile,
   useBroadcastMutation,
@@ -18,6 +18,7 @@ import { useContractWrite, useSignTypedData } from 'wagmi';
 import { Button } from '../UI/Button';
 import { Spinner } from '../UI/Spinner';
 import { UserIcon } from '@heroicons/react/24/outline';
+import { LensHub } from '@/abi/LensHub';
 
 interface FollowProps {
   profile: Profile;
@@ -40,8 +41,8 @@ const Follow: FC<FollowProps> = ({
 }) => {
   const { pathname } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const setShowAuthModal = useGlobalModalStateStore(
     (state) => state.setShowAuthModal
   );
@@ -74,7 +75,7 @@ const Follow: FC<FollowProps> = ({
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'follow',
     onSuccess: () => onCompleted(),
     onError

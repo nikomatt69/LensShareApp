@@ -27,7 +27,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import getRpc from '@/lib/getRpc';
-import UserSigNoncesProvider from './UserSigNoncesProvider';
+
 import LeafwatchProvider from './LeafwatchProvider';
 
 
@@ -36,6 +36,7 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { W3mQrCode, Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import UserSigNoncesProvider from './UserSigNoncesProvider';
 
 const chains = [polygon,mainnet]
 const projectId =  WALLETCONNECT_PROJECT_ID
@@ -65,7 +66,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <WagmiConfig config={wagmiConfig}>
         <ApolloProvider client={apolloClient}>
-          <UserSigNoncesProvider />
+         <UserSigNoncesProvider/>
           <QueryClientProvider client={queryClient}>
             <LivepeerConfig client={livepeerClient}>
               <ThemeProvider defaultTheme="light" attribute="class">

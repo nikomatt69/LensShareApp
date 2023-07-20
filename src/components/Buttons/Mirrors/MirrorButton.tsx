@@ -22,6 +22,7 @@ import getSignature from '@/lib/getSignature';
 import { splitSignature } from 'ethers/lib/utils';
 import Spinner from '@/components/Spinner';
 import MirrorOutline from '../MirrorOutline';
+import { LensHub } from '@/abi/LensHub';
 
 //should also add authorisation so user cant like posttwice
 
@@ -58,7 +59,7 @@ const MirrorButton: FC<Props> = ({ publication }) => {
 
   const { isLoading: writeLoading, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'mirrorWithSig',
 
     onSuccess: onCompleted,

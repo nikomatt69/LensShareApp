@@ -35,6 +35,7 @@ import {
   useExploreLazyQuery,
   usePublicationDetailsLazyQuery
 } from '@/utils/lens/generated';
+import Navbar from '../Navbar';
 
 interface Props {
   following?: boolean;
@@ -182,6 +183,7 @@ const Bytes = () => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags title="LensShare" />
+      <Navbar/>
 
       {full()}
       <div

@@ -56,6 +56,7 @@ const ViewPublication: NextPage = (profile) => {
 
   return (
     <div>
+      <div className="m-auto flex overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]"><Navbar/></div>
       <GridLayout>
         <MetaTags
           title={
@@ -66,6 +67,8 @@ const ViewPublication: NextPage = (profile) => {
               : APP_NAME
           }
         />
+
+      
         <GridItemEight className="h-[vh-80] space-y-5 rounded-xl bg-[#F2F6F9]">
           <Card>
             <FullPublication

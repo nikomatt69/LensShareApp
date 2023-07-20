@@ -51,6 +51,7 @@ import dayjs from 'dayjs';
 import { Spinner } from '@/components/UI/Spinner';
 import IndexStatus from '@/components/UI/IndexStatus';
 import { encode } from 'punycode';
+import { LensHub } from '@/abi/LensHub';
 
 interface Props {
   publication: Publication;
@@ -104,7 +105,7 @@ const CollectModule: FC<Props> = ({ publication, setCount, count }) => {
     write
   } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'collectWithSig',
 
     onSuccess: onCompleted,

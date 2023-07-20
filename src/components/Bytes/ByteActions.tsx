@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 import { profile } from 'console';
 import MirrorModal from './MirrorModal';
 import ShareMenu from '../Publication/Actions/Share';
+import Collect from '../Publication/Actions/Collect';
 
 type Props = {
   video: Publication;
@@ -74,7 +75,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger }) => {
         </div>
 
         <div className="w-full text-center text-white md:text-inherit">
-          <CollectButton publication={video as Publication} />
+          <Collect publication={video as Publication} showCount={false} />
         </div>
         {/* {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
           <div className="hidden w-full pb-3 text-center md:block">

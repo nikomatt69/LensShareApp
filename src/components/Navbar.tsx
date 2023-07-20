@@ -37,7 +37,7 @@ const Navbar: FC = () => {
   console.log('CURRENT PROFILE', currentProfile?.picture);
 
   return (
-    <div className="flex w-full items-center justify-between border-t-0 border-2 border-b border-l border-r border-blue-700 bg-white bg-gradient-to-b  from-blue-100 to-transparent p-2 ">
+    <div className="flex w-full  items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white bg-gradient-to-b  from-blue-100 to-transparent p-2 ">
       <Link href="/discover">
         <button
           className="text-md text-md flex cursor-pointer items-center gap-2 rounded-full   border-[#57B8FF] px-2 py-2 

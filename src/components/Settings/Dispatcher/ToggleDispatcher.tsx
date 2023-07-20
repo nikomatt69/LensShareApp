@@ -1,3 +1,4 @@
+import { LensHub } from '@/abi/LensHub';
 import { LENS_HUB_ABI } from '@/abi/abi';
 import { Button } from '@/components/UI/Button';
 import IndexStatus from '@/components/UI/IndexStatus';
@@ -15,7 +16,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppStore } from 'src/store/app';
-import { useNonceStore } from 'src/store/nonce';
+
 import { useContractWrite, useSignTypedData } from 'wagmi';
 
 interface ToggleDispatcherProps {
@@ -23,8 +24,8 @@ interface ToggleDispatcherProps {
 }
 
 const ToggleDispatcher: FC<ToggleDispatcherProps> = ({ buttonSize = 'md' }) => {
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [isLoading, setIsLoading] = useState(false);
   const canUseRelay = getIsDispatcherEnabled(currentProfile);
@@ -49,7 +50,7 @@ const ToggleDispatcher: FC<ToggleDispatcherProps> = ({ buttonSize = 'md' }) => {
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { data: writeData, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'setDispatcher',
     onSuccess: () => {
       onCompleted();

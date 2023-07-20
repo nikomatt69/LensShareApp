@@ -93,7 +93,7 @@ const Latest = () => {
           : null,
         profileId: currentProfile?.id ?? null
       },
-      onCompleted: ({ explorePublications }) => {}
+      onCompleted: ({ explorePublications:any }) => {}
     });
   console.log(data);
 
@@ -135,7 +135,7 @@ const Latest = () => {
     () =>
       currentViewingId && byte && router.pathname ? (
         <FullScreen
-          profile={currentProfile as Profile}
+       
           byte={byte}
           close={closeDialog}
           isShow={show}
@@ -189,7 +189,7 @@ const Latest = () => {
       {full()}
       <div
         ref={bytesContainer}
-        className="mt-3 h-[screen] border-0 pt-3 font-semibold md:h-[calc(100vh-70px)]"
+        className="mt-3 h-screen border-0 pt-3 font-semibold md:h-[calc(100vh-70px)]"
       >
         {bytes?.map((video: Publication, index) => (
           <VideoCard

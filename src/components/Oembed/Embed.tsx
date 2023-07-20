@@ -52,7 +52,7 @@ const Embed: FC<EmbedProps> = ({ og }) => {
             <div className="truncate p-2">
               <div className="space-y-1.5">
                 {og.title && (
-                  <div className="line-clamp-2 truncate break-words font-bold">
+                  <div className="line-clamp-3 truncate break-words font-bold">
                     {og.title}
                   </div>
                 )}

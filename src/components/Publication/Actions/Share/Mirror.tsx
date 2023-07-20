@@ -1,3 +1,4 @@
+import { LensHub } from '@/abi/LensHub';
 import { LENS_HUB_ABI } from '@/abi/abi';
 import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 import { LENSHUB_PROXY } from '@/constants';
@@ -21,7 +22,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAppStore } from 'src/store/app';
-import { useNonceStore } from 'src/store/nonce';
+
 import { useContractWrite, useSignTypedData } from 'wagmi';
 
 interface MirrorProps {
@@ -32,8 +33,8 @@ interface MirrorProps {
 
 const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
   const isMirror = publication.__typename === 'Mirror';
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [mirrored, setMirrored] = useState(
     isMirror
@@ -85,7 +86,7 @@ const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
 
   const { write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'mirror',
     onSuccess: () => {
       onCompleted();

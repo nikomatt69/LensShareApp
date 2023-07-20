@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import type { FC } from 'react';
-import { FolderPlusIcon } from '@heroicons/react/24/solid';
-import { CollectModules, Publication } from '@/utils/lens/generatedLenster';
-import CollectModule from './CollectModule';
-import { Modal } from '../../UI/Modal';
-import { getModule } from '@/lib/getModule';
-import GetModuleIcon from '@/utils/GetModuleIcon';
-import { useAppStore } from '@/store/app';
-import FullScreenModal from '@/components/UI/FullScreenModal';
-import CollectOutline from './CollectOutline';
+
 
 //should also add authorisation so user cant like posttwice
+
+import { useAppStore } from "@/store/app";
+import { CollectModules, Publication } from "@/utils/lens/generatedLenster";
+import { FC, useEffect, useState } from "react";
+import CollectOutline from "./CollectOutline";
+import { Modal } from "@/components/UI/Modal";
+import { getModule } from "@/lib/getModule";
+import GetModuleIcon from "@/components/UI/GetModuleIcon";
+import CollectModule from "@/components/Publication/Actions/Collect/CollectModule";
 
 interface Props {
   publication: Publication;

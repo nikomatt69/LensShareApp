@@ -5,10 +5,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import type { FC } from 'react';
 import type { Publication } from '@/utils/lens/generatedLenster';
-import LikeButton from '@/components/Buttons/Likes/LikeButton';
-import MirrorButton from '@/components/Buttons/Mirrors/MirrorButton';
-import CommentButton from '@/components/Buttons/CommentButton';
-import CollectButton from '@/components/Buttons/Collects/CollectButton';
+
 import getMedia from '@/lib/getMedia';
 import { useRouter } from 'next/router';
 import ShareIcon from '@heroicons/react/24/outline/ShareIcon';

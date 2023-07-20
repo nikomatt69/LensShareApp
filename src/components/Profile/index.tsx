@@ -136,6 +136,7 @@ const ViewProfile: NextPage = () => {
       ) : (
         <MetaTags title={`@${formatHandle(profile?.handle)} • ${APP_NAME}`} />
       )}
+      <div className="m-auto w-full flex overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]"><Navbar/></div>
 
       <Cover
         cover={

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import Custom404 from 'src/pages/404';
 import { useAppPersistStore, useAppStore } from 'src/store/app';
-import { useNonceStore } from 'src/store/nonce';
+
 import { useEffectOnce } from 'usehooks-ts';
 import { useContractWrite, useDisconnect } from 'wagmi';
 
@@ -28,11 +28,12 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { Modal } from '@/components/UI/Modal';
 import { BsExclamation } from 'react-icons/bs';
 import { WarningMessage } from '@/components/UI/WarningMessage';
+import { LensHub } from '@/abi/LensHub';
 
 const DeleteSettings: FC = () => {
   const [showWarningModal, setShowWarningModal] = useState(false);
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
@@ -56,7 +57,7 @@ const DeleteSettings: FC = () => {
 
   const { write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'burn',
     onSuccess: () => {
       onCompleted();

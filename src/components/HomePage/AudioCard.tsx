@@ -34,6 +34,7 @@ import { getRelativeTime } from '@/utils/functions/formatTime2';
 import PublicationReaction from '../DetailPage/CommentsBlock/PublicationReaction';
 import Audio from '../Echos/Audio';
 import Wrapper from '../Echos/Wrapper';
+import Collect from '../Publication/Actions/Collect';
 
 interface Props {
   publication: Publication;
@@ -243,7 +244,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           <MirrorButton publication={publication as Publication} />
         </button>
         <button className="block pb-2 pr-2 md:hidden">
-          <CollectButton publication={publication as Publication} />
+          <Collect publication={publication as Publication} showCount={true} />
         </button>
         <button
           className="block pb-2 pr-2 md:hidden"

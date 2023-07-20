@@ -135,23 +135,21 @@ const LatestRender = () => {
 
   return (
     <div>
-      <MetaTags title={`Latest • ${APP_NAME} `} />
-      <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
-        
-
-        <div className="flex gap-6 border-0  md:gap-20">
-          <div className="hidden h-[92vh] overflow-hidden border-0  lg:block lg:hover:overflow-auto">
-            <Sidebar />
-          </div>
-          <div className="videos mb-8 mt-2 flex h-[88vh] flex-1 flex-col gap-10 overflow-auto overflow-x-hidden border-0 pb-8">
-            <Latest />
-          </div>
+    <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
+      <Navbar />
+      <div className="flex gap-6 md:gap-20">
+        <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
+          <Sidebar />
         </div>
-        <div className=" m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px] ">
-          <BottomNav />
+        <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
+          <Latest />
         </div>
       </div>
+      <div className="block ">
+        <BottomNav/>
+      </div>
     </div>
+  </div>
   );
 };
 

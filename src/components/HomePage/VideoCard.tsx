@@ -36,6 +36,7 @@ import SinglePublication from '../Composer/SinglePublication';
 import CommentModal from '../Bytes/CommentModal';
 import ShareMenu from '../Publication/Actions/Share';
 import PublicationMenu from '../Publication/Actions/Menu';
+import Collect from '../Publication/Actions/Collect';
 
 interface Props {
   publication: Publication;
@@ -204,7 +205,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           <CommentButton publication={publication as Publication} />
         </button>
         <button className="block   pb-2  pr-2 lg:mb-3.5 xl:mb-3.5">
-          <CollectButton publication={publication as Publication} />
+          <Collect publication={publication as Publication} showCount={true} />
         </button>
         <button
           className="block pb-2 pr-2 md:mt-2 lg:mb-3 xl:mb-3"

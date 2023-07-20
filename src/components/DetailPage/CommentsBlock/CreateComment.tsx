@@ -30,6 +30,7 @@ import InputMentions from '@/components/UI/InputMentions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { LensHub } from '@/abi/LensHub';
 
 interface Props {
   publication: Publication;
@@ -115,7 +116,7 @@ const CreateComment: FC<Props> = ({ publication, refetchComments }) => {
 
   const { error, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'commentWithSig',
 
     onSuccess: ({ hash }) => {

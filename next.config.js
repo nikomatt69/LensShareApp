@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-nextConfig = {
+const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   newNextLinkBehavior: true,
+  redirects:true,
   topLevelAwait:true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -74,53 +75,11 @@ nextConfig = {
       { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true }
     ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap',
-      },
-    ]
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
-          { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
-        ]
-      },
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Max-Age', value: '1728000' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
-        ]
-      },
-      {
-        source: '/api/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Max-Age', value: '1728000' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type,Authorization' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' }
-        ]
-      }
-    ];
   }
+
+
+
+ 
 };
 
 module.exports = nextConfig;

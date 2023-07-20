@@ -25,6 +25,7 @@ import { Toaster } from 'react-hot-toast';
 import Sidebar from '../Sidebar/Sidebar';
 import BottomNav from '../Navs/BottomNav';
 import Loading from '../Loading';
+import Navbar from '../Navbar';
 
 const FeedRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -137,7 +138,7 @@ const FeedRender = () => {
     <div>
       <MetaTags title={`Feed • ${APP_NAME} `} />
       <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
-        
+        <Navbar/>
 
         <div className="flex gap-6 border-0  md:gap-20">
           <div className="hidden h-[92vh] overflow-hidden border-0 lg:block lg:hover:overflow-auto">

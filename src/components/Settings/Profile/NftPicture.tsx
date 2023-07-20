@@ -1,4 +1,5 @@
-import { LENS_HUB_ABI } from '@/abi/abi';
+
+import { LensHub } from '@/abi/LensHub';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Button } from '@/components/UI/Button';
 import { Form, useZodForm } from '@/components/UI/Form';
@@ -22,7 +23,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppStore } from 'src/store/app';
-import { useNonceStore } from 'src/store/nonce';
+
 import { useContractWrite, useSignMessage, useSignTypedData } from 'wagmi';
 import { mainnet, polygon, polygonMumbai } from 'wagmi/chains';
 import { object, string } from 'zod';
@@ -39,8 +40,8 @@ interface NftPictureProps {
 }
 
 const NftPicture: FC<NftPictureProps> = ({ profile }) => {
-  const userSigNonce = useNonceStore((state) => state.userSigNonce);
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const userSigNonce = useAppStore((state) => state.userSigNonce);
+  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [isLoading, setIsLoading] = useState(false);
   const [chainId, setChainId] = useState<number>(
@@ -77,7 +78,7 @@ const NftPicture: FC<NftPictureProps> = ({ profile }) => {
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { error, write } = useContractWrite({
     address: LENSHUB_PROXY,
-    abi: LENS_HUB_ABI,
+    abi: LensHub,
     functionName: 'setProfileImageURI',
     onSuccess: () => onCompleted(),
     onError

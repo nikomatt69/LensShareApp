@@ -36,6 +36,7 @@ import { v4 as uuid } from 'uuid';
 import { useContractWrite, useSignTypedData } from 'wagmi';
 import { object, string, union } from 'zod';
 import { Image } from '@/components/UI/Image';
+import { LensPeriphery } from '@/abi/LensPeriphery';
 
 const editProfileSchema = object({
   name: string()
@@ -94,7 +95,7 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
   const { signTypedDataAsync } = useSignTypedData({ onError });
   const { error, write } = useContractWrite({
     address: LENS_PERIPHERY,
-    abi: LENS_HUB_ABI,
+    abi: LensPeriphery,
     functionName: 'setProfileMetadataURI',
     onSuccess: () => onCompleted(),
     onError
