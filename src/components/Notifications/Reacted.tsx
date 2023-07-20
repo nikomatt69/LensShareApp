@@ -6,9 +6,12 @@ import getRelativeTime from '@/utils/functions/formatTime';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
+import { NotificationType } from '@/enums';
 
 interface Props {
   notification: NewReactionNotification;
+ 
+  
 }
 
 const ReactedNotification: FC<Props> = ({ notification }) => {
@@ -32,15 +35,15 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
       </div>
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
-          {notification.reaction === 'UPVOTE' ? `liked` : `disliked`}{' '}
+          {notification.reaction === 'DOWNVOTE' ? `disliked` : `liked`}{' '}
           'your'{' '}
           {notification.publication.__typename === 'Comment' && (
             'comment on'
           )}
           <Link
             href={`/post/${
-              notification.publication.__typename === 'Comment'
-              ? notification.publication?.mainPost?.id
+              notification.publication.__typename === 'Post'
+              ? notification.publication?.id
               : notification?.publication.id
             }`}
             className="ml-1 text-indigo-500"

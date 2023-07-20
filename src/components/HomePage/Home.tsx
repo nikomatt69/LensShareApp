@@ -30,6 +30,7 @@ import Bytes from '../Bytes';
 import DiscoverMob from '../DiscoverPage/DiscoverMob';
 import BytesSection from '../Home/BytesSection';
 import NewPost from '../Composer/Post/New';
+import Timeline from '../Timeline';
 
 const Home: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -136,29 +137,24 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <MetaTags title={`Home • ${APP_NAME}`} />
-      <div className="m-auto h-[100vh] overflow-hidden lg:w-[1100px] xl:w-[1200px]">
-        <Navbar/>
-     
-
-        <div className="flex gap-6 md:gap-20">
-          <div className="hidden  overflow-hidden lg:block lg:hover:overflow-auto">
-            <Sidebar />
-          </div>
-
-          <div className="videos mt-2 flex  flex-1 cursor-pointer flex-col gap-10 overflow-auto overflow-x-hidden ">
-            <div className="flex flex-col  gap-10">
-              <BytesSection />
-            </div>
-
-            <div className="onesignal-customlink-container"></div>
-            <Explore />
-          </div>
+    <MetaTags title={`Home • ${APP_NAME}`} />
+    <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
+      <Navbar />
+      <div className="flex gap-6 md:gap-20">
+        <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
+          <Sidebar />
         </div>
-        <div className="display:absolute m-auto block h-[100vh] border-0  lg:w-[1100px] xl:w-[1200px] ">
-          <BottomNav />
+        <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
+        <div className="flex flex-col  gap-10">
+                  <BytesSection />
+                </div>
+        <Timeline />
         </div>
       </div>
+      <div className="block ">
+        <BottomNav/>
+      </div>
+    </div>
     </div>
   );
 };
