@@ -12,12 +12,16 @@ import { useAppStore } from '@/store/app';
 import { AUTH_ROUTES } from '@/utils/data/auth-routes';
 
 import dynamic from 'next/dynamic';
-
 const Providers = dynamic(() => import('@/components/Providers'), {
   ssr: false
 });
+const Layout = dynamic(() => import('@/components/Layout'), {
+  ssr: false
+});
 
-const Layout = lazy(() => import('@/components/Layout'));
+
+
+
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 
 const App = ({ Component, pageProps }: AppProps) => {

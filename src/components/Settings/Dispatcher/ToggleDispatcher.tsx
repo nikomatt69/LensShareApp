@@ -6,6 +6,7 @@ import { Spinner } from '@/components/UI/Spinner';
 import { LENSHUB_PROXY, OLD_LENS_RELAYER_ADDRESS } from '@/constants';
 import getIsDispatcherEnabled from '@/lib/getIsDispatcherEnabled';
 import getSignature from '@/lib/getSignature';
+import { useNonceStore } from '@/store/nonce';
 import {
   useBroadcastMutation,
   useCreateSetDispatcherTypedDataMutation
@@ -24,8 +25,8 @@ interface ToggleDispatcherProps {
 }
 
 const ToggleDispatcher: FC<ToggleDispatcherProps> = ({ buttonSize = 'md' }) => {
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [isLoading, setIsLoading] = useState(false);
   const canUseRelay = getIsDispatcherEnabled(currentProfile);

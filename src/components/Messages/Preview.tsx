@@ -61,7 +61,7 @@ const Preview: FC<PreviewProps> = ({
     message?.content && (
       <div
         className={clsx(
-          'cursor-pointer py-3 hover:bg-gray-100 dark:hover:bg-gray-800',
+          'cursor-pointer py-3 hover:bg-gray-100 dark:hover:bg-blue-100',
           isSelected && 'bg-gray-50 dark:bg-gray-800'
         )}
         onClick={() =>

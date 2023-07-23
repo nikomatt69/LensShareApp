@@ -8,6 +8,7 @@ import { Spinner } from '@/components/UI/Spinner';
 import { APP_NAME, LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
+import { useNonceStore } from '@/store/nonce';
 import formatHandle from '@/utils/functions/formatHandle';
 import {
   CreateSetDefaultProfileRequest,
@@ -29,8 +30,8 @@ import { useContractWrite, useSignTypedData } from 'wagmi';
 const SetProfile: FC = () => {
   const profiles = useAppStore((state) => state.profiles);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const [selectedUser, setSelectedUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 

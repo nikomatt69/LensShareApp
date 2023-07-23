@@ -36,7 +36,7 @@ const DispatcherSettings: FC = () => {
     if (isOldDispatcherEnabled) {
       return ' Upgrade your dispatcher to the latest version for better faster stronger signless transactions.';
     }
-    return  `${APP_NAME}`;
+    return  `Dispatcher on ${APP_NAME}`;
   };
 
   if (!currentProfile) {

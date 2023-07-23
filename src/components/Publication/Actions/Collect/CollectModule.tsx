@@ -68,6 +68,7 @@ import { Tooltip } from '@/components/UI/Tooltip';
 import CollectWarning from './CollectWarning';
 import ReferralAlert from './ReferralAlert';
 import formatTime from '@/utils/functions/formatTime';
+import { useNonceStore } from '@/store/nonce';
 
 interface CollectModuleProps {
   count: number;
@@ -83,8 +84,8 @@ const CollectModule: FC<CollectModuleProps> = ({
     publication,
     electedMirror
   }) => {
-    const userSigNonce = useAppStore((state) => state.userSigNonce);
-    const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+    const userSigNonce = useNonceStore((state) => state.userSigNonce);
+    const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
     const currentProfile = useAppStore((state) => state.currentProfile);
     const [isLoading, setIsLoading] = useState(false);
     const [revenue, setRevenue] = useState(0);

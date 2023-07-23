@@ -105,6 +105,7 @@ import QuotedPublication from './QuotedPublication';
 import { MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -157,7 +158,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   );
 
   // Nonce store
-  const { userSigNonce, setUserSigNonce } = useAppStore((state) => state);
+  const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
 
   // Publication store
   const {

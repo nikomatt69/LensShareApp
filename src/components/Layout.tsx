@@ -119,7 +119,9 @@ const Layout = ({ children }: Props) => {
 
       <div className="flex  flex-col min-h-screen md:pb-0">
 
-        
+          
+
+          
           <BottomNav/>
             {children}
 

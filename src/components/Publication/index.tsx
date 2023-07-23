@@ -86,7 +86,6 @@ const ViewPublication: NextPage = (profile) => {
         <GridItemFour className="space-y-5">
           <RelevantPeople publication={publication} />
           <OnchainMeta publication={publication} />
-
           <Footer />
         </GridItemFour>
       </GridLayout>

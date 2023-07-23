@@ -4,6 +4,7 @@ import MirrorOutline from '@/components/UI/Icons/MirrorOutline';
 import { LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
+import { useNonceStore } from '@/store/nonce';
 import { publicationKeyFields } from '@/utils/functions/publicationKeyFields';
 import {
   CreateDataAvailabilityMirrorRequest,
@@ -33,8 +34,8 @@ interface MirrorProps {
 
 const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
   const isMirror = publication.__typename === 'Mirror';
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [mirrored, setMirrored] = useState(
     isMirror

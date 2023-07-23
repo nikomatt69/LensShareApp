@@ -211,7 +211,7 @@ const FullScreen: FC<Props> = ({
                     />
                   )}
                 </div>
-                <div className="absolute bottom-40 right-3 z-40 ">
+                <div className="absolute bottom-60 right-3 z-40 ">
                   <ByteActions
                     publication={video as Publication}
                     publicationId={video as Publication}
@@ -222,7 +222,7 @@ const FullScreen: FC<Props> = ({
                 </div>
               </div>
               {
-                <div className="assolute bottom-0.5 left-0 right-0 mt-4 block rounded-b-xl pt-20 ">
+                <div className="assolute bottom-0.5 left-0 right-0 mt-4  pt-20 block rounded-b-xl  ">
                   <MobileBottomOverlay
                     video={video}
                     setFollowing={setFollowing}

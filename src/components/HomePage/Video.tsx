@@ -100,7 +100,7 @@ const Video: FC<Props> = ({ publication }) => {
           )}
           showControls={true}
           options={{
-            autoPlay: true,
+            autoPlay: false,
             muted: true,
             loop: true,
             loadingSpinner: false,

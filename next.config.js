@@ -3,8 +3,6 @@
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
-  newNextLinkBehavior: true,
-  redirects:true,
   topLevelAwait:true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -74,6 +72,46 @@ const nextConfig = {
       { source: '/u/:id(.+).lens', destination: '/u/:id', permanent: true },
       { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
       { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true }
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+      
+          { key: 'Cache-Control', value: 'public, max-age=3600' },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
+          { key: 'Cache-Control', value: 'public, max-age=3600' }
+        ]
+      },
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Max-Age', value: '1728000' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
+          { key: 'Access-Control-Allow-Methods', value: 'Content-Type' },
+          { key: 'Cache-Control', value: 'public, max-age=3600' }
+        ]
+      },
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Max-Age', value: '1728000' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
+          { key: 'Access-Control-Allow-Methods', value: 'Content-Type' },
+          { key: 'Cache-Control', value: 'public, max-age=3600' }
+        ]
+      }
     ];
   }
 

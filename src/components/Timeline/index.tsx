@@ -16,6 +16,7 @@ import NewPost from '../Composer/Post/New';
 import { Modal } from '../UI/Modal';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
+import { SCROLL_ROOT_MARGIN } from '@/constants';
 
 
 const Timeline: FC = () => {
@@ -60,7 +61,7 @@ const Timeline: FC = () => {
   // Variables
   const request: FeedRequest = {
     profileId: seeThroughProfile?.id ?? currentProfile?.id,
-    limit: 50,
+    limit: 30,
     feedEventItemTypes: getFeedEventItems()
   };
   const reactionRequest = currentProfile
@@ -76,16 +77,14 @@ const Timeline: FC = () => {
   const hasMore = pageInfo?.next;
 
   const { observe } = useInView({
-    onChange: async ({ inView }) => {
-      if (!inView || !hasMore) {
-        return;
-      }
-
+    rootMargin: SCROLL_ROOT_MARGIN,
+    onEnter: async () => {
       await fetchMore({
         variables: {
-          request: { ...request, cursor: pageInfo?.next },
-          reactionRequest,
-          profileId: currentProfile?.id
+          request: {
+            ...request,
+            cursor: pageInfo?.next
+          }
         }
       });
     }
@@ -109,17 +108,7 @@ const Timeline: FC = () => {
   }
 
   return (
-    <><div onClick={() => setShowNewPostModal(true)}>
-      <NewPost />
-      <Modal
-        title={`Create post`}
-        size="md"
-        show={showNewPostModal}
-        onClose={() => setShowNewPostModal(false)}
-      >
-        <NewPublication />
-      </Modal>
-    </div><Card className="divide-y-[3px] mt-3 border-2 border-blue-700 rounded-xl dark:divide-blue-700">
+   <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
         {txnQueue.map(
           (txn) => txn?.type === OptmisticPublicationType.NewPost && (
             <div key={txn.id}>
@@ -136,8 +125,12 @@ const Timeline: FC = () => {
             feedItem={publication as FeedItem}
             publication={publication.root as Publication} />
         ))}
-        {hasMore && <span ref={observe} />}
-      </Card></>
+       {pageInfo?.next && (
+          <span ref={observe} className="flex  justify-center p-10">
+            <Loading />
+          </span>
+        )}
+      </Card>
   );
 };
 

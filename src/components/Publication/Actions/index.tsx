@@ -18,7 +18,7 @@ interface PublicationActionsProps {
 const PublicationActions: FC<PublicationActionsProps> = ({
   publication,
   electedMirror,
-  showCount = false
+  showCount = true
 }) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const collectModuleType = publication?.collectModule?.__typename;

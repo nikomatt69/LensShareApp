@@ -73,7 +73,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     hasURLs && !showAttachments && !showQuotedPublication && !quoted;
 
   return (
-    <div className="break-words border-blue-500 ">
+    <div className="break-words">
       <Markup
         className={clsx(
           { 'line-clamp-5': canShowMore },

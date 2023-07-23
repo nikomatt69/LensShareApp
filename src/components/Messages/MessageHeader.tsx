@@ -70,11 +70,11 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center justify-between rounded-xl  border px-4 py-2">
+    <div className="divider flex items-center justify-between rounded-xl  border border-blue-700 px-4 py-2">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}
-          className="mr-1 h-6 w-6 cursor-pointer lg:hidden"
+          className="mr-1 h-6 w-6 cursor-pointer text-blue-700 lg:hidden"
         />
         {profile?.id ? (
           <UserProfile profile={profile} />

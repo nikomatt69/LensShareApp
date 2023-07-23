@@ -137,9 +137,9 @@ const Feed = () => {
             className="mt-3 h-screen border-0 pt-3 font-semibold md:h-[calc(100vh-70px)]"
           >
             {bytes?.map((video: Publication, index) => (
-              <BytesCard
-                publication={video}
-                following={following}
+              <ByteVideo
+                
+             
                 setFollowing={setFollowing}
                 video={video}
                 key={`${video?.id}_${video.createdAt}1`}

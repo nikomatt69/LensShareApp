@@ -1,15 +1,16 @@
+import { useNonceStore } from '@/store/nonce';
 import { useUserSigNoncesQuery } from '@/utils/lens/generatedLenster'
 import type { FC } from 'react';
 import { isSupported, share } from 'shared-zustand';
-import { useAppPersistStore, useAppStore } from 'src/store/app';
+import { useAppPersistStore} from 'src/store/app';
 
 
 const UserSigNoncesProvider: FC = () => {
   const profileId = useAppPersistStore((state) => state.profileId);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
 
   if (isSupported()) {
-    share('userSigNonce', useAppStore);
+    share('userSigNonce', useNonceStore);
   }
 
   // Sync nonce every 10 seconds

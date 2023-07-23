@@ -112,7 +112,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
     const variable = {
       variables: {
         request: {
-          profileId: currentProfile?.id,
+          profileId: currentProfile.id,
           reaction: ReactionTypes.Upvote,
           publicationId:
             publication.__typename === 'Mirror'
@@ -147,14 +147,14 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
         onClick={createLike}
         aria-label="Like"
       >
-        <div className={clsx('hover:bg-pink-300/20', 'rounded-full p-1.5')}>
+        <div className={clsx('hover:bg-pink-300/20 ', 'rounded-full p-1.5')}>
           <Tooltip
             placement="top"
             content={liked ? `Unlike` : `Like`}
             withDelay
           >
             {liked ? (
-              <HeartIcon className={iconClassName} />
+              <HeartOutline className='bg-pink-500'/>
             ) : (
               <HeartOutline className={iconClassName} />
             )}

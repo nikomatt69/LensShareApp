@@ -32,7 +32,7 @@ import BytesSection from '../Home/BytesSection';
 import NewPost from '../Composer/Post/New';
 import Timeline from '../Timeline';
 
-const Home: NextPage = () => {
+const Home2: NextPage = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -159,4 +159,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Home2;

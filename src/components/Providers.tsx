@@ -64,9 +64,9 @@ const queryClient = new QueryClient();
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <WagmiConfig config={wagmiConfig}>
+  <WagmiConfig config={wagmiConfig}>
         <ApolloProvider client={apolloClient}>
-         <UserSigNoncesProvider/>
+          <UserSigNoncesProvider />
           <QueryClientProvider client={queryClient}>
             <LivepeerConfig client={livepeerClient}>
               <ThemeProvider defaultTheme="light" attribute="class">
@@ -77,14 +77,8 @@ const Providers = ({ children }: { children: ReactNode }) => {
             </LivepeerConfig>
           </QueryClientProvider>
         </ApolloProvider>
-        <Web3Modal  themeVariables={{
-                     '--w3m-font-family': 'Roboto, sans-serif',
-                     '--w3m-accent-color': '#000fff',
-                     '--w3m-background-color':'#FFFF',
-                     '--w3m-logo-image-url':'https://lenshareapp.xyz/images/icon.png',
-                      '--w3m-container-border-radius': '25px',
-                     '--w3m-background-border-radius':'25px' }} themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
-    </WagmiConfig>
+      <Web3Modal  themeVariables={{ '--w3m-font-family': 'Roboto, sans-serif', '--w3m-accent-color': '#000fff',   '--w3m-background-color':'#FFFF', '--w3m-logo-image-url':'https://lenshareapp.xyz/images/icon.png', '--w3m-container-border-radius': '25px','--w3m-background-border-radius':'25px' }} themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
+  </WagmiConfig>
   );
 };
 

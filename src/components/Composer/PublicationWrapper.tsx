@@ -1,4 +1,4 @@
-import { Publication } from '@/utils/lens/generatedLenster';
+import type { Publication } from '@/utils/lens/generatedLenster';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
@@ -11,7 +11,7 @@ interface PublicationWrapperProps {
 
 const PublicationWrapper: FC<PublicationWrapperProps> = ({
   publication,
-  className = 'line-clamp-5 break-words truncate',
+  className = '',
   children
 }) => {
   const { push } = useRouter();

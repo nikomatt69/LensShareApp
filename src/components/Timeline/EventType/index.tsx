@@ -44,7 +44,7 @@ const ActionType: FC<ActionTypeProps> = ({ feedItem,profile }) => {
             <Collected collects={feedItem.collects} />
           ) : null}
           {feedItem.reactions.length && !isComment ? (
-            <Liked profile={profile} reactions={feedItem.reactions} />
+            <Liked profile={profile as Profile} reactions={feedItem.reactions} />
           ) : null}
         </>
       )}

@@ -29,11 +29,12 @@ import { Modal } from '@/components/UI/Modal';
 import { BsExclamation } from 'react-icons/bs';
 import { WarningMessage } from '@/components/UI/WarningMessage';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 const DeleteSettings: FC = () => {
   const [showWarningModal, setShowWarningModal] = useState(false);
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
