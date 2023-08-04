@@ -11,6 +11,7 @@ import {
   PhotoIcon
 } from '@heroicons/react/24/outline';
 import TabButton from './TabButton';
+import StreamOutline from '../UI/Icons/StreamOutline';
 
 interface FeedTypeProps {
   setFeedType: Dispatch<string>;
@@ -24,7 +25,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="text-md mt-3 flex gap-3 overflow-x-auto px-5 pb-2 text-blue-500 sm:mt-0 sm:px-0 md:pb-0">
+      <div className="text-md mt-3 flex gap-3 overflow-x-auto px-3.5 pb-2 text-blue-500 sm:mt-0 sm:px-0 md:pb-0">
         <TabButton
           name={`Feed`}
           icon={<PencilIcon className="text-md h-4 w-4 text-blue-500 " />}
@@ -62,6 +63,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
           type={ProfileFeedType.Subscribers.toLowerCase()}
           onClick={() => switchTab(ProfileFeedType.Subscribers)}
         />
+        
       </div>
       <div>{feedType === ProfileFeedType.Media && <MediaFilter />}</div>
     </div>

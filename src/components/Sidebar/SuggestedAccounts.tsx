@@ -31,7 +31,7 @@ const SuggestedAccounts = () => {
   console.log('Recommended', data);
   return (
     <div className="border-gray-200 pb-4 lg:border-b-2">
-      <p className="m-3 mt-4 hidden font-semibold text-gray-500 lg:block">
+      <p className="m-3 mt-4 hidden font-semibold text-gray-500 dark:text-white lg:block">
         Suggested Accounts
       </p>
 
@@ -53,7 +53,7 @@ const SuggestedAccounts = () => {
               handle: string | null;
             }) => (
               <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-                <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary">
+                <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary dark:hover:bg-gray-800">
                   <div className="relative h-[32px] w-[32px]">
                     <Image
                       src={getAvatar(currentProfile)}
@@ -64,7 +64,7 @@ const SuggestedAccounts = () => {
                   </div>
                   <div />
                   <div>
-                    <p className="text-md flex items-center gap-1 font-bold lowercase text-primary">
+                    <p className="text-md flex items-center gap-1 font-bold lowercase text-primary dark:text-white">
                       {currentProfile.name}
                     </p>
                     <p className="text-xs capitalize text-gray-400">

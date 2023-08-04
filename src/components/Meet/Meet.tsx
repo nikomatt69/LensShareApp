@@ -153,7 +153,7 @@ const Meet: FC = () => {
             <div
               className={clsx(
                 resolvedTheme == 'dark'
-                  ? 'bg-gray-900 text-black'
+                  ? 'bg-gray-900 text-black dark:text-white'
                   : 'text-brand-500 bg-brand-100',
                 'absolute bottom-1 left-1 rounded-lg p-1'
               )}

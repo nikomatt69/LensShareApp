@@ -44,9 +44,7 @@ const NewPost: FC = () => {
 
   return (
     <Card
-      className="space-y-3 rounded-xl border-blue-600 p-5"
-     
-    >
+      className="space-y-3 rounded-xl border-blue-600 p-5">
       <div className="flex items-center  space-x-3">
         <Image
           src={getAvatar(currentProfile)}
@@ -55,7 +53,7 @@ const NewPost: FC = () => {
           alt={currentProfile?.id}
         />
         <button
-          className="flex w-full items-center space-x-2 rounded-xl border bg-gray-100 px-4 py-2 "
+          className="flex w-full items-center space-x-2 rounded-xl border text-black bg-gray-100 px-4 py-2 "
           type="button"
           onClick={() => setShowNewPostModal(true)}
         >

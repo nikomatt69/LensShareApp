@@ -10,7 +10,7 @@ import {
 } from '@/utils/lens/generatedLenster';
 import { ApolloCache } from '@apollo/client';
 
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/solid';
 
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -134,7 +134,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
   };
 
   const iconClassName = showCount
-    ? 'w-[17px] sm:w-[20px]'
+    ? 'w-[17px] sm:w-[20px] '
     : 'w-[15px] sm:w-[18px]';
 
   return (
@@ -142,7 +142,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
       <motion.button
         whileTap={{ scale: 0.9 }}
         animate={{
-          rotate: liked ? 90 : 0
+          rotate: liked ? 0 : 0
         }}
         onClick={createLike}
         aria-label="Like"
@@ -154,7 +154,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
             withDelay
           >
             {liked ? (
-              <HeartOutline className='bg-pink-500'/>
+              <HeartIcon className={iconClassName}/>
             ) : (
               <HeartOutline className={iconClassName} />
             )}
@@ -162,7 +162,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
         </div>
       </motion.button>
       {count > 0 && !showCount && (
-        <span className="text-[11px] sm:text-xs">{nFormatter(count)}</span>
+        <span className="text-[11px] text-pink sm:text-xs">{nFormatter(count)}</span>
       )}
     </div>
   );

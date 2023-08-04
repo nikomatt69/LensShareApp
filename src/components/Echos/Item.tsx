@@ -36,7 +36,7 @@ const Item: FC<Props> = ({ publication }) => {
         <button
           onClick={() => onPlayPause(publication)}
           className={clsx(
-            'invisible absolute bottom-2.5 left-2.5 rounded-full bg-white/70 p-2 outline-none backdrop-blur-lg transition-all duration-100 ease-in-out group-hover:visible'
+            'invisible absolute bottom-2.5 left-2.5 rounded-full bg-white dark:bg-gray-900/70/70 p-2 outline-none backdrop-blur-lg transition-all duration-100 ease-in-out group-hover:visible'
           )}
         >
           {publication?.id === 'selectedTrack?.id' ? (

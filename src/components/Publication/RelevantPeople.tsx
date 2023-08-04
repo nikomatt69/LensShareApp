@@ -68,7 +68,7 @@ const RelevantPeople: FC<RelevantPeopleProps> = ({ publication }) => {
   return (
     <Card
       as="aside"
-      className="space-y-4 rounded-3xl bg-[#F2F6F9] p-5"
+      className="space-y-4 rounded-3xl bg-[#F2F6F9] dark:bg-black p-5"
       dataTestId="relevant-profiles"
     >
       <ErrorMessage title={`Failed to load relevant people`} error={error} />

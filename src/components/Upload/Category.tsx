@@ -32,7 +32,7 @@ const Category = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute z-[1] mt-1 max-h-52 w-full overflow-auto rounded-xl bg-white py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 sm:text-sm">
+            <Listbox.Options className="absolute z-[1] mt-1 max-h-52 w-full overflow-auto rounded-xl bg-white dark:bg-gray-900/70 py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 sm:text-sm">
               <Listbox.Option
                 key={Category?.name}
                 className={({ active }) =>

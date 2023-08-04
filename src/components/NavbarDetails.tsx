@@ -35,10 +35,10 @@ const Navbar: FC = () => {
   console.log('CURRENT PROFILE', currentProfile?.picture);
 
   return (
-    <div className="flex w-full items-center justify-between rounded-lg border-4 border-blue-500 bg-white bg-gradient-to-b  from-blue-100 to-transparent p-2 ">
+    <div className="flex w-full items-center justify-between rounded-lg border-4 border-blue-500 bg-white dark:bg-gray-900/70 bg-gradient-to-b  from-blue-100 to-transparent p-2 ">
       <button
         onClick={() => router.back()}
-        className="w-6px h-6px flex items-center justify-center rounded-md text-black"
+        className="w-6px h-6px flex items-center justify-center rounded-md text-black dark:text-white"
       >
         <ArrowLeftIcon className="h-6 w-6 cursor-pointer fill-blue-500" />
       </button>

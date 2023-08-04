@@ -136,8 +136,6 @@ const ViewProfile: NextPage = () => {
       ) : (
         <MetaTags title={`@${formatHandle(profile?.handle)} • ${APP_NAME}`} />
       )}
-      <div className="m-auto w-full flex overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]"><Navbar/></div>
-
       <Cover
         cover={
           profile?.coverPicture?.__typename === 'MediaSet'
@@ -145,8 +143,14 @@ const ViewProfile: NextPage = () => {
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         }
       />
+      
+   
+
+
       <GridLayout className="max-w-[1200px] pt-6">
+     
         <GridItemFour>
+       
           <ProfileCard
             profile={profile as Profile}
             following={Boolean(following)}
@@ -167,7 +171,7 @@ const ViewProfile: NextPage = () => {
           )}
         </GridItemEight>
       </GridLayout>
-      <BottomNav />
+      
     </>
   );
 };

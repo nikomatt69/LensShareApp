@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdOutlineClose } from 'react-icons/md';
 import FullScreenModal from '../UI/FullScreenModal';
-import Comments from '../DetailPage/CommentsBlock/Comments';
+
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { Modal } from '../UI/Modal';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ import FollowButton from '../Buttons/FollowButton';
 import Image from 'next/image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
-import CommentsVideo from '../DetailPage/CommentsBlock/Comments';
+
 import CommentsByte from './FullScreen/Comments';
 import MirroredList from '@/components/Bytes/MirrorList';
 import MirrorOutline from '../Buttons/MirrorOutline';

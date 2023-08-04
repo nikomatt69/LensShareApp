@@ -82,15 +82,9 @@ const EmojiPickerPlugin: FC = () => {
   const [queryString, setQueryString] = useState<string | null>(null);
   const [emojis, setEmojis] = useState<Emoji[]>([]);
 
-  const fetchEmojis = async () => {
-    const res = await fetch(`${STATIC_ASSETS_URL}/emoji.json`);
-    const data = await res.json();
-    setEmojis(data);
-  };
+  
 
-  useEffectOnce(() => {
-    fetchEmojis();
-  });
+
 
   const emojiOptions = useMemo(
     () =>
@@ -165,7 +159,7 @@ const EmojiPickerPlugin: FC = () => {
 
         return anchorElementRef.current && options.length
           ? ReactDOM.createPortal(
-              <ul className="mt-7 w-52 rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900">
+              <ul className="mt-7 w-52 rounded-xl border bg-white dark:bg-gray-900/70 shadow-sm dark:border-gray-700 dark:bg-gray-900">
                 {options.map((option: EmojiOption, index) => (
                   <div key={option.key}>
                     <EmojiMenuItem

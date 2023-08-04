@@ -1,7 +1,7 @@
-import logo from '@/images/Lenstoknewlogo.png';
+import logo from '@/images/Lenstoknewlogo3.png';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { FC } from 'react';
+import { useState, type FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import { VideoCameraIcon } from '@heroicons/react/24/outline';
@@ -29,6 +29,10 @@ import router from 'next/router';
 import NotificationIcon from './Notifications/NotificationIcon';
 import MeetingIcon from './Messages/MeetingIcon';
 
+import { Profile } from '@/utils/lens/generatedLenster';
+import { ProfileFeedType } from '@/enums';
+import StreamOutline from './UI/Icons/StreamOutline';
+
 
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -36,8 +40,32 @@ const Navbar: FC = () => {
   const profilePic = currentProfile?.picture;
   console.log('CURRENT PROFILE', currentProfile?.picture);
 
+
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true)
+  
+  const handleScroll = () => {
+      const currentScrollPos = window.scrollY
+  
+      if(currentScrollPos > prevScrollPos){
+          setVisible(false)
+      }else{
+          setVisible(true)
+      }
+  
+      setPrevScrollPos(currentScrollPos)
+  }
+  
+  useEffect( () => {
+      window.addEventListener('scroll', handleScroll);
+  
+      return () => window.removeEventListener('scroll', handleScroll)
+  })
+  
+
   return (
-    <div className="flex w-full  items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white bg-gradient-to-b  from-blue-100 to-transparent p-2 ">
+    <div className={`flex w-full  items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
+
       <Link href="/discover">
         <button
           className="text-md text-md flex cursor-pointer items-center gap-2 rounded-full   border-[#57B8FF] px-2 py-2 
@@ -114,7 +142,7 @@ const Navbar: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

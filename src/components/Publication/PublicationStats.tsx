@@ -42,7 +42,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
       {mirrorCount > 0 && (
         <>
           <span data-testid="comment-stats">
-            <b className="text-black dark:text-blue-700">
+            <b className="text-black dark:text-white dark:text-blue-700">
               {nFormatter(commentsCount)}
             </b>{' '}
           </span>
@@ -53,7 +53,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="mirror-stats"
           >
-            <b className="text-black dark:text-blue-700">
+            <b className="text-black dark:text-white dark:text-blue-700">
               {nFormatter(mirrorCount)}
             </b>{' '}
           </button>
@@ -76,7 +76,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="like-stats"
           >
-            <b className="text-black dark:text-blue-700">
+            <b className="text-black dark:text-white dark:text-blue-700">
               {nFormatter(reactionCount)}
             </b>{' '}
           </button>
@@ -99,7 +99,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="collect-stats"
           >
-            <b className="text-black dark:text-blue-700">
+            <b className="text-black dark:text-white dark:text-blue-700">
               {nFormatter(collectCount)}
             </b>{' '}
           </button>

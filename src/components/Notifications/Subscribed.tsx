@@ -35,7 +35,7 @@ const SubscribedNotification: FC<Props> = ({ notification }) => {
             />
             <div className="flex items-center space-x-0.5">
               <span>
-                {formatHandle(notification?.wallet?.defaultProfile?.handle)}
+                {(notification?.wallet?.defaultProfile?.name)}
               </span>
             </div>
           </Link>

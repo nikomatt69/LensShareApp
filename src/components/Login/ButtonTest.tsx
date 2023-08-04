@@ -20,7 +20,7 @@ const ButtonTest: FC = () => {
         )}
       </div>
       {/* <div className="px-7 py-3 bordeh-12 r-solid border gap-2.5 inline-flex justify-center 
-      items-center rounded-lg text-black text-left font-bold w-[284px] drop-shadow-lg 
+      items-center rounded-lg text-black dark:text-white text-left font-bold w-[284px] drop-shadow-lg 
       bg-gradient-to-r from-[rgba(155,251,0,1)] to-[rgba(220,255,146,1)]
        border-[rgba(190,_253,_103,_1.22)] font-['Inter']">
        </div> */}

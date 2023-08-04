@@ -18,10 +18,10 @@ const DiscoverMain = () => {
   >('suggestedaccounts');
 
   const suggestedaccountsClass =
-    selectedTab === 'suggestedaccounts' ? ' border-black' : 'text-black';
+    selectedTab === 'suggestedaccounts' ? ' border-black' : 'text-black dark:text-white';
   const categoriesClass =
-    selectedTab === 'categories' ? ' border-black' : 'text-black';
-  const searchClass = selectedTab === 'search' ? ' border-black' : 'text-black';
+    selectedTab === 'categories' ? ' border-black' : 'text-black dark:text-white';
+  const searchClass = selectedTab === 'search' ? ' border-black' : 'text-black dark:text-white';
 
   console.log('oioioioio', selectedTab);
   console.log('a', suggestedaccountsClass);

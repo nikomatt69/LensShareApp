@@ -32,7 +32,8 @@ interface FeedProps {
     | ProfileFeedType.Feed
     | ProfileFeedType.Replies
     | ProfileFeedType.Media
-    | ProfileFeedType.Collects;
+    | ProfileFeedType.Collects
+    
 }
 
 const Feed: FC<FeedProps> = ({ profile, type }) => {
@@ -128,7 +129,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
         ? "hasn't replied yet!"
         : type === ProfileFeedType.Collects
         ? "hasn't collected anything yet!"
-        : '';
+        :'';
 
     return (
       <EmptyState
@@ -151,7 +152,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
 
   return (
     <Card
-      className=" m-1 divide-y-4 rounded-xl border-2 p-2"
+      className=" m-1 divide-y-1 rounded-xl border-1 p-2"
       dataTestId={`profile-feed-type-${type.toLowerCase()}`}
     >
       {publications?.map((publication, index) => (

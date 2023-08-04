@@ -42,7 +42,7 @@ const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
         onClose={closeModal}
         show={showModal}
       >
-        <div className="display:absolute mt-40 rounded-xl bg-white ">
+        <div className="display:absolute mt-40 rounded-xl bg-white dark:bg-gray-900/70 ">
           <div className="z-10 max-md:absolute">
             <button
               type="button"
@@ -83,7 +83,7 @@ const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
           onClick={() => openModal()}
           className="rounded-full bg-blue-500 p-2.5"
         >
-          <PlayIcon className="h-5 w-5 text-black" />
+          <PlayIcon className="h-5 w-5 text-black dark:text-white" />
         </button>
       </Tooltip>
     </div>

@@ -64,7 +64,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
         </Menu.Button>
         <MenuTransition>
           <Menu.Items
-            className="absolute z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none dark:border-gray-700"
+            className="absolute z-[5] mt-1 w-max rounded-xl border bg-white dark:bg-gray-900/70 shadow-sm focus:outline-none dark:border-gray-700"
             static
           >
             <Mirror

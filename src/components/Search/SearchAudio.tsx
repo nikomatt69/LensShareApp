@@ -118,7 +118,7 @@ const Search: FC<SearchProps> = ({
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white py-2 text-xs">
+          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white dark:bg-gray-900/70 py-2 text-xs">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />
@@ -129,7 +129,7 @@ const Search: FC<SearchProps> = ({
                 {profiles.map((publication:Publication) => (
                   <div
                     key={publication?.id}
-                    className="cursor-pointer bg-white px-4 py-2 "
+                    className="cursor-pointer bg-white dark:bg-gray-900/70 px-4 py-2 "
                     onClick={() => {
                      
                       setSearchText('');

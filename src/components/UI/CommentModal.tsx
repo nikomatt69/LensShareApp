@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdOutlineClose } from 'react-icons/md';
 import FullScreenModal from './FullScreenModal';
-import Comments from '../DetailPage/CommentsBlock/Comments';
+
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
+import Comments from '../Bytes/FullScreen/Comments';
 
 type Props = {
   trigger: React.ReactNode;

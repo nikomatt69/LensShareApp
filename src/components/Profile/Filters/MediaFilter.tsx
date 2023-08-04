@@ -32,7 +32,7 @@ const MediaFilter = () => {
       <MenuTransition>
         <Menu.Items
           static
-          className="absolute right-0 z-[5] mt-1 rounded-xl border bg-white py-1 shadow-sm focus:outline-none dark:border-gray-700 "
+          className="absolute right-0 z-[5] mt-1 rounded-xl border bg-white dark:bg-gray-900/70 py-1 shadow-sm focus:outline-none dark:border-gray-700 "
         >
           <Menu.Item
             as="label"

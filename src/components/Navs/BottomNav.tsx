@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useAppStore } from 'src/store/app';
 import { toast } from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ButtonTest from '../Login/ButtonTest';
 import LoginWalletMobile from '../Login/LoginWalletMobile';
 import {
@@ -21,10 +21,15 @@ import MessageIcon from '../Messages/MessageIcon';
 const BottomNav: React.FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [homePage, setHomePage] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true)
+  
+ 
 
   return (
     <div>
-      <nav className="z-999 fixed bottom-0 left-0 right-0 z-[5] m-auto flex h-[70px] items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white bg-gradient-to-b  from-blue-100 to-transparent px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
+
+      <nav className="z-999 fixed bottom-0 left-0 right-0 z-[5] m-auto flex h-[70px] items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
         {/* //swap timelines */}
         {homePage ? (
           <Link href="/">

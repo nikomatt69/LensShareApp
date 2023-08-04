@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdOutlineClose } from 'react-icons/md';
 import FullScreenModal from '../UI/FullScreenModal';
-import Comments from '../DetailPage/CommentsBlock/Comments';
+
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { Modal } from '../UI/Modal';
 import Link from 'next/link';
@@ -15,8 +15,8 @@ import FollowButton from '../Buttons/FollowButton';
 import Image from 'next/image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
-import CommentsVideo from '../DetailPage/CommentsBlock/Comments';
-import CommentsByte from './FullScreen/Comments';
+
+
 import { useAppStore } from '@/store/app';
 import PublicationActions from '../Publication/Actions';
 import Feed from '../Comment/Feed';
@@ -53,7 +53,7 @@ const CommentModal: FC<Props> = ({
         {trigger}
       </button>
       <FullScreenModal
-        panelClassName="max-w-lg bg-[#F2F6F9] overflow-y-hidden overflow-y-auto rounded-xl lg:ml-9"
+        panelClassName="max-w-lg bg-[#F2F6F9] dark:bg-black overflow-y-hidden overflow-y-auto rounded-xl lg:ml-9"
         show={show}
         autoClose
       >
@@ -69,7 +69,7 @@ const CommentModal: FC<Props> = ({
         <div className="ml-12 mt-5 items-center justify-center p-5 text-center">
           <PublicationActions publication={publication} />
         </div>
-        <div className="scrollbar-text-blue flex max-h-[75%] overflow-y-auto  bg-white  pt-3">
+        <div className="scrollbar-text-blue flex max-h-[75%] overflow-y-auto  bg-white dark:bg-gray-900/70  pt-3">
           <Feed publication={publication as Comment} />
         </div>
         <NewPublication publication={publication} />

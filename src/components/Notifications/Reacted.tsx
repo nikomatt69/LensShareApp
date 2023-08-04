@@ -29,7 +29,7 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
             draggable={false}
           />
           <div className="flex items-center space-x-0.5">
-            <span>{formatHandle(notification?.profile?.handle)}</span>
+            <span>{(notification?.profile?.name)}</span>
           </div>
         </Link>
       </div>

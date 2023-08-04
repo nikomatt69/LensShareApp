@@ -7,7 +7,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: rgba(252, 245, 245, 0.761);
+  @apply bg-white dark:bg-black;
 }
 
 a {
@@ -74,7 +74,7 @@ a {
 }
 
 .label {
-  @apply mb-1 font-medium text-black ;
+  @apply mb-1 font-medium text-black dark:text-white ;
 }
 
 .dropdown-active {

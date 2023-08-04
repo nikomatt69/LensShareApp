@@ -52,7 +52,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
       className={clsx(
         isFirst && 'rounded-t-xl',
         isLast && 'rounded-b-xl',
-        'cursor-pointer p-5 hover:bg-gray-100 dark:hover:bg-gray-300'
+        'cursor-pointer p-5 hover:bg-gray-100 dark:hover:bg-gray-700'
       )}
       publication={rootPublication}
     >

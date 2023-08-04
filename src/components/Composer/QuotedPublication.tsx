@@ -18,7 +18,7 @@ const QuotedPublication: FC<QuotedPublicationProps> = ({
 }) => {
   return (
     <PublicationWrapper
-      className="line-clamp-5 dark:hover:bg-grey-600/50 cursor-pointer break-words truncate border-blue-500 p-5  text-xs first:rounded-t-xl last:rounded-b-xl hover:bg-gray-100"
+      className="line-clamp-5 cursor-pointer break-words truncate border-blue-500 p-5  text-xs first:rounded-t-xl last:rounded-b-xl hover:bg-grey-200 dark:hover:bg-gray-800"
       publication={publication}
     >
       <PublicationHeader

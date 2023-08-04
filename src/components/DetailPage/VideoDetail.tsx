@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Toaster } from 'react-hot-toast';
 
-import Comments from './CommentsBlock/Comments';
+
 import { useQuery } from '@apollo/client';
 import {
   Publication,
@@ -322,11 +322,7 @@ const VideoDetail: FC<Props> = ({
             </button>
           </div>
         </div>
-        <Comments
-          profile={profile as Profile}
-          key={publication?.profile.id}
-          publication={publication as Publication}
-        />
+       
       </div>
     </div>
   );

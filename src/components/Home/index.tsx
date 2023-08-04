@@ -8,6 +8,7 @@ import MetaTags from "../UI/MetaTags";
 import { useAppStore } from "@/store/app";
 import BytesSection from "./BytesSection";
 import Navbar from "../Navbar";
+import Sidebar from "../Sidebar/Sidebar";
 
 
 const Home: NextPage = () => {
@@ -21,7 +22,12 @@ const Home: NextPage = () => {
       <MetaTags />
       <Navbar/>
       <GridLayout>
+      <GridItemFour>
+         <Sidebar/>
+          <Footer />
+        </GridItemFour>
         <GridItemEight className="space-y-5">
+          
           <BytesSection/>
           {currentProfile?.id ? 
             
@@ -29,9 +35,6 @@ const Home: NextPage = () => {
               :<Explore/>
             }
         </GridItemEight>
-        <GridItemFour>
-          <Footer />
-        </GridItemFour>
       </GridLayout>
     </>
   );

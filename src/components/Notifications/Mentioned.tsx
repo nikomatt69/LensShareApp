@@ -27,7 +27,7 @@ const MentionedNotification: FC<Props> = ({ notification }) => {
           />
           <div className="flex items-center space-x-0.5">
             <span>
-              {formatHandle(notification?.mentionPublication?.profile?.handle)}
+              {(notification?.mentionPublication?.profile?.name)}
             </span>
           </div>
         </Link>

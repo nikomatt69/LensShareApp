@@ -46,7 +46,7 @@ const FollowingAccounts = () => {
             href={`/u/${following?.profile.id}`}
             key={following?.profile.id}
           >
-            <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary">
+            <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary dark:hover:bg-gray-800">
               <div className="relative h-[32px] w-[32px]">
                 <Image
                   src={getAvatar(following?.profile)}
@@ -57,7 +57,7 @@ const FollowingAccounts = () => {
               </div>
               <div />
               <div>
-                <p className="text-md flex items-center gap-1 font-bold lowercase text-primary">
+                <p className="text-md flex items-center gap-1 font-bold lowercase text-primary dark:text-white">
                   {following?.profile.name}
                 </p>
                 <p className="text-xs capitalize text-gray-400">

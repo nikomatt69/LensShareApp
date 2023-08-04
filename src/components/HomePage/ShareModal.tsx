@@ -49,7 +49,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication, show }) => {
           <MdOutlineClose className="h-4 w-4 text-white" />
         </button>
       </div>
-      <div className="mt-20 rounded-xl bg-white">
+      <div className="mt-20 rounded-xl bg-white dark:bg-gray-900/70">
         <Card className="rounded-xl border-0 object-contain object-center p-2 ">
           <div className="no-scrollbar mb-4 flex flex-nowrap items-center space-x-3 overflow-x-auto">
             <EmbedVideo

@@ -22,7 +22,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
         )}
         <textarea
           id={id}
-          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 shadow-sm outline-none ring-0 focus-within:ring-0 focus:ring-0  focus-visible:ring-0 disabled:bg-gray-500 disabled:bg-opacity-20 disabled:opacity-60 dark:bg-gray-900"
+          className="w-full rounded-lg border border-gray-300 bg-white dark:bg-gray-900/70 px-4 py-2 shadow-sm outline-none ring-0 focus-within:ring-0 focus:ring-0  focus-visible:ring-0 disabled:bg-gray-500 disabled:bg-opacity-20 disabled:opacity-60 dark:bg-gray-900"
           ref={ref}
           {...props}
         />

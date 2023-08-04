@@ -27,14 +27,15 @@ import InterweaveContent from '../UI/InterweaveContent';
 import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
 import clsx from 'clsx';
 import ReportModal from '../DetailPage/ReportModal';
-import CommentOptions from '../DetailPage/CommentsBlock/CommentOptions';
+
 import { SIGN_IN_REQUIRED_MESSAGE } from '@/constants';
 import toast from 'react-hot-toast';
 import { getRelativeTime } from '@/utils/functions/formatTime2';
-import PublicationReaction from '../DetailPage/CommentsBlock/PublicationReaction';
+
 import Audio from '../Echos/Audio';
 import Wrapper from '../Echos/Wrapper';
 import Collect from '../Publication/Actions/Collect';
+import CommentOptions from '../Bytes/CommentOptions';
 
 interface Props {
   publication: Publication;
@@ -99,7 +100,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   }, [profile?.isFollowedByMe]);
 
   return (
-    <div className="justify-content break-word m-3 flex flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#F2F6F9] pb-0 md:pb-6">
+    <div className="justify-content break-word m-3 flex flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#F2F6F9] dark:bg-black pb-0 md:pb-6">
       <div className="break-word flex flex-row ">
         <div className="break-word mt-4 flex-auto cursor-pointer gap-3 rounded p-2 font-semibold">
           <Link href={`/u/${profile.id}`} key={profile.id} />
@@ -138,7 +139,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
               key={publication.id}
             >
               <div
-                className="break-word my-3  pb-3 text-xs font-semibold text-black"
+                className="break-word my-3  pb-3 text-xs font-semibold text-black dark:text-white"
                 style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
               >
                 {publication?.metadata?.content && (
@@ -215,19 +216,19 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
       </div>
 
       <div className="flex flex-row space-x-3 py-3">
-        <p className="text-black-400 block pl-1 text-xs font-semibold md:hidden">
+        <p className="text-black dark:text-white-400 block pl-1 text-xs font-semibold md:hidden">
           {' '}
           {likes} Likes
         </p>
-        <p className="text-black-400 block text-xs font-semibold md:hidden">
+        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
           {' '}
           {comments} Comments
         </p>
-        <p className="text-black-400 block text-xs font-semibold md:hidden">
+        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
           {' '}
           {mirrors} Mirrors
         </p>
-        <p className="text-black-400 block text-xs font-semibold md:hidden">
+        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
           {' '}
           {collects} Collects
         </p>

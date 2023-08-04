@@ -58,7 +58,7 @@ const Video = () => {
             type={uploadedVideo.videoType || 'video/mp4'}
           />
         </video>
-        <div className="absolute left-2 top-2 rounded-full bg-orange-200 px-2 py-0.5 text-xs uppercase text-black">
+        <div className="absolute left-2 top-2 rounded-full bg-orange-200 px-2 py-0.5 text-xs uppercase text-black dark:text-white">
           {uploadedVideo.file?.size && (
             <span className="whitespace-nowrap font-semibold">
               {uploadedVideo.file?.size}
@@ -70,7 +70,7 @@ const Video = () => {
             <button
               type="button"
               onClick={() => onCopyVideoSource(uploadedVideo.videoSource)}
-              className="absolute right-2 top-2 rounded-lg bg-orange-200 p-1 px-1.5 text-xs text-black outline-none"
+              className="absolute right-2 top-2 rounded-lg bg-orange-200 p-1 px-1.5 text-xs text-black dark:text-white outline-none"
             >
               <CopyOutline className="h-3.5 w-3.5" />
             </button>

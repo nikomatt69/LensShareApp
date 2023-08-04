@@ -13,7 +13,7 @@ import { BsFlag } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 
 import TopOverlay from '../TopOverlay';
-import Comments from './Comments';
+
 import ByteActions from '../ByteActions';
 import router, { useRouter } from 'next/router';
 
@@ -31,8 +31,10 @@ import MobileBottomOverlay from '../MobileBottomOverlay';
 import CollectModule from '@/components/Buttons/Collects/CollectModule';
 import ChevronUpOutline from './ChevronUpOutline';
 import ChevronDownOutline from './ChevronDownOutline';
-import CommentOptions from '@/components/DetailPage/CommentsBlock/CommentOptions';
+
 import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import CommentOptions from '../CommentOptions';
+import Comments from './Comments';
 
 type Props = {
   byte: Publication;
@@ -164,7 +166,7 @@ const FullScreen: FC<Props> = ({
         autoClose
       >
         <div
-          className="flex snap-center border-0 bg-[#F2F6F9] "
+          className="flex snap-center border-0 bg-[#F2F6F9] dark:bg-black "
           data-testid="byte-video"
           id="videoFull"
         >
@@ -260,7 +262,7 @@ const FullScreen: FC<Props> = ({
             </div>
           </div>
           <div className="flex h-screen w-[30vw] max-w-[544px] flex-shrink-0 flex-col items-stretch p-5">
-            <Comments key={video.profile.id} comment={video as Publication} />
+            
           </div>
         </div>
 

@@ -73,9 +73,9 @@ const UserProfile: FC<UserProfileProps> = ({
 
   const UserName = () => (
     <>
-      <div className="flex max-w-sm items-center">
+      <div className="flex dark:text-white max-w-sm items-center">
         <div className={clsx(isBig ? 'font-bold' : 'text-md', 'grid')}>
-          <div className="truncate">
+          <div className="truncate dark:text-white">
             {sanitizeDisplayName(profile?.name) ??
               formatHandle(profile?.handle)}
           </div>

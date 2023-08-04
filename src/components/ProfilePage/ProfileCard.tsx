@@ -30,7 +30,7 @@ import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
 import router, { useRouter } from 'next/router';
-import Cover from './Cover';
+
 import { APP_NAME, STATIC_IMAGES_URL } from '@/constants';
 import formatHandle from '@/utils/functions/formatHandle';
 import Slug from '../UI/Slug';
@@ -66,6 +66,8 @@ import formatAddress from '@/lib/formatAddress';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Button } from '../UI/Button';
 import SuperfluidSubscribe from '../Superfluid';
+import StreamOutline from '../UI/Icons/StreamOutline';
+import Cover from '../Profile/Cover';
 
 interface Props {
   profile: Profile;
@@ -95,13 +97,13 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   const itsNotMe = profile?.id !== currentProfile?.id;
   const videos = showUserVideos
     ? 'text-center border-2 border-black text-white'
-    : 'border-2 border-black text-center text-black';
+    : 'border-2 border-black text-center text-black dark:text-white';
   const mirrorvideos = !showUserMirrorVideos
     ? 'text-center border-2 border-black text-white'
-    : 'border-2 border-black text-center text-black';
+    : 'border-2 border-black text-center text-black dark:text-white';
   const liked = !showUserVideos
     ? 'text-center border-2 border-black text-white'
-    : 'border-2 border-black text-center text-black';
+    : 'border-2 border-black text-center text-black dark:text-white';
 
   const [conversationKey, setConversationKey] = useState<string | null>(null);
   const [profileId, setProfileId] = useState<string | null>(null);
@@ -150,9 +152,13 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   const isActivePath = (path: string) => router.pathname === path;
 
   return (
+    
+      
     <div className="mx-4 mb-2 flex justify-center">
       <MetaTags title={`User • ${profile?.name} ${APP_NAME}`} />
+      
       <div className="xs:max-w-[680px] w-full max-w-[1150px] sm:max-w-[680px]">
+      
         <div className="relative -mt-24 h-32 w-32 sm:-mt-32 sm:h-52 sm:w-52">
           <Image
             onClick={() => setExpandedImage(getAvatar(profile))}
@@ -170,7 +176,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
           />
         </div>
         <div className="space-y-1 py-2">
-          <div className="flex items-center gap-1.5 text-2xl font-bold">
+          <div className="flex items-center dark:text-white gap-1.5 text-2xl font-bold">
             <div className="truncate" data-testid="profile-name">
               {sanitizeDisplayName(profile?.name) ??
                 formatHandle(profile?.handle)}
@@ -209,6 +215,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
     
             {itsNotMe ? (
               <div className="text-md fl  right-2">
+            
                
                 {following ? (
                   <UnfollowButton
@@ -372,6 +379,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
         )}
       </div>
     </div>
+
   );
 };
 

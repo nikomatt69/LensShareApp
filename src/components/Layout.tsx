@@ -121,7 +121,7 @@ const Layout = ({ children }: Props) => {
 
           
 
-          
+          <Navbar/>
           <BottomNav/>
             {children}
 
