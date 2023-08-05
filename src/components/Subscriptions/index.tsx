@@ -26,6 +26,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import BottomNav from '../Navs/BottomNav';
 import Loading from '../Loading';
 import Navbar from '../Navbar';
+import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 
 const FeedRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -135,24 +136,21 @@ const FeedRender = () => {
   }
 
   return (
-    <div>
-      <MetaTags title={`Feed • ${APP_NAME} `} />
-      <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
+    <GridLayout className="max-w-[1200px] pt-6">
       
-
-        <div className="flex gap-6 border-0  md:gap-20">
-          <div className="hidden h-[92vh] overflow-hidden border-0 lg:block lg:hover:overflow-auto">
-            <Sidebar />
-          </div>
-          <div className="videos mb-8 mt-2 flex h-[88vh] flex-1 flex-col gap-10 overflow-auto overflow-x-hidden border-0 pb-8">
-            <Feed />
-          </div>
-        </div>
-        <div className="display:absolute m-auto block h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
-          <BottomNav />
-        </div>
-      </div>
-    </div>
+   
+     
+   
+    <GridItemEight className="space-y-5">
+     <Feed/>
+    </GridItemEight>
+     
+    <GridItemFour>
+   
+   <Sidebar/>
+  
+ </GridItemFour>
+  </GridLayout>
   );
 };
 

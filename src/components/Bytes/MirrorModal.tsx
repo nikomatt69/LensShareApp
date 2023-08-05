@@ -12,7 +12,7 @@ import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
 import UnfollowButton from '../Buttons/UnfollowButton';
 import FollowButton from '../Buttons/FollowButton';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
 

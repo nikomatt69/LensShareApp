@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import logo from '@/images/Lenstoklogo.png';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import imageProxy from '@/lib/imageProxy';
 import { STATIC_ASSETS_URL } from '@/constants';
 import MetaTags from './UI/MetaTags';
@@ -12,7 +12,7 @@ const Loading: FC = () => {
       <MetaTags />
       <div className="animate-bounce">
         <img
-          src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          src={`${STATIC_ASSETS_URL}/images/icon.png`}
           draggable={false}
           className="h-12 w-12 md:h-16 md:w-16"
           alt="lensshare"

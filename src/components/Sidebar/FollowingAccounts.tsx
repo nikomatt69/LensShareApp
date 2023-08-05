@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useState, useEffect, FC, Key } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import {
   FollowingDocument,
   PaginatedFollowingResult,
@@ -52,7 +52,7 @@ const FollowingAccounts = () => {
                   src={getAvatar(following?.profile)}
                   alt="profilepic"
                   className="rounded-full"
-                  layout="fill"
+             
                 />
               </div>
               <div />

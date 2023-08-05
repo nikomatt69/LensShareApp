@@ -190,7 +190,7 @@ const FullScreen: FC<Props> = ({
                 onMouseLeave={() => displayControl(false)}
               >
                 <div
-                  className="m-auto  flex min-w-[50vh] max-w-[1px] items-center border-0 md:rounded-sm"
+                  className="  flex min-w-[50vh] max-w-[1px] items-center border-0 md:rounded-sm"
                   style={{
                     backgroundColor: backgroundColor
                       ? backgroundColor

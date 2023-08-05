@@ -13,7 +13,7 @@ import { profile } from 'console';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import getAvatar from '@/lib/getAvatar';
 import Loader from './UI/Loader';
 

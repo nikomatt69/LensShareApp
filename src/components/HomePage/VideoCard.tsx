@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { FC, useEffect, useRef, useState } from 'react';
 import type { Profile, Publication } from '@/utils/lens/generatedLenster';
 import Video from './Video';

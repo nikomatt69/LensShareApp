@@ -31,6 +31,8 @@ import DiscoverMob from '../DiscoverPage/DiscoverMob';
 import BytesSection from '../Home/BytesSection';
 import NewPost from '../Composer/Post/New';
 import Timeline from '../Timeline';
+import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
+import SuggestedAccounts from '../Sidebar/SuggestedAccounts';
 
 const Home2: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -136,30 +138,31 @@ const Home2: NextPage = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   return (
-    <div>
-    <MetaTags title={`Home • ${APP_NAME}`} />
-    <div className="xl:w-[1200px] lg:w-[1100px] m-auto overflow-hidden h-[100vh]">
-
-      <div className="flex gap-6 md:gap-20">
-        <div className="h-[92vh] overflow-hidden hidden lg:block lg:hover:overflow-auto">
-          <Sidebar />
-        </div>
-        <div className="mt-2 mb-8 pb-8 flex flex-col gap-10 overflow-auto overflow-x-hidden h-[88vh] videos flex-1">
-        <div className="flex flex-col  gap-10">
-                  <BytesSection />
-                </div>
-                {currentProfile?.id ? 
+  
+    <GridLayout className="max-w-[1200px] pt-6">
+      <GridItemFour>
+   
+   <BytesSection />
+ 
+    </GridItemFour>
+      
+   
+     
+   
+    <GridItemEight className="space-y-5">
+    {currentProfile?.id ? 
             
             <><NewPost /><Timeline /></>
             :<Explore/>
           }
-        </div>
-      </div>
-      <div className="block ">
-        <BottomNav/>
-      </div>
-    </div>
-    </div>
+    </GridItemEight>
+     
+    <GridItemFour>
+   
+    <SuggestedAccounts />
+  
+ </GridItemFour>
+  </GridLayout>
   );
 };
 

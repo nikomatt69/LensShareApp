@@ -9,7 +9,7 @@ import { getTimeFromSeconds } from '@/utils/functions/formatTime2';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
 import type WaveSurfer from 'wavesurfer.js';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import imageKit from '@/lib/imageKit';
 
 type Props = {

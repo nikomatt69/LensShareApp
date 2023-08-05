@@ -21,7 +21,6 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
         objectFit="contain"
         showLoadingSpinner
         autoPlay
-        muted
         showPipButton={false}
         showUploadingIndicator={false}
         controls={{ defaultVolume: 0 }}

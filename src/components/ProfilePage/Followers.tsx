@@ -4,7 +4,7 @@ import { useFollowersQuery } from '@/types/graph';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import InfiniteLoader from '../UI/InfiniteLoader';
 import Loader from '../UI/Loader';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { GoVerified } from 'react-icons/go';
 import SuggestedAccounts from '@/components/Sidebar/SuggestedAccounts';
 import FollowingAccounts from '@/components/Sidebar/FollowingAccounts';
@@ -90,7 +90,7 @@ const Followers: FC<Props> = ({ profile }) => {
                     src={getAvatar(followers?.wallet?.defaultProfile)}
                     alt="profilepic"
                     className="rounded-full"
-                    layout="fill"
+                    
                   />
                 </div>
                 <div />

@@ -1,7 +1,7 @@
 //this is just the profile pic and info
 
 import React, { Dispatch, FC, ReactNode, useEffect, useState } from 'react';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import FollowButton from '@/components/Buttons/FollowButton';

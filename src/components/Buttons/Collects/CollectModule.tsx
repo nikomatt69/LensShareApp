@@ -45,7 +45,7 @@ import {
 } from 'wagmi';
 import getTokenImage from '@/lib/getTokenImage';
 import Loader from '../../UI/Loader';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import AllowanceButton from './AllowanceButton';
 import dayjs from 'dayjs';
 import { Spinner } from '@/components/UI/Spinner';

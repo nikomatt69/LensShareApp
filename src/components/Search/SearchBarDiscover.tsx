@@ -11,7 +11,7 @@ import { Spinner } from '../UI/Spinner';
 import getAvatar from '@/lib/getAvatar';
 import { GoVerified } from 'react-icons/go';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import formatHandle from '@/utils/functions/formatHandle';
 
 interface Props {

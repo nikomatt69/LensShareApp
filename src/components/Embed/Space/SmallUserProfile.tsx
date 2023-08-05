@@ -2,7 +2,7 @@ import getAvatar from '@/lib/getAvatar';
 
 import formatHandle from '@/utils/functions/formatHandle';
 import { FC, memo } from 'react';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import Slug from '@/components/UI/Slug';
 import formatTime from '@/utils/functions/formatTime';
 import Link from 'next/link';

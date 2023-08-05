@@ -19,6 +19,7 @@ import Head from 'next/head';
 import { useTheme } from 'next-themes';
 import GlobalModals from './GlobalModals';
 import GlobalAlerts from './Publication/Actions/Menu/GlobalAlerts';
+import Wrapper from './Embed/Wrapper';
 
 interface Props {
   children: ReactNode;
@@ -122,8 +123,9 @@ const Layout = ({ children }: Props) => {
           
 
           <Navbar/>
-          <BottomNav/>
+          <BottomNav/> 
             {children}
+            <Wrapper children  />
 
 
        

@@ -14,7 +14,7 @@ import Following from './Following';
 import formatHandle from '@/utils/functions/formatHandle';
 import getAvatar from '@/lib/getAvatar';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { Card } from '../UI/Card';
 
 interface Props {
@@ -72,7 +72,7 @@ const UserProfiles: NextPage = () => {
                   src={getAvatar(profile)}
                   alt="profilepic"
                   className="rounded-full"
-                  layout="fill"
+            
                 />
               </div>
               <div />

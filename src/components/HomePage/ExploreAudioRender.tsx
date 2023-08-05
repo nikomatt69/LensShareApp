@@ -27,6 +27,9 @@ import ExploreAudio from './ExploreAudio';
 import Wrapper from '../Echos/Wrapper';
 import NavbarDetails from '../NavbarDetails';
 import MetaTags from '../UI/MetaTags';
+import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
+import Echos from '../Echos/EchosPage';
+import EchosPage from '@/pages/musicfeed';
 
 interface Props {
   profile: Profile;
@@ -141,23 +144,22 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
   }
 
   return (
-    <div>
-      <MetaTags title={`MusicFeed • ${APP_NAME} `} />
-      <div className="m-auto h-[100vh] overflow-hidden border-0 lg:w-[1100px] xl:w-[1200px]">
- 
-        
+   
+     <GridLayout className="max-w-[1200px] pt-6">
+      
+   
+     
+   
+     <GridItemEight className="space-y-5">
+     <ExploreAudio publication={publication} profile={profile} />
+     <Wrapper children publication={publication} />
+     </GridItemEight>
+      
+    
+  
+   </GridLayout>
 
-        <div className="flex  ">
-          <div className="xs:h-[40] hidden h-[70vh] overflow-hidden border-0 sm:h-[40] lg:block lg:hover:overflow-auto">
-            <Sidebar />
-          </div>
-          <div className="xs:h-[40] videos  mt-2 flex h-[70vh] flex-1 flex-col overflow-auto overflow-x-hidden sm:h-[40]">
-            <ExploreAudio publication={publication} profile={profile} />
-          </div>
-        </div>
-        <Wrapper children publication={publication} />
-      </div>
-    </div>
+    
   );
 };
 

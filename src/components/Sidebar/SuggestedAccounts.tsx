@@ -9,7 +9,7 @@ import {
   ReactPortal
 } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { GoVerified } from 'react-icons/go';
 import {
   Profile,
@@ -59,7 +59,7 @@ const SuggestedAccounts = () => {
                       src={getAvatar(currentProfile)}
                       alt={getAvatar(currentProfile)}
                       className="rounded-full"
-                      layout="fill"
+                      
                     />
                   </div>
                   <div />

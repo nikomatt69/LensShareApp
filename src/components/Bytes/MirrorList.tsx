@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import React, { FC } from 'react';
 import Loader from '../UI/Loader';
 import getAvatar from '@/lib/getAvatar';

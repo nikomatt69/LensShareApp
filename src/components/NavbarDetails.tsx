@@ -1,6 +1,6 @@
 import logo from '@/images/icon.png';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
@@ -78,7 +78,7 @@ const Navbar: FC = () => {
                       height={40}
                       className="cursor-pointer rounded-full"
                       alt={currentProfile.id.handle}
-                      layout="responsive"
+                     
                     />
                   ) : (
                     <Image
@@ -87,7 +87,7 @@ const Navbar: FC = () => {
                       height={40}
                       className="cursor-pointer rounded-full"
                       alt={currentProfile.id.handle}
-                      layout="responsive"
+                  
                     />
                   )
                 ) : (

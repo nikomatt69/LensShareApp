@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import Link from 'next/link';
 import { useAppStore, useTransactionPersistStore } from 'src/store/app';
 

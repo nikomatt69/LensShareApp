@@ -7,7 +7,7 @@ import React, { FC } from 'react';
 import { Spinner } from '../UI/Spinner';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import InfiniteLoader from '../UI/InfiniteLoader';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import getAvatar from '@/lib/getAvatar';
 import { GoVerified } from 'react-icons/go';
 import Link from 'next/link';

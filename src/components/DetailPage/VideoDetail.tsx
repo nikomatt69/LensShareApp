@@ -7,7 +7,7 @@ import React, {
   useCallback
 } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import Link from 'next/link';
 import { Toaster } from 'react-hot-toast';
 

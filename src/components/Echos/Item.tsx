@@ -11,7 +11,7 @@ import imageCdn from '@/utils/functions/imageCdn';
 import getAvatar from '@/lib/getAvatar';
 import getMedia from '@/lib/getMedia';
 import imageProxy from '@/lib/imageProxy';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 
 type Props = {

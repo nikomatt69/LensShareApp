@@ -2,7 +2,7 @@ import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
 import { Profile, useProfileQuery } from '@/utils/lens/generated';
 import { type FC } from 'react';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 
 interface SpaceUserProps {

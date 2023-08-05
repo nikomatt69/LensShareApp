@@ -12,7 +12,7 @@ import Categories from '@/components/Sidebar/Categories';
 import { useAppStore } from 'src/store/app';
 import formatHandle from '@/utils/functions/formatHandle';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import Loading from '../Loading';
 import { useInView } from 'react-cool-inview';
 interface Props {
@@ -90,7 +90,7 @@ const Following: FC<Props> = ({ profile }) => {
                     src={getAvatar(following?.profile)}
                     alt="profilepic"
                     className="rounded-full"
-                    layout="fill"
+                    
                   />
                 </div>
                 <div />
