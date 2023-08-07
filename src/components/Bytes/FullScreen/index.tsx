@@ -67,7 +67,7 @@ const FullScreen: FC<Props> = ({
   const [showReport, setShowReport] = useState(false);
 
   const thumbnailUrl = imageCdn(
-    sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
+    sanitizeIpfsUrl(getThumbnailUrl(byte.metadata)),
     'thumbnail_v'
   );
   const { color: backgroundColor } = useAverageColor(thumbnailUrl, true);
@@ -125,7 +125,7 @@ const FullScreen: FC<Props> = ({
         autoPlay: true,
         loop: true,
         loadingSpinner: false,
-        muted: true
+        muted: false
       }}
     />
   );

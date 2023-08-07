@@ -66,10 +66,10 @@ const CommentModal: FC<Props> = ({
             <MdOutlineClose className="h-4 w-4 text-white" />
           </button>
         </div>
-        <div className="ml-12 mt-5 items-center justify-center p-5 text-center">
+        <div className="ml-12 mt-3 items-center justify-center p-5 text-center">
           <PublicationActions publication={publication} />
         </div>
-        <div className="scrollbar-text-blue flex max-h-[70%] overflow-y-auto  bg-white dark:bg-gray-900/70  pt-3">
+        <div className="scrollbar-text-blue flex max-h-[50%] overflow-y-auto  bg-white dark:bg-gray-900/70  pt-3">
           <Feed publication={publication as Comment} />
         </div>
         <NewPublication publication={publication} />

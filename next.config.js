@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
   topLevelAwait:true,
   eslint: {
@@ -96,7 +96,7 @@ const nextConfig = {
         source: '/:path*',
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Max-Age', value: '1728000' },
+   
           { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
           { key: 'Access-Control-Allow-Methods', value: 'Content-Type' },
           { key: 'Cache-Control', value: 'public, max-age=3600' }
@@ -106,7 +106,7 @@ const nextConfig = {
         source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Max-Age', value: '1728000' },
+    
           { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
           { key: 'Access-Control-Allow-Methods', value: 'Content-Type' },
           { key: 'Cache-Control', value: 'public, max-age=3600' }

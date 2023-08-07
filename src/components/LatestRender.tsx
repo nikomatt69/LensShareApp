@@ -144,11 +144,7 @@ const LatestRender = () => {
      <Latest/>
     </GridItemEight>
      
-    <GridItemFour>
-   
-   <Sidebar/>
   
- </GridItemFour>
   </GridLayout>
   );
 };

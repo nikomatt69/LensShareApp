@@ -33,7 +33,7 @@ module.exports = {
         ' 50%': '50%'
       },
       backgroundColor: {
-        primary: '#F1F1F2',
+        primary: '#000',
         blur: '#030303'
       },
       colors: {

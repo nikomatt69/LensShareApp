@@ -137,7 +137,7 @@ const FeedRender = () => {
 
   return (
     <GridLayout className="max-w-[1200px] pt-6">
-      
+      <MetaTags title={`Bytes • ${APP_NAME}`} />
    
      
    
@@ -145,11 +145,7 @@ const FeedRender = () => {
      <Feed/>
     </GridItemEight>
      
-    <GridItemFour>
    
-   <Sidebar/>
-  
- </GridItemFour>
   </GridLayout>
   );
 };

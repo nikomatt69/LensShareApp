@@ -33,6 +33,7 @@ import NewPost from '../Composer/Post/New';
 import Timeline from '../Timeline';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import SuggestedAccounts from '../Sidebar/SuggestedAccounts';
+import Footer from '../Sidebar/Footer';
 
 const Home2: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -138,17 +139,18 @@ const Home2: NextPage = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   return (
+    
+
   
-    <GridLayout className="max-w-[1200px] pt-6">
-      <GridItemFour>
+    <GridLayout className="max-w-[1200px] pt-6"> 
+    <MetaTags title={`Home • ${APP_NAME}`} /> 
+     <GridItemFour>
    
    <BytesSection />
- 
-    </GridItemFour>
-      
-   
-     
-   
+
+    
+  
+ </GridItemFour>
     <GridItemEight className="space-y-5">
     {currentProfile?.id ? 
             
@@ -156,12 +158,7 @@ const Home2: NextPage = () => {
             :<Explore/>
           }
     </GridItemEight>
-     
-    <GridItemFour>
-   
-    <SuggestedAccounts />
-  
- </GridItemFour>
+    
   </GridLayout>
   );
 };

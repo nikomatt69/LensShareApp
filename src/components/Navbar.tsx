@@ -1,6 +1,6 @@
 import logo from '@/images/Lenstoknewlogo3.png';
 import Link from 'next/link';
-import { Image } from '@/components/UI/Image';
+import Image from 'next/image';
 import { useState, type FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
@@ -95,7 +95,7 @@ const Navbar: FC = () => {
         <div className="w-[100px] md:w-[129px]">
           <Image
             className="cursor-pointer"
-            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
+            src={logo}
             alt="logo"
            
           />

@@ -31,10 +31,7 @@ const ByteVideo: FC<Props> = ({ video, onDetail, isShow, index }) => {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const intersectionRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
-  const thumbnailUrl = imageCdn(
-    sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
-    'thumbnail_v'
-  );
+  const thumbnailUrl = imageCdn(getThumbnailUrl(video.metadata), 'thumbnail_v')
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth);
   };
@@ -66,8 +63,8 @@ const ByteVideo: FC<Props> = ({ video, onDetail, isShow, index }) => {
         const id = data[0].target.id;
         id != currentViewingId && setCurrentViewingId(id);
         // if (isShow) {
-        //   const nextUrl = `${location.origin}/${video?.id}`
-        //   history.replaceState({ path: nextUrl }, '', nextUrl)
+          // const nextUrl = `${location.origin}/${video?.id}`
+          // history.replaceState({ path: nextUrl }, '', nextUrl)
         // }
       }
     },
@@ -112,55 +109,67 @@ const ByteVideo: FC<Props> = ({ video, onDetail, isShow, index }) => {
 
   const profile = video.profile;
   return (
-    <div className={clsx(index != 0 && ' ', !isMobile && 'mt-8 flex md:ml-2')}>
+    <div
+    className="flex snap-center justify-center md:mt-6"
+    data-testid="byte-video"
+  >
+    <div className="relative">
       <div
-        className="flex snap-center border-0 object-contain"
-        data-testid="byte-video"
+         className={clsx(
+          !isMobile
+            ? 'ultrawide:w-[650px] flex h-screen w-screen min-w-[250px] items-center overflow-hidden bg-black  md:h-[65vh] md:w-[19.5vw] md:rounded-xl md:max-xl:h-[30vh]'
+            : 'flex h-screen w-screen'
+        )}
+        style={{
+          backgroundColor: 'transparent'
+        }}
       >
-        <div className="relative bottom-0 border-0">
-          <div
-            className={clsx(
-              !isMobile
-                ? 'ultrawide:w-[400px] flex h-screen max-h-[600px] min-h-[500px] w-screen min-w-[380px] max-w-[400px] items-center  overflow-hidden border-0 bg-black md:h-[65vh] md:w-[19.5vw] md:rounded-xl md:max-xl:h-[30vh]'
-                : 'flex h-screen w-screen'
-            )}
-            id={currentViewingId === video.id ? 'currentVideo' : video.id + '1'}
-            style={{
-              backgroundColor: 'transparent'
+        <div
+          className="absolute top-[50%]"
+          ref={intersectionRef}
+          id={video?.id}
+        />
+        {currentViewingId === video.id ? (
+          <VideoPlayer
+            publicationId={video.id}
+            refCallback={refCallback}
+            permanentUrl={getPublicationMediaUrl(video)}
+            posterUrl={thumbnailUrl}
+            ratio="9to16"
+            showControls={false}
+            options={{
+              autoPlay: false,
+              muted: false,
+              loop: true,
+              loadingSpinner: false,
+              isCurrentlyShown: currentViewingId === video.id
             }}
-          >
-            <div
-              className="absolute top-[50%] border-0"
-              ref={intersectionRef}
-              id={video.id}
+          />
+        ) : (
+          <div className="h-full w-full">
+            <img
+              className="w-full object-cover"
+              src={thumbnailUrl}
+              alt="thumbnail"
+              draggable={false}
             />
-            {currentViewingId === video.id ? (
+            <span className="invisible absolute">
               <VideoPlayer
-                refCallback={refCallback}
                 permanentUrl={getPublicationMediaUrl(video)}
-                posterUrl={thumbnailUrl}
-                ratio="9to16"
                 publicationId={video.id}
-                showControls={true}
+                showControls={false}
                 options={{
                   autoPlay: false,
-                  loop: true,
+                  muted: false,
                   loadingSpinner: false,
-                  muted: true,
-                  isCurrentlyShown: true
+                  isCurrentlyShown: currentViewingId === video.id
                 }}
               />
-            ) : (
-              <img
-                className="w-full rounded-[10px] border-0 object-contain"
-                src={thumbnailUrl}
-                alt="thumbnail"
-                draggable={false}
-              />
-            )}
+            </span>
           </div>
-          {/* isMobile && <TopOverlay onClickVideo={onClickVideo} id={video.id} />  */}
-          {isMobile && (
+        )}
+      </div>
+      {isMobile && (
             <MobileBottomOverlay
               video={video}
               setFollowing={setFollowing}
@@ -168,37 +177,28 @@ const ByteVideo: FC<Props> = ({ video, onDetail, isShow, index }) => {
               following={following}
             />
           )}
-          <div className="absolute bottom-[15%] right-3 z-[1] inline-block md:hidden">
-            <ByteActions
-              publication={video as Publication}
-              trigger
-              publicationId={video as Publication}
-              key={currentViewingId}
-              video={video}
-              showDetail={() => onDetail(video)}
-            />
-            {/* {video?.collectModule?.__typename !==
-                'RevertCollectModuleSettings' && (
-                  <div className="text-center text-white md:text-gray-500">
-                    <CollectVideo video={video} />
-                    <div className="text-xs">
-                      {video.stats?.totalAmountOfCollects || 'Collect'}
-                    </div>
-                  </div>
-                )} */}
-          </div>
-        </div>
-        <div className="hidden md:flex">
-          <ByteActions
+      <div className="absolute bottom-[15%] right-2 z-[1] md:hidden">
+      <ByteActions
             publication={video as Publication}
             publicationId={video as Publication}
             trigger
             video={video}
             showDetail={() => onDetail(video)}
           />
-        </div>
+        
       </div>
     </div>
+    <div className="hidden md:flex">
+    <ByteActions
+            publication={video as Publication}
+            publicationId={video as Publication}
+            trigger
+            video={video}
+            showDetail={() => onDetail(video)}
+          />
+    </div>
+  </div>
+  
   );
 };
 

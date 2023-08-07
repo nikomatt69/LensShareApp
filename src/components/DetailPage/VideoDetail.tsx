@@ -148,11 +148,11 @@ const VideoDetail: FC<Props> = ({
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageCdn(
             sanitizeIpfsUrl(getThumbnailUrl(publication.metadata)),
-            isBytesVideo ? 'thumbnail_v' : 'thumbnail'
+            isBytesVideo ? 'thumbnail' : 'thumbnail'
           )}
           options={{
             autoPlay: true,
-            muted: true,
+            muted: false,
             loop: true,
             loadingSpinner: false,
             isCurrentlyShown: true

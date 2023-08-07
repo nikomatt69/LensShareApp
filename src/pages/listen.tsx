@@ -1,3 +1,4 @@
-import ExploreAudioRender from '@/components/HomePage/ExploreAudioRender';
+import EchosPage from "@/components/Echos/EchosPage";
 
-export default ExploreAudioRender;
+
+export default EchosPage;

@@ -1,7 +1,7 @@
 import { useAppStore, useAppPersistStore } from '@/store/app';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { Profile, ProfilesDocument } from '@/utils/lens/generatedLenster';
+import { Profile, ProfilesDocument, Publication } from '@/utils/lens/generatedLenster';
 import { useQuery } from '@apollo/client';
 import toast, { Toaster } from 'react-hot-toast';
 import { CHAIN_ID } from '@/constants';
@@ -19,13 +19,15 @@ import Head from 'next/head';
 import { useTheme } from 'next-themes';
 import GlobalModals from './GlobalModals';
 import GlobalAlerts from './Publication/Actions/Menu/GlobalAlerts';
-import Wrapper from './Embed/Wrapper';
+import Wrapper from './Echos/Wrapper';
+
 
 interface Props {
   children: ReactNode;
+  publication:Publication
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children,publication }: Props) => {
   const { resolvedTheme } = useTheme();
   const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const setProfiles = useAppStore((state) => state.setCurrentProfile);
@@ -105,10 +107,10 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <Head>
+     <Head>
         <meta
           name="theme-color"
-          content={resolvedTheme === 'dark' ? '#ffffff' : '#ffffff'}
+          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
         />
       </Head>
       <Toaster
@@ -116,19 +118,21 @@ const Layout = ({ children }: Props) => {
         toastOptions={getToastOptions(resolvedTheme)}
       />
       <GlobalModals />
-      <GlobalAlerts/>
+      <GlobalAlerts />
+      <div className="flex min-h-screen flex-col pb-14 md:pb-0">
+      {pathname.includes(`/listen`) ? (
+          <>
+            <Navbar />
+            <Wrapper children publication={publication} />{children}
+          </>
+        ):(
+          <>
+        <Navbar />
+        <BottomNav />
+        {children}
+        </>
+        )}
 
-      <div className="flex  flex-col min-h-screen md:pb-0">
-
-          
-
-          <Navbar/>
-          <BottomNav/> 
-            {children}
-            <Wrapper children  />
-
-
-       
       </div>
     </>
   );

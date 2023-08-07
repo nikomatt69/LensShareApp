@@ -36,6 +36,7 @@ import {
   usePublicationDetailsLazyQuery
 } from '@/utils/lens/generated';
 import Navbar from '../Navbar';
+import { useTheme } from 'next-themes';
 
 interface Props {
   following?: boolean;
@@ -43,6 +44,7 @@ interface Props {
 }
 
 const Bytes = () => {
+  const { resolvedTheme } = useTheme();
   const router = useRouter();
   const bytesContainer = useRef<HTMLDivElement>(null);
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -180,7 +182,10 @@ const Bytes = () => {
   return (
     <div className="border-0">
       <Head>
-        <meta name="theme-color" content="#000000" />
+      <meta
+          name="theme-color"
+          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
+        />
       </Head>
       <MetaTags title="LensShare" />
       <Navbar/>

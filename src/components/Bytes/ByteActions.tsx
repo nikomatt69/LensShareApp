@@ -20,6 +20,9 @@ import { profile } from 'console';
 import MirrorModal from './MirrorModal';
 import ShareMenu from '../Publication/Actions/Share';
 import Collect from '../Publication/Actions/Collect';
+import CommentOutline from '../UI/Icons/CommentOutline';
+import Mirror from '../Publication/Actions/Share/Mirror';
+import CommentOptions from './CommentOptions';
 
 type Props = {
   video: Publication;
@@ -28,9 +31,10 @@ type Props = {
   trigger: React.ReactNode;
   publicationId: Publication;
   publication: Publication;
+  showCount?: boolean;
 };
 
-const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger }) => {
+const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger, showCount }) => {
   const [showShare, setShowShare] = useState(false);
   const [showReport, setShowReport] = useState(false);
   const [show, setShow] = useState(false);
@@ -46,28 +50,24 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger }) => {
   const profile = id ? currentProfile : video?.profile;
 
   return (
-    <div className="mb-14 ml-4 w-14 flex-col items-center justify-between md:flex md:w-14 md:max-xl:mb-16">
+    <div className="w-12 flex-col items-center justify-between md:flex md:w-14">
+      <div className='pr-5'><CommentOptions setShowReport={setShowReport}  video={video as Publication}/></div>
+      
       <div className="items-center space-y-1.5 pt-2.5 md:flex md:flex-col">
-        <div className="w-full  text-center text-white md:text-inherit">
-          <LikeButton publication={video as Publication} />
+        <div className="text-white md:pr-5 md:text-inherit">
+        <LikeButton publication={video}  />
         </div>
-
-        <div
-          className="w-full pr-7 text-center text-white md:text-inherit"
-          onClick={() => setShow(true)}
-        >
-          <button>
-            <CommentModal
-              publication={video as Publication}
-              trigger={trigger}
-              setFollowing={setFollowing}
-              following={following}
-              profile={currentProfile as Profile}
-            />
-          </button>
-          <p className="hidden text-xs font-semibold text-gray-400 lg:block">
-            {comments}
-          </p>
+        <div className="w-full text-center pr-5 text-white md:text-inherit">
+          <CommentModal
+            trigger={trigger}
+            publication={video as Publication}
+            setFollowing={setFollowing}
+            following={following}
+            profile={currentProfile as Profile}
+          />
+        </div>
+        <div className="w-full text-center text-white md:text-inherit">
+         
         </div>
 
         <div className="w-full  text-center text-white md:text-inherit">
@@ -77,14 +77,7 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger }) => {
         <div className="w-full text-center text-white md:text-inherit">
           <Collect publication={video as Publication} showCount={false} />
         </div>
-        {/* {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
-          <div className="hidden w-full pb-3 text-center md:block">
-            <CollectVideo video={video} />
-            <div className="text-center text-xs leading-3">
-              {video.stats?.totalAmountOfCollects || 'Collect'}
-            </div>
-          </div>
-        )} */}
+       
         <div
           className="w-full  text-center text-white md:text-inherit"
           onClick={() => setShowShare(true)}
@@ -93,7 +86,10 @@ const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger }) => {
         </div>
       </div>
     </div>
+    
   );
 };
+
+
 
 export default ByteActions;

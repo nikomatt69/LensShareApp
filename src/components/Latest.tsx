@@ -39,6 +39,7 @@ import MetaTags from './UI/MetaTags';
 import Loading from './Loading';
 import BytesCard from './HomePage/BytesCard';
 import VideoCard from './HomePage/VideoCard';
+import { useTheme } from 'next-themes';
 
 const Latest = () => {
   const router = useRouter();
@@ -48,6 +49,7 @@ const Latest = () => {
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const request = {
@@ -183,7 +185,10 @@ const Latest = () => {
   return (
     <div>
       <Head>
-        <meta name="theme-color" content="#fff" />
+      <meta
+          name="theme-color"
+          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
+        />
       </Head>
       <MetaTags title={`Latest • ${APP_NAME} `} />
       {full()}

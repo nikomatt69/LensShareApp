@@ -37,7 +37,7 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
   }, [subscriber?.isFollowedByMe]);
 
   return (
-    <div className="absolute bottom-0  left-0 right-0 z-[10] overflow-auto  rounded-b-2xl border-b-2 border-blue-700 bg-blue-500  bg-gradient-to-b from-gray-900 to-transparent px-3 pb-6 pt-3 md:rounded-b-xl">
+    <div className="absolute bottom-0   left-0 right-0 z-[10]  overflow-auto  rounded-b-2xl    px-3 pb-6 pt-3 md:rounded-b-xl">
       <Link href={`/bytes/${video?.id}`} key={video.id}>
         <div className="pb-2">
           {isMirror ? (
@@ -48,7 +48,7 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
               <h1 className="text-xs text-blue-700">{video.metadata.name}</h1>
             </div>
           ) : (
-            <h1 className="line-clamp-2 font-bold text-white">
+            <h1 className="line-clamp-2 font-bold text-black dark:text-white">
               {video.metadata.name}
             </h1>
           )}
