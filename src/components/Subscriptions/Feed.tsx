@@ -21,7 +21,8 @@ import {
   LENSTUBE_APP_ID,
   SCROLL_ROOT_MARGIN,
   LENSTER_APP_ID,
-  ORB_APP_ID
+  ORB_APP_ID,
+  APP_NAME
 } from '@/constants';
 import Video from '../HomePage/Video';
 import Bytes from '../Bytes';
@@ -30,6 +31,9 @@ import FullScreen from '../Bytes/FullScreen';
 import router from 'next/router';
 import BytesCard from '../HomePage/BytesCard';
 import { useFeedQuery } from '@/utils/lens/generated';
+import Head from 'next/head';
+import MetaTags from '../UI/MetaTags';
+import { useTheme } from 'next-themes';
 
 interface Props {
   publication: Publication;
@@ -44,6 +48,7 @@ const Feed = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const currentViewingId = useAppStore((state) => state.currentviewingId);
+  const { resolvedTheme } = useTheme();
 
   const bytesContainer = useRef<HTMLDivElement>(null);
   const [byte, setByte] = useState<Publication>();
@@ -128,18 +133,24 @@ const Feed = () => {
     return <Custom400 />;
   }
   return (
-    <div className="mt-2 border-0  pt-3">
+    <div className="mt-2 border-0 dark:bg-black bg-white pt-3">
+      <Head>
+      <meta
+          name="theme-color"
+          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
+        />
+      </Head>  
+      <MetaTags title={`Feed • ${APP_NAME} `} />
+ 
       {full()}
       {!error && !loading && (
         <>
           <div
             ref={bytesContainer}
-            className="mt-3 h-screen border-0 pt-3 font-semibold md:h-[calc(100vh-70px)]"
+            className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-70px)]"
           >
             {bytes?.map((video: Publication, index) => (
               <ByteVideo
-                
-             
                 setFollowing={setFollowing}
                 video={video}
                 key={`${video?.id}_${video.createdAt}1`}

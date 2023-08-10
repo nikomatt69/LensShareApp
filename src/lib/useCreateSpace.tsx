@@ -1,23 +1,19 @@
-import { IS_MAINNET, SPACES_WORKER_URL } from '@/constants';
+
+import { SPACES_WORKER_URL } from '@/constants';
 import axios from 'axios';
-import { useReadLocalStorage } from 'usehooks-ts';
+import getBasicWorkerPayload from './getBasicWorkerPayload';
 
 type CreateSpaceResponse = string;
 
 const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
-  const accessToken = useReadLocalStorage('accessToken');
   const createSpace = async (): Promise<CreateSpaceResponse> => {
     try {
       const response = await axios({
         url: `${SPACES_WORKER_URL}/createSpace`,
         method: 'POST',
-        data: {
-          isMainnet: IS_MAINNET,
-          accessToken
-        }
+        data: getBasicWorkerPayload()
       });
-
-      return response.data.spaceId;
+      return response.data;
     } catch (error) {
       throw error;
     }

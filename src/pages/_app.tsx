@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import Loading from '@/components/Loading';
-import type { AppProps } from 'next/app';
+
 import { lazy, Suspense, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import MetaTags from '@/components/UI/MetaTags';
@@ -12,6 +12,7 @@ import { useAppStore } from '@/store/app';
 import { AUTH_ROUTES } from '@/utils/data/auth-routes';
 
 import dynamic from 'next/dynamic';
+import { Publication } from '@/utils/lens/generatedLenster';
 const Providers = dynamic(() => import('@/components/Providers'), {
   ssr: false
 });
@@ -19,12 +20,18 @@ const Layout = dynamic(() => import('@/components/Layout'), {
   ssr: false
 });
 
+interface AppProps {
+  publication:Publication,
+  Component :any,
+  pageProps:any,
+}
+
 
 
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps ,publication }: AppProps) => {
   const { pathname, replace, asPath } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
 
@@ -51,7 +58,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
       <Suspense fallback={<Loading />}>
         <Providers>
-          <Layout>
+          <Layout publication={publication as Publication}>
             <Component {...pageProps} />
           </Layout>
         </Providers>

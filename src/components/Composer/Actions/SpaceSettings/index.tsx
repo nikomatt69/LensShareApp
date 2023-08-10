@@ -1,36 +1,162 @@
-import { Tooltip } from '@/components/UI/Tooltip';
-import { FeatureFlag } from '@/utils/data/feature-flags';
-import isFeatureEnabled from '@/utils/functions/isFeatureEnabled';
-import { MicrophoneIcon } from '@heroicons/react/24/outline';
 
-import { motion } from 'framer-motion';
+import { Input } from '@/components/UI/Input';
+import MenuTransition from '@/components/UI/MenuTransition';
+
+import { Toggle } from '@/components/UI/Toggle';
+import { useSpacesStore } from '@/store/spaces';
+import { Menu } from '@headlessui/react';
+
+import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 import type { FC } from 'react';
-import { usePublicationStore } from 'src/store/publication4';
+import React, { useState } from 'react';
+
+
+enum TokenGateCondition {
+  HAVE_A_LENS_PROFILE,
+  FOLLOW_A_LENS_PROFILE,
+  COLLECT_A_POST,
+  MIRROR_A_POST
+}
 
 const SpaceSettings: FC = () => {
-  const showSpaceEditor = usePublicationStore((state) => state.showSpaceEditor);
-  const setShowSpaceEditor = usePublicationStore(
-    (state) => state.setShowSpaceEditor
-  );
-  const isSpacesEnabled = isFeatureEnabled(FeatureFlag.Spaces);
+  const { isRecordingOn, setIsRecordingOn, isTokenGated, setIsTokenGated } =
+    useSpacesStore();
 
-  if (!isSpacesEnabled) {
-    return null;
+  const [selectedDropdown, setSelectedDropdown] = useState<TokenGateCondition>(
+    TokenGateCondition.HAVE_A_LENS_PROFILE
+  );
+
+  interface ModuleProps {
+    title: string;
+    onClick: () => void;
+    condition: TokenGateCondition;
   }
 
+  const Module: FC<ModuleProps> = ({ title, onClick, condition }) => (
+    <Menu.Item
+      as="a"
+      className={clsx(
+        { 'dropdown-active': selectedDropdown === condition },
+        'menu-item'
+      )}
+      onClick={onClick}
+    >
+      <div className="flex items-center justify-between space-x-2">
+        <div className="flex items-center space-x-1.5">
+          <div>{title}</div>
+        </div>
+        {selectedDropdown === condition && (
+          <CheckCircleIcon className="w-5 text-green-500" />
+        )}
+      </div>
+    </Menu.Item>
+  );
+
   return (
-    <Tooltip placement="top" content={`Space`}>
-      <motion.button
-        whileTap={{ scale: 0.9 }}
-        type="button"
-        onClick={() => {
-          setShowSpaceEditor(!showSpaceEditor);
-        }}
-        aria-label="Space"
-      >
-        <MicrophoneIcon className="text-brand h-5 w-5" />
-      </motion.button>
-    </Tooltip>
+    <div>
+      {selectedDropdown !== TokenGateCondition.HAVE_A_LENS_PROFILE && (
+        <div className="flex w-full items-center gap-2 border-t border-neutral-200 px-4 py-3 dark:border-neutral-800">
+          <div className="flex items-center gap-3 text-neutral-500">
+        
+              {selectedDropdown === TokenGateCondition.FOLLOW_A_LENS_PROFILE
+                ? 'Enter Lens profile link'
+                : 'Enter Lens post link'}
+        
+          </div>
+          <div className="flex flex-[1_0_0] items-center gap-1 px-3">
+            <Input
+              placeholder={`Lens ${
+                selectedDropdown === TokenGateCondition.FOLLOW_A_LENS_PROFILE
+                  ? 'profile'
+                  : 'post'
+              } link`}
+              className="placeholder-neutral-400"
+            />
+          </div>
+        </div>
+      )}
+      <div className="block items-center border-t border-neutral-200 px-5 pt-3 dark:border-neutral-800 sm:flex">
+        <div className="flex flex-[0_0_1] gap-2 space-x-1">
+          <div>
+            <Toggle
+              on={isRecordingOn}
+              setOn={() => setIsRecordingOn(!isRecordingOn)}
+            />
+          </div>
+          <div className="flex flex-col items-start text-neutral-400 dark:text-neutral-500">
+            Record Spaces
+          </div>
+          <div>
+            <Toggle
+              on={isTokenGated}
+              setOn={() => setIsTokenGated(!isTokenGated)}
+            />
+          </div>
+          <div className="flex items-start gap-1">
+            <div className="flex flex-col items-start text-neutral-400 dark:text-neutral-500">
+             Token gate with
+            </div>
+            <Menu as="div" className="relative">
+              <Menu.Button className="flex items-start gap-1">
+                <span className="flex items-center gap-1 text-neutral-500 dark:text-neutral-300">
+                  
+                    {selectedDropdown !== TokenGateCondition.HAVE_A_LENS_PROFILE
+                      ? selectedDropdown ===
+                        TokenGateCondition.FOLLOW_A_LENS_PROFILE
+                        ? 'follow a lens profile'
+                        : selectedDropdown === TokenGateCondition.COLLECT_A_POST
+                        ? 'collect a post'
+                        : 'mirror a post'
+                      : 'have a lens profile'}
+        
+                  <ChevronDownIcon className="h-4 w-4 items-center justify-center" />
+                </span>
+              </Menu.Button>
+              <MenuTransition>
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg focus:outline-none dark:bg-gray-900">
+                  <Module
+                    title="have a lens profile"
+                    onClick={() =>
+                      setSelectedDropdown(
+                        TokenGateCondition.HAVE_A_LENS_PROFILE
+                      )
+                    }
+                    condition={TokenGateCondition.HAVE_A_LENS_PROFILE}
+                  />
+
+                  <Module
+                    title="follow a lens profile"
+                    onClick={() =>
+                      setSelectedDropdown(
+                        TokenGateCondition.FOLLOW_A_LENS_PROFILE
+                      )
+                    }
+                    condition={TokenGateCondition.FOLLOW_A_LENS_PROFILE}
+                  />
+
+                  <Module
+                    title="collect a post"
+                    onClick={() =>
+                      setSelectedDropdown(TokenGateCondition.COLLECT_A_POST)
+                    }
+                    condition={TokenGateCondition.COLLECT_A_POST}
+                  />
+
+                  <Module
+                    title="mirror a post"
+                    onClick={() =>
+                      setSelectedDropdown(TokenGateCondition.MIRROR_A_POST)
+                    }
+                    condition={TokenGateCondition.MIRROR_A_POST}
+                  />
+                </Menu.Items>
+              </MenuTransition>
+            </Menu>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

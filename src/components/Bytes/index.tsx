@@ -32,9 +32,8 @@ import { EmptyState } from '../UI/EmptyState';
 import FullScreen from './FullScreen';
 import Link from 'next/link';
 import {
-  useExploreLazyQuery,
-  usePublicationDetailsLazyQuery
-} from '@/utils/lens/generated';
+
+} from '@/utils/lens/generatedLenster';
 import Navbar from '../Navbar';
 import { useTheme } from 'next-themes';
 
@@ -71,10 +70,10 @@ const Bytes = () => {
   const [show, setShow] = useState(false);
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationDetailsLazyQuery();
+    usePublicationLazyQuery();
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
-    useExploreLazyQuery({
+    useExploreFeedLazyQuery({
       // prevent the query from firing again after the first fetch
       nextFetchPolicy: 'standby',
       variables: {

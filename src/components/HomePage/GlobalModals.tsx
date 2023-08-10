@@ -1,54 +1,47 @@
 import NewPublication from '@/components/Composer/NewPublication';
+import ReportPublication from '@/components/ReportPublication';
+import { PublicationTypes } from '@/utils/lens/generatedLenster';
+import { ShieldCheckIcon } from '@heroicons/react/24/outline';
 
+import { t } from '@lingui/macro';
 import type { FC } from 'react';
 import { useGlobalModalStateStore } from 'src/store/modals';
 import { Modal } from '../UI/Modal';
 
+
+
+
 const GlobalModals: FC = () => {
   // Report modal state
-  const showReportModal = useGlobalModalStateStore(
-    (state) => state.showReportModal
-  );
-  const reportingPublication = useGlobalModalStateStore(
-    (state) => state.reportingPublication
-  );
-  const setShowReportModal = useGlobalModalStateStore(
-    (state) => state.setShowReportModal
-  );
-  const showStatusModal = useGlobalModalStateStore(
-    (state) => state.showStatusModal
-  );
-  const setShowStatusModal = useGlobalModalStateStore(
-    (state) => state.setShowStatusModal
-  );
-  const showProfileSwitchModal = useGlobalModalStateStore(
-    (state) => state.showProfileSwitchModal
-  );
-  const setShowProfileSwitchModal = useGlobalModalStateStore(
-    (state) => state.setShowProfileSwitchModal
-  );
-  const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewPostModal
-  );
-  const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPostModal
-  );
-  const showAuthModal = useGlobalModalStateStore(
-    (state) => state.showAuthModal
-  );
-  const setShowAuthModal = useGlobalModalStateStore(
-    (state) => state.setShowAuthModal
-  );
+  const {
+
+    reportingPublication,
+
+    showStatusModal,
+    setShowStatusModal,
+    showProfileSwitchModal,
+    setShowProfileSwitchModal,
+    showNewModal,
+    showAuthModal,
+    setShowNewModal,
+    setShowAuthModal,
+ 
+  } = useGlobalModalStateStore();
 
   return (
     <>
+     
       <Modal
         title={`Create post`}
-        show={showNewPostModal}
-        onClose={() => setShowNewPostModal(false)}
+        size="md"
+        show={showNewModal}
+        onClose={() => {
+          setShowNewModal(false, PublicationTypes.Post);
+        }}
       >
         <NewPublication />
       </Modal>
+     
     </>
   );
 };

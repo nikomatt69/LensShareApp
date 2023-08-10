@@ -15,6 +15,7 @@ import Quote from './Quote';
 import Oembed from '../Oembed';
 import DecryptedPublicationBody from '../Publication/DecryptedPublicationBody';
 import Space from '../Embed/Space';
+import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -25,20 +26,21 @@ interface PublicationBodyProps {
 
 const PublicationBody: FC<PublicationBodyProps> = ({
   publication,
-  profile,
   showMore = false,
-  quoted = false
+  quoted = false,
+  profile
 }) => {
-  const isSpacesEnabled = isFeatureEnabled(FeatureFlag.Spaces);
   const { id, metadata } = publication;
   const canShowMore = metadata?.content?.length > 450 && showMore;
   const urls = getURLs(metadata?.content);
   const hasURLs = urls?.length > 0;
 
+
   const quotedPublicationId = getPublicationAttribute(
     metadata.attributes,
     'quotedPublicationId'
   );
+
   const spaceObject = getPublicationAttribute(
     metadata.attributes,
     'audioSpace'
@@ -62,7 +64,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
 
-  if (Boolean(space?.id) && isSpacesEnabled) {
+  if (Boolean(space?.id)) {
     return <Space publication={publication} />;
   }
 
@@ -70,7 +72,14 @@ const PublicationBody: FC<PublicationBodyProps> = ({
 
   const showQuotedPublication = quotedPublicationId && !quoted;
   const showOembed =
-    hasURLs && !showAttachments && !showQuotedPublication && !quoted;
+    hasURLs &&
+    !showAttachments &&
+    !showQuotedPublication &&
+    !quoted;
+
+  if (showOembed) {
+    content = removeUrlAtEnd(urls, content);
+  }
 
   return (
     <div className="break-words">
@@ -91,12 +100,10 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
+    
       {showOembed ? <Oembed url={urls[0]} /> : null}
       {showQuotedPublication ? (
-        <Quote
-          profile={profile as Profile}
-          publicationId={quotedPublicationId}
-        />
+        <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}
     </div>
   );

@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
 
-const nextConfig = {
-  reactStrictMode: true,
+})
+
+nextConfig = {
+  reactStrictMode: false,
   swcMinify: true,
-  topLevelAwait:true,
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -57,14 +63,15 @@ const nextConfig = {
       'lp-playback.com/hls',
       'lp-playback.com',
       'static-asset.lenster.xyz',
-      'static.lenstube.xyz'
+      'static.lenstube.xyz',
+      'img.lenstube.xyz'
     ]
   },
 
   experimental: {
     scrollRestoration: true,
     newNextLinkBehavior: true,
-    topLevelAwait: true
+
   },
 
   async redirects() {
@@ -119,5 +126,4 @@ const nextConfig = {
 
  
 };
-
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig)

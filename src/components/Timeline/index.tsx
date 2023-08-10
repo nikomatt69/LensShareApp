@@ -28,11 +28,11 @@ const Timeline: FC = () => {
   const seeThroughProfile = useTimelineStore(
     (state) => state.seeThroughProfile
   );
-  const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPostModal
+  const setShowNewModal = useGlobalModalStateStore(
+    (state) => state.setShowNewModal
   );
-  const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewPostModal
+  const showNewModal = useGlobalModalStateStore(
+    (state) => state.showNewModal
   );
 
   const getFeedEventItems = () => {

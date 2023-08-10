@@ -123,7 +123,7 @@ const Layout = ({ children,publication }: Props) => {
       {pathname.includes(`/listen`) ? (
           <>
             <Navbar />
-            <Wrapper children publication={publication} />{children}
+            {children}
           </>
         ):(
           <>

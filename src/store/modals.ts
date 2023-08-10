@@ -1,11 +1,15 @@
-import type { Publication } from '@/utils/lens/generatedLenster';
+import { Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
 import { create } from 'zustand';
 
 interface GlobalModalState {
   showAuthModal: boolean;
   setShowAuthModal: (showAuthModal: boolean) => void;
-  showNewPostModal: boolean;
-  setShowNewPostModal: (showNewPostModal: boolean) => void;
+  showNewModal: boolean;
+  modalPublicationType: PublicationTypes;
+  setShowNewModal: (
+    showNewModal: boolean,
+    modalPublicationType: PublicationTypes
+  ) => void;
   showReportModal: boolean;
   reportingPublication: Publication | null;
   reportConfig: any;
@@ -25,8 +29,10 @@ interface GlobalModalState {
 export const useGlobalModalStateStore = create<GlobalModalState>((set) => ({
   showAuthModal: false,
   setShowAuthModal: (showAuthModal) => set(() => ({ showAuthModal })),
-  showNewPostModal: false,
-  setShowNewPostModal: (showNewPostModal) => set(() => ({ showNewPostModal })),
+  showNewModal: false,
+  modalPublicationType: PublicationTypes.Post,
+  setShowNewModal: (showNewModal, modalPublicationType) =>
+    set(() => ({ showNewModal, modalPublicationType })),
   showReportModal: false,
   reportingPublication: null,
   reportConfig: null,

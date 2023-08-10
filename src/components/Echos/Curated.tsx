@@ -20,7 +20,7 @@ import MetaTags from '../UI/MetaTags';
 import Loader from '../UI/Loader';
 import EchosShimmer from './EchosShimmer';
 import { EmptyState } from '../UI/EmptyState';
-import { useExploreQuery } from '@/utils/lens/generated';
+
 import Search from '../Search/Search';
 import SearchAudio from '../Search/SearchAudio';
 
@@ -40,7 +40,7 @@ const Curated = () => {
     }
   };
 
-  const { data, loading, error, fetchMore } = useExploreQuery({
+  const { data, loading, error, fetchMore } = useExploreFeedQuery({
     variables: { request }
   });
 

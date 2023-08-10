@@ -26,7 +26,7 @@ import {
   VideoCameraIcon
 } from '@heroicons/react/24/outline';
 import BytesShimmer from './BytesShimmer';
-import { useExploreQuery } from '@/utils/lens/generated';
+
 
 const BytesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -46,7 +46,7 @@ const BytesSection = () => {
     }
   };
 
-  const { data, error, loading } = useExploreQuery({
+  const { data, error, loading } = useExploreFeedQuery({
     nextFetchPolicy: 'standby',
     variables: { request }
   });

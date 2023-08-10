@@ -152,7 +152,7 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
    
      <GridItemEight className="space-y-5">
      <ExploreAudio publication={publication} profile={profile} />
-     <Wrapper children publication={publication} />
+    
      </GridItemEight>
       
     

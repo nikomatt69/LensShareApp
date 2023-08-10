@@ -136,13 +136,15 @@ const LatestRender = () => {
 
   return (
     <GridLayout className="max-w-[1200px] pt-6">
+      <GridItemEight>
       
    
      
    
-    <GridItemEight className="space-y-5">
+    
      <Latest/>
-    </GridItemEight>
+     </GridItemEight>
+   
      
   
   </GridLayout>

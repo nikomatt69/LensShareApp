@@ -19,12 +19,12 @@ const Wrapper: FC<Props> = ({ children }) => {
       <div className="xs:mb-22 sm:mb-22 display:absolute mx-auto mb-10 h-full max-w-[100rem] md:mb-10 lg:mb-10">
         {children}
         {selectedTrack && (
-          <div className="display:absolute sticky z-[8] w-full rounded-xl border-x border-t border-blue-700 bg-blue-500 bg-gradient-to-b from-gray-900 to-transparent p-2 backdrop-blur-lg">
+          <div className="z-999 fixed bottom-0 left-0 right-0 z-[5] m-auto flex  items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
             <AudioPlayer selectedTrack={selectedTrack} />
           </div>
         )}
       </div>
-      <BottomNav />
+      
     </>
   );
 };

@@ -173,19 +173,19 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
       </div>
 
       <div className="ml-4 flex flex-row space-x-3 py-3">
-        <p className="text-black dark:text-white-400 block  pl-1 text-xs font-semibold">
+        <p className="text-black dark:text-white block  pl-1 text-xs font-semibold">
           {' '}
           {likes} Likes
         </p>
-        <p className="text-black dark:text-white-400 block  text-xs font-semibold">
+        <p className="text-black dark:text-white block  text-xs font-semibold">
           {' '}
           {comments} Comments
         </p>
-        <p className="text-black dark:text-white-400 block  text-xs font-semibold">
+        <p className="text-black dark:text-white block  text-xs font-semibold">
           {' '}
           {mirrors} Mirrors
         </p>
-        <p className="text-black dark:text-white-400 block text-xs font-semibold">
+        <p className="text-black dark:text-white block text-xs font-semibold">
           {' '}
           {collects} Collects
         </p>

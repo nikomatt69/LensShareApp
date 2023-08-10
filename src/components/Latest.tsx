@@ -189,12 +189,12 @@ const Latest = () => {
           name="theme-color"
           content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
         />
-      </Head>
+      </Head>  
       <MetaTags title={`Latest • ${APP_NAME} `} />
       {full()}
       <div
         ref={bytesContainer}
-        className="mt-3 h-screen border-0 pt-3 font-semibold md:h-[calc(100vh-70px)]"
+        className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-70px)]"
       >
         {bytes?.map((video: Publication, index) => (
           <VideoCard

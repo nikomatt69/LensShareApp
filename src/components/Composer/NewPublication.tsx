@@ -38,6 +38,7 @@ import {
   ReferenceModules,
   useBroadcastDataAvailabilityMutation,
   useBroadcastMutation,
+  PublicationTypes,
   useCreateCommentTypedDataMutation,
   useCreateCommentViaDispatcherMutation,
   useCreateDataAvailabilityCommentTypedDataMutation,
@@ -76,7 +77,7 @@ import { v4 as uuid } from 'uuid';
 import { useContractWrite, usePublicClient, useSignTypedData } from 'wagmi';
 import { superfluidClient} from '@/utils/lens/apollo'
 import PollEditor from './Actions/PollSettings/PollEditor';
-import SpaceSettings from './Actions/SpaceSettings';
+
 import Editor from './Editor';
 import { useApolloClient } from '@apollo/client/react';
 import { useGlobalModalStateStore } from '@/store/modals';
@@ -106,6 +107,7 @@ import { MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
 import { useNonceStore } from '@/store/nonce';
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/20/solid';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -140,6 +142,12 @@ const PollSettings = dynamic(
     loading: () => <div className="shimmer mb-1 h-5 w-5 rounded-lg" />
   }
 );
+const SpaceSettings = dynamic(
+  () => import('@/components/Composer/Actions/SpaceSettings'),
+  {
+    loading: () => <div className="shimmer mb-1 h-5 w-5 rounded-lg" />
+  }
+);
 
 interface NewPublicationProps {
   publication: Publication;
@@ -153,9 +161,8 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   // Modal store
-  const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPostModal
-  );
+  const { setShowNewModal, showNewModal, modalPublicationType } =
+  useGlobalModalStateStore();
 
   // Nonce store
   const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
@@ -250,8 +257,10 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     resetCollectSettings();
     resetAccessSettings();
     if (!isComment) {
-      setShowNewPostModal(false);
+     
+      setShowNewModal(false, PublicationTypes.Post);
     }
+    setShowNewModal(false, PublicationTypes.Spaces);
 
     // Track in leafwatch
     const eventProperties = {
@@ -964,20 +973,25 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
       ) : null}
       <div className="block items-center px-5 sm:flex">
         <div className="flex items-center space-x-4">
-          <Attachment />
-          <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-          {!publication?.isDataAvailability && (
-            <>
-              <CollectSettings />
-              <ReferenceSettings />
-              <AccessSettings />
-            </>
-          )}
-          <PollSettings />
-          {!isComment ? <SpaceSettings /> : null}
+        {showNewModal && modalPublicationType === PublicationTypes.Spaces ? (
+          <SpaceSettings />
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Attachment />
+            <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
+            {!publication?.isDataAvailability && (
+              <>
+                <CollectSettings />
+                <ReferenceSettings />
+                <AccessSettings />
+              </>
+            )}
+            <PollSettings />
+          </div>
+        )}
         </div>
         <div className="ml-auto pt-2 sm:pt-0">
-          <Button
+        <Button
             disabled={
               isLoading ||
               isUploading ||
@@ -988,8 +1002,9 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
               isLoading ? (
                 <Spinner size="xs" />
               ) : isComment ? (
-                <ChatBubbleLeftEllipsisIcon className="h-4 w-4" />
-              ) : showSpaceEditor ? (
+                <ChatBubbleOvalLeftEllipsisIcon className="h-4 w-4" />
+              ) : showNewModal &&
+                modalPublicationType === PublicationTypes.Spaces ? (
                 <MicrophoneIcon className="h-4 w-4" />
               ) : (
                 <PencilIcon className="h-4 w-4" />
@@ -997,7 +1012,11 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
             }
             onClick={createPublication}
           >
-            {isComment ? `Comment` : showSpaceEditor ? `Start Space` : `Post`}
+            {isComment
+              ? `Comment`
+              : showNewModal && modalPublicationType === PublicationTypes.Spaces
+              ? `Create spaces`
+              : `Post`}
           </Button>
         </div>
       </div>

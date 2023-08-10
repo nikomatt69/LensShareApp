@@ -86,11 +86,11 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showUserAudio, setShowUserAudio] = useState<Boolean>(true);
   const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPostModal
+    (state) => state.setShowNewModal
   );
 
   const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewPostModal
+    (state) => state.showNewModal
   );
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
 

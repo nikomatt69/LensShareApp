@@ -1,6 +1,6 @@
 import logo from '@/images/Lenstoknewlogo3.png';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Image } from '@/components/UI/Image';
 import { useState, type FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
@@ -95,7 +95,7 @@ const Navbar: FC = () => {
         <div className="w-[100px] md:w-[129px]">
           <Image
             className="cursor-pointer"
-            src={logo}
+            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
             alt="logo"
            
           />
@@ -106,6 +106,7 @@ const Navbar: FC = () => {
           <button>
             <NotificationIcon />
           </button>
+      
           <div className="flex">
             {currentProfile ? (
               <div className="h-12 w-12">

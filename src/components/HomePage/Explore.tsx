@@ -53,10 +53,10 @@ const Explore = () => {
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
   const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPostModal
+    (state) => state.setShowNewModal
   );
   const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewPostModal
+    (state) => state.showNewModal
   );
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
@@ -204,17 +204,7 @@ const Explore = () => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
-      <div onClick={() => setShowNewPostModal(true)}>
-        <NewPost />
-        <Modal
-          title={`Create post`}
-          size="md"
-          show={showNewPostModal}
-          onClose={() => setShowNewPostModal(false)}
-        >
-          <NewPublication />
-        </Modal>
-      </div>
+      
       {full()}
       <div
         ref={bytesContainer}

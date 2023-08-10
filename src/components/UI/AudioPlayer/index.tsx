@@ -132,40 +132,40 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
               alt={selectedTrack.profile.id}
             />
           </div>
-          <div className="mx-4 flex flex-col justify-between text-white">
+          <div className="mx-4 flex flex-col justify-between text-black dark:text-white">
             <h5 className="line-clamp-1">{selectedTrack.metadata.name}</h5>
             <Link
               href={`/u/${selectedTrack?.profile?.id}`}
-              className="truncate text-[11px] font-medium uppercase text-white opacity-90 hover:underline"
+              className="truncate text-[11px] font-medium uppercase text-black dark:text-white opacity-90 hover:underline"
             >
               {selectedTrack.profile.handle}
             </Link>
             <div className="flex items-center text-xs">
-              <div className="w-10 text-white">{currentPlayingTime}</div>
+              <div className="w-10 dark:text-white text-black">{currentPlayingTime}</div>
               <span className="pr-0.5">/</span>
-              <div className="w-10 text-center text-white">{duration}</div>
+              <div className="w-10 text-center dark:text-white text-black">{duration}</div>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex w-full flex-col items-center text-white">
+      <div className="flex w-full flex-col items-center text-black dark:text-white">
         <div
           id="waveform"
-          className="m-2 w-full  text-white"
+          className="m-2 w-full text-black  dark:text-white"
           ref={waveformRef}
         />
-        <div className="flex w-full items-center justify-between text-white">
+        <div className="flex w-full items-center justify-between text-black dark:text-white">
           {/* <Reactions selectedTrack={selectedTrack} /> */}
-          <div className="flex items-center space-x-4 text-white">
+          <div className="flex items-center space-x-4 text-black dark:text-white">
             <button
               onClick={rewind}
-              className="flex items-center space-x-1 text-white"
+              className="flex items-center space-x-1 text-black dark:text-white"
             >
               <FiChevronLeft /> <span>5</span>
             </button>
             <button
               onClick={handlePlayPause}
-              className="mx-4 rounded-full  bg-blue-500 p-2 text-white outline-none"
+              className="mx-4 rounded-full  bg-blue-500 p-2 text-black dark:text-white outline-none"
             >
               {playing ? (
                 <BiPause className="text-xl" />
@@ -175,7 +175,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
             </button>
             <button
               onClick={forward}
-              className="flex items-center space-x-1 text-white"
+              className="flex items-center space-x-1 text-black dark:text-white"
             >
               <span>5</span>
               <FiChevronRight />
