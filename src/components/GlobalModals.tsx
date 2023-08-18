@@ -24,6 +24,7 @@ const GlobalModals: FC = () => {
     showAuthModal,
     setShowNewModal,
     setShowAuthModal,
+    setShowNewSpacesModal
  
   } = useGlobalModalStateStore();
 

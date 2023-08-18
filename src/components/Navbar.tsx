@@ -33,6 +33,7 @@ import { Profile } from '@/utils/lens/generatedLenster';
 import { ProfileFeedType } from '@/enums';
 import StreamOutline from './UI/Icons/StreamOutline';
 import { STATIC_ASSETS_URL } from '@/constants';
+import { useTheme } from 'next-themes';
 
 
 const Navbar: FC = () => {
@@ -44,6 +45,8 @@ const Navbar: FC = () => {
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true)
+
+  const { resolvedTheme } = useTheme();
   
   const handleScroll = () => {
       const currentScrollPos = window.scrollY
@@ -65,7 +68,7 @@ const Navbar: FC = () => {
   
 
   return (
-    <div className={`flex w-full  items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
+    <div className={`flex w-full z-10 items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
 
       <Link href="/discover">
         <button
@@ -93,19 +96,27 @@ const Navbar: FC = () => {
       {/* //home */}
       <Link href="/">
         <div className="w-[100px] md:w-[129px]">
-          <Image
+        {resolvedTheme === 'dark' ? (
+    <Image
             className="cursor-pointer"
             src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
             alt="logo"
            
-          />
+          />) : (<Image
+            className="cursor-pointer"
+            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
+            alt="logo"
+           
+          />)}
         </div>
       </Link>
+      
       <div>
         <div className="centre-item flex gap-5 pl-2 md:gap-10 ">
           <button>
             <NotificationIcon />
           </button>
+
       
           <div className="flex">
             {currentProfile ? (

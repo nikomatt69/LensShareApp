@@ -64,7 +64,8 @@ const Search: FC<SearchProps> = ({
             type: SearchRequestTypes.Publication,
             query: keyword,
             customFilters: [CustomFiltersTypes.Gardeners],
-            limit: 8
+            limit: 8,
+            
         
          
           }
@@ -118,7 +119,7 @@ const Search: FC<SearchProps> = ({
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white dark:bg-gray-900/70 py-2 text-xs">
+          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl z-999 bg-white dark:bg-gray-900/70 py-2 text-xs">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />

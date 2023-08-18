@@ -66,9 +66,8 @@ export interface MarkupLinkProps {
 
 export interface SpaceMetadata {
   id: string;
-  host: Profile;
+  host: `0x${string}`;
 }
-
 
 export interface InflowType {
   id: string;

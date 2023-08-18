@@ -1,13 +1,8 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
 
-})
 
-nextConfig = {
-  reactStrictMode: false,
+const nextConfig = {
+  reactStrictMode: true,
   swcMinify: true,
 
   eslint: {
@@ -88,12 +83,6 @@ nextConfig = {
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
-      
-          { key: 'Cache-Control', value: 'public, max-age=3600' },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
           { key: 'Cache-Control', value: 'public, max-age=3600' }
@@ -126,4 +115,4 @@ nextConfig = {
 
  
 };
-module.exports = withPWA(nextConfig)
+module.exports = nextConfig

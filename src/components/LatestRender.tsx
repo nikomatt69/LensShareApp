@@ -26,6 +26,8 @@ import { Toaster } from 'react-hot-toast';
 import NavbarDetails from './NavbarDetails';
 import MetaTags from './UI/MetaTags';
 import { GridItemEight, GridItemFour, GridLayout } from './UI/GridLayout';
+import { Head } from 'next/document';
+import { useTheme } from 'next-themes';
 
 const LatestRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -133,9 +135,11 @@ const LatestRender = () => {
   if (loading || !mounted) {
     return <Loading />;
   }
+  const { resolvedTheme } = useTheme();
 
   return (
     <GridLayout className="max-w-[1200px] pt-6">
+        
       <GridItemEight>
       
    

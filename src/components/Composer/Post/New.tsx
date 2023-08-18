@@ -22,15 +22,20 @@ const NewPost: FC = () => {
     (state) => state.setPublicationContent
   );
 
+  const setShowNewSpacesModal = useGlobalModalStateStore(
+    (state) => state.setShowNewSpacesModal
+  );
+
 
   const openModal = () => {
     setShowNewModal(true, PublicationTypes.Post);
   };
 
   const openSpacesModal = () => {
-    setShowNewModal(true, PublicationTypes.Spaces);
-  };
-
+    setShowNewSpacesModal(true);
+    openModal();
+  }; 
+  
   useEffectOnce(() => {
     if (isReady && query.text) {
       const { text, url, via, hashtags } = query;
@@ -53,7 +58,7 @@ const NewPost: FC = () => {
   });
 
   return (
-    <Card className="space-y-3 p-5">
+    <Card className="space-y-3 border-blue-700 rounded-xl p-5">
       <div className="flex items-center space-x-3">
         <Image
           src={getAvatar(currentProfile)}
@@ -68,7 +73,7 @@ const NewPost: FC = () => {
         >
           <PencilIcon className="h-5 w-5" />
           <span>
-            What's happening?
+            New Post...
           </span>
         </button>
       

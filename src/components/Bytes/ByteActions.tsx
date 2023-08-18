@@ -1,3 +1,4 @@
+
 import type { Dispatch, FC } from 'react';
 import React, { useState } from 'react';
 import { RiShareForwardLine } from 'react-icons/ri';
@@ -11,7 +12,7 @@ import Like from '../Buttons/Likes/Like';
 import CollectButton from '../Buttons/Collects/CollectButton';
 import CommentButton from '../Buttons/CommentButton';
 import LikeButton from '../Buttons/Likes/LikeButton';
-import Comments from './FullScreen/Comments';
+
 import ShareButton from '../Buttons/ShareButton';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { useAppStore } from '@/store/app';
@@ -23,73 +24,79 @@ import Collect from '../Publication/Actions/Collect';
 import CommentOutline from '../UI/Icons/CommentOutline';
 import Mirror from '../Publication/Actions/Share/Mirror';
 import CommentOptions from './CommentOptions';
+import Tooltip from '../Upload/Tooltip';
+import MirrorOutline from '../UI/Icons/MirrorOutline';
+import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 
 type Props = {
   video: Publication;
-  showDetail?: () => void;
-  inDetail?: boolean;
-  trigger: React.ReactNode;
-  publicationId: Publication;
-  publication: Publication;
-  showCount?: boolean;
+  
+
 };
 
-const ByteActions: FC<Props> = ({ video, showDetail, inDetail, trigger, showCount }) => {
-  const [showShare, setShowShare] = useState(false);
-  const [showReport, setShowReport] = useState(false);
-  const [show, setShow] = useState(false);
-  const currentProfile = useAppStore((state) => state.currentProfile);
-  const router = useRouter();
-  const { id } = router.query;
-  const [following, setFollowing] = useState(false);
-  const isMirror = video.__typename === 'Mirror';
-  const comments = isMirror
-    ? video.mirrorOf.stats.totalAmountOfComments
-    : video.stats.totalAmountOfComments;
-
-  const profile = id ? currentProfile : video?.profile;
+const ByteActions: FC<Props> = ({ video }) => {
+  const [showShare, setShowShare] = useState(false)
+  const [showReport, setShowReport] = useState(false)
+  const setMute = useAppStore((state) => state.setMute)
+  const [isPlaying, setPlay] = useState(true)
+  const mute = useAppStore((state) => state.isMute)
+  const vidEl = document.querySelector(`#currentVideo`)
+  const handleClickMute = (e: any) => {
+  
+    e.stopPropagation();
+    const elVol = vidEl && vidEl.querySelectorAll<HTMLButtonElement>(`button[volume]`)[0]
+    if (!elVol) {
+      return
+    }
+    const vol = elVol.getAttribute('title')
+    const isMuted = vol ? vol?.includes('Mute') : false;
+    if (mute) {
+      isMuted && elVol.click()
+    } else {
+      !isMuted && elVol.click()
+    }
+    setMute && setMute(isMuted);
+  }
 
   return (
     <div className="w-12 flex-col items-center justify-between md:flex md:w-14">
-      <div className='pr-5'><CommentOptions setShowReport={setShowReport}  video={video as Publication}/></div>
-      
+      <div className="flex justify-center space-y-4 p-2 md:flex-col">
+       
+      </div>
       <div className="items-center space-y-1.5 pt-2.5 md:flex md:flex-col">
-        <div className="text-white md:pr-5 md:text-inherit">
+        <div className='cursor-pointer '>
+        <button className='mr-5' onClick={handleClickMute}>
+    {mute ? <MdVolumeOff className='w-6 h-6' fill='white' />
+      : <MdVolumeUp className='w-6 h-6' fill='white' />}
+  </button>
+        </div>
+        <div className="text-white pr-1 pb-2 md:pr-5 md:text-inherit">
         <LikeButton publication={video}  />
         </div>
-        <div className="w-full text-center pr-5 text-white md:text-inherit">
+        <div className="w-full pr-6 pb-2 text-center text-white md:text-inherit">
           <CommentModal
-            trigger={trigger}
-            publication={video as Publication}
-            setFollowing={setFollowing}
-            following={following}
-            profile={currentProfile as Profile}
+            trigger
+            
+            publication={video}
           />
         </div>
-        <div className="w-full text-center text-white md:text-inherit">
-         
-        </div>
-
-        <div className="w-full  text-center text-white md:text-inherit">
-          <ShareMenu publication={video as Publication} showCount={true} />
-        </div>
-
-        <div className="w-full text-center text-white md:text-inherit">
-          <Collect publication={video as Publication} showCount={false} />
-        </div>
-       
-        <div
-          className="w-full  text-center text-white md:text-inherit"
-          onClick={() => setShowShare(true)}
-        >
-          <ShareButton publication={video as Publication} />
-        </div>
+        <button className="mt-0.5  dark:text-white md:pr-5 block pb-2 pr-2">
+          <ShareMenu
+            publication={video as Publication}
+            showCount={true}
+          />
+        </button>
+        {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
+          <div className="hidden w-full pb-3 text-center md:block">
+             <Collect publication={video as Publication} showCount={false} />
+            
+          </div>
+        )}
       </div>
+      <ShareModal publication={video} show={showShare} setShowShare={setShowShare} />
+     
     </div>
-    
-  );
-};
+  )
+}
 
-
-
-export default ByteActions;
+export default ByteActions

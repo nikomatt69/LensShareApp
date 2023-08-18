@@ -70,7 +70,7 @@ const ViewPublication: NextPage = (profile) => {
 
       
         <GridItemEight className="h-[vh-80] space-y-5 rounded-xl bg-[#F2F6F9] dark:bg-black">
-          <Card>
+          <Card className='rounded-xl border-blue-700'>
             <FullPublication
               profile={profile as Profile}
               publication={publication}
@@ -81,7 +81,7 @@ const ViewPublication: NextPage = (profile) => {
           <NewPublication publication={publication} />
 
           <Feed publication={publication} />
-          <NoneRelevantFeed publication={publication} />
+          
         </GridItemEight>
         <GridItemFour className="space-y-5">
           <RelevantPeople publication={publication} />

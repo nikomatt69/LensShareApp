@@ -68,6 +68,7 @@ import { Button } from '../UI/Button';
 import SuperfluidSubscribe from '../Superfluid';
 import StreamOutline from '../UI/Icons/StreamOutline';
 import Cover from '../Profile/Cover';
+import ProfileImage from '../Bytes/ProfileImage';
 
 interface Props {
   profile: Profile;
@@ -169,6 +170,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             alt={formatHandle(profile?.handle)}
             data-testid="profile-avatar"
           />
+         
           <LightBox
             show={Boolean(expandedImage)}
             url={expandedImage}
@@ -200,7 +202,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             )}
             {currentProfile &&
               currentProfile?.id !== profile?.id &&
-              profile?.isFollowing && (
+              profile?.id.isFollowing && (
                 <div className="rounded-full bg-gray-200 px-2 py-0.5 text-xs dark:bg-gray-700">
                   Follows you
                 </div>
@@ -209,6 +211,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
           <div className='flex mt-4 pt-2  '>
           <SuperfluidSubscribe profile={profile} />
                 <Message onClick={onMessageClick} />
+                
                 </div>
 
           <div className="display:inline-block right-2 pt-1 ">
@@ -377,7 +380,9 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             </Link>
           </MetaDetails>
         )}
+        
       </div>
+      
     </div>
 
   );

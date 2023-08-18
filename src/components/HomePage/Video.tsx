@@ -12,9 +12,9 @@ import ShareIcon from '@heroicons/react/24/outline/ShareIcon';
 import ShareModal from './ShareModal';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 import ViewCount from './ViewCount';
-import imageCdn from '@/lib/imageCdn';
+
 import VideoPlayer from '@/utils/VideoPlayer';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import {
   APP_ID,
@@ -26,6 +26,9 @@ import {
 import { useAppStore } from '@/store/app';
 import ShareOutline from '../Bytes/ShareOutline';
 import ShareButton from '../Buttons/ShareButton';
+import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
+import { imageCdn } from '@/utils/functions/imageCdn';
+import { getThumbnailUrl } from '@/utils/functions/getThumbnailUrl';
 
 interface Props {
   publication: Publication;
@@ -81,6 +84,10 @@ const Video: FC<Props> = ({ publication }) => {
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
+  const thumbnailUrl = imageCdn(
+    sanitizeDStorageUrl(getThumbnailUrl(video)),
+    'THUMBNAIL_V'
+  )
   const isBytesVideo =
     video.appId === LENSTUBE_APP_ID ||   
     publication.appId === APP_ID
@@ -94,10 +101,7 @@ const Video: FC<Props> = ({ publication }) => {
           currentTime={videoWatchTime}
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}
-          posterUrl={imageCdn(
-            sanitizeIpfsUrl(getThumbnailUrl(video.metadata)),
-            isBytesVideo ? 'thumbnail_v' : 'thumbnail'
-          )}
+          posterUrl={thumbnailUrl}
           showControls={true}
           options={{
             autoPlay: false,

@@ -81,6 +81,14 @@ export const S3_BUCKET = {
   LENSTER_MEDIA: 'lenster-media'
 };
 
+export const IMAGE_TRANSFORMATIONS = {
+  AVATAR: 'tr:w-60,h-60',
+  AVATAR_LG: 'tr:w-300,h-300',
+  THUMBNAIL: 'tr:w-720,h-404',
+  THUMBNAIL_V: 'tr:w-404,h-720',
+  SQUARE: 'tr:w-200,h-200'
+}
+
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
 export const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
 

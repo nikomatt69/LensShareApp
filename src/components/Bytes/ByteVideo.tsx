@@ -4,8 +4,8 @@ import type { Dispatch, FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
-import imageCdn from '@/utils/functions/imageCdn';
+import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
+import {imageCdn} from '@/utils/functions/imageCdn';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 
 import VideoPlayer from '@/utils/VideoPlayer';
@@ -18,177 +18,158 @@ import { useAppStore } from '@/store/app';
 import MobileBottomOverlay from './MobileBottomOverlay';
 import { Image } from '../UI/Image';
 import imageProxy2 from '@/lib/imageProxy2';
+import Collect from '../Publication/Actions/Collect';
+import useAverageColor from '@/utils/hooks/useAverageColor';
+import sanitizeDStorageUrl from '@/utils/lib/sanitizeDStorageUrl';
+import imageKit from '@/lib/imageKit';
 
 type Props = {
   video: Publication;
-  onDetail: (video: Publication) => void;
-  isShow: boolean;
-  index?: number;
-  setFollowing: Dispatch<boolean>;
+ 
+  currentViewingId: string
+  intersectionCallback: (id: string) => void
 };
 
-const ByteVideo: FC<Props> = ({ video, onDetail, isShow, index }) => {
-  const videoRef = useRef<HTMLMediaElement>();
-  const [following, setFollowing] = useState(false);
-  const [width, setWidth] = useState<number>(window.innerWidth);
-  const intersectionRef = useRef<HTMLDivElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const thumbnailUrl = imageProxy2(getThumbnailUrl(video.metadata), 'thumbnail_v')
-  const handleWindowSizeChange = () => {
-    setWidth(window.innerWidth);
-  };
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
-  const isMobile = width <= 768;
-
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
+const ByteVideo: FC<Props> = ({
+  video,
+  currentViewingId,
+  intersectionCallback
+}) => {
+  const videoRef = useRef<HTMLMediaElement>()
+  const intersectionRef = useRef<HTMLDivElement>(null)
+  const thumbnailUrl = imageCdn(
+    sanitizeDStorageUrl(getThumbnailUrl(video)),
+    'THUMBNAIL_V'
+  )
+  const { color: black } = useAverageColor(thumbnailUrl, true)
+  const currentProfile = useAppStore((state) => state.currentProfile)
 
   const playVideo = () => {
-    if (!videoRef.current || isShow) {
-      return;
+    if (!videoRef.current) {
+      return
     }
-    videoRef.current.currentTime = 0;
-    videoRef.current.volume = 1;
-    videoRef.current.autoplay = true;
-    videoRef.current?.play().catch(() => {});
-    setPlaying(true);
-  };
+    videoRef.current.currentTime = 0
+    videoRef.current.volume = 1
+    videoRef.current.autoplay = true
+    videoRef.current?.play().catch(() => {})
+   
+  }
 
-  const observer = new IntersectionObserver(
-    (data, observer) => {
-      if (data[0].target.id && data[0].isIntersecting) {
-        const id = data[0].target.id;
-        id != currentViewingId && setCurrentViewingId(id);
-        if (isShow) {
-           const nextUrl = `${location.origin}/${video?.id}`
-           history.replaceState({ path: nextUrl }, '', nextUrl)
-         }
-      }
-    },
-    { rootMargin: '0px 0px -50% 0px' }
-  );
+  const observer = new IntersectionObserver((data) => {
+    if (data[0].target.id && data[0].isIntersecting) {
+      intersectionCallback(data[0].target.id)
+      const nextUrl = `${location.origin}/bytes/${video?.id}`
+      history.replaceState({ path: nextUrl }, '', nextUrl)
+    }
+  })
 
   useEffect(() => {
     if (intersectionRef.current) {
-      observer.observe(intersectionRef.current);
+      observer.observe(intersectionRef.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   const pauseVideo = () => {
     if (!videoRef.current) {
-      return;
+      return
     }
-    videoRef.current?.pause();
-    videoRef.current.autoplay = false;
-    setPlaying(false);
-  };
+    videoRef.current.volume = 0
+    videoRef.current?.pause()
+    videoRef.current.autoplay = false
+  }
 
-  const onClickVideo = (event: any) => {
-    event.preventDefault();
-    setCurrentViewingId(video.id);
-    onDetail(video);
-  };
+  const onClickVideo = () => {
+    if (videoRef.current?.paused) {
+      playVideo()
+    } else {
+      pauseVideo()
+    }
+  }
 
   const refCallback = (ref: HTMLMediaElement) => {
     if (!ref) {
-      return;
+      return
     }
-    videoRef.current = ref;
-    playVideo();
-  };
+    videoRef.current = ref
+    playVideo()
+  }
 
-  useEffect(() => {
-    if (currentViewingId == video.id) {
-      isShow ? pauseVideo() : playVideo();
-    }
-  }, [isShow]);
+  if (!video) {
+    return null
+  }
 
-  const profile = video.profile;
   return (
     <div
-    className="flex snap-center justify-center md:mt-6"
-    data-testid="byte-video"
-  >
-    <div className="relative">
-      <div
-         className={clsx(
-          !isMobile
-            ? 'ultrawide:w-[650px] flex h-screen w-screen min-w-[250px] items-center overflow-hidden bg-black  md:h-[65vh] md:w-[19.5vw] md:rounded-xl md:max-xl:h-[30vh]'
-            : 'flex h-screen w-screen'
-        )}
-        style={{
-          backgroundColor: 'transparent'
-        }}
-      >
-       <div
-                className="absolute top-[10%]"
-                ref={intersectionRef}
-                id={video.id}
-              />
-              {currentViewingId === video.id ? (
+      className=" snap-center justify-center md:mt-6"
+      data-testid="byte-video"
+    >
+      <div className="relative">
+        <div
+          className="ultrawide:w-[650px] flex h-screen w-screen min-w-[250px] items-center overflow-hidden bg-black md:h-[calc(100vh-145px)] md:w-[400px] md:rounded-xl"
+          style={{
+            backgroundColor: black ? black: black
+          }}
+        >
+          <div
+            className="absolute top-[30%] bottom-[30%]"
+            ref={intersectionRef}
+            id={video?.id}
+          />
+          {currentViewingId === video.id ? (
+            <VideoPlayer
+              
+              refCallback={refCallback}
+              permanentUrl={getPublicationMediaUrl(video)}
+             
+              posterUrl={thumbnailUrl}
+              ratio="9to16"
+              showControls={false}
+              options={{
+                autoPlay: false,
+                muted: false,
+                loop: true,
+                loadingSpinner: false,
+                isCurrentlyShown: currentViewingId === video.id
+              }}
+            />
+          ) : (
+            <div className="h-full w-full">
+              
+              <span className="invisible absolute">
                 <VideoPlayer
-                  refCallback={refCallback}
                   permanentUrl={getPublicationMediaUrl(video)}
-                  posterUrl={thumbnailUrl}
-                  ratio="9to16"
-                  publicationId={video.id}
-                  showControls={true}
+                  showControls={false}
                   options={{
                     autoPlay: false,
-                    loop: true,
-                    loadingSpinner: true,
                     muted: true,
-                    isCurrentlyShown: true,
+                    loadingSpinner: false,
+                    isCurrentlyShown: currentViewingId === video.id
                   }}
                 />
-              ) : (
-                <img
-                  className="w-full object-contain rounded-[10px]"
-                  src={thumbnailUrl}
-                  alt="thumbnail"
-                  draggable={false}
-                />
-              )}
+              </span>
             </div>
-      
-      {isMobile && (
-            <MobileBottomOverlay
-              video={video}
-              setFollowing={setFollowing}
-              profile={profile as Profile}
-              following={following}
-            />
           )}
-     
-      <div className="absolute bottom-[25%] right-2 z-[1] md:hidden">
-      <ByteActions
-            publication={video as Publication}
-            publicationId={video as Publication}
-            trigger
-            video={video}
-            showDetail={() => onDetail(video)}
-          />
-        
+          
+        </div>
+        <TopOverlay onClickVideo={onClickVideo} />
+        <BottomOverlay video={video} />
+        <div className="absolute bottom-[36%] right-2 z-[1] md:hidden">
+          <ByteActions video={video} />
+          {video?.collectModule?.__typename !==
+            'RevertCollectModuleSettings' && (
+            <div className="text-center text-white md:text-gray-500">
+              <Collect publication={video as Publication} showCount={true} />
+              
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="hidden md:flex">
+        <ByteActions video={video} />
       </div>
     </div>
-    <div className="hidden md:flex">
-    <ByteActions
-            publication={video as Publication}
-            publicationId={video as Publication}
-            trigger
-            video={video}
-            showDetail={() => onDetail(video)}
-          />
-    </div>
-  </div>
-  
-  );
-};
+  )
+}
 
 export default React.memo(ByteVideo);

@@ -14,7 +14,7 @@ import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl
 
 import imageCdn from '@/lib/imageCdn';
 import VideoPlayer from '@/utils/VideoPlayer';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import {
   APP_ID,

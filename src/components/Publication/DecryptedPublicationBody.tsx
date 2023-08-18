@@ -43,6 +43,7 @@ import Attachments from '../Composer/Attachments';
 import getURLs from '../Composer/getURLs';
 import Oembed from '../Oembed';
 import useNft from '@/lib/useNft';
+import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 
 interface DecryptMessageProps {
   icon: ReactNode;
@@ -332,6 +333,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   }
 
   const publication: PublicationMetadataV2Input = decryptedData;
+  let { content } = publication ?? {};
+  const urls = getURLs(content);
+  content = removeUrlAtEnd(urls, content);
 
   return (
     <div className="break-words">
@@ -351,9 +355,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       )}
       {publication?.media?.length ? (
         <Attachments attachments={publication?.media} />
-      ) : publication?.content ? (
-        getURLs(publication?.content)?.length > 0 && (
-          <Oembed url={getURLs(publication?.content)[0]} />
+      ) : content ? (
+        urls.length > 0 && (
+          <Oembed url={urls[0]} publicationId={encryptedPublication.id} />
         )
       ) : null}
     </div>

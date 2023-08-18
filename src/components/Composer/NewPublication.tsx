@@ -103,7 +103,7 @@ import { LENS_HUB_ABI } from '@/abi/abi';
 import useCreatePoll from '@/lib/useCreatePoll';
 import useCreateSpace from '@/lib/useCreateSpace';
 import QuotedPublication from './QuotedPublication';
-import { MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
 import { useNonceStore } from '@/store/nonce';
@@ -164,6 +164,13 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const { setShowNewModal, showNewModal, modalPublicationType } =
   useGlobalModalStateStore();
 
+  const setShowNewSpacesModal = useGlobalModalStateStore(
+    (state) => state.setShowNewSpacesModal
+  );
+  const showNewSpacesModal = useGlobalModalStateStore(
+    (state) => state.showNewSpacesModal
+  );
+
   // Nonce store
   const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
 
@@ -221,6 +228,10 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const { data: walletClient } = useEthersWalletClient();
   const [createPoll] = useCreatePoll();
   const [createSpace] = useCreateSpace();
+  const [isRecordingOn, setIsRecordingOn] = useState(false);
+  const [isTokenGated, setIsTokenGated] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedDropdown, setSelectedDropdown] = useState<string>('');
 
   const isComment = Boolean(publication);
   const hasAudio = ALLOWED_AUDIO_TYPES.includes(
@@ -247,7 +258,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     setQuotedPublication(null);
     setShowPollEditor(false);
     resetPollConfig();
-    setShowSpaceEditor(false);
     setAttachments([]);
     setVideoThumbnail({
       url: '',
@@ -257,10 +267,9 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     resetCollectSettings();
     resetAccessSettings();
     if (!isComment) {
-     
       setShowNewModal(false, PublicationTypes.Post);
     }
-    setShowNewModal(false, PublicationTypes.Spaces);
+    setShowNewSpacesModal(false);
 
     // Track in leafwatch
     const eventProperties = {
@@ -638,60 +647,21 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     };
 
     // Create the access condition
-    const currentAddress = await walletClient.getAddress();
-    const { data: superfluidInflowsData } = await superfluidClient.query({
-      query: SuperfluidInflowsDocument,
-      variables: { id: !currentAddress.toString().toLowerCase() }
-    });
-    console.log('superfluidInflowsData', superfluidInflowsData, !currentAddress);
-
-    const listOfSuperfluidAddresses = superfluidInflowsData.account.inflows.map(
-      (inflow: InflowType) => inflow.sender.id
-    );
-
-    const eoaAccessCondition: EoaOwnership = {
-      address: listOfSuperfluidAddresses
-    };
-
-
     let accessCondition: AccessConditionOutput = {};
-    if (collectToView || followToView || superfluidToView) {
-      const criteria = [];
-
-      if (collectToView) {
-        criteria.push({ collect: collectAccessCondition });
-      }
-
-      if (followToView) {
-        criteria.push({ follow: followAccessCondition });
-      }
-      
-      if (criteria.length === 1) {
-        accessCondition = criteria[0];
-      } else {
-        accessCondition = { and: { criteria } };
-      }
-    } else {
-      if (collectToView) {
-        accessCondition = { collect: collectAccessCondition };
-      } else if (followToView) {
-        accessCondition = { follow: followAccessCondition };
-      }
+    if (collectToView && followToView) {
+      accessCondition = {
+        and: {
+          criteria: [
+            { collect: collectAccessCondition },
+            { follow: followAccessCondition }
+          ]
+        }
+      };
+    } else if (collectToView) {
+      accessCondition = { collect: collectAccessCondition };
+    } else if (followToView) {
+      accessCondition = { follow: followAccessCondition };
     }
-    if (superfluidToView) {
-      if (listOfSuperfluidAddresses.length > 1) {
-        accessCondition = {
-          or: {
-            criteria: listOfSuperfluidAddresses.map((address: string) => {
-              return { eoa: { address } };
-            })
-          }
-        };
-      } else if (listOfSuperfluidAddresses.length === 1) {
-        accessCondition = { eoa: { address: listOfSuperfluidAddresses[0] } };
-      }
-    }
-    console.log('accessCondition', accessCondition);
 
     // Generate the encrypted metadata and upload it to Arweave
     const { contentURI } = await tokenGatedSdk.gated.encryptMetadata(
@@ -753,7 +723,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
 
       // Create Space in Huddle
       let spaceId = null;
-      if (showSpaceEditor) {
+      if (showNewSpacesModal) {
         spaceId = await createSpace();
       }
 
@@ -763,14 +733,14 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
           displayType: PublicationMetadataDisplayTypes.String,
           value: getMainContentFocus()?.toLowerCase()
         },
-        ...(showSpaceEditor
+        ...(showNewSpacesModal
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
                   id: spaceId,
-                  host: '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
+                  host: currentProfile.ownedBy
                 })
               }
             ]
@@ -942,56 +912,64 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
 
   return (
     <Card
-      className={clsx(
-        { '!rounded-b-xl !rounded-t-none border-none': !isComment },
-        'pb-3'
-      )}
-    >
-      {error && (
-        <ErrorMessage
-          className="!rounded-none"
-          title={`Transaction failed!`}
-          error={error}
-        />
-      )}
-      <Editor />
-      {publicationContentError && (
-        <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
-          {publicationContentError}
+    className={clsx(
+      { '!rounded-b-xl !rounded-t-none border-none': !isComment },
+      'pb-3'
+    )}
+  >
+    {error && (
+      <ErrorMessage
+        className="!rounded-none"
+        title={`Transaction failed!`}
+        error={error}
+      />
+    )}
+    <Editor />
+    {publicationContentError && (
+      <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
+        {publicationContentError}
+      </div>
+    )}
+    {showPollEditor && <PollEditor />}
+    {quotedPublication ? (
+      <Wrapper className="m-5" zeroPadding>
+        <QuotedPublication profile={profile} publication={quotedPublication} isNew />
+      </Wrapper>
+    ) : null}
+    {showNewSpacesModal ? (
+      <SpaceSettings>
+        <div className="ml-auto pt-2 sm:pt-0">
+          <Button
+            disabled={isLoading}
+            icon={
+              isLoading ? (
+                <Spinner size="xs" />
+              ) : (
+                <MicrophoneIcon className="h-4 w-4" />
+              )
+            }
+            onClick={createPublication}
+          >
+            Create spaces
+          </Button>
         </div>
-      )}
-      {showPollEditor && <PollEditor />}
-      {quotedPublication ? (
-        <Wrapper className="m-5" zeroPadding>
-          <QuotedPublication
-          
-            profile={profile as Profile}
-            publication={quotedPublication}
-            isNew
-          />
-        </Wrapper>
-      ) : null}
+      </SpaceSettings>
+    ) : (
       <div className="block items-center px-5 sm:flex">
         <div className="flex items-center space-x-4">
-        {showNewModal && modalPublicationType === PublicationTypes.Spaces ? (
-          <SpaceSettings />
-        ) : (
-          <div className="flex items-center space-x-4">
-            <Attachment />
-            <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-            {!publication?.isDataAvailability && (
-              <>
-                <CollectSettings />
-                <ReferenceSettings />
-                <AccessSettings />
-              </>
-            )}
-            <PollSettings />
-          </div>
-        )}
+          <Attachment />
+          <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
+          {!publication?.isDataAvailability && (
+            <>
+              <CollectSettings />
+              <ReferenceSettings />
+              <AccessSettings />
+            </>
+          )}
+          <PollSettings />
         </div>
         <div className="ml-auto pt-2 sm:pt-0">
-        <Button
+          <Button
             disabled={
               isLoading ||
               isUploading ||
@@ -1002,28 +980,22 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
               isLoading ? (
                 <Spinner size="xs" />
               ) : isComment ? (
-                <ChatBubbleOvalLeftEllipsisIcon className="h-4 w-4" />
-              ) : showNewModal &&
-                modalPublicationType === PublicationTypes.Spaces ? (
-                <MicrophoneIcon className="h-4 w-4" />
+                <ChatBubbleOvalLeftIcon className="h-4 w-4" />
               ) : (
                 <PencilIcon className="h-4 w-4" />
               )
             }
             onClick={createPublication}
           >
-            {isComment
-              ? `Comment`
-              : showNewModal && modalPublicationType === PublicationTypes.Spaces
-              ? `Create spaces`
-              : `Post`}
+            {isComment ? `Comment` : `Post`}
           </Button>
         </div>
       </div>
-      <div className="px-5">
-        <Attachments attachments={attachments} isNew />
-      </div>
-    </Card>
+    )}
+    <div className="px-5">
+      <Attachments attachments={attachments} isNew />
+    </div>
+  </Card>
   );
 };
 

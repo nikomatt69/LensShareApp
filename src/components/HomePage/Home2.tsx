@@ -1,13 +1,14 @@
-import type { NextPage } from 'next';
 
+import type { NextPage } from 'next';
+import Spaces from '@/components/Spaces2';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import Explore from '@/components/HomePage/Explore';
 import BottomNav from '../Navs/BottomNav';
-
+import { Image } from '../UI/Image';
 import * as Apollo from '@apollo/client';
 
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
@@ -16,12 +17,13 @@ import {
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
+  Publication,
   ReferenceModules,
   UserProfilesDocument,
   UserProfilesQuery,
   UserProfilesQueryVariables
 } from '@/utils/lens/generatedLenster';
-import { APP_NAME, CHAIN_ID } from '@/constants';
+import { APP_NAME, CHAIN_ID, STATIC_ASSETS_URL } from '@/constants';
 import Loading from '../Loading';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -34,6 +36,14 @@ import Timeline from '../Timeline';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import SuggestedAccounts from '../Sidebar/SuggestedAccounts';
 import Footer from '../Sidebar/Footer';
+import { useSpacesStore } from '@/store/spaces';
+import SpacesWindow from '../Spaces2/SpacesWindow/SpacesWindow';
+import EchosPage from '@/pages/musicfeed';
+import Echos from '../Echos/EchosPage';
+import Audio from '../Echos/Audio';
+import LoginButton from '../Login/LoginButton';
+import Meet from '../Meet';
+import { useTheme } from 'next-themes';
 
 const Home2: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -75,6 +85,8 @@ const Home2: NextPage = () => {
       options
     );
   }
+
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   const getIsAuthTokensAvailable = () => {
     const accessToken = localStorage.getItem('accessToken');
@@ -138,19 +150,39 @@ const Home2: NextPage = () => {
     validateAuthentication();
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
+  const { resolvedTheme } = useTheme();
+
   return (
     
 
-  
+  <div>
     <GridLayout className="max-w-[1200px] pt-6"> 
     <MetaTags title={`Home • ${APP_NAME}`} /> 
-     <GridItemFour>
-   
+    <GridItemEight>
+      {resolvedTheme === 'dark' ? (
+    <Image
+            className="cursor-pointer"
+            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
+            alt="logo"
+           
+          />) : (<Image
+            className="cursor-pointer"
+            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
+            alt="logo"
+           
+          />)}
+          
+      
+    
    <BytesSection />
+   
+   </GridItemEight>
+  
 
     
   
- </GridItemFour>
+
+ {showSpacesWindow && <SpacesWindow />}
     <GridItemEight className="space-y-5">
     {currentProfile?.id ? 
             
@@ -160,6 +192,7 @@ const Home2: NextPage = () => {
     </GridItemEight>
     
   </GridLayout>
+  </div>
   );
 };
 

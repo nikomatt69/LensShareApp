@@ -103,7 +103,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
 
   return (
     <Card
-      className="divide-y-[1px] divide-blue-700"
+      className="divide-y-[1px] dark:bg-black/70 bg-white border-blue-700 rounded-xl divide-blue-700"
       dataTestId="comments-feed"
     >
       {txnQueue.map(

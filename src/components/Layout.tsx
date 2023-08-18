@@ -20,14 +20,17 @@ import { useTheme } from 'next-themes';
 import GlobalModals from './GlobalModals';
 import GlobalAlerts from './Publication/Actions/Menu/GlobalAlerts';
 import Wrapper from './Echos/Wrapper';
+import Spaces from './Spaces2';
+import SpacesWindow from './Spaces2/SpacesWindow/SpacesWindow';
+import { useSpacesStore } from '@/store/spaces';
 
 
 interface Props {
   children: ReactNode;
-  publication:Publication
+ 
 }
 
-const Layout = ({ children,publication }: Props) => {
+const Layout = ({ children }: Props) => {
   const { resolvedTheme } = useTheme();
   const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
   const setProfiles = useAppStore((state) => state.setCurrentProfile);
@@ -43,6 +46,9 @@ const Layout = ({ children,publication }: Props) => {
       toast.error(error?.message);
     }
   });
+
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   const { loading } = useQuery(ProfilesDocument, {
     variables: {
@@ -117,21 +123,25 @@ const Layout = ({ children,publication }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
+      {showSpacesLobby && <Spaces />}
+      {showSpacesWindow && <SpacesWindow />}
       <GlobalModals />
       <GlobalAlerts />
       <div className="flex min-h-screen flex-col pb-14 md:pb-0">
-      {pathname.includes(`/listen`) ? (
+      {pathname.includes( `/bytes/` && `/feed`) ? (
           <>
-            <Navbar />
             {children}
           </>
-        ):(
+        ) : (
           <>
         <Navbar />
         <BottomNav />
         {children}
         </>
         )}
+      
+
+
 
       </div>
     </>

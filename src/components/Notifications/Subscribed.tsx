@@ -7,7 +7,7 @@ import React from 'react';
 import getRelativeTime from '@/utils/functions/formatTime';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getRandomProfilePicture } from '@/utils/functions/getRandomProfilePicture';
-import imageCdn from '@/utils/functions/imageCdn';
+import imageCdn from '@/lib/imageCdn';
 import { shortenAddress } from '@/utils/functions/shortenAddress';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';

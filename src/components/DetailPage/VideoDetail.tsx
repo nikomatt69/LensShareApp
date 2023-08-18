@@ -47,9 +47,9 @@ import Following from '../ProfilePage/Following';
 import { Modal } from '../UI/Modal';
 import Followers from '../ProfilePage/Followers';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
-import imageCdn from '@/utils/functions/imageCdn';
+import {imageCdn} from '@/utils/functions/imageCdn';
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import VideoPlayer from '@/utils/VideoPlayer';
 
 interface Props {
@@ -147,8 +147,8 @@ const VideoDetail: FC<Props> = ({
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageCdn(
-            sanitizeIpfsUrl(getThumbnailUrl(publication.metadata)),
-            isBytesVideo ? 'thumbnail' : 'thumbnail'
+            sanitizeIpfsUrl(getThumbnailUrl(publication)),
+            isBytesVideo ? 'THUMBNAIL_V' : 'THUMBNAIL'
           )}
           options={{
             autoPlay: true,

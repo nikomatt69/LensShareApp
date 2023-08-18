@@ -33,8 +33,12 @@ import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import Loading from '../Loading';
 import SubscribersFeed from './SubscribersFeed';
+import ProfileImage from '../Bytes/ProfileImage';
 
-const ViewProfile: NextPage = () => {
+import Stories from '../Bytes/Stories';
+import StoriesRender from '../Bytes/Stories';
+
+const ViewProfile: NextPage = (publication) => {
   const {
     query: { id, type, followIntent }
   } = useRouter();
@@ -155,6 +159,12 @@ const ViewProfile: NextPage = () => {
             profile={profile as Profile}
             following={Boolean(following)}
             setFollowing={setFollowing}
+          />
+          <StoriesRender
+                profile={profile as Profile}
+                trigger
+                publication={publication as Publication}
+          
           />
         </GridItemFour>
         <GridItemEight className="space-y-5">

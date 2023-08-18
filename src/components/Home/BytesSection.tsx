@@ -15,8 +15,7 @@ import {
 } from '@/utils/lens/generatedLenster';
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
-import imageCdn from '@/lib/imageCdn';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+
 import getLensHandle from '@/utils/functions/getLensHandle';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { useAppStore } from '@/store/app';
@@ -26,6 +25,8 @@ import {
   VideoCameraIcon
 } from '@heroicons/react/24/outline';
 import BytesShimmer from './BytesShimmer';
+import { imageCdn } from '@/utils/functions/imageCdn';
+import getThumbnailUrl  from '@/utils/lib/getThumbnailUrl';
 
 
 const BytesSection = () => {
@@ -103,7 +104,7 @@ const BytesSection = () => {
               <div className="aspect-[9/16] h-[280px]">
                 <img
                   className="rounded-sm"
-                  src={imageCdn(getThumbnailUrl(byte.metadata), 'thumbnail_v')}
+                  src={imageCdn(getThumbnailUrl(byte.metadata), 'THUMBNAIL_V')}
                   alt="thumbnail"
                   draggable={false}
                 />

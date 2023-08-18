@@ -19,7 +19,7 @@ import router, { useRouter } from 'next/router';
 
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import { useAppStore } from '@/store/app';
-import imageCdn from '@/lib/imageCdn';
+
 import usePersistStore from '@/store/persist';
 import { SIGN_IN_REQUIRED_MESSAGE } from '@/constants';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
@@ -32,9 +32,12 @@ import CollectModule from '@/components/Buttons/Collects/CollectModule';
 import ChevronUpOutline from './ChevronUpOutline';
 import ChevronDownOutline from './ChevronDownOutline';
 
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import CommentOptions from '../CommentOptions';
 import Comments from './Comments';
+import BottomOverlay from '../BottomOverlay';
+import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
+import { imageCdn } from '@/utils/functions/imageCdn';
 
 type Props = {
   byte: Publication;
@@ -67,9 +70,9 @@ const FullScreen: FC<Props> = ({
   const [showReport, setShowReport] = useState(false);
 
   const thumbnailUrl = imageCdn(
-    sanitizeIpfsUrl(getThumbnailUrl(byte.metadata)),
-    'thumbnail_v'
-  );
+    sanitizeDStorageUrl(getThumbnailUrl(video)),
+    'THUMBNAIL_V'
+  )
   const { color: backgroundColor } = useAverageColor(thumbnailUrl, true);
 
   const playVideo = () => {
@@ -198,7 +201,7 @@ const FullScreen: FC<Props> = ({
                   }}
                 >
                   <div
-                    className="absolute border-0"
+                    className="absolute h-1 border-0"
                     ref={intersectionRef}
                     id={video.id}
                   />
@@ -206,7 +209,7 @@ const FullScreen: FC<Props> = ({
                     player
                   ) : (
                     <img
-                      className="w-full border-0 object-contain"
+                      className="w-full h-[full] border-0"
                       src={thumbnailUrl}
                       alt="thumbnail"
                       draggable={false}
@@ -215,21 +218,20 @@ const FullScreen: FC<Props> = ({
                 </div>
                 <div className="absolute bottom-60 right-3 z-40 ">
                   <ByteActions
-                    publication={video as Publication}
-                    publicationId={video as Publication}
-                    trigger
+                    
+                   
                     video={video as Publication}
-                    inDetail={true}
+                 
                   />
                 </div>
               </div>
               {
-                <div className="assolute bottom-0.5 left-0 right-0 mt-4  pt-20 block rounded-b-xl  ">
-                  <MobileBottomOverlay
+                <div className="assolute bottom-0.5 left-0 right-0 mb-10   block rounded-b-xl  ">
+                  <BottomOverlay
                     video={video}
-                    setFollowing={setFollowing}
-                    profile={profile as Profile}
-                    following={false}
+                   
+                    
+                   
                   />
                 </div>
               }

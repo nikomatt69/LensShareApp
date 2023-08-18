@@ -1,15 +1,17 @@
 import { useSpacesStore } from "@/store/spaces";
 import { SpaceMetadata } from "@/typesLenster";
-import { Profile, Publication, useProfilesQuery } from "@/utils/lens/generatedLenster";
+
 import getPublicationAttribute from "@/utils/lib/getPublicationAttribute";
 import { getLensAccessToken, getLensMessage } from "@huddle01/auth";
 import { FC } from "react";
 import { useAccount, useSignMessage } from "wagmi";
 import Wrapper from "../Wrapper";
-import SmallUserProfile from "./SmallUserProfile";
+
 import { Spinner } from "@/components/UI/Spinner";
 import { MicrophoneIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/UI/Button";
+import SmallUserProfile from "@/components/SmallUserProfile";
+import { Profile, Publication, useProfilesQuery } from "@/utils/lens/generatedLenster";
 
 interface SpaceProps {
   publication: Publication;
@@ -18,27 +20,32 @@ interface SpaceProps {
 const Space: FC<SpaceProps> = ({ publication }) => {
   const { address } = useAccount();
   const { metadata } = publication;
-  const setShowSpacesLobby = useSpacesStore(
-    (state) => state.setShowSpacesLobby
+  const setShowSpacesWindow = useSpacesStore(
+    (state) => state.setShowSpacesWindow
   );
   const setLensAccessToken = useSpacesStore(
     (state) => state.setLensAccessToken
   );
   const lensAccessToken = useSpacesStore((state) => state.lensAccessToken);
+  const setSpace = useSpacesStore((state) => state.setSpace);
+
+  const space: SpaceMetadata = JSON.parse(
+    getPublicationAttribute(metadata.attributes, 'audioSpace')
+  );
 
   const { signMessage, isLoading: signing } = useSignMessage({
     onSuccess: async (data) => {
       const token = await getLensAccessToken(data, address as string);
       if (token.accessToken) {
-        setShowSpacesLobby(true);
+        setShowSpacesWindow(true);
         setLensAccessToken(token.accessToken);
+        setSpace({
+          ...space,
+          title: metadata.content
+        });
       }
     }
   });
-
-  const space: SpaceMetadata = JSON.parse(
-    getPublicationAttribute(metadata.attributes, 'audioSpace')
-  );
 
   const { data, loading } = useProfilesQuery({
     variables: {
@@ -71,7 +78,11 @@ const Space: FC<SpaceProps> = ({ publication }) => {
           }
           onClick={async () => {
             if (lensAccessToken) {
-              setShowSpacesLobby(true);
+              setShowSpacesWindow(true);
+              setSpace({
+                ...space,
+                title: metadata.content
+              });
               return;
             }
             const msg = await getLensMessage(address as string);

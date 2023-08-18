@@ -1,16 +1,21 @@
-import { IMAGE_CDN_URL } from '@/constants';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import { IMAGE_TRANSFORMATIONS, LENS_MEDIA_SNAPSHOT_URL } from "@/constants"
 
-const imageCdn = (
+export const imageCdn = (
   url: string,
-  type?: 'thumbnail' | 'avatar' | 'avatar_lg' | 'square' | 'thumbnail_v'
+  type?: keyof typeof IMAGE_TRANSFORMATIONS
 ): string => {
-  if (!url || !IMAGE_CDN_URL) return url;
-  return type
-    ? `${IMAGE_CDN_URL}/tr:n-${type},tr:di-placeholder.webp/${sanitizeIpfsUrl(
-        url
-      )}`
-    : `${IMAGE_CDN_URL}/tr:di-placeholder.webp/${sanitizeIpfsUrl(url)}`;
-};
+  if (!url) {
+    return url
+  }
 
-export default imageCdn;
+  if (url.includes(LENS_MEDIA_SNAPSHOT_URL)) {
+    const splitedUrl = url.split('/')
+    const path = splitedUrl[splitedUrl.length - 1]
+
+    return type
+      ? `${LENS_MEDIA_SNAPSHOT_URL}/${IMAGE_TRANSFORMATIONS[type]}/${path}`
+      : url
+  }
+
+  return url
+}

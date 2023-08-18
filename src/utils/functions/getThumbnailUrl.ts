@@ -1,25 +1,16 @@
-import { STATIC_IMAGES_URL } from '@/constants';
-import type { MetadataOutput } from '@/utils/lens/generatedLenster';
+import { FALLBACK_COVER_URL } from "@/constants"
+import { Publication } from "../lens/generatedLenster"
+import sanitizeDStorageUrl from "./sanitizeDStorageUrl"
 
-import sanitizeDStorageUrl from './sanitizeDStorageUrl';
+export const getThumbnailUrl = (
+  video: Publication,
+  withFallback?: boolean
+): string => {
+  let url = video?.metadata?.cover?.original.url || video?.metadata?.image
 
-/**
- * Returns the thumbnail URL for the specified publication metadata.
- *
- * @param metadata The publication metadata.
- * @returns The thumbnail URL.
- */
-const getThumbnailUrl = (metadata?: MetadataOutput): string => {
-  const fallbackUrl = `${STATIC_IMAGES_URL}/placeholder.webp`;
-
-  if (!metadata) {
-    return fallbackUrl;
+  if (withFallback) {
+    url = url || FALLBACK_COVER_URL
   }
 
-  const { cover, image } = metadata;
-  const url = cover?.original?.url ?? image ?? fallbackUrl;
-
-  return sanitizeDStorageUrl(url);
-};
-
-export default getThumbnailUrl;
+  return sanitizeDStorageUrl(url)
+}

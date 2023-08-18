@@ -5,6 +5,8 @@ interface GlobalModalState {
   showAuthModal: boolean;
   setShowAuthModal: (showAuthModal: boolean) => void;
   showNewModal: boolean;
+  showNewPostModal: boolean;
+  setShowNewPostModal: (showNewPostModal: boolean) => void;
   modalPublicationType: PublicationTypes;
   setShowNewModal: (
     showNewModal: boolean,
@@ -24,10 +26,15 @@ interface GlobalModalState {
   setShowProfileSwitchModal: (showProfileSwitchModal: boolean) => void;
   showMobileDrawer: boolean;
   setShowMobileDrawer: (showMobileDrawer: boolean) => void;
+  showNewSpacesModal: boolean;
+  setShowNewSpacesModal: (showNewSpacesModal: boolean) => void;
+
 }
 
 export const useGlobalModalStateStore = create<GlobalModalState>((set) => ({
   showAuthModal: false,
+  showNewPostModal: false,
+  setShowNewPostModal: (showNewPostModal) => set(() => ({ showNewPostModal })),
   setShowAuthModal: (showAuthModal) => set(() => ({ showAuthModal })),
   showNewModal: false,
   modalPublicationType: PublicationTypes.Post,
@@ -44,5 +51,8 @@ export const useGlobalModalStateStore = create<GlobalModalState>((set) => ({
   setShowProfileSwitchModal: (showProfileSwitchModal) =>
     set(() => ({ showProfileSwitchModal })),
   showMobileDrawer: false,
-  setShowMobileDrawer: (showMobileDrawer) => set(() => ({ showMobileDrawer }))
+  setShowMobileDrawer: (showMobileDrawer) => set(() => ({ showMobileDrawer })),
+  showNewSpacesModal: false,
+  setShowNewSpacesModal: (showNewSpacesModal) =>
+    set(() => ({ showNewSpacesModal }))
 }));

@@ -1,3 +1,4 @@
+
 import { Comment, Profile, Publication } from '@/utils/lens/generatedLenster';
 import type { Dispatch, FC } from 'react';
 import React, { useState } from 'react';
@@ -24,17 +25,13 @@ import NewPublication from '../Composer/NewPublication';
 type Props = {
   trigger: React.ReactNode;
   publication: Publication;
-  profile: Profile;
-  setFollowing: Dispatch<boolean>;
-  following: boolean;
+
 };
 
 const CommentModal: FC<Props> = ({
   trigger,
   publication,
-  profile,
-  setFollowing,
-  following
+
 }) => {
   const [show, setShow] = useState(false);
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);

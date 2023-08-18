@@ -58,7 +58,7 @@ const App = ({ Component, pageProps ,publication }: AppProps) => {
 
       <Suspense fallback={<Loading />}>
         <Providers>
-          <Layout publication={publication as Publication}>
+          <Layout >
             <Component {...pageProps} />
           </Layout>
         </Providers>

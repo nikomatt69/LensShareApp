@@ -1,43 +1,73 @@
-import type { Publication } from '@/utils/lens/generatedLenster';
-import Link from 'next/link';
-import type { FC } from 'react';
-import React from 'react';
-import { Tooltip } from '../UI/Tooltip';
+import { formatNumber } from "@/utils/functions/formatNumber"
+import { Profile, Publication } from "@/utils/lens/generatedLenster"
+import getProfilePicture from "@/utils/lib/getProfilePicture"
+import Link from "next/link"
+import { FC, useState } from "react"
+import Follow from "../Profile/Follow"
+import FollowButton from "../Buttons/FollowButton"
+import UnfollowButton from "../Buttons/UnfollowButton"
+import getAvatar from "@/lib/getAvatar"
+import useAverageColor from "@/utils/hooks/useAverageColor"
 
 type Props = {
-  video: Publication;
-  btnSize?: 'sm' | 'md' | 'lg' | 'xl';
-};
+  video: Publication
+}
 
-const BottomOverlay: FC<Props> = ({ video, btnSize }) => {
-  const subscribeType = video.profile?.followModule?.__typename;
-  const profile = video.profile;
+const BottomOverlay: FC<Props> = ({ video }) => {
+  const subscribeType = video.profile?.followModule?.__typename
+  const channel = video.profile
+  const [following, setFollowing] = useState(false);
+
   return (
-    <div className="z-[1] mr-1 pb-3 md:rounded-b-xl">
-      <div className="flex justify-between">
-        <div>
-          <Link href={`/u/${profile?.id}`}>
-            <span className="text-base font-bold">{video.profile.name}</span>
-            <span className="inline-flex text-sm font-thin">
-              @{video.profile.id} &nbsp;{' '}
-            </span>
-          </Link>
-          <Link href={`/bytes/${video.id}`} key={video.id}>
-            <h1 className="mt-2 line-clamp-2 text-base font-normal">
-              {video.metadata.name}{' '}
-              <span>
-                {video.metadata.tags?.map((tag) => (
-                  <span key={tag} className="font-bold">
-                    #{tag}
-                  </span>
-                ))}
+    <div className="absolute bottom-0 left-0 right-0 z-[1] bg-gradient-to-t from-trasparent to-transparent px-3 pb-3 mb-32 md:rounded-b-xl">
+      <div className="pb-2">
+        <Link href={`/bytes/${video?.id}`} key={video.id}>
+        <h1 className="line-clamp-2 text-white">{video.metadata.name}</h1>
+        </Link>
+      </div>
+      <div className="flex items-center justify-between">
+        <div className="min-w-0">
+          <Link
+            href={`/u/${channel?.id}`}
+            className="flex flex-none cursor-pointer items-center space-x-2"
+          >
+            <img
+              src={getAvatar(channel)}
+              className="h-9 w-9 rounded-full"
+              draggable={false}
+              alt={channel?.handle}
+            />
+            <div className="flex min-w-0 flex-col items-start text-white">
+              <h6 className="flex max-w-full items-center space-x-1">
+                <span className="truncate">
+                  {(channel?.name)}
+                </span>
+                
+              </h6>
+              <span className="inline-flex items-center space-x-1 text-xs">
+                {formatNumber(channel?.stats.totalFollowers)} Followers
               </span>
-            </h1>
+            </div>
           </Link>
+        </div>
+        <div className="flex items-center space-x-2">
+        {following ? (
+                <UnfollowButton
+                  setFollowing={setFollowing}
+                  profile={channel as Profile}
+                />
+              ) : (
+                <FollowButton
+                  setFollowing={setFollowing}
+                  profile={channel as Profile}
+                />
+              )}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BottomOverlay;
+export default BottomOverlay
+
+

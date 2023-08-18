@@ -6,12 +6,14 @@ import imageKit from '@/lib/imageKit';
 import { ATTACHMENT } from '@/constants';
 import { OG } from '@/typesLenster';
 import { Image } from '../UI/Image';
+import { Publication } from '@/utils/lens/generatedLenster';
 
 interface EmbedProps {
   og: OG;
+  publicationId?:string
 }
 
-const Embed: FC<EmbedProps> = ({ og }) => {
+const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
   return (
     <div
       className="mt-4 text-sm truncate sm:w-5/6"

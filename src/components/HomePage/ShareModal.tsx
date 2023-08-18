@@ -6,7 +6,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { LENSTOK_URL, STATIC_ASSETS_URL } from '@/constants';
 
-import imageCdn from '@/utils/functions/imageCdn';
+import imageCdn from '@/lib/imageCdn';
 import useCopyToClipboard from '@/utils/hooks/useCopyToClipboard';
 
 import EmbedVideo from './EmbedVideo';

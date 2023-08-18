@@ -49,7 +49,7 @@ const OnchainMeta: FC<OnchainMetaProps> = ({ publication }) => {
   }
 
   return (
-    <Card as="aside" dataTestId="onchain-meta">
+    <Card as="aside" className='rounded-xl border border-blue-700' dataTestId="onchain-meta">
       <div className="lt-text-gray-500 divide-y rounded-xl border-2 border-blue-700 bg-[#F2F6F9] dark:bg-black dark:divide-blue-700">
         {isArweaveHash ? (
           <Meta

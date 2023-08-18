@@ -43,7 +43,7 @@ const FullPublication: FC<FullPublicationProps> = ({
     <article className="p-5" data-testid={`publication-${publication.id}`}>
       <PublicationType profile={profile} publication={publication} showType />
 
-      <div>
+      <div className='border-blue-700 rounded-xl'>
         <PublicationHeader profile={profile} publication={publication} />
         <div className="ml-[53px]">
           {publication?.hidden ? (

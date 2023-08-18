@@ -1,8 +1,0 @@
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-    <ShortName>LensShare</ShortName>
-    <Description>LensShare Search</Description>
-    <Url type="text/html" method="get" template="https://lenshareapp.xyz/search?q={searchTerms}&#38;type=profiles"/>
-    <Image width="32" height="32">https://lenshareapp.xyz/faviconok.png</Image>
-    <InputEncoding>UTF-8</InputEncoding>
-    <moz:SearchForm>https://lenshareapp.xyz</moz:SearchForm>
-</OpenSearchDescription>

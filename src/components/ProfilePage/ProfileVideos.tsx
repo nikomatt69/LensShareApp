@@ -6,7 +6,8 @@ import {
   PublicationsQueryRequest,
   PaginatedPublicationResult,
   Publication,
-  PublicationMainFocus
+  PublicationMainFocus,
+  PublicationSortCriteria
 } from '@/types/lens';
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -22,13 +23,25 @@ import {
   ORB_APP_ID
 } from '@/constants';
 import getMedia from '@/lib/getMedia';
+import Loading from '../Loading';
+import { useInView } from 'react-cool-inview';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteLoader from '../UI/InfiniteLoader';
+import Loader from '../UI/Loader';
+
 
 const ProfileVideos = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, loading, error } = useQuery<{
+
+  
+   
+
+ 
+
+  const  { data, loading, error,fetchMore } = useQuery<{
     publications: PaginatedPublicationResult;
   }>(PublicationsDocument, {
     variables: {
@@ -43,16 +56,43 @@ const ProfileVideos = () => {
         ],
         profileId: id,
         publicationTypes: ['POST'],
-        limit: 50,
+        limit: 10,
         metadata: {
-          mainContentFocus: [PublicationMainFocus.Video]
-        }
+          mainContentFocus: [PublicationMainFocus.Video,PublicationMainFocus.Image]
+        },
+     
       }
     }
   });
+ 
+
+
 
   const publications = data?.publications.items;
   console.log('DATA', data?.publications?.items);
+
+  const pageInfo = data?.publications?.pageInfo?.next;
+  
+
+  const hasMore = pageInfo?.next  ;
+
+
+  const { observe } = useInView({
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            
+            cursor: pageInfo?.next,
+      
+           
+          }
+        }
+      });
+    }
+  });
+
+
 
   const handleOnMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.play();
@@ -62,15 +102,25 @@ const ProfileVideos = () => {
   };
 
   return (
-    <div>
+    <InfiniteScroll
+        className='overflow-y-auto'
+        scrollThreshold={0.5}
+        hasMore={hasMore}
+        next={observe}
+    
+        loader={<Loader/>}
+        scrollableTarget="scrollableDiv" dataLength={0}>
+   
+       
       {publications?.length === 0 ? (
         <p className="text-center">No videos yet</p>
       ) : (
-        <div className="3xl:grid-cols-4  xs:grid-col-1 mb-2 mt-2 grid gap-2 gap-x-4 gap-y-2 pl-1 pr-1 sm:grid-cols-2 md:grid-cols-3 md:gap-y-6 lg:grid-cols-3">
+        <div className=" xs:grid-col-3 mb-2 mt-2 grid-cols-3 gap-2 gap-x-4 gap-y-2 pl-1 pr-1 sm:grid-cols-3 md:grid-cols-3 md:gap-y-6 lg:grid-cols-3">
+         
           {publications?.map((pub) => (
             <div key={pub.id}>
               <Link href={`/post/${pub.id}`} key={pub.id}>
-                <a className="relative block h-0 rounded-lg border-2 border-blue-500 pb-[131%]">
+                <div className="relative  h-0 overflow-y-hidden rounded-lg border-2 border-blue-500 pb-[131%]">
                   <video
                     loop
                     autoPlay
@@ -87,13 +137,17 @@ const ProfileVideos = () => {
                   <p className="absolute bottom-3 left-3 text-xs font-semibold text-white">
                     {pub.metadata.name}
                   </p>
-                </a>
+                </div>
               </Link>
             </div>
           ))}
+           
+          
         </div>
       )}
-    </div>
+     
+   
+    </InfiniteScroll>
   );
 };
 

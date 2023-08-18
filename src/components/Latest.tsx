@@ -37,7 +37,7 @@ import Loader from './UI/Loader';
 import { EmptyState } from './UI/EmptyState';
 import MetaTags from './UI/MetaTags';
 import Loading from './Loading';
-import BytesCard from './HomePage/BytesCard';
+
 import VideoCard from './HomePage/VideoCard';
 import { useTheme } from 'next-themes';
 
@@ -183,7 +183,7 @@ const Latest = () => {
   }
 
   return (
-    <div>
+    <div className='mt-2 border-0 dark:bg-black bg-white pt-3' >
       <Head>
       <meta
           name="theme-color"
@@ -192,6 +192,7 @@ const Latest = () => {
       </Head>  
       <MetaTags title={`Latest • ${APP_NAME} `} />
       {full()}
+      <>
       <div
         ref={bytesContainer}
         className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-70px)]"
@@ -209,6 +210,7 @@ const Latest = () => {
           </span>
         )}
       </div>
+      </>
     </div>
   );
 };

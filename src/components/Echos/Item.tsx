@@ -6,8 +6,8 @@ import type { FC } from 'react';
 import React from 'react';
 import { BsPlay } from 'react-icons/bs';
 import { FcDvdLogo } from 'react-icons/fc';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
-import imageCdn from '@/utils/functions/imageCdn';
+import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
+import imageCdn from '@/utils/lib/imageCdn';
 import getAvatar from '@/lib/getAvatar';
 import getMedia from '@/lib/getMedia';
 import imageProxy from '@/lib/imageProxy';
@@ -29,7 +29,7 @@ const Item: FC<Props> = ({ publication }) => {
     <div className="flex h-full w-full flex-col rounded-sm p-2">
       <div className="group relative flex justify-center">
         <Image
-          src={getThumbnailUrl(publication.metadata)}
+          src={getThumbnailUrl(publication)}
           className="w-full rounded-lg object-cover transition duration-300 ease-in-out group-hover:scale-105 md:h-[220px]"
           alt={publication?.id.name}
         />

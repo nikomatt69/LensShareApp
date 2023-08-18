@@ -7,7 +7,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
 import { getTimeFromSeconds } from '@/utils/functions/formatTime2';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
-import getThumbnailUrl from '@/utils/functions/getThumbnailUrl';
+import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import type WaveSurfer from 'wavesurfer.js';
 import { Image } from '@/components/UI/Image';
 import imageKit from '@/lib/imageKit';
@@ -125,7 +125,7 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
         <div className="flex">
           <div className="h-16 w-16 flex-none">
             <Image
-              src={getThumbnailUrl(selectedTrack.metadata)}
+              src={getThumbnailUrl(selectedTrack)}
               width={500}
               height={500}
               className="h-full w-full"

@@ -27,6 +27,8 @@ import BottomNav from '../Navs/BottomNav';
 import Loading from '../Loading';
 import Navbar from '../Navbar';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
+import { Head } from 'next/document';
+import { useTheme } from 'next-themes';
 
 const FeedRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -126,6 +128,7 @@ const FeedRender = () => {
       disconnect?.();
     }
   };
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     validateAuthentication();
@@ -136,7 +139,9 @@ const FeedRender = () => {
   }
 
   return (
+    
     <GridLayout className="max-w-[1200px] pt-6">
+       
       <MetaTags title={`Bytes • ${APP_NAME}`} />
    
      

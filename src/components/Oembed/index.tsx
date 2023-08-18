@@ -7,11 +7,13 @@ import Player from './Player';
 import { OEMBED_WORKER_URL } from '@/constants';
 import { OG } from '@/typesLenster';
 
+
 interface OembedProps {
   url?: string;
+  publicationId?: string;
 }
 
-const Oembed: FC<OembedProps> = ({ url }) => {
+const Oembed: FC<OembedProps> = ({ url, publicationId }) => {
   const { isLoading, error, data } = useQuery(
     [url],
     () =>
@@ -33,7 +35,7 @@ const Oembed: FC<OembedProps> = ({ url }) => {
     site: data?.site,
     favicon: `https://www.google.com/s2/favicons?domain=${data.url}`,
     thumbnail: data?.image,
-    isLarge: false,
+    isLarge: data?.isLarge,
     html: data?.html
   };
 
@@ -41,7 +43,11 @@ const Oembed: FC<OembedProps> = ({ url }) => {
     return null;
   }
 
-  return og.html ? <Player og={og} /> : <Embed og={og} />;
+  return og.html ? (
+    <Player og={og} />
+  ) : (
+    <Embed og={og} publicationId={publicationId} />
+  );
 };
 
 export default Oembed;

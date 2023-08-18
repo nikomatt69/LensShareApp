@@ -1,3 +1,4 @@
+
 import type { Profile, Publication } from '@/utils/lens/generatedLenster';
 import {
   PublicationSortCriteria,
@@ -29,53 +30,41 @@ import {
 } from '@/constants';
 import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
-import FullScreen from './FullScreen';
+
 import Link from 'next/link';
 import {
 
 } from '@/utils/lens/generatedLenster';
 import Navbar from '../Navbar';
 import { useTheme } from 'next-themes';
+import ChevronDownOutline from '../UI/Icons/ChevronDownOutline';
+import ChevronUpOutline from '../UI/Icons/ChevronUpOutline';
 
 interface Props {
   following?: boolean;
   setFollowing?: (following: boolean) => void;
 }
 
+const request = {
+  sortCriteria: PublicationSortCriteria.CuratedProfiles,
+  limit: 50,
+  noRandomize: false,
+  sources: [LENSTUBE_BYTES_APP_ID],
+  publicationTypes: [PublicationTypes.Post],
+  customFilters: LENS_CUSTOM_FILTERS
+}
+
 const Bytes = () => {
-  const { resolvedTheme } = useTheme();
-  const router = useRouter();
-  const bytesContainer = useRef<HTMLDivElement>(null);
-  const currentProfile = useAppStore((state) => state.currentProfile);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
-  const [byte, setByte] = useState<Publication>();
-  const [following, setFollowing] = useState(false);
-
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
-  const request = {
-    sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 10,
-    noRandomize: false,
-    sources: [APP_ID, LENSTUBE_BYTES_APP_ID],
-    publicationTypes: [PublicationTypes.Post],
-    customFilters: LENS_CUSTOM_FILTERS,
-    metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
-      mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Image]
-    }
-  };
-
-  const [show, setShow] = useState(false);
+  const router = useRouter()
+  const bytesContainer = useRef<HTMLDivElement>(null)
+  const [currentViewingId, setCurrentViewingId] = useState('')
+  const currentProfile = useAppStore((state) => state.currentProfile)
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationLazyQuery();
+    usePublicationLazyQuery()
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
     useExploreFeedLazyQuery({
-      // prevent the query from firing again after the first fetch
-      nextFetchPolicy: 'standby',
       variables: {
         request,
         reactionRequest: currentProfile
@@ -83,18 +72,24 @@ const Bytes = () => {
           : null,
         profileId: currentProfile?.id ?? null
       },
-      onCompleted: ({ explorePublications }) => {}
-    });
-  console.log(data);
+      onCompleted: ({ explorePublications }) => {
+        const items = explorePublications?.items as Publication[]
+        const publicationId = router.query.id
+        if (!publicationId) {
+          const nextUrl = `${location.origin}/bytes/${items[0]?.id}`
+          history.pushState({ path: nextUrl }, '', nextUrl)
+        }
+      }
+    })
 
-  const bytes = data?.explorePublications?.items as Publication[];
-  const pageInfo = data?.explorePublications?.pageInfo;
-  const singleBytePublication = singleByte?.publication as Publication;
+  const bytes = data?.explorePublications?.items as Publication[]
+  const pageInfo = data?.explorePublications?.pageInfo
+  const singleBytePublication = singleByte?.publication as Publication
 
   const fetchSingleByte = async () => {
-    const publicationId = router.query.id;
+    const publicationId = router.query.id
     if (!publicationId) {
-      return fetchAllBytes();
+      return fetchAllBytes()
     }
     await fetchPublication({
       variables: {
@@ -104,52 +99,21 @@ const Bytes = () => {
           : null,
         profileId: currentProfile?.id ?? null
       },
-      onCompleted: () => fetchAllBytes()
-    });
-  };
-
-  const openDetail = (byte: Publication) => {
-    const nextUrl = `/${byte.id}`;
-    setByte(byte);
-    history.pushState({ path: nextUrl }, '', nextUrl);
-    setShow(!show);
-  };
-
-  const closeDialog = () => {
-    const nextUrl = `/`;
-    history.pushState({ path: nextUrl }, '', nextUrl);
-    setShow(false);
-  };
-
-  const full = useCallback(
-    () =>
-      currentViewingId && byte && router.pathname ? (
-        <FullScreen
-          byte={byte}
-          close={closeDialog}
-          isShow={show}
-          bytes={bytes}
-          index={bytes?.findIndex((video) => video.id === currentViewingId)}
-          profile={currentProfile as Profile}
-        />
-      ) : null,
-    [byte, show, currentViewingId]
-  );
-
-  useEffect(() => {
-    if (router.query.id && singleBytePublication) {
-      openDetail(singleBytePublication);
-    }
-  }, [singleByte]);
+      onCompleted: () => fetchAllBytes(),
+      fetchPolicy: 'network-only'
+    })
+  }
 
   useEffect(() => {
     if (router.isReady) {
-      fetchSingleByte();
+      fetchSingleByte()
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady]);
+  }, [router.isReady])
 
   const { observe } = useInView({
+    rootMargin: SCROLL_ROOT_MARGIN,
     onEnter: async () => {
       await fetchMore({
         variables: {
@@ -158,68 +122,70 @@ const Bytes = () => {
             cursor: pageInfo?.next
           }
         }
-      });
+      })
     }
-  });
+  })
 
   if (loading || singleByteLoading) {
     return (
       <div className="grid h-[80vh] place-items-center">
         <Loader />
       </div>
-    );
+    )
   }
 
   if (error) {
     return (
       <div className="grid h-[80vh] place-items-center">
-        <EmptyState message="No bytes found" icon />
+        <EmptyState message icon />
       </div>
-    );
+    )
   }
 
   return (
-    <div className="border-0">
+    <div className="overflow-y-hidden">
       <Head>
-      <meta
-          name="theme-color"
-          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
-        />
+        <meta name="theme-color" content="#000000" />
       </Head>
-      <MetaTags title="LensShare" />
-      <Navbar/>
-
-      {full()}
+      <MetaTags title="Bytes" />
       <div
         ref={bytesContainer}
-        className="h-screen border-0 md:h-[calc(100vh-70px)]"
+        className="no-scrollbar h-screen bg-white dark:bg-black snap-y pb-10 snap-mandatory overflow-y-scroll scroll-smooth md:h-[calc(100vh-70px)]"
       >
-        {singleByte && (
-          <ByteVideo
-            setFollowing={setFollowing}
-            video={singleBytePublication}
-            key={`${singleBytePublication?.id}_${singleBytePublication.createdAt}0`}
-            onDetail={openDetail}
-            isShow={show}
-          />
+        
+        {bytes?.map(
+          (video: Publication, index) =>
+            singleByte?.publication?.id !== video.id && (
+              <ByteVideo
+                video={video}
+                currentViewingId={currentViewingId}
+                intersectionCallback={(id) => setCurrentViewingId(id)}
+                key={`${video?.id}_${index}`}
+              />
+            )
         )}
-        {bytes?.map((video: Publication, index) => (
-          <ByteVideo
-            video={video}
-            key={`${video?.id}_${video.createdAt}1`}
-            onDetail={openDetail}
-            isShow={show}
-            setFollowing={setFollowing}
-          />
-        ))}
         {pageInfo?.next && (
-          <span ref={observe} className="flex justify-center border-0 p-10">
+          <span ref={observe} className="flex justify-center ">
             <Loader />
           </span>
         )}
+        <div className="bottom-7 right-4  flex-col space-y-3 lg:absolute lg:flex">
+          <button
+            className="rounded-full bg-gray-300 p-3 focus:outline-none dark:bg-gray-700"
+            onClick={() => bytesContainer.current?.scrollBy({ top: -30 })}
+          >
+            <ChevronUpOutline className="h-5 w-5" />
+          </button>
+          <button
+            className="rounded-full bg-gray-300 p-3 focus:outline-none dark:bg-gray-700"
+            onClick={() => bytesContainer.current?.scrollBy({ top: 30 })}
+          >
+            <ChevronDownOutline className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Bytes;
+export default Bytes
