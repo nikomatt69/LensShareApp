@@ -1,0 +1,8 @@
+{
+	"appId": "com.lenshareapp.test",
+	"appName": "LensShare",
+	"webDir": ".vercel/output/static",
+	"server": {
+		"androidScheme": "https"
+	}
+}
