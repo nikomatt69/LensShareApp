@@ -72,7 +72,7 @@ const Curated = () => {
       {!error && !loading && videos && (
         <>
           <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid grid-cols-2 place-items-center gap-2 md:grid-cols-3 md:gap-3">
-            <SearchAudio/>
+          
             {videos?.map((publication: Publication) => (
               <Item publication={publication} key={publication.id} />
             ))}

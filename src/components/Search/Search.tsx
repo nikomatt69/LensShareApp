@@ -81,7 +81,7 @@ const Search: FC<SearchProps> = ({
   const profiles = isProfileSearchResult ? searchResult.items : [];
 
   return (
-    <div aria-hidden="true" className="w-full pb-4" data-testid="global-search">
+    <div aria-hidden="true" className="w-full mx-auto pb-4" data-testid="global-search">
       <form onSubmit={handleKeyDown}>
         <Input
           type="text"
@@ -104,13 +104,13 @@ const Search: FC<SearchProps> = ({
       {pathname !== '/search' && !hideDropdown && searchText.length > 0 && (
         <div
           className={clsx(
-            'justify-content absolute mt-2 flex w-[90%] flex-col  items-center rounded-xl text-xs',
+            'justify-between absolute mt-2 min-w- flex flex-col px-auto items-center sm:pr-10 rounded-xl text-xs',
             modalWidthClassName
           )}
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white dark:bg-gray-900/70 py-2 text-xs">
+          <Card className="justify-content max-h-[80vh] mx-auto items-center overflow-y-auto rounded-xl bg-white dark:bg-gray-900/70 py-2 text-xs">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />
@@ -121,7 +121,7 @@ const Search: FC<SearchProps> = ({
                 {profiles.map((profile: Profile) => (
                   <div
                     key={profile?.handle}
-                    className="cursor-pointer bg-white dark:bg-gray-900/70 px-4 py-2 "
+                    className="cursor-pointer bg-white text-xs dark:bg-gray-900/70  py-2 "
                     onClick={() => {
                       if (onProfileSelected) {
                         onProfileSelected(profile);

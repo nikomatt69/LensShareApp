@@ -24,13 +24,14 @@ import Composer from './Composer';
 import MessagesList from './MessagesList';
 import PreviewList from './PreviewList';
 import { Card } from '../UI/Card';
-import { APP_NAME } from '@/constants';
+import { APP_NAME, STATIC_ASSETS_URL } from '@/constants';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import formatHandle from '@/utils/functions/formatHandle';
 import { GridItemEight, GridLayout } from '../UI/GridLayout';
 import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import NavbarDetails from '../NavbarDetails';
+import { imageCdn } from '@/utils/functions/imageCdn';
 
 interface MessageProps {
   conversationKey: string;
@@ -154,7 +155,6 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
         selectedConversationKey={conversationKey}
       />
       <GridItemEight className="xs:mx-2  mb-5 sm:mx-2 md:col-span-8">
-     
         <Card className="flex h-[87vh] flex-col justify-between">
           {showLoading ? (
             <div className="flex   items-center justify-center">

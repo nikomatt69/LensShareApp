@@ -10,6 +10,9 @@ import SuggestedAccounts from '@/components/Sidebar/SuggestedAccounts';
 import FollowingAccounts from '@/components/Sidebar/FollowingAccounts';
 import Categories from '@/components/Sidebar/Categories';
 import SearchBarDiscover from '../Search/SearchBarDiscover';
+import Search from '../Search/Search';
+import { imageCdn } from '@/utils/functions/imageCdn';
+import { STATIC_ASSETS_URL } from '@/constants';
 
 const DiscoverMain = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -31,24 +34,25 @@ const DiscoverMain = () => {
   return (
     <div className="mx-4 flex justify-center  rounded-full border-blue-700">
       <div className="w-full max-w-[1150px]">
-        <div className="flex  w-full items-center justify-center rounded-full border-4 border-black bg-blue-500 p-5">
-          <span className="text-center text-xl font-semibold">Discover</span>
+      <div className="flex mb-5 items-center space-x-2">
+          <img
+            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            draggable={false}
+            className="h-12 w-12 md:h-16 md:w-16"
+            alt="lensshare"
+          />
+          <h1 className="text-xl font-semibold">Discover</h1>
         </div>
-        <div className="mb-5 flex w-full items-center justify-center gap-10 rounded-full border-2 border-black bg-blue-500  p-5">
+        <div className="mb-5 flex w-full items-center text-blue-700 justify-center gap-10 rounded-full  p-5">
           <span
-            className={`text-md cursor-pointer rounded-full border-2 border-black px-2 py-2 font-semibold ${suggestedaccountsClass} mt-2`}
+            className={`text-md cursor-pointer rounded-full  px-2 py-2 text-blue-700 font-semibold ${suggestedaccountsClass} mt-2`}
             onClick={() => setSelectedTab('suggestedaccounts')}
           >
             Users
           </span>
+         
           <span
-            className={`text-md cursor-pointer rounded-full border-2 border-black px-2 py-2 font-semibold  ${categoriesClass} mt-2`}
-            onClick={() => setSelectedTab('categories')}
-          >
-            Categories
-          </span>
-          <span
-            className={`text-md cursor-pointer rounded-full border-2 border-black px-2 py-2 font-semibold ${searchClass} mt-2`}
+            className={`text-md cursor-pointer rounded-full  px-2 text-blue-700 py-2 font-semibold ${searchClass} mt-2`}
             onClick={() => setSelectedTab('search')}
           >
             Search
@@ -63,7 +67,7 @@ const DiscoverMain = () => {
         {selectedTab === 'categories' && <Categories />}
         {selectedTab === 'search' && (
           <div className="content-center items-center justify-center">
-            <SearchBarDiscover />
+            <Search/>
           </div>
         )}
       </div>

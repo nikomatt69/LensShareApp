@@ -26,7 +26,8 @@ interface Props {
 const SuggestedAccounts = () => {
   const { data, loading, error } = useQuery(RecommendedProfilesDocument, {
     nextFetchPolicy: 'standby',
-    variables: { options: { shuffle: true } }
+    variables: { options: { shuffle: true ,limit: 10} },
+
   });
   console.log('Recommended', data);
   return (
@@ -37,7 +38,7 @@ const SuggestedAccounts = () => {
 
       <div>
         {data?.recommendedProfiles
-          .slice(0, 20)
+          .slice(0, 10)
           .map(
             (currentProfile: {
               id: Key | null | undefined;
@@ -53,7 +54,7 @@ const SuggestedAccounts = () => {
               handle: string | null;
             }) => (
               <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-                <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary dark:hover:bg-gray-800">
+                <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-blue-100 dark:hover:bg-gray-700">
                   <div className="relative h-[32px] w-[32px]">
                     <Image
                       src={getAvatar(currentProfile)}

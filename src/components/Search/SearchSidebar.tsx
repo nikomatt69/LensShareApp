@@ -11,7 +11,7 @@ const SearchSidebar = () => {
   const { query } = useRouter();
 
   const normalLink =
-    'flex items-center gap-3 hover:bg-primary p-3 justify-center lg:justify-start curser-pointer font-semibold text-[#57B8FF] rounded';
+    'flex items-center gap-3 hover:bg-primary p-3 justify-center lg:justify-start curser-pointer font-semibold text-blue-700 rounded';
 
   return (
     <div>
@@ -31,7 +31,7 @@ const SearchSidebar = () => {
             </Link>
             <Link href={`/search?q=${query.q}&type=pubs`}>
               <div className={normalLink}>
-                <a className="text-md cursor-pointer text-[#000000] lg:block">
+                <a className="text-md cursor-pointer text-blu-700 lg:block">
                   Publications
                 </a>
               </div>

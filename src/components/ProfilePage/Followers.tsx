@@ -84,7 +84,7 @@ const Followers: FC<Props> = ({ profile }) => {
               href={`/u/${followers?.wallet?.defaultProfile?.id}`}
               key={followers?.wallet?.defaultProfile?.id}
             >
-              <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary">
+              <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-gray-300 dark:hover:bg-gray-700">
                 <div className="relative h-[32px] w-[32px]">
                   <Image
                     src={getAvatar(followers?.wallet?.defaultProfile)}
@@ -95,10 +95,10 @@ const Followers: FC<Props> = ({ profile }) => {
                 </div>
                 <div />
                 <div>
-                  <p className="text-md flex items-center gap-1 font-bold lowercase text-primary">
+                  <p className="text-md flex items-center gap-1 font-bold lowercase text-black dark:text-white">
                     {followers?.wallet?.defaultProfile?.name}
                   </p>
-                  <p prefix="@" className="text-xs  capitalize text-gray-400">
+                  <p prefix="@" className="text-xs  capitalize text-gray-500">
                     {formatHandle(followers?.wallet?.defaultProfile?.handle)}{' '}
                     {''}
                   </p>

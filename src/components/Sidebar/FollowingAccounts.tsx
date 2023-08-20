@@ -25,7 +25,9 @@ const FollowingAccounts = () => {
   }>(FollowingDocument, {
     nextFetchPolicy: 'standby',
     variables: {
+      
       request: {
+        limit: 15,
         address: address
       }
     }
@@ -46,7 +48,7 @@ const FollowingAccounts = () => {
             href={`/u/${following?.profile.id}`}
             key={following?.profile.id}
           >
-            <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-primary dark:hover:bg-gray-800">
+            <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-blue-100 dark:hover:bg-gray-700">
               <div className="relative h-[32px] w-[32px]">
                 <Image
                   src={getAvatar(following?.profile)}

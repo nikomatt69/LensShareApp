@@ -79,11 +79,11 @@ const SearchProfiles: FC<Props> = ({ query }) => {
   });
 
   return (
-    <div className="space-y-3 rounded-xl">
+    <div className="space-y-2 mx-3 rounded-xl">
       {profiles?.map((profile: Profile) => (
         <div key={profile?.id} className="p-5">
           <Link href={`/u/${profile?.id}`}>
-            <div className="flex cursor-pointer items-center gap-3 rounded-xl p-2  font-semibold">
+            <div className="flex cursor-pointer items-center gap-3 rounded-xl p-2 text-xs font-semibold">
               <Image
                 width={62}
                 height={62}
@@ -92,13 +92,14 @@ const SearchProfiles: FC<Props> = ({ query }) => {
                 alt={formatHandle(profile?.handle)}
               />
               <div className=" lg:block">
-                <p className="text-md flex items-center gap-1 font-bold lowercase text-primary">
+                <p className="text-md flex items-center gap-1 font-bold lowercase dark:text-white text-black">
                   {profile?.name}
+                  </p>
                   <p className="capitalize text-gray-400">
                     {formatHandle(profile?.handle)}
                     {''}
                   </p>
-                </p>
+             
               </div>
             </div>
           </Link>

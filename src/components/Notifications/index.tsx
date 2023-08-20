@@ -125,11 +125,11 @@ const Notifications = () => {
   });
 
   return (
-    <div className=" md:container truncate break-words border-blue-700 md:max-w-3xl md:p-0">
+    <div className="mx-auto  sm:container lg:container md:container truncate break-words border-blue-700 md:max-w-3xl md:p-0">
       <MetaTags title={`Notifications • ${APP_NAME}`} />
 
 
-      <Card className="p-2">
+      <Card className="p-2 border-blue-700 mt-2">
         <Tab.Group as="div" className="w-full">
           <div className="mb-4 flex items-center justify-between">
             <Tab.List className="no-scrollbar flex w-full space-x-4 overflow-x-auto pr-4">
