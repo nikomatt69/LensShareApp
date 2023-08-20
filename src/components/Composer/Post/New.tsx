@@ -63,7 +63,7 @@ const NewPost: FC = () => {
         <Image
           src={getAvatar(currentProfile)}
           className="h-9 w-9 cursor-pointer rounded-full border bg-gray-200 dark:border-gray-700"
-          onClick={() => push(`/u/${currentProfile?.handle}`)}
+          onClick={() => push(`/u/${currentProfile?.id}`)}
           alt={formatHandle(currentProfile?.handle)}
         />
         <button

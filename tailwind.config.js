@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'Helvetica'],
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+        serif: ['Helvetica', ...defaultTheme.fontFamily.serif]
       },
       width: {
         1600: '1600px',

@@ -13,6 +13,7 @@ import PublicationHeader from './PublicationHeader';
 import PublicationWrapper from './PublicationWrapper';
 import PublicationActions from '../Publication/Actions';
 import PublicationType from '../Publication/Type';
+import PublicationMenu from '../Publication/Actions/Menu';
 
 interface SinglePublicationProps {
   publication: Publication;
@@ -68,6 +69,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
         feedItem={feedItem}
         profile={profile}
       />
+    
       <div className="ml-[53px] border-blue-500">
         {publication?.hidden ? (
           <HiddenPublication type={publication.__typename} />
@@ -84,6 +86,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
                 electedMirror={feedItem?.electedMirror as ElectedMirror}
               />
             )}
+            
           </>
         )}
       </div>

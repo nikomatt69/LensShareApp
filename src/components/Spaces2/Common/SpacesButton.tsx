@@ -8,7 +8,7 @@ type Props = {} & React.DetailedHTMLProps<
 const SpacesButton = ({ children, ...props }: Props) => {
   return (
     <button
-      className="rounded-lg bg-violet-500 px-8 py-2 text-sm text-white"
+      className="rounded-lg bg-blue-700 px-8 py-2 text-sm text-white"
       {...props}
     >
       {children}

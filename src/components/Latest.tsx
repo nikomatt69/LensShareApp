@@ -20,7 +20,7 @@ import { useInView } from 'react-cool-inview';
 
 import ByteVideo from '@/components/Bytes/ByteVideo';
 
-import { useAppStore } from '@/store/app';
+import { useAppStore, useTransactionPersistStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
@@ -30,7 +30,8 @@ import {
   LENS_CUSTOM_FILTERS,
   ORB_APP_ID,
   RIFF_APP_ID,
-  SCROLL_ROOT_MARGIN
+  SCROLL_ROOT_MARGIN,
+  STATIC_ASSETS_URL
 } from '@/constants';
 import FullScreen from './Bytes/FullScreen';
 import Loader from './UI/Loader';
@@ -40,6 +41,12 @@ import Loading from './Loading';
 
 import VideoCard from './HomePage/VideoCard';
 import { useTheme } from 'next-themes';
+import SinglePublication from './Composer/SinglePublication2';
+import { Card } from './UI/Card';
+import QueuedPublication from './Composer/QueuedPublication';
+import { OptmisticPublicationType } from '@/enums';
+import { imageCdn } from '@/utils/functions/imageCdn';
+
 
 const Latest = () => {
   const router = useRouter();
@@ -50,6 +57,7 @@ const Latest = () => {
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
   const { resolvedTheme } = useTheme();
+  const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const request = {
@@ -183,34 +191,43 @@ const Latest = () => {
   }
 
   return (
-    <div className='mt-2 border-0 dark:bg-black bg-white pt-3' >
+    <div>
       <Head>
-      <meta
-          name="theme-color"
-          content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
-        />
-      </Head>  
-      <MetaTags title={`Latest • ${APP_NAME} `} />
-      {full()}
-      <>
-      <div
-        ref={bytesContainer}
-        className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-70px)]"
-      >
-        {bytes?.map((video: Publication, index) => (
-          <VideoCard
-            publication={video}
-            key={`${video?.id}_${video.createdAt}1`}
-            onDetail={openDetail}
+        <meta name="theme-color" content="#000000" />
+      </Head>
+      <MetaTags title={`Explore • ${APP_NAME} `} />
+      <div className="flex mb-5 items-center space-x-2">
+          <img
+            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            draggable={false}
+            className="h-12 w-12 md:h-16 md:w-16"
+            alt="lensshare"
           />
-        ))}
-        {pageInfo?.next && (
-          <span ref={observe} className="flex justify-center border-0 p-10">
-            <Loading />
-          </span>
-        )}
-      </div>
-      </>
+          <h1 className="text-xl font-semibold">Latest</h1>
+        </div>
+      
+      <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
+    {txnQueue.map(
+      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
+        <div key={txn.id}>
+          <QueuedPublication txn={txn} />
+        </div>
+      )
+    )}
+    {bytes?.map((publication, index) => (
+      <SinglePublication
+        profile={currentProfile as Profile}
+        key={`${publication?.id}_${index}`}
+        isFirst={index === 0}
+        isLast={index === bytes.length - 1}
+        publication={publication as Publication} />
+    ))}
+   {pageInfo?.next && (
+      <span ref={observe} className="flex  justify-center p-10">
+        <Loading />
+      </span>
+    )}
+  </Card>
     </div>
   );
 };

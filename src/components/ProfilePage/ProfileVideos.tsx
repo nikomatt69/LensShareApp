@@ -28,13 +28,15 @@ import { useInView } from 'react-cool-inview';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import InfiniteLoader from '../UI/InfiniteLoader';
 import Loader from '../UI/Loader';
+import { date } from 'zod';
 
 
 const ProfileVideos = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { id } = router.query;
-
+  const timestamp= {formatTime(date: Date | undefined) { (date?.getDay)}}
+ 
 
   
    
@@ -45,6 +47,7 @@ const ProfileVideos = () => {
     publications: PaginatedPublicationResult;
   }>(PublicationsDocument, {
     variables: {
+      expiresAt:{timestamp},
       request: {
         sources: [
           LENSTUBE_BYTES_APP_ID,

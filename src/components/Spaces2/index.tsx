@@ -4,7 +4,7 @@ import PreviewSpaces from './PreviewSpaces/PreviewSpaces';
 import SpacesWindow from './SpacesWindow/SpacesWindow';
 
 const AudioSpaces = () => {
-  return <SpacesWindow />;
+  return <PreviewSpaces/>;
 };
 
 export default AudioSpaces;

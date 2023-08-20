@@ -11,7 +11,7 @@ const MeetRoom: NextPage = () => {
 
   useEffect(() => {
     if (!isRoomJoined) {
-      push(`/spaces/${query.roomid}`);
+      push(`/spaces/${query.roomid}/lobby`);
       return;
     }
   }, []);

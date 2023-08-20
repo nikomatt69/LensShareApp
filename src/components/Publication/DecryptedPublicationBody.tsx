@@ -1,4 +1,4 @@
-import { LIT_PROTOCOL_ENV, POLYGONSCAN_URL, RARIBLE_URL } from '@/constants';
+import { LIT_PROTOCOL_ENV, LIT_PROTOCOL_ENVIRONMENT, POLYGONSCAN_URL, RARIBLE_URL } from '@/constants';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
 import {
@@ -34,7 +34,7 @@ import {
   PhotoIcon,
   UsersIcon
 } from '@heroicons/react/24/outline';
-import { BsCollection, BsDatabaseFill } from 'react-icons/bs';
+import { BsCollection, BsDatabase, BsDatabaseFill } from 'react-icons/bs';
 import formatHandle from '@/utils/functions/formatHandle';
 import { Tooltip } from '../UI/Tooltip';
 import { ErrorMessage } from '../ErrorMessage';
@@ -44,6 +44,12 @@ import getURLs from '../Composer/getURLs';
 import Oembed from '../Oembed';
 import useNft from '@/lib/useNft';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
+import { BiLogInCircle } from 'react-icons/bi';
+
+interface DecryptMessageProps {
+  icon: ReactNode;
+  children: ReactNode;
+}
 
 interface DecryptMessageProps {
   icon: ReactNode;
@@ -83,7 +89,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
   const showMore =
     encryptedPublication?.metadata?.content?.length > 450 &&
-    pathname !== '/post/[id]';
+    pathname !== '/posts/[id]';
 
   useCanDecryptStatusQuery({
     variables: {
@@ -178,7 +184,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
     const sdk = await LensGatedSDK.create({
       provider: publicClient as any,
       signer: walletClient as any,
-      env: LIT_PROTOCOL_ENV as LensEnvironment
+      env: LIT_PROTOCOL_ENVIRONMENT as LensEnvironment
     });
     const { decrypted, error } = await sdk.gated.decryptMetadata(data);
     setDecryptedData(decrypted);
@@ -196,7 +202,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         }}
       >
         <div className="flex items-center space-x-1 font-bold text-white">
-          <RiLogoutCircleFill className="h-5 w-5" />
+          <BiLogInCircle className="h-5 w-5" />
           <span>Login to decrypt</span>
         </div>
       </Card>
@@ -221,8 +227,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage icon={<BsCollection className="h-4 w-4" />}>
               Collect the{' '}
               <Link
-                href={`/post/${collectCondition?.publicationId}`}
+                href={`/posts/${collectCondition?.publicationId}`}
                 className="font-bold lowercase underline"
+               
               >
                 {encryptedPublication?.__typename}
               </Link>
@@ -232,7 +239,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage
               icon={<BsCollection className="h-4 w-4 animate-pulse" />}
             >
-              Collect finalizing on chain..
+              Collect finalizing on chain...
             </DecryptMessage>
           )}
 
@@ -241,7 +248,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage icon={<UsersIcon className="h-4 w-4" />}>
               Follow{' '}
               <Link
-                href={`/u/${encryptedPublication?.profile?.id}`}
+                href={`/u/${formatHandle(
+                  encryptedPublication?.profile?.handle
+                )}`}
                 className="font-bold"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
@@ -258,11 +267,12 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
           {/* Token check */}
           {unauthorizedBalance && (
-            <DecryptMessage icon={<BsDatabaseFill className="h-4 w-4" />}>
+            <DecryptMessage icon={<BsDatabase className="h-4 w-4" />}>
               You need{' '}
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}
                 className="font-bold underline"
+                
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -283,6 +293,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
                   className="font-bold underline"
+                
                   target="_blank"
                   rel="noreferrer noopener"
                 >
@@ -319,10 +330,11 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         onClick={async (event) => {
           stopEventPropagation(event);
           await getDecryptedData();
+         
         }}
       >
-        <div className="flex items-center space-x-1 border-blue-600 font-bold text-blue-600">
-          <LockClosedIcon className="h-5 w-5" />
+        <div className="flex items-center space-x-1 font-bold text-white">
+          <FingerPrintIcon className="h-5 w-5" />
           <span>
             Decrypt{' '}
             <span className="lowercase">{encryptedPublication.__typename}</span>
@@ -345,23 +357,24 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           'markup linkify text-md break-words'
         )}
       >
-        {publication?.content}
+        {content}
       </Markup>
       {showMore && (
         <div className="mt-4 flex items-center space-x-1 text-sm font-bold text-gray-500">
           <EyeIcon className="h-4 w-4" />
-          <Link href={`/post/${encryptedPublication?.id}`}>Show more</Link>
+          <Link href={`/post/${encryptedPublication?.id}`}>
+            Show more
+          </Link>
         </div>
       )}
       {publication?.media?.length ? (
         <Attachments attachments={publication?.media} />
       ) : content ? (
-        urls.length > 0 && (
-          <Oembed url={urls[0]} publicationId={encryptedPublication.id} />
-        )
+        urls.length > 0 && <Oembed url={urls[0]} />
       ) : null}
     </div>
   );
 };
 
 export default DecryptedPublicationBody;
+

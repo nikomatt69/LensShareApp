@@ -64,8 +64,8 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
     ? publication.mirrorOf.stats.totalAmountOfComments
     : publication.stats.totalAmountOfComments;
   const mirrors = isMirror
-    ? publication?.mirrorOf?.stats?.totalAmountOfComments
-    : publication?.stats?.totalAmountOfComments;
+    ? publication?.mirrorOf?.stats?.totalAmountOfMirrors
+    : publication?.stats?.totalAmountOfMirrors;
   const collects = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfCollects
     : publication?.stats?.totalAmountOfCollects;

@@ -67,7 +67,7 @@ const StoriesRender: FC<Props> = ({
         onClick={() => setShow(true)}
       >
          <div
-        className="w-10 h-10 md:w-20 overflow-y-auto pl-4 md:h-20 md:mx-auto"
+        className="w-14 h-14 md:w-22 overflow-y-auto pl-4 md:h-22 md:mx-auto"
     
       >
         

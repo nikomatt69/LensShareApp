@@ -37,6 +37,8 @@ import CommentModal from '../Bytes/CommentModal';
 import ShareMenu from '../Publication/Actions/Share';
 import PublicationMenu from '../Publication/Actions/Menu';
 import Collect from '../Publication/Actions/Collect';
+import Comment from '../Publication/Actions/Comment';
+import Like from '../Publication/Actions/Like';
 
 interface Props {
   publication: Publication;
@@ -65,8 +67,8 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
     ? publication.mirrorOf.stats.totalAmountOfComments
     : publication.stats.totalAmountOfComments;
   const mirrors = isMirror
-    ? publication?.mirrorOf?.stats?.totalAmountOfComments
-    : publication?.stats?.totalAmountOfComments;
+    ? publication?.mirrorOf?.stats?.totalAmountOfMirrors
+    : publication?.stats?.totalAmountOfMirrors;
   const collects = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfCollects
     : publication?.stats?.totalAmountOfCollects;
@@ -101,7 +103,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   }, [profile?.isFollowedByMe]);
 
   return (
-    <div className="justify-content break-word m-3 flex flex-col  rounded-xl border border-blue-700 bg-[#F2F6F9] dark:bg-black pb-0 md:pb-6">
+    <div className="divide-y-[1px] m-2 border border-blue-700 rounded-xl dark:divide-blue-700">
       <div className="break-word flex flex-row ">
         <div className="break-word mt-4 flex-auto cursor-pointer gap-3 rounded p-2 font-semibold">
           <Link href={`/u/${profile.id}`} key={profile.id} />
@@ -172,28 +174,9 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
         )}
       </div>
 
-      <div className="ml-4 flex flex-row space-x-3 py-3">
-        <p className="text-black dark:text-white block  pl-1 text-xs font-semibold">
-          {' '}
-          {likes} Likes
-        </p>
-        <p className="text-black dark:text-white block  text-xs font-semibold">
-          {' '}
-          {comments} Comments
-        </p>
-        <p className="text-black dark:text-white block  text-xs font-semibold">
-          {' '}
-          {mirrors} Mirrors
-        </p>
-        <p className="text-black dark:text-white block text-xs font-semibold">
-          {' '}
-          {collects} Collects
-        </p>
-      </div>
-
       <div className="ml-auto flex">
         <button className="block pb-2 pr-2 ">
-          <LikeButton publication={publication as Publication} />
+          <Like showCount={false} publication={publication as Publication} />
         </button>
         <button className="mt-0.5 block pb-2 pr-2">
           <ShareMenu
@@ -202,17 +185,13 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           />
         </button>
         <button className="block  pb-2 pr-2">
-          <CommentButton publication={publication as Publication} />
+          <Comment showCount
+           publication={publication as Publication} />
         </button>
         <button className="block   pb-2  pr-2 lg:mb-3.5 xl:mb-3.5">
           <Collect publication={publication as Publication} showCount={true} />
         </button>
-        <button
-          className="block pb-2 pr-2 md:mt-2 lg:mb-3 xl:mb-3"
-          onClick={() => setShowShare(true)}
-        >
-          <ShareButton publication={publication as Publication} />
-        </button>
+        
       </div>
     </div>
   );

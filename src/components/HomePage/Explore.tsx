@@ -20,7 +20,7 @@ import { useInView } from 'react-cool-inview';
 
 import ByteVideo from '@/components/Bytes/ByteVideo';
 import MetaTags from '../UI/MetaTags';
-import { useAppStore } from '@/store/app';
+import { useAppStore, useTransactionPersistStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
@@ -43,6 +43,10 @@ import NewPost from '../Composer/Post/New';
 import { Modal } from '../UI/Modal';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
+import { Card } from '../UI/Card';
+import SinglePublication from '../Composer/SinglePublication2';
+import QueuedPublication from '../Composer/QueuedPublication';
+import { OptmisticPublicationType } from '@/enums';
 
 const Explore = () => {
   const router = useRouter();
@@ -51,6 +55,7 @@ const Explore = () => {
   const currentViewingId = useAppStore((state) => state.currentviewingId);
   const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
   const [byte, setByte] = useState<Publication>();
+  const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const [following, setFollowing] = useState(false);
   const setShowNewPostModal = useGlobalModalStateStore(
     (state) => state.setShowNewModal
@@ -205,24 +210,28 @@ const Explore = () => {
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
       
-      {full()}
-      <div
-        ref={bytesContainer}
-        className="h-screen border-0 md:h-[calc(100vh-70px)]"
-      >
-        {bytes?.map((video: Publication, index) => (
-          <VideoCard
-            publication={video}
-            key={`${video?.id}_${video.createdAt}1`}
-            onDetail={openDetail}
-          />
-        ))}
-        {pageInfo?.next && (
-          <span ref={observe} className="flex  justify-center p-10">
-            <Loading />
-          </span>
-        )}
-      </div>
+      <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
+    {txnQueue.map(
+      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
+        <div key={txn.id}>
+          <QueuedPublication txn={txn} />
+        </div>
+      )
+    )}
+    {bytes?.map((publication, index) => (
+      <SinglePublication
+        profile={currentProfile as Profile}
+        key={`${publication?.id}_${index}`}
+        isFirst={index === 0}
+        isLast={index === bytes.length - 1}
+        publication={publication as Publication} />
+    ))}
+   {pageInfo?.next && (
+      <span ref={observe} className="flex  justify-center p-10">
+        <Loading />
+      </span>
+    )}
+  </Card>
     </div>
   );
 };

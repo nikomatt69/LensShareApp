@@ -125,7 +125,7 @@ const Notifications = () => {
   });
 
   return (
-    <div className="mx-auto md:container truncate break-words md:max-w-3xl md:p-0">
+    <div className=" md:container truncate break-words border-blue-700 md:max-w-3xl md:p-0">
       <MetaTags title={`Notifications • ${APP_NAME}`} />
 
 

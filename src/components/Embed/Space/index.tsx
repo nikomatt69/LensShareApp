@@ -65,10 +65,11 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
       <div className="mt-2 space-y-3">
-        <b className="text-lg">{metadata.content}</b>
+        <b className="text-sm">{metadata.content}</b>
         <Button
           className="!mt-4 flex w-full justify-center"
           disabled={signing}
+          size="sm"
           icon={
             signing ? (
               <Spinner size="xs" className="mr-1" />

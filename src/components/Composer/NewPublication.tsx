@@ -19,7 +19,8 @@ import {
   ALLOWED_VIDEO_TYPES,
   APP_NAME,
   LENSHUB_PROXY,
-  LIT_PROTOCOL_ENV
+  LIT_PROTOCOL_ENV,
+  LIT_PROTOCOL_ENVIRONMENT
 } from '@/constants';
 
 import type {
@@ -215,7 +216,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     restricted,
     followToView,
     collectToView,
-    superfluidToView,
     reset: resetAccessSettings
   } = useAccessSettingsStore((state) => state);
 
@@ -631,13 +631,13 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     const tokenGatedSdk = await LensGatedSDK.create({
       provider: publicClient as any,
       signer: walletClient as any,
-      env: LIT_PROTOCOL_ENV as LensEnvironment
+      env: LIT_PROTOCOL_ENVIRONMENT as LensEnvironment
     });
 
     // Connect to the SDK
     await tokenGatedSdk.connect({
       address: currentProfile.ownedBy,
-      env: LIT_PROTOCOL_ENV as LensEnvironment
+      env: LIT_PROTOCOL_ENVIRONMENT as LensEnvironment
     });
 
     // Condition for gating the content
@@ -740,7 +740,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
                   id: spaceId,
-                  host: currentProfile.ownedBy
+                  host: currentProfile?.id.ownedBy
                 })
               }
             ]

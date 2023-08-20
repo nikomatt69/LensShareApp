@@ -10,20 +10,21 @@ import {
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
-import { ProfileFeedType } from 'src/enums';
-import { useAppStore } from 'src/store/app';
+import { OptmisticPublicationType, ProfileFeedType } from 'src/enums';
+import { useAppStore, useTransactionPersistStore } from 'src/store/app';
 
 import { EmptyState } from '../UI/EmptyState';
 import formatHandle from '@/utils/functions/formatHandle';
 import { BsCollection } from 'react-icons/bs';
 import { ErrorMessage } from '../ErrorMessage';
 import { Card } from '../UI/Card';
-import SinglePublication from '../Composer/SinglePublication';
+import SinglePublication from '../Composer/SinglePublication2';
 import PublicationHeader from '../Composer/PublicationHeader';
 import { useProfileFeedStore } from '@/store/profile-feed';
 import PublicationActions from '../Publication/Actions';
 import VideoCard from '../HomePage/VideoCard';
 import Loading from '../Loading';
+import QueuedPublication from '../Composer/QueuedPublication';
 
 interface FeedProps {
   profile: Profile;
@@ -56,6 +57,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
     }
     return filters;
   };
+  const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
 
   // Variables
   const publicationTypes =
@@ -151,27 +153,28 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
   }
 
   return (
-    <Card
-      className=" m-1 divide-y-1 rounded-xl border-1 p-2"
-      dataTestId={`profile-feed-type-${type.toLowerCase()}`}
-    >
-      {publications?.map((publication, index) => (
-        <VideoCard
-          publication={publication as Publication}
-          key={`${publication.id}_${index}`}
-          onDetail={function (video: Publication): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
-      ))}
-      {pageInfo?.next && (
-        <span ref={observe} className="flex  justify-center p-10">
-          <Loading />
-        </span>
-      )}
-
-      {hasMore && <span ref={observe} />}
-    </Card>
+    <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
+    {txnQueue.map(
+      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
+        <div key={txn.id}>
+          <QueuedPublication txn={txn} />
+        </div>
+      )
+    )}
+    {publications?.map((publication, index) => (
+      <SinglePublication
+        profile={currentProfile as Profile}
+        key={`${publication?.id}_${index}`}
+        isFirst={index === 0}
+        isLast={index === publications.length - 1}
+        publication={publication as Publication} />
+    ))}
+   {pageInfo?.next && (
+      <span ref={observe} className="flex  justify-center p-10">
+        <Loading />
+      </span>
+    )}
+  </Card>
   );
 };
 
