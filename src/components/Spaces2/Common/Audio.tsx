@@ -1,15 +1,13 @@
+import type { AudioHTMLAttributes, DetailedHTMLProps, FC } from 'react';
 import React, { useEffect, useRef } from 'react';
 
 interface IAudioProps {
   track?: MediaStreamTrack;
 }
 
-const Audio: React.FC<
+const Audio: FC<
   IAudioProps &
-    React.DetailedHTMLProps<
-      React.AudioHTMLAttributes<HTMLAudioElement>,
-      HTMLAudioElement
-    >
+    DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>
 > = ({ track }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -36,7 +34,7 @@ const Audio: React.FC<
         console.error('audioCard() | Error is hapenning...');
       };
     }
-  }, []);
+  }, [track]);
 
   return <audio ref={audioRef}>Audio</audio>;
 };

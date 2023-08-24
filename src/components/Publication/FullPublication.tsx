@@ -16,11 +16,13 @@ import PublicationType from './Type';
 interface FullPublicationProps {
   publication: Publication;
   profile: Profile;
+  showCount:boolean
 }
 
 const FullPublication: FC<FullPublicationProps> = ({
   publication,
-  profile
+  profile,
+  showCount
 }) => {
   const isMirror = publication.__typename === 'Mirror';
   const timestamp = isMirror
@@ -66,7 +68,7 @@ const FullPublication: FC<FullPublicationProps> = ({
                 </>
               )}
               <div className="divider" />
-              <PublicationActions publication={publication} showCount />
+              <PublicationActions publication={publication} showCount={showCount} />
             </>
           )}
         </div>

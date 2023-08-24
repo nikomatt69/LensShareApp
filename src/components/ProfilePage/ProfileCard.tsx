@@ -86,13 +86,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showUserAudio, setShowUserAudio] = useState<Boolean>(true);
-  const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewModal
-  );
 
-  const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewModal
-  );
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
 
   const itsNotMe = profile?.id !== currentProfile?.id;

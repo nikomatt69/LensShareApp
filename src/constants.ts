@@ -72,7 +72,7 @@ export const OEMBED_WORKER_URL = IS_PRODUCTION
   : 'http://localhost:8087';
 export const SPACES_WORKER_URL = IS_PRODUCTION
   ? 'https://spaces.lenshareapp.xyz'
-  : 'http://localhost:8088';
+  : 'https://spaces.lenshareapp.xyz';
 export const LEAFWATCH_WORKER_URL = IS_PRODUCTION
   ? 'https://leafwatch.lenster.xyz'
   : 'http://localhost:8089';

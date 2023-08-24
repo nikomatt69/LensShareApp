@@ -19,6 +19,7 @@ import Loading from '../Loading';
 import ProfileCard from './ProfileCard';
 import Profiles from './Profiles';
 import { useUserProfilesQuery } from '@/types/graph';
+import Loader from '../UI/Loader';
 
 const ProfileRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -111,7 +112,7 @@ const ProfileRender = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (

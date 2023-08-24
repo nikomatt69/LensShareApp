@@ -62,7 +62,7 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { OptmisticPublicationType } from 'src/enums';
+import { NewPublicationTypes, OptmisticPublicationType } from 'src/enums';
 
 import {
   useAppStore,
@@ -104,11 +104,17 @@ import { LENS_HUB_ABI } from '@/abi/abi';
 import useCreatePoll from '@/lib/useCreatePoll';
 import useCreateSpace from '@/lib/useCreateSpace';
 import QuotedPublication from './QuotedPublication';
-import { ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
 import { useNonceStore } from '@/store/nonce';
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/20/solid';
+import Discard from './Post/Discard';
+import Dropdown from '../Spaces2/Common/Dropdown';
+import { Input } from '../UI/Input';
+import { Icons } from '../Spaces2/Common/assets/Icons';
+import { useUnmountEffect } from 'framer-motion';
+import { useSpacesStore } from '@/store/spaces';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -162,16 +168,22 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   // Modal store
-  const { setShowNewModal, showNewModal, modalPublicationType } =
-  useGlobalModalStateStore();
+  // Modal store
+  const {
+    setShowNewPublicationModal,
+    showNewPublicationModal,
+    modalPublicationType
+  } = useGlobalModalStateStore();
 
-  const setShowNewSpacesModal = useGlobalModalStateStore(
-    (state) => state.setShowNewSpacesModal
+  const {
+    setSpacesTimeInHour,
+    setSpacesTimeInMinute,
+    spacesTimeInHour,
+    spacesTimeInMinute
+  } = useSpacesStore();
+  const setShowDiscardModal = useGlobalModalStateStore(
+    (state) => state.setShowDiscardModal
   );
-  const showNewSpacesModal = useGlobalModalStateStore(
-    (state) => state.showNewSpacesModal
-  );
-
   // Nonce store
   const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
 
@@ -197,49 +209,47 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     pollConfig
   } = usePublicationStore((state) => state);
 
-  // Transaction persist store
-  const { txnQueue, setTxnQueue } = useTransactionPersistStore(
-    (state) => state
-  );
+ // Transaction persist store
+ const { txnQueue, setTxnQueue } = useTransactionPersistStore(
+  (state) => state
+);
 
-  // Collect module store
-  const { collectModule, reset: resetCollectSettings } = useCollectModuleStore(
-    (state) => state
-  );
+// Collect module store
+const { collectModule, reset: resetCollectSettings } = useCollectModuleStore(
+  (state) => state
+);
 
-  // Reference module store
-  const { selectedReferenceModule, onlyFollowers, degreesOfSeparation } =
-    useReferenceModuleStore((state) => state);
+// Reference module store
+const { selectedReferenceModule, onlyFollowers, degreesOfSeparation } =
+  useReferenceModuleStore();
 
-  // Access module store
-  const {
-    restricted,
-    followToView,
-    collectToView,
-    reset: resetAccessSettings
-  } = useAccessSettingsStore((state) => state);
+// Access module store
+const {
+  restricted,
+  followToView,
+  collectToView,
+  reset: resetAccessSettings
+} = useAccessSettingsStore();
 
-  // States
-  const [isLoading, setIsLoading] = useState(false);
-  const [publicationContentError, setPublicationContentError] = useState('');
+// States
+const [isLoading, setIsLoading] = useState(false);
+const [publicationContentError, setPublicationContentError] = useState('');
 
-  const [editor] = useLexicalComposerContext();
-  const publicClient = usePublicClient();
-  const { data: walletClient } = useEthersWalletClient();
-  const [createPoll] = useCreatePoll();
-  const [createSpace] = useCreateSpace();
-  const [isRecordingOn, setIsRecordingOn] = useState(false);
-  const [isTokenGated, setIsTokenGated] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedDropdown, setSelectedDropdown] = useState<string>('');
+const [editor] = useLexicalComposerContext();
+const publicClient = usePublicClient();
+const { data: walletClient } = useEthersWalletClient();
+const [createPoll] = useCreatePoll();
+const [createSpace] = useCreateSpace();
 
-  const isComment = Boolean(publication);
-  const hasAudio = ALLOWED_AUDIO_TYPES.includes(
-    attachments[0]?.original.mimeType
-  );
-  const hasVideo = ALLOWED_VIDEO_TYPES.includes(
-    attachments[0]?.original.mimeType
-  );
+const isComment = Boolean(publication);
+const hasAudio = ALLOWED_AUDIO_TYPES.includes(
+  attachments[0]?.original.mimeType
+);
+const hasVideo = ALLOWED_VIDEO_TYPES.includes(
+  attachments[0]?.original.mimeType
+);
+
+// Dispatcher
 
   // Dispatcher
   const canUseRelay = currentProfile?.dispatcher?.canUseRelay;
@@ -248,6 +258,13 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const onCompleted = (__typename?: 'RelayError' | 'RelayerResult') => {
     if (__typename === 'RelayError') {
       return;
+    }
+
+    if (
+      showNewPublicationModal &&
+      modalPublicationType === NewPublicationTypes.Spaces
+    ) {
+      toast.success('Spaces created successfully!');
     }
 
     setIsLoading(false);
@@ -266,10 +283,11 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     });
     resetCollectSettings();
     resetAccessSettings();
+
     if (!isComment) {
-      setShowNewModal(false, PublicationTypes.Post);
+      setShowNewPublicationModal(false, NewPublicationTypes.Post);
     }
-    setShowNewSpacesModal(false);
+    setShowNewPublicationModal(false, NewPublicationTypes.Spaces);
 
     // Track in leafwatch
     const eventProperties = {
@@ -723,9 +741,21 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
 
       // Create Space in Huddle
       let spaceId = null;
-      if (showNewSpacesModal) {
+      if (
+        showNewPublicationModal &&
+        modalPublicationType === NewPublicationTypes.Spaces
+      ) {
         spaceId = await createSpace();
       }
+
+      const now = new Date();
+      now.setHours(Number(spacesTimeInHour));
+      now.setMinutes(Number(spacesTimeInMinute));
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const formattedTime = new Date(
+        now.toLocaleString('en', { timeZone: userTimezone })
+      );
+      const startTime = formattedTime.toISOString();
 
       const attributes: MetadataAttributeInput[] = [
         {
@@ -733,14 +763,16 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
           displayType: PublicationMetadataDisplayTypes.String,
           value: getMainContentFocus()?.toLowerCase()
         },
-        ...(showNewSpacesModal
+        ...(showNewPublicationModal &&
+        modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
                   id: spaceId,
-                  host: currentProfile?.id.ownedBy
+                  host: currentProfile.ownedBy,
+                  startTime: startTime
                 })
               }
             ]
@@ -822,7 +854,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
           : isRevertCollectModule);
 
       let arweaveId = null;
-      console.log('restricted', restricted);
       if (restricted) {
         arweaveId = await createTokenGatedMetadata(metadata);
       } else {
@@ -910,92 +941,143 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
       pollConfig.choices.some((choice) => !choice.length)
     : false;
 
+  const onDiscardClick = () => {
+    setShowNewPublicationModal(false, NewPublicationTypes.Post);
+    setShowDiscardModal(false);
+  };
+
+  useUnmountEffect(() => {
+    setPublicationContent('');
+    setShowPollEditor(false);
+    resetPollConfig();
+    setAttachments([]);
+    setVideoThumbnail({
+      url: '',
+      type: '',
+      uploading: false
+    });
+    resetCollectSettings();
+    resetAccessSettings();
+  });
+
   return (
     <Card
-    className={clsx(
-      { '!rounded-b-xl !rounded-t-none border-none': !isComment },
-      'pb-3'
-    )}
-  >
-    {error && (
-      <ErrorMessage
-        className="!rounded-none"
-        title={`Transaction failed!`}
-        error={error}
-      />
-    )}
-    <Editor />
-    {publicationContentError && (
-      <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
-        {publicationContentError}
-      </div>
-    )}
-    {showPollEditor && <PollEditor />}
-    {quotedPublication ? (
-      <Wrapper className="m-5" zeroPadding>
-        <QuotedPublication profile={profile} publication={quotedPublication} isNew />
-      </Wrapper>
-    ) : null}
-    {showNewSpacesModal ? (
-      <SpaceSettings>
-        <div className="ml-auto pt-2 sm:pt-0">
-          <Button
-            disabled={isLoading}
-            icon={
-              isLoading ? (
-                <Spinner size="xs" />
-              ) : (
-                <MicrophoneIcon className="h-4 w-4" />
-              )
-            }
-            onClick={createPublication}
-          >
-            Create spaces
-          </Button>
+      className={clsx(
+        { '!rounded-b-xl !rounded-t-none border-none': !isComment },
+        'pb-3'
+      )}
+    >
+      {error && (
+        <ErrorMessage
+          className="!rounded-none"
+          title={`Transaction failed!`}
+          error={error}
+        />
+      )}
+      <Editor />
+      {publicationContentError && (
+        <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
+          {publicationContentError}
         </div>
-      </SpaceSettings>
-    ) : (
+      )}
+      {showPollEditor && <PollEditor />}
+      {quotedPublication ? (
+        <Wrapper className="m-5" zeroPadding>
+          <QuotedPublication profile={profile} publication={quotedPublication} isNew />
+        </Wrapper>
+      ) : null}
       <div className="block items-center px-5 sm:flex">
-        <div className="flex items-center space-x-4">
-          <Attachment />
-          <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-          {!publication?.isDataAvailability && (
-            <>
-              <CollectSettings />
-              <ReferenceSettings />
-              <AccessSettings />
-            </>
-          )}
-          <PollSettings />
-        </div>
-        <div className="ml-auto pt-2 sm:pt-0">
-          <Button
-            disabled={
-              isLoading ||
-              isUploading ||
-              isSubmitDisabledByPoll ||
-              videoThumbnail.uploading
-            }
-            icon={
-              isLoading ? (
-                <Spinner size="xs" />
-              ) : isComment ? (
-                <ChatBubbleOvalLeftIcon className="h-4 w-4" />
-              ) : (
-                <PencilIcon className="h-4 w-4" />
-              )
-            }
-            onClick={createPublication}
-          >
-            {isComment ? `Comment` : `Post`}
-          </Button>
+        {showNewPublicationModal &&
+        modalPublicationType === NewPublicationTypes.Spaces ? (
+          <SpaceSettings />
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Attachment />
+            <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
+            {!publication?.isDataAvailability && (
+              <>
+                <CollectSettings />
+                <ReferenceSettings />
+                <AccessSettings />
+              </>
+            )}
+            <PollSettings />
+          </div>
+        )}
+        <div className="absolute  inline-flex">
+          <div className="ml-auto pt-2 sm:pt-0">
+            <Button
+              disabled={
+                isLoading ||
+                isUploading ||
+                isSubmitDisabledByPoll ||
+                videoThumbnail.uploading
+              }
+              icon={
+                isLoading ? (
+                  <Spinner size="xs" />
+                ) : isComment ? (
+                  <ChatBubbleOvalLeftEllipsisIcon className="h-4 w-4" />
+                ) : showNewPublicationModal &&
+                  modalPublicationType === NewPublicationTypes.Spaces ? (
+                  <MicrophoneIcon className="h-4 w-4" />
+                ) : (
+                  <PencilIcon className="h-4 w-4" />
+                )
+              }
+              onClick={createPublication}
+            >
+              {isComment
+                ? `Comment`
+                : showNewPublicationModal &&
+                  modalPublicationType === NewPublicationTypes.Spaces
+                ? `Create spaces`
+                : `Post`}
+            </Button>
+          </div>
+          {showNewPublicationModal &&
+            modalPublicationType === NewPublicationTypes.Spaces && (
+              <Dropdown
+                triggerChild={
+                  <div className="ml-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-violet-500 p-1">
+                    <div className="text-brand-500 relative h-6 w-6">
+                      {Icons.calendar}
+                    </div>
+                  </div>
+                }
+              >
+                <div className="absolute -left-4 top-10 w-[12rem] translate-x-1/2 items-start justify-center gap-4 rounded-lg border border-neutral-300 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+                  <Input
+                    type="time"
+                    onChange={(e) => {
+                      const [hour, minute] = e.target.value.split(':');
+                      setSpacesTimeInHour(hour);
+                      setSpacesTimeInMinute(minute);
+                    }}
+                  />
+                  <div className="mt-4 inline-flex w-full items-center justify-center gap-1 self-stretch rounded-lg bg-violet-500 p-2">
+                    {isLoading ? (
+                      <Spinner size="xs" />
+                    ) : (
+                      <CalendarIcon className="h-4 w-4 text-neutral-50" />
+                    )}
+                    <button
+                      className="flex items-center justify-center text-sm font-semibold leading-none text-neutral-50"
+                      onClick={createPublication}
+                    >
+                      Schedule Spaces
+                    </button>
+                  </div>
+                </div>
+              </Dropdown>
+            )}
         </div>
       </div>
-    )}
-    <div className="px-5">
-      <Attachments attachments={attachments} isNew />
-    </div>
-  </Card>
+      <div className="px-5">
+        <Attachments attachments={attachments} isNew />
+      </div>
+      <Discard onDiscard={onDiscardClick} />
+    </Card>
   );
 };
 

@@ -200,7 +200,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
         ))}
         {pageInfo?.next && (
           <span ref={observe} className="flex  justify-center p-10">
-            <Loading />
+            <Loader />
           </span>
         )}
       </div>

@@ -1,3 +1,4 @@
+import { MusicTrack, TokenGateCondition } from 'src/enums';
 import { create } from 'zustand';
 
 export type TSidebarView = 'close' | 'peers';
@@ -13,6 +14,14 @@ interface SpacesState {
   setIsRecordingOn: (isRecordingOn: boolean) => void;
   isTokenGated: boolean;
   setIsTokenGated: (isTokenGated: boolean) => void;
+  tokenGateConditionType: TokenGateCondition;
+  setTokenGateConditionType: (
+    tokenGateConditionType: TokenGateCondition
+  ) => void;
+  tokenGateConditionValue: string;
+  setTokenGateConditionValue: (tokenGateConditionValue: string) => void;
+  myReaction: string;
+  setMyReaction: (myReaction: string) => void;
   space: {
     id: string;
     host: string;
@@ -26,9 +35,17 @@ interface SpacesState {
   setSidebarView: (val: TSidebarView) => void;
   isMyHandRaised: boolean;
   setMyHandRaised: (val: boolean) => void;
+  myMusicTrack: MusicTrack;
+  setMyMusicTrack: (val: MusicTrack) => void;
+  isMyMusicPlaying: boolean;
+  setIsMyMusicPlaying: (val: boolean) => void;
   requestedPeers: string[];
   addRequestedPeers: (val: string) => void;
   removeRequestedPeers: (val: string) => void;
+  spacesTimeInHour: string;
+  setSpacesTimeInHour: (val: string) => void;
+  spacesTimeInMinute: string;
+  setSpacesTimeInMinute: (val: string) => void;
 }
 
 export const useSpacesStore = create<SpacesState>((set, get) => ({
@@ -42,6 +59,12 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
   setIsRecordingOn: (isRecordingOn) => set(() => ({ isRecordingOn })),
   isTokenGated: false,
   setIsTokenGated: (isTokenGated) => set(() => ({ isTokenGated })),
+  tokenGateConditionValue: '',
+  setTokenGateConditionValue: (tokenGateConditionValue) =>
+    set(() => ({ tokenGateConditionValue })),
+  tokenGateConditionType: TokenGateCondition.HAVE_A_LENS_PROFILE,
+  setTokenGateConditionType: (tokenGateConditionType) =>
+    set(() => ({ tokenGateConditionType })),
   space: {
     id: '',
     host: '',
@@ -52,6 +75,10 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
     sidebarView: 'close'
   },
   isMyHandRaised: false,
+  myMusicTrack: MusicTrack.DEFAULT,
+  setMyMusicTrack: (myMusicTrack) => set(() => ({ myMusicTrack })),
+  isMyMusicPlaying: false,
+  setIsMyMusicPlaying: (isMyMusicPlaying) => set(() => ({ isMyMusicPlaying })),
   requestedPeers: [],
   setSpace: (space) => set(() => ({ space })),
   setSidebarView(sidebarView: TSidebarView) {
@@ -82,5 +109,13 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
   removeRequestedPeers: (peerId) =>
     set((state) => ({
       requestedPeers: state.requestedPeers.filter((id) => id !== peerId)
-    }))
+    })),
+  myReaction: '',
+  setMyReaction: (myReaction) => set(() => ({ myReaction })),
+  spacesTimeInHour: '00',
+  setSpacesTimeInHour: (spacesTimeInHour) => set(() => ({ spacesTimeInHour })),
+  spacesTimeInMinute: '00',
+  setSpacesTimeInMinute: (spacesTimeInMinute) =>
+    set(() => ({ spacesTimeInMinute })),
+  isSpacesTimeInAM: true
 }));

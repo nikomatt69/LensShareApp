@@ -5,7 +5,7 @@ import {
   FollowersRequest,
   useFollowersLazyQuery
 } from '@/utils/lens/generatedLenster';
-import { Trans } from '@lingui/macro';
+
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppStore } from 'src/store/app';

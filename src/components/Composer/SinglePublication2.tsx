@@ -26,6 +26,7 @@ interface SinglePublicationProps {
   isFirst?: boolean;
   isLast?: boolean;
   profile: Profile;
+  showCount:boolean
 }
 
 const SinglePublication: FC<SinglePublicationProps> = ({
@@ -36,7 +37,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   showType = true,
   showActions = true,
   showModActions = false,
-
+  showCount= true,
   showMore = true,
   isFirst = false,
   isLast = false
@@ -84,6 +85,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
               <PublicationActions
                 publication={rootPublication}
                 electedMirror={feedItem?.electedMirror as ElectedMirror}
+                showCount={showCount}
               />
             )}
             

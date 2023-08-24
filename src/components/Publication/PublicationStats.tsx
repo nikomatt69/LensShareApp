@@ -24,10 +24,10 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
 
   const isMirror = publication.__typename === 'Mirror';
   const commentsCount = isMirror
-    ? publication?.mirrorOf?.stats?.commentsTotal
-    : publication?.stats?.commentsTotal;
+    ? publication?.mirrorOf?.stats?.totalAmountOfComments
+    : publication?.stats?.totalAmountOfMirrors;
   const mirrorCount = isMirror
-    ? publication?.mirrorOf?.stats?.totalAmountOfMirrors
+    ? publication?.mirrorOf?.stats?.totalAmountOfComments
     : publication?.stats?.totalAmountOfMirrors;
   const reactionCount = isMirror
     ? publication?.mirrorOf?.stats?.totalUpvotes
@@ -43,7 +43,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
       {mirrorCount > 0 && (
         <>
           <span data-testid="comment-stats">
-            <b className="text-black dark:text-white dark:text-blue-700">
+            <b className="text-black dark:text-blue-700">
               {nFormatter(commentsCount)}
             </b>{' '}
           </span>
@@ -54,7 +54,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="mirror-stats"
           >
-            <b className="text-black dark:text-white dark:text-blue-700">
+            <b className="text-black  dark:text-blue-700">
               {nFormatter(mirrorCount)}
             </b>{' '}
           </button>
@@ -64,7 +64,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             show={showMirrorsModal}
             onClose={() => setShowMirrorsModal(false)}
           >
-            <MirroredList publication={publication} publicationId={publicationId} />
+            <MirroredList publication={publication?.id} publicationId={publicationId} />
           </Modal>
         </>
       )}
@@ -77,7 +77,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="like-stats"
           >
-            <b className="text-black dark:text-white dark:text-blue-700">
+            <b className="text-black  dark:text-blue-700">
               {nFormatter(reactionCount)}
             </b>{' '}
           </button>
@@ -87,7 +87,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             show={showLikesModal}
             onClose={() => setShowLikesModal(false)}
           >
-            <LikeList publicationId={publicationId} publication={publication} />
+            <LikeList publicationId={publicationId} publication={publication?.id} />
           </Modal>
         </>
       )}
@@ -100,7 +100,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="collect-stats"
           >
-            <b className="text-black dark:text-white dark:text-blue-700">
+            <b className="text-black  dark:text-blue-700">
               {nFormatter(collectCount)}
             </b>{' '}
           </button>

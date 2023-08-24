@@ -124,6 +124,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
             isLast={index === comments.length - 1}
             publication={comment as Comment}
             showType={false}
+            showCount={true}
           />
         )
       )}

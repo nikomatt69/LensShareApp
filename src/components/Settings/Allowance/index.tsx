@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro';
+
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import Custom404 from 'src/pages/404';

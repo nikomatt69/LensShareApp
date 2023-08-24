@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import type { FC } from 'react';
 import React from 'react';
 
 import { PeerListIcons } from '../../../assets/Icons';
@@ -11,13 +12,13 @@ type StripProps = {
   onClick?: () => void;
 };
 
-const Strip: React.FC<StripProps> = ({ type, title, variant, onClick }) => {
+const Strip: FC<StripProps> = ({ type, title, variant, onClick }) => {
   return (
     <div
       className={clsx(
-        'flex cursor-pointer items-center gap-1 rounded-md bg-neutral-900 text-sm font-normal',
+        'flex cursor-pointer items-center gap-1 p-1 text-sm font-normal',
         variant === 'normal'
-          ? 'text-rgbColors-3'
+          ? 'text-neutral-500 dark:text-neutral-400'
           : ' hover:bg-rgbColors-4 text-red-400'
       )}
       onClick={onClick}

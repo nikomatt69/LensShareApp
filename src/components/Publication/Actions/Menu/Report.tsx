@@ -12,8 +12,8 @@ interface ReportProps {
 }
 
 const Report: FC<ReportProps> = ({ publication }) => {
-  const setShowReportModal = useGlobalModalStateStore(
-    (state) => state.setShowReportModal
+  const setShowPublicationReportModal = useGlobalModalStateStore(
+    (state) => state.setShowPublicationReportModal
   );
 
   return (
@@ -27,7 +27,7 @@ const Report: FC<ReportProps> = ({ publication }) => {
       }
       onClick={(event:any) => {
         stopEventPropagation(event);
-        setShowReportModal(true, publication);
+        setShowPublicationReportModal(true, publication);
       }}
     >
       <div className="flex items-center space-x-2">

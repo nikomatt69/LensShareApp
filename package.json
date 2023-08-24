@@ -46,6 +46,7 @@
     "@huddle01/iframe": "^0.0.7",
     "@huddle01/react": "^0.0.13",
     "@lens-protocol/sdk-gated": "^1.2.0",
+    "@lexical/markdown": "^0.12.0",
     "@lexical/react": "^0.11.2",
     "@lingui/core": "^4.2.1",
     "@lit-protocol/sdk-browser": "^1.1.238",

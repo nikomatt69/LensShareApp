@@ -30,6 +30,7 @@ import MetaTags from '../UI/MetaTags';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import Echos from '../Echos/EchosPage';
 import EchosPage from '@/pages/musicfeed';
+import Loader from '../UI/Loader';
 
 interface Props {
   profile: Profile;
@@ -140,7 +141,7 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (

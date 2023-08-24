@@ -11,6 +11,7 @@ import VideoCard from '../HomePage/VideoCard';
 import Video from '../HomePage/Video';
 import Loading from '../Loading';
 import { useInView } from 'react-cool-inview';
+import Loader from '../UI/Loader';
 
 interface Props {
   query: string | string[];
@@ -73,7 +74,7 @@ const SearchPublications: FC<Props> = ({ query }) => {
       ))}
       {pageInfo?.next && (
         <span ref={observe} className="flex justify-center border-0 p-10">
-          <Loading />
+          <Loader />
         </span>
       )}
     </div>

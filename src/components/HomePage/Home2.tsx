@@ -42,7 +42,7 @@ import EchosPage from '@/pages/musicfeed';
 import Echos from '../Echos/EchosPage';
 import Audio from '../Echos/Audio';
 import LoginButton from '../Login/LoginButton';
-import Meet from '../Meet';
+
 import { useTheme } from 'next-themes';
 
 const Home2: NextPage = () => {

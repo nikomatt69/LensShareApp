@@ -17,6 +17,7 @@ import { Modal } from '../UI/Modal';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
 import { SCROLL_ROOT_MARGIN } from '@/constants';
+import Loader from '../UI/Loader';
 
 
 const Timeline: FC = () => {
@@ -28,12 +29,7 @@ const Timeline: FC = () => {
   const seeThroughProfile = useTimelineStore(
     (state) => state.seeThroughProfile
   );
-  const setShowNewModal = useGlobalModalStateStore(
-    (state) => state.setShowNewModal
-  );
-  const showNewModal = useGlobalModalStateStore(
-    (state) => state.showNewModal
-  );
+
 
   const getFeedEventItems = () => {
     const filters: FeedEventItemType[] = [];
@@ -91,7 +87,7 @@ const Timeline: FC = () => {
   });
 
   if (loading) {
-    return <Loading />;
+    return <Loader />;
   }
 
   if (publications?.length === 0) {
@@ -123,11 +119,12 @@ const Timeline: FC = () => {
             isFirst={index === 0}
             isLast={index === publications.length - 1}
             feedItem={publication as FeedItem}
-            publication={publication.root as Publication} />
+            publication={publication.root as Publication}
+            showCount={true} />
         ))}
        {pageInfo?.next && (
           <span ref={observe} className="flex  justify-center p-10">
-            <Loading />
+            <Loader />
           </span>
         )}
       </Card>

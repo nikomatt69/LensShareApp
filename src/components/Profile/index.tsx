@@ -37,6 +37,7 @@ import ProfileImage from '../Bytes/ProfileImage';
 
 import Stories from '../Bytes/Stories';
 import StoriesRender from '../Bytes/Stories';
+import Loader from '../UI/Loader';
 
 const ViewProfile: NextPage = (publication) => {
   const {
@@ -115,7 +116,7 @@ const ViewProfile: NextPage = (publication) => {
   }
 
   if (loading || !data) {
-    return <Loading />;
+    return <Loader />;
   }
 
   if (!data?.profile) {

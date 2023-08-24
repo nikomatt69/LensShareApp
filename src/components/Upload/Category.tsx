@@ -1,5 +1,5 @@
 import { useAppStore } from '@/store/app';
-import { Trans } from '@lingui/macro';
+
 import React, { Fragment } from 'react';
 import CheckOutline from '../UI/Icons/CheckOutline';
 import { Listbox, Transition } from '@headlessui/react';

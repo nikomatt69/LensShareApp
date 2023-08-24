@@ -1,3 +1,4 @@
+import { NewPublicationTypes } from '@/enums';
 import { Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
@@ -5,7 +6,6 @@ import type { FC } from 'react';
 import { HiAnnotation } from 'react-icons/hi';
 import { useGlobalModalStateStore } from 'src/store/modals';
 import { usePublicationStore } from 'src/store/publication4';
-
 interface QuoteProps {
   publication: Publication;
 }
@@ -16,8 +16,8 @@ const Quote: FC<QuoteProps> = ({ publication }) => {
     ? publication.mirrorOf.__typename
     : publication.__typename;
 
-  const setShowNewModal = useGlobalModalStateStore(
-    (state) => state.setShowNewModal
+  const setShowNewPublicationModal = useGlobalModalStateStore(
+    (state) => state.setShowNewPublicationModal
   );
   const setQuotedPublication = usePublicationStore(
     (state) => state.setQuotedPublication
@@ -34,13 +34,17 @@ const Quote: FC<QuoteProps> = ({ publication }) => {
       }
       onClick={() => {
         setQuotedPublication(publication);
-        setShowNewModal(true, PublicationTypes.Post);
+        setShowNewPublicationModal(true, NewPublicationTypes.Post);
       }}
     >
       <div className="flex items-center space-x-2">
         <HiAnnotation className="h-4 w-4" />
         <div>
-          {publicationType === 'Comment' ? 'Quote comment' : 'Quote post'}
+          {publicationType === 'Comment' ? (
+            'Quote comment'
+          ) : (
+           'Quote post'
+          )}
         </div>
       </div>
     </Menu.Item>

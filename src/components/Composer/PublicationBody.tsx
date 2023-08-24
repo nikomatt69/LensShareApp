@@ -17,6 +17,7 @@ import DecryptedPublicationBody from '../Publication/DecryptedPublicationBody';
 import Space from '../Embed/Space';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { useSpacesStore } from '@/store/spaces';
+import PreviewSpaces from '../Spaces2/PreviewSpaces/PreviewSpaces';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -60,6 +61,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       }
     }
   }
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   if (metadata?.encryptionParams) {
     return <DecryptedPublicationBody encryptedPublication={publication} />;
@@ -103,6 +105,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
      {showSpacesLobby ? (<Space publication={publication} />):(null)}
+     {showSpacesWindow ? (<PreviewSpaces />):(null)}
       {showOembed ? <Oembed url={urls[0]} /> : null}
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />

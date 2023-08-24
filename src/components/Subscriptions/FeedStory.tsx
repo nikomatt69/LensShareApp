@@ -152,7 +152,7 @@ const FeedStory = () => {
 
             {pageInfo?.next && (
               <span ref={observe} className="flex justify-center border-0 ">
-                <Loading />
+                <Loader />
               </span>
             )}
           </div>

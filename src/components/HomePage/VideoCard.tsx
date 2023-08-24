@@ -176,7 +176,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
 
       <div className="ml-auto flex">
         <button className="block pb-2 pr-2 ">
-          <Like showCount={false} publication={publication as Publication} />
+          <Like showCount={true} publication={publication as Publication} />
         </button>
         <button className="mt-0.5 block pb-2 pr-2">
           <ShareMenu
@@ -185,7 +185,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           />
         </button>
         <button className="block  pb-2 pr-2">
-          <Comment showCount
+          <Comment showCount={true}
            publication={publication as Publication} />
         </button>
         <button className="block   pb-2  pr-2 lg:mb-3.5 xl:mb-3.5">

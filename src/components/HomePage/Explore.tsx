@@ -57,12 +57,7 @@ const Explore = () => {
   const [byte, setByte] = useState<Publication>();
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const [following, setFollowing] = useState(false);
-  const setShowNewPostModal = useGlobalModalStateStore(
-    (state) => state.setShowNewModal
-  );
-  const showNewPostModal = useGlobalModalStateStore(
-    (state) => state.showNewModal
-  );
+
 
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const request = {
@@ -224,11 +219,12 @@ const Explore = () => {
         key={`${publication?.id}_${index}`}
         isFirst={index === 0}
         isLast={index === bytes.length - 1}
-        publication={publication as Publication} />
+        publication={publication as Publication} 
+        showCount={true}/>
     ))}
    {pageInfo?.next && (
       <span ref={observe} className="flex  justify-center p-10">
-        <Loading />
+        <Loader />
       </span>
     )}
   </Card>

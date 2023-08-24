@@ -20,6 +20,7 @@ import Footer from '../Sidebar/Footer';
 import BottomNav from '../Navs/BottomNav';
 import Navbar from '../Navbar';
 import Loading from '../Loading';
+import Loader from '../UI/Loader';
 
 const ViewPublication: NextPage = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -44,7 +45,7 @@ const ViewPublication: NextPage = (profile) => {
   }
 
   if (loading || !data) {
-    return <Loading />;
+    return <Loader />;
   }
 
   if (!data.publication) {
@@ -74,6 +75,7 @@ const ViewPublication: NextPage = (profile) => {
             <FullPublication
               profile={profile as Profile}
               publication={publication}
+              showCount={true}
             />
           </Card>
           {currentProfile && !publication?.hidden}

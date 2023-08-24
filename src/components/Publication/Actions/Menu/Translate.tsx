@@ -2,7 +2,6 @@ import stopEventPropagation from '@/lib/stopEventPropagation';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 
-import { Trans } from '@lingui/macro';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';

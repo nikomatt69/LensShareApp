@@ -21,6 +21,7 @@ import TabButton from '@/components/Profile/TabButton';
 import { Card } from '@/components/UI/Card';
 import { CubeIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import ProfileSettingsForm from './Profile';
+import Loader from '@/components/UI/Loader';
 
 const ProfileSettings: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -40,7 +41,7 @@ const ProfileSettings: NextPage = () => {
   }
 
   if (loading) {
-    return <Loading />;
+    return <Loader />;
   }
 
   if (!currentProfile) {

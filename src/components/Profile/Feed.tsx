@@ -25,6 +25,7 @@ import PublicationActions from '../Publication/Actions';
 import VideoCard from '../HomePage/VideoCard';
 import Loading from '../Loading';
 import QueuedPublication from '../Composer/QueuedPublication';
+import Loader from '../UI/Loader';
 
 interface FeedProps {
   profile: Profile;
@@ -118,7 +119,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
   });
 
   if (loading) {
-    return <Loading />;
+    return <Loader />;
   }
 
   if (publications?.length === 0) {
@@ -167,11 +168,12 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
         key={`${publication?.id}_${index}`}
         isFirst={index === 0}
         isLast={index === publications.length - 1}
-        publication={publication as Publication} />
+        publication={publication as Publication}
+        showCount={true} />
     ))}
    {pageInfo?.next && (
       <span ref={observe} className="flex  justify-center p-10">
-        <Loading />
+        <Loader />
       </span>
     )}
   </Card>

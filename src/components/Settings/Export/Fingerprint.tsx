@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+
 import type { FC } from 'react';
 
 import { Card } from '@/components/UI/Card';

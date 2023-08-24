@@ -1,50 +1,50 @@
-import { Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
+import { NewPublicationTypes } from '@/enums';
+import { Profile, Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
 import { create } from 'zustand';
 
 interface GlobalModalState {
   showAuthModal: boolean;
   setShowAuthModal: (showAuthModal: boolean) => void;
-  showNewModal: boolean;
-  showNewPostModal: boolean;
-  setShowNewPostModal: (showNewPostModal: boolean) => void;
-  modalPublicationType: PublicationTypes;
-  setShowNewModal: (
-    showNewModal: boolean,
-    modalPublicationType: PublicationTypes
+  showNewPublicationModal: boolean;
+  modalPublicationType: NewPublicationTypes;
+  setShowNewPublicationModal: (
+    showNewPublicationModal: boolean,
+    modalPublicationType: NewPublicationTypes
   ) => void;
-  showReportModal: boolean;
-  reportingPublication: Publication | null;
-  reportConfig: any;
-  setShowReportModal: (
-    showReportModal: boolean,
-    reportingPublication: Publication | null,
-    reportConfig?: any
-  ) => void;
+  showDiscardModal: boolean;
+  setShowDiscardModal: (showDiscardModal: boolean) => void;
   showStatusModal: boolean;
   setShowStatusModal: (showStatusModal: boolean) => void;
   showProfileSwitchModal: boolean;
   setShowProfileSwitchModal: (showProfileSwitchModal: boolean) => void;
   showMobileDrawer: boolean;
   setShowMobileDrawer: (showMobileDrawer: boolean) => void;
-  showNewSpacesModal: boolean;
-  setShowNewSpacesModal: (showNewSpacesModal: boolean) => void;
-
+  showInvitesModal: boolean;
+  setShowInvitesModal: (showInvitesModal: boolean) => void;
+  showPublicationReportModal: boolean;
+  reportingPublication: Publication | null;
+  setShowPublicationReportModal: (
+    showPublicationReportModal: boolean,
+    reportingPublication: Publication | null
+  ) => void;
+  showReportProfileModal: boolean;
+  reportingProfile: Profile | null;
+  setShowReportProfileModal: (
+    reportProfileModal: boolean,
+    reportingProfile: Profile | null
+  ) => void;
 }
 
 export const useGlobalModalStateStore = create<GlobalModalState>((set) => ({
   showAuthModal: false,
-  showNewPostModal: false,
-  setShowNewPostModal: (showNewPostModal) => set(() => ({ showNewPostModal })),
   setShowAuthModal: (showAuthModal) => set(() => ({ showAuthModal })),
-  showNewModal: false,
-  modalPublicationType: PublicationTypes.Post,
-  setShowNewModal: (showNewModal, modalPublicationType) =>
-    set(() => ({ showNewModal, modalPublicationType })),
-  showReportModal: false,
-  reportingPublication: null,
-  reportConfig: null,
-  setShowReportModal: (showReportModal, reportingPublication, reportConfig) =>
-    set(() => ({ showReportModal, reportingPublication, reportConfig })),
+  showNewPublicationModal: false,
+  modalPublicationType: NewPublicationTypes.Post,
+  setShowNewPublicationModal: (showNewPublicationModal, modalPublicationType) =>
+    set(() => ({ showNewPublicationModal, modalPublicationType })),
+  showDiscardModal: false,
+  setShowDiscardModal: (showDiscardModal) => set(() => ({ showDiscardModal })),
+  showPublicationReportModal: false,
   showStatusModal: false,
   setShowStatusModal: (showStatusModal) => set(() => ({ showStatusModal })),
   showProfileSwitchModal: false,
@@ -52,7 +52,19 @@ export const useGlobalModalStateStore = create<GlobalModalState>((set) => ({
     set(() => ({ showProfileSwitchModal })),
   showMobileDrawer: false,
   setShowMobileDrawer: (showMobileDrawer) => set(() => ({ showMobileDrawer })),
-  showNewSpacesModal: false,
-  setShowNewSpacesModal: (showNewSpacesModal) =>
-    set(() => ({ showNewSpacesModal }))
+  showInvitesModal: false,
+  setShowInvitesModal: (showInvitesModal) => set(() => ({ showInvitesModal })),
+  reportingPublication: null,
+  setShowPublicationReportModal: (
+    showPublicationReportModal,
+    reportingPublication
+  ) =>
+    set(() => ({
+      showPublicationReportModal,
+      reportingPublication
+    })),
+  showReportProfileModal: false,
+  reportingProfile: null,
+  setShowReportProfileModal: (showReportProfileModal, reportingProfile) =>
+    set(() => ({ showReportProfileModal, reportingProfile }))
 }));

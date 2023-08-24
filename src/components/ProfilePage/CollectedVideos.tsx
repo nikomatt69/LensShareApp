@@ -11,6 +11,7 @@ import { useInView } from 'react-cool-inview';
 import Loading from '../Loading';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Card } from '../UI/Card';
+import Loader from '../UI/Loader';
 
 interface Props {
   profile: Profile;
@@ -57,7 +58,7 @@ const CollectedVideos: FC<Props> = ({ profile }) => {
             loader={
               pageInfo?.next && (
                 <span ref={observe} className="flex justify-center p-10">
-                  <Loading />
+                  <Loader />
                 </span>
               )
             }

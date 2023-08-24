@@ -21,7 +21,7 @@ interface UserProfileProps {
 const SmallUserProfile: FC<UserProfileProps> = ({
   profile,
   timestamp = '',
-  smallAvatar = false
+  smallAvatar = true
 }) => {
   const UserAvatar = () => (
     <Image
@@ -40,12 +40,12 @@ const SmallUserProfile: FC<UserProfileProps> = ({
   const UserName = () => (
     <div className="flex max-w-sm items-center">
       <div className="truncate">
-        {sanitizeDisplayName(profile?.name) ?? formatHandle(profile?.handle)}
+        {(profile?.name)}
       </div>
 
       <Slug
         className="ml-2 text-sm"
-        slug={formatHandle(profile?.handle)}
+        slug={formatHandle(profile?.id)}
         prefix="@"
       />
       {timestamp ? (
@@ -60,7 +60,7 @@ const SmallUserProfile: FC<UserProfileProps> = ({
   );
 
   return (
-    <Link href={`/u/${formatHandle(profile?.handle)}`}>
+    <Link href={`/u/${profile?.id}`}>
       <div className="flex items-center space-x-2">
         <UserAvatar />
         <UserName />

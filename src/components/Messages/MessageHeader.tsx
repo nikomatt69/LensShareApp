@@ -18,8 +18,7 @@ import UserProfile from '../ProfilePage/UserProfile';
 import { Modal } from '../UI/Modal';
 import FullScreenModal from '../UI/FullScreenModal';
 import Link from 'next/link';
-import MeetRoom from '../Meet';
-import Lobby from '../Meet/Lobby';
+
 import Follow from '../Profile/Follow';
 import Unfollow from '../Profile/Unfollow';
 import { Button } from '../UI/Button';

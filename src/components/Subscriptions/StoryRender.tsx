@@ -30,6 +30,7 @@ import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
 import ProfileVideos from '../ProfilePage/ProfileVideos';
+import Loader from '../UI/Loader';
 
 const StoryRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -136,7 +137,7 @@ const StoryRender = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (

@@ -1,36 +1,20 @@
-// Radix ui
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Menu } from '@headlessui/react';
+import type { FC, ReactNode } from 'react';
 import React from 'react';
 
 type DropdownProps = {
-  align?: 'center' | 'start' | 'end';
-  open?: boolean;
-  onOpenChange?(open: boolean): void;
   triggerChild: JSX.Element;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({
-  children,
-  triggerChild,
-  onOpenChange,
-  open,
-  align
-}) => {
+const Dropdown: FC<DropdownProps> = ({ children, triggerChild }) => {
   return (
-    <DropdownMenu.Root open={open} onOpenChange={onOpenChange}>
-      <DropdownMenu.Trigger asChild>
-        <span>{triggerChild}</span>
-      </DropdownMenu.Trigger>
-
-      <DropdownMenu.Content
-        sideOffset={5}
-        align={align}
-        className="bg-custom-3 relative rounded-xl"
-      >
-        {children}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+    <Menu>
+      <Menu.Button>{triggerChild}</Menu.Button>
+      <Menu.Items className="absolute">
+        <Menu.Item disabled>{children}</Menu.Item>
+      </Menu.Items>
+    </Menu>
   );
 };
 export default Dropdown;

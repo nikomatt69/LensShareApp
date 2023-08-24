@@ -205,7 +205,7 @@ const Stories = () => {
         ))}
         {pageInfo?.next && (
           <span ref={observe} className="flex justify-center border-0 p-10">
-            <Loading />
+            <Loader />
           </span>
         )}
       </div>

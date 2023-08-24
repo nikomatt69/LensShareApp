@@ -14,6 +14,7 @@ import Link from 'next/link';
 import formatHandle from '@/utils/functions/formatHandle';
 import Loading from '../Loading';
 import { useInView } from 'react-cool-inview';
+import Loader from '../UI/Loader';
 
 interface Props {
   query: string | string[];
@@ -107,7 +108,7 @@ const SearchProfiles: FC<Props> = ({ query }) => {
       ))}
       {pageInfo?.next && (
         <span ref={observe} className="flex justify-center border-0 p-10">
-          <Loading />
+          <Loader />
         </span>
       )}
     </div>

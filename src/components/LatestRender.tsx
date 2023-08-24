@@ -28,6 +28,7 @@ import MetaTags from './UI/MetaTags';
 import { GridItemEight, GridItemFour, GridLayout } from './UI/GridLayout';
 import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
+import Loader from './UI/Loader';
 
 const LatestRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -133,7 +134,7 @@ const LatestRender = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <Loading />;
+    return <Loader />;
   }
   const { resolvedTheme } = useTheme();
 

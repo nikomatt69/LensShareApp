@@ -29,6 +29,7 @@ import Navbar from '../Navbar';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
+import Loader from '../UI/Loader';
 
 const FeedRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -135,7 +136,7 @@ const FeedRender = () => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (

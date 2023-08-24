@@ -220,11 +220,12 @@ const Latest = () => {
         key={`${publication?.id}_${index}`}
         isFirst={index === 0}
         isLast={index === bytes.length - 1}
-        publication={publication as Publication} />
+        publication={publication as Publication}
+        showCount={true} />
     ))}
    {pageInfo?.next && (
       <span ref={observe} className="flex  justify-center p-10">
-        <Loading />
+        <Loader />
       </span>
     )}
   </Card>

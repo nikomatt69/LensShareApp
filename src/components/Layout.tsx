@@ -23,6 +23,8 @@ import Wrapper from './Echos/Wrapper';
 import Spaces from './Spaces2';
 import SpacesWindow from './Spaces2/SpacesWindow/SpacesWindow';
 import { useSpacesStore } from '@/store/spaces';
+import PreviewSpaces from './Spaces2/PreviewSpaces/PreviewSpaces';
+import Loader from './UI/Loader';
 
 
 interface Props {
@@ -39,6 +41,7 @@ const Layout = ({ children }: Props) => {
   const profileId = useAppPersistStore((state) => state.profileId);
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
   const { address, isDisconnected } = useAccount();
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
   const { chain } = useNetwork();
   const [mounted, setMounted] = useState(false);
   const { disconnect } = useDisconnect({
@@ -47,7 +50,6 @@ const Layout = ({ children }: Props) => {
     }
   });
 
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
   const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   const { loading } = useQuery(ProfilesDocument, {
@@ -123,8 +125,9 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-      {showSpacesLobby && <Spaces />}
-      {showSpacesWindow && <SpacesWindow />}
+     
+     {showSpacesLobby ? <Spaces /> : null}
+      {showSpacesWindow ? <SpacesWindow /> : null}
       <GlobalModals />
       <GlobalAlerts />
       <div className="flex min-h-screen flex-col pb-14 md:pb-0">
