@@ -25,8 +25,9 @@ import {
   VideoCameraIcon
 } from '@heroicons/react/24/outline';
 import BytesShimmer from './BytesShimmer';
-import { imageCdn } from '@/utils/functions/imageCdn';
+
 import getThumbnailUrl  from '@/utils/lib/getThumbnailUrl';
+import imageKit from '@/lib/imageKit';
 
 
 const BytesSection = () => {
@@ -72,7 +73,7 @@ const BytesSection = () => {
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <img
-            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
             draggable={false}
             className="h-12 w-12 md:h-16 md:w-16"
             alt="lensshare"
@@ -104,7 +105,7 @@ const BytesSection = () => {
               <div className="aspect-[9/16] h-[280px]">
                 <img
                   className="rounded-sm"
-                  src={imageCdn(getThumbnailUrl(byte.metadata), 'THUMBNAIL_V')}
+                  src={imageKit(getThumbnailUrl(byte.metadata), 'THUMBNAIL_V')}
                   alt="thumbnail"
                   draggable={false}
                 />

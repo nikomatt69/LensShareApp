@@ -30,8 +30,9 @@ import Search from '../Search/Search';
 import Following from '../ProfilePage/Following';
 import { Errors } from '@/lib/errors';
 import { ErrorMessage } from './ErrorMessage';
-import { imageCdn } from '@/utils/functions/imageCdn';
+
 import { STATIC_ASSETS_URL } from '@/constants';
+import imageKit from '@/lib/imageKit';
 
 interface PreviewListProps {
   className?: string;
@@ -115,7 +116,7 @@ const PreviewList: FC<PreviewListProps> = ({
         <div className="divider relative flex items-center justify-between p-5">
         <div className="flex items-center space-x-2">
           <img
-            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
             draggable={false}
             className="h-12 w-12 md:h-16 md:w-16"
             alt="lensshare"

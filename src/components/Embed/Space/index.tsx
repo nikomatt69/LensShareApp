@@ -27,7 +27,7 @@ import { useLobby, useRoom } from "@huddle01/react/hooks";
     const { address } = useAccount();
     const { metadata } = publication;
   
-    const { setShowSpacesLobby, setLensAccessToken, lensAccessToken, setSpace } =
+    const { setShowSpacesLobby,setShowSpacesWindow, setLensAccessToken, lensAccessToken, setSpace } =
       useSpacesStore();
   
     const space: SpaceMetadata = JSON.parse(
@@ -62,34 +62,7 @@ import { useLobby, useRoom } from "@huddle01/react/hooks";
       (profile) => profile?.ownedBy === space.host
     ) as Profile;
   
-    const calculateRemainingTime = () => {
-      const now = new Date();
-      const targetTime = new Date(space.startTime);
-      const timeDifference = targetTime.getTime() - now.getTime();
-      if (timeDifference <= 0) {
-        return 'Start Listening';
-      }
-      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-      const minutes = Math.floor(
-        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-      );
-  
-      let result = 'Starts in ';
-      if (hours > 0) {
-        result += `${hours} hour `;
-      }
-  
-      if (minutes > 0) {
-        result += `${minutes} minutes`;
-      }
-  
-      if (hours === 0 && minutes === 0) {
-        result = 'Start Listening';
-      }
-  
-      return result;
-    };
-  
+
     return (
       <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
         <SmallUserProfile profile={hostProfile} smallAvatar />
@@ -97,38 +70,40 @@ import { useLobby, useRoom } from "@huddle01/react/hooks";
           <b className="text-lg">{metadata.content}</b>
           <Button
             className={clsx(
-              '!md:pointer-events-none !mt-4 flex w-full justify-center',
-              calculateRemainingTime() !== 'Start Listening'
-                ? 'pointer-events-none'
+              'pointer-events-none !mt-4 flex w-full justify-center',
+             'Start Listening'
+                ? 'pointer-events-auto'
                 : 'pointer-events-auto'
             )}
             disabled={signing}
             icon={
               signing ? (
                 <Spinner size="xs" className="mr-1" />
-              ) : calculateRemainingTime() !== 'Start Listening' ? (
+              ) :  'Start Listening' ? (
                 <div className="flex h-5 w-5 items-center justify-center">
-                  {Icons.timer}
+                 <MicrophoneIcon className="h-5 w-5" />
                 </div>
               ) : (
-                <MicrophoneIcon className="h-5 w-5" />
+                null
               )
             }
             onClick={async () => {
               if (lensAccessToken) {
+               
                 setShowSpacesLobby(true);
                 setSpace({
                   ...space,
                   title: metadata.content
                 });
-                return;
+                return(
+                setShowSpacesWindow(true));
               }
               const msg = await getLensMessage(address as string);
               signMessage({ message: msg.message });
             }}
           >
-            <div className="hidden md:block"> {calculateRemainingTime()} </div>
-            <div className="md:hidden"> Spaces will open in desktop only </div>
+            
+            
           </Button>
         </div>
       </Wrapper>

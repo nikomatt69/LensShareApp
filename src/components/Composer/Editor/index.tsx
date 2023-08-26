@@ -35,7 +35,6 @@ const Editor: FC = () => {
     (state) => state.setPublicationContent
   );
   const showPollEditor = usePublicationStore((state) => state.showPollEditor);
-  const showSpaceEditor = usePublicationStore((state) => state.showSpaceEditor);
   const attachments = usePublicationStore((state) => state.attachments);
   const { handleUploadAttachments } = useUploadAttachments();
   const [editor] = useLexicalComposerContext();
@@ -70,16 +69,14 @@ const Editor: FC = () => {
       <ToolbarPlugin />
       <RichTextPlugin
         contentEditable={
-          <ContentEditable className="my-4 block min-h-[65px] rounded-lg  bg-white dark:bg-gray-900/70 overflow-auto px-5" />
+          <ContentEditable className="my-4 block min-h-[65px] dark:text-black dark:bg-white bg-grey-300 overflow-auto px-5" />
         }
         placeholder={
-          <div className="pointer-events-none absolute top-[65px] bg-white dark:bg-gray-900/70 whitespace-nowrap px-5 text-gray-400">
-            {showSpaceEditor ? (
-             'What do you want to talk about?'
-            ) : showPollEditor ? (
-              'Ask a question...'
+          <div className="pointer-events-none absolute top-[65px]  whitespace-nowrap px-5 text-gray-600">
+            {showPollEditor ? (
+             ' Ask a question...'
             ) : (
-             ' New Post?'
+             'Whats happening?'
             )}
           </div>
         }

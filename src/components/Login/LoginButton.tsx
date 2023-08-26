@@ -9,7 +9,7 @@ const LoginButton: FC = () => {
     <>
       <div
         className="text-md border-grey-400 mt-3 w-full object-center cursor-pointer rounded-full  border-2 bg-black px-6 py-3
-       font-semibold text-blue-700 outline-none hover:bg-blue-500 hover:text-white"
+       font-semibold text-blue-700 outline-none hover:bg-blue-700 hover:text-white"
       >
         {currentProfile ? (
           <div className="flex object-center justify-between"><MainButton/></div>

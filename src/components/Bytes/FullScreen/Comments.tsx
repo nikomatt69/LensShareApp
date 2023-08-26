@@ -99,13 +99,13 @@ const CommentsVideo: FC<Props> = ({ publication, profile }) => {
         </div>
       </div>
       <div className="mt-3 flex flex-grow flex-col justify-center rounded-xl border-2 bg-[#F2F6F9] dark:bg-black text-center font-sans text-xs">
-        <span className="mb-3 rounded-xl bg-blue-500 p-1 text-center text-lg font-bold   ">
+        <span className="mb-3 rounded-xl bg-blue-700 p-1 text-center text-lg font-bold   ">
           Description
         </span>
         <InterweaveContent content={publication?.metadata?.content} />
       </div>
       <div className="mt-3 rounded-xl border-2 bg-[#F2F6F9] dark:bg-black pt-3 ">
-        <span className="ml-1  rounded-xl bg-blue-500 object-center p-1 text-center font-bold">
+        <span className="ml-1  rounded-xl bg-blue-700 object-center p-1 text-center font-bold">
           Comments
         </span>
         {comments?.map((publication: Comment) => (
@@ -114,7 +114,7 @@ const CommentsVideo: FC<Props> = ({ publication, profile }) => {
        
       </div>
       <div className="mt-3 rounded-xl border-2 bg-[#F2F6F9] dark:bg-black pt-2 ">
-        <span className="ml-1 rounded-xl bg-blue-500 object-center p-1 pb-1  text-center font-bold">
+        <span className="ml-1 rounded-xl bg-blue-700 object-center p-1 pb-1  text-center font-bold">
           Collects
         </span>
         <div className="display:inline-block flex pt-1 font-sans text-blue-700  ">

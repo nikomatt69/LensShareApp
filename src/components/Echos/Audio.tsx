@@ -12,7 +12,7 @@ import ShareIcon from '@heroicons/react/24/outline/ShareIcon';
 
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 import VideoPlayer from '@/utils/VideoPlayer';
 
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';

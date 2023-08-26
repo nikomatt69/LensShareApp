@@ -44,12 +44,7 @@ import getURLs from '../Composer/getURLs';
 import Oembed from '../Oembed';
 import useNft from '@/lib/useNft';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
-import { BiLogInCircle } from 'react-icons/bi';
-
-interface DecryptMessageProps {
-  icon: ReactNode;
-  children: ReactNode;
-}
+import { BiLogInCircle, BiLogOut } from 'react-icons/bi';
 
 interface DecryptMessageProps {
   icon: ReactNode;
@@ -70,6 +65,7 @@ interface DecryptedPublicationBodyProps {
 const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   encryptedPublication
 }) => {
+  const [content, setContent] = useState<any>();
   const { pathname } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setShowAuthModal = useGlobalModalStateStore(
@@ -89,7 +85,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
   const showMore =
     encryptedPublication?.metadata?.content?.length > 450 &&
-    pathname !== '/posts/[id]';
+    pathname !== '/post/[id]';
 
   useCanDecryptStatusQuery({
     variables: {
@@ -184,10 +180,11 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
     const sdk = await LensGatedSDK.create({
       provider: publicClient as any,
       signer: walletClient as any,
-      env: LIT_PROTOCOL_ENVIRONMENT as LensEnvironment
+      env: LIT_PROTOCOL_ENV as LensEnvironment
     });
     const { decrypted, error } = await sdk.gated.decryptMetadata(data);
     setDecryptedData(decrypted);
+    setContent(decrypted?.content);
     setDecryptError(error);
     setIsDecrypting(false);
   };
@@ -201,8 +198,8 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           setShowAuthModal(true);
         }}
       >
-        <div className="flex items-center space-x-1 font-bold text-white">
-          <BiLogInCircle className="h-5 w-5" />
+        <div className="flex items-center space-x-1 font-bold bg-blue-700 text-white">
+          <BiLogOut className="h-5 w-5" />
           <span>Login to decrypt</span>
         </div>
       </Card>
@@ -215,19 +212,19 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         className={clsx(cardClasses, 'cursor-text')}
         onClick={stopEventPropagation}
       >
-        <div className="flex items-center space-x-2 font-bold">
+        <div className="flex items-center bg-blue-700 space-x-2 font-bold">
           <LockClosedIcon className="h-5 w-5 text-green-300" />
           <span className="text-base font-black text-white">
             To view this...
           </span>
         </div>
-        <div className="space-y-2 pt-3.5 text-white">
+        <div className="space-y-2 pt-3.5 bg-blue-700 text-white">
           {/* Collect checks */}
           {hasNotCollectedPublication && (
             <DecryptMessage icon={<BsCollection className="h-4 w-4" />}>
               Collect the{' '}
               <Link
-                href={`/posts/${collectCondition?.publicationId}`}
+                href={`/post/${collectCondition?.publicationId}`}
                 className="font-bold lowercase underline"
                
               >
@@ -248,9 +245,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage icon={<UsersIcon className="h-4 w-4" />}>
               Follow{' '}
               <Link
-                href={`/u/${formatHandle(
-                  encryptedPublication?.profile?.handle
-                )}`}
+                href={`/u/${
+                  encryptedPublication?.profile?.id
+                }`}
                 className="font-bold"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
@@ -293,7 +290,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
                   className="font-bold underline"
-                
+                 
                   target="_blank"
                   rel="noreferrer noopener"
                 >
@@ -333,7 +330,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
          
         }}
       >
-        <div className="flex items-center space-x-1 font-bold text-white">
+        <div className="flex items-center space-x-1 font-bold bg-blue-700 text-white">
           <FingerPrintIcon className="h-5 w-5" />
           <span>
             Decrypt{' '}
@@ -345,9 +342,14 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   }
 
   const publication: PublicationMetadataV2Input = decryptedData;
-  let { content } = publication ?? {};
   const urls = getURLs(content);
-  content = removeUrlAtEnd(urls, content);
+
+  const onData = () => {
+    const updatedContent = removeUrlAtEnd(urls, content);
+    if (updatedContent !== content) {
+      setContent(updatedContent);
+    }
+  };
 
   return (
     <div className="break-words">
@@ -369,12 +371,14 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       )}
       {publication?.media?.length ? (
         <Attachments attachments={publication?.media} />
-      ) : content ? (
-        urls.length > 0 && <Oembed url={urls[0]} />
+      ) : content && urls.length > 0 ? (
+        <Oembed
+          url={urls[0]}
+          publicationId={encryptedPublication.id}
+          onData={onData}
+        />
       ) : null}
     </div>
   );
 };
-
 export default DecryptedPublicationBody;
-

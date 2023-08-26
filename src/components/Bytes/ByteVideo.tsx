@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
-import {imageCdn} from '@/utils/functions/imageCdn';
+
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 
 import VideoPlayer from '@/utils/VideoPlayer';
@@ -17,7 +17,7 @@ import clsx from 'clsx';
 import { useAppStore } from '@/store/app';
 import MobileBottomOverlay from './MobileBottomOverlay';
 import { Image } from '../UI/Image';
-import imageProxy2 from '@/lib/imageProxy2';
+
 import Collect from '../Publication/Actions/Collect';
 import useAverageColor from '@/utils/hooks/useAverageColor';
 import sanitizeDStorageUrl from '@/utils/lib/sanitizeDStorageUrl';
@@ -37,7 +37,7 @@ const ByteVideo: FC<Props> = ({
 }) => {
   const videoRef = useRef<HTMLMediaElement>()
   const intersectionRef = useRef<HTMLDivElement>(null)
-  const thumbnailUrl = imageCdn(
+  const thumbnailUrl = imageKit(
     sanitizeDStorageUrl(getThumbnailUrl(video)),
     'THUMBNAIL_V'
   )

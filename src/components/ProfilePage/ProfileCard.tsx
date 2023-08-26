@@ -43,7 +43,7 @@ import { Card } from '../UI/Card';
 import StatsCard from '@/abi/Stats';
 import { count } from 'console';
 import Stats from '@/abi/Stats';
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 import CogOutline from '../UI/Icons/CogOutline';
 import { SpaceMetadata } from '@/typesLenster';
 import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';

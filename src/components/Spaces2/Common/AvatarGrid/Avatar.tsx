@@ -13,6 +13,7 @@ import HostData from '../Sidebar/Peers/PeerRole/HostData';
 import ListenersData from '../Sidebar/Peers/PeerRole/ListenersData';
 import SpeakerData from '../Sidebar/Peers/PeerRole/SpeakerData';
 import type { IRoleEnum } from '../SpacesTypes';
+import { BiDotsVertical } from 'react-icons/bi';
 
 type Props = {
   peerId: string;
@@ -75,18 +76,16 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
             <div className="absolute inset-0 rounded-full group-hover:bg-black group-hover:opacity-50" />
             <Dropdown
               triggerChild={
-                <button className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 group-hover:opacity-100">
-                  {NestedPeerListIcons.active.more}
-                </button>
+                <BiDotsVertical className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-neutral-50 opacity-0 group-hover:opacity-100" />
               }
             >
-              <div className="absolute -left-4 -top-5 w-[10rem] rounded-lg border border-neutral-300 bg-white p-1 dark:border-neutral-500 dark:bg-neutral-800">
+              <div className="absolute -left-4 -top-5 w-40 rounded-lg border border-neutral-300 bg-white p-1 dark:border-neutral-500 dark:bg-neutral-800">
                 <div className="inline-flex w-full items-center justify-start gap-3 px-2 py-1.5">
                   <Image
                     src={avatarUrl}
-                    className="flex h-5 w-5 basis-0 items-center justify-start gap-2 rounded-full"
+                    className="flex h-5 w-5 items-center justify-start gap-2 rounded-full"
                   />
-                  <div className="shrink grow basis-0 text-sm font-medium leading-tight text-neutral-700 dark:text-stone-200">
+                  <div className="text-sm font-medium leading-tight text-neutral-700 dark:text-stone-200">
                     {displayName}
                   </div>
                 </div>
@@ -96,12 +95,10 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
           </>
         ) : null}
       </div>
-      <div className="flex flex-col items-center justify-start gap-0.5">
-        <div className="text-xs font-normal leading-none text-neutral-700 dark:text-neutral-300">
-          {displayName}
-        </div>
+      <div className="text-xs font-normal text-neutral-700 dark:text-neutral-300">
+        {displayName}
       </div>
-      <div className="text-xs font-normal leading-none text-neutral-500 dark:text-slate-400">
+      <div className="text-xs font-normal text-neutral-500 dark:text-slate-400">
         {role}
       </div>
       <div className="absolute bottom-1/2 left-1/2 -translate-x-1/2 text-2xl">

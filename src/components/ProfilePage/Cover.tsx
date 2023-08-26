@@ -2,8 +2,8 @@ import { STATIC_IMAGES_URL } from '@/constants';
 import getIPFSLink from '@/lib/getIPFSLink';
 import { COVER } from '@/constants';
 import type { FC } from 'react';
-import imageProxy2 from '@/lib/imageProxy2';
-import imageCdn from '@/lib/imageCdn';
+
+import imageKit from '@/lib/imageKit';
 
 interface Props {
   cover: string;
@@ -16,7 +16,7 @@ const Cover: FC<Props> = ({ cover }) => {
       style={{
         backgroundImage: `url(${
           cover
-            ? imageCdn(getIPFSLink(cover))
+            ? imageKit(getIPFSLink(cover))
             : `${STATIC_IMAGES_URL}/placeholder.png`
         })`,
         backgroundColor: '#3b82f6',

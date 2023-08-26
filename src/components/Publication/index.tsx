@@ -21,9 +21,14 @@ import BottomNav from '../Navs/BottomNav';
 import Navbar from '../Navbar';
 import Loading from '../Loading';
 import Loader from '../UI/Loader';
+import { useGlobalModalStateStore } from '@/store/modals';
 
 const ViewPublication: NextPage = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
+  const showNewPublicationModal = useGlobalModalStateStore(
+    (state) => state.showNewPublicationModal
+  );
+
 
   const {
     query: { id }
@@ -70,7 +75,7 @@ const ViewPublication: NextPage = (profile) => {
         />
 
       
-        <GridItemEight className="h-[vh-80] space-y-5 rounded-xl bg-[#F2F6F9] dark:bg-black">
+        <GridItemEight className="h-[vh-80] space-y-5 rounded-xl mb-5 bg-[#F2F6F9] dark:bg-black">
           <Card className='rounded-xl border-blue-700'>
             <FullPublication
               profile={profile as Profile}
@@ -78,9 +83,13 @@ const ViewPublication: NextPage = (profile) => {
               showCount={true}
             />
           </Card>
-          {currentProfile && !publication?.hidden}
-
-          <NewPublication publication={publication} />
+          {currentProfile && !publication?.hidden && !showNewPublicationModal ? (
+          canComment ? (
+            <NewPublication publication={publication} />
+          ) : (
+            null
+          )
+        ) : null}
 
           <Feed publication={publication} />
           

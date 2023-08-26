@@ -81,7 +81,7 @@ const EmbedVideo: FC<Props> = ({ videoId, onClose }) => {
         <button
           type="button"
           onClick={() => openModal()}
-          className="rounded-full bg-blue-500 p-2.5"
+          className="rounded-full bg-blue-700 p-2.5"
         >
           <PlayIcon className="h-5 w-5 text-black dark:text-white" />
         </button>

@@ -37,7 +37,8 @@ import CommentOptions from '../CommentOptions';
 import Comments from './Comments';
 import BottomOverlay from '../BottomOverlay';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
-import { imageCdn } from '@/utils/functions/imageCdn';
+import imageKit from '@/lib/imageKit';
+
 
 type Props = {
   byte: Publication;
@@ -69,7 +70,7 @@ const FullScreen: FC<Props> = ({
   const [showOptions, setShowOptions] = useState(false);
   const [showReport, setShowReport] = useState(false);
 
-  const thumbnailUrl = imageCdn(
+  const thumbnailUrl = imageKit(
     sanitizeDStorageUrl(getThumbnailUrl(video)),
     'THUMBNAIL_V'
   )

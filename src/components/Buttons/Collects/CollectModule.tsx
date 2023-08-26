@@ -299,7 +299,7 @@ const CollectModule: FC<Props> = ({ publication, setCount, count }) => {
             CollectModules.LimitedTimedFeeCollectModule) && (
           <div className="h-2.5 w-full bg-gray-200">
             <div
-              className="h-2.5 bg-blue-500"
+              className="h-2.5 bg-blue-700"
               style={{ width: `${percentageCollected}%` }}
             />
           </div>

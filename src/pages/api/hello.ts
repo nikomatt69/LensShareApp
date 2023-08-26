@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 
-export default function handler(req: NextApiRequest,
+export  function handler(req: NextApiRequest,
   res: NextApiResponse) {
   if (req.method === 'POST') {
     
@@ -11,7 +11,7 @@ export default function handler(req: NextApiRequest,
   }
 }
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
   return new Response('Hello, Next.js!', {
     status: 200,
     headers: {

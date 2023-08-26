@@ -71,7 +71,7 @@ const CoverImage: FC<CoverImageProps> = ({
           {loading && !cover ? (
             <Spinner size="sm" />
           ) : (
-            <div className="flex flex-col items-center text-sm text-black dark:text-white opacity-60 dark:text-white">
+            <div className="flex flex-col items-center text-sm text-black dark:text-white opacity-60 ">
               <PhotoIcon className="h-5 w-5" />
               <span>Add cover</span>
             </div>

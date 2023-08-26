@@ -1,7 +1,7 @@
 import type { Profile } from 'src/utils/lens';
 import { getRandomProfilePicture } from './getRandomProfilePicture';
 import { sanitizeIpfsUrl } from 'src/utils/sanitizeIpfsUrl';
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 
 const getProfilePicture = (
   profile: Profile,
@@ -9,11 +9,11 @@ const getProfilePicture = (
 ): string => {
   const url =
     profile?.picture && profile.picture.__typename === 'MediaSet'
-      ? imageCdn(sanitizeIpfsUrl(profile?.picture?.original?.url))
+      ? imageKit(sanitizeIpfsUrl(profile?.picture?.original?.url))
       : profile?.picture?.__typename === 'NftImage'
-      ? imageCdn(sanitizeIpfsUrl(profile?.picture?.uri))
+      ? imageKit(sanitizeIpfsUrl(profile?.picture?.uri))
       : getRandomProfilePicture(profile?.handle);
-  const sanitized = imageCdn(sanitizeIpfsUrl(url));
+  const sanitized = imageKit(sanitizeIpfsUrl(url));
   return url;
 };
 

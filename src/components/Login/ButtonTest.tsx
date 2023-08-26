@@ -10,7 +10,7 @@ const ButtonTest: FC = () => {
       <div
         className="border-grey-300 mt-3 inline-flex h-12 w-[284px] cursor-pointer 
       items-center justify-center rounded-full border-2 border-solid bg-[#000fff]
-      px-6 py-3 font-bold text-[#000000] drop-shadow-lg hover:bg-blue-500
+      px-6 py-3 font-bold text-[#000000] drop-shadow-lg hover:bg-blue-700
        hover:text-white"
       >
         {currentProfile ? (

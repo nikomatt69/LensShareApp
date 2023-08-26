@@ -6,7 +6,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import { LENSTOK_URL, STATIC_ASSETS_URL } from '@/constants';
 
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 import useCopyToClipboard from '@/utils/hooks/useCopyToClipboard';
 
 import EmbedVideo from './EmbedVideo';
@@ -15,8 +15,8 @@ import { BiCopy } from 'react-icons/bi';
 import { GiMirrorMirror } from 'react-icons/gi';
 import { getSharableLink } from '@/utils/functions/getSharableLink';
 import { Card } from '../UI/Card';
-import imageProxy2 from '@/lib/imageProxy2';
-import imageProxy from '@/lib/imageProxy';
+
+
 import FullScreenModal from '../UI/FullScreenModal';
 import { MdOutlineClose } from 'react-icons/md';
 
@@ -63,7 +63,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication, show }) => {
               href={getSharableLink('lenster', publication)}
             >
               <img
-                src={imageCdn(
+                src={imageKit(
                   `${STATIC_ASSETS_URL}/images/social/lenster.png`,
                   'avatar_lg'
                 )}
@@ -79,7 +79,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication, show }) => {
               href={getSharableLink('twitter', publication)}
             >
               <img
-                src={imageCdn(
+                src={imageKit(
                   `${STATIC_ASSETS_URL}/images/social/twitter.png`,
                   'avatar_lg'
                 )}
@@ -94,7 +94,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication, show }) => {
               rel="noreferrer"
             >
               <img
-                src={imageCdn(
+                src={imageKit(
                   `${STATIC_ASSETS_URL}/images/social/reddit-logo.png`,
                   'avatar_lg'
                 )}
@@ -109,7 +109,7 @@ const ShareModal: FC<Props> = ({ setShowShare, publication, show }) => {
               rel="noreferrer"
             >
               <img
-                src={imageCdn(
+                src={imageKit(
                   `${STATIC_ASSETS_URL}/images/social/linkedin.png`,
                   'avatar_lg'
                 )}

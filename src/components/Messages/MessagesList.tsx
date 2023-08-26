@@ -107,7 +107,7 @@ const MessageTile: FC<MessageTileProps> = ({
           className={clsx(
             address === message.senderAddress
               ? 'bg-brand-500'
-              : 'bg-gray-100 dark:bg-blue-500',
+              : 'bg-gray-100 dark:bg-blue-700',
             'w-full rounded-lg px-4 py-2 text-xs font-bold'
           )}
         >

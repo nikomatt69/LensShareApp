@@ -9,7 +9,7 @@ type Props = {
 
 const StatCard: FC<Props> = ({ icon, count, text }) => {
   return (
-    <div className=" flex flex-col items-center justify-center space-y-3 rounded-xl bg-blue-500 p-6">
+    <div className=" flex flex-col items-center justify-center space-y-3 rounded-xl bg-blue-700 p-6">
       <span>{icon}</span>
       <div className="text-center">
         <h6 className="mb-1 text-3xl font-semibold opacity-90">{count}</h6>

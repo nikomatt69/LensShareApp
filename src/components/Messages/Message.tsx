@@ -31,7 +31,7 @@ import { GridItemEight, GridLayout } from '../UI/GridLayout';
 import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import NavbarDetails from '../NavbarDetails';
-import { imageCdn } from '@/utils/functions/imageCdn';
+
 
 interface MessageProps {
   conversationKey: string;

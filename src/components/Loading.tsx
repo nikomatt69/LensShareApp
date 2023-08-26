@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import logo from '@/images/Lenstoklogo.png';
 import { Image } from '@/components/UI/Image';
-import imageProxy from '@/lib/imageProxy';
+
 import { STATIC_ASSETS_URL } from '@/constants';
 import MetaTags from './UI/MetaTags';
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 
 const Loading: FC = () => {
   return (

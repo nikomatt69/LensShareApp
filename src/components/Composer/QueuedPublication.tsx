@@ -8,13 +8,14 @@ import {
   usePublicationLazyQuery
 } from '@/utils/lens/generatedLenster';
 import { useApolloClient } from '@apollo/client';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import UserProfile from '../ProfilePage/UserProfile';
 import Markup from '../UI/Markup';
 import { Tooltip } from '../UI/Tooltip';
 import Attachments from './Attachments';
 import Oembed from '../Oembed';
 import getURLs from './getURLs';
+import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 
 interface QueuedPublicationProps {
   txn: OptimisticTransaction;
@@ -27,6 +28,15 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
   const { cache } = useApolloClient();
   const txHash = txn?.txHash;
   const txId = txn?.txId;
+  const [content, setContent] = useState(txn.content);
+  const urls = getURLs(content);
+
+  const onData = () => {
+    const updatedContent = removeUrlAtEnd(urls, content);
+    if (updatedContent !== content) {
+      setContent(updatedContent);
+    }
+  };
 
   const removeTxn = () => {
     if (txHash) {
@@ -41,7 +51,7 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
       if (publication) {
         cache.modify({
           fields: {
-            publications() {
+            publications: () => {
               cache.writeQuery({
                 data: publication,
                 query: PublicationDocument
@@ -88,7 +98,7 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
   });
 
   return (
-    <article className="border-blue-500 p-5">
+    <article className="p-5">
       <div className="flex items-start justify-between pb-4">
         <UserProfile profile={currentProfile as Profile} />
         <Tooltip content={`Indexing`} placement="top">
@@ -98,16 +108,14 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
         </Tooltip>
       </div>
       <div className="ml-[53px]">
-        <div className="markup linkify text-md break-words border-blue-500">
-          <Markup>{txn?.content}</Markup>
+        <div className="markup linkify text-md break-words">
+          <Markup>{content}</Markup>
         </div>
         {txn?.attachments?.length > 0 ? (
           <Attachments attachments={txn?.attachments} txn={txn} hideDelete />
         ) : (
           txn?.attachments &&
-          getURLs(txn?.content)?.length > 0 && (
-            <Oembed url={getURLs(txn?.content)[0]} />
-          )
+          urls.length > 0 && <Oembed url={urls[0]} onData={onData} />
         )}
       </div>
     </article>

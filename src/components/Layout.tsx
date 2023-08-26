@@ -7,9 +7,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import { CHAIN_ID } from '@/constants';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import MetaTags from './UI/MetaTags';
-import imageCdn from '@/lib/imageCdn';
+
 import { STATIC_ASSETS_URL } from '@/constants';
-import imageProxy from '@/lib/imageProxy';
+import imageKit from '@/lib/imageKit';
 import { useRouter } from 'next/router';
 import Navbar from './Navbar';
 import BottomNav from './Navs/BottomNav';
@@ -41,7 +41,7 @@ const Layout = ({ children }: Props) => {
   const profileId = useAppPersistStore((state) => state.profileId);
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
   const { address, isDisconnected } = useAccount();
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+
   const { chain } = useNetwork();
   const [mounted, setMounted] = useState(false);
   const { disconnect } = useDisconnect({
@@ -50,6 +50,7 @@ const Layout = ({ children }: Props) => {
     }
   });
 
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
   const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   const { loading } = useQuery(ProfilesDocument, {
@@ -125,18 +126,20 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
+        {showSpacesLobby && <Spaces />}
+      {showSpacesWindow && <SpacesWindow />}
      
-     {showSpacesLobby ? <Spaces /> : null}
-      {showSpacesWindow ? <SpacesWindow /> : null}
       <GlobalModals />
       <GlobalAlerts />
       <div className="flex min-h-screen flex-col pb-14 md:pb-0">
       {pathname.includes( `/bytes/` && `/feed`) ? (
           <>
+  
             {children}
           </>
         ) : (
           <>
+      
         <Navbar />
         <BottomNav />
         {children}

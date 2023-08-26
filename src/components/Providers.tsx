@@ -59,9 +59,7 @@ const livepeerClient = createReactClient({
   })
 });
 
-
 const queryClient = new QueryClient();
-
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
   <WagmiConfig config={wagmiConfig}>

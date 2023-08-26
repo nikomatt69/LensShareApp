@@ -95,7 +95,7 @@ const Attachment: FC = () => {
       <MenuTransition show={showMenu}>
         <Menu.Items
           ref={dropdownRef}
-          className="absolute z-[5] mt-2 rounded-xl border bg-white dark:bg-gray-900/70 py-1 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-white dark:bg-gray-900/70"
+          className="absolute z-[5] mt-2 rounded-xl border bg-white dark:bg-gray-900/70 py-2 px-2 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-white dark:bg-gray-900/70"
           static
         >
           <Menu.Item
@@ -104,7 +104,7 @@ const Attachment: FC = () => {
             className={({ active }) =>
               clsx(
                 { 'dropdown-active': active },
-                'menu-item !flex cursor-pointer items-center gap-1 space-x-1 rounded-lg'
+                'menu-item !flex cursor-pointer items-center gap-3  space-x-1 rounded-lg'
               )
             }
             htmlFor={`image_${id}`}
@@ -127,7 +127,7 @@ const Attachment: FC = () => {
             className={({ active }) =>
               clsx(
                 { 'dropdown-active': active },
-                'menu-item !flex cursor-pointer items-center gap-1 space-x-1 text-black rounded-lg'
+                'menu-item !flex cursor-pointer items-center gap-3 space-x-1 text-black rounded-lg'
               )
             }
             htmlFor={`video_${id}`}
@@ -149,7 +149,7 @@ const Attachment: FC = () => {
             className={({ active }) =>
               clsx(
                 { 'dropdown-active': active },
-                'menu-item !flex cursor-pointer items-center gap-1 space-x-1 rounded-lg'
+                'menu-item !flex cursor-pointer items-center gap-3 space-x-1 rounded-lg'
               )
             }
             htmlFor={`audio_${id}`}

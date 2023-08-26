@@ -45,7 +45,8 @@ import SinglePublication from './Composer/SinglePublication2';
 import { Card } from './UI/Card';
 import QueuedPublication from './Composer/QueuedPublication';
 import { OptmisticPublicationType } from '@/enums';
-import { imageCdn } from '@/utils/functions/imageCdn';
+import imageKit from '@/lib/imageKit';
+
 
 
 const Latest = () => {
@@ -198,7 +199,7 @@ const Latest = () => {
       <MetaTags title={`Explore • ${APP_NAME} `} />
       <div className="flex mb-5 items-center space-x-2">
           <img
-            src={imageCdn(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
             draggable={false}
             className="h-12 w-12 md:h-16 md:w-16"
             alt="lensshare"

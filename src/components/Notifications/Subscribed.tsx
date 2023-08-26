@@ -7,7 +7,7 @@ import React from 'react';
 import getRelativeTime from '@/utils/functions/formatTime';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getRandomProfilePicture } from '@/utils/functions/getRandomProfilePicture';
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 import { shortenAddress } from '@/utils/functions/shortenAddress';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -44,7 +44,7 @@ const SubscribedNotification: FC<Props> = ({ notification }) => {
             <span className="font-base inline-flex items-center space-x-1.5">
               <img
                 className="h-5 w-5 rounded-full"
-                src={imageCdn(
+                src={imageKit(
                   getRandomProfilePicture(notification.wallet.address),
                   'avatar'
                 )}

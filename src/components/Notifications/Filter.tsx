@@ -21,7 +21,7 @@ const NotificationsFilter = () => {
         <Cog6ToothIcon className="h-4 w-4 opacity-70 hover:opacity-100" />
       }
     >
-      <div className="mt-1 overflow-hidden rounded-xl border border-gray-200 bg-blue-500 p-1 text-sm shadow dark:border-gray-800">
+      <div className="mt-1 overflow-hidden rounded-xl border border-gray-200 bg-blue-700 p-1 text-sm shadow dark:border-gray-800">
         <Menu.Item
           className={clsx(
             ' rounded-lg px-3 py-1.5 text-left',

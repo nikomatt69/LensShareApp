@@ -47,10 +47,11 @@ import Following from '../ProfilePage/Following';
 import { Modal } from '../UI/Modal';
 import Followers from '../ProfilePage/Followers';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
-import {imageCdn} from '@/utils/functions/imageCdn';
+
 import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import VideoPlayer from '@/utils/VideoPlayer';
+import imageKit from '@/lib/imageKit';
 
 interface Props {
   publication: Publication;
@@ -146,7 +147,7 @@ const VideoDetail: FC<Props> = ({
           currentTime={videoWatchTime}
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
-          posterUrl={imageCdn(
+          posterUrl={imageKit(
             sanitizeIpfsUrl(getThumbnailUrl(publication)),
             isBytesVideo ? 'THUMBNAIL_V' : 'THUMBNAIL'
           )}
@@ -313,7 +314,7 @@ const VideoDetail: FC<Props> = ({
               value={Links}
             />
             <button
-              className="flex-shrink-0 cursor-pointer rounded-xl border px-2 active:bg-blue-500"
+              className="flex-shrink-0 cursor-pointer rounded-xl border px-2 active:bg-blue-700"
               onClick={() => {
                 copyToClipboard(Links);
               }}

@@ -166,7 +166,7 @@ const FollowButton: FC<Props> = ({ setFollowing, profile }) => {
         <button
           onClick={createFollow}
           disabled={isLoading}
-          className="lg:text-md xl:text-md font-helvetica mt-2 cursor-pointer rounded-full border-2 border-black bg-blue-500 px-1 py-1 text-xs font-semibold text-[#000000] drop-shadow-xl transition hover:bg-[#57B8FF] hover:text-[#fff]"
+          className="lg:text-md xl:text-md font-helvetica mt-2 cursor-pointer rounded-full border-2 border-black bg-blue-700 px-1 py-1 text-xs font-semibold text-[#000000] drop-shadow-xl transition hover:bg-[#57B8FF] hover:text-[#fff]"
         >
           Follow
         </button>

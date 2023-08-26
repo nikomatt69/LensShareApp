@@ -23,6 +23,7 @@ import Follow from '../Profile/Follow';
 import Unfollow from '../Profile/Unfollow';
 import { Button } from '../UI/Button';
 import { LENSTOK_URL } from '@/constants';
+import MeetingIcon from '../Meet/MeetingIcon';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -91,6 +92,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
+      <MeetingIcon/>
           {!following ? (
             <FollowButton
               profile={profile as Profile}

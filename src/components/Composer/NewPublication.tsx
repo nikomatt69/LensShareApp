@@ -84,7 +84,7 @@ import { useApolloClient } from '@apollo/client/react';
 import { useGlobalModalStateStore } from '@/store/modals';
 
 import { useAccessSettingsStore } from '@/store/access';
-import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
+import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient2';
 import { Errors } from '@/lib/errors';
 import uploadToArweave from '@/lib/uploadToArweave';
 import getTextNftUrl from '@/utils/functions/getTextNftUrl';
@@ -115,6 +115,7 @@ import { Input } from '../UI/Input';
 import { Icons } from '../Spaces2/Common/assets/Icons';
 import { useUnmountEffect } from 'framer-motion';
 import { useSpacesStore } from '@/store/spaces';
+import errorToast from './errorToast';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -155,19 +156,15 @@ const SpaceSettings = dynamic(
     loading: () => <div className="shimmer mb-1 h-5 w-5 rounded-lg" />
   }
 );
-
 interface NewPublicationProps {
   publication: Publication;
-  profile: Profile;
-  onDetail: (video: Publication) => void;
+  profile:Profile
 }
-
-const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail }) => {
+const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
 
-  // Modal store
   // Modal store
   const {
     setShowNewPublicationModal,
@@ -184,8 +181,9 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
   const setShowDiscardModal = useGlobalModalStateStore(
     (state) => state.setShowDiscardModal
   );
+
   // Nonce store
-  const { userSigNonce, setUserSigNonce } = useNonceStore((state) => state);
+  const { userSigNonce, setUserSigNonce } = useNonceStore();
 
   // Publication store
   const {
@@ -204,52 +202,48 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile,onDetail
     showPollEditor,
     setShowPollEditor,
     resetPollConfig,
-    showSpaceEditor,
-    setShowSpaceEditor,
     pollConfig
-  } = usePublicationStore((state) => state);
+  } = usePublicationStore();
 
- // Transaction persist store
- const { txnQueue, setTxnQueue } = useTransactionPersistStore(
-  (state) => state
-);
+  // Transaction persist store
+  const { txnQueue, setTxnQueue } = useTransactionPersistStore(
+    (state) => state
+  );
 
-// Collect module store
-const { collectModule, reset: resetCollectSettings } = useCollectModuleStore(
-  (state) => state
-);
+  // Collect module store
+  const { collectModule, reset: resetCollectSettings } = useCollectModuleStore(
+    (state) => state
+  );
 
-// Reference module store
-const { selectedReferenceModule, onlyFollowers, degreesOfSeparation } =
-  useReferenceModuleStore();
+  // Reference module store
+  const { selectedReferenceModule, onlyFollowers, degreesOfSeparation } =
+    useReferenceModuleStore();
 
-// Access module store
-const {
-  restricted,
-  followToView,
-  collectToView,
-  reset: resetAccessSettings
-} = useAccessSettingsStore();
+  // Access module store
+  const {
+    restricted,
+    followToView,
+    collectToView,
+    reset: resetAccessSettings
+  } = useAccessSettingsStore();
 
-// States
-const [isLoading, setIsLoading] = useState(false);
-const [publicationContentError, setPublicationContentError] = useState('');
+  // States
+  const [isLoading, setIsLoading] = useState(false);
+  const [publicationContentError, setPublicationContentError] = useState('');
 
-const [editor] = useLexicalComposerContext();
-const publicClient = usePublicClient();
-const { data: walletClient } = useEthersWalletClient();
-const [createPoll] = useCreatePoll();
-const [createSpace] = useCreateSpace();
+  const [editor] = useLexicalComposerContext();
+  const publicClient = usePublicClient();
+  const { data: walletClient } = useEthersWalletClient();
+  const [createPoll] = useCreatePoll();
+  const [createSpace] = useCreateSpace();
 
-const isComment = Boolean(publication);
-const hasAudio = ALLOWED_AUDIO_TYPES.includes(
-  attachments[0]?.original.mimeType
-);
-const hasVideo = ALLOWED_VIDEO_TYPES.includes(
-  attachments[0]?.original.mimeType
-);
-
-// Dispatcher
+  const isComment = Boolean(publication);
+  const hasAudio = ALLOWED_AUDIO_TYPES.includes(
+    attachments[0]?.original.mimeType
+  );
+  const hasVideo = ALLOWED_VIDEO_TYPES.includes(
+    attachments[0]?.original.mimeType
+  );
 
   // Dispatcher
   const canUseRelay = currentProfile?.dispatcher?.canUseRelay;
@@ -303,12 +297,15 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
       publication_attachment_types:
         attachments.length > 0
           ? attachments.map((attachment) => attachment.original.mimeType)
-          : null
+          : null,
+      publication_has_poll: showPollEditor
     };
+   
   };
 
   const onError = (error: any) => {
     setIsLoading(false);
+    errorToast(error);
   };
 
   useUpdateEffect(() => {
@@ -400,7 +397,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
       if (data?.publication) {
         cache.modify({
           fields: {
-            publications() {
+            publications: () => {
               cache.writeQuery({
                 data: { publication: data?.publication },
                 query: PublicationDocument
@@ -753,7 +750,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
       now.setMinutes(Number(spacesTimeInMinute));
       const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const formattedTime = new Date(
-        now.toLocaleString('en', { timeZone: userTimezone })
+        now.toLocaleString('en-US', { timeZone: userTimezone })
       );
       const startTime = formattedTime.toISOString();
 
@@ -825,7 +822,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
         version: '2.0.0',
         metadata_id: uuid(),
         content: processedPublicationContent,
-        external_url: `https://lenshareapp.xyz/u/${currentProfile?.id}`,
+        external_url: `https://lensshare.xyz/u/${currentProfile?.id}`,
         image:
           attachmentsInput.length > 0 ? getAttachmentImage() : textNftImageUrl,
         imageMimeType:
@@ -963,8 +960,8 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
   return (
     <Card
       className={clsx(
-        { '!rounded-b-xl !rounded-t-none border-none': !isComment },
-        'pb-3'
+        { '!rounded-b-xl border-blue-700 !rounded-t-none border-none': !isComment },
+        'pb-3 mb-5'
       )}
     >
       {error && (
@@ -1004,7 +1001,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
             <PollSettings />
           </div>
         )}
-        <div className="absolute  inline-flex">
+        
           <div className="ml-auto pt-2 sm:pt-0">
             <Button
               disabled={
@@ -1017,7 +1014,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
                 isLoading ? (
                   <Spinner size="xs" />
                 ) : isComment ? (
-                  <ChatBubbleOvalLeftEllipsisIcon className="h-4 w-4" />
+                  <ChatBubbleOvalLeftIcon className="h-4 w-4" />
                 ) : showNewPublicationModal &&
                   modalPublicationType === NewPublicationTypes.Spaces ? (
                   <MicrophoneIcon className="h-4 w-4" />
@@ -1031,7 +1028,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
                 ? `Comment`
                 : showNewPublicationModal &&
                   modalPublicationType === NewPublicationTypes.Spaces
-                ? `Create spaces`
+                ? `Space`
                 : `Post`}
             </Button>
           </div>
@@ -1040,7 +1037,7 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
               <Dropdown
                 triggerChild={
                   <div className="ml-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-violet-500 p-1">
-                    <div className="text-brand-500 relative h-6 w-6">
+                    <div className="text-white relative h-6 w-6">
                       {Icons.calendar}
                     </div>
                   </div>
@@ -1055,14 +1052,14 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
                       setSpacesTimeInMinute(minute);
                     }}
                   />
-                  <div className="mt-4 inline-flex w-full items-center justify-center gap-1 self-stretch rounded-lg bg-violet-500 p-2">
+                  <div className="mt-4 inline-flex w-full items-center justify-center gap-1 self-stretch rounded-lg bg-blue-700 p-2">
                     {isLoading ? (
                       <Spinner size="xs" />
                     ) : (
-                      <CalendarIcon className="h-4 w-4 text-neutral-50" />
+                      <CalendarIcon className="h-4 w-4 text-black" />
                     )}
                     <button
-                      className="flex items-center justify-center text-sm font-semibold leading-none text-neutral-50"
+                      className="flex items-center justify-center text-sm font-semibold leading-none text-black"
                       onClick={createPublication}
                     >
                       Schedule Spaces
@@ -1071,12 +1068,13 @@ const hasVideo = ALLOWED_VIDEO_TYPES.includes(
                 </div>
               </Dropdown>
             )}
-        </div>
+        
       </div>
       <div className="px-5">
         <Attachments attachments={attachments} isNew />
       </div>
-      <Discard onDiscard={onDiscardClick} />
+      <div className='z-[90]'><Discard onDiscard={onDiscardClick} /></div>
+      
     </Card>
   );
 };

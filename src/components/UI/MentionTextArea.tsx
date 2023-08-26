@@ -1,5 +1,5 @@
 import getIPFSLink from '@/lib/getIPFSLink';
-import imageProxy from '@/lib/imageProxy';
+
 import { UserSuggestion } from '@/typesLenster';
 import { useLazyQuery } from '@apollo/client';
 
@@ -18,7 +18,7 @@ import {
   SearchRequestTypes
 } from '@/utils/lens/generatedLenster';
 import getStampFyiURL from '@/lib/getStampFyiURL';
-import imageCdn from '@/lib/imageCdn';
+import imageKit from '@/lib/imageKit';
 
 interface UserProps {
   suggestion: UserSuggestion;
@@ -36,7 +36,7 @@ const User: FC<UserProps> = ({ suggestion, focused }) => (
       className="h-7 w-7 rounded-full"
       height={32}
       width={32}
-      src={imageCdn(getIPFSLink(suggestion.picture), AVATAR)}
+      src={imageKit(getIPFSLink(suggestion.picture), AVATAR)}
       alt={suggestion.id}
     />
     <div className="flex flex-col truncate">

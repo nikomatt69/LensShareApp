@@ -6,7 +6,7 @@ import { Profile, Publication } from '@/utils/lens/generatedLenster';
 
 import clsx from 'clsx';
 import Link from 'next/link';
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import Markup from '../UI/Markup';
 import { EyeIcon } from '@heroicons/react/24/outline';
 import Attachments from './Attachments';
@@ -18,6 +18,7 @@ import Space from '../Embed/Space';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { useSpacesStore } from '@/store/spaces';
 import PreviewSpaces from '../Spaces2/PreviewSpaces/PreviewSpaces';
+import AudioSpaces from '../Spaces2';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -51,22 +52,24 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     ? JSON.parse(spaceObject)
     : null;
 
-  let content = metadata?.content;
-  const filterId = quotedPublicationId;
+  const filterId =  quotedPublicationId;
+
+  let rawContent = metadata?.content;
 
   if (filterId) {
     for (const url of urls) {
       if (url.includes(filterId)) {
-        content = content?.replace(url, '');
+        rawContent = rawContent?.replace(url, '');
       }
     }
   }
-  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
+
+  const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
     return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+  const setshowSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
 
   if (Boolean(space?.id)) {
     return <Space publication={publication} />;
@@ -81,9 +84,15 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     !showQuotedPublication &&
     !quoted;
 
-  if (showOembed) {
-    content = removeUrlAtEnd(urls, content);
-  }
+ 
+  const onData = () => {
+    if (showOembed) {
+      const updatedContent = removeUrlAtEnd(urls, content);
+      if (updatedContent !== content) {
+        setContent(updatedContent);
+      }
+    }
+  };
 
   return (
     <div className="break-words">
@@ -104,9 +113,9 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
-     {showSpacesLobby ? (<Space publication={publication} />):(null)}
-     {showSpacesWindow ? (<PreviewSpaces />):(null)}
-      {showOembed ? <Oembed url={urls[0]} /> : null}
+
+    
+      {showOembed ? <Oembed url={urls[0]}  publicationId={publication.id} onData={onData} /> : null}
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}
