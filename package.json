@@ -33,7 +33,6 @@
     "@capacitor/ios": "^5.2.3",
     "@cloudflare/workers-types": "^4.20230724.0",
     "@emotion/css": "^11.11.0",
-    "@expo/webpack-config": "^18.0.1",
     "@fingerprintjs/fingerprintjs": "^3.4.1",
     "@giphy/js-fetch-api": "^4.7.1",
     "@giphy/js-types": "^4.4.0",
