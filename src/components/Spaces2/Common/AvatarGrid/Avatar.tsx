@@ -14,12 +14,13 @@ import ListenersData from '../Sidebar/Peers/PeerRole/ListenersData';
 import SpeakerData from '../Sidebar/Peers/PeerRole/SpeakerData';
 import type { IRoleEnum } from '../SpacesTypes';
 import { BiDotsVertical } from 'react-icons/bi';
+import { HiDotsVertical } from 'react-icons/hi';
 
 type Props = {
-  peerId: string;
+  peerId?: string;
   displayName: string;
   mic?: MediaStreamTrack | null;
-  role: IRoleEnum;
+  role?: IRoleEnum;
   avatarUrl: string;
 };
 
@@ -31,9 +32,9 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
 
   const RoleData = {
     host: <HostData />,
-    coHost: <CoHostData peerId={peerId} />,
-    speaker: <SpeakerData peerId={peerId} />,
-    listener: <ListenersData peerId={peerId} />
+    coHost: peerId ? <CoHostData peerId={peerId} /> : null,
+    speaker: peerId ? <SpeakerData peerId={peerId} /> : null,
+    listener: peerId ? <ListenersData peerId={peerId} /> : null
   } as const;
 
   useEventListener('room:data-received', (data) => {
@@ -69,6 +70,7 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
         />
         {me.role === 'host' ||
         (me.role === 'coHost' &&
+          role !== undefined &&
           (me.meId === peerId || ['speaker', 'listener'].includes(role))) ||
         ((me.role === 'speaker' || me.role === 'listener') &&
           me.meId === peerId) ? (
@@ -76,7 +78,7 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
             <div className="absolute inset-0 rounded-full group-hover:bg-black group-hover:opacity-50" />
             <Dropdown
               triggerChild={
-                <BiDotsVertical className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-neutral-50 opacity-0 group-hover:opacity-100" />
+                <HiDotsVertical className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-neutral-50 opacity-0 group-hover:opacity-100" />
               }
             >
               <div className="absolute -left-4 -top-5 w-40 rounded-lg border border-neutral-300 bg-white p-1 dark:border-neutral-500 dark:bg-neutral-800">
@@ -89,7 +91,7 @@ const Avatar: FC<Props> = ({ peerId, displayName, mic, role, avatarUrl }) => {
                     {displayName}
                   </div>
                 </div>
-                {RoleData?.[role]}
+                {role ? RoleData?.[role] : null}
               </div>
             </Dropdown>
           </>

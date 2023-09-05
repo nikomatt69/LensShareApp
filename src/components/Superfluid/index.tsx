@@ -7,6 +7,7 @@ import tokenList from '../../../node_modules/@superfluid-finance/tokenlist';
 import SuperfluidWidget from '../../../node_modules/@superfluid-finance/widget';
 import paymentDetails from './paymentDetails';
 import { Button } from '../UI/Button';
+import { STATIC_ASSETS_URL } from '@/constants';
 
 interface SuperfluidSubscribeProps {
   profile: Profile;
@@ -30,6 +31,7 @@ export function SuperfluidSubscribe({ profile }: SuperfluidSubscribeProps) {
     <div>
       <SuperfluidWidget
         productDetails={{
+          imageURI: `${STATIC_ASSETS_URL}/images/icon.png`,
           name: 'Superfluid Subscription | ' + profile.name,
           description:
             profile.bio || "Subscribe to this creator's Superfluid stream"
@@ -40,7 +42,22 @@ export function SuperfluidSubscribe({ profile }: SuperfluidSubscribeProps) {
         tokenList={tokenList}
         type="dialog"
         walletManager={walletManager}
-      >
+        theme= {{
+      
+          
+          palette:{
+            mode: "dark",
+           
+           
+          }
+          
+         
+         } }
+        >
+               
+          
+        
+      
         {({ openModal }) => (
           <Button
             type="button"

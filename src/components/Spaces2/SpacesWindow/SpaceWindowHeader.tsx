@@ -76,7 +76,7 @@ const SpaceWindowHeader: FC<SpacesWindowProps> = ({
               toast.success(`Copied to clipboard!`);
             }}
           />
-          <BiDotsVertical className="h-5 w-5 cursor-pointer" />
+          <BiDotsVertical className="h-5 w-5" />
           {isExpanded &&
             (me.role === 'host' ? (
               <button className="text-brand-500 text-sm" onClick={endRoom}>
@@ -101,9 +101,10 @@ const SpaceWindowHeader: FC<SpacesWindowProps> = ({
               className="h-4 w-4 rounded-full bg-violet-500"
             />
             <Slug
-              slug={`@${hostProfile.id}`}
+              slug={`@${hostProfile.handle}`}
               className="text-sm font-normal"
             />
+            
           </div>
         </>
       )}

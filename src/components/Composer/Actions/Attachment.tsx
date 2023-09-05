@@ -95,7 +95,7 @@ const Attachment: FC = () => {
       <MenuTransition show={showMenu}>
         <Menu.Items
           ref={dropdownRef}
-          className="absolute z-[5] mt-2 rounded-xl border bg-white dark:bg-gray-900/70 py-2 px-2 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-white dark:bg-gray-900/70"
+          className="absolute z-[5] mt-2 rounded-xl border bg-white dark:bg-gray-900/70 py-2 px-2 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-white "
           static
         >
           <Menu.Item

@@ -75,7 +75,7 @@ const UserProfile: FC<UserProfileProps> = ({
     <>
       <div className="flex dark:text-white max-w-sm items-center">
         <div className={clsx(isBig ? 'font-bold' : 'text-md', 'grid')}>
-          <div className="truncate dark:text-white">
+          <div className="truncate font-bold dark:text-white font-serif">
             {sanitizeDisplayName(profile?.name) ??
               formatHandle(profile?.handle)}
           </div>
@@ -93,7 +93,7 @@ const UserProfile: FC<UserProfileProps> = ({
       </div>
       <div>
         <Slug
-          className="text-sm"
+          className="text-sm font-mono"
           slug={formatHandle(profile?.handle)}
           prefix="@"
         />

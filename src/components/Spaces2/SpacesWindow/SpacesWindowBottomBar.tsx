@@ -14,6 +14,7 @@ import EmojiTray from '../Common/EmojiTray';
 import MusicTray from '../Common/MusicTray';
 import { MicrophoneIcon, MusicalNoteIcon, UserIcon } from '@heroicons/react/24/outline';
 import EmojiOutline from '@/components/UI/Icons/EmojiOutline';
+import { HiOutlineEmojiHappy } from 'react-icons/hi';
 
 const SpacesWindowBottomBar: FC = () => {
   const { peers } = usePeers();
@@ -63,13 +64,13 @@ const SpacesWindowBottomBar: FC = () => {
         </button>
       ) : (
         <button
-          className="bg-blue-500 inline-flex h-5 items-center justify-start gap-1 rounded-lg px-2 py-4 dark:bg-indigo-950"
+          className="bg-brand-500 inline-flex h-5 items-center justify-start gap-1 rounded-lg px-2 py-4 dark:bg-indigo-950"
           onClick={sendSpeakerRequest}
         >
           <MicrophoneIcon className="dark:text-brand-400 relative h-4 w-4 text-neutral-50" />
 
           <div className="dark:text-brand-400 text-xs font-medium leading-none text-neutral-50">
-            Request to speak
+           Request to speak
           </div>
         </button>
       )}
@@ -90,7 +91,7 @@ const SpacesWindowBottomBar: FC = () => {
         <Dropdown
           triggerChild={
             <div className="bg-brand-100 rounded-lg p-1.5 dark:bg-neutral-800">
-              <EmojiOutline className="text-brand-500 h-5 w-5 dark:text-neutral-400" />
+              <HiOutlineEmojiHappy className="text-brand-500 h-5 w-5 dark:text-neutral-400" />
             </div>
           }
         >

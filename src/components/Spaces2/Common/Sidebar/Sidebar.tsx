@@ -6,6 +6,7 @@ import { useSpacesStore } from 'src/store/spaces';
 
 import ViewComponent from './ViewController';
 
+
 type SidebarProps = {};
 
 const Sidebar: FC<SidebarProps> = () => {
@@ -20,7 +21,7 @@ const Sidebar: FC<SidebarProps> = () => {
   return (
     <div
       className={clsx(
-        'min-h-[35vh] w-[20vw] flex-col rounded-xl border border-neutral-300 bg-grey transition-all duration-300 ease-out dark:border-neutral-500 dark:bg-neutral-900',
+        'min-h-[35vh] w-[20vw] flex-col rounded-xl border border-neutral-300 bg-white transition-all duration-300 ease-out dark:border-neutral-500 dark:bg-neutral-900',
         isSidebarOpen ? 'flex' : 'hidden'
       )}
     >

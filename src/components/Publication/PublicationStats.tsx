@@ -12,6 +12,8 @@ import Like from './Actions/Like';
 import MirrorOutline from '../UI/Icons/MirrorOutline';
 import Mirrores from '../ProfilePage/ Mirrores';
 import LikeList from '../Bytes/LikeList';
+import Likes from './Actions/Likes';
+import Mirrors from './Actions/Mirrors';
 
 interface PublicationStatsProps {
   publication: Publication;
@@ -25,9 +27,9 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
   const isMirror = publication.__typename === 'Mirror';
   const commentsCount = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfComments
-    : publication?.stats?.totalAmountOfMirrors;
+    : publication?.stats?.totalAmountOfComments
   const mirrorCount = isMirror
-    ? publication?.mirrorOf?.stats?.totalAmountOfComments
+    ? publication?.mirrorOf?.stats?.totalAmountOfMirrors
     : publication?.stats?.totalAmountOfMirrors;
   const reactionCount = isMirror
     ? publication?.mirrorOf?.stats?.totalUpvotes
@@ -54,7 +56,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="mirror-stats"
           >
-            <b className="text-black  dark:text-blue-700">
+            <b className="text-emerald-500  dark:text-emerald-500">
               {nFormatter(mirrorCount)}
             </b>{' '}
           </button>
@@ -64,7 +66,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             show={showMirrorsModal}
             onClose={() => setShowMirrorsModal(false)}
           >
-            <MirroredList publication={publication?.id} publicationId={publicationId} />
+            <Mirrors publicationId={publicationId} />
           </Modal>
         </>
       )}
@@ -77,17 +79,17 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="like-stats"
           >
-            <b className="text-black  dark:text-blue-700">
+            <b className="text-red-700  dark:text-red-700">
               {nFormatter(reactionCount)}
             </b>{' '}
           </button>
           <Modal
             title={`Liked by`}
-            icon={<HeartIcon className="text-brand h-5 w-5" />}
+            icon={<HeartIcon className="text-red-700 h-5 w-5" />}
             show={showLikesModal}
             onClose={() => setShowLikesModal(false)}
           >
-            <LikeList publicationId={publicationId} publication={publication?.id} />
+            <Likes publicationId={publicationId}  />
           </Modal>
         </>
       )}
@@ -100,7 +102,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
             }}
             data-testid="collect-stats"
           >
-            <b className="text-black  dark:text-blue-700">
+            <b className="text-red-500  dark:text-red-500">
               {nFormatter(collectCount)}
             </b>{' '}
           </button>

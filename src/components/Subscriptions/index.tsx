@@ -30,6 +30,7 @@ import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
 import Loader from '../UI/Loader';
+import Bytes from '../Bytes';
 
 const FeedRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -148,7 +149,7 @@ const FeedRender = () => {
      
    
     <GridItemEight className="space-y-5">
-     <Feed/>
+     <Bytes/>
     </GridItemEight>
      
    

@@ -127,7 +127,7 @@ const FeedStory = () => {
   }
 
   if (!loading && error) {
-    return <Custom400 />;
+    return <EmptyState message={undefined} icon={undefined} />;
   }
   return (
     <div className="mt-2 border-0 dark:bg-black bg-white pt-3">

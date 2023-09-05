@@ -141,7 +141,7 @@ export const ALLOWED_MEDIA_TYPES = [
   ...ALLOWED_AUDIO_TYPES
 ];
 
-export const IPFS_GATEWAY = 'https://gateway.ipfscdn.io/ipfs';
+export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';
 export const EVER_ACCESS_KEY = process.env.EVER_ACCESS_KEY as string;

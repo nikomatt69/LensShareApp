@@ -14,8 +14,6 @@ import { MESSAGING_PROVIDER } from '@/constants';
 export type TabValues = 'All' | 'Lens' | 'Other' | 'Requests';
 
 interface MessageState {
-  chatProvider: string;
-  setChatProvider: (chatProvider: string) => void;
   client: Client | undefined;
   setClient: (client: Client | undefined) => void;
   conversations: Map<string, Conversation>;
@@ -66,8 +64,6 @@ export const useMessageStore = create<MessageState>((set) => ({
       return { conversations };
     });
   },
-  chatProvider: MESSAGING_PROVIDER.PUSH,
-  setChatProvider: (chatProvider) => set(() => ({ chatProvider })),
   queuedMessages: new Map(),
   addQueuedMessage: (
     key: string,
@@ -145,8 +141,8 @@ export const useMessageStore = create<MessageState>((set) => ({
   selectedProfileId: '',
   setSelectedProfileId: (selectedProfileId) =>
     set(() => ({ selectedProfileId })),
-  selectedTab: 'All',
-  setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
+    selectedTab: 'All',
+    setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
   syncedProfiles: new Set(),
   addSyncedProfiles: (profileIds) =>
     set(({ syncedProfiles }) => ({

@@ -28,7 +28,7 @@ export const Modal: FC<ModalProps> = ({
     <Transition.Root show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-[20] overflow-y-auto"
+        className="fixed inset-0 z-[15] overflow-y-auto"
         onClose={() => onClose?.()}
         data-testid={dataTestId}
       >

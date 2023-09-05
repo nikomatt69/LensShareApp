@@ -9,6 +9,7 @@ interface MetaProps {
   name: string;
   uri: string;
   hash: string;
+
 }
 
 const Meta: FC<MetaProps> = ({ name, uri, hash }) => (
@@ -56,6 +57,7 @@ const OnchainMeta: FC<OnchainMetaProps> = ({ publication }) => {
             name={`ARWEAVE TRANSACTION`}
             uri={`https://arweave.app/tx/${hash}`}
             hash={hash}
+            
           />
         ) : null}
         {publication?.isDataAvailability ? (

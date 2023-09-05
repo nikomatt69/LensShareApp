@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "87a7f0df-866f-435f-a6c1-c895677c968a"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "xyz.lenshareapp.zip"
+    }
+  }
+}

@@ -26,8 +26,8 @@ export const useAuthPersistStore = create(
       signIn: ({ accessToken, refreshToken }) =>
         set({ accessToken, refreshToken }),
       signOut: () => {
-        localStorage.removeItem('lenstube.store');
-        localStorage.removeItem('lenstube.auth.store');
+        localStorage.removeItem('lensshare.store');
+        localStorage.removeItem('lensshare.store');
       },
       hydrateAuthTokens: () => {
         return {
@@ -37,7 +37,7 @@ export const useAuthPersistStore = create(
       }
     }),
     {
-      name: 'lenstube.auth.store'
+      name: 'lensshare.store'
     }
   )
 );

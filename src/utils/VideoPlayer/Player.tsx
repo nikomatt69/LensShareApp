@@ -39,9 +39,27 @@ const PlayerInstance: FC<PlayerProps> = ({
       objectFit="contain"
       aspectRatio={ratio}
       showPipButton
+      theme={{
+        borderStyles: {
+          containerBorderStyle: 'solid',
+          
+        },
+        colors: {
+          accent: '#1d4ed8',
+        },
+        space: {
+          controlsBottomMarginX: '10px',
+          controlsBottomMarginY: '5px',
+          controlsTopMarginX: '15px',
+          controlsTopMarginY: '8pxpx',
+        },
+        radii: {
+          containerBorderRadius: '16px',
+        },
+      }}
       mediaElementRef={playerRef}
       loop={options.loop ?? true}
-      showUploadingIndicator={false}
+      showUploadingIndicator={true}
       muted={options?.muted ?? false}
       controls={{ defaultVolume: 1 }}
       autoPlay={options.autoPlay ?? false}

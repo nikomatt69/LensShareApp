@@ -128,7 +128,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
           />
         )
       )}
-      {hasMore && <span className="" ref={observe} />}
+      {hasMore && <span ref={observe} />}
     </Card>
   );
 };

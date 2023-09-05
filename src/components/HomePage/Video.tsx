@@ -96,7 +96,7 @@ const Video: FC<Props> = ({ publication }) => {
 
   return (
     <div className="lenshare-player">
-      <div>
+      <div className='border-2 border-blue-700 rounded-3xl'>
         <VideoPlayer
       
           currentTime={videoWatchTime}

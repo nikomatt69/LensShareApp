@@ -26,10 +26,10 @@ const PreviewSpacesHeader: FC = () => {
   return (
     <div className="relative border-b border-neutral-300 bg-neutral-100 p-3 dark:border-neutral-800 dark:bg-zinc-800">
       <div className="mx-auto flex w-fit items-center gap-2 text-neutral-900 dark:text-neutral-100">
-        {hostProfile?.id}
+        {hostProfile?.name}
         
         <span className="text-sm"> | </span>
-        <Slug slug={`@${hostProfile.id}`} />
+        <Slug slug={`@${hostProfile.handle}`} />
       </div>
       <div className="pt-2 text-base font-normal text-neutral-500 dark:text-neutral-300">
         {space.title}

@@ -37,6 +37,7 @@ import { W3mQrCode, Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 import UserSigNoncesProvider from './UserSigNoncesProvider';
+import { getWebSocketPublicClient } from '@wagmi/core';
 
 const chains = [polygon,mainnet]
 const projectId =  WALLETCONNECT_PROJECT_ID
@@ -45,7 +46,8 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, chains }),
-  publicClient
+  publicClient,
+ 
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 

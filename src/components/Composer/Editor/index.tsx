@@ -69,7 +69,7 @@ const Editor: FC = () => {
       <ToolbarPlugin />
       <RichTextPlugin
         contentEditable={
-          <ContentEditable className="my-4 block min-h-[65px] dark:text-black dark:bg-white bg-grey-300 overflow-auto px-5" />
+          <ContentEditable className="my-4 block min-h-[65px] dark:text-black dark:bg-white bg-white overflow-auto px-5" />
         }
         placeholder={
           <div className="pointer-events-none absolute top-[65px]  whitespace-nowrap px-5 text-gray-600">

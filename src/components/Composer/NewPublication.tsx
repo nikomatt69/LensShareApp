@@ -85,6 +85,7 @@ import { useGlobalModalStateStore } from '@/store/modals';
 
 import { useAccessSettingsStore } from '@/store/access';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient2';
+import useEthersWalletClient2 from '@/utils/hooks/useEthersWalletClient';
 import { Errors } from '@/lib/errors';
 import uploadToArweave from '@/lib/uploadToArweave';
 import getTextNftUrl from '@/utils/functions/getTextNftUrl';
@@ -224,8 +225,9 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     restricted,
     followToView,
     collectToView,
+    superfluidToView,
     reset: resetAccessSettings
-  } = useAccessSettingsStore();
+  } = useAccessSettingsStore((state) => state);
 
   // States
   const [isLoading, setIsLoading] = useState(false);
@@ -662,22 +664,63 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     };
 
     // Create the access condition
-    let accessCondition: AccessConditionOutput = {};
-    if (collectToView && followToView) {
-      accessCondition = {
-        and: {
-          criteria: [
-            { collect: collectAccessCondition },
-            { follow: followAccessCondition }
-          ]
-        }
-      };
-    } else if (collectToView) {
-      accessCondition = { collect: collectAccessCondition };
-    } else if (followToView) {
-      accessCondition = { follow: followAccessCondition };
-    }
+    const currentAddress = await walletClient.getAddress();
+    const { data: superfluidInflowsData } = await superfluidClient.query({
+      query: SuperfluidInflowsDocument,
+      variables: { id: currentAddress.toString().toLowerCase() }
+    });
+    console.log('superfluidInflowsData', superfluidInflowsData, currentAddress);
+    const listOfSuperfluidAddresses = superfluidInflowsData.account.inflows.map(
+      (inflow: InflowType) => inflow.sender.id
+    );
+    const eoaAccessCondition: EoaOwnership = {
+      address: listOfSuperfluidAddresses
+    };
 
+    // Create the access condition
+    let accessCondition: AccessConditionOutput = {};
+
+    if (collectToView || followToView || superfluidToView) {
+      const criteria = [];
+
+      if (collectToView) {
+        criteria.push({ collect: collectAccessCondition });
+      }
+
+      if (followToView) {
+        criteria.push({ follow: followAccessCondition });
+      }
+
+      if (superfluidToView) {
+        criteria.push({ eoa: eoaAccessCondition });
+      }
+
+      if (criteria.length === 1) {
+        accessCondition = criteria[0];
+      } else {
+        accessCondition = { and: { criteria } };
+      }
+    } else {
+      if (collectToView) {
+        accessCondition = { collect: collectAccessCondition };
+      } else if (followToView) {
+        accessCondition = { follow: followAccessCondition };
+      }
+    }
+    if (superfluidToView) {
+      if (listOfSuperfluidAddresses.length > 1) {
+        accessCondition = {
+          or: {
+            criteria: listOfSuperfluidAddresses.map((address: string) => {
+              return { eoa: { address } };
+            })
+          }
+        };
+      } else if (listOfSuperfluidAddresses.length === 1) {
+        accessCondition = { eoa: { address: listOfSuperfluidAddresses[0] } };
+      }
+    }
+    console.log('accessCondition', accessCondition);
     // Generate the encrypted metadata and upload it to Arweave
     const { contentURI } = await tokenGatedSdk.gated.encryptMetadata(
       metadata,
@@ -737,14 +780,22 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
       }
 
       // Create Space in Huddle
-      let spaceId = null;
+      
+      let spaceId = {
+        success: false,
+        response: {
+          message: '',
+          data: {
+            roomId: '',
+          },
+      }};
+
       if (
         showNewPublicationModal &&
         modalPublicationType === NewPublicationTypes.Spaces
       ) {
         spaceId = await createSpace();
       }
-
       const now = new Date();
       now.setHours(Number(spacesTimeInHour));
       now.setMinutes(Number(spacesTimeInMinute));
@@ -753,7 +804,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
         now.toLocaleString('en-US', { timeZone: userTimezone })
       );
       const startTime = formattedTime.toISOString();
-
       const attributes: MetadataAttributeInput[] = [
         {
           traitType: 'type',
@@ -761,16 +811,17 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
           value: getMainContentFocus()?.toLowerCase()
         },
         ...(showNewPublicationModal &&
+        spaceId.success &&
         modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceId,
+                  id: spaceId.response.data.roomId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
-                })
+                })  
               }
             ]
           : []),
@@ -822,7 +873,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
         version: '2.0.0',
         metadata_id: uuid(),
         content: processedPublicationContent,
-        external_url: `https://lensshare.xyz/u/${currentProfile?.id}`,
+        external_url: `https://lenshareapp.xyz/u/${currentProfile?.id}`,
         image:
           attachmentsInput.length > 0 ? getAttachmentImage() : textNftImageUrl,
         imageMimeType:
@@ -1073,7 +1124,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
       <div className="px-5">
         <Attachments attachments={attachments} isNew />
       </div>
-      <div className='z-[90]'><Discard onDiscard={onDiscardClick} /></div>
+      <div className='z-[30]'><Discard onDiscard={onDiscardClick} /></div>
       
     </Card>
   );

@@ -1,6 +1,6 @@
 import * as Apollo from '@apollo/client';
 
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
@@ -9,6 +9,7 @@ import {
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
+  Publication,
   ReferenceModules,
   UserProfilesDocument,
   UserProfilesQuery,
@@ -29,8 +30,15 @@ import { GridItemEight, GridItemFour, GridLayout } from './UI/GridLayout';
 import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
 import Loader from './UI/Loader';
+import Wrapper from './Echos/Wrapper';
+import Curated from './Echos/Curated';
+import Footer from './Sidebar/Footer';
+interface Props {
+  publication:Publication
 
-const LatestRender = () => {
+}
+
+const LatestRender: FC<Props> = ({ publication}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -149,6 +157,16 @@ const LatestRender = () => {
     
      <Latest/>
      </GridItemEight>
+     <GridItemFour className='block'>
+      
+      <Wrapper publication={publication}>
+        <div className='hidden lg:block xl:block'><Curated /></div>
+        
+          </Wrapper>
+      <Footer/>
+    
+   </GridItemFour>
+   
    
      
   

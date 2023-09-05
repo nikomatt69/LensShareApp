@@ -8,7 +8,7 @@ import BottomNav from '../Navs/BottomNav';
 import { Image } from '../UI/Image';
 import * as Apollo from '@apollo/client';
 
-import { Children, useEffect, useState } from 'react';
+import { Children, FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
@@ -44,8 +44,15 @@ import Audio from '../Echos/Audio';
 import LoginButton from '../Login/LoginButton';
 
 import { useTheme } from 'next-themes';
+import Wrapper from '../Echos/Wrapper';
+import Curated from '../Echos/Curated';
+import AddToHome from './AddToHome';
+interface Props {
+  publication:Publication
 
-const Home2: NextPage = () => {
+}
+
+const Home2: FC<Props> = ({ publication}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -159,6 +166,7 @@ const Home2: NextPage = () => {
     <GridLayout className="max-w-[1200px] pt-6"> 
     <MetaTags title={`Home • ${APP_NAME}`} /> 
     <GridItemEight>
+      <AddToHome />
       {resolvedTheme === 'dark' ? (
     <Image
             className="cursor-pointer"
@@ -172,7 +180,7 @@ const Home2: NextPage = () => {
            
           />)}
           
-      
+         
     
    <BytesSection />
    
@@ -190,6 +198,15 @@ const Home2: NextPage = () => {
             :<Explore/>
           }
     </GridItemEight>
+    <GridItemFour className='block max-h-40'>
+    <Footer />
+
+    <Wrapper publication={publication}>
+    <div className='hidden lg:block xl:block'><Curated /></div>
+        </Wrapper>
+
+  
+ </GridItemFour>
     
   </GridLayout>
   </div>

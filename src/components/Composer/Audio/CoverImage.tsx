@@ -8,6 +8,8 @@ import clsx from 'clsx';
 import type { ChangeEvent, FC, Ref } from 'react';
 import { useState } from 'react';
 import { Image } from '@/components/UI/Image';
+import imageCdn from '@/lib/imageCdn';
+import imageProxy2 from '@/lib/imageProxy2';
 
 interface CoverImageProps {
   isNew: boolean;
@@ -53,7 +55,7 @@ const CoverImage: FC<CoverImageProps> = ({
           onError={({ currentTarget }) => {
             currentTarget.src = cover ? sanitizeDStorageUrl(cover) : cover;
           }}
-          src={cover ? imageKit(sanitizeDStorageUrl(cover), ATTACHMENT) : cover}
+          src={cover ? imageProxy2(sanitizeDStorageUrl(cover), ATTACHMENT) : cover}
           className="h-24 w-24 rounded-xl object-cover md:h-40 md:w-40 md:rounded-none"
           draggable={false}
           alt={`attachment-audio-cover-${cover}`}

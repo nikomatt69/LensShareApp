@@ -150,7 +150,7 @@ const Bytes = () => {
       <MetaTags title="Bytes" />
       <div
         ref={bytesContainer}
-        className="no-scrollbar h-screen bg-white dark:bg-black snap-y pb-10 snap-mandatory overflow-y-scroll scroll-smooth md:h-[calc(100vh-70px)]"
+        className="no-scrollbar h-screen bg-white dark:bg-black snap-y pb-6 snap-mandatory overflow-y-scroll scroll-smooth md:h-[calc(100vh-70px)]"
       >
         
         {bytes?.map(

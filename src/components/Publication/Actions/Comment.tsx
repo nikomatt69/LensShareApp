@@ -2,7 +2,7 @@ import { Tooltip } from '@/components/UI/Tooltip';
 import humanize from '@/lib/humanize';
 import nFormatter from '@/lib/nFormatter';
 import { Publication } from '@/utils/lens/generatedLenster';
-import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftEllipsisIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -17,9 +17,9 @@ const Comment: FC<CommentProps> = ({ publication, showCount }) => {
     publication.__typename === 'Mirror'
       ? publication?.mirrorOf?.stats?.commentsTotal
       : publication?.stats?.commentsTotal;
-  const iconClassName = showCount
-    ? 'w-[17px] sm:w-[20px]'
-    : 'w-[15px] sm:w-[18px]';
+      const iconClassName = showCount
+      ? 'w-[17px] sm:w-[20px] '
+      : 'w-[15px] sm:w-[18px]';
 
   return (
     <div className="flex items-center space-x-1 text-blue-500">
@@ -31,7 +31,7 @@ const Comment: FC<CommentProps> = ({ publication, showCount }) => {
               content={count > 0 ? `${humanize(count)} Comments` : `Comment`}
               withDelay
             >
-              <ChatBubbleLeftEllipsisIcon className={iconClassName} />
+              <ChatBubbleOvalLeftEllipsisIcon className={iconClassName} />
             </Tooltip>
           </div>
         </Link>

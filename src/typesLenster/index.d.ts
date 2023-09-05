@@ -66,11 +66,10 @@ export interface MarkupLinkProps {
 
 
 export interface SpaceMetadata {
-    id: string;
-    host: `0x${string}`;
-    startTime: string
-   
-    
+  id: string;
+  host: `0x${string}`;
+  startTime: string;
+ 
 }
 
 

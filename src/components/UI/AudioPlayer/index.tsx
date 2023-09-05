@@ -11,6 +11,10 @@ import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import type WaveSurfer from 'wavesurfer.js';
 import { Image } from '@/components/UI/Image';
 import imageKit from '@/lib/imageKit';
+import { MdOutlineClose } from 'react-icons/md';
+import { Button } from '../Button';
+import useEchoStore, { useEchosPersistStore } from '@/store/echos';
+import { XCircleIcon } from '@heroicons/react/24/solid';
 
 type Props = {
   selectedTrack: Publication;
@@ -19,11 +23,13 @@ type Props = {
 const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const waveSurfer = useRef<WaveSurfer>();
+  const setSelectedTrack = useEchoStore((state) => state.setSelectedTrack);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [currentPlayingTime, setCurrentPlayingTime] = useState('00:00');
   const [duration, setDuration] = useState('00:00');
-
+  const selectedTrackId = useEchosPersistStore((state) => state.selectedTrackId);
+  const setSelectedTrackId = useEchosPersistStore((state) => state.setSelectedTrackId);
   const getAudioPlayerOptions = (ref: HTMLDivElement) => ({
     container: ref,
     waveColor: 'gray',
@@ -119,10 +125,12 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
     return null;
   }
 
+
   return (
-    <div className="flex w-full flex-row flex-wrap items-center gap-y-2 ">
+    <div className="flex w-full h-20 flex-row flex-wrap items-center gap-y-2 ">
       <div className="flex w-1/2 items-center">
         <div className="flex">
+
           <div className="h-16 w-16 flex-none">
             <Image
               src={getThumbnailUrl(selectedTrack)}
@@ -138,34 +146,25 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
               href={`/u/${selectedTrack?.profile?.id}`}
               className="truncate text-[11px] font-medium uppercase text-black dark:text-white opacity-90 hover:underline"
             >
-              {selectedTrack.profile.handle}
+              {selectedTrack.profile.name}
             </Link>
+
             <div className="flex items-center text-xs">
               <div className="w-10 dark:text-white text-black">{currentPlayingTime}</div>
               <span className="pr-0.5">/</span>
               <div className="w-10 text-center dark:text-white text-black">{duration}</div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="flex w-full flex-col items-center text-black dark:text-white">
-        <div
-          id="waveform"
-          className="m-2 w-full text-black  dark:text-white"
-          ref={waveformRef}
-        />
-        <div className="flex w-full items-center justify-between text-black dark:text-white">
-          {/* <Reactions selectedTrack={selectedTrack} /> */}
-          <div className="flex items-center space-x-4 text-black dark:text-white">
+          <div className="flex items-center space-x-3 text-black dark:text-white">
             <button
               onClick={rewind}
-              className="flex items-center space-x-1 text-black dark:text-white"
+              className="flex items-center space-x-0.5 text-black dark:text-white"
             >
               <FiChevronLeft /> <span>5</span>
             </button>
             <button
               onClick={handlePlayPause}
-              className="mx-4 rounded-full  bg-blue-500 p-2 text-black dark:text-white outline-none"
+              className="mx-2 rounded-full  bg-blue-500 p-2 text-black dark:text-white outline-none"
             >
               {playing ? (
                 <BiPause className="text-xl" />
@@ -175,13 +174,13 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
             </button>
             <button
               onClick={forward}
-              className="flex items-center space-x-1 text-black dark:text-white"
+              className="flex items-center space-x-0.5 text-black dark:text-white"
             >
               <span>5</span>
               <FiChevronRight />
             </button>
           </div>
-          <div className="flex items-center">
+          <div className="flex ml-2 items-center">
             <button onClick={() => onClickVolume()}>
               {waveSurfer.current?.getMute() ? (
                 <GiSpeakerOff className="h-5 w-5" />
@@ -189,16 +188,31 @@ const AudioPlayer: FC<Props> = ({ selectedTrack }) => {
                 <GiSpeaker className="h-5 w-5" />
               )}
             </button>
+            
             <input
               type="range"
               step={10}
               value={volume * 100}
               onChange={onChangeVolume}
-              className="h-1 w-[100px] cursor-pointer appearance-none overflow-hidden rounded-lg bg-green-100"
+              className="h-1 w-[100px] cursor-pointer appearance-none overflow-hidden rounded-lg hidden lg:block xl:block bg-blue-700"
             />
+      
           </div>
+          <div className=' r-0 mb-1' onClick={() =>setSelectedTrack(null)}><XCircleIcon className='h-5 w-5'/></div>
         </div>
+        
       </div>
+      <div className="flex w-full flex-col items-center text-black dark:text-white">
+        <div
+          id="waveform"
+          className=" w-full text-blue-700 "
+          ref={waveformRef}
+        />
+        <div className="flex w-full items-center justify-between text-black dark:text-white">
+          {/* <Reactions selectedTrack={selectedTrack} /> */}
+         
+      </div>
+    </div>
     </div>
   );
 };

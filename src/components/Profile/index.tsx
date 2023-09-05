@@ -38,6 +38,7 @@ import ProfileImage from '../Bytes/ProfileImage';
 import Stories from '../Bytes/Stories';
 import StoriesRender from '../Bytes/Stories';
 import Loader from '../UI/Loader';
+import Wrapper from '../Echos/Wrapper';
 
 const ViewProfile: NextPage = (publication) => {
   const {
@@ -167,6 +168,7 @@ const ViewProfile: NextPage = (publication) => {
                 publication={publication as Publication}
           
           />
+          <Wrapper children publication={publication as Publication}/>
         </GridItemFour>
         <GridItemEight className="space-y-5">
         {currentProfile?.id ?(<NewPost />):(null) }

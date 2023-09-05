@@ -112,7 +112,7 @@ const ByteVideo: FC<Props> = ({
           }}
         >
           <div
-            className="absolute top-[30%] bottom-[30%]"
+            className="absolute top-[50%]"
             ref={intersectionRef}
             id={video?.id}
           />

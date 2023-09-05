@@ -1,6 +1,7 @@
 import { COVER, STATIC_IMAGES_URL } from '@/constants';
 import imageKit from '@/lib/imageKit';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
+import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import type { FC } from 'react';
 import colors from 'tailwindcss/colors';
 
@@ -16,7 +17,7 @@ const Cover: FC<CoverProps> = ({ cover }) => {
       style={{
         backgroundImage: `url(${
           cover
-            ? imageKit(sanitizeDStorageUrl(cover), COVER)
+            ? imageKit(sanitizeIpfsUrl(cover), COVER)
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         })`,
         backgroundColor: colors.blue[100],

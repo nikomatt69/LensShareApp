@@ -215,7 +215,7 @@ const Mirror: FC<MirrorProps> = ({ publication, setIsLoading, isLoading }) => {
       disabled={isLoading}
     >
       <div className="flex items-center space-x-2">
-        <MirrorOutline className="h-4 w-4" />
+        <MirrorOutline className="h-5  w-4" />
         <div>{mirrored ? 'Unmirror' : 'Mirror'}</div>
       </div>
     </Menu.Item>

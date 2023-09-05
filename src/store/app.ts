@@ -130,7 +130,10 @@ export const useAppStore = create<AppState>((set) => ({
 interface AppPersistState {
   profileId: string | null;
   setProfileId: (profileId: string | null) => void;
+  
 }
+
+
 
 export const useAppPersistStore = create(
   persist<AppPersistState>(

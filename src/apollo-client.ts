@@ -2,7 +2,7 @@ import { API_URL } from '@/constants';
 import { onError } from '@apollo/client/link/error';
 import jwtDecode from 'jwt-decode';
 import toast from 'react-hot-toast';
-
+import {  fromPromise, toPromise } from '@apollo/client';
 import {
   ApolloClient,
   ApolloLink,
@@ -13,90 +13,108 @@ import {
 import { publicationKeyFields } from './lib/keyFields';
 import cursorBasedPagination from './lib/cursorBasedPagination';
 import result from './types/lens';
+import { Localstorage } from './storage';
+import { parseJwt } from './utils/lens/apollo/lib';
+import axios from 'axios';
+import createFeedFieldPolicy from './utils/lens/apollo/cache/createFeedFieldPolicy';
+import createFeedHighlightsFieldPolicy from './utils/lens/apollo/cache/createFeedHighlightsFieldPolicy';
+import createForYouFieldPolicy from './utils/lens/apollo/cache/createForYouFieldPolicy';
+import createExplorePublicationsFieldPolicy from './utils/lens/apollo/cache/createExplorePublicationsFieldPolicy';
+import createPublicationsFieldPolicy from './utils/lens/apollo/cache/createPublicationsFieldPolicy';
+import createNftsFieldPolicy from './utils/lens/apollo/cache/createNftsFieldPolicy';
+import createNotificationsFieldPolicy from './utils/lens/apollo/cache/createNotificationsFieldPolicy';
+import createFollowersFieldPolicy from './utils/lens/apollo/cache/createFollowersFieldPolicy';
+import createFollowingFieldPolicy from './utils/lens/apollo/cache/createFollowingFieldPolicy';
+import createSearchFieldPolicy from './utils/lens/apollo/cache/createSearchFieldPolicy';
+import createProfilesFieldPolicy from './utils/lens/apollo/cache/createProfilesFieldPolicy';
+import createWhoCollectedPublicationFieldPolicy from './utils/lens/apollo/cache/createWhoCollectedPublicationFieldPolicy';
+import createWhoReactedPublicationFieldPolicy from './utils/lens/apollo/cache/createWhoReactedPublicationFieldPolicy';
+import createMutualFollowersProfilesFieldPolicy from './utils/lens/apollo/cache/createMutualFollowersProfilesFieldPolicy';
+import superfluidLink from './superfluidLink';
 
-const REFRESH_AUTHENTICATION_MUTATION = `
-    mutation Refresh($request: RefreshRequest!) {
-      refresh(request: $request) {
-        accessToken
-        refreshToken
-      }
-    }
-  `;
+const superfluidClient = new ApolloClient({
+  link: superfluidLink,
+  cache: new InMemoryCache()
+});
+
+export default superfluidClient;
 
 const httpLink = new HttpLink({ uri: API_URL, fetchOptions: 'no-cors', fetch });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+
+const resetAuthData = () => {
+ 
+  localStorage.removeItem(Localstorage.NotificationStore);
+  localStorage.removeItem(Localstorage.TransactionStore);
+  localStorage.removeItem(Localstorage.TimelineStore);
+  localStorage.removeItem(Localstorage.MessageStore);
+  localStorage.removeItem(Localstorage.AttachmentCache);
+  localStorage.removeItem(Localstorage.AttachmentStore);
+  localStorage.removeItem(Localstorage.NonceStore);
+};
+
+const REFRESH_AUTHENTICATION_MUTATION = `
+  mutation Refresh($request: RefreshRequest!) {
+    refresh(request: $request) {
+      accessToken
+      refreshToken
+    }
+  }
+`;
 
 const authLink = new ApolloLink((operation, forward) => {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem(Localstorage.AccessToken);
+  const refreshToken = localStorage.getItem(Localstorage.RefreshToken);
 
-  if (accessToken === 'undefined' || !accessToken) {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('selectedProfile');
-
+  if (!accessToken || accessToken === 'undefined') {
+    resetAuthData();
     return forward(operation);
-  } else {
+  }
+
+  const expiringSoon = Date.now() >= parseJwt(accessToken)?.exp * 1000;
+
+  if (!expiringSoon) {
     operation.setContext({
       headers: {
         'x-access-token': accessToken ? `Bearer ${accessToken}` : ''
       }
     });
 
-    const { exp }: { exp: number } = jwtDecode(accessToken);
-
-    if (Date.now() >= exp * 1000) {
-      fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          operationName: 'Refresh',
-          query: REFRESH_AUTHENTICATION_MUTATION,
-          variables: {
-            request: { refreshToken: localStorage.getItem('refreshToken') }
-          }
-        })
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          operation.setContext({
-            headers: {
-              'x-access-token': accessToken
-                ? `Bearer ${res?.data?.refresh?.accessToken}`
-                : ''
-            }
-          });
-          localStorage.setItem('accessToken', res?.data?.refresh?.accessToken);
-          localStorage.setItem(
-            'refreshToken',
-            res?.data?.refresh?.refreshToken
-          );
-        })
-        .catch(() => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-
-          toast.error(
-            `Something went wrong when authenticating with Lens! Please log out, log back in, and try again.`
-          );
-        });
-    }
-
     return forward(operation);
   }
+
+  return fromPromise(
+    axios
+      .post(
+        API_URL,
+        {
+          operationName: 'Refresh',
+          query: REFRESH_AUTHENTICATION_MUTATION,
+          variables: { request: { refreshToken } }
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then(({ data }) => {
+        const accessToken = data?.data?.refresh?.accessToken;
+        const refreshToken = data?.data?.refresh?.refreshToken;
+        operation.setContext({
+          headers: { 'x-access-token': `Bearer ${accessToken}` }
+        });
+
+        localStorage.setItem(Localstorage.AccessToken, accessToken);
+        localStorage.setItem(Localstorage.RefreshToken, refreshToken);
+
+        return toPromise(forward(operation));
+      })
+      .catch(() => {
+        return toPromise(forward(operation));
+      })
+  );
 });
 
 export const apolloClient = new ApolloClient({
-  link: from([errorLink, authLink, httpLink]),
+  link: from([ authLink, httpLink]),
   cache: new InMemoryCache({
     possibleTypes: result.possibleTypes,
     typePolicies: {
@@ -105,49 +123,23 @@ export const apolloClient = new ApolloClient({
       Mirror: { keyFields: publicationKeyFields },
       Query: {
         fields: {
-          timeline: cursorBasedPagination(['request', ['profileId']]),
-          feed: cursorBasedPagination([
-            'request',
-            ['profileId', 'feedEventItemTypes']
-          ]),
-          feedHighlights: cursorBasedPagination(['request', ['profileId']]),
-          explorePublications: cursorBasedPagination([
-            'request',
-            ['sortCriteria', 'metadata']
-          ]),
-          publications: cursorBasedPagination([
-            'request',
-            ['profileId', 'commentsOf', 'publicationTypes', 'metadata']
-          ]),
-          nfts: cursorBasedPagination([
-            'request',
-            ['ownerAddress', 'chainIds']
-          ]),
-          notifications: cursorBasedPagination([
-            'request',
-            ['profileId', 'notificationTypes']
-          ]),
-          followers: cursorBasedPagination(['request', ['profileId']]),
-          following: cursorBasedPagination(['request', ['address']]),
-          search: cursorBasedPagination(['request', ['query', 'type']]),
-          profiles: cursorBasedPagination([
-            'request',
-            ['profileIds', 'ownedBy', 'handles', 'whoMirroredPublicationId']
-          ]),
-          whoCollectedPublication: cursorBasedPagination([
-            'request',
-            ['publicationId']
-          ]),
-          whoReactedPublication: cursorBasedPagination([
-            'request',
-            ['publicationId']
-          ]),
-          mutualFollowersProfiles: cursorBasedPagination([
-            'request',
-            ['viewingProfileId', 'yourProfileId', 'limit']
-          ])
+          feed: createFeedFieldPolicy(),
+          feedHighlights: createFeedHighlightsFieldPolicy(),
+          forYou: createForYouFieldPolicy(),
+          explorePublications: createExplorePublicationsFieldPolicy(),
+          publications: createPublicationsFieldPolicy(),
+          publicationsProfileBookmarks: createPublicationsFieldPolicy(),
+          nfts: createNftsFieldPolicy(),
+          notifications: createNotificationsFieldPolicy(),
+          followers: createFollowersFieldPolicy(),
+          following: createFollowingFieldPolicy(),
+          search: createSearchFieldPolicy(),
+          profiles: createProfilesFieldPolicy(),
+          whoCollectedPublication: createWhoCollectedPublicationFieldPolicy(),
+          whoReactedPublication: createWhoReactedPublicationFieldPolicy(),
+          mutualFollowersProfiles: createMutualFollowersProfilesFieldPolicy()
         }
       }
     }
-  })
+    })
 });

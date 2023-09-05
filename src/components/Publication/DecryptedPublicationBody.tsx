@@ -2,6 +2,7 @@ import { LIT_PROTOCOL_ENV, LIT_PROTOCOL_ENVIRONMENT, POLYGONSCAN_URL, RARIBLE_UR
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
 import {
+  Profile,
   DecryptFailReason,
   Publication,
   PublicationMetadataV2Input,
@@ -20,7 +21,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppStore } from 'src/store/app';
 import { useGlobalModalStateStore } from 'src/store/modals';
 import { usePublicClient, useToken } from 'wagmi';
@@ -45,7 +46,45 @@ import Oembed from '../Oembed';
 import useNft from '@/lib/useNft';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { BiLogInCircle, BiLogOut } from 'react-icons/bi';
+import { SuperfluidInflowsDocument } from '@/utils/lens/generated4';
+import superfluidClient from '@/apollo-client';
+export interface Sender {
+  id: string;
+}
+export interface UnderlyingToken {
+  name: string;
+  symbol: string;
+}
+export interface Token {
+  name: string;
+  symbol: string;
+  decimals: string;
+  id: string;
+  underlyingToken: UnderlyingToken;
+}
 
+export interface Inflow {
+  id: string;
+  sender: Sender;
+  token: Token;
+  deposit: string;
+  currentFlowRate: string;
+  createdAtTimestamp: string;
+}
+
+
+
+export interface Account {
+  createdAtTimestamp: string;
+  createdAtBlockNumber: string;
+  isSuperApp: boolean;
+  updatedAtBlockNumber: string;
+  updatedAtTimestamp: string;
+  inflows: Inflow[];
+}
+export interface SuplerfluidInflowsDataType {
+  account: Account;
+}
 interface DecryptMessageProps {
   icon: ReactNode;
   children: ReactNode;
@@ -60,10 +99,19 @@ const DecryptMessage: FC<DecryptMessageProps> = ({ icon, children }) => (
 
 interface DecryptedPublicationBodyProps {
   encryptedPublication: Publication;
+  profile: Profile;
+  inflow:{ id: string;
+    sender: Sender;
+    token: Token;
+    deposit: string;
+    currentFlowRate: string;
+    createdAtTimestamp: string;}
 }
 
 const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
-  encryptedPublication
+  encryptedPublication,
+  profile,
+  inflow
 }) => {
   const [content, setContent] = useState<any>();
   const { pathname } = useRouter();
@@ -71,6 +119,27 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   const setShowAuthModal = useGlobalModalStateStore(
     (state) => state.setShowAuthModal
   );
+  const [currentAddress, setCurrentAddress] = useState('');
+  const [superfluidInflowsData, setSuperfluidInflowsData] =
+    useState<SuplerfluidInflowsDataType>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error>();
+  console.log('profile?.ownedBy', profile?.ownedBy);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } =
+        await superfluidClient.query<SuplerfluidInflowsDataType>({
+          query: SuperfluidInflowsDocument,
+          variables: { id: profile?.ownedBy.toLowerCase() }
+        });
+      setCurrentAddress(profile?.ownedBy);
+      setSuperfluidInflowsData(data);
+      setLoading(false);
+      setError(error);
+    };
+
+    fetchData();
+  }, [profile]);
   const [decryptedData, setDecryptedData] = useState<any>(null);
   const [decryptError, setDecryptError] = useState<any>(null);
   const [isDecrypting, setIsDecrypting] = useState(false);
@@ -167,6 +236,8 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   // NFT check - https://docs.lens.xyz/docs/gated#erc20-token-ownership
   const doesNotOwnNft = reasons?.includes(DecryptFailReason.DoesNotOwnNft);
 
+  const doesNotOwnSuperfluid = reasons?.includes(DecryptFailReason.DoesNotOwnNft);
+
   const getDecryptedData = async () => {
     if (!walletClient || isDecrypting) {
       return;
@@ -192,7 +263,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!currentProfile) {
     return (
       <Card
-        className={clsx(cardClasses, '!cursor-pointer')}
+        className={clsx(cardClasses, 'bg-blue-700 !cursor-pointer')}
         onClick={(event) => {
           stopEventPropagation(event);
           setShowAuthModal(true);
@@ -209,7 +280,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!canDecrypt) {
     return (
       <Card
-        className={clsx(cardClasses, 'cursor-text')}
+        className={clsx(cardClasses, 'bg-blue-700 cursor-text')}
         onClick={stopEventPropagation}
       >
         <div className="flex items-center bg-blue-700 space-x-2 font-bold">
@@ -300,6 +371,28 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               nft to unlock
             </DecryptMessage>
           )}
+
+
+{doesNotOwnSuperfluid && (
+            <DecryptMessage icon={<PhotoIcon className="h-4 w-4" />}>
+              You need{' '}
+              <Tooltip
+                content={nftData?.contractMetadata?.name}
+                placement="top"
+              >
+                <Link
+                  href={`https://nft.superfluid.finance/cfa/v1/getsvg?chain_id=137&sender=${inflow.sender.id}&token_address=${inflow.token.id}&token_symbol=${inflow.token.symbol}&start_date=${inflow.createdAtTimestamp}&receiver=${currentAddress}&flowRate=${inflow.currentFlowRate}&token_decimals=${inflow.token.decimals}`}
+                  className="font-bold underline"
+                 
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {nftData?.contractMetadata?.symbol}
+                </Link>
+              </Tooltip>{' '}
+              nft to unlock
+            </DecryptMessage>
+          )}
         </div>
       </Card>
     );
@@ -323,7 +416,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!decryptedData) {
     return (
       <Card
-        className={clsx(cardClasses, '!cursor-pointer')}
+        className={clsx(cardClasses, 'bg-blue-700 !cursor-pointer')}
         onClick={async (event) => {
           stopEventPropagation(event);
           await getDecryptedData();

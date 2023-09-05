@@ -23,13 +23,14 @@ import { EmptyState } from '../UI/EmptyState';
 
 import Search from '../Search/Search';
 import SearchAudio from '../Search/SearchAudio';
+import imageKit from '@/lib/imageKit';
 
 const Curated = () => {
   const activeTagFilter = useAppStore((state) => state.activeTagFilter);
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 32,
+    limit: 12,
     noRandomize: false,
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
@@ -67,10 +68,19 @@ const Curated = () => {
 
   return (
     <div>
-      <MetaTags title="Echos" />
+      
       {loading && <EchosShimmer />}
       {!error && !loading && videos && (
         <>
+        <div className="flex mb-5 items-center space-x-2">
+          <img
+            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+            draggable={false}
+            className="h-12 w-12 md:h-16 md:w-16"
+            alt="lensshare"
+          />
+          <h1 className="text-xl font-semibold">Music</h1>
+        </div>
           <div className="desktop:grid-cols-6 ultrawide:grid-cols-7 laptop:grid-cols-4 mx-auto mt-4 grid grid-cols-2 place-items-center gap-2 md:grid-cols-3 md:gap-3">
           
             {videos?.map((publication: Publication) => (

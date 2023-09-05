@@ -165,7 +165,7 @@ const SpacesWindow: FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 top-auto z-50 mx-auto flex h-fit w-full grow">
+    <div className="fixed inset-0 top-auto z-20 mx-auto flex h-fit w-full grow">
       {musicTrack !== MusicTrack.DEFAULT && isMusicPlaying && (
         <audio ref={audioRef} src={musicTrack} loop />
       )}
@@ -206,7 +206,7 @@ const SpacesWindow: FC = () => {
                 <div className="absolute bottom-12 right-0 z-10 h-fit">
                   <Sidebar />
                 </div>
-                <AvatarGrid />
+                <AvatarGrid isLobbyPreview={false} />
                 <SpacesWindowBottomBar />
               </div>
             ) : (

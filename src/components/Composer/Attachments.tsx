@@ -25,6 +25,7 @@ import { Image } from '../UI/Image';
 import { LinkIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import VideoPlayer from '@/utils/VideoPlayer';
 import Video from '../HomePage/Video';
+import Item from '../Echos/Item';
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
     return {
@@ -171,16 +172,16 @@ const Attachments: FC<AttachmentsProps> = ({
                     <Video publication={publication as Publication} />
                   )
                 ) : isAudio ? (
-                  <Audio
-                    src={url}
-                    isNew={isNew}
-                    publication={publication}
-                    txn={txn}
-                    expandCover={(url) => setExpandedImage(url)}
+                  <Item
+                    
+                    
+                    publication={publication as Publication}
+                   
+                   
                   />
                 ) : (
                   <Image
-                    className="cursor-pointer rounded-lg border bg-gray-100 object-cover dark:border-gray-700 dark:bg-gray-800"
+                    className="cursor-pointer rounded-xl border-2 border-blue-700 bg-gray-100 object-cover  dark:bg-gray-800"
                     loading="lazy"
                     height={1000}
                     width={1000}

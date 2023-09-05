@@ -1,6 +1,7 @@
 import { FALLBACK_COVER_URL } from "@/constants"
 import { Publication } from "../lens/generatedLenster"
 import sanitizeDStorageUrl from "./sanitizeDStorageUrl"
+import { sanitizeIpfsUrl } from "../sanitizeIpfsUrl"
 
 export const getThumbnailUrl = (
   video: Publication,
@@ -12,5 +13,5 @@ export const getThumbnailUrl = (
     url = url || FALLBACK_COVER_URL
   }
 
-  return sanitizeDStorageUrl(url)
+  return sanitizeIpfsUrl(url)
 }

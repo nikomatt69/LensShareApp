@@ -10,7 +10,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useAppStore } from '@/store/app';
 import { AUTH_ROUTES } from '@/utils/data/auth-routes';
-
+import LogRocket from 'logrocket';
 import dynamic from 'next/dynamic';
 import { Publication } from '@/utils/lens/generatedLenster';
 const Providers = dynamic(() => import('@/components/Providers'), {
@@ -34,6 +34,10 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 const App = ({ Component, pageProps ,publication }: AppProps) => {
   const { pathname, replace, asPath } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
+
+  LogRocket.init('rttnrz/lensshare');
+
+
 
   return (
     <div>

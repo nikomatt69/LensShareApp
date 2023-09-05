@@ -37,7 +37,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const canShowMore = metadata?.content?.length > 450 && showMore;
   const urls = getURLs(metadata?.content);
   const hasURLs = urls?.length > 0;
-
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   const quotedPublicationId = getPublicationAttribute(
     metadata.attributes,
@@ -67,9 +67,11 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
-    return <DecryptedPublicationBody encryptedPublication={publication} />;
+    return <DecryptedPublicationBody profile={profile} inflow={ id
+     } encryptedPublication={publication} />;
   }
-  const setshowSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+ 
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
 
   if (Boolean(space?.id)) {
     return <Space publication={publication} />;
@@ -99,7 +101,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       <Markup
         className={clsx(
           { 'line-clamp-5': canShowMore },
-          'markup linkify font-helvetica break-words text-xs font-bold'
+          'markup linkify font-bold font-helvetica break-words text-xs'
         )}
       >
         {content}
@@ -113,6 +115,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
+      {showSpacesLobby ? (<Space publication={publication} />):(null)}
+     {showSpacesWindow ? (<PreviewSpaces />):(null)}
 
     
       {showOembed ? <Oembed url={urls[0]}  publicationId={publication.id} onData={onData} /> : null}

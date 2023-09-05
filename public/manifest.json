@@ -1,31 +1,32 @@
 {
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "LensShare",
+  "short_name": "LensShare",
+  "description": "Decentralized Social Network",
+  "icons": [
+    {
+      "src": "https://asset.lenshareapp.xyz/images/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://asset.lenshareapp.xyz/images/icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "https://asset.lenshareapp.xyz/images/icon.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "https://asset.lenshareapp.xyz/images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
-    "name": "LensShare",
-    "short_name": "LensShare",
-    "description": "Decentralized Sharing Video Platform",
-    "icons": [
-        {
-            "src": "https://asset.lenshareapp.xyz/images/icon.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "https://asset.lenshareapp.xyz/images/icon.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "https://asset.lenshareapp.xyz/images/icon.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        },
-        {
-            "src": "https://asset.lenshareapp.xyz/images/icon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  
 }

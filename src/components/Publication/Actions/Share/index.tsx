@@ -31,7 +31,9 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
     ? publication?.mirrorOf?.mirrors?.length > 0
     : // @ts-expect-error
       publication?.mirrors?.length > 0;
-  const iconClassName = 'w-[15px] sm:w-[18px] m-1 ';
+      const iconClassName = showCount
+      ? 'w-[17px] sm:w-[20px] '
+      : 'w-[15px] sm:w-[18px]';
 
   return (
     <div className="flex items-center space-x-1">

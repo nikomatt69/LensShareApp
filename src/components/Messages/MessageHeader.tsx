@@ -24,6 +24,7 @@ import Unfollow from '../Profile/Unfollow';
 import { Button } from '../UI/Button';
 import { LENSTOK_URL } from '@/constants';
 import MeetingIcon from '../Meet/MeetingIcon';
+import useSendOptimisticMessage from '@/lib/useSendOptimisticMessage';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -42,7 +43,8 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   const url =
     (ensName && getStampFyiURL(conversationKey?.split('/')[0] ?? '')) ?? '';
 
-  const { sendMessage } = useSendMessage(conversationKey ?? '');
+    const { sendMessage } = useSendOptimisticMessage(conversationKey ?? '');
+
   const [show, setShow] = useState(false);
 
   const currentProfile = profile;
@@ -70,13 +72,13 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center justify-between rounded-xl  border border-blue-700 px-4 py-2">
+    <div className="divider flex items-center justify-between px-4 py-2">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}
-          className="mr-1 h-6 w-6 cursor-pointer text-blue-700 lg:hidden"
+          className="mr-1 h-6 w-6 cursor-pointer lg:hidden"
         />
-        {profile?.id ? (
+        {profile ? (
           <UserProfile profile={profile} />
         ) : (
           <>
@@ -92,19 +94,56 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
-      <MeetingIcon/>
+      {profile && (
+        <div>
+          <img
+            src="/camera-video.svg"
+            onClick={async () => {
+              const apiCall = await fetch(
+                '/api/create-room',
+                { mode:'no-cors',
+                  method: 'POST',
+                  body: JSON.stringify({
+                    title: 'LensShare-Space',
+                  
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0'
+                  }
+                }
+              );
+              const data = await apiCall.json();
+              const { roomId } = data.data;
+              const currentUrl = window.location.href;
+              const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+              sendMessage(
+                `Join here for a call: ${url}/meet/${roomId}`,
+                ContentTypeText
+              );
+            
+            }}
+            className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
+          />
           {!following ? (
-            <FollowButton
-              profile={profile as Profile}
+            <Follow
+              showText
+              profile={profile}
               setFollowing={setFollowingWrapped}
+
             />
           ) : (
-            <UnfollowButton
-              profile={profile as Profile}
+            <Unfollow
+              showText
+              profile={profile}
               setFollowing={setFollowingWrapped}
             />
           )}
+        </div>
+      )}
     </div>
   );
 };
+      
+    
 export default MessageHeader;

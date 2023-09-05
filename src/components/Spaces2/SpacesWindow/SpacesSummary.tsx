@@ -37,7 +37,7 @@ const SpacesSummary: FC = () => {
           className="aspect-square h-4 w-4 rounded-full"
         />
         <div className="text-sm font-normal leading-none">
-          {hostProfile.id}
+          {hostProfile.handle}
         </div>
       </div>
       <div className="flex items-center text-xs font-normal leading-none text-neutral-500 text-opacity-60 dark:text-white">
@@ -62,7 +62,7 @@ const SpacesSummary: FC = () => {
           ) : null}
         </div>
         {`${listeners}${listeners > 0 ? '+ ' : ' '}`}
-       Listening
+        Listening
       </div>
     </div>
   );
