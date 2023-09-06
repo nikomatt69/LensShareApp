@@ -70,7 +70,7 @@
     "@web3modal/ethereum": "^2.2.2",
     "@web3modal/react": "^2.2.2",
     "@xmtp/xmtp-js": "9.1.7",
-    "abitype": "^0.8.11",
+    "abitype": "^0.9.6",
     "add": "^2.0.6",
     "axios": "^1.4.0",
     "connectkit": "^1.4.0",
