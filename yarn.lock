@@ -7110,6 +7110,11 @@
     "@smithy/types" "^2.2.2"
     tslib "^2.5.0"
 
+"@snyk/protect@^1.1215.0":
+  version "1.1215.0"
+  resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.1215.0.tgz#1c2cae9fd10f9fb8dcbc62091449642048da9752"
+  integrity sha512-C3mtWi7rSNkuRIridO7maOYeLYr6wOvTcXhlZsOlLmBznm/nvMzpqmNVsi68hl3ghv2n5bUD5jPNv1VelpR/qQ==
+
 "@socket.io/component-emitter@~3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"

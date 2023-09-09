@@ -1,0 +1,23 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - docker > less > request > hawk > hoek:
+        patched: '2023-09-09T17:34:19.427Z'
+        id: 'npm:hoek:20180212'
+        path: docker > less > request > hawk > hoek
+    - docker > less > request > hawk > boom > hoek:
+        patched: '2023-09-09T17:34:19.427Z'
+        id: 'npm:hoek:20180212'
+        path: docker > less > request > hawk > boom > hoek
+    - docker > less > request > hawk > sntp > hoek:
+        patched: '2023-09-09T17:34:19.427Z'
+        id: 'npm:hoek:20180212'
+        path: docker > less > request > hawk > sntp > hoek
+  'npm:lodash:20180130':
+    - docker > dox > jsdoctypeparser > lodash:
+        patched: '2023-09-09T17:34:19.427Z'
+        id: 'npm:lodash:20180130'
+        path: docker > dox > jsdoctypeparser > lodash

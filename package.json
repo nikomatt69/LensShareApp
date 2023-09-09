@@ -11,7 +11,7 @@
     "prestart": "npm run codegen",
     "predev": "npm run",
     "sitemap": "babel-node src/sitemap-generator.js",
-    "prepare": "husky install",
+    "prepare": "yarn run snyk-protect && husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint . --ext .ts,.tsx",
@@ -20,7 +20,8 @@
     "prettier:fix": "prettier --write \"**/*.{js,ts,tsx,md}\"  --cache",
     "start": "expo start --dev-client",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "snyk-protect": "snyk-protect"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
@@ -164,7 +165,8 @@
     "wavesurfer.js": "^6.6.3",
     "xmtp": "^0.0.0",
     "xmtp-content-type-remote-attachment": "^1.0.7",
-    "zod": "^3.19.1"
+    "zod": "^3.19.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
@@ -207,5 +209,6 @@
   "packageManager": "yarn@1.22.19",
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "snyk": true
 }
