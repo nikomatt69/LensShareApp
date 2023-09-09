@@ -3,7 +3,7 @@ import { FeedEventItemType, FeedItem, FeedRequest, Profile, Publication, useTime
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
-import { useAppStore, useTransactionPersistStore } from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 import Loading from '../Loading';
 import { EmptyState } from '../UI/EmptyState';
 import { UserGroupIcon } from '@heroicons/react/24/outline';
@@ -18,6 +18,7 @@ import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
 import { SCROLL_ROOT_MARGIN } from '@/constants';
 import Loader from '../UI/Loader';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 
 const Timeline: FC = () => {
@@ -120,13 +121,9 @@ const Timeline: FC = () => {
             isLast={index === publications.length - 1}
             feedItem={publication as FeedItem}
             publication={publication.root as Publication}
-            showCount={true} />
+            showCount={true} tags={''} />
         ))}
-       {pageInfo?.next && (
-          <span ref={observe} className="flex  justify-center p-10">
-            <Loader />
-          </span>
-        )}
+       {hasMore ? <span ref={observe} /> : null}
       </Card>
   );
 };

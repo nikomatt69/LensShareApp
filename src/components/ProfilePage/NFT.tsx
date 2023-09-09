@@ -11,8 +11,9 @@ import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import type { FC } from 'react';
 import { CHAIN_ID } from 'src/constants';
 import { Card } from '@/components/UI/Card';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import Link from 'next/link';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
 interface Props {
   nft: Nft;

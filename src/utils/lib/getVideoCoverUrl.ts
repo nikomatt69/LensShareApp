@@ -1,5 +1,6 @@
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import { Publication } from '@/utils/lens/generatedLenster';
+import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
 
 const getVideoCoverUrl = (publication: Publication): string => {
   const url = publication.metadata.cover?.original?.url;

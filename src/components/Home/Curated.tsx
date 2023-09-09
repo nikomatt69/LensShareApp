@@ -25,7 +25,7 @@ import TimelineShimmer from './TimelineShimmer';
 import App from 'next/app';
 
 const Curated = (onDetail: (video: Publication) => void) => {
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
+
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -41,8 +41,7 @@ const Curated = (onDetail: (video: Publication) => void) => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+
       mainContentFocus: [PublicationMainFocus.Video]
     }
   };

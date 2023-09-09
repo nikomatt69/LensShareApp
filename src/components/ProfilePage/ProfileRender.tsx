@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
@@ -20,6 +20,8 @@ import ProfileCard from './ProfileCard';
 import Profiles from './Profiles';
 import { useUserProfilesQuery } from '@/types/graph';
 import Loader from '../UI/Loader';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 
 const ProfileRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -31,7 +33,7 @@ const ProfileRender = () => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

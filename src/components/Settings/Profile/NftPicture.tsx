@@ -8,6 +8,7 @@ import { Spinner } from '@/components/UI/Spinner';
 import { IS_MAINNET, LENSHUB_PROXY } from '@/constants';
 import { Errors } from '@/lib/errors';
 import getSignature from '@/lib/getSignature';
+import { useNonceStore } from '@/store/nonce';
 import {
   NftImage,
   Profile,
@@ -40,8 +41,8 @@ interface NftPictureProps {
 }
 
 const NftPicture: FC<NftPictureProps> = ({ profile }) => {
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [isLoading, setIsLoading] = useState(false);
   const [chainId, setChainId] = useState<number>(

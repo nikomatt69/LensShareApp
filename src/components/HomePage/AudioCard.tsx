@@ -46,8 +46,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   const [following, setFollowing] = useState(false);
   const bytesContainer = useRef<HTMLDivElement>(null);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
+
   const [byte, setByte] = useState<Publication>();
 
   const [showShare, setShowShare] = useState(false);

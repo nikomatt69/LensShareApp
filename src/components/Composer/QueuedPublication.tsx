@@ -1,4 +1,4 @@
-import { useAppStore, useTransactionPersistStore } from '@/store/app';
+import { useAppStore, } from '@/store/app';
 import { OptimisticTransaction } from '@/typesLenster';
 import {
   Profile,
@@ -16,6 +16,7 @@ import Attachments from './Attachments';
 import Oembed from '../Oembed';
 import getURLs from './getURLs';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 interface QueuedPublicationProps {
   txn: OptimisticTransaction;
@@ -115,7 +116,7 @@ const QueuedPublication: FC<QueuedPublicationProps> = ({ txn }) => {
           <Attachments attachments={txn?.attachments} txn={txn} hideDelete />
         ) : (
           txn?.attachments &&
-          urls.length > 0 && <Oembed url={urls[0]} onData={onData} />
+          urls.length > 0 && <Oembed url={urls[0]}  />
         )}
       </div>
     </article>

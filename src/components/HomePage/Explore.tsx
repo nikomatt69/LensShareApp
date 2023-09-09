@@ -20,7 +20,7 @@ import { useInView } from 'react-cool-inview';
 
 import ByteVideo from '@/components/Bytes/ByteVideo';
 import MetaTags from '../UI/MetaTags';
-import { useAppStore, useTransactionPersistStore } from '@/store/app';
+import { useAppStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
@@ -36,7 +36,7 @@ import {
 } from '@/constants';
 import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
-import FullScreen from '../Bytes/FullScreen';
+
 import VideoCard from './VideoCard';
 import Loading from '../Loading';
 import NewPost from '../Composer/Post/New';
@@ -47,19 +47,18 @@ import { Card } from '../UI/Card';
 import SinglePublication from '../Composer/SinglePublication2';
 import QueuedPublication from '../Composer/QueuedPublication';
 import { OptmisticPublicationType } from '@/enums';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 const Explore = () => {
   const router = useRouter();
   const bytesContainer = useRef<HTMLDivElement>(null);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
   const [byte, setByte] = useState<Publication>();
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const [following, setFollowing] = useState(false);
 
 
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
+
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 10,
@@ -74,8 +73,7 @@ const Explore = () => {
     ],
     publicationTypes: [PublicationTypes.Post],
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+    
 
       mainContentFocus: [
         PublicationMainFocus.Video,
@@ -128,20 +126,9 @@ const Explore = () => {
     });
   };
 
-  const full = useCallback(
-    () =>
-      currentViewingId && byte && router.pathname ? (
-        <FullScreen
-          profile={currentProfile as Profile}
-          byte={byte}
-          close={closeDialog}
-          isShow={show}
-          bytes={bytes}
-        />
-      ) : null,
-    [byte, show, currentViewingId]
-  );
-
+ 
+   
+  const hasMore = pageInfo?.next;
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
       openDetail(singleBytePublication);
@@ -219,14 +206,10 @@ const Explore = () => {
         key={`${publication?.id}_${index}`}
         isFirst={index === 0}
         isLast={index === bytes.length - 1}
-        publication={publication as Publication} 
-        showCount={true}/>
+        publication={publication as Publication}
+        showCount={true} tags={''}/>
     ))}
-   {pageInfo?.next && (
-      <span ref={observe} className="flex  justify-center p-10">
-        <Loader />
-      </span>
-    )}
+  {hasMore ? <span ref={observe} /> : null}
   </Card>
     </div>
   );

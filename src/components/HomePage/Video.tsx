@@ -16,7 +16,7 @@ import ViewCount from './ViewCount';
 
 import VideoPlayer from '@/utils/VideoPlayer';
 
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import {
   APP_ID,
   LENSTER_APP_ID,
@@ -35,7 +35,7 @@ interface Props {
   publication: Publication;
 }
 const Video: FC<Props> = ({ publication }) => {
-  const videoWatchTime = useAppStore((state) => state.videoWatchTime);
+
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
@@ -96,10 +96,10 @@ const Video: FC<Props> = ({ publication }) => {
 
   return (
     <div className="lenshare-player">
-      <div className='border-2 border-blue-700 rounded-3xl'>
+      <div className='border-2 border-blue-700 rounded-2xl'>
         <VideoPlayer
       
-          currentTime={videoWatchTime}
+ 
           publicationId={video?.id}
           permanentUrl={getMedia(video as Publication)}
           posterUrl={thumbnailUrl}

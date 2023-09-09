@@ -1,16 +1,25 @@
-import { IMAGE_CDN_URL } from '@/constants';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import { LENS_MEDIA_SNAPSHOT_URL } from "@/constants";
 
-const imageCdn = (
-  url: string,
-  type?: 'thumbnail' | 'avatar' | 'avatar_lg' | 'square' | 'thumbnail_v'
-): string => {
-  if (!url || !IMAGE_CDN_URL) return url;
-  return type
-    ? `${IMAGE_CDN_URL}/tr:n-${type},tr:di-placeholder.webp/${sanitizeIpfsUrl(
-        url
-      )}`
-    : `${IMAGE_CDN_URL}/tr:di-placeholder.webp/${sanitizeIpfsUrl(url)}`;
+/**
+ * Transforms the URL of an image to use ImageKit.
+ *
+ * @param url The original URL of the image.
+ * @param name The transformation name (optional).
+ * @returns A transformed URL.
+ */
+const imageCdn = (url: string, name?: string): string => {
+  if (!url) {
+    return '';
+  }
+
+  if (url.includes(LENS_MEDIA_SNAPSHOT_URL)) {
+    const splitedUrl = url.split('/');
+    const path = splitedUrl[splitedUrl.length - 1];
+
+    return name ? `${LENS_MEDIA_SNAPSHOT_URL}/${name}/${path}` : url;
+  }
+
+  return url;
 };
 
 export default imageCdn;

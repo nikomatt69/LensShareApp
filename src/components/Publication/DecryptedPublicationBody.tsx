@@ -467,8 +467,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       ) : content && urls.length > 0 ? (
         <Oembed
           url={urls[0]}
-          publicationId={encryptedPublication.id}
-          onData={onData}
+        
         />
       ) : null}
     </div>

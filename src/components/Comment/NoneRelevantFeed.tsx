@@ -94,8 +94,7 @@ const NoneRelevantFeed: FC<NoneRelevantFeedProps> = ({ publication }) => {
                 isLast={index === comments.length - 1}
                 publication={comment as Comment}
                 showType={false}
-                showCount={true}
-              />
+                showCount={true} tags={''}              />
             )
           )}
           {hasMore && <span ref={observe} />}

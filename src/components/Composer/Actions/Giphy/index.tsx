@@ -1,6 +1,7 @@
 import Loader from '@/components/UI/Loader';
 import { Modal } from '@/components/UI/Modal';
-import Tooltip from '@/components/Upload/Tooltip';
+import { Tooltip } from '@/components/UI/Tooltip';
+
 import type { IGif } from '@giphy/js-types';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 

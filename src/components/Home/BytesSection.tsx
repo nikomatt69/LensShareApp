@@ -32,7 +32,7 @@ import imageKit from '@/lib/imageKit';
 
 const BytesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
+
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -42,8 +42,8 @@ const BytesSection = () => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+     
+
       mainContentFocus: [PublicationMainFocus.Video]
     }
   };

@@ -8,7 +8,7 @@ import {
   FollowingRequest,
   Profile
 } from '@/utils/lens/generatedLenster';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import getAvatar from '@/lib/getAvatar';
 import { useAppStore } from '@/store/app';
 import { useAccount } from 'wagmi';

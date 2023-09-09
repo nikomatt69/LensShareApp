@@ -1,7 +1,5 @@
 import React, { Dispatch, FC, useEffect, useState } from 'react';
-import { Image } from '@/components/UI/Image';
-import { Profile } from '@/utils/lens/generatedLenster';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import { useAppStore } from 'src/store/app';
 import { Router } from 'next/router';
 

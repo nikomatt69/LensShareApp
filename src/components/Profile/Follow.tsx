@@ -19,6 +19,7 @@ import { Button } from '../UI/Button';
 import { Spinner } from '../UI/Spinner';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 interface FollowProps {
   profile: Profile;
@@ -41,8 +42,8 @@ const Follow: FC<FollowProps> = ({
 }) => {
   const { pathname } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const setShowAuthModal = useGlobalModalStateStore(
     (state) => state.setShowAuthModal
   );

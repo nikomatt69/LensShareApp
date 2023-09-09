@@ -3,8 +3,8 @@ import { ApolloLink, fromPromise, toPromise } from '@apollo/client';
 import axios from 'axios';
 
 import { parseJwt } from './lib';
-import { API_URL } from '@/constants';
 
+export const API_URL = 'https://api.lens.dev';
 const REFRESH_AUTHENTICATION_MUTATION = `
   mutation Refresh($request: RefreshRequest!) {
     refresh(request: $request) {
@@ -36,6 +36,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
   if (!expiringSoon) {
     operation.setContext({
+      fetchOptions: 'no-cors',
       headers: {
         'x-access-token': accessToken ? `Bearer ${accessToken}` : ''
       }
@@ -46,9 +47,11 @@ const authLink = new ApolloLink((operation, forward) => {
 
   return fromPromise(
     axios(API_URL, {
+      
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' },
       data: JSON.stringify({
+        fetchOptions: 'no-cors',
         operationName: 'Refresh',
         query: REFRESH_AUTHENTICATION_MUTATION,
         variables: {
@@ -62,8 +65,10 @@ const authLink = new ApolloLink((operation, forward) => {
         const accessToken = data?.data?.refresh?.accessToken;
         const refreshToken = data?.data?.refresh?.refreshToken;
         operation.setContext({
+          fetchOptions: 'no-cors',
           headers: {
-            'x-access-token': `Bearer ${accessToken}`
+            'x-access-token': `Bearer ${accessToken}`,
+            'Access-Control-Allow-Origin':'*'
           }
         });
 

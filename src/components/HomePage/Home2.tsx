@@ -12,7 +12,7 @@ import { Children, FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
@@ -47,6 +47,8 @@ import { useTheme } from 'next-themes';
 import Wrapper from '../Echos/Wrapper';
 import Curated from '../Echos/Curated';
 import AddToHome from './AddToHome';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 interface Props {
   publication:Publication
 
@@ -62,7 +64,7 @@ const Home2: FC<Props> = ({ publication}) => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

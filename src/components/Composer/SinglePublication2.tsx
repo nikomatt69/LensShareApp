@@ -14,6 +14,13 @@ import PublicationWrapper from './PublicationWrapper';
 import PublicationActions from '../Publication/Actions';
 import PublicationType from '../Publication/Type';
 import PublicationMenu from '../Publication/Actions/Menu';
+import FeaturedChannel from '../FeaturedChannel';
+import { useRouter } from 'next/router';
+import { COMMUNITIES_WORKER_URL } from '@/constants';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Community } from '@/types/communities';
+import { Database } from '@/utils/supabase/database.types';
 
 interface SinglePublicationProps {
   publication: Publication;
@@ -27,10 +34,12 @@ interface SinglePublicationProps {
   isLast?: boolean;
   profile: Profile;
   showCount:boolean
+ tags:string
 }
 
 const SinglePublication: FC<SinglePublicationProps> = ({
   publication,
+  tags,
   feedItem,
   showThread = true,
   profile,
@@ -42,6 +51,28 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   isFirst = false,
   isLast = false
 }) => {
+  const {
+    query: { slug }
+  } = useRouter();
+  
+
+  const fetchCommunity = async () => {
+    try {
+      const response = await axios(
+        `${COMMUNITIES_WORKER_URL}/getCommunityBySlug/${slug}`
+      );
+
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const { data, isLoading, error } = useQuery(['community', slug], () =>
+    fetchCommunity().then((res) => res)
+  );
+  const community: Community = data;
+
   const firstComment = feedItem?.comments && feedItem.comments[0];
   const rootPublication = feedItem
     ? firstComment
@@ -88,6 +119,8 @@ const SinglePublication: FC<SinglePublicationProps> = ({
                 showCount={showCount}
               />
             )}
+          
+          
             
           </>
         )}

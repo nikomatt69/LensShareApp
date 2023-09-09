@@ -88,18 +88,19 @@ const authLink = new ApolloLink((operation, forward) => {
     axios
       .post(
         API_URL,
-        {
+        { fetchOptions: 'no-cors',
           operationName: 'Refresh',
           query: REFRESH_AUTHENTICATION_MUTATION,
           variables: { request: { refreshToken } }
         },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' } }
       )
       .then(({ data }) => {
         const accessToken = data?.data?.refresh?.accessToken;
         const refreshToken = data?.data?.refresh?.refreshToken;
         operation.setContext({
-          headers: { 'x-access-token': `Bearer ${accessToken}` }
+          fetchOptions: 'no-cors',
+          headers: { 'x-access-token': `Bearer ${accessToken}` , 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' }
         });
 
         localStorage.setItem(Localstorage.AccessToken, accessToken);
@@ -114,6 +115,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const apolloClient = new ApolloClient({
+  
   link: from([ authLink, httpLink]),
   cache: new InMemoryCache({
     possibleTypes: result.possibleTypes,

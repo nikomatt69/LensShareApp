@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
@@ -33,6 +33,8 @@ import Loader from './UI/Loader';
 import Wrapper from './Echos/Wrapper';
 import Curated from './Echos/Curated';
 import Footer from './Sidebar/Footer';
+import { useNonceStore } from '@/store/nonce';
+import { useReferenceModuleStore } from '@/store/reference-module';
 interface Props {
   publication:Publication
 
@@ -48,7 +50,7 @@ const LatestRender: FC<Props> = ({ publication}) => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

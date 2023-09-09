@@ -24,7 +24,7 @@ import Collect from '../Publication/Actions/Collect';
 import CommentOutline from '../UI/Icons/CommentOutline';
 import Mirror from '../Publication/Actions/Share/Mirror';
 import CommentOptions from './CommentOptions';
-import Tooltip from '../Upload/Tooltip';
+
 import MirrorOutline from '../UI/Icons/MirrorOutline';
 import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 

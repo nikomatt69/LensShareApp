@@ -42,33 +42,35 @@ export const MESSAGING_PROVIDER = {
   XMTP: 'xmtp',
   PUSH: 'push'
 };
+export const BASE_URL = IS_MAINNET
+  ? 'https://lenshareapp.xyz'
+  : 'https://testnet.lenster.xyz';
 
 export const ALCHEMY_KEY = '7jxlM7yIx-aJXDivcEZxsLFFRKQS6-ue';
 
 export const REQUESTING_SIGNATURE_MESSAGE = 'Requesting signature...';
 
-export const LENS_MEDIA_SNAPSHOT_URL =
-  '"https://ik.imagekit.io/lens/media-snapshot"';
+export const LENS_MEDIA_SNAPSHOT_URL = 'https://ik.imagekit.io/lens/media-snapshot';
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
 export const STS_GENERATOR_WORKER_URL = IS_PRODUCTION
-  ? 'https://sts.lenster.xyz'
+  ? 'https://sts.lenshareapp.xyz'
   : 'http://localhost:8082';
 export const METADATA_WORKER_URL = IS_PRODUCTION
-  ? 'https://metadata.lenster.xyz'
+  ? 'https://metadata.lenshareapp.xyz'
   : 'http://localhost:8083';
 export const FRESHDESK_WORKER_URL = IS_PRODUCTION
   ? 'https://freshdesk.lenster.xyz'
   : 'http://localhost:8084';
 export const SNAPSHOR_RELAY_WORKER_URL = IS_PRODUCTION
-  ? 'https://snapshot-relay.lenster.xyz'
+  ? 'https://snapshot-relay.lenshareapp.xyz'
   : 'http://localhost:8085';
 export const ENS_RESOLVER_WORKER_URL = IS_PRODUCTION
-  ? 'https://ens-resolver.lenster.xyz'
+  ? 'https://ens-resolver.lenshareapp.xyz'
   : 'http://localhost:8086';
 export const OEMBED_WORKER_URL = IS_PRODUCTION
-  ? 'https://oembed.lenster.xyz'
+  ? 'https://oembed.lenshareapp.xyz'
   : 'http://localhost:8087';
 export const SPACES_WORKER_URL = IS_PRODUCTION
   ? 'https://spaces.lenshareapp.xyz'
@@ -77,17 +79,32 @@ export const LEAFWATCH_WORKER_URL = IS_PRODUCTION
   ? 'https://leafwatch.lenster.xyz'
   : 'http://localhost:8089';
 
-export const S3_BUCKET = {
-  LENSTER_MEDIA: 'lenster-media'
-};
+export const CHANNELS_WORKER_URL = IS_PRODUCTION
+  ? 'https://channels.lenster.xyz'
+  : 'http://localhost:8093';
+export const COMMUNITIES_WORKER_URL = IS_PRODUCTION
+  ? 'https://communities.lenshareapp.xyz'
+  : 'http://localhost:8091';
 
+export const S3_BUCKET = {
+  LENSTER_MEDIA: 'lensshare'
+};
+export const EVER_API = 'https://endpoint.4everland.co';
 export const IMAGE_TRANSFORMATIONS = {
-  AVATAR: 'tr:w-60,h-60',
+  
   AVATAR_LG: 'tr:w-300,h-300',
   THUMBNAIL: 'tr:w-720,h-404',
   THUMBNAIL_V: 'tr:w-404,h-720',
-  SQUARE: 'tr:w-200,h-200'
-}
+  SQUARE: 'tr:w-200,h-200',
+  AVATAR :'tr:w-300,h-300',
+ EXPANDED_AVATAR :'tr:w-1000,h-1000',
+ COVER : 'tr:w-1500,h-500',
+ ATTACHMENT :'tr:w-1000'}
+ export const AVATAR = 'tr:w-300,h-300';
+ export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
+ export const COVER = 'tr:w-1500,h-500';
+ export const ATTACHMENT = 'tr:w-1000';
+
 
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
 export const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
@@ -113,6 +130,7 @@ export const INFURA_RPC = IS_MAINNET
 
 export const POLYGON_CHAIN_ID = IS_MAINNET ? 137 : 137;
 
+// Utils
 export const ALLOWED_IMAGE_TYPES = [
   'image/jpeg',
   'image/png',
@@ -141,6 +159,7 @@ export const ALLOWED_MEDIA_TYPES = [
   ...ALLOWED_AUDIO_TYPES
 ];
 
+
 export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';
@@ -159,7 +178,7 @@ export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz';
 export const LENSSHARE_EMBED_URL = 'https://embed.lenshareapp.xyz';
 
 export const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz';
-export const STATIC_IMAGES_URL = `${STATIC_ASSETS_URL}/images`;
+
 
 export const FALLBACK_COVER_URL = `${STATIC_ASSETS_URL}/images/logo.png`;
 
@@ -181,7 +200,7 @@ export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   : '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 
 export const BUNDLR_NODE_URL = IS_MAINNET
-  ? 'https://node1.bundlr.network'
+  ? 'https://node2.bundlr.network'
   : 'https://devnet.bundlr.network';
 
 export const BUNDLR_CURRENCY = 'matic';
@@ -193,7 +212,7 @@ export const IMAGEPROXY_URL = IS_MAINNET
   ? 'https://img.lenstube.xyz'
   : 'https://img.lenstube.xyz';
 
-export const API_ORIGINS = 'https://lenshareapp.xyz/*';
+export const API_ORIGINS = 'https://lenshareapp.xyz/';
 
 export const ARWEAVE_WEBSITE_URL = 'https://arweave.net';
 export const ARWEAVE_GATEWAY = 'https://arweave.net';
@@ -210,7 +229,7 @@ export const IMAGE_CDN_URL = IS_MAINNET
   : 'https://img.lenstube.xyz';
 
 export const USER_CONTENT_URL = 'https://static-assets.lenster.xyz';
-
+export const STATIC_IMAGES_URL = `${USER_CONTENT_URL}/images`;
 export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET
   ? '0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938'
   : '0xA78E4a4D0367f0f4674130F0Bb2653957ab5917e';
@@ -242,10 +261,7 @@ export const MESSAGE_PAGE_LIMIT = 35;
 export const SCROLL_THRESHOLD = 0.1;
 export const MIN_WIDTH_DESKTOP = 600;
 
-// Named transforms
-export const AVATAR = 'avatar';
-export const COVER = 'cover';
-export const ATTACHMENT = 'attachment';
+
 
 // External Apps
 export const LENSTER_URL = 'https://lenster.xyz';

@@ -38,6 +38,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 import UserSigNoncesProvider from './UserSigNoncesProvider';
 import { getWebSocketPublicClient } from '@wagmi/core';
+import FeaturedChannelsProvider from './FeaturedChannelsProvider';
 
 const chains = [polygon,mainnet]
 const projectId =  WALLETCONNECT_PROJECT_ID
@@ -61,13 +62,16 @@ const livepeerClient = createReactClient({
   })
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } }
+});
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
   <WagmiConfig config={wagmiConfig}>
-        <ApolloProvider client={apolloClient}>
-          <UserSigNoncesProvider />
+     <ApolloProvider client={apolloClient}>
+        <UserSigNoncesProvider />
           <QueryClientProvider client={queryClient}>
+           <FeaturedChannelsProvider />
             <LivepeerConfig client={livepeerClient}>
               <ThemeProvider defaultTheme="light" attribute="class">
                 {children}
@@ -76,8 +80,8 @@ const Providers = ({ children }: { children: ReactNode }) => {
               {/* <Video /> */}
             </LivepeerConfig>
           </QueryClientProvider>
-        </ApolloProvider>
-      <Web3Modal  themeVariables={{ '--w3m-font-family': 'Roboto, sans-serif', '--w3m-accent-color': '#000fff',   '--w3m-background-color':'#FFFF', '--w3m-logo-image-url':'https://lenshareapp.xyz/images/icon.png', '--w3m-container-border-radius': '25px','--w3m-background-border-radius':'25px' }} themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
+      </ApolloProvider>
+    <Web3Modal  themeVariables={{ '--w3m-font-family': 'Roboto, sans-serif', '--w3m-accent-color': '#000fff',   '--w3m-background-color':'#FFFF', '--w3m-logo-image-url':'https://lenshareapp.xyz/images/icon.png', '--w3m-container-border-radius': '25px','--w3m-background-border-radius':'25px' }} themeMode="dark" projectId={projectId} ethereumClient={ethereumClient} />
   </WagmiConfig>
   );
 };

@@ -25,6 +25,7 @@ import SpacesWindow from './Spaces2/SpacesWindow/SpacesWindow';
 import { useSpacesStore } from '@/store/spaces';
 import PreviewSpaces from './Spaces2/PreviewSpaces/PreviewSpaces';
 import Loader from './UI/Loader';
+import { useNonceStore } from '@/store/nonce';
 
 
 interface Props {
@@ -34,7 +35,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const { resolvedTheme } = useTheme();
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const setProfiles = useAppStore((state) => state.setCurrentProfile);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);

@@ -5,29 +5,27 @@ import type { FC } from 'react';
 import Embed from './Embed';
 import Player from './Player';
 import { OEMBED_WORKER_URL } from '@/constants';
-import { OG } from '@/typesLenster';
+import { OG } from '@/types/misc';
+
 
 
 interface OembedProps {
   url?: string;
-  publicationId?: string;
-  onData: () => void;
 }
 
-const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
+const Oembed: FC<OembedProps> = ({ url }) => {
   const { isLoading, error, data } = useQuery(
     [url],
     () =>
-      axios
-        .get(OEMBED_WORKER_URL, { params: { url } })
-        .then((res) => res.data.oembed),
+      axios({
+        url: OEMBED_WORKER_URL,
+        params: { url }
+      }).then((res) => res.data.oembed),
     { enabled: Boolean(url) }
   );
 
-  if (isLoading || error || !data) {
+  if (error || isLoading || !data) {
     return null;
-  } else if (data) {
-    onData();
   }
 
   const og: OG = {
@@ -45,11 +43,7 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
     return null;
   }
 
-  return og.html ? (
-    <Player og={og} />
-  ) : (
-    <Embed og={og} publicationId={publicationId} />
-  );
+  return og.html ? <Player og={og} /> : <Embed og={og} />;
 };
 
 export default Oembed;

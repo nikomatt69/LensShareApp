@@ -52,6 +52,7 @@ import { Spinner } from '@/components/UI/Spinner';
 import IndexStatus from '@/components/UI/IndexStatus';
 import { encode } from 'punycode';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 interface Props {
   publication: Publication;
@@ -60,8 +61,8 @@ interface Props {
 }
 
 const CollectModule: FC<Props> = ({ publication, setCount, count }) => {
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [revenue, setRevenue] = useState(0);
   const [hasCollectedByMe, setHasCollectedByMe] = useState(

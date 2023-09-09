@@ -15,7 +15,6 @@ import {
   Profile,
   RecommendedProfilesDocument
 } from '@/utils/lens/generatedLenster';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
 

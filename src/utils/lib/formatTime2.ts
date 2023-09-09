@@ -13,6 +13,10 @@ export const getSecondsFromTime = (time: string) => {
   return seconds;
 };
 
+export const formatDate = (date?: Date, format = 'MMMM D, YYYY') => {
+  return dayjs(date).format(format);
+};
+
 export const getTimeFromSeconds = (seconds: string) => {
   if (seconds === 'Infinity') {
     return null;

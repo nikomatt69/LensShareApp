@@ -5,7 +5,8 @@ import { MdOutlineClose } from 'react-icons/md';
 import FullScreenModal from './FullScreenModal';
 
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
-import Comments from '../Bytes/FullScreen/Comments';
+import Feed from '../Comment/Feed';
+
 
 type Props = {
   trigger: React.ReactNode;
@@ -36,8 +37,8 @@ const CommentModal: FC<Props> = ({ trigger, video, profile }) => {
           </button>
         </div>
         <div className="no-scrollbar max-h-[40vh] overflow-y-auto pt-3">
-          <Comments
-            profile={profile as Profile}
+          <Feed
+   
             publication={video as Publication}
           />
         </div>

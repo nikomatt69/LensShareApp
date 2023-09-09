@@ -10,7 +10,7 @@ import {
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import { BsPlay } from 'react-icons/bs';
 import getMedia from '@/lib/getMedia';
 

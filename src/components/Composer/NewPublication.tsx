@@ -66,8 +66,7 @@ import { NewPublicationTypes, OptmisticPublicationType } from 'src/enums';
 
 import {
   useAppStore,
-  useReferenceModuleStore,
-  useTransactionPersistStore
+  
 } from 'src/store/app';
 import { useCollectModuleStore } from 'src/store/collect-module';
 
@@ -85,7 +84,6 @@ import { useGlobalModalStateStore } from '@/store/modals';
 
 import { useAccessSettingsStore } from '@/store/access';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient2';
-import useEthersWalletClient2 from '@/utils/hooks/useEthersWalletClient';
 import { Errors } from '@/lib/errors';
 import uploadToArweave from '@/lib/uploadToArweave';
 import getTextNftUrl from '@/utils/functions/getTextNftUrl';
@@ -117,6 +115,8 @@ import { Icons } from '../Spaces2/Common/assets/Icons';
 import { useUnmountEffect } from 'framer-motion';
 import { useSpacesStore } from '@/store/spaces';
 import errorToast from './errorToast';
+import { useTransactionPersistStore } from '@/store/transaction';
+import { useReferenceModuleStore } from '@/store/reference-module';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -225,9 +225,8 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     restricted,
     followToView,
     collectToView,
-    superfluidToView,
     reset: resetAccessSettings
-  } = useAccessSettingsStore((state) => state);
+  } = useAccessSettingsStore();
 
   // States
   const [isLoading, setIsLoading] = useState(false);
@@ -664,63 +663,22 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     };
 
     // Create the access condition
-    const currentAddress = await walletClient.getAddress();
-    const { data: superfluidInflowsData } = await superfluidClient.query({
-      query: SuperfluidInflowsDocument,
-      variables: { id: currentAddress.toString().toLowerCase() }
-    });
-    console.log('superfluidInflowsData', superfluidInflowsData, currentAddress);
-    const listOfSuperfluidAddresses = superfluidInflowsData.account.inflows.map(
-      (inflow: InflowType) => inflow.sender.id
-    );
-    const eoaAccessCondition: EoaOwnership = {
-      address: listOfSuperfluidAddresses
-    };
-
-    // Create the access condition
     let accessCondition: AccessConditionOutput = {};
-
-    if (collectToView || followToView || superfluidToView) {
-      const criteria = [];
-
-      if (collectToView) {
-        criteria.push({ collect: collectAccessCondition });
-      }
-
-      if (followToView) {
-        criteria.push({ follow: followAccessCondition });
-      }
-
-      if (superfluidToView) {
-        criteria.push({ eoa: eoaAccessCondition });
-      }
-
-      if (criteria.length === 1) {
-        accessCondition = criteria[0];
-      } else {
-        accessCondition = { and: { criteria } };
-      }
-    } else {
-      if (collectToView) {
-        accessCondition = { collect: collectAccessCondition };
-      } else if (followToView) {
-        accessCondition = { follow: followAccessCondition };
-      }
+    if (collectToView && followToView) {
+      accessCondition = {
+        and: {
+          criteria: [
+            { collect: collectAccessCondition },
+            { follow: followAccessCondition }
+          ]
+        }
+      };
+    } else if (collectToView) {
+      accessCondition = { collect: collectAccessCondition };
+    } else if (followToView) {
+      accessCondition = { follow: followAccessCondition };
     }
-    if (superfluidToView) {
-      if (listOfSuperfluidAddresses.length > 1) {
-        accessCondition = {
-          or: {
-            criteria: listOfSuperfluidAddresses.map((address: string) => {
-              return { eoa: { address } };
-            })
-          }
-        };
-      } else if (listOfSuperfluidAddresses.length === 1) {
-        accessCondition = { eoa: { address: listOfSuperfluidAddresses[0] } };
-      }
-    }
-    console.log('accessCondition', accessCondition);
+
     // Generate the encrypted metadata and upload it to Arweave
     const { contentURI } = await tokenGatedSdk.gated.encryptMetadata(
       metadata,
@@ -821,7 +779,9 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
                   id: spaceId.response.data.roomId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
-                })  
+                })
+    
+  
               }
             ]
           : []),

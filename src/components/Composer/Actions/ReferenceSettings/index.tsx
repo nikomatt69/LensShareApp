@@ -1,6 +1,7 @@
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Tooltip } from '@/components/UI/Tooltip';
-import { useReferenceModuleStore } from '@/store/app';
+import { useReferenceModuleStore } from '@/store/reference-module';
+
 import { ReferenceModules } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import {

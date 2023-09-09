@@ -119,7 +119,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
      {showSpacesWindow ? (<PreviewSpaces />):(null)}
 
     
-      {showOembed ? <Oembed url={urls[0]}  publicationId={publication.id} onData={onData} /> : null}
+      {showOembed ? <Oembed url={urls[0]}   /> : null}
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}

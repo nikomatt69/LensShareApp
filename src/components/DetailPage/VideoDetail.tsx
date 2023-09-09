@@ -48,10 +48,11 @@ import { Modal } from '../UI/Modal';
 import Followers from '../ProfilePage/Followers';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 import VideoPlayer from '@/utils/VideoPlayer';
 import imageKit from '@/lib/imageKit';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
 interface Props {
   publication: Publication;
@@ -70,7 +71,7 @@ const VideoDetail: FC<Props> = ({
   following,
   isShow
 }) => {
-  const videoWatchTime = useAppStore((state) => state.videoWatchTime);
+
   const [showShare, setShowShare] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [liked, setLiked] = useState(false);
@@ -144,7 +145,7 @@ const VideoDetail: FC<Props> = ({
       <Toaster position="bottom-right" />
       <div className="relative flex items-center  justify-center bg-black lg:flex-grow">
         <VideoPlayer
-          currentTime={videoWatchTime}
+          
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageKit(

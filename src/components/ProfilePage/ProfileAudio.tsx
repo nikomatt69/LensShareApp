@@ -39,7 +39,7 @@ import {
 } from '@/constants';
 import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
-import FullScreen from '../Bytes/FullScreen';
+
 
 import Loading from '../Loading';
 
@@ -58,13 +58,11 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
   const router = useRouter();
   const bytesContainer = useRef<HTMLDivElement>(null);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
+
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
   const { id } = router.query;
 
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const request = {
     feedEventItemTypes: [FeedEventItemType.Post, FeedEventItemType.Comment],
     limit: 10,
@@ -73,8 +71,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
     profileId: id,
     publicationTypes: [PublicationTypes.Post],
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
 
       mainContentFocus: [PublicationMainFocus.Audio, PublicationMainFocus.Audio]
     }
@@ -123,19 +119,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
     });
   };
 
-  const full = useCallback(
-    () =>
-      currentViewingId && byte && router.pathname ? (
-        <FullScreen
-          profile={currentProfile as Profile}
-          byte={byte}
-          close={closeDialog}
-          isShow={show}
-          bytes={bytes}
-        />
-      ) : null,
-    [byte, show, currentViewingId]
-  );
+
 
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
@@ -200,7 +184,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
 
-      {full()}
       <div
         ref={bytesContainer}
         className="h-screen border-0 md:h-[calc(100vh-70px)]"

@@ -1,5 +1,5 @@
 import { usePublicationStore } from '@/store/publication4';
-import { NewLensshareAttachment } from '@/typesLenster';
+import { NewLensshareAttachment } from '@/types/misc';
 
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';

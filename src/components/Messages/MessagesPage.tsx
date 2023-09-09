@@ -7,7 +7,7 @@ import { FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { Profile, ReferenceModules } from '@/utils/lens/generatedLenster';
@@ -18,6 +18,8 @@ import { useUserProfilesQuery } from '@/types/graph';
 import { Publication } from '@/utils/lens/generatedLenster';
 
 import Messages from '.';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 
 interface Props {
   publication: Publication;
@@ -33,7 +35,7 @@ const MessagePage: FC<Props> = ({ publication }) => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

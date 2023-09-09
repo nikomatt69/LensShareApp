@@ -11,10 +11,12 @@ import { MediaSet, Publication } from '@/utils/lens/generatedLenster';
 import {
   ALLOWED_AUDIO_TYPES,
   ALLOWED_VIDEO_TYPES,
+
   ATTACHMENT,
+
   STATIC_IMAGES_URL
 } from '@/constants';
-import { NewLensshareAttachment } from '@/typesLenster';
+import { NewLensshareAttachment } from '@/types/misc';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { Button } from '../UI/Button';
@@ -26,6 +28,7 @@ import { LinkIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import VideoPlayer from '@/utils/VideoPlayer';
 import Video from '../HomePage/Video';
 import Item from '../Echos/Item';
+import { HiExternalLink } from 'react-icons/hi';
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
     return {
@@ -149,10 +152,12 @@ const Attachments: FC<AttachmentsProps> = ({
                   <Button
                     className="text-sm"
                     variant="primary"
-                    icon={<LinkIcon className="h-4 w-4" />}
+                    icon={<HiExternalLink className="h-4 w-4" />}
                     onClick={() => window.open(url, '_blank')}
                   >
-                    <span>Open Image in new tab</span>
+                    <span>
+                      Open Image in new tab
+                    </span>
                   </Button>
                 ) : isVideo ? (
                   isNew ? (
@@ -172,16 +177,16 @@ const Attachments: FC<AttachmentsProps> = ({
                     <Video publication={publication as Publication} />
                   )
                 ) : isAudio ? (
-                  <Item
-                    
-                    
-                    publication={publication as Publication}
-                   
-                   
+                  <Audio
+                    src={url}
+                    isNew={isNew}
+                    publication={publication}
+                    txn={txn}
+                    expandCover={(url) => setExpandedImage(url)}
                   />
                 ) : (
                   <Image
-                    className="cursor-pointer rounded-xl border-2 border-blue-700 bg-gray-100 object-cover  dark:bg-gray-800"
+                    className="cursor-pointer rounded-lg border bg-gray-100 object-cover dark:border-gray-700 dark:bg-gray-800"
                     loading="lazy"
                     height={1000}
                     width={1000}
@@ -190,6 +195,7 @@ const Attachments: FC<AttachmentsProps> = ({
                     }}
                     onClick={() => {
                       setExpandedImage(url);
+                     
                     }}
                     src={isNew ? url : imageKit(url, ATTACHMENT)}
                     alt={isNew ? url : imageKit(url, ATTACHMENT)}

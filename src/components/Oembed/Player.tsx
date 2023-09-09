@@ -1,4 +1,4 @@
-import { OG } from '@/typesLenster';
+import { OG } from '@/types/misc';
 import type { FC } from 'react';
 
 interface PlayerProps {

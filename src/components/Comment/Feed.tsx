@@ -18,7 +18,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
-import { useAppStore, useTransactionPersistStore } from 'src/store/app';
+import { useAppStore, } from 'src/store/app';
 
 import { ErrorMessage } from '../ErrorMessage';
 import { EmptyState } from '../UI/EmptyState';
@@ -27,6 +27,7 @@ import SinglePublication from '../Composer/SinglePublication2';
 import QueuedPublication from '../Composer/QueuedPublication';
 import { Card } from '../UI/Card';
 import PublicationHeader from '../Composer/PublicationHeader';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 interface FeedProps {
   publication?: Publication;
@@ -124,8 +125,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
             isLast={index === comments.length - 1}
             publication={comment as Comment}
             showType={false}
-            showCount={true}
-          />
+            showCount={true} tags={''}          />
         )
       )}
       {hasMore && <span ref={observe} />}

@@ -11,7 +11,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType, ProfileFeedType } from 'src/enums';
-import { useAppStore, useTransactionPersistStore } from 'src/store/app';
+import { useAppStore, } from 'src/store/app';
 
 import { EmptyState } from '../UI/EmptyState';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -26,6 +26,7 @@ import VideoCard from '../HomePage/VideoCard';
 import Loading from '../Loading';
 import QueuedPublication from '../Composer/QueuedPublication';
 import Loader from '../UI/Loader';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 interface FeedProps {
   profile: Profile;
@@ -99,6 +100,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
 
   const publications = data?.publications?.items;
   const pageInfo = data?.publications?.pageInfo;
+  
 
   const { observe } = useInView({
     onChange: async ({ inView }) => {
@@ -169,7 +171,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
         isFirst={index === 0}
         isLast={index === publications.length - 1}
         publication={publication as Publication}
-        showCount={true} />
+        showCount={true} tags={''} />
     ))}
    {pageInfo?.next && (
       <span ref={observe} className="flex  justify-center p-10">

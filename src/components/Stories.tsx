@@ -32,7 +32,7 @@ import {
   RIFF_APP_ID,
   SCROLL_ROOT_MARGIN
 } from '@/constants';
-import FullScreen from './Bytes/FullScreen';
+
 import Loader from './UI/Loader';
 import { EmptyState } from './UI/EmptyState';
 import MetaTags from './UI/MetaTags';
@@ -45,13 +45,10 @@ const Stories = () => {
   const router = useRouter();
   const bytesContainer = useRef<HTMLDivElement>(null);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
   const { resolvedTheme } = useTheme();
 
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
   const request = {
     sortCriteria: PublicationSortCriteria.Latest,
     limit: 5,
@@ -68,8 +65,7 @@ const Stories = () => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+
       mainContentFocus: [
         PublicationMainFocus.Video,
         PublicationMainFocus.Image,
@@ -132,20 +128,7 @@ const Stories = () => {
     setShow(false);
   };
 
-  const full = useCallback(
-    () =>
-      currentViewingId && byte && router.pathname ? (
-        <FullScreen
-       
-          byte={byte}
-          close={closeDialog}
-          isShow={show}
-          bytes={bytes}
-          index={bytes?.findIndex((video) => video.id === currentViewingId)}
-        />
-      ) : null,
-    [byte, show, currentViewingId]
-  );
+
 
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
@@ -190,7 +173,7 @@ const Stories = () => {
         />
       </Head>  
       <MetaTags title={`Latest • ${APP_NAME} `} />
-      {full()}
+
       <>
       <div
         ref={bytesContainer}

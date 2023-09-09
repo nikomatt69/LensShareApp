@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
@@ -31,6 +31,8 @@ import { Head } from 'next/document';
 import { useTheme } from 'next-themes';
 import ProfileVideos from '../ProfilePage/ProfileVideos';
 import Loader from '../UI/Loader';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 
 const StoryRender = () => {
   const [mounted, setMounted] = useState(false);
@@ -42,7 +44,7 @@ const StoryRender = () => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

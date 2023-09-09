@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import {
   useAppPersistStore,
   useAppStore,
-  useReferenceModuleStore
+
 } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
@@ -31,6 +31,8 @@ import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import Echos from '../Echos/EchosPage';
 import EchosPage from '@/pages/musicfeed';
 import Loader from '../UI/Loader';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 
 interface Props {
   profile: Profile;
@@ -47,7 +49,7 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
   console.log(mounted);
 
   const setProfiles = useAppStore((state) => state.setProfiles);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const profileId = useAppPersistStore((state) => state.profileId);

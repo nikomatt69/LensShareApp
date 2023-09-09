@@ -17,6 +17,7 @@ import {
   useProxyActionMutation
 } from '@/types/graph';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 interface Props {
   setFollowing: Dispatch<boolean>;
@@ -24,8 +25,8 @@ interface Props {
 }
 
 const FollowButton: FC<Props> = ({ setFollowing, profile }) => {
-  const userSigNonce = useAppStore((state) => state.userSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const { address } = useAccount();

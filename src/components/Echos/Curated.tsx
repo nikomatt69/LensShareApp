@@ -26,7 +26,7 @@ import SearchAudio from '../Search/SearchAudio';
 import imageKit from '@/lib/imageKit';
 
 const Curated = () => {
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
+
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -35,8 +35,8 @@ const Curated = () => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-      tags:
-        activeTagFilter !== 'all' ? { oneOf: [activeTagFilter] } : undefined,
+      
+     
       mainContentFocus: [PublicationMainFocus.Audio]
     }
   };

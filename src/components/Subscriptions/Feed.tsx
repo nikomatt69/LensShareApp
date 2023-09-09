@@ -27,7 +27,6 @@ import {
 import Video from '../HomePage/Video';
 import Bytes from '../Bytes';
 import ByteVideo from '../Bytes/ByteVideo';
-import FullScreen from '../Bytes/FullScreen';
 import router from 'next/router';
 import { useFeedQuery } from '@/utils/lens/generated';
 import Head from 'next/head';
@@ -45,7 +44,7 @@ interface Props {
 
 const Feed = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const activeTagFilter = useAppStore((state) => state.activeTagFilter);
+
 
   const { resolvedTheme } = useTheme();
   const [currentViewingId, setCurrentViewingId] = useState('')
@@ -108,20 +107,6 @@ const Feed = () => {
     setShow(false);
   };
 
-  const full = useCallback(
-    () =>
-      currentViewingId && byte && router.pathname ? (
-        <FullScreen
-          byte={byte}
-          close={closeDialog}
-          isShow={show}
-          bytes={bytes}
-          index={bytes?.findIndex((video) => video.id === currentViewingId)}
-          profile={currentProfile as Profile}
-        />
-      ) : null,
-    [byte, show]
-  );
 
   if (bytes?.length === 0) {
     return (
@@ -142,7 +127,6 @@ const Feed = () => {
       </Head>  
       <MetaTags title={`Feed • ${APP_NAME} `} />
  
-      {full()}
       {!error && !loading && (
         <>
           <div

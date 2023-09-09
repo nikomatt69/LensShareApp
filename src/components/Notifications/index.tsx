@@ -51,9 +51,7 @@ const initialFilters = {
 const Notifications = () => {
   const [activeFilter, setActiveFilter] = useState(initialFilters);
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const setHasNewNotification = useAppStore(
-    (state) => state.setHasNewNotification
-  );
+ 
   const selectedNotificationsFilter = usePersistStore(
     (state) => state.selectedNotificationsFilter
   );
@@ -105,7 +103,7 @@ const Notifications = () => {
     variables: {
       request
     },
-    onCompleted: () => setHasNewNotification(false)
+  
   });
 
   const notifications = data?.notifications?.items as Notification[];

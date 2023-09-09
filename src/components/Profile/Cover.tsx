@@ -1,7 +1,8 @@
 import { COVER, STATIC_IMAGES_URL } from '@/constants';
 import imageKit from '@/lib/imageKit';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
+
 import type { FC } from 'react';
 import colors from 'tailwindcss/colors';
 

@@ -15,7 +15,6 @@ import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl
 import imageKit from '@/lib/imageKit';
 import VideoPlayer from '@/utils/VideoPlayer';
 
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
 import {
   APP_ID,
   LENSTER_APP_ID,
@@ -33,7 +32,7 @@ interface Props {
   publication: Publication;
 }
 const Audio: FC<Props> = ({ publication }) => {
-  const videoWatchTime = useAppStore((state) => state.videoWatchTime);
+
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showButtons, setShowButtons] = useState(true);

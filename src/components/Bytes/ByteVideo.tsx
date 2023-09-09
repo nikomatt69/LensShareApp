@@ -6,8 +6,6 @@ import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
 
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
-
 import VideoPlayer from '@/utils/VideoPlayer';
 
 import BottomOverlay from './BottomOverlay';

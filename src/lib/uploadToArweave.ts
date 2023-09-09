@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Errors } from './errors';
 
+
 /**
  * Uploads the given data to Arweave.
  *
@@ -31,3 +32,4 @@ const uploadToArweave = async (data: any): Promise<string> => {
 };
 
 export default uploadToArweave;
+

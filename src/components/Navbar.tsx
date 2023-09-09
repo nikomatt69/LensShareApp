@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Image } from '@/components/UI/Image';
 import { useState, type FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import { VideoCameraIcon } from '@heroicons/react/24/outline';
 import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
@@ -33,6 +33,8 @@ import { ProfileFeedType } from '@/enums';
 import StreamOutline from './UI/Icons/StreamOutline';
 import { STATIC_ASSETS_URL } from '@/constants';
 import { useTheme } from 'next-themes';
+import { PlusCircleIcon } from '@heroicons/react/20/solid';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
 
 const Navbar: FC = () => {
@@ -115,7 +117,7 @@ const Navbar: FC = () => {
           <button>
             <NotificationIcon />
           </button>
-
+          
       
           <div className="flex">
             {currentProfile ? (

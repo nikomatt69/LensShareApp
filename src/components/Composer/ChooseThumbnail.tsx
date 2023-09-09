@@ -6,12 +6,14 @@ import { toast } from 'react-hot-toast';
 import { usePublicationStore } from 'src/store/publication4';
 
 import { useUpdateEffect } from 'usehooks-ts';
-import { getFileFromDataURL } from '../Upload/getFileFromDataURL';
-import { generateVideoThumbnails } from '../Upload/generateVideoThumbnails';
+
 import { Spinner } from '../UI/Spinner';
-import ThumbnailsShimmer from '../Upload/ThumbnailsShimmer';
+
 import { CheckCircleIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
+import { getFileFromDataURL } from '@/utils/functions/getFileFromDataURL';
+import { generateVideoThumbnails } from '@/utils/functions/generateVideoThumbnails';
+import ThumbnailsShimmer from './ThumbnailsShimmer';
 
 const DEFAULT_THUMBNAIL_INDEX = 0;
 export const THUMBNAIL_GENERATE_COUNT = 4;

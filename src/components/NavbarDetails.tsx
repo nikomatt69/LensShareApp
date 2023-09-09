@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Image } from '@/components/UI/Image';
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import { VideoCameraIcon } from '@heroicons/react/24/outline';
 import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
@@ -27,6 +27,7 @@ import { FaHeadphones } from 'react-icons/fa';
 import { ConnectKitButton } from 'connectkit';
 import MainButton from './Buttons/Rainbow/mainbutton';
 import NotificationIcon from './Notifications/NotificationIcon';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);

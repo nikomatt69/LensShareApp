@@ -1,4 +1,4 @@
-import { useAppStore, useTransactionPersistStore } from '@/store/app';
+import { useAppStore } from '@/store/app';
 import {
   useHasTxHashBeenIndexedQuery,
   usePublicationLazyQuery
@@ -16,6 +16,7 @@ import React, { FC } from 'react';
 import { Image } from '@/components/UI/Image';
 import getAvatar from '@/lib/getAvatar';
 import Loader from './UI/Loader';
+import { useTransactionPersistStore } from '@/store/transaction';
 
 interface Props {
   txn: any;

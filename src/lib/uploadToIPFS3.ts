@@ -1,14 +1,12 @@
 import { S3 } from '@aws-sdk/client-s3';
 import {
-  EVER_BUCKET_NAME,
-  EVER_ENDPOINT,
+  EVER_API,
   S3_BUCKET,
   STS_GENERATOR_WORKER_URL
 } from '@/constants';
+import type { MediaSetWithoutOnChain } from '@/types/misc';
 import axios from 'axios';
-
 import { v4 as uuid } from 'uuid';
-import { MediaSetWithoutOnChain } from '@/typesLenster';
 
 const FALLBACK_TYPE = 'image/jpeg';
 
@@ -20,7 +18,7 @@ const FALLBACK_TYPE = 'image/jpeg';
 const getS3Client = async (): Promise<S3> => {
   const token = await axios.get(STS_GENERATOR_WORKER_URL);
   const client = new S3({
-    endpoint: EVER_ENDPOINT,
+    endpoint: EVER_API,
     credentials: {
       accessKeyId: token.data?.accessKeyId,
       secretAccessKey: token.data?.secretAccessKey,

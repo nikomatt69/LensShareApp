@@ -1,4 +1,5 @@
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 import getStampFyiURL from './getStampFyiURL';
 
 const getAvatar = (profile: any): string => {

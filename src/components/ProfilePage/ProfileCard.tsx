@@ -3,7 +3,7 @@
 import React, { Dispatch, FC, ReactNode, useEffect, useState } from 'react';
 import { Image } from '@/components/UI/Image';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+
 import FollowButton from '@/components/Buttons/FollowButton';
 import { useAppStore } from 'src/store/app';
 import MesssageIcon from 'src/components/Messages/MessageIcon';

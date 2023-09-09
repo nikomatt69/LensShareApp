@@ -1,5 +1,6 @@
 import { IMAGE_CDN_URL } from '@/constants';
-import { sanitizeIpfsUrl } from '@/utils/sanitizeIpfsUrl';
+import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
+
 
 const imageCdn = (
   url: string,

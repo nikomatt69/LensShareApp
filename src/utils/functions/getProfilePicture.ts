@@ -1,7 +1,8 @@
 import type { Profile } from 'src/utils/lens';
 import { getRandomProfilePicture } from './getRandomProfilePicture';
-import { sanitizeIpfsUrl } from 'src/utils/sanitizeIpfsUrl';
+
 import imageKit from '@/lib/imageKit';
+import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
 
 const getProfilePicture = (
   profile: Profile,

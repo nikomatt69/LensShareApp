@@ -34,8 +34,6 @@ const CommentModal: FC<Props> = ({
 
 }) => {
   const [show, setShow] = useState(false);
-  const setCurrentViewingId = useAppStore((state) => state.setCurrentviewingId);
-  const currentViewingId = useAppStore((state) => state.currentviewingId);
 
   return (
     <>

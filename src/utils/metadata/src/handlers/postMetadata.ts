@@ -1,0 +1,74 @@
+
+import type { IRequest } from 'itty-router';
+
+import type { Env } from '../types';
+import { PublicationMetadataV2Input } from '../../generatedLenster';
+import { EthereumSigner, createData } from '../bundlr';
+
+export default async (request: IRequest, env: Env) => {
+  try {
+    const payload: PublicationMetadataV2Input = await request.json();
+    const signer = new EthereumSigner(env.BUNDLR_PRIVATE_KEY);
+    if (payload.content?.length) {
+      try {
+        const aiEndpoint = 'https://ai.lenster.xyz';
+        const fetchPayload = {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' ,},
+          body: JSON.stringify({ text: payload.content })
+        };
+
+        const responses = await Promise.all([
+          fetch(`${aiEndpoint}/tagger`, fetchPayload),
+          fetch(`${aiEndpoint}/locale`, fetchPayload)
+        ]);
+
+        // Append Tags to metadata
+        const taggerResponseJson: any = await responses[0].json();
+        payload.tags = [
+          ...new Set([
+            ...(payload.tags || []),
+            ...(taggerResponseJson.topics || [])
+          ])
+        ];
+
+        // Append Locale to metadata
+        const localeResponse: any = await responses[1].json();
+        if (localeResponse.locale) {
+          payload.locale = localeResponse.locale;
+        }
+      } catch (error) {
+        console.error('Failed to fetch AI data', error);
+      }
+    }
+
+    const tx = createData(JSON.stringify(payload), signer, {
+      tags: [
+        { name: 'content-type', value: 'application/json' ,},
+        { name: 'App-Name', value: 'LensShare' }
+      ]
+    });
+    await tx.sign(signer);
+
+    const bundlrRes = await fetch('http://node2.bundlr.network/tx/matic', {
+      method: 'POST',
+      headers: { 'content-type': 'application/octet-stream' },
+      body: tx.getRaw()
+    });
+
+    if (bundlrRes.statusText === 'Created' || bundlrRes.statusText === 'OK') {
+      return new Response(
+        JSON.stringify({ success: true, id: tx.id, metadata: payload })
+      );
+    } else {
+      return new Response(
+        JSON.stringify({ success: false, message: 'Bundlr error!', bundlrRes })
+      );
+    }
+  } catch (error) {
+    console.error('Failed to create metadata data', error);
+    return new Response(
+      JSON.stringify({ success: false, error: 'Something went wrong!' })
+    );
+  }
+};

@@ -23,6 +23,7 @@ import { splitSignature } from 'ethers/lib/utils';
 import Spinner from '@/components/Spinner';
 import MirrorOutline from '../MirrorOutline';
 import { LensHub } from '@/abi/LensHub';
+import { useNonceStore } from '@/store/nonce';
 
 //should also add authorisation so user cant like posttwice
 
@@ -32,8 +33,8 @@ interface Props {
 
 const MirrorButton: FC<Props> = ({ publication }) => {
   const isMirror = publication.__typename === 'Mirror';
-  const userSigNonce = useAppStore((state) => state.setUserSigNonce);
-  const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
+  const userSigNonce = useNonceStore((state) => state.userSigNonce);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const [count, setCount] = useState(
