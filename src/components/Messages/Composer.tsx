@@ -37,7 +37,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { Input } from '../UI/Input';
 import { Button } from '../UI/Button';
-import uploadFilesToIPFS, { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
+import { uploadFileToIPFS } from '@/lib/uploadToIPFS3 copy';
+
 
 interface ComposerProps {
   sendMessage: <T extends AllowedContent = string>(

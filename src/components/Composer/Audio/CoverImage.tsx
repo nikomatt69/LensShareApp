@@ -1,15 +1,15 @@
 import { Spinner } from '@/components/UI/Spinner';
 import { ATTACHMENT } from '@/constants';
 import imageKit from '@/lib/imageKit';
-import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
+
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import type { ChangeEvent, FC, Ref } from 'react';
 import { useState } from 'react';
 import { Image } from '@/components/UI/Image';
-import imageCdn from '@/lib/imageCdn';
-import imageProxy2 from '@/lib/imageProxy2';
+import { uploadToIPFS } from '@/lib/uploadToIPFS3';
+
 
 interface CoverImageProps {
   isNew: boolean;
@@ -36,8 +36,8 @@ const CoverImage: FC<CoverImageProps> = ({
     if (event.target.files?.length) {
       try {
         setLoading(true);
-        const attachment = await uploadFileToIPFS(event.target.files[0]);
-        setCover(attachment.original.url, attachment.original.mimeType);
+        const attachment = await uploadToIPFS(event.target.files[0]);
+        setCover(attachment.url, attachment.url);
       } catch (error) {
         onError(error);
       }
@@ -55,7 +55,7 @@ const CoverImage: FC<CoverImageProps> = ({
           onError={({ currentTarget }) => {
             currentTarget.src = cover ? sanitizeDStorageUrl(cover) : cover;
           }}
-          src={cover ? imageProxy2(sanitizeDStorageUrl(cover), ATTACHMENT) : cover}
+          src={cover ? imageKit(sanitizeDStorageUrl(cover), ATTACHMENT) : cover}
           className="h-24 w-24 rounded-xl object-cover md:h-40 md:w-40 md:rounded-none"
           draggable={false}
           alt={`attachment-audio-cover-${cover}`}

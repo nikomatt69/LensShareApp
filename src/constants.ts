@@ -56,16 +56,16 @@ export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
 export const STS_GENERATOR_WORKER_URL = IS_PRODUCTION
   ? 'https://sts.lenshareapp.xyz'
-  : 'http://localhost:8082';
+  : 'https://sts.lenshareapp.xyz';
 export const METADATA_WORKER_URL = IS_PRODUCTION
-  ? 'https://metadata.lenshareapp.xyz'
-  : 'http://localhost:8083';
+  ? 'https://meta.lenshareapp.xyz'
+  : 'https://meta.lenshareapp.xyz';
 export const FRESHDESK_WORKER_URL = IS_PRODUCTION
   ? 'https://freshdesk.lenster.xyz'
   : 'http://localhost:8084';
 export const SNAPSHOR_RELAY_WORKER_URL = IS_PRODUCTION
   ? 'https://snapshot-relay.lenshareapp.xyz'
-  : 'http://localhost:8085';
+  : 'https://snapshot-relay.lenshareapp.xyz';
 export const ENS_RESOLVER_WORKER_URL = IS_PRODUCTION
   ? 'https://ens-resolver.lenshareapp.xyz'
   : 'http://localhost:8086';

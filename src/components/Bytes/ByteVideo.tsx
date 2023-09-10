@@ -37,7 +37,7 @@ const ByteVideo: FC<Props> = ({
   const intersectionRef = useRef<HTMLDivElement>(null)
   const thumbnailUrl = imageKit(
     sanitizeDStorageUrl(getThumbnailUrl(video)),
-    'THUMBNAIL_V'
+ 
   )
   const { color: black } = useAverageColor(thumbnailUrl, true)
   const currentProfile = useAppStore((state) => state.currentProfile)

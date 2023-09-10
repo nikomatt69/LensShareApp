@@ -10,10 +10,11 @@ import { useUpdateEffect } from 'usehooks-ts';
 import { Spinner } from '../UI/Spinner';
 
 import { CheckCircleIcon, PhotoIcon } from '@heroicons/react/24/outline';
-import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
+
 import { getFileFromDataURL } from '@/utils/functions/getFileFromDataURL';
 import { generateVideoThumbnails } from '@/utils/functions/generateVideoThumbnails';
 import ThumbnailsShimmer from './ThumbnailsShimmer';
+import { uploadFileToIPFS } from '@/lib/uploadToIPFS3 copy';
 
 const DEFAULT_THUMBNAIL_INDEX = 0;
 export const THUMBNAIL_GENERATE_COUNT = 4;

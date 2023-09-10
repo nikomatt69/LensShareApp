@@ -26,9 +26,10 @@ import { LightBox } from '../UI/LightBox';
 import { Image } from '../UI/Image';
 import { LinkIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import VideoPlayer from '@/utils/VideoPlayer';
-import Video from '../HomePage/Video';
+
 import Item from '../Echos/Item';
 import { HiExternalLink } from 'react-icons/hi';
+import Video from './Video';
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
     return {
@@ -174,16 +175,13 @@ const Attachments: FC<AttachmentsProps> = ({
                       <ChooseThumbnail />
                     </>
                   ) : (
-                    <Video publication={publication as Publication} />
+                    <Video src={url} poster={getThumbnailUrl()} />
                   )
                 ) : isAudio ? (
-                  <Audio
-                    src={url}
-                    isNew={isNew}
-                    publication={publication}
-                    txn={txn}
-                    expandCover={(url) => setExpandedImage(url)}
-                  />
+                  <Item
+                    publication={publication as Publication}
+                   
+                  /> 
                 ) : (
                   <Image
                     className="cursor-pointer rounded-lg border bg-gray-100 object-cover dark:border-gray-700 dark:bg-gray-800"

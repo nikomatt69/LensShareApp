@@ -1,25 +1,21 @@
-import { LENS_MEDIA_SNAPSHOT_URL } from "@/constants";
+import { IMAGE_TRANSFORMATIONS, LENS_MEDIA_SNAPSHOT_URL } from "@/constants"
 
-/**
- * Transforms the URL of an image to use ImageKit.
- *
- * @param url The original URL of the image.
- * @param name The transformation name (optional).
- * @returns A transformed URL.
- */
-const imageCdn = (url: string, name?: string): string => {
+export const imageCdn = (
+  url: string,
+  type?: keyof typeof IMAGE_TRANSFORMATIONS
+): string => {
   if (!url) {
-    return '';
+    return url
   }
 
   if (url.includes(LENS_MEDIA_SNAPSHOT_URL)) {
-    const splitedUrl = url.split('/');
-    const path = splitedUrl[splitedUrl.length - 1];
+    const splitedUrl = url.split('/')
+    const path = splitedUrl[splitedUrl.length - 1]
 
-    return name ? `${LENS_MEDIA_SNAPSHOT_URL}/${name}/${path}` : url;
+    return type
+      ? `${LENS_MEDIA_SNAPSHOT_URL}/${IMAGE_TRANSFORMATIONS}/${path}`
+      : url
   }
 
-  return url;
-};
-
-export default imageCdn;
+  return url
+}

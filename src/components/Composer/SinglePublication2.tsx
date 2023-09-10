@@ -20,7 +20,7 @@ import { COMMUNITIES_WORKER_URL } from '@/constants';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Community } from '@/types/communities';
-import { Database } from '@/utils/supabase/database.types';
+
 
 interface SinglePublicationProps {
   publication: Publication;

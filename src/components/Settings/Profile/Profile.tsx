@@ -13,7 +13,7 @@ import getProfileAttribute from '@/lib/getProfileAttribute';
 import getSignature from '@/lib/getSignature';
 import imageKit from '@/lib/imageKit';
 import uploadToArweave from '@/lib/uploadToArweave';
-import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
+
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import {
   CreatePublicSetProfileMetadataUriRequest,

@@ -1,36 +1,85 @@
-import { createCors, error, json, Router } from 'itty-router';
+import { createData, EthereumSigner } from '../bundlr'
 
-import postMetadata from './handlers/postMetadata';
-import type { Env } from './types';
+export interface Env {
+  BUNDLR_PRIVATE_KEY: string
+}
 
-const { preflight, corsify } = createCors({
-  origins: ['*'],
-  methods: ['HEAD', 'GET', 'POST']
-});
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Content-Type': 'application/json'
+}
 
-const router = Router();
-
-router.all('*', preflight);
-router.get('/', () => new Response('gm, to metadata service 👋'));
-router.post('/', postMetadata);
-
-const routerHandleStack = (request: Request, env: Env, ctx: ExecutionContext) =>
-  router.handle(request, env, ctx).then(json);
-
-const handleFetch = async (
-  request: Request,
-  env: Env,
-  ctx: ExecutionContext
-) => {
-  try {
-    return await routerHandleStack(request, env, ctx);
-  } catch (error_) {
-    console.error('Failed to handle request', error_);
-    return error(500);
+const handleRequest = async (request: Request, env: Env) => {
+  if (request.method !== 'POST') {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: 'Only POST requests are supported'
+      }),
+      {
+        headers
+      }
+    )
   }
-};
+
+  const payload = await request.json()
+
+  if (!payload) {
+    return new Response(
+      JSON.stringify({ success: false, message: 'No body provided' }),
+      { headers }
+    )
+  }
+
+  try {
+    const signer = new EthereumSigner(env.BUNDLR_PRIVATE_KEY)
+    const tx = createData(JSON.stringify(payload), signer, {
+      tags: [
+        { name: 'Content-Type', value: 'application/json' },
+        { name: 'App-Name', value: 'Lenstube' }
+      ]
+    })
+    await tx.sign(signer)
+    const bundlrRes = await fetch('http://node2.bundlr.network/tx/matic', {
+      method: 'POST',
+      headers: { 'content-type': 'application/octet-stream' },
+      body: tx.getRaw()
+    })
+
+    if (bundlrRes.statusText === 'Created' || bundlrRes.statusText === 'OK') {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          id: tx.id,
+          url: `ar://${tx.id}`
+        }),
+        {
+          headers
+        }
+      )
+    } else {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: 'Something went wrong!',
+          bundlrRes
+        }),
+        {
+          headers
+        }
+      )
+    }
+  } catch {
+    return new Response(
+      JSON.stringify({ success: false, message: 'Something went wrong!' }),
+      { headers }
+    )
+  }
+}
 
 export default {
-  fetch: (request: Request, env: Env, context: ExecutionContext) =>
-    handleFetch(request, env, context).then(corsify)
-};
+  async fetch(request: Request, env: Env): Promise<Response> {
+    return await handleRequest(request, env)
+  }
+}

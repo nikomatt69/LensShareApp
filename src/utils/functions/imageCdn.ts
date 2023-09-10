@@ -13,7 +13,7 @@ export const imageCdn = (
     const path = splitedUrl[splitedUrl.length - 1]
 
     return type
-      ? `${LENS_MEDIA_SNAPSHOT_URL}/${IMAGE_TRANSFORMATIONS[type]}/${path}`
+      ? `${LENS_MEDIA_SNAPSHOT_URL}/${IMAGE_TRANSFORMATIONS}/${path}`
       : url
   }
 

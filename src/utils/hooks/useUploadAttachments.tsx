@@ -1,10 +1,11 @@
+import { uploadToIPFS } from '@/lib/uploadToIPFS3';
 import { usePublicationStore } from '@/store/publication4';
 import { NewLensshareAttachment } from '@/types/misc';
 
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
-import uploadToIPFS from '@/lib/uploadToIPFS3';
+
 
 const useUploadAttachments = () => {
   const addAttachments = usePublicationStore((state) => state.addAttachments);
@@ -74,12 +75,10 @@ const useUploadAttachments = () => {
         const attachmentsUploaded = await uploadToIPFS(attachments);
         if (attachmentsUploaded) {
           attachmentsIPFS = previewAttachments.map(
-            (attachment: NewLensshareAttachment, index: number) => ({
+            (attachment: NewLensshareAttachment) => ({
               ...attachment,
-              original: {
-                url: attachmentsUploaded[index].original.url,
-                mimeType: attachmentsUploaded[index].original.mimeType
-              }
+              
+              
             })
           );
           updateAttachments(attachmentsIPFS);

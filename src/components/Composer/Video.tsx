@@ -20,7 +20,27 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
         poster={imageKit(sanitizeDStorageUrl(poster))}
         objectFit="contain"
         showLoadingSpinner
-        autoPlay
+       
+        theme={{
+          borderStyles: {
+            containerBorderStyle: 'solid',
+
+            
+          },
+          colors: {
+            accent: '#1d4ed8',
+            containerBorderColor:'#1d4ed8'
+          },
+          space: {
+            controlsBottomMarginX: '10px',
+            controlsBottomMarginY: '5px',
+            controlsTopMarginX: '15px',
+            controlsTopMarginY: '8pxpx',
+          },
+          radii: {
+            containerBorderRadius: '16px',
+          },
+        }}
         showPipButton={false}
         showUploadingIndicator={false}
         controls={{ defaultVolume: 0 }}
