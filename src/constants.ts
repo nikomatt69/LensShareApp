@@ -54,35 +54,35 @@ export const LENS_MEDIA_SNAPSHOT_URL = 'https://ik.imagekit.io/lens/media-snapsh
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
-export const STS_GENERATOR_WORKER_URL = IS_PRODUCTION
+export const STS_GENERATOR_WORKER_URL = IS_MAINNET
   ? 'https://sts.lenshareapp.xyz'
   : 'https://sts.lenshareapp.xyz';
-export const METADATA_WORKER_URL = IS_PRODUCTION
+export const METADATA_WORKER_URL = IS_MAINNET
   ? 'https://meta.lenshareapp.xyz'
   : 'https://meta.lenshareapp.xyz';
-export const FRESHDESK_WORKER_URL = IS_PRODUCTION
+export const FRESHDESK_WORKER_URL = IS_MAINNET
   ? 'https://freshdesk.lenster.xyz'
   : 'http://localhost:8084';
-export const SNAPSHOR_RELAY_WORKER_URL = IS_PRODUCTION
+export const SNAPSHOR_RELAY_WORKER_URL = IS_MAINNET
   ? 'https://snapshot-relay.lenshareapp.xyz'
   : 'https://snapshot-relay.lenshareapp.xyz';
-export const ENS_RESOLVER_WORKER_URL = IS_PRODUCTION
+export const ENS_RESOLVER_WORKER_URL = IS_MAINNET
   ? 'https://ens-resolver.lenshareapp.xyz'
   : 'https://ens-resolver.lenshareapp.xyz';
-export const OEMBED_WORKER_URL = IS_PRODUCTION
+export const OEMBED_WORKER_URL = IS_MAINNET
   ? 'https://oembed.lenshareapp.xyz'
   : 'https://oembed.lenshareapp.xyz';
-export const SPACES_WORKER_URL = IS_PRODUCTION
+export const SPACES_WORKER_URL = IS_MAINNET
   ? 'https://spaces.lenshareapp.xyz'
   : 'https://spaces.lenshareapp.xyz';
-export const LEAFWATCH_WORKER_URL = IS_PRODUCTION
+export const LEAFWATCH_WORKER_URL = IS_MAINNET
   ? 'https://leafwatch.lenster.xyz'
   : 'http://localhost:8089';
 
-export const CHANNELS_WORKER_URL = IS_PRODUCTION
+export const CHANNELS_WORKER_URL = IS_MAINNET
   ? 'https://channels.lenster.xyz'
   : 'http://localhost:8093';
-export const COMMUNITIES_WORKER_URL = IS_PRODUCTION
+export const COMMUNITIES_WORKER_URL = IS_MAINNET
   ? 'https://communities.lenshareapp.xyz'
   : 'http://localhost:8091';
 

@@ -17,6 +17,7 @@ import {
   ALLOWED_AUDIO_TYPES,
   ALLOWED_IMAGE_TYPES,
   ALLOWED_VIDEO_TYPES,
+  APP_ID,
   APP_NAME,
   LENSHUB_PROXY,
   LIT_PROTOCOL_ENV,
@@ -83,7 +84,7 @@ import { useApolloClient } from '@apollo/client/react';
 import { useGlobalModalStateStore } from '@/store/modals';
 
 import { useAccessSettingsStore } from '@/store/access';
-import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient2';
+import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
 import { Errors } from '@/lib/errors';
 import uploadToArweave from '@/lib/uploadToArweave';
 import getTextNftUrl from '@/utils/functions/getTextNftUrl';
@@ -279,7 +280,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     });
     resetCollectSettings();
     resetAccessSettings();
-
     if (!isComment) {
       setShowNewPublicationModal(false, NewPublicationTypes.Post);
     }
@@ -851,7 +851,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
         attributes,
         media: attachmentsInput,
         locale: getUserLocale(),
-        appId: APP_NAME
+        appId: APP_ID
       };
 
       const isRevertCollectModule =

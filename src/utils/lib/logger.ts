@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 
 const tailLog = (level: 'error' | 'log', message: string) => {
-  if (IS_MAINNET && IS_PRODUCTION) {
+  if (IS_MAINNET) {
     axios
       .post(LENSSHARE_TAIL_INGEST_URL, {
         source: 'web',

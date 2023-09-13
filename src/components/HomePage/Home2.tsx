@@ -192,7 +192,7 @@ const Home2: FC<Props> = ({ publication}) => {
     
   
 
- {showSpacesWindow && <SpacesWindow />}
+
     <GridItemEight className="space-y-5">
     {currentProfile?.id ? 
             
