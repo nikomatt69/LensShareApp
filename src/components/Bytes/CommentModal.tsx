@@ -1,7 +1,7 @@
 
 import { Comment, Profile, Publication } from '@/utils/lens/generatedLenster';
 import type { Dispatch, FC } from 'react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdOutlineClose } from 'react-icons/md';
 import FullScreenModal from '../UI/FullScreenModal';
@@ -34,7 +34,19 @@ const CommentModal: FC<Props> = ({
 
 }) => {
   const [show, setShow] = useState(false);
-
+  const subscriber = publication.profile;
+  const [following, setFollowing] = useState(false);
+  const currentProfile = useAppStore((state) => state.currentProfile);
+  useEffect(() => {
+    if (subscriber?.isFollowedByMe === true) {
+      setFollowing(true);
+    } else {
+      setFollowing(false);
+    }
+    if (!currentProfile) {
+      setFollowing(false);
+    }
+  }, [subscriber?.isFollowedByMe]);
   return (
     <>
       <button
@@ -64,7 +76,7 @@ const CommentModal: FC<Props> = ({
         <div className="ml-12 mt-3 items-center justify-center p-5 text-center">
           <PublicationActions publication={publication} />
         </div>
-        <div className="scrollbar-text-blue flex max-h-[50%] overflow-y-auto  bg-white dark:bg-gray-900/70  pt-3">
+        <div className=" flex max-h-[60%] overflow-y-auto center-items w-full bg-white dark:bg-gray-900/70  pt-3">
           <Feed publication={publication as Comment} />
         </div>
         <NewPublication publication={publication} />

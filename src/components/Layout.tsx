@@ -127,13 +127,12 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-        {showSpacesLobby && <Spaces />}
-      {showSpacesWindow && <SpacesWindow />}
+      <Spaces />
      
       <GlobalModals />
       <GlobalAlerts />
-      <div className="flex min-h-screen flex-col pb-14 md:pb-0">
-      {pathname.includes( `/bytes/` && `/feed`) ? (
+      <div className="flex min-h-screen pb-14 flex-col md:pb-0">
+      {pathname.includes( `/bytes` && `/feed`) ? (
           <>
   
             {children}

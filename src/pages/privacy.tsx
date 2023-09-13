@@ -26,7 +26,7 @@ const terms = () => {
           </p>
           <p>
             This Privacy Policy (the “Privacy Policy”) provides a comprehensive
-            description of how Lenstik (“we,” “our,” or “us”) collects, uses,
+            description of how LensShare (“we,” “our,” or “us”) collects, uses,
             and shares information about you in connection with the website at
             “lenshareapp.xyz”, as well as your rights and choices regarding such
             information.

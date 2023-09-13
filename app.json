@@ -7,6 +7,9 @@
     },
     "ios": {
       "bundleIdentifier": "xyz.lenshareapp.zip"
+    },
+    "android": {
+      "package": "xyz.lenshareapp.zip"
     }
   }
 }

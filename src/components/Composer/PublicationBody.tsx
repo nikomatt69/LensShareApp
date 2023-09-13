@@ -19,6 +19,7 @@ import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { useSpacesStore } from '@/store/spaces';
 import PreviewSpaces from '../Spaces2/PreviewSpaces/PreviewSpaces';
 import AudioSpaces from '../Spaces2';
+import { OG } from '@/types/misc';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -52,8 +53,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     ? JSON.parse(spaceObject)
     : null;
 
-  const filterId =  quotedPublicationId;
-
+  const filterId = quotedPublicationId;
   let rawContent = metadata?.content;
 
   if (filterId) {
@@ -71,12 +71,11 @@ const PublicationBody: FC<PublicationBodyProps> = ({
      } encryptedPublication={publication} />;
   }
  
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+  
 
   if (Boolean(space?.id)) {
     return <Space publication={publication} />;
   }
-
   const showAttachments = metadata?.media?.length > 0;
 
   const showQuotedPublication = quotedPublicationId && !quoted;
@@ -85,16 +84,16 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     !showAttachments &&
     !showQuotedPublication &&
     !quoted;
-
- 
-  const onData = () => {
-    if (showOembed) {
+  const onOembedData = (data: OG) => {
+    if (showOembed && data?.title) {
       const updatedContent = removeUrlAtEnd(urls, content);
       if (updatedContent !== content) {
         setContent(updatedContent);
       }
     }
   };
+
+ 
 
   return (
     <div className="break-words">
@@ -115,11 +114,15 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
-      {showSpacesLobby ? (<Space publication={publication} />):(null)}
-     {showSpacesWindow ? (<PreviewSpaces />):(null)}
+
 
     
-      {showOembed ? <Oembed url={urls[0]}   /> : null}
+     {showOembed ? (
+        <Oembed
+          url={urls[0]}
+          publicationId={publication.id}
+          onData={onOembedData}
+        />):null}
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}

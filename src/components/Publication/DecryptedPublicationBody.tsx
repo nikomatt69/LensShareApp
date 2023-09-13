@@ -236,7 +236,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   // NFT check - https://docs.lens.xyz/docs/gated#erc20-token-ownership
   const doesNotOwnNft = reasons?.includes(DecryptFailReason.DoesNotOwnNft);
 
-  const doesNotOwnSuperfluid = reasons?.includes(DecryptFailReason.DoesNotOwnNft);
+
 
   const getDecryptedData = async () => {
     if (!walletClient || isDecrypting) {
@@ -373,26 +373,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           )}
 
 
-{doesNotOwnSuperfluid && (
-            <DecryptMessage icon={<PhotoIcon className="h-4 w-4" />}>
-              You need{' '}
-              <Tooltip
-                content={nftData?.contractMetadata?.name}
-                placement="top"
-              >
-                <Link
-                  href={`https://nft.superfluid.finance/cfa/v1/getsvg?chain_id=137&sender=${inflow.sender.id}&token_address=${inflow.token.id}&token_symbol=${inflow.token.symbol}&start_date=${inflow.createdAtTimestamp}&receiver=${currentAddress}&flowRate=${inflow.currentFlowRate}&token_decimals=${inflow.token.decimals}`}
-                  className="font-bold underline"
-                 
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  {nftData?.contractMetadata?.symbol}
-                </Link>
-              </Tooltip>{' '}
-              nft to unlock
-            </DecryptMessage>
-          )}
+
         </div>
       </Card>
     );
@@ -462,12 +443,13 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           </Link>
         </div>
       )}
-      {publication?.media?.length ? (
+    {publication?.media?.length ? (
         <Attachments attachments={publication?.media} />
       ) : content && urls.length > 0 ? (
         <Oembed
           url={urls[0]}
-        
+          publicationId={encryptedPublication.id}
+          onData={onData}
         />
       ) : null}
     </div>

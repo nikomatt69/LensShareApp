@@ -117,6 +117,7 @@ import { useSpacesStore } from '@/store/spaces';
 import errorToast from './errorToast';
 import { useTransactionPersistStore } from '@/store/transaction';
 import { useReferenceModuleStore } from '@/store/reference-module';
+import ScheduleSpacesMenu from './Actions/SpaceSettings/ScheduleSpacesMenu';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -682,7 +683,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     // Generate the encrypted metadata and upload it to Arweave
     const { contentURI } = await tokenGatedSdk.gated.encryptMetadata(
       metadata,
-      currentProfile.id,
+      currentProfile?.id,
       accessCondition,
       async (data: EncryptedMetadata) => {
         return await uploadToArweave(data);
@@ -739,7 +740,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
 
       // Create Space in Huddle
       
-      let spaceId = {
+      let spaceData = {
         success: false,
         response: {
           message: '',
@@ -752,7 +753,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
         showNewPublicationModal &&
         modalPublicationType === NewPublicationTypes.Spaces
       ) {
-        spaceId = await createSpace();
+        spaceData = await createSpace();
       }
       const now = new Date();
       now.setHours(Number(spacesTimeInHour));
@@ -769,14 +770,14 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
           value: getMainContentFocus()?.toLowerCase()
         },
         ...(showNewPublicationModal &&
-        spaceId.success &&
+        spaceData.success &&
         modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceId.response.data.roomId,
+                  id: spaceData.response.data.roomId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
                 })
@@ -1045,40 +1046,11 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
           </div>
           {showNewPublicationModal &&
             modalPublicationType === NewPublicationTypes.Spaces && (
-              <Dropdown
-                triggerChild={
-                  <div className="ml-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-violet-500 p-1">
-                    <div className="text-white relative h-6 w-6">
-                      {Icons.calendar}
-                    </div>
-                  </div>
-                }
-              >
-                <div className="absolute -left-4 top-10 w-[12rem] translate-x-1/2 items-start justify-center gap-4 rounded-lg border border-neutral-300 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
-                  <Input
-                    type="time"
-                    onChange={(e) => {
-                      const [hour, minute] = e.target.value.split(':');
-                      setSpacesTimeInHour(hour);
-                      setSpacesTimeInMinute(minute);
-                    }}
-                  />
-                  <div className="mt-4 inline-flex w-full items-center justify-center gap-1 self-stretch rounded-lg bg-blue-700 p-2">
-                    {isLoading ? (
-                      <Spinner size="xs" />
-                    ) : (
-                      <CalendarIcon className="h-4 w-4 text-black" />
-                    )}
-                    <button
-                      className="flex items-center justify-center text-sm font-semibold leading-none text-black"
-                      onClick={createPublication}
-                    >
-                      Schedule Spaces
-                    </button>
-                  </div>
-                </div>
-              </Dropdown>
-            )}
+              <ScheduleSpacesMenu
+                isLoading={isLoading}
+                createPublication={createPublication}
+              /> )}
+                   
         
       </div>
       <div className="px-5">

@@ -29,7 +29,9 @@ import VideoPlayer from '@/utils/VideoPlayer';
 
 import Item from '../Echos/Item';
 import { HiExternalLink } from 'react-icons/hi';
-import Video from './Video';
+import Video from '../HomePage/Video';
+
+
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
     return {
@@ -175,7 +177,7 @@ const Attachments: FC<AttachmentsProps> = ({
                       <ChooseThumbnail />
                     </>
                   ) : (
-                    <Video src={url} poster={getThumbnailUrl()} />
+                    <Video publication={publication as Publication} />
                   )
                 ) : isAudio ? (
                   <Item

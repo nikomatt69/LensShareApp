@@ -23,7 +23,7 @@ const nextConfig = {
       'source.unsplash.com',
       'ar://',
       'arweave.net',
-      'arweave.net/',
+   
       'ipfs://',
       'avatar.tobi.sh',
       'statics-lens-staging.s3.eu-west-1.amazonaws.com',
@@ -39,11 +39,13 @@ const nextConfig = {
       'opensea.io',
       'rarible.com',
       'lenshareapp.xyz',
+      'oembed.lenshareapp.xyz',
       'lenshareapp.infura-ipfs.io',
-      'store.lenshareapp.xyz',
+      'ik.imagekit.io/lens/media-snapshot',
+ 
       '.ipfs.4everland.io',
       'statics-polygon-lens.s3.eu-west-1.amazonaws.com',
-      'ipfs.infura.io:5001',
+  
       'statics-mumbai-lens-staging.s3.eu-west-1.amazonaws.com',
       'statics-mumbai-polygon-lens.s3.eu-west-1.amazonaws.com',
       'statics-polygon-lens.s3.us-west-2.amazonaws.com',
@@ -53,13 +55,15 @@ const nextConfig = {
       'gateway.ipfscdn.io/ipfs/',
       'ep-noisy-rice-867852-pooler.us-west-2.postgres.vercel-storage.com',
       'user-content.lenster.xyz',
-      'lp-playback.com/hls',
-      'lp-playback.com',
+    
       'static-asset.lenster.xyz',
       'static.lenstube.xyz',
       'img.lenstube.xyz',
-      'ipfs.lenshareapp.xyz/ipfs'
-      
+      'ipfs.lenshareapp.xyz/ipfs',
+      'media.lenster.xyz',
+      'static-asset.lenshareapp.xyz',
+      'metadata.lenshareapp.xyz',
+      'metadata.lenster.xyz',
      
     ]
   },

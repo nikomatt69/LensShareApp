@@ -9,79 +9,52 @@ import {
   LENSSHARE_API_URL,
   LENSSHARE_EMBED_URL,
   LENSTOK_URL,
+  OG_IMAGE,
   STATIC_ASSETS_URL
 } from '@/constants';
 import { title } from 'process';
 
-type Props = {
+interface MetaTagsProps {
   title?: string;
-  description?: string | null;
-  image?: string;
-};
+  description?: string;
+}
 
-const MetaTags: FC<Props> = (props) => {
-  const { description, title, image } = props;
-  const router = useRouter();
-
-  const meta = {
-    title: title ?? APP_NAME,
-    description: description ?? APP_INFOPAGE,
-    image: image ?? `${STATIC_ASSETS_URL}/images/icon.png`,
-    type: 'website'
-  };
-
+const MetaTags: FC<MetaTagsProps> = ({
+  title = APP_NAME,
+  description = APP_INFOPAGE
+}) => {
   return (
     <Head>
-      <title>{meta.title}</title>
-      <meta name="robots" content="follow, index" />
-      <meta content={meta.description} name="description" />
-      <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0 viewport-fit=cover"/>
-      <link rel="canonical" href={`${LENSTOK_URL}${router.asPath}`} />
-      <meta property="og:url" content={`${LENSTOK_URL}${router.asPath}`} />
-      <meta property="og:type" content={meta.type} />
-      <meta property="og:site_name" content={`${APP_NAME}`} />
-      <meta property="og:description" content={meta.description} />
-      <meta property="og:title" content={meta.title} />
-      <meta property="og:image" content={meta.image} />
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover"
+      />
+
+      <meta property="og:url" content="https://lenshareapp.xyz" />
+      <meta property="og:site_name" content={APP_NAME} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={OG_IMAGE} />
       <meta property="og:image:width" content="400" />
       <meta property="og:image:height" content="400" />
-      <meta name="twitter:card" content="summary" />
+
+      <meta property="twitter:card" content="summary" />
+      <meta property="twitter:site" content={APP_NAME} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={OG_IMAGE} />
       <meta property="twitter:image:width" content="400" />
       <meta property="twitter:image:height" content="400" />
-      <meta name="twitter:site" content={`${APP_NAME}`} />
-      <meta name="twitter:title" content={meta.title} />
-      <meta name="twitter:description" content={meta.description} />
-      <meta property="twitter:image" content={meta.image} />
-      <meta property="twitter:creator" content={APP_NAME} />
+      <meta property="twitter:creator" content="lenshareappxyz" />
 
-      {router.pathname === '/u/[id]' && router.query?.id && (
-        <>
-          <link
-            rel="iframely player"
-            type="text/html"
-            href={`${LENSSHARE_EMBED_URL}/${router.query?.id}`}
-            media="(aspect-ratio: 16/9)"
-          />
-          <link
-            rel="alternate"
-            type="text/xml+oembed"
-            href={`${LENSSHARE_API_URL}/oembed?format=xml&id=${router.query?.id}`}
-            title={title}
-          />
-          <link
-            rel="alternate"
-            type="application/json+oembed"
-            href={`${LENSSHARE_API_URL}/oembed?format=json&id=${router.query?.id}`}
-            title={title}
-          />
-          <link
-            rel="search"
-            type="application/opensearchdescription+xml"
-            href="/opensearch.xml"
-            title={APP_NAME}
-          />
-        </>
-      )}
+      <link
+        rel="search"
+        type="application/opensearchdescription+xml"
+        href="/opensearch.xml"
+        title={APP_NAME}
+      />
     </Head>
   );
 };

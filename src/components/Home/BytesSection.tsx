@@ -104,9 +104,9 @@ const BytesSection = () => {
             <Link href={`/bytes/${byte.id}`}>
               <div className="aspect-[9/16] h-[280px]">
                 <img
-                  className="rounded-sm"
-                  src={imageKit(getThumbnailUrl(byte.metadata), 'THUMBNAIL_V')}
-                  alt="thumbnail"
+                  className="rounded-xl"
+                  src={imageKit(getThumbnailUrl(byte.metadata))}
+                  alt={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
                   draggable={false}
                 />
               </div>

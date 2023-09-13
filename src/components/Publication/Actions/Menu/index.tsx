@@ -11,13 +11,16 @@ import Delete from './Delete';
 import Report from './Report';
 import Share from './Share';
 import Translate from './Translate';
-import { Publication } from '@/utils/lens/generatedLenster';
+import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { BiDotsVertical } from 'react-icons/bi';
 import MenuTransition from '@/components/UI/MenuTransition';
+import { SuperfluidSubscribePub } from '@/components/Superfluid/SubPublication';
+import Sub from './Sub';
 
 interface PublicationMenuProps {
   publication: Publication;
+
 }
 
 const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
@@ -47,6 +50,7 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
           ) : (
             <Report publication={publication} />
           )}
+          
 
           <Share publication={publication} />
           <Translate publication={publication} />

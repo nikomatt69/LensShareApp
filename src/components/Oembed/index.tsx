@@ -11,21 +11,24 @@ import { OG } from '@/types/misc';
 
 interface OembedProps {
   url?: string;
+  publicationId?: string;
+  onData: (data: OG) => void;
 }
 
-const Oembed: FC<OembedProps> = ({ url }) => {
+const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
   const { isLoading, error, data } = useQuery(
     [url],
     () =>
-      axios({
-        url: OEMBED_WORKER_URL,
-        params: { url }
-      }).then((res) => res.data.oembed),
+      axios
+        .get(`${OEMBED_WORKER_URL}/oembed`, { params: { url } })
+        .then((res) => res.data.oembed),
     { enabled: Boolean(url) }
   );
 
-  if (error || isLoading || !data) {
+  if (isLoading || error || !data) {
     return null;
+  } else if (data) {
+    onData(data);
   }
 
   const og: OG = {
@@ -34,7 +37,7 @@ const Oembed: FC<OembedProps> = ({ url }) => {
     description: data?.description,
     site: data?.site,
     favicon: `https://www.google.com/s2/favicons?domain=${data.url}`,
-    thumbnail: data?.image,
+    image: data?.image,
     isLarge: data?.isLarge,
     html: data?.html
   };
@@ -43,7 +46,11 @@ const Oembed: FC<OembedProps> = ({ url }) => {
     return null;
   }
 
-  return og.html ? <Player og={og} /> : <Embed og={og} />;
+  return og.html ? (
+    <Player og={og} />
+  ) : (
+    <Embed og={og} publicationId={publicationId} />
+  );
 };
 
 export default Oembed;

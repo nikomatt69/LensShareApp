@@ -15,6 +15,7 @@ import { Profile, Publication, useProfilesQuery } from "@/utils/lens/generatedLe
 import { Icons } from "@/components/Spaces2/Common/assets/Icons";
 import { useRouter } from "next/router";
 import { useLobby, useRoom } from "@huddle01/react/hooks";
+import dayjs from "dayjs";
 
 
 
@@ -24,16 +25,11 @@ interface SpaceProps {
 }
 
 const Space: FC<SpaceProps> = ({ publication }) => {
+  const { setShowSpacesLobby, setLensAccessToken, lensAccessToken, setSpace } =
+    useSpacesStore();
+
   const { address } = useAccount();
   const { metadata } = publication;
-  const setShowSpacesWindow = useSpacesStore(
-    (state) => state.setShowSpacesWindow
-  );
-  const setLensAccessToken = useSpacesStore(
-    (state) => state.setLensAccessToken
-  );
-  const lensAccessToken = useSpacesStore((state) => state.lensAccessToken);
-  const setSpace = useSpacesStore((state) => state.setSpace);
 
   const space: SpaceMetadata = JSON.parse(
     getPublicationAttribute(metadata.attributes, 'audioSpace')
@@ -43,7 +39,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     onSuccess: async (data) => {
       const token = await getLensAccessToken(data, address as string);
       if (token.accessToken) {
-        setShowSpacesWindow(true);
+        setShowSpacesLobby(true);
         setLensAccessToken(token.accessToken);
         setSpace({
           ...space,
@@ -67,25 +63,63 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     (profile) => profile?.ownedBy === space.host
   ) as Profile;
 
+  const calculateRemainingTime = () => {
+    const now = dayjs();
+    const targetTime = dayjs(space.startTime);
+    const timeDifference = targetTime.diff(now);
+
+    if (timeDifference <= 0) {
+      return `Start Listening`;
+    }
+
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
+    let result = `Starts in`;
+    result += ' ';
+    if (hours > 0) {
+      result += `${hours} hour`;
+      result += ' ';
+    }
+
+    if (minutes > 0) {
+      result += `${minutes} minutes`;
+    }
+
+    if (hours === 0 && minutes === 0) {
+      result = `Start Listening`;
+    }
+
+    return result;
+  };
+
   return (
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
       <div className="mt-2 space-y-3">
-        <b className="text-sm">{metadata.content}</b>
+        <b className="text-lg">{metadata.content}</b>
         <Button
-          className="!mt-4 flex w-full justify-center"
+          className={clsx(
+            '!md:pointer-events-none !mt-4 flex w-full justify-center',
+            calculateRemainingTime() !== 'Start Listening'
+              ? 'pointer-events-none'
+              : 'pointer-events-auto'
+          )}
           disabled={signing}
-          size="sm"
           icon={
             signing ? (
-              <Spinner size="xs" className="mr-1" />
+              <Spinner size="xs" className="p-1" />
+            ) : calculateRemainingTime() !== 'Start Listening' ? (
+              <ClockIcon className="h-5 w-5" />
             ) : (
               <MicrophoneIcon className="h-5 w-5" />
             )
           }
           onClick={async () => {
             if (lensAccessToken) {
-              setShowSpacesWindow(true);
+              setShowSpacesLobby(true);
               setSpace({
                 ...space,
                 title: metadata.content
@@ -96,7 +130,10 @@ const Space: FC<SpaceProps> = ({ publication }) => {
             signMessage({ message: msg.message });
           }}
         >
-          Open Space
+          <div className="hidden md:block">{calculateRemainingTime()}</div>
+          <div className="md:hidden">
+           Spaces will open in desktop only
+          </div>
         </Button>
       </div>
     </Wrapper>

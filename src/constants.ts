@@ -44,7 +44,7 @@ export const MESSAGING_PROVIDER = {
 };
 export const BASE_URL = IS_MAINNET
   ? 'https://lenshareapp.xyz'
-  : 'https://testnet.lenster.xyz';
+  : 'https://lenshareapp.xyz';
 
 export const ALCHEMY_KEY = '7jxlM7yIx-aJXDivcEZxsLFFRKQS6-ue';
 
@@ -68,10 +68,10 @@ export const SNAPSHOR_RELAY_WORKER_URL = IS_PRODUCTION
   : 'https://snapshot-relay.lenshareapp.xyz';
 export const ENS_RESOLVER_WORKER_URL = IS_PRODUCTION
   ? 'https://ens-resolver.lenshareapp.xyz'
-  : 'http://localhost:8086';
+  : 'https://ens-resolver.lenshareapp.xyz';
 export const OEMBED_WORKER_URL = IS_PRODUCTION
   ? 'https://oembed.lenshareapp.xyz'
-  : 'http://localhost:8087';
+  : 'https://oembed.lenshareapp.xyz';
 export const SPACES_WORKER_URL = IS_PRODUCTION
   ? 'https://spaces.lenshareapp.xyz'
   : 'https://spaces.lenshareapp.xyz';
@@ -96,14 +96,11 @@ export const IMAGE_TRANSFORMATIONS = {
   THUMBNAIL: 'tr:w-720,h-404',
   THUMBNAIL_V: 'tr:w-404,h-720',
   SQUARE: 'tr:w-200,h-200',
-  AVATAR :'tr:w-300,h-300',
- EXPANDED_AVATAR :'tr:w-1000,h-1000',
- COVER : 'tr:w-1500,h-500',
- ATTACHMENT :'tr:w-1000'}
- export const AVATAR = 'tr:w-300,h-300';
- export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
- export const COVER = 'tr:w-1500,h-500';
- export const ATTACHMENT = 'tr:w-1000';
+}
+export const AVATAR = 'tr:w-300,h-300';
+export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
+export const COVER = 'tr:w-1500,h-500';
+export const ATTACHMENT ='tr:w-300';
 
 
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';

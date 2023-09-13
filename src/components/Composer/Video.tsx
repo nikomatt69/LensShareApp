@@ -41,11 +41,18 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
             containerBorderRadius: '16px',
           },
         }}
-        showPipButton={false}
-        showUploadingIndicator={false}
-        controls={{ defaultVolume: 0 }}
+        showPipButton
+        showUploadingIndicator={true}
+    
+        
+        controls={{ defaultVolume: 1 }}
+        
+        
+        
         autoUrlUpload={{ fallback: true, ipfsGateway: IPFS_GATEWAY }}
-      />
+      >
+       
+      </Player>
     </div>
   );
 };

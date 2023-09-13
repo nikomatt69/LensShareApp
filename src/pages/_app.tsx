@@ -29,46 +29,24 @@ interface AppProps {
 
 
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
 
 const App = ({ Component, pageProps ,publication }: AppProps) => {
-  const { pathname, replace, asPath } = useRouter();
-  const currentProfile = useAppStore((state) => state.currentProfile);
 
-  LogRocket.init('rttnrz/lensshare');
+
 
 
 
   return (
-    <div>
-      <MetaTags
-        title="LensShare"
-        description="LensShare is a decentralized video sharing platform built on LensProtocol."
-        image={`${STATIC_IMAGES_URL}/icon.png`}
-      />
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){window.dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', '${GA_MEASUREMENT_ID}');
-        `}
-      </Script>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover" /> 
-
+    
       <Suspense fallback={<Loading />}>
         <Providers>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </Providers>
-        <Analytics />
+       <Analytics />
       </Suspense>
-    </div>
+ 
   );
 };
 

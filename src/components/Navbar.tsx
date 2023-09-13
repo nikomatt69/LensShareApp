@@ -69,7 +69,7 @@ const Navbar: FC = () => {
   
 
   return (
-    <div className={`flex w-full z-10 items-center justify-between  border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
+    <div className={`flex w-full z-10 items-center justify-between h-[50px] border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
 
       <Link href="/discover">
         <button
@@ -119,40 +119,9 @@ const Navbar: FC = () => {
           </button>
           
       
-          <div className="flex">
-            {currentProfile ? (
-              <div className="h-12 w-12">
-                <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-                  {profilePic?.__typename === 'MediaSet' ? (
-                    profilePic.original?.url.includes('ipfs') ? (
-                      <Image
-                        src={sanitizeIpfsUrl(profilePic?.original.url)}
-                        width={40}
-                        height={40}
-                        className="cursor-pointer rounded-full"
-                        alt={currentProfile.id.handle}
-                        
-                      />
-                    ) : (
-                      <Image
-                        src={profilePic?.original.url}
-                        width={40}
-                        height={40}
-                        className="cursor-pointer rounded-full"
-                        alt={currentProfile.id.handle}
-                     
-                      />
-                    )
-                  ) : (
-                    <div className="h-8 w-8 rounded-full bg-blue-900" />
-                  )}
-                </Link>
-              </div>
-            ) : (
+        
               <div className="block">
                 <MainButton />
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import { Image } from '../UI/Image';
 import { useAppStore } from 'src/store/app';
 import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
@@ -17,19 +17,24 @@ import router from 'next/router';
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { MdVideoLibrary } from 'react-icons/md';
 import MessageIcon from '../Messages/MessageIcon';
+import ExploreOutline from '../UI/Icons/ExploreOutline';
+import VideoOutline from '../UI/Icons/VideoOutline';
+import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
 const BottomNav: React.FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [homePage, setHomePage] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true)
-  
- 
+
+  const profilePic = currentProfile?.picture;
+  console.log('CURRENT PROFILE', currentProfile?.picture);
+
 
   return (
     <div>
 
-      <nav className="z-99 fixed bottom-0 left-0 right-0 z-[5] m-auto flex h-[70px] items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white/70 dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
+      <nav className="z-99 fixed  bottom-0 left-0 right-0 z-[5] m-auto flex h-[50px] items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white/70 dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
         {/* //swap timelines */}
         {homePage ? (
           <Link href="/">
@@ -87,7 +92,7 @@ const BottomNav: React.FC = () => {
         <div>
           {/* //feed */}
           <Link href="/feed">
-            <MdVideoLibrary className="h-6 w-6 pb-1 text-blue-500" />{' '}
+            <VideoOutline className="h-6 w-6 pb-1 text-blue-500" />{' '}
           </Link>
         </div>
         <div>
@@ -113,22 +118,29 @@ const BottomNav: React.FC = () => {
         {/* //log into lens & profile page */}
         {currentProfile ? (
           <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-            <button className="border-gray-800 text-blue-500 hover:text-gray-100 focus:text-gray-100 focus:outline-none">
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                ></path>
-              </svg>
-            </button>
+           {profilePic?.__typename === 'MediaSet' ? (
+                    profilePic.original?.url.includes('ipfs') ? (
+                      <Image
+                        src={sanitizeIpfsUrl(profilePic?.original.url)}
+                        width={30}
+                        height={30}
+                        className="cursor-pointer rounded-full"
+                        alt={currentProfile.id.handle}
+                        
+                      />
+                    ) : (
+                      <Image
+                        src={profilePic?.original.url}
+                        width={30}
+                        height={30}
+                        className="cursor-pointer rounded-full"
+                        alt={currentProfile.id.handle}
+                     
+                      />
+                    )
+                  ) : (
+                    <LoginWalletMobile />
+                  )}
           </Link>
         ) : (
           <LoginWalletMobile />

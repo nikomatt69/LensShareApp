@@ -87,7 +87,7 @@ const Video: FC<Props> = ({ publication }) => {
   };
   const thumbnailUrl = imageCdn(
     sanitizeDStorageUrl(getThumbnailUrl(video)),
-    'THUMBNAIL_V'
+   
   )
   const isBytesVideo =
     video.appId === LENSTUBE_APP_ID ||   
