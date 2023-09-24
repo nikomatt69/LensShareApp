@@ -7,7 +7,7 @@ import { useUpdateEffect } from 'usehooks-ts';
 
 import Audio from './Audio';
 
-import { MediaSet, Publication } from '@/utils/lens/generatedLenster';
+import { MediaSet, MetadataOutput, Publication } from '@/utils/lens/generatedLenster';
 import {
   ALLOWED_AUDIO_TYPES,
   ALLOWED_VIDEO_TYPES,
@@ -29,7 +29,8 @@ import VideoPlayer from '@/utils/VideoPlayer';
 
 import Item from '../Echos/Item';
 import { HiExternalLink } from 'react-icons/hi';
-import Video from '../HomePage/Video';
+import Video from './Video';
+
 
 
 const getClass = (attachments: number, isNew = false) => {
@@ -94,20 +95,27 @@ const Attachments: FC<AttachmentsProps> = ({
     );
   };
 
-  const getThumbnailUrl = () => {
-    const metadata = publication?.metadata;
-    const hasNoThumbnail = metadata?.media[0].original.url === metadata?.image;
+  /**
+ * Returns the thumbnail URL for the specified publication metadata.
+ *
+ * @param metadata The publication metadata.
+ * @returns The thumbnail URL.
+ */
+ const getThumbnailUrl = (metadata?: MetadataOutput): string => {
+  const fallbackUrl = `${STATIC_IMAGES_URL}/icon.png`;
 
-    if (hasNoThumbnail) {
-      return `${STATIC_IMAGES_URL}/thumbnail.png`;
-    }
+  if (!metadata) {
+    return fallbackUrl;
+  }
 
-    return (
-      metadata?.cover?.original.url ||
-      metadata?.image ||
-      `${STATIC_IMAGES_URL}/thumbnail.png`
-    );
-  };
+  const { cover } = metadata;
+  const url = cover?.original?.url || fallbackUrl;
+
+  return sanitizeDStorageUrl(url);
+ };
+
+
+
 
   const slicedAttachments = attachments?.some((e: any) =>
     ALLOWED_VIDEO_TYPES.includes(e?.original?.mimeType)
@@ -177,14 +185,25 @@ const Attachments: FC<AttachmentsProps> = ({
                       <ChooseThumbnail />
                     </>
                   ) : (
-                    <Video publication={publication as Publication} />
+                    <Video src={url} poster={getThumbnailUrl(publication?.metadata)} />
                   )
-                ) : isAudio ? (
+                ) : isAudio ? ( isNew ? (
+                  <>
+                    <Audio
+                    src={url}
+                    isNew={isNew}
+                    publication={publication}
+                    txn={txn}
+                    expandCover={(url) => setExpandedImage(url)}
+                  />
+                   
+                   
+                  </>) :(
                   <Item
                     publication={publication as Publication}
                    
                   /> 
-                ) : (
+                ) ): (
                   <Image
                     className="cursor-pointer rounded-lg border bg-gray-100 object-cover dark:border-gray-700 dark:bg-gray-800"
                     loading="lazy"

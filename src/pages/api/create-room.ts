@@ -8,15 +8,14 @@ const handler= async (req: NextApiRequest, res: NextApiResponse) => {
     const { data } = await axios.post(
       'https://api.huddle01.com/api/v1/create-room',
       {
-        title: 'LensShare-Spaces',
+        title: 'LensShare-Meet',
         roomLock: false,
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0',
+          'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || '',
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type',
 
         },
       }

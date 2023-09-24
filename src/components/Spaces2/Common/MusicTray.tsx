@@ -1,6 +1,6 @@
 import { useAppUtils } from '@huddle01/react/app-utils';
 
-import clsx from 'clsx';
+
 import React, { FC } from 'react';
 
 import { useUpdateEffect } from 'usehooks-ts';
@@ -10,6 +10,7 @@ import { Radio } from '@/components/UI/Radio';
 import { useSpacesStore } from '@/store/spaces';
 import { MusicTrack } from '@/enums';
 import { MusicalNoteIcon, PlayIcon, StopIcon } from '@heroicons/react/24/outline';
+import cn from '@/components/UI/cn';
 
 interface MusicTrackSelectionProps {
   value: MusicTrack;
@@ -32,27 +33,28 @@ const MusicTray: FC = () => {
         isMusicPlaying: isMyMusicPlaying
       });
     }
-  }, [isMyMusicPlaying]);
+  }, [myMusicTrack, isMyMusicPlaying]);
 
   const MusicTrackSelection = ({ value, label }: MusicTrackSelectionProps) => (
-    <div className="cursor-pointer border-b border-neutral-300 p-2 text-center text-base font-semibold dark:border-slate-700">
+    <div className="cursor-pointer border-b border-gray-300 p-2 text-center text-base font-semibold dark:border-gray-700">
       <Radio
         value={value}
         heading={
-          <div className="p-1 text-sm font-medium text-neutral-500 dark:text-neutral-400">
+          <div className="p-1 text-sm font-medium text-gray-500 dark:text-gray-400">
             {label}
           </div>
         }
         onChange={() => setMyMusicTrack(value)}
         checked={myMusicTrack === value}
+        name={myMusicTrack}
       />
     </div>
   );
 
   return (
-    <div className="rounded-lg border border-neutral-300 dark:border-slate-700 dark:bg-neutral-900">
+    <div className="rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-900">
       <div className="relative">
-        <div className="flex items-center justify-center border-b border-neutral-300 px-2 py-3 font-semibold text-neutral-700 dark:border-slate-700 dark:text-slate-200">
+        <div className="flex items-center justify-center border-b border-gray-300 px-2 py-3 font-semibold text-gray-700 dark:border-gray-700 dark:text-gray-200">
           <MusicalNoteIcon className="mr-2 h-5 w-5 " />
           <span className="text-sm font-medium">
             Background Music
@@ -72,8 +74,8 @@ const MusicTray: FC = () => {
         label="Forest Lullaby"
       />
       <div
-        className={clsx(
-          'bg-brand-500 inline-flex w-full cursor-pointer items-center gap-2 rounded-b-lg p-2',
+        className={cn(
+          'bg-brand-500 inline-flex w-full cursor-pointer items-center gap-2 rounded-b-lg px-1.5 py-2',
           isMyMusicPlaying ? 'bg-red-400 bg-opacity-20' : 'bg-brand-500'
         )}
         onClick={() => {
@@ -85,12 +87,12 @@ const MusicTray: FC = () => {
         {isMyMusicPlaying ? (
           <StopIcon className="h-5 w-5 text-red-400" />
         ) : (
-          <PlayIcon className="h-5 w-5 text-slate-200" />
+          <PlayIcon className="h-5 w-5 text-gray-200" />
         )}
         <div
-          className={clsx(
-            'text-sm font-semibold',
-            isMyMusicPlaying ? 'text-red-400' : 'text-slate-200'
+          className={cn(
+            'ml-1.5 text-sm font-semibold',
+            isMyMusicPlaying ? 'text-red-400' : 'text-gray-200'
           )}
         >
           {isMyMusicPlaying ? 'Stop music' : 'Play music'}

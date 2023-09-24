@@ -39,7 +39,8 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
     favicon: `https://www.google.com/s2/favicons?domain=${data.url}`,
     image: data?.image,
     isLarge: data?.isLarge,
-    html: data?.html
+    html: data?.html,
+    thumbnail: data.thumbnail
   };
 
   if (!og.title) {

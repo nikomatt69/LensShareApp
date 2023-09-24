@@ -3,54 +3,40 @@ import Dropdown from '@/components/Spaces2/Common/Dropdown';
 import { Input } from '@/components/UI/Input';
 import { Spinner } from '@/components/UI/Spinner';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import React from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
-interface ScheduleSpacesMenuProps {
-  isLoading: boolean;
-  createPublication: () => void;
+interface ScheduleSpacesFormProps {
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const ScheduleSpacesMenu: FC<ScheduleSpacesMenuProps> = ({
-  isLoading,
-  createPublication
-}) => {
-  const { setSpacesTimeInHour, setSpacesTimeInMinute } = useSpacesStore();
+const ScheduleSpacesForm: FC<ScheduleSpacesFormProps> = ({ setShowModal }) => {
+  const setSpacesStartTime = useSpacesStore(
+    (state) => state.setSpacesStartTime
+  );
 
   return (
-    <Dropdown
-      triggerChild={
-        <div className="ml-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-violet-500 p-1">
-          <CalendarIcon className="text-brand-500 relative h-6 w-6" />
-        </div>
-      }
-    >
-      <div className="absolute top-10 w-48 translate-x-20 items-start justify-center gap-4 rounded-lg border border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-        <Input
-          type="time"
-          onChange={(e) => {
-            const [hour, minute] = e.target.value.split(':');
-            setSpacesTimeInHour(hour);
-            setSpacesTimeInMinute(minute);
-          }}
-        />
-        <div className="mt-4 rounded-lg bg-violet-500 p-2">
-          {isLoading ? (
-            <Spinner size="xs" />
-          ) : (
-            <CalendarIcon className="inline h-5 w-5 text-gray-50" />
-          )}
+    <div className="m-4 flex flex-col">
+      <Input
+        type="datetime-local"
+        onChange={(e) => {
+          setSpacesStartTime(new Date(e.target.value));
+        }}
+      />
+      <div className="mt-4 rounded-lg bg-violet-500 p-2">
+        <div className="flex justify-center">
+          <CalendarIcon className="h-5 w-5 text-gray-50" />
           <button
             className="ml-2 text-sm font-semibold text-gray-50"
-            onClick={createPublication}
+            onClick={() => setShowModal(false)}
           >
-            Schedule Spaces
+            Set Date & Time
           </button>
         </div>
       </div>
-    </Dropdown>
+    </div>
   );
 };
 
-export default ScheduleSpacesMenu;
+export default ScheduleSpacesForm;

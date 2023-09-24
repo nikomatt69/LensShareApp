@@ -254,7 +254,7 @@ const Composer: FC<ComposerProps> = ({
   };
 
   return (
-    <div className="bg-brand-100/75 mb-16 rounded-xl border">
+    <div className="bg-brand-100/75 mb-0 rounded-xl border">
       {attachment && !sending ? (
         <AttachmentPreview
           onDismiss={onDismiss}

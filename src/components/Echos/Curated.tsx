@@ -30,7 +30,7 @@ const Curated = () => {
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 12,
+    limit: 24,
     noRandomize: false,
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
@@ -87,11 +87,7 @@ const Curated = () => {
               <Item publication={publication} key={publication.id} />
             ))}
           </div>
-          {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center border-0 p-10">
-              <Loader />
-            </span>
-          )}
+         
         </>
       )}
     </div>

@@ -34,7 +34,7 @@ const BottomNav: React.FC = () => {
   return (
     <div>
 
-      <nav className="z-99 fixed  bottom-0 left-0 right-0 z-[5] m-auto flex h-[50px] items-center justify-around overflow-hidden rounded-lg  border-2 border-b-0 border-l border-r border-t border-blue-700 bg-white/70 dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
+      <nav className="z-99 fixed  bottom-0 left-0 right-0 z-[5] m-auto flex h-[50px] items-center justify-around overflow-hidden   border-2 border-b-0 rounded-md border-t border-blue-700 bg-white/70 dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
         {/* //swap timelines */}
         {homePage ? (
           <Link href="/">

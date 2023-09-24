@@ -1,8 +1,9 @@
 import million from 'million/compiler';
+
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -12,13 +13,13 @@ const nextConfig = {
     domains: [
       'nftstorage.link',
       'ik.imagekit.io',
-      'asset.lenshareapp.xyz/images/',
+
       'asset.lenshareapp.xyz',
       'ipfs.infura.io',
       'ipfs.infura.io.ipfs.w3s.link',
       'statics-polygon-lens-staging.s3.eu-west-1.amazonaws.com',
-      'lens.infura-ipfs.io',
-      'lens.infura-ipfs.io',
+      'nftstorage.link/ipfs/',
+
       'lens.infura-ipfs.io.ipfs.4everland.io',
       'source.unsplash.com',
       'ar://',
@@ -55,15 +56,17 @@ const nextConfig = {
       'gateway.ipfscdn.io/ipfs/',
       'ep-noisy-rice-867852-pooler.us-west-2.postgres.vercel-storage.com',
       'user-content.lenster.xyz',
-    
+      'meta.lenshareapp.xyz',
       'static-asset.lenster.xyz',
+      'static-asset.lenshareapp.xyz',
       'static.lenstube.xyz',
       'img.lenstube.xyz',
       'ipfs.lenshareapp.xyz/ipfs',
       'media.lenster.xyz',
       'static-asset.lenshareapp.xyz',
       'metadata.lenshareapp.xyz',
-      'metadata.lenster.xyz',
+     
+      'metalens.lenshareapp.xyz',
      
     ]
   },
@@ -90,6 +93,7 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin' },
+
          
     
         ]

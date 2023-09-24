@@ -23,6 +23,8 @@ import Follow from '../Profile/Follow';
 import Unfollow from '../Profile/Unfollow';
 import { Button } from '../UI/Button';
 import { LENSTOK_URL } from '@/constants';
+import MeetingIcon from '../Meet/MeetingIcon';
+import useSendOptimisticMessage from '@/lib/useSendOptimisticMessage';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -41,9 +43,9 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   const url =
     (ensName && getStampFyiURL(conversationKey?.split('/')[0] ?? '')) ?? '';
 
-  const { sendMessage } = useSendMessage(conversationKey ?? '');
+  const { sendMessage } = useSendOptimisticMessage(conversationKey ?? '');
   const [show, setShow] = useState(false);
-
+ 
   const currentProfile = profile;
 
   const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
@@ -91,17 +93,53 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           </>
         )}
       </div>
+      {profile && (
+        <div>
+          <img
+            src="/camera-video.svg"
+            onClick={async () => {
+              const apiCall = await fetch(
+                '/api/create-room',
+                { mode:'no-cors',
+                  method: 'POST',
+                  body: JSON.stringify({
+                    title: 'LensShare-Space',
+                  
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
+                  }
+                }
+              );
+              const data = await apiCall.json() as { data: { roomId: string } };
+              const { roomId } = data.data;
+              const currentUrl = window.location.href;
+              const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+              sendMessage(
+                `Join here for a call: ${url}/meet/${roomId}`,
+                ContentTypeText
+              );
+            
+            }}
+            className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
+          />
           {!following ? (
             <FollowButton
-              profile={profile as Profile}
+              
+              profile={profile}
               setFollowing={setFollowingWrapped}
+
             />
           ) : (
             <UnfollowButton
-              profile={profile as Profile}
+             
+              profile={profile}
               setFollowing={setFollowingWrapped}
             />
           )}
+        </div>
+      )}
     </div>
   );
 };

@@ -11,69 +11,70 @@ import { NewPublicationTypes } from '@/enums';
 
 
 
-  const GlobalModals: FC = () => {
-    // Report modal state
-    const {
-      showPublicationReportModal,
-      reportingPublication,
-      setShowPublicationReportModal,
-      showStatusModal,
-      setShowStatusModal,
-      showProfileSwitchModal,
-      setShowProfileSwitchModal,
-      showNewPublicationModal,
-      showAuthModal,
-      setShowNewPublicationModal,
-      setShowAuthModal,
-      showInvitesModal,
-      setShowInvitesModal,
-      showReportProfileModal,
-      reportingProfile,
-      setShowReportProfileModal,
-      setShowDiscardModal
-    } = useGlobalModalStateStore();
-  
-    const {
-      publicationContent,
-      attachments,
-      isUploading,
-      videoDurationInSeconds,
-      videoThumbnail,
-      audioPublication,
-      quotedPublication,
-      showPollEditor,
-      pollConfig
-    } = usePublicationStore();
-  
-    const checkIfPublicationNotDrafted = () => {
-      if (
-        publicationContent === '' &&
-        quotedPublication === null &&
-        attachments.length === 0 &&
-        audioPublication.title === '' &&
-        videoThumbnail.url === '' &&
-        videoDurationInSeconds === '' &&
-        !showPollEditor &&
-        !isUploading &&
-        pollConfig.choices[0] === ''
-      ) {
-        return true;
-      }
-      return false;
-    };
+const GlobalModals: FC = () => {
+  // Report modal state
+  const {
+    showPublicationReportModal,
+    reportingPublication,
+    setShowPublicationReportModal,
+    showStatusModal,
+    setShowStatusModal,
+    showProfileSwitchModal,
+    setShowProfileSwitchModal,
+    showComposerModal,
+    setShowComposerModal,
+    showAuthModal,
+    setShowAuthModal,
+    showWrongNetworkModal,
+    setShowWrongNetworkModal,
+    showInvitesModal,
+    setShowInvitesModal,
+    showReportProfileModal,
+    reportingProfile,
+    setShowReportProfileModal,
+    setShowDiscardModal
+  } = useGlobalModalStateStore();
+
+  const {
+    publicationContent,
+    attachments,
+    isUploading,
+    videoDurationInSeconds,
+    videoThumbnail,
+    audioPublication,
+    quotedPublication,
+    showPollEditor,
+    pollConfig
+  } = usePublicationStore();
+
+  const checkIfPublicationNotDrafted = () => {
+    if (
+      publicationContent === '' &&
+      quotedPublication === null &&
+      attachments.length === 0 &&
+      audioPublication.title === '' &&
+      videoThumbnail.url === '' &&
+      videoDurationInSeconds === '' &&
+      !showPollEditor &&
+      !isUploading &&
+      pollConfig.choices[0] === ''
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <>
       
-     
-      
+    
       <Modal
         title={`Create post`}
         size="md"
-        show={showNewPublicationModal}
+        show={showComposerModal}
         onClose={() => {
           if (checkIfPublicationNotDrafted()) {
-            setShowNewPublicationModal(false, NewPublicationTypes.Post);
+            setShowComposerModal(false, NewPublicationTypes.Publication);
           } else {
             setShowDiscardModal(true);
           }
@@ -81,7 +82,7 @@ import { NewPublicationTypes } from '@/enums';
       >
         <NewPublication />
       </Modal>
-      
+    
     </>
   );
 };

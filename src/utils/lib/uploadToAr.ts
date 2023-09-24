@@ -1,23 +1,26 @@
-import axios from 'axios';
-import type { PublicationMetadataV2Input } from '@/utils/lens/generatedLenster';
-import toast from 'react-hot-toast';
 
 import { METADATA_WORKER_URL } from '@/constants';
-import type { ProfileMetadata } from '../custom-types';
-import { logger } from '@/logger';
+import { Errors } from '@/lib/errors';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-const uploadToAr = async (
-  data: PublicationMetadataV2Input | ProfileMetadata
-): Promise<{ url: string | null }> => {
+/**
+ * Uploads the given data to Arweave.
+ *
+ * @param data The data to upload.
+ * @returns The Arweave transaction ID.
+ * @throws An error if the upload fails.
+ */
+const uploadToArweave = async (data: any): Promise<string> => {
   try {
-    const response = await axios.post(METADATA_WORKER_URL, data);
-    const { id } = response.data;
-    return { url: `ar://${id}` };
-  } catch (error) {
-    logger.error('[Error AR Data Upload]', error);
-    toast.error('Failed to upload metadata!');
-    return { url: null };
+    const upload = await axios.post(METADATA_WORKER_URL, { ...data });
+    const { id }: { id: string } = upload?.data;
+
+    return id;
+  } catch {
+    toast.error(Errors.SomethingWentWrong);
+    throw new Error(Errors.SomethingWentWrong);
   }
 };
 
-export default uploadToAr;
+export default uploadToArweave;

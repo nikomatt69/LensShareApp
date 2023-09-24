@@ -1,6 +1,6 @@
-import { ZERO_ADDRESS } from '@/constants';
-import type { TypedDataDomain } from 'viem';
-import { usePublicClient, useWalletClient } from 'wagmi';
+
+import { CHAIN_ID, ZERO_ADDRESS } from 'src/constants';
+import { useWalletClient } from 'wagmi';
 
 const useEthersWalletClient = (): {
   data: {
@@ -9,8 +9,7 @@ const useEthersWalletClient = (): {
   };
   isLoading: boolean;
 } => {
-  const { data, isLoading } = useWalletClient();
-  const { estimateGas, getGasPrice, getTransaction } = usePublicClient();
+  const { data, isLoading } = useWalletClient({ chainId: CHAIN_ID });
 
   const ethersWalletClient = {
     getAddress: async (): Promise<`0x${string}`> => {
@@ -19,42 +18,20 @@ const useEthersWalletClient = (): {
     signMessage: async (message: string): Promise<string> => {
       const signature = await data?.signMessage({ message });
       return signature ?? '';
-    },
-    getSigner: () => {
-      return {
-        ...data,
-        getAddress: () => data?.account.address,
-        _signTypedData: async (
-          domain: TypedDataDomain,
-          types: any,
-          message: any
-        ) => {
-          message['Transaction hash'] =
-            '0x' + Buffer.from(message['Transaction hash']).toString('hex');
-          const r = await data?.signTypedData({
-            domain,
-            message,
-            types,
-            primaryType: 'Bundlr'
-          });
-          return r;
-        }
-      };
-    },
-    estimateGas: () => estimateGas,
-    getGasPrice: () => getGasPrice,
-    getTransaction: () => getTransaction
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { signMessage, ...rest } = data ?? {};
 
   const mergedWalletClient = {
-    ...ethersWalletClient,
-    ...rest
+    data: {
+      ...ethersWalletClient,
+      ...{ ...rest }
+    }
   };
 
-  return { data: mergedWalletClient, isLoading };
+  return { data: mergedWalletClient.data, isLoading };
 };
 
 export default useEthersWalletClient;

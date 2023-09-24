@@ -1,14 +1,15 @@
-import { ZERO_ADDRESS } from '@/constants';
+
+import { CHAIN_ID, ZERO_ADDRESS } from 'src/constants';
 import { useWalletClient } from 'wagmi';
 
-const useEthersWalletClient2 = (): {
+const useEthersWalletClient = (): {
   data: {
     getAddress: () => Promise<`0x${string}`>;
     signMessage: (message: string) => Promise<string>;
   };
   isLoading: boolean;
 } => {
-  const { data, isLoading } = useWalletClient();
+  const { data, isLoading } = useWalletClient({ chainId: CHAIN_ID });
 
   const ethersWalletClient = {
     getAddress: async (): Promise<`0x${string}`> => {
@@ -33,4 +34,4 @@ const useEthersWalletClient2 = (): {
   return { data: mergedWalletClient.data, isLoading };
 };
 
-export default useEthersWalletClient2;
+export default useEthersWalletClient;

@@ -30,7 +30,7 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
           </div>
         </Link>
         <span className="truncate text-gray-600 dark:text-gray-400">
-          commented on your
+          commented 
           <Link
             href={`/post/${
               notification?.comment?.commentOn &&

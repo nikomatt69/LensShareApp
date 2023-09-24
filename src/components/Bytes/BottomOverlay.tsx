@@ -20,7 +20,7 @@ const BottomOverlay: FC<Props> = ({ video }) => {
   const [following, setFollowing] = useState(false);
 
   return (
-    <div className="absolute rounded-xl text-gray-400 bottom-0 left-0 right-0 z-[1] text-xs  bg-gradient-to-t from-trasparent to-transparent px-3 pb-3 mb-18 md:rounded-b-xl">
+    <div className="absolute rounded-xl text-gray-400 bottom-0 left-0 right-0 z-[1] text-xs  bg-gradient-to-t from-trasparent to-transparent px-3 pb-3 mb-24 md:rounded-b-xl">
       <div className="pb-2">
         <Link href={`/post/${video?.id}`} key={video.id}>
         <h1 className="line-clamp-2 flex-grow text-xs backdrop-blur-sm px-3 py-2 rounded-xl backdrop-brightness-25 backdrop-contrast-20 text-gray-200">{video.metadata.name}</h1>

@@ -71,4 +71,4 @@ export const footerList3 = [
   'Creator Portal',
   'Community Guidelines'
 ];
-export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs';
+export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs/';

@@ -11,10 +11,16 @@ class LensshareDocument extends Document {
           {/* Prefetch and Preconnect */}
           <link rel="preconnect" href="https://asset.lenshareapp.xyz" />
           <link rel="dns-prefetch" href="https://asset.lenshareapp.xyz" />
-          <link rel="preconnect" href="https://static-assets.lenshareapp.xyz" />
-          <link rel="dns-prefetch" href="https://static-assets.lenshareapp.xyz" />
+          <link rel="preconnect" href="https://prerender.lenshareapp.xyz" />
+          <link rel="dns-prefetch" href="https://prerender.lenshareapp.xyz" />
 
           {/* Misc */}
+          <link rel="apple-touch-icon" href="./images/icon.png"></link>
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#fff" />
+          <meta name="application-name" content="LensShare" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
 
           
 

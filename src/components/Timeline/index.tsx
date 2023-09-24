@@ -123,7 +123,11 @@ const Timeline: FC = () => {
             publication={publication.root as Publication}
             showCount={true} tags={''} />
         ))}
-       {hasMore ? <span ref={observe} /> : null}
+       {pageInfo?.next && (
+      <span ref={observe} className="flex  justify-center p-10">
+        <Loader />
+      </span>
+    )}
       </Card>
   );
 };

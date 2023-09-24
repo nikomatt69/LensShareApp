@@ -37,7 +37,7 @@ import { W3mQrCode, Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 import UserSigNoncesProvider from './UserSigNoncesProvider';
-import { getWebSocketPublicClient } from '@wagmi/core';
+
 import FeaturedChannelsProvider from './FeaturedChannelsProvider';
 
 const chains = [polygon,mainnet]
@@ -57,7 +57,7 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY!,
+    apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY||'',
     baseUrl: LENSTOK_URL
   })
 });
@@ -71,7 +71,6 @@ const Providers = ({ children }: { children: ReactNode }) => {
      <ApolloProvider client={apolloClient}>
         <UserSigNoncesProvider />
           <QueryClientProvider client={queryClient}>
-           <FeaturedChannelsProvider />
             <LivepeerConfig client={livepeerClient}>
               <ThemeProvider defaultTheme="light" attribute="class">
                 {children}

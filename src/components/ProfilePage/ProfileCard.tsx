@@ -203,7 +203,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
               )}
           </div>
           <div className='flex mt-4 pt-2  '>
-          <SuperfluidSubscribe profile={profile} />
+         
                 <Message onClick={onMessageClick} />
                 
                 </div>

@@ -1,5 +1,8 @@
 import type { AudioHTMLAttributes, DetailedHTMLProps, FC } from 'react';
 import React, { useEffect, useRef } from 'react';
+import { HTMLAudioElementWithSetSinkId } from './SpacesTypes';
+import { useSpacesStore } from '@/store/spaces';
+import { useUpdateEffect } from 'usehooks-ts';
 
 interface IAudioProps {
   track?: MediaStreamTrack;
@@ -7,9 +10,15 @@ interface IAudioProps {
 
 const Audio: FC<
   IAudioProps &
-    DetailedHTMLProps<AudioHTMLAttributes<HTMLAudioElement>, HTMLAudioElement>
+    DetailedHTMLProps<
+      AudioHTMLAttributes<HTMLAudioElementWithSetSinkId>,
+      HTMLAudioElement
+    >
 > = ({ track }) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElementWithSetSinkId>(null);
+  const activeSpeakerDevice = useSpacesStore(
+    (state) => state.activeSpeakerDevice
+  );
 
   const getStream = (_track: MediaStreamTrack) => {
     const stream = new MediaStream();
@@ -35,6 +44,13 @@ const Audio: FC<
       };
     }
   }, [track]);
+
+  useUpdateEffect(() => {
+    const audioObj = audioRef.current;
+    if (audioObj && activeSpeakerDevice) {
+      audioObj.setSinkId(activeSpeakerDevice.deviceId);
+    }
+  }, [activeSpeakerDevice]);
 
   return <audio ref={audioRef}>Audio</audio>;
 };

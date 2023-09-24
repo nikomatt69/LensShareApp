@@ -1,20 +1,22 @@
 import { useAppUtils } from '@huddle01/react/app-utils';
 import { useAudio, useEventListener, useHuddle01 } from '@huddle01/react/hooks';
-import clsx from 'clsx';
+
 import Image from 'next/image';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
-import { Icons, NestedPeerListIcons, PeerListIcons } from '../../assets/Icons';
+import { Icons} from '../../assets/Icons';
 import Dropdown from '../../Dropdown';
 import CoHostData from './PeerRole/CoHostData';
 import HostData from './PeerRole/HostData';
 import ListenersData from './PeerRole/ListenersData';
 import SpeakerData from './PeerRole/SpeakerData';
-import { CheckIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { BiDotsVertical } from 'react-icons/bi';
+import { SpacesEvents } from '@/enums';
+import cn from '@/components/UI/cn';
 
 interface PeerMetaDatProps {
   isRequested?: boolean;
@@ -37,7 +39,7 @@ interface IAcceptDenyProps {
 const AcceptDenyGroup: FC<IAcceptDenyProps> = ({ onAccept, onDeny }) => (
   <div className="flex items-center gap-2">
     <button
-      className="border-brand-500 text-brand-500 rounded-md border p-0.5 dark:border-neutral-500 dark:text-neutral-50"
+      className="border-brand-500 text-brand-500 rounded-md border p-0.5 dark:border-gray-500 dark:text-gray-50"
       onClick={onAccept}
     >
       <CheckIcon className="h-4 w-4" />
@@ -46,7 +48,7 @@ const AcceptDenyGroup: FC<IAcceptDenyProps> = ({ onAccept, onDeny }) => (
       className="rounded-md border border-red-400 p-0.5 text-red-400"
       onClick={onDeny}
     >
-      <XCircleIcon className="h-4 w-4" />
+      <XMarkIcon className="h-4 w-4" />
     </button>
   </div>
 );
@@ -77,10 +79,14 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
     produceAudio,
     stopProducingAudio
   } = useAudio();
-  const [isHandRaised, setIsHandRaised] = useState<boolean>(false);
-  const setMyHandRaised = useSpacesStore((state) => state.setMyHandRaised);
-  const isMyHandRaised = useSpacesStore((state) => state.isMyHandRaised);
-  const [isAudioOn, setIsAudioOn] = useState<boolean>(false);
+  const [isHandRaised, setIsHandRaised] = useState(false);
+  const {
+    setMyHandRaised,
+    isMyHandRaised,
+    isAudioOn,
+    setIsAudioOn,
+    activeMicDevice
+  } = useSpacesStore();
 
   useEffect(() => {
     sendData('*', {
@@ -95,16 +101,14 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
     }
   }, [isMyHandRaised]);
 
-  useEventListener('app:mic-on', (stream) => {
-    if (me.meId == peerId) {
+  useEventListener(SpacesEvents.APP_MIC_ON, (stream) => {
+    if (me.meId == peerId && stream) {
       setIsAudioOn(true);
-      if (stream) {
-        produceAudio(stream);
-      }
+      produceAudio(stream);
     }
   });
 
-  useEventListener('app:mic-off', () => {
+  useEventListener(SpacesEvents.APP_MIC_OFF, () => {
     if (me.meId == peerId) {
       setIsAudioOn(false);
       stopProducingAudio();
@@ -112,9 +116,7 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
   });
 
   return (
-    <div
-      className={clsx(className, 'flex w-full items-center justify-between')}
-    >
+    <div className={cn(className, 'flex w-full items-center justify-between')}>
       <div className="flex items-center gap-2">
         <Image
           loader={() => src}
@@ -126,7 +128,7 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
           quality={100}
           className="rounded-full object-contain"
         />
-        <div className="text-xs font-normal text-neutral-500 dark:text-slate-400">
+        <div className="text-xs font-normal text-gray-500 dark:text-gray-400">
           {name}
         </div>
       </div>
@@ -140,7 +142,9 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
                 ['host', 'coHost', 'speaker'].includes(role) &&
                 peerId === me.meId
               ) {
-                isAudioOn ? stopAudioStream() : fetchAudioStream();
+                isAudioOn
+                  ? stopAudioStream()
+                  : fetchAudioStream(activeMicDevice?.deviceId);
               }
             }}
             className="flex items-center justify-center"
@@ -155,15 +159,15 @@ const PeerMetaData: React.FC<PeerMetaDatProps> = ({
             me.meId === peerId) ? (
             <Dropdown
               triggerChild={
-                <BiDotsVertical className="h-4 w-4 text-neutral-500" />
+                <EllipsisVerticalIcon className="h-4 w-4 text-gray-500" />
               }
             >
-              <div className="absolute -right-10 top-4 w-40 rounded-lg border border-neutral-300 bg-white dark:border-neutral-500 dark:bg-neutral-800">
+              <div className="absolute -right-10 top-4 w-40 rounded-lg border border-gray-300 bg-white dark:border-gray-500 dark:bg-gray-800">
                 {RoleData?.[role]}
               </div>
             </Dropdown>
           ) : (
-            <BiDotsVertical className="h-4 w-4 text-neutral-500" />
+            <EllipsisVerticalIcon className="h-4 w-4 text-gray-500" />
           )}
         </div>
       )}

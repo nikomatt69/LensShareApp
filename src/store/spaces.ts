@@ -8,10 +8,10 @@ interface SpacesState {
   setShowSpacesLobby: (showSpacesLobby: boolean) => void;
   showSpacesWindow: boolean;
   setShowSpacesWindow: (showSpacesWindow: boolean) => void;
+  spacesPublicationId: string;
+  setSpacesPublicationId: (spacesPublicationId: string) => void;
   lensAccessToken: string;
   setLensAccessToken: (lensAccessToken: string) => void;
-  isRecordingOn: boolean;
-  setIsRecordingOn: (isRecordingOn: boolean) => void;
   isTokenGated: boolean;
   setIsTokenGated: (isTokenGated: boolean) => void;
   tokenGateConditionType: TokenGateCondition;
@@ -42,10 +42,14 @@ interface SpacesState {
   requestedPeers: string[];
   addRequestedPeers: (val: string) => void;
   removeRequestedPeers: (val: string) => void;
-  spacesTimeInHour: string;
-  setSpacesTimeInHour: (val: string) => void;
-  spacesTimeInMinute: string;
-  setSpacesTimeInMinute: (val: string) => void;
+  spacesStartTime: Date;
+  setSpacesStartTime: (val: Date) => void;
+  isAudioOn: boolean;
+  setIsAudioOn: (val: boolean) => void;
+  activeMicDevice: MediaDeviceInfo | null;
+  setActiveMicDevice: (val: MediaDeviceInfo | null) => void;
+  activeSpeakerDevice: MediaDeviceInfo | null;
+  setActiveSpeakerDevice: (val: MediaDeviceInfo | null) => void;
 }
 
 export const useSpacesStore = create<SpacesState>((set, get) => ({
@@ -53,10 +57,11 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
   setShowSpacesLobby: (showSpacesLobby) => set(() => ({ showSpacesLobby })),
   showSpacesWindow: false,
   setShowSpacesWindow: (showSpacesWindow) => set(() => ({ showSpacesWindow })),
+  spacesPublicationId: '',
+  setSpacesPublicationId: (spacesPublicationId) =>
+    set(() => ({ spacesPublicationId })),
   lensAccessToken: '',
   setLensAccessToken: (lensAccessToken) => set(() => ({ lensAccessToken })),
-  isRecordingOn: false,
-  setIsRecordingOn: (isRecordingOn) => set(() => ({ isRecordingOn })),
   isTokenGated: false,
   setIsTokenGated: (isTokenGated) => set(() => ({ isTokenGated })),
   tokenGateConditionValue: '',
@@ -112,10 +117,13 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
     })),
   myReaction: '',
   setMyReaction: (myReaction) => set(() => ({ myReaction })),
-  spacesTimeInHour: '00',
-  setSpacesTimeInHour: (spacesTimeInHour) => set(() => ({ spacesTimeInHour })),
-  spacesTimeInMinute: '00',
-  setSpacesTimeInMinute: (spacesTimeInMinute) =>
-    set(() => ({ spacesTimeInMinute })),
-  isSpacesTimeInAM: true
+  spacesStartTime: new Date(),
+  setSpacesStartTime: (spacesStartTime) => set(() => ({ spacesStartTime })),
+  isAudioOn: false,
+  setIsAudioOn: (isAudioOn) => set(() => ({ isAudioOn })),
+  activeMicDevice: null,
+  setActiveMicDevice: (activeMicDevice) => set(() => ({ activeMicDevice })),
+  activeSpeakerDevice: null,
+  setActiveSpeakerDevice: (activeSpeakerDevice) =>
+    set(() => ({ activeSpeakerDevice }))
 }));

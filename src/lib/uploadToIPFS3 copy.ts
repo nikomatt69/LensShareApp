@@ -1,14 +1,16 @@
-import { S3 } from '@aws-sdk/client-s3';
+import { S3 } from "@aws-sdk/client-s3";
 import {
-  EVER_API,
+  EVER_BUCKET_NAME,
+  EVER_ENDPOINT,
   S3_BUCKET,
-  STS_GENERATOR_WORKER_URL
-} from '@/constants';
-import type { MediaSetWithoutOnChain } from '@/types/misc';
-import axios from 'axios';
-import { v4 as uuid } from 'uuid';
+  STS_GENERATOR_WORKER_URL,
+} from "@/constants";
+import axios from "axios";
 
-const FALLBACK_TYPE = 'image/jpeg';
+import { v4 as uuid } from "uuid";
+import { MediaSetWithoutOnChain } from "@/types/misc";
+
+const FALLBACK_TYPE = "image/jpeg";
 
 /**
  * Returns an S3 client with temporary credentials obtained from the STS service.
@@ -18,14 +20,14 @@ const FALLBACK_TYPE = 'image/jpeg';
 const getS3Client = async (): Promise<S3> => {
   const token = await axios.get(STS_GENERATOR_WORKER_URL);
   const client = new S3({
-    endpoint: EVER_API,
+    endpoint: EVER_ENDPOINT,
     credentials: {
       accessKeyId: token.data?.accessKeyId,
       secretAccessKey: token.data?.secretAccessKey,
-      sessionToken: token.data?.sessionToken
+      sessionToken: token.data?.sessionToken,
     },
-    region: 'us-west-2',
-    maxAttempts: 3
+    region: "us-west-2",
+    maxAttempts: 3,
   });
 
   client.middlewareStack.addRelativeTo(
@@ -37,11 +39,11 @@ const getS3Client = async (): Promise<S3> => {
       return { response };
     },
     {
-      name: 'nullFetchResponseBodyMiddleware',
-      toMiddleware: 'deserializerMiddleware',
-      relation: 'after',
-      override: true
-    }
+      name: "nullFetchResponseBodyMiddleware",
+      toMiddleware: "deserializerMiddleware",
+      relation: "after",
+      override: true,
+    },
   );
 
   return client;
@@ -61,24 +63,24 @@ const uploadToIPFS = async (data: any): Promise<MediaSetWithoutOnChain[]> => {
       files.map(async (_: any, i: number) => {
         const file = data[i];
         const params = {
-          Bucket: S3_BUCKET.LENSTER_MEDIA,
-          Key: uuid()
+          Bucket: S3_BUCKET.LENSSHARE,
+          Key: uuid(),
         };
         await client.putObject({
           ...params,
           Body: file,
-          ContentType: file.type
+          ContentType: file.type,
         });
         const result = await client.headObject(params);
         const metadata = result.Metadata;
 
         return {
           original: {
-            url: `ipfs://${metadata?.['ipfs-hash']}`,
-            mimeType: file.type || FALLBACK_TYPE
-          }
+            url: `ipfs://${metadata?.["ipfs-hash"]}`,
+            mimeType: file.type || FALLBACK_TYPE,
+          },
         };
-      })
+      }),
     );
 
     return attachments;
@@ -94,7 +96,7 @@ const uploadToIPFS = async (data: any): Promise<MediaSetWithoutOnChain[]> => {
  * @returns MediaSet object or null if the upload fails.
  */
 export const uploadFileToIPFS = async (
-  file: File
+  file: File,
 ): Promise<MediaSetWithoutOnChain> => {
   try {
     const ipfsResponse = await uploadToIPFS([file]);
@@ -102,13 +104,13 @@ export const uploadFileToIPFS = async (
 
     return {
       original: {
-        url: metadata.original?.url,
-        mimeType: file.type || FALLBACK_TYPE
-      }
+        url: metadata.original.url,
+        mimeType: file.type || FALLBACK_TYPE,
+      },
     };
   } catch (error) {
-    console.error('Failed to upload file to IPFS', error);
-    return { original: { url: '', mimeType: file.type || FALLBACK_TYPE } };
+    console.error("Failed to upload file to IPFS", error);
+    return { original: { url: "", mimeType: file.type || FALLBACK_TYPE } };
   }
 };
 

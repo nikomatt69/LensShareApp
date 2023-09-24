@@ -22,6 +22,7 @@ import { useAppStore } from '@/store/app';
 import PublicationActions from '../Publication/Actions';
 import Feed from '../Comment/Feed';
 import NewPublication from '../Composer/NewPublication';
+import FeedComment from '../Comment/FeedComment';
 type Props = {
   trigger: React.ReactNode;
   publication: Publication;
@@ -76,8 +77,8 @@ const CommentModal: FC<Props> = ({
         <div className="ml-12 mt-3 items-center justify-center p-5 text-center">
           <PublicationActions publication={publication} />
         </div>
-        <div className=" flex max-h-[60%] overflow-y-auto center-items w-full bg-white dark:bg-gray-900/70  pt-3">
-          <Feed publication={publication as Comment} />
+        <div className=" flex max-h-[60%] overflow-y-auto center-items w-full bg-white dark:bg-gray-900/70 border-0  pt-3">
+          <FeedComment publication={publication as Comment} />
         </div>
         <NewPublication publication={publication} />
       </FullScreenModal>

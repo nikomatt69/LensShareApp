@@ -25,9 +25,10 @@ import { useGlobalModalStateStore } from '@/store/modals';
 
 const ViewPublication: NextPage = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const showNewPublicationModal = useGlobalModalStateStore(
-    (state) => state.showNewPublicationModal
+  const showComposerModal = useGlobalModalStateStore(
+    (state) => state.showComposerModal
   );
+
 
 
   const {
@@ -83,12 +84,10 @@ const ViewPublication: NextPage = (profile) => {
               showCount={true}
             />
           </Card>
-          {currentProfile && !publication?.hidden && !showNewPublicationModal ? (
-          canComment ? (
+          {currentProfile && !publication?.hidden && !showComposerModal ? (
+        
             <NewPublication publication={publication} />
-          ) : (
-            null
-          )
+          
         ) : null}
 
           <Feed publication={publication} />

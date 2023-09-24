@@ -52,8 +52,11 @@ const MessageContent: FC<MessageContentProps> = ({
   return meetingLink ? (
     <div>
  
+
+ 
       
-      <Markup>{message.content}</Markup>
+ <Markup>{message.content}</Markup>
+
     </div>
   ) : (
     <Markup>{message.content}</Markup>

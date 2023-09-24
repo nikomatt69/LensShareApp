@@ -1,4 +1,5 @@
-import { uploadToIPFS } from '@/lib/uploadToIPFS3';
+
+import uploadToIPFS, { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 import { usePublicationStore } from '@/store/publication4';
 import { NewLensshareAttachment } from '@/types/misc';
 
@@ -75,10 +76,12 @@ const useUploadAttachments = () => {
         const attachmentsUploaded = await uploadToIPFS(attachments);
         if (attachmentsUploaded) {
           attachmentsIPFS = previewAttachments.map(
-            (attachment: NewLensshareAttachment) => ({
+            (attachment: NewLensshareAttachment, index: number) => ({
               ...attachment,
-              
-              
+              original: {
+                url: attachmentsUploaded[index].original.url,
+                mimeType: attachmentsUploaded[index].original.mimeType
+              }
             })
           );
           updateAttachments(attachmentsIPFS);

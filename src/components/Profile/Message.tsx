@@ -9,12 +9,14 @@ interface MessageProps {
 
 const Message: FC<MessageProps> = ({ onClick }) => {
   return (
-    <Button
+    <button
       className="!px-3 !py-1.5 text-sm"
-      icon={<ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5" />}
+   
       onClick={onClick}
       aria-label="Message"
-    />
+    >
+      <ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5" />
+    </button>
   );
 };
 

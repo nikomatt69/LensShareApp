@@ -67,8 +67,7 @@ const authLink = new ApolloLink((operation, forward) => {
         operation.setContext({
           fetchOptions: 'no-cors',
           headers: {
-            'x-access-token': `Bearer ${accessToken}`,
-            'Access-Control-Allow-Origin':'*'
+            'x-access-token': accessToken ? `Bearer ${accessToken}` : ''
           }
         });
 

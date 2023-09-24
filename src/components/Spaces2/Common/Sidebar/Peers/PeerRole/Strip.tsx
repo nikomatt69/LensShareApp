@@ -1,18 +1,18 @@
-import { clsx } from 'clsx';
+
 import type { FC } from 'react';
 import React from 'react';
 
-import { PeerListIcons } from '../../../assets/Icons';
-import { UserIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { MegaphoneIcon, PhoneXMarkIcon, UserIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { HiPhoneMissedCall, HiSpeakerphone } from 'react-icons/hi';
+import cn from '@/components/UI/cn';
 
-type StripProps = {
+interface StripProps {
   type: 'personNormal' | 'speaker' | 'leave' | 'remove';
   title: string;
   className?: string;
   variant: 'normal' | 'danger';
   onClick?: () => void;
-};
+}
 
 const PeerIcons = (type: 'personNormal' | 'speaker' | 'leave' | 'remove') => {
   switch (type) {
@@ -21,19 +21,19 @@ const PeerIcons = (type: 'personNormal' | 'speaker' | 'leave' | 'remove') => {
     case 'remove' || 'close':
       return <XCircleIcon className="h-4 w-4" />;
     case 'speaker':
-      return <HiSpeakerphone className="h-4 w-4" />;
+      return <MegaphoneIcon className="h-4 w-4" />;
     case 'leave':
-      return <HiPhoneMissedCall className="h-4 w-4" />;
+      return <PhoneXMarkIcon className="h-4 w-4" />;
   }
 };
 
 const Strip: FC<StripProps> = ({ type, title, variant, onClick }) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex cursor-pointer items-center gap-1 p-1 text-sm font-normal',
         variant === 'normal'
-          ? 'text-neutral-500 dark:text-neutral-400'
+          ? 'text-gray-500 dark:text-gray-400'
           : 'text-red-400'
       )}
       onClick={onClick}

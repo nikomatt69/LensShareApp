@@ -35,7 +35,7 @@ const Lobby: NextPage = () => {
   const { setDisplayName } = useDisplayName();
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [displayUserName, setDisplayUserName] = useState<string>(
-    currentProfile?.id ?? ''
+    currentProfile?.name ?? ''
   );
   const {
     toggleMicMuted,

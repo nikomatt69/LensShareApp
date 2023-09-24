@@ -4,10 +4,12 @@ import type { FC } from 'react';
 import React from 'react';
 
 import Strip from './Strip';
+import toast from 'react-hot-toast';
 
-type SpeakerDataProps = {
+
+interface SpeakerDataProps {
   peerId: string;
-};
+}
 
 const Speaker: FC<SpeakerDataProps> = ({ peerId }) => {
   const { changePeerRole, kickPeer } = useAcl();
@@ -27,6 +29,7 @@ const Speaker: FC<SpeakerDataProps> = ({ peerId }) => {
               requestType: 'coHost-invitation',
               peerId: peerId
             });
+            toast.success('Invitation sent');
           }}
         />
       )}

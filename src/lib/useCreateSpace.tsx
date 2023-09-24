@@ -13,22 +13,17 @@ type CreateSpaceResponse = {
   };
 };
 
-const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
+const useCreateSpace = (): [() => Promise<CreateSpaceResponse>] => {
   const {
     isTokenGated,
     tokenGateConditionType,
     tokenGateConditionValue,
-    spacesTimeInHour,
-    spacesTimeInMinute
+    spacesStartTime
   } = useSpacesStore();
-  ``;
   let payload = {};
-  const now = new Date();
-  now.setHours(Number(spacesTimeInHour));
-  now.setMinutes(Number(spacesTimeInMinute));
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const formattedTime = new Date(
-    now.toLocaleString('en-US', { timeZone: userTimezone })
+    spacesStartTime.toLocaleString('en-US', { timeZone: userTimezone })
   );
   const startTime = formattedTime.toISOString();
   const createSpace = async (): Promise<CreateSpaceResponse> => {
@@ -54,6 +49,7 @@ const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
       });
       return response.data;
     } catch (error) {
+      console.error('Error creating space:', error);
       throw error;
     }
   };

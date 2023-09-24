@@ -1,6 +1,5 @@
 import { API_URL } from '@/constants';
-import { onError } from '@apollo/client/link/error';
-import jwtDecode from 'jwt-decode';
+
 import toast from 'react-hot-toast';
 import {  fromPromise, toPromise } from '@apollo/client';
 import {
@@ -13,8 +12,8 @@ import {
 import { publicationKeyFields } from './lib/keyFields';
 import cursorBasedPagination from './lib/cursorBasedPagination';
 import result from './types/lens';
-import { Localstorage } from './storage';
-import { parseJwt } from './utils/lens/apollo/lib';
+
+
 import axios from 'axios';
 import createFeedFieldPolicy from './utils/lens/apollo/cache/createFeedFieldPolicy';
 import createFeedHighlightsFieldPolicy from './utils/lens/apollo/cache/createFeedHighlightsFieldPolicy';
@@ -31,6 +30,8 @@ import createWhoCollectedPublicationFieldPolicy from './utils/lens/apollo/cache/
 import createWhoReactedPublicationFieldPolicy from './utils/lens/apollo/cache/createWhoReactedPublicationFieldPolicy';
 import createMutualFollowersProfilesFieldPolicy from './utils/lens/apollo/cache/createMutualFollowersProfilesFieldPolicy';
 import superfluidLink from './superfluidLink';
+import { Localstorage } from './storage';
+import parseJwt from './utils/lens/apollo/lib/parseJwt';
 
 const superfluidClient = new ApolloClient({
   link: superfluidLink,
@@ -100,7 +101,9 @@ const authLink = new ApolloLink((operation, forward) => {
         const refreshToken = data?.data?.refresh?.refreshToken;
         operation.setContext({
           fetchOptions: 'no-cors',
-          headers: { 'x-access-token': `Bearer ${accessToken}` , 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' }
+          headers: {
+            'x-access-token': accessToken ? `Bearer ${accessToken}` : ''
+          }
         });
 
         localStorage.setItem(Localstorage.AccessToken, accessToken);
@@ -115,7 +118,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const apolloClient = new ApolloClient({
-  
+
   link: from([ authLink, httpLink]),
   cache: new InMemoryCache({
     possibleTypes: result.possibleTypes,

@@ -210,7 +210,11 @@ const Latest = () => {
         publication={publication as Publication}
         showCount={true} tags={''} />
     ))}
-    {hasMore && <span ref={observe} />}
+    {pageInfo?.next && (
+      <span ref={observe} className="flex  justify-center p-10">
+        <Loader />
+      </span>
+    )}
   </Card>
     </div>
   );

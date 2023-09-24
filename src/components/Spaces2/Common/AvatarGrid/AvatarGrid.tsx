@@ -35,28 +35,30 @@ const AvatarGrid: FC<AvatarGridProps> = ({ isLobbyPreview }) => {
   useEffectOnce(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2000);
   });
 
   return (
-    <div className="min-w-[24rem]">
-      {isLoading ? (
-        <div className="flex grid min-h-[18rem] items-center justify-center p-4">
-          <Spinner />
-        </div>
-      ) : isLobbyPreview && Object.keys(previewPeers).length > 0 ? (
-        <div className="m-4 inline-flex grid min-h-[18rem] grid-cols-5 items-center justify-between gap-5">
-          {Object.values(previewPeers).map(({ displayName, avatarUrl }) => (
-            <Avatar
-              key={displayName}
-              displayName={displayName}
-              avatarUrl={avatarUrl}
-            />
-          ))}
-        </div>
+    <div className="w-96">
+      {isLobbyPreview && Object.keys(previewPeers).length > 0 ? (
+        isLoading ? (
+          <div className="flex min-h-[18rem] items-center justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          <div className="mx-4 grid min-h-[18rem] grid-cols-5 items-center justify-between gap-5">
+            {Object.values(previewPeers).map(({ displayName, avatarUrl }) => (
+              <Avatar
+                key={displayName}
+                displayName={displayName}
+                avatarUrl={avatarUrl}
+              />
+            ))}
+          </div>
+        )
       ) : (
         <>
-          <div className="inline-flex grid min-h-[8rem] grid-cols-5 items-center justify-between gap-5 self-stretch">
+          <div className="grid min-h-[8rem] grid-cols-5 items-center justify-between gap-5 self-stretch">
             {showSpacesWindow && me.role !== 'listener' && (
               <Avatar
                 key={me.meId}
@@ -79,10 +81,10 @@ const AvatarGrid: FC<AvatarGridProps> = ({ isLobbyPreview }) => {
                 />
               ))}
           </div>
-          <div className="py-4 text-sm font-normal leading-none text-slate-400">
-           
+          <div className="py-4 text-sm font-normal leading-none text-gray-400">
+            
           </div>
-          <div className="inline-flex grid min-h-[8rem] grid-cols-5 items-center justify-between gap-5 self-stretch pb-6">
+          <div className="grid min-h-[8rem] grid-cols-5 items-center justify-between gap-5 self-stretch pb-6">
             {showSpacesWindow && me.role === 'listener' && (
               <Avatar
                 key={me.meId}

@@ -16,10 +16,7 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
   return (
     <div className="lp-player" data-testid={`attachment-video-${src}`}>
       <Player
-        src={src}
-        poster={imageKit(sanitizeDStorageUrl(poster))}
-        objectFit="contain"
-        showLoadingSpinner
+       
        
         theme={{
           borderStyles: {
@@ -41,14 +38,15 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
             containerBorderRadius: '16px',
           },
         }}
+        src={src}
+        poster={imageKit(sanitizeDStorageUrl(poster))}
+        objectFit="contain"
+        showLoadingSpinner
+        
+        muted
         showPipButton
-        showUploadingIndicator={true}
-    
-        
-        controls={{ defaultVolume: 1 }}
-        
-        
-        
+        showUploadingIndicator={false}
+        controls={{ defaultVolume: 0 } }
         autoUrlUpload={{ fallback: true, ipfsGateway: IPFS_GATEWAY }}
       >
        

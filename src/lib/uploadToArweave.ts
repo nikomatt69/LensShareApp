@@ -14,6 +14,7 @@ import { Errors } from './errors';
 const uploadToArweave = async (data: any): Promise<string> => {
   try {
     const upload = await axios(METADATA_WORKER_URL, {
+      
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -19,7 +19,9 @@ import SpaceWindowHeader from './SpaceWindowHeader';
 import getAvatar from '@/lib/getAvatar';
 import toast from 'react-hot-toast';
 import { useSpacesStore } from '@/store/spaces';
-import { MusicTrack } from '@/enums';
+import { MusicTrack, SpacesEvents } from '@/enums';
+import { useUpdateEffect } from 'usehooks-ts';
+import { HTMLAudioElementWithSetSinkId } from '../Common/SpacesTypes';
 
 const SpacesWindow: FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -33,13 +35,14 @@ const SpacesWindow: FC = () => {
     removeRequestedPeers,
     requestedPeers,
     myMusicTrack,
-    isMyMusicPlaying
+    isMyMusicPlaying,
+    activeSpeakerDevice
   } = useSpacesStore();
   const [requestType, setRequestType] = useState('');
   const { peers } = usePeers();
   const [musicTrack, setMusicTrack] = useState('');
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const audioRef = createRef<HTMLAudioElement>();
+  const audioRef = createRef<HTMLAudioElementWithSetSinkId>();
 
   const currentProfile = useAppStore((state) => state.currentProfile);
 
@@ -60,19 +63,19 @@ const SpacesWindow: FC = () => {
     }
   };
 
-  useEventListener('room:peer-joined', ({ peerId, role }) => {
+  useEventListener(SpacesEvents.ROOM_PEER_JOINED, ({ peerId, role }) => {
     if (role === 'peer' && me.role === 'host') {
       changePeerRole(peerId, 'listener');
     }
   });
 
-  useEventListener('room:me-role-update', (role) => {
+  useEventListener(SpacesEvents.ROOM_ME_ROLE_UPDATE, (role) => {
     if (role !== 'listener') {
       toast.success(`You are now a ${role}`);
     }
   });
 
-  useEventListener('room:data-received', (data) => {
+  useEventListener(SpacesEvents.ROOM_DATA_RECEIVED, (data) => {
     if (data.payload['request-to-speak']) {
       setShowAcceptRequest(true);
       setRequestedPeerId(data.payload['request-to-speak']);
@@ -123,7 +126,13 @@ const SpacesWindow: FC = () => {
     } else {
       audioRef.current?.pause();
     }
-  }, [isMusicPlaying]);
+  }, [isMusicPlaying, musicTrack]);
+
+  useUpdateEffect(() => {
+    if (activeSpeakerDevice) {
+      audioRef.current?.setSinkId(activeSpeakerDevice.deviceId);
+    }
+  }, [activeSpeakerDevice]);
 
   useEffect(() => {
     if (changeAvatarUrl.isCallable) {
@@ -151,6 +160,7 @@ const SpacesWindow: FC = () => {
       requestType: `accepted-${requestType}`,
       peerId: me.meId
     });
+    toast.success('Invitation accepted');
   };
 
   const handleAccept = () => {
@@ -170,7 +180,7 @@ const SpacesWindow: FC = () => {
         <audio ref={audioRef} src={musicTrack} loop />
       )}
       <div className="relative mx-auto max-w-screen-xl grow">
-        <div className="absolute bottom-0 right-0 ml-auto rounded-xl rounded-b-none border-[1.5px] border-neutral-300 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-900">
+        <div className="absolute bottom-0 right-0 ml-auto rounded-xl rounded-b-none border-[1.5px] border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
           <div className="flex justify-center">
             {showAcceptRequest && isExpanded && (
               <InvitationModal

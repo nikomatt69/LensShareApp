@@ -56,22 +56,6 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   } = useRouter();
   
 
-  const fetchCommunity = async () => {
-    try {
-      const response = await axios(
-        `${COMMUNITIES_WORKER_URL}/getCommunityBySlug/${slug}`
-      );
-
-      return response.data;
-    } catch (error) {
-      return [];
-    }
-  };
-
-  const { data, isLoading, error } = useQuery(['community', slug], () =>
-    fetchCommunity().then((res) => res)
-  );
-  const community: Community = data;
 
   const firstComment = feedItem?.comments && feedItem.comments[0];
   const rootPublication = feedItem

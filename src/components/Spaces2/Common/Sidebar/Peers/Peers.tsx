@@ -12,9 +12,8 @@ import PeerList from './PeerList';
 import PeerMetaData from './PeerMetaData';
 import { Input } from '@/components/UI/Input';
 
-type PeersProps = {};
 
-const Peers: FC<PeersProps> = () => {
+const Peers: FC = () => {
   const BlackList = ['peer', 'listener'];
 
   const { me } = useHuddle01();

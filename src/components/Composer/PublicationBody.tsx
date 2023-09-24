@@ -38,7 +38,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const canShowMore = metadata?.content?.length > 450 && showMore;
   const urls = getURLs(metadata?.content);
   const hasURLs = urls?.length > 0;
-  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
+  
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
 
   const quotedPublicationId = getPublicationAttribute(
     metadata.attributes,
@@ -54,7 +55,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     : null;
 
   const filterId = quotedPublicationId;
-  let rawContent = metadata?.content;
+  let rawContent = metadata.content;
 
   if (filterId) {
     for (const url of urls) {
@@ -99,14 +100,14 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     <div className="break-words">
       <Markup
         className={clsx(
-          { 'line-clamp-5': canShowMore },
-          'markup linkify font-bold font-helvetica break-words text-xs'
+          { 'line-clamp-8': canShowMore },
+          'markup linkify  font-helvetica break-words text-xs'
         )}
       >
         {content}
       </Markup>
       {canShowMore && (
-        <div className="lt-text-gray-500 mt-4 flex items-center space-x-1 text-sm font-bold">
+        <div className="lt-text-blue-700 mt-4 flex items-center space-x-1 text-sm font-bold">
           <Link href={`/post/${id}`}>Show more</Link>
         </div>
       )}
@@ -123,6 +124,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           publicationId={publication.id}
           onData={onOembedData}
         />):null}
+      {showSpacesLobby ? (<Space publication={publication} />):null}
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}

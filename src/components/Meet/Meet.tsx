@@ -133,7 +133,7 @@ const Meet: FC = () => {
               Object.values(peers).length === 0
                 ? 'my-10 h-full w-[60vw]'
                 : 'h-[50vh] w-[40vw]',
-              resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
+              resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-white-100',
               'relative flex flex-shrink-0 items-center justify-center rounded-lg'
             )}
           >
@@ -149,7 +149,7 @@ const Meet: FC = () => {
               <img
                 src="/default-avatar.svg"
                 alt="avatar"
-                className="mb-16 mt-16 h-32 w-32"
+                className="mb-16 mt-16  h-32 w-32"
               />
             )}
             <div
@@ -157,7 +157,7 @@ const Meet: FC = () => {
                 resolvedTheme == 'dark'
                   ? 'bg-gray-900 text-black'
                   : 'text-brand-500 bg-brand-100',
-                'absolute bottom-1 left-1 rounded-lg p-1'
+                'absolute bottom-1 left-1 rounded-lg p-1 xs:hidden sm:hidden'
               )}
             >
               {me.displayName ?? 'Me'}

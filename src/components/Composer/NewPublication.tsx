@@ -31,7 +31,7 @@ import type {
   Publication,
   PublicationMetadataMediaInput,
   PublicationMetadataV2Input
-} from '@/utils/lens/generatedLenster';
+} from '@/utils/lens/generated5';
 import {
   CollectModules,
   PublicationDocument,
@@ -50,7 +50,7 @@ import {
   useCreatePostTypedDataMutation,
   useCreatePostViaDispatcherMutation,
   usePublicationLazyQuery
-} from '@/utils/lens/generatedLenster';
+} from '@/utils/lens/generated5';
 import {SuperfluidInflowsDocument} from '@/utils/lens/generated4'
 
 import { $convertFromMarkdownString } from '@lexical/markdown';
@@ -104,11 +104,11 @@ import { LENS_HUB_ABI } from '@/abi/abi';
 import useCreatePoll from '@/lib/useCreatePoll';
 import useCreateSpace from '@/lib/useCreateSpace';
 import QuotedPublication from './QuotedPublication';
-import { CalendarIcon, ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ChatBubbleLeftRightIcon, ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
 import { useNonceStore } from '@/store/nonce';
-import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/20/solid';
+import { ChatBubbleOvalLeftEllipsisIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 import Discard from './Post/Discard';
 import Dropdown from '../Spaces2/Common/Dropdown';
 import { Input } from '../UI/Input';
@@ -119,6 +119,10 @@ import errorToast from './errorToast';
 import { useTransactionPersistStore } from '@/store/transaction';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import ScheduleSpacesMenu from './Actions/SpaceSettings/ScheduleSpacesMenu';
+import dayjs from 'dayjs';
+
+import cn from '../UI/cn';
+import EmojiPicker from './EmojiPicker';
 
 const Attachment = dynamic(
   () => import('@/components/Composer/Actions/Attachment'),
@@ -167,20 +171,15 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
-
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   // Modal store
-  const {
-    setShowNewPublicationModal,
-    showNewPublicationModal,
-    modalPublicationType
-  } = useGlobalModalStateStore();
 
-  const {
-    setSpacesTimeInHour,
-    setSpacesTimeInMinute,
-    spacesTimeInHour,
-    spacesTimeInMinute
-  } = useSpacesStore();
+
+  const { setShowComposerModal, showComposerModal, modalPublicationType } =
+  useGlobalModalStateStore();
+
+  // Spaces store
+   const spacesStartTime = useSpacesStore((state) => state.spacesStartTime);
   const setShowDiscardModal = useGlobalModalStateStore(
     (state) => state.setShowDiscardModal
   );
@@ -252,16 +251,35 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
   const canUseRelay = currentProfile?.dispatcher?.canUseRelay;
   const isSponsored = currentProfile?.dispatcher?.sponsor;
 
+  const getButtonIcon = () => {
+    switch (true) {
+      case isLoading:
+        return <Spinner size="xs" />;
+      case isComment:
+        return <ChatBubbleLeftRightIcon className="h-4 w-4" />;
+      case showComposerModal &&
+        modalPublicationType === NewPublicationTypes.Spaces:
+        return <MicrophoneIcon className="h-4 w-4" />;
+      default:
+        return <PencilIcon className="h-4 w-4" />;
+    }
+  };
+
+  const getButtonText = () => {
+    switch (true) {
+      case isComment:
+        return `Comment`;
+      case showComposerModal &&
+        modalPublicationType === NewPublicationTypes.Spaces:
+        return `Create Spaces`;
+      default:
+        return `Post`;
+    }
+  };
+
   const onCompleted = (__typename?: 'RelayError' | 'RelayerResult') => {
     if (__typename === 'RelayError') {
       return;
-    }
-
-    if (
-      showNewPublicationModal &&
-      modalPublicationType === NewPublicationTypes.Spaces
-    ) {
-      toast.success('Spaces created successfully!');
     }
 
     setIsLoading(false);
@@ -281,10 +299,10 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     resetCollectSettings();
     resetAccessSettings();
     if (!isComment) {
-      setShowNewPublicationModal(false, NewPublicationTypes.Post);
+      setShowComposerModal(false, NewPublicationTypes.Publication);
+    } else {
+      setShowComposerModal(false, NewPublicationTypes.Spaces);
     }
-    setShowNewPublicationModal(false, NewPublicationTypes.Spaces);
-
     // Track in leafwatch
     const eventProperties = {
       publication_type: restricted ? 'token_gated' : 'public',
@@ -745,31 +763,27 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
         response: {
           message: '',
           data: {
-            roomId: '',
-          },
-      }};
+            roomId: ''
+          }
+        }
+      };
 
       if (
-        showNewPublicationModal &&
+        showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces
       ) {
         spaceData = await createSpace();
       }
-      const now = new Date();
-      now.setHours(Number(spacesTimeInHour));
-      now.setMinutes(Number(spacesTimeInMinute));
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const formattedTime = new Date(
-        now.toLocaleString('en-US', { timeZone: userTimezone })
-      );
-      const startTime = formattedTime.toISOString();
+
+      const startTime = dayjs(spacesStartTime);
+
       const attributes: MetadataAttributeInput[] = [
         {
           traitType: 'type',
           displayType: PublicationMetadataDisplayTypes.String,
           value: getMainContentFocus()?.toLowerCase()
         },
-        ...(showNewPublicationModal &&
+        ...(showComposerModal &&
         spaceData.success &&
         modalPublicationType === NewPublicationTypes.Spaces
           ? [
@@ -781,8 +795,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
                   host: currentProfile.ownedBy,
                   startTime: startTime
                 })
-    
-  
               }
             ]
           : []),
@@ -951,7 +963,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     : false;
 
   const onDiscardClick = () => {
-    setShowNewPublicationModal(false, NewPublicationTypes.Post);
+    setShowComposerModal(false, NewPublicationTypes.Publication);
     setShowDiscardModal(false);
   };
 
@@ -971,94 +983,72 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
 
   return (
     <Card
-      className={clsx(
-        { '!rounded-b-xl border-blue-700 !rounded-t-none border-none': !isComment },
-        'pb-3 mb-5'
-      )}
-    >
-      {error && (
-        <ErrorMessage
-          className="!rounded-none"
-          title={`Transaction failed!`}
-          error={error}
-        />
-      )}
-      <Editor />
-      {publicationContentError && (
-        <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
-          {publicationContentError}
+    onClick={() => setShowEmojiPicker(false)}
+    className={cn(
+      { '!rounded-b-xl !rounded-t-none border-none': !isComment },
+      'pb-3'
+    )}
+  >
+    {error ? (
+      <ErrorMessage
+        className="!rounded-none"
+        title={`Transaction failed!`}
+        error={error}
+      />
+    ) : null}
+    <Editor />
+    {publicationContentError ? (
+      <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
+        {publicationContentError}
+      </div>
+    ) : null}
+    {showPollEditor ? <PollEditor /> : null}
+    {quotedPublication ? (
+      <Wrapper className="m-5" zeroPadding>
+        <QuotedPublication profile={profile} publication={quotedPublication} isNew />
+      </Wrapper>
+    ) : null}
+    <div className="items-center  p-1 px-5 block sm:flex">
+      <div className=" right-2 lg:block ">
+        <div className=" pr-2 sm:pt-0 pb-2">
+          <Button
+            disabled={
+              isLoading ||
+              isUploading ||
+              isSubmitDisabledByPoll ||
+              videoThumbnail.uploading
+            }
+            icon={getButtonIcon()}
+            onClick={createPublication}
+          >
+            {getButtonText()}
+          </Button>
+        </div>
+      </div>
+      {showComposerModal &&
+      modalPublicationType === NewPublicationTypes.Spaces ? (
+        <SpaceSettings />
+      ) : (
+        <div className="flex items-center space-x-4">
+          <Attachment />
+          
+          <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
+          {!publication?.isDataAvailability ? (
+            <>
+              <CollectSettings />
+              <ReferenceSettings />
+              <AccessSettings />
+            </>
+          ) : null}
+          <PollSettings />
         </div>
       )}
-      {showPollEditor && <PollEditor />}
-      {quotedPublication ? (
-        <Wrapper className="m-5" zeroPadding>
-          <QuotedPublication profile={profile} publication={quotedPublication} isNew />
-        </Wrapper>
-      ) : null}
-      <div className="block items-center px-5 sm:flex">
-        {showNewPublicationModal &&
-        modalPublicationType === NewPublicationTypes.Spaces ? (
-          <SpaceSettings />
-        ) : (
-          <div className="flex items-center space-x-4">
-            <Attachment />
-            <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-            {!publication?.isDataAvailability && (
-              <>
-                <CollectSettings />
-                <ReferenceSettings />
-                <AccessSettings />
-              </>
-            )}
-            <PollSettings />
-          </div>
-        )}
-        
-          <div className="ml-auto pt-2 sm:pt-0">
-            <Button
-              disabled={
-                isLoading ||
-                isUploading ||
-                isSubmitDisabledByPoll ||
-                videoThumbnail.uploading
-              }
-              icon={
-                isLoading ? (
-                  <Spinner size="xs" />
-                ) : isComment ? (
-                  <ChatBubbleOvalLeftIcon className="h-4 w-4" />
-                ) : showNewPublicationModal &&
-                  modalPublicationType === NewPublicationTypes.Spaces ? (
-                  <MicrophoneIcon className="h-4 w-4" />
-                ) : (
-                  <PencilIcon className="h-4 w-4" />
-                )
-              }
-              onClick={createPublication}
-            >
-              {isComment
-                ? `Comment`
-                : showNewPublicationModal &&
-                  modalPublicationType === NewPublicationTypes.Spaces
-                ? `Space`
-                : `Post`}
-            </Button>
-          </div>
-          {showNewPublicationModal &&
-            modalPublicationType === NewPublicationTypes.Spaces && (
-              <ScheduleSpacesMenu
-                isLoading={isLoading}
-                createPublication={createPublication}
-              /> )}
-                   
-        
-      </div>
-      <div className="px-5">
-        <Attachments attachments={attachments} isNew />
-      </div>
-      <div className='z-[30]'><Discard onDiscard={onDiscardClick} /></div>
-      
-    </Card>
+    </div>
+    <div className="px-5">
+      <Attachments attachments={attachments} isNew />
+    </div>
+    <Discard onDiscard={onDiscardClick} />
+  </Card>
   );
 };
 

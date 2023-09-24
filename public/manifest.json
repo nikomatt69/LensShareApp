@@ -1,4 +1,5 @@
 {
+  "id": "com.lensshareapp",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

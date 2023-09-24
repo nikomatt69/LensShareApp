@@ -8,7 +8,9 @@ import clsx from 'clsx';
 import type { ChangeEvent, FC, Ref } from 'react';
 import { useState } from 'react';
 import { Image } from '@/components/UI/Image';
-import { uploadToIPFS } from '@/lib/uploadToIPFS3';
+import {uploadFileToIPFS}  from '@/lib/uploadToIPFS3';
+import errorToast from '../errorToast';
+
 
 
 interface CoverImageProps {
@@ -30,14 +32,15 @@ const CoverImage: FC<CoverImageProps> = ({
 
   const onError = (error: any) => {
     setLoading(false);
+    errorToast(error);
   };
 
   const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.length) {
       try {
         setLoading(true);
-        const attachment = await uploadToIPFS(event.target.files[0]);
-        setCover(attachment.url, attachment.url);
+        const attachment = await uploadFileToIPFS(event.target.files[0]);
+        setCover(attachment.original.url, attachment.original.mimeType);
       } catch (error) {
         onError(error);
       }
@@ -63,7 +66,7 @@ const CoverImage: FC<CoverImageProps> = ({
           ref={imageRef}
         />
       </button>
-      {isNew && (
+      {isNew ? (
         <label
           className={clsx(
             { visible: loading && !cover, invisible: cover },
@@ -73,7 +76,7 @@ const CoverImage: FC<CoverImageProps> = ({
           {loading && !cover ? (
             <Spinner size="sm" />
           ) : (
-            <div className="flex flex-col items-center text-sm text-black dark:text-white opacity-60 ">
+            <div className="flex flex-col items-center text-sm text-black opacity-60 dark:text-white">
               <PhotoIcon className="h-5 w-5" />
               <span>Add cover</span>
             </div>
@@ -85,7 +88,7 @@ const CoverImage: FC<CoverImageProps> = ({
             onChange={onChange}
           />
         </label>
-      )}
+      ) : null}
     </div>
   );
 };

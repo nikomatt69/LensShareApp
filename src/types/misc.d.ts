@@ -1,4 +1,5 @@
-import { MediaSet } from "@/utils/lens/generatedLenster";
+import { Profile } from '@/utils/lens/generatedLenster';
+import type { MediaSet } from '@/utils/lens/generatedLenster';
 
 export interface MediaSetWithoutOnChain extends Omit<MediaSet, 'onChain'> {}
 
@@ -17,14 +18,15 @@ export interface UserSuggestion {
 }
 
 export interface OG {
+  title: string;
+  description: string;
+  site: string;
   url: string;
-  title: string | null;
-  description: string | null;
-  site: string | null;
+  favicon: string;
+  thumbnail: string;
+  isLarge: boolean;
+  html: string;
   image: string | null;
-  favicon: string | null;
-  isLarge: boolean | null;
-  html: string | null;
 }
 
 export interface ProfileInterest {
@@ -61,4 +63,20 @@ export interface OptimisticTransaction {
 export interface MarkupLinkProps {
   href?: string;
   title?: string;
+}
+
+
+export interface SpaceMetadata {
+  id: string;
+  host: `0x${string}`;
+  startTime: string;
+}
+
+
+
+export interface InflowType {
+  id: string;
+  sender: {
+    id: string;
+  };
 }

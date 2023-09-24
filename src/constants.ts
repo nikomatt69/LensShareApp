@@ -46,7 +46,7 @@ export const BASE_URL = IS_MAINNET
   ? 'https://lenshareapp.xyz'
   : 'https://lenshareapp.xyz';
 
-export const ALCHEMY_KEY = '7jxlM7yIx-aJXDivcEZxsLFFRKQS6-ue';
+export const ALCHEMY_KEY = 'ko67M7MTbwy-pJHRMi7VdhHemweoRzY_';
 
 export const REQUESTING_SIGNATURE_MESSAGE = 'Requesting signature...';
 
@@ -58,8 +58,8 @@ export const STS_GENERATOR_WORKER_URL = IS_MAINNET
   ? 'https://sts.lenshareapp.xyz'
   : 'https://sts.lenshareapp.xyz';
 export const METADATA_WORKER_URL = IS_MAINNET
-  ? 'https://meta.lenshareapp.xyz'
-  : 'https://meta.lenshareapp.xyz';
+  ? 'https://metadata.lenshareapp.xyz'
+  : 'https://metadata.lenshareapp.xyz';
 export const FRESHDESK_WORKER_URL = IS_MAINNET
   ? 'https://freshdesk.lenster.xyz'
   : 'http://localhost:8084';
@@ -87,7 +87,7 @@ export const COMMUNITIES_WORKER_URL = IS_MAINNET
   : 'http://localhost:8091';
 
 export const S3_BUCKET = {
-  LENSTER_MEDIA: 'lensshare'
+  LENSSHARE: 'lensshare'
 };
 export const EVER_API = 'https://endpoint.4everland.co';
 export const IMAGE_TRANSFORMATIONS = {
@@ -132,7 +132,8 @@ export const ALLOWED_IMAGE_TYPES = [
   'image/jpeg',
   'image/png',
   'image/webp',
-  'image/gif'
+  'image/gif',
+  'image/jpg'
 ];
 export const ALLOWED_AUDIO_TYPES = [
   'audio/mpeg',
@@ -157,7 +158,7 @@ export const ALLOWED_MEDIA_TYPES = [
 ];
 
 
-export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs';
+export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs/';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';
 export const EVER_ACCESS_KEY = process.env.EVER_ACCESS_KEY as string;
@@ -197,7 +198,7 @@ export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   : '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 
 export const BUNDLR_NODE_URL = IS_MAINNET
-  ? 'https://node2.bundlr.network'
+  ? 'https://node1.bundlr.network'
   : 'https://devnet.bundlr.network';
 
 export const BUNDLR_CURRENCY = 'matic';
@@ -226,7 +227,7 @@ export const IMAGE_CDN_URL = IS_MAINNET
   : 'https://img.lenstube.xyz';
 
 export const USER_CONTENT_URL = 'https://static-assets.lenster.xyz';
-export const STATIC_IMAGES_URL = `${USER_CONTENT_URL}/images`;
+export const STATIC_IMAGES_URL = `${STATIC_ASSETS_URL}/images`;
 export const UPDATE_OWNABLE_FEE_COLLECT_MODULE_ADDRESS = IS_MAINNET
   ? '0x432960b3209686Cc69e2EEC1dBBaB52A1c0Bf938'
   : '0xA78E4a4D0367f0f4674130F0Bb2653957ab5917e';
@@ -242,7 +243,7 @@ export const POLYGONSCAN_URL = IS_MAINNET
   ? 'https://polygonscan.com'
   : 'https://mumbai.polygonscan.com';
 
-export const API_KEY = process.env.NEXT_PUBLIC_STUDIO_API_KEY;
+
 
 export const LIVE_API_KEY = process.env.NEXT_PUBLIC_LIVE_STUDIO_API_KEY;
 

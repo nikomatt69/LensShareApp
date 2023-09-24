@@ -36,9 +36,9 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
           {notification.reaction === 'DOWNVOTE' ? `disliked` : `liked`}{' '}
-          'your'{' '}
+          {' '}
           {notification.publication.__typename === 'Comment' && (
-            'comment on'
+            'comment'
           )}
           <Link
             href={`/post/${

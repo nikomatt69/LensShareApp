@@ -59,13 +59,13 @@ export function SuperfluidSubscribe({ profile }: SuperfluidSubscribeProps) {
         
       
         {({ openModal }) => (
-          <Button
+          <button
             type="button"
             onClick={() => openModal()}
             className=" px-4 py-2 text-sm font-bold text-white hover:bg-blue-700"
           >
             {`$`}
-          </Button>
+          </button>
           // <Button
           //   className="!px-3 !py-1 text-sm"
           //   outline

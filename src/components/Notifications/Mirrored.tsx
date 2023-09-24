@@ -32,7 +32,7 @@ const MirroredNotification: FC<Props> = ({ notification }) => {
       </div>
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
-          mirrored your{' '}
+          mirrored{' '}
           <Link
             href={`/post/${notification?.publication.id}`}
             className="ml-1 text-indigo-500"

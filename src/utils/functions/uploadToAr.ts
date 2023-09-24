@@ -13,19 +13,11 @@ import toast from 'react-hot-toast';
  */
 const uploadToArweave = async (data: any): Promise<string> => {
   try {
-    const upload = await axios(METADATA_WORKER_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data
-    });
-
+    const upload = await axios.post(METADATA_WORKER_URL, { ...data });
     const { id }: { id: string } = upload?.data;
 
     return id;
-  } catch (error) {
-    console.error('Failed to upload to Arweave', error);
+  } catch {
     toast.error(Errors.SomethingWentWrong);
     throw new Error(Errors.SomethingWentWrong);
   }

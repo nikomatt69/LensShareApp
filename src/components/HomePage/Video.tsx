@@ -98,18 +98,22 @@ const Video: FC<Props> = ({ publication }) => {
     <div className="lenshare-player">
       <div className='border-2 border-blue-700 rounded-2xl'>
         <VideoPlayer
+         
       
- 
+         
           publicationId={video?.id}
-          permanentUrl={getMedia(video as Publication)}
+          permanentUrl={getPublicationMediaUrl(video as Publication)}
           posterUrl={thumbnailUrl}
           showControls={true}
           options={{
-            autoPlay: false,
+            autoPlay:true,
             muted: false,
             loop: true,
             loadingSpinner: false,
-            isCurrentlyShown: true
+            isCurrentlyShown: false,
+       
+
+            
           }}
         />
       </div>

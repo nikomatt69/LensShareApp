@@ -1,7 +1,7 @@
 import { Card } from '@/components/UI/Card';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
-import { MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon, PencilIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -16,20 +16,20 @@ import { NewPublicationTypes } from '@/enums';
 const NewPost: FC = () => {
   const { query, isReady, push } = useRouter();
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const setShowNewPublicationModal = useGlobalModalStateStore(
-    (state) => state.setShowNewPublicationModal
+  const setShowComposerModal = useGlobalModalStateStore(
+    (state) => state.setShowComposerModal
   );
   const setPublicationContent = usePublicationStore(
     (state) => state.setPublicationContent
   );
-  
 
-  const openModal = () => {
-    setShowNewPublicationModal(true, NewPublicationTypes.Post);
+
+  const openPublicationModal = () => {
+    setShowComposerModal(true, NewPublicationTypes.Publication);
   };
 
   const openSpacesModal = () => {
-    setShowNewPublicationModal(true, NewPublicationTypes.Spaces);
+    setShowComposerModal(true, NewPublicationTypes.Spaces);
   };
 
   useEffectOnce(() => {
@@ -48,7 +48,7 @@ const NewPost: FC = () => {
         processedHashtags ? ` ${processedHashtags} ` : ''
       }${url ? `\n\n${url}` : ''}${via ? `\n\nvia @${via}` : ''}`;
 
-      setShowNewPublicationModal(true, NewPublicationTypes.Post);
+      openPublicationModal();
       setPublicationContent(content);
     }
   });
@@ -65,21 +65,21 @@ const NewPost: FC = () => {
         <button
           className="flex w-full items-center space-x-2 rounded-xl border bg-gray-100 px-4 py-2 dark:border-gray-700 dark:bg-gray-900"
           type="button"
-          onClick={() => openModal()}
+          onClick={openPublicationModal}
         >
           <PencilIcon className="h-5 w-5" />
           <span>
-            What's happening?
+            New Post?
           </span>
         </button>
         
-          <button
-            className=" h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900 sm:inline-flex"
-            onClick={() => openSpacesModal()}
-          >
-            <MicrophoneIcon className="text-brand-500 hover:text-brand-600 relative h-5 w-5 cursor-pointer" />
+          <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
+            <MicrophoneIcon
+              className="text-brand h-6 w-6"
+              onClick={openSpacesModal}
+            />
           </button>
-        
+
       </div>
     </Card>
   );

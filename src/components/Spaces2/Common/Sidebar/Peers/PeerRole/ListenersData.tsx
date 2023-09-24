@@ -4,10 +4,11 @@ import type { FC } from 'react';
 import React from 'react';
 
 import Strip from './Strip';
+import toast from 'react-hot-toast';
 
-type ListenersDataProps = {
+interface ListenersDataProps {
   peerId: string;
-};
+}
 
 const ListenersData: FC<ListenersDataProps> = ({ peerId }) => {
   const { kickPeer } = useAcl();
@@ -22,6 +23,7 @@ const ListenersData: FC<ListenersDataProps> = ({ peerId }) => {
       requestType: invitationType,
       peerId: peerId
     });
+    toast.success('Invitation sent');
   };
 
   return (

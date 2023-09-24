@@ -56,7 +56,7 @@ interface Props {
 
 const Home2: FC<Props> = ({ publication}) => {
   const [mounted, setMounted] = useState(false);
-
+  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -202,6 +202,8 @@ const Home2: FC<Props> = ({ publication}) => {
     </GridItemEight>
     <GridItemFour className='block max-h-40'>
     <Footer />
+    {showSpacesLobby && <Spaces />}
+    
 
     <Wrapper publication={publication}>
     <div className='hidden lg:block xl:block'><Curated /></div>

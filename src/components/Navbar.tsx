@@ -69,7 +69,7 @@ const Navbar: FC = () => {
   
 
   return (
-    <div className={`flex w-full z-10 items-center justify-between h-[50px] border-2 rounded-t-sm rounded-xl border-b border-t-0 border-l border-r border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
+    <div className={`flex w-full z-10 items-center justify-between h-[50px] border-2 rounded-t-sm rounded-md border-b border-t-0  border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
 
       <Link href="/discover">
         <button
