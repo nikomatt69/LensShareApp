@@ -13,7 +13,7 @@ interface CoverProps {
 const Cover: FC<CoverProps> = ({ cover }) => {
   return (
     <div
-      className="h-52  sm:h-80"
+      className="h-48  sm:h-72"
       data-testid="profile-cover"
       style={{
         backgroundImage: `url(${

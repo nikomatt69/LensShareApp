@@ -40,7 +40,7 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
     image: data?.image,
     isLarge: data?.isLarge,
     html: data?.html,
-    thumbnail: data.thumbnail
+    thumbnail: data?.image
   };
 
   if (!og.title) {

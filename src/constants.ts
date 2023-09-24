@@ -91,7 +91,7 @@ export const S3_BUCKET = {
 };
 export const EVER_API = 'https://endpoint.4everland.co';
 export const IMAGE_TRANSFORMATIONS = {
-  
+
   AVATAR_LG: 'tr:w-300,h-300',
   THUMBNAIL: 'tr:w-720,h-404',
   THUMBNAIL_V: 'tr:w-404,h-720',
@@ -100,7 +100,7 @@ export const IMAGE_TRANSFORMATIONS = {
 export const AVATAR = 'tr:w-300,h-300';
 export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
 export const COVER = 'tr:w-1500,h-500';
-export const ATTACHMENT ='tr:w-300';
+export const ATTACHMENT = 'tr:w-1000';
 
 
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
