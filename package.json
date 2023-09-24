@@ -94,7 +94,7 @@
     "filereader-stream": "^2.0.0",
     "framer-motion": "^10.12.12",
     "generate-password": "^1.7.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "headlessui": "^0.0.0",
     "heroicons": "^2.0.13",
     "html-entities": "^2.3.3",
