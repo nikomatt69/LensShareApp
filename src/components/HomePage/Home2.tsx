@@ -49,6 +49,7 @@ import Curated from '../Echos/Curated';
 import AddToHome from './AddToHome';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import { useNonceStore } from '@/store/nonce';
+import CuratedHome from '../Echos/CuratedHome';
 interface Props {
   publication:Publication
 
@@ -206,7 +207,7 @@ const Home2: FC<Props> = ({ publication}) => {
     
 
     <Wrapper publication={publication}>
-    <div className='hidden lg:block xl:block'><Curated /></div>
+    <div className='hidden lg:block xl:block'><CuratedHome /></div>
         </Wrapper>
 
   

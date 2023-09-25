@@ -196,7 +196,7 @@ const Lobby: NextPage = () => {
             Set a display name
             <div
               className={clsx(
-                resolvedTheme == 'dark' ? 'text-gray-900' : 'text-gray-900',
+                resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
                 'gap- flex w-full items-center rounded-[10px] border border-zinc-800 pl-3 backdrop-blur-[400px]'
               )}
             >
@@ -213,7 +213,7 @@ const Lobby: NextPage = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
-                className="flex-1 rounded-lg border-transparent bg-transparent py-3 outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
+                className="flex-1 rounded-lg border-transparent bg-transparent py-3 text-blue-700 outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}
               />
@@ -222,7 +222,7 @@ const Lobby: NextPage = () => {
         </div>
         <div className="flex w-full items-center">
           <button
-            className="bg- bg-brand-500 mt-2 flex w-full items-center justify-center rounded-md p-2 'text-gray-900'"
+            className="bg- bg-brand-500 mt-2 flex w-full items-center justify-center rounded-md p-2 text-blue-700 "
             onClick={async () => {
               if (isLobbyJoined) {
                 joinRoom();

@@ -25,7 +25,7 @@ import Search from '../Search/Search';
 import SearchAudio from '../Search/SearchAudio';
 import imageKit from '@/lib/imageKit';
 
-const Curated = () => {
+const CuratedHome = () => {
 
 
   const request = {
@@ -87,11 +87,6 @@ const Curated = () => {
               <Item publication={publication} key={publication.id} />
             ))}
           </div>
-          {pageInfo?.next && (
-            <span ref={observe} className="flex justify-center border-0 p-10">
-              <Loader />
-            </span>
-          )}
          
         </>
       )}
@@ -99,4 +94,4 @@ const Curated = () => {
   );
 };
 
-export default Curated;
+export default CuratedHome;

@@ -1,8 +1,11 @@
 
+import { WMATIC_TOKEN_ADDRESS } from '@/constants';
 import { Community } from '@/types/communities';
 import { NewLensshareAttachment } from '@/types/misc';
+import { CREATOR_VIDEO_CATEGORIES } from '@/utils/data/categories';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { create } from 'zustand';
+
 
 interface PublicationState {
   publicationContent: string;
@@ -39,6 +42,7 @@ interface PublicationState {
   videoDurationInSeconds: string;
   setVideoDurationInSeconds: (videoDurationInSeconds: string) => void;
   isUploading: boolean;
+  isByte:boolean
   setIsUploading: (isUploading: boolean) => void;
   showPollEditor: boolean;
   setShowPollEditor: (showPollEditor: boolean) => void;
@@ -101,6 +105,7 @@ export const usePublicationStore = create<PublicationState>((set) => ({
   setVideoDurationInSeconds: (videoDurationInSeconds) =>
     set(() => ({ videoDurationInSeconds })),
   isUploading: false,
+  isByte:false,
   setIsUploading: (isUploading) => set(() => ({ isUploading })),
   showPollEditor: false,
   setShowPollEditor: (showPollEditor) => set(() => ({ showPollEditor })),

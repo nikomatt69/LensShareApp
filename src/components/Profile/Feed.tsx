@@ -166,18 +166,14 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
     )}
     {publications?.map((publication, index) => (
       <SinglePublication
-        profile={currentProfile as Profile}
+        profile={currentProfile?.id as Profile}
         key={`${publication?.id}_${index}`}
         isFirst={index === 0}
         isLast={index === publications.length - 1}
         publication={publication as Publication}
         showCount={true} tags={''} />
     ))}
-   {pageInfo?.next && (
-      <span ref={observe} className="flex  justify-center p-10">
-        <Loader />
-      </span>
-    )}
+   {hasMore && <span ref={observe} />}
   </Card>
   );
 };

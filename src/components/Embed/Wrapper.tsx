@@ -2,6 +2,7 @@ import stopEventPropagation from '@/lib/stopEventPropagation';
 import clsx from 'clsx';
 import type { FC, ReactNode } from 'react';
 import { Card } from '../UI/Card';
+import cn from '../UI/cn';
 
 interface WrapperProps {
   children: ReactNode;
@@ -17,7 +18,7 @@ const Wrapper: FC<WrapperProps> = ({
   zeroPadding = false
 }) => (
   <Card
-    className={clsx('mt-3 cursor-auto', className, { 'p-5': !zeroPadding })}
+    className={cn('mt-3 cursor-auto', className, { 'p-5': !zeroPadding })}
     forceRounded
     dataTestId={dataTestId}
     onClick={stopEventPropagation}

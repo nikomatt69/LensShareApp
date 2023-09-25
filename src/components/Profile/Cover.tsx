@@ -13,7 +13,7 @@ interface CoverProps {
 const Cover: FC<CoverProps> = ({ cover }) => {
   return (
     <div
-      className="h-48  sm:h-72"
+      className="h-48 sm:h-64"
       data-testid="profile-cover"
       style={{
         backgroundImage: `url(${
@@ -26,7 +26,10 @@ const Cover: FC<CoverProps> = ({ cover }) => {
         backgroundPosition: 'center center',
         backgroundRepeat: cover ? 'no-repeat' : 'repeat'
       }}
+     
     />
+
+  
   );
 };
 

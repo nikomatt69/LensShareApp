@@ -35,6 +35,7 @@ import Curated from './Echos/Curated';
 import Footer from './Sidebar/Footer';
 import { useNonceStore } from '@/store/nonce';
 import { useReferenceModuleStore } from '@/store/reference-module';
+import CuratedHome from './Echos/CuratedHome';
 interface Props {
   publication:Publication
 
@@ -162,7 +163,7 @@ const LatestRender: FC<Props> = ({ publication}) => {
      <GridItemFour className='block'>
       
       <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><Curated /></div>
+        <div className='hidden lg:block xl:block'><CuratedHome /></div>
         
           </Wrapper>
       <Footer/>

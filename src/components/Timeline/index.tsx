@@ -58,7 +58,7 @@ const Timeline: FC = () => {
   // Variables
   const request: FeedRequest = {
     profileId: seeThroughProfile?.id ?? currentProfile?.id,
-    limit: 30,
+    limit: 20,
     feedEventItemTypes: getFeedEventItems()
   };
   const reactionRequest = currentProfile
@@ -74,19 +74,20 @@ const Timeline: FC = () => {
   const hasMore = pageInfo?.next;
 
   const { observe } = useInView({
-    rootMargin: SCROLL_ROOT_MARGIN,
-    onEnter: async () => {
+    onChange: async ({ inView }) => {
+      if (!inView || !hasMore) {
+        return;
+      }
+
       await fetchMore({
         variables: {
-          request: {
-            ...request,
-            cursor: pageInfo?.next
-          }
+          request: { ...request, cursor: pageInfo?.next },
+          reactionRequest,
+          profileId: currentProfile?.id
         }
       });
     }
   });
-
   if (loading) {
     return <Loader />;
   }
@@ -115,7 +116,7 @@ const Timeline: FC = () => {
         )}
         {publications?.map((publication, index) => (
           <SinglePublication
-            profile={currentProfile as Profile}
+            profile={currentProfile?.id as Profile}
             key={`${publication?.root.id}_${index}`}
             isFirst={index === 0}
             isLast={index === publications.length - 1}
@@ -123,11 +124,7 @@ const Timeline: FC = () => {
             publication={publication.root as Publication}
             showCount={true} tags={''} />
         ))}
-       {pageInfo?.next && (
-      <span ref={observe} className="flex  justify-center p-10">
-        <Loader />
-      </span>
-    )}
+        {hasMore && <span ref={observe} />}
       </Card>
   );
 };

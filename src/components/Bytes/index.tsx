@@ -47,7 +47,7 @@ interface Props {
 
 const request = {
   sortCriteria: PublicationSortCriteria.CuratedProfiles,
-  limit: 50,
+  limit: 20,
   noRandomize: false,
   sources: [LENSTUBE_BYTES_APP_ID],
   publicationTypes: [PublicationTypes.Post],

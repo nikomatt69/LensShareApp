@@ -66,7 +66,6 @@ const Latest = () => {
     noRandomize: false,
     sources: [
       APP_ID,
-      LENSTUBE_BYTES_APP_ID,
       LENSTUBE_APP_ID,
       LENSTER_APP_ID,
       ORB_APP_ID,
@@ -157,13 +156,16 @@ const Latest = () => {
   }, [router.isReady]);
 
   const { observe } = useInView({
-    onEnter: async () => {
+    onChange: async ({ inView }) => {
+      if (!inView || !hasMore) {
+        return;
+      }
+
       await fetchMore({
         variables: {
-          request: {
-            ...request,
-            cursor: pageInfo?.next
-          }
+          request: { ...request, cursor: pageInfo?.next },
+          
+          profileId: currentProfile?.id
         }
       });
     }
@@ -210,11 +212,7 @@ const Latest = () => {
         publication={publication as Publication}
         showCount={true} tags={''} />
     ))}
-    {pageInfo?.next && (
-      <span ref={observe} className="flex  justify-center p-10">
-        <Loader />
-      </span>
-    )}
+    {hasMore && <span ref={observe} />}
   </Card>
     </div>
   );
