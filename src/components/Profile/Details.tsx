@@ -245,7 +245,7 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
               </Link>
             </MetaDetails>
           )}
-          {getProfileAttribute(profile?.attributes, 'twitter') && (
+          {getProfileAttribute(profile?.attributes, 'x') && (
             <MetaDetails
               icon={
                 resolvedTheme === 'dark' ? (
@@ -269,15 +269,15 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
               dataTestId="profile-meta-twitter"
             >
               <Link
-                href={`https://twitter.com/${getProfileAttribute(
+                href={`https://x.com/${getProfileAttribute(
                   profile?.attributes,
-                  'twitter'
+                  'x'
                 )}`}
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                {getProfileAttribute(profile?.attributes, 'twitter')?.replace(
-                  'https://twitter.com/',
+                {getProfileAttribute(profile?.attributes, 'x')?.replace(
+                  'https://x.com/',
                   ''
                 )}
               </Link>

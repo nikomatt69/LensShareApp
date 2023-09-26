@@ -28,6 +28,21 @@ export const OLD_LENS_RELAYER_ADDRESS =
   '0xD1FecCF6881970105dfb2b654054174007f0e07E';
 
 export const LENSSHARE_TAIL_INGEST_URL = 'https://tail.lenshareapp.xyz';
+export const LENSTER_POLLS_SPACE = 'polls.lenster.xyz';
+export const SNAPSHOT_HUB_URL = IS_MAINNET
+  ? 'https://hub.snapshot.org'
+  : 'https://testnet.snapshot.org';
+export const MAINNET_SNAPSHOT_SEQUNECER_URL = 'https://seq.snapshot.org';
+export const TESTNET_SNAPSHOT_SEQUNECER_URL =
+  'https://testnet.seq.snapshot.org';
+export const SNAPSHOT_SEQUNECER_URL = IS_MAINNET
+  ? MAINNET_SNAPSHOT_SEQUNECER_URL
+  : TESTNET_SNAPSHOT_SEQUNECER_URL;
+export const MAINNET_SNAPSHOT_URL = 'https://snapshot.org';
+export const TESTNET_SNAPSHOT_URL = 'https://demo.snapshot.org';
+export const SNAPSHOT_URL = IS_MAINNET
+  ? MAINNET_SNAPSHOT_URL
+  : TESTNET_SNAPSHOT_URL;
 
 export const IPFS_FREE_UPLOAD_LIMIT = IS_MAINNET ? 5000 : 100; // in MB
 

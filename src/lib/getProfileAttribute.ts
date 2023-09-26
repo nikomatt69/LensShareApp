@@ -1,13 +1,7 @@
 import type { Attribute, Maybe } from '@/utils/lens/generatedLenster';
 
-type Key =
-  | 'hasPrideLogo'
-  | 'app'
-  | 'twitter'
-  | 'location'
-  | 'website'
-  | 'statusEmoji'
-  | 'statusMessage';
+
+type Key = 'x' | 'location' | 'website' | 'statusEmoji' | 'statusMessage';
 
 /**
  * Returns the attribute value for a given key from an array of attributes.

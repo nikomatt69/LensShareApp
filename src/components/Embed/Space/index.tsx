@@ -154,8 +154,10 @@ const Space: FC<SpaceProps> = ({ publication }) => {
             signMessage({ message: msg.message });
           }}
         >
-          <div className="md:block">{calculateRemainingTime()}</div>
-          
+          <div className="hidden md:block">{calculateRemainingTime()}</div>
+          <div className="md:hidden">
+            Spaces will open in desktop only
+          </div>
         </Button>
       </div>
     </Wrapper>
@@ -163,3 +165,4 @@ const Space: FC<SpaceProps> = ({ publication }) => {
 };
 
 export default Space;
+

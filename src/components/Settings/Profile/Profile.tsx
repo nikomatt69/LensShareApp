@@ -148,8 +148,8 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
       name: profile?.name ?? '',
       location: getProfileAttribute(profile?.attributes, 'location'),
       website: getProfileAttribute(profile?.attributes, 'website'),
-      twitter: getProfileAttribute(profile?.attributes, 'twitter')?.replace(
-        /(https:\/\/)?twitter\.com\//,
+      twitter: getProfileAttribute(profile?.attributes, 'x')?.replace(
+        /(https:\/\/)?x\.com\//,
         ''
       ),
       bio: profile?.bio ?? ''
@@ -180,7 +180,7 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
                 ![
                   'location',
                   'website',
-                  'twitter',
+                  'x',
                   'hasPrideLogo',
                   'statusEmoji',
                   'statusMessage',
@@ -190,7 +190,7 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
             .map(({ key, value }) => ({ key, value })) ?? []),
           { key: 'location', value: location },
           { key: 'website', value: website },
-          { key: 'twitter', value: twitter },
+          { key: 'x', value: twitter },
 
           {
             key: 'statusEmoji',
@@ -270,9 +270,9 @@ const ProfileSettingsForm: FC<ProfileSettingsFormProps> = ({ profile }) => {
             {...form.register('website')}
           />
           <Input
-            label={`Twitter`}
+            label={`X`}
             type="text"
-            prefix="https://twitter.com"
+            prefix="https://x.com"
             placeholder="gavin"
             {...form.register('twitter')}
           />

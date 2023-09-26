@@ -1,4 +1,4 @@
-import type { MetadataAttributeOutput } from '@/utils/lens/generatedLenster';
+import type { MetadataAttributeOutput } from '@/utils/lens/generated5';
 
 /**
  * Returns the attribute value for a given trait type from an array of publication attributes.

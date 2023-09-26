@@ -18,8 +18,9 @@ import Space from '../Embed/Space';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { useSpacesStore } from '@/store/spaces';
 import PreviewSpaces from '../Spaces2/PreviewSpaces/PreviewSpaces';
-import AudioSpaces from '../Spaces2';
+import Spaces from '../Spaces2';
 import { OG } from '@/types/misc';
+import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -38,7 +39,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const canShowMore = metadata?.content?.length > 450 && showMore;
   const urls = getURLs(metadata?.content);
   const hasURLs = urls?.length > 0;
-  
+  const snapshotProposalId = getSnapshotProposalId(urls);
   const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
 
   const quotedPublicationId = getPublicationAttribute(
@@ -54,8 +55,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     ? JSON.parse(spaceObject)
     : null;
 
-  const filterId = quotedPublicationId;
-  let rawContent = metadata.content;
+  const filterId = snapshotProposalId || quotedPublicationId;
+  let rawContent = metadata?.content;
 
   if (filterId) {
     for (const url of urls) {
@@ -115,6 +116,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
+  
 
 
     
@@ -124,7 +126,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           publicationId={publication.id}
           onData={onOembedData}
         />):null}
-      {showSpacesLobby ? (<Space publication={publication} />):null}
+    
       {showQuotedPublication ? (
         <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
       ) : null}

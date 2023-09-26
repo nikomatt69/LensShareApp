@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
 import { Icons } from '../Common/assets/Icons';
-import { Profile, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import { Profile, useProfilesQuery } from '@/utils/lens/generated5';
 import getAvatar from '@/lib/getAvatar';
 
 const SpacesSummary: FC = () => {

@@ -50,6 +50,11 @@ import AddToHome from './AddToHome';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import { useNonceStore } from '@/store/nonce';
 import CuratedHome from '../Echos/CuratedHome';
+import Space from '../Embed/Space';
+import getPublicationAttribute from '@/utils/lib/getPublicationAttribute';
+import { SpaceMetadata } from '@/types/misc';
+import getURLs from '../Composer/getURLs';
+import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
 interface Props {
   publication:Publication
 
@@ -57,7 +62,7 @@ interface Props {
 
 const Home2: FC<Props> = ({ publication}) => {
   const [mounted, setMounted] = useState(false);
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -78,6 +83,11 @@ const Home2: FC<Props> = ({ publication}) => {
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
 
+
+
+
+
+
   const resetAuthState = () => {
     setProfileId(null);
     setCurrentProfile(null);
@@ -95,6 +105,9 @@ const Home2: FC<Props> = ({ publication}) => {
       options
     );
   }
+
+
+ 
 
   const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
@@ -202,8 +215,9 @@ const Home2: FC<Props> = ({ publication}) => {
           }
     </GridItemEight>
     <GridItemFour className='block max-h-40'>
+
     <Footer />
-    {showSpacesLobby && <Spaces />}
+  
     
 
     <Wrapper publication={publication}>

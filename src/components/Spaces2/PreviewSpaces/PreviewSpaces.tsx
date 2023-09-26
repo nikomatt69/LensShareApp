@@ -23,14 +23,15 @@ const PreviewSpaces: FC = () => {
   const { setShowSpacesLobby, setShowSpacesWindow } = useSpacesStore();
   const { space, lensAccessToken } = useSpacesStore();
   const currentProfile = useAppStore((state) => state.currentProfile);
-
+  const { query, push } = useRouter();
   const { initialize, roomState } = useHuddle01();
   const { joinLobby, previewPeers } = useLobby();
   const { joinRoom, isRoomJoined } = useRoom();
 
   useEffectOnce(() => {
-    initialize('3kzet_ujpjtF8dzciFefEOAZqrDNpdQS');
+    initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
   });
+
 
 
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {

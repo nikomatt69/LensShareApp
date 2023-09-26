@@ -346,7 +346,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             </Link>
           </MetaDetails>
         )}
-        {getProfileAttribute(profile?.attributes, 'twitter') && (
+        {getProfileAttribute(profile?.attributes, 'x') && (
           <MetaDetails
             icon={
               <img
@@ -354,21 +354,21 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
                 className="h-4 w-4"
                 height={16}
                 width={16}
-                alt="Twitter Logo"
+                alt="X Logo"
               />
             }
             dataTestId="profile-meta-twitter"
           >
             <Link
-              href={`https://twitter.com/${getProfileAttribute(
+              href={`https://x.com/${getProfileAttribute(
                 profile?.attributes,
-                'twitter'
+                'x'
               )}`}
               target="_blank"
               rel="noreferrer noopener"
             >
-              {getProfileAttribute(profile?.attributes, 'twitter')?.replace(
-                'https://twitter.com/',
+              {getProfileAttribute(profile?.attributes, 'x')?.replace(
+                'https://x.com/',
                 ''
               )}
             </Link>

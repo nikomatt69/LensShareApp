@@ -678,7 +678,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
     // Condition for gating the content
     const collectAccessCondition: CollectCondition = { thisPublication: true };
     const followAccessCondition: FollowCondition = {
-      profileId: currentProfile.id
+      profileId: currentProfile?.id
     };
 
     // Create the access condition

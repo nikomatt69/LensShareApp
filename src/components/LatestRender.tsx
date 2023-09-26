@@ -161,12 +161,13 @@ const LatestRender: FC<Props> = ({ publication}) => {
      <Latest/>
      </GridItemEight>
      <GridItemFour className='block'>
+     <Footer/>
       
       <Wrapper publication={publication}>
         <div className='hidden lg:block xl:block'><CuratedHome /></div>
         
           </Wrapper>
-      <Footer/>
+      
     
    </GridItemFour>
    
