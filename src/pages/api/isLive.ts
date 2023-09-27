@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse, spaceId: strin
     const huddleResponse = await axios.get(
       `http://api.huddle01.com/api/v1/live-meeting?roomId=${spaceId}`,
       {
-        method: 'get',
+        method: 'GET',
         
    
     

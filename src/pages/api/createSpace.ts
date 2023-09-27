@@ -50,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const { payload } = jwt.decode(accessToken) as { payload: any };
-    const { data } = await axios.post(`api/create-room`, {
+    const { data } = await axios.post(`https://api.huddle01.com/api/v1/create-room`, {
       fetchPolicy:'no-cors',
       title: 'LensShare-Meet',
       hostWallets: [payload.id],
