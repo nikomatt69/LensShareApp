@@ -1,4 +1,4 @@
-import { SPACES_WORKER_URL } from '@/constants';
+import { BASE_URL, SPACES_WORKER_URL } from '@/constants';
 import axios from 'axios';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
 import { useSpacesStore } from '@/store/spaces';
@@ -42,8 +42,7 @@ const useCreateSpace = (): [() => Promise<CreateSpaceResponse>] => {
       };
     }
     try {
-      const response = await axios.post( `${SPACES_WORKER_URL}/createSpace`,{
-        fetchPolicy:'no-cors',
+      const response = await axios.post( `${BASE_URL}/api/createSpace`,{
         data: payload
       });
       return response.data;

@@ -17,8 +17,8 @@ import DecryptedPublicationBody from '../Publication/DecryptedPublicationBody';
 import Space from '../Embed/Space';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { useSpacesStore } from '@/store/spaces';
-import PreviewSpaces from '../Spaces2/PreviewSpaces/PreviewSpaces';
-import Spaces from '../Spaces2';
+import PreviewSpaces from '../Spaces/PreviewSpaces/PreviewSpaces';
+import Spaces from '../Spaces';
 import { OG } from '@/types/misc';
 import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
 

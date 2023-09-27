@@ -1,5 +1,5 @@
 
-import Dropdown from '@/components/Spaces2/Common/Dropdown';
+import Dropdown from '@/components/Spaces/Common/Dropdown';
 import { Input } from '@/components/UI/Input';
 import { Spinner } from '@/components/UI/Spinner';
 import { CalendarIcon } from '@heroicons/react/24/outline';

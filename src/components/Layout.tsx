@@ -20,10 +20,10 @@ import { useTheme } from 'next-themes';
 import GlobalModals from './GlobalModals';
 import GlobalAlerts from './Publication/Actions/Menu/GlobalAlerts';
 import Wrapper from './Echos/Wrapper';
-import Spaces from './Spaces2';
-import SpacesWindow from './Spaces2/SpacesWindow/SpacesWindow';
+import Spaces from './Spaces';
+import SpacesWindow from './Spaces/SpacesWindow/SpacesWindow';
 import { useSpacesStore } from '@/store/spaces';
-import PreviewSpaces from './Spaces2/PreviewSpaces/PreviewSpaces';
+import PreviewSpaces from './Spaces/PreviewSpaces/PreviewSpaces';
 import Loader from './UI/Loader';
 import { useNonceStore } from '@/store/nonce';
 

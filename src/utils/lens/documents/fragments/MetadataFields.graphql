@@ -2,8 +2,9 @@ fragment MetadataFields on MetadataOutput {
   name
   content
   image
+  tags
   attributes {
-    displayType
+
     traitType
     value
   }

@@ -45,5 +45,5 @@ module.exports = {
       }
     }
   },
-  plugins: ['@headlessui/tailwindcss']
+  plugins: [require('@headlessui/tailwindcss'),require('@tailwindcss/aspect-ratio'), require('@tailwindcss/forms')]
 };

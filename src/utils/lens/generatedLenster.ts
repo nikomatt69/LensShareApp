@@ -3630,7 +3630,7 @@ export enum PublicationTypes {
   Comment = 'COMMENT',
   Mirror = 'MIRROR',
   Post = 'POST',
-  Spaces = 'SPACES'
+
 }
 
 export type PublicationValidateMetadataResult = {
@@ -4066,7 +4066,8 @@ export enum RelayRoleKey {
   ProxyActionFollow_10 = 'PROXY_ACTION_FOLLOW_10',
   WithSig_1 = 'WITH_SIG_1',
   WithSig_2 = 'WITH_SIG_2',
-  WithSig_3 = 'WITH_SIG_3'
+  WithSig_3 = 'WITH_SIG_3',
+  ZkRelayer_1 = 'ZK_RELAYER_1'
 }
 
 /** The relayer result */

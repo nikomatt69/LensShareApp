@@ -1,6 +1,6 @@
 
 import type { NextPage } from 'next';
-import Spaces from '@/components/Spaces2';
+import Spaces from '@/components/Spaces';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import Explore from '@/components/HomePage/Explore';
@@ -37,7 +37,7 @@ import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import SuggestedAccounts from '../Sidebar/SuggestedAccounts';
 import Footer from '../Sidebar/Footer';
 import { useSpacesStore } from '@/store/spaces';
-import SpacesWindow from '../Spaces2/SpacesWindow/SpacesWindow';
+import SpacesWindow from '../Spaces/SpacesWindow/SpacesWindow';
 import EchosPage from '@/pages/musicfeed';
 import Echos from '../Echos/EchosPage';
 import Audio from '../Echos/Audio';
@@ -109,7 +109,7 @@ const Home2: FC<Props> = ({ publication}) => {
 
  
 
-  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
+  const { showSpacesLobby, showSpacesWindow } = useSpacesStore();
 
   const getIsAuthTokensAvailable = () => {
     const accessToken = localStorage.getItem('accessToken');
@@ -181,8 +181,10 @@ const Home2: FC<Props> = ({ publication}) => {
   <div>
     <GridLayout className="max-w-[1200px] pt-6"> 
     <MetaTags title={`Home • ${APP_NAME}`} /> 
+    {showSpacesLobby && <Spaces />}
     <GridItemEight>
       <AddToHome />
+  
       {resolvedTheme === 'dark' ? (
     <Image
             className="cursor-pointer"

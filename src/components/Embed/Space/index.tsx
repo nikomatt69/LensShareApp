@@ -40,6 +40,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     getPublicationAttribute(metadata.attributes, 'audioSpace')
   );
 
+
   const { signMessage, isLoading: signing } = useSignMessage({
     onSuccess: async (data) => {
       const token = await getLensAccessToken(data, address as string);
