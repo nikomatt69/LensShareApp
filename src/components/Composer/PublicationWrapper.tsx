@@ -1,7 +1,9 @@
 import type { Publication } from '@/utils/lens/generatedLenster';
-import clsx from 'clsx';
+
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
+import cn from '@/components/UI/cn';
 
 interface PublicationWrapperProps {
   publication: Publication;
@@ -17,18 +19,22 @@ const PublicationWrapper: FC<PublicationWrapperProps> = ({
   const { push } = useRouter();
 
   return (
-    <article
-      className={clsx(className)}
+    <motion.article
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={cn(className)}
       onClick={() => {
         const selection = window.getSelection();
         if (!selection || selection.toString().length === 0) {
           push(`/post/${publication?.id}`);
         }
       }}
-      data-testid={`publication-${publication.id}`} aria-hidden="true"
+      data-testid={`publication-${publication.id}`}
+      aria-hidden="true"
     >
       {children}
-    </article>
+    </motion.article>
   );
 };
 

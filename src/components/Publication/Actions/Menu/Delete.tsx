@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import type { FC } from 'react';
@@ -19,7 +19,7 @@ const Delete: FC<DeleteProps> = ({ publication }) => {
     <Menu.Item
       as="div"
       className={({ active }) =>
-        clsx(
+        cn(
           { 'dropdown-active': active },
           'm-2 block cursor-pointer rounded-lg px-4 py-1.5 text-sm text-red-500'
         )

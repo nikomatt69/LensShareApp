@@ -1,6 +1,6 @@
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { FeedItem, Profile, Publication } from '@/utils/lens/generatedLenster';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import { usePublicationStore } from 'src/store/publication4';
 import UserProfile from '../ProfilePage/UserProfile';
@@ -48,7 +48,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
 
   return (
     <div
-      className={clsx(
+      className={cn(
         quoted ? 'pb-2' : 'pb-4',
         'relative m-2 flex justify-between space-x-1.5 pt-3'
       )}

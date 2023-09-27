@@ -8,7 +8,7 @@ import {
   useRoom,
   useVideo
 } from '@huddle01/react/hooks';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
@@ -129,7 +129,7 @@ const Meet: FC = () => {
       <div className="my-10 flex h-[80vh] items-center justify-center self-stretch">
         <div className="flex h-full grid-cols-2 items-center justify-center gap-10 rounded-lg">
           <div
-            className={clsx(
+            className={cn(
               Object.values(peers).length === 0
                 ? 'my-10 h-full w-[60vw]'
                 : 'h-[50vh] w-[40vw]',
@@ -153,7 +153,7 @@ const Meet: FC = () => {
               />
             )}
             <div
-              className={clsx(
+              className={cn(
                 resolvedTheme == 'dark'
                   ? 'bg-gray-900 text-blue-700 '
                   : 'text-blue-700 bg-brand-100',
@@ -167,7 +167,7 @@ const Meet: FC = () => {
           {Object.values(peers).map(({ cam, peerId, mic, displayName }) => (
             <div
               key={peerId}
-              className={clsx(
+              className={cn(
                 resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
                 'relative flex h-[50vh] w-[40vw] flex-shrink-0 items-center justify-center rounded-lg'
               )}
@@ -184,7 +184,7 @@ const Meet: FC = () => {
               )}
               {mic && <AudioElem track={mic} key={peerId} />}
               <div
-                className={clsx(
+                className={cn(
                   resolvedTheme == 'dark'
                     ? 'bg-blue-700  text-slate-100'
                     : 'text-brand-500 bg-brand-100',
@@ -211,7 +211,7 @@ const Meet: FC = () => {
           ) : (
             <button
               onClick={stopVideoStream}
-              className={clsx(
+              className={cn(
                 resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
                 'flex h-10 w-10 items-center justify-center rounded-xl'
               )}
@@ -231,7 +231,7 @@ const Meet: FC = () => {
           ) : (
             <button
               onClick={stopAudioStream}
-              className={clsx(
+              className={cn(
                 resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
                 'flex h-10 w-10 items-center justify-center rounded-xl'
               )}

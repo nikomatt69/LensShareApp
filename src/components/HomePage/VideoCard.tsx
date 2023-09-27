@@ -25,7 +25,7 @@ import ByteVideo from '../Bytes/ByteVideo';
 import { useRouter } from 'next/router';
 import InterweaveContent from '../UI/InterweaveContent';
 import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import ReportModal from '../DetailPage/ReportModal';
 
 import { SIGN_IN_REQUIRED_MESSAGE } from '@/constants';

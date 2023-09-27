@@ -4,7 +4,7 @@ import imageKit from '@/lib/imageKit';
 
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import { PhotoIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { ChangeEvent, FC, Ref } from 'react';
 import { useState } from 'react';
 import { Image } from '@/components/UI/Image';
@@ -68,7 +68,7 @@ const CoverImage: FC<CoverImageProps> = ({
       </button>
       {isNew ? (
         <label
-          className={clsx(
+          className={cn(
             { visible: loading && !cover, invisible: cover },
             'absolute top-0 grid h-24 w-24 cursor-pointer place-items-center bg-gray-100 backdrop-blur-lg group-hover:visible dark:bg-gray-900 md:h-40 md:w-40'
           )}

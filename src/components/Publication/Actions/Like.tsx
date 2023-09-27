@@ -12,7 +12,7 @@ import { ApolloCache } from '@apollo/client';
 
 import { HeartIcon } from '@heroicons/react/24/solid';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -138,7 +138,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
     : 'w-[15px] sm:w-[18px]';
 
   return (
-    <div className={clsx('text-pink-500', 'flex items-center space-x-1')}>
+    <div className={cn('text-pink-500', 'flex items-center space-x-1')}>
       <motion.button
         whileTap={{ scale: 0.9 }}
         animate={{
@@ -147,7 +147,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
         onClick={createLike}
         aria-label="Like"
       >
-        <div className={clsx('hover:bg-pink-300/20 ', 'rounded-full p-1.5')}>
+        <div className={cn('hover:bg-pink-300/20 ', 'rounded-full p-1.5')}>
           <Tooltip
             placement="top"
             content={liked ? `Unlike` : `Like`}

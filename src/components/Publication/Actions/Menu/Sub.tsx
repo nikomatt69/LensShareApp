@@ -3,7 +3,7 @@ import stopEventPropagation from '@/lib/stopEventPropagation';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import { ClipboardIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import toast from 'react-hot-toast';
 

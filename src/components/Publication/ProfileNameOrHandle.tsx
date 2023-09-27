@@ -1,7 +1,7 @@
 import formatHandle from '@/utils/functions/formatHandle';
 import { Profile } from '@/utils/lens/generatedLenster';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import Slug from '../UI/Slug';
@@ -25,7 +25,7 @@ const ProfileNameOrHandle: FC<ProfileNameOrHandleProps> = ({
     <>
       <Link
         href={`/u/${profile?.id}`}
-        className={clsx('max-w-sm truncate hover:underline', className)}
+        className={cn('max-w-sm truncate hover:underline', className)}
       >
         <b className="whitespace-nowrap">
           {profile?.name ? (

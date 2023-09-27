@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { SVGProps } from 'react';
 import React from 'react';
 
@@ -8,7 +8,7 @@ const ThreeDotsOutline = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 20 6"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={clsx(props.className, 'rotate-90')}
+    className={cn(props.className, 'rotate-90')}
   >
     <path
       fillRule="evenodd"

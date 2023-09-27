@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 
 interface Props {
@@ -20,7 +20,7 @@ export const Spinner: FC<Props> = ({
 }) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         {
           'border-blue-200 border-t-blue-600': variant === 'primary',
           'border-gray-200 border-t-gray-600': variant === 'secondary',

@@ -3,7 +3,7 @@ import getIPFSLink from '@/lib/getIPFSLink';
 import { UserSuggestion } from '@/typesLenster';
 import { useLazyQuery } from '@apollo/client';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Dispatch, FC } from 'react';
 import { useEffect, useRef } from 'react';
 import { Mention, MentionsInput } from 'react-mentions';
@@ -27,7 +27,7 @@ interface UserProps {
 
 const User: FC<UserProps> = ({ suggestion, focused }) => (
   <div
-    className={clsx(
+    className={cn(
       { 'dropdown-active': focused },
       'm-1.5 flex items-center space-x-2 rounded-xl px-3 py-1'
     )}
@@ -115,7 +115,7 @@ export const MentionTextArea: FC<Props> = ({
   return (
     <div className="mb-2">
       <MentionsInput
-        className={clsx(
+        className={cn(
           hideBorder ? 'mention-input-borderless' : 'mention-input'
         )}
         value={publicationContent}

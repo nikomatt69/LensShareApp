@@ -1,5 +1,5 @@
 import { Menu } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 
@@ -18,7 +18,7 @@ const DeviceList: FC<DeviceListProps> = ({ devices, setDevice }) => {
         <Menu.Item key={device.deviceId}>
           {({ active }) => (
             <button
-              className={clsx(
+              className={cn(
                 'flex h-full w-full justify-start rounded-lg px-4 py-2 text-sm ',
                 !active
                   ? 'text-slate-500'

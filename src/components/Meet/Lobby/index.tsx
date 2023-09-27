@@ -7,7 +7,7 @@ import {
   useRoom,
   useVideo
 } from '@huddle01/react/hooks';
-import { clsx } from 'clsx';
+
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
@@ -19,6 +19,7 @@ import {  useUpdateEffect } from 'usehooks-ts';
 import { BasicIcons } from '../BasicIcons';
 import SwitchDeviceMenu from '../SwitchDeviceMenu';
 import { ArrowRightIcon, UserIcon } from '@heroicons/react/24/outline';
+import cn from '@/components/UI/cn';
 
 type HTMLAudioElementWithSetSinkId = HTMLAudioElement & {
   setSinkId: (id: string) => void;
@@ -117,7 +118,7 @@ const Lobby: NextPage = () => {
     <main className="bg-lobby flex h-screen flex-col items-center justify-center">
       <div className="flex h-[35vh] w-[35vw] flex-col items-center justify-center gap-4">
         <div
-          className={clsx(
+          className={cn(
             resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
             'relative mx-auto flex w-fit items-center justify-center rounded-lg text-center'
           )}
@@ -140,7 +141,7 @@ const Lobby: NextPage = () => {
           </div>
         </div>
         <div
-          className={clsx(
+          className={cn(
             resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
             'flex items-center justify-center self-stretch rounded-lg p-2'
           )}
@@ -158,7 +159,7 @@ const Lobby: NextPage = () => {
             ) : (
               <button
                 onClick={stopVideoStream}
-                className={clsx(
+                className={cn(
                   resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
@@ -180,7 +181,7 @@ const Lobby: NextPage = () => {
                 onClick={() => {
                   stopAudioStream();
                 }}
-                className={clsx(
+                className={cn(
                   resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
@@ -195,14 +196,14 @@ const Lobby: NextPage = () => {
           <div className="flex w-full flex-col justify-center gap-1">
             Set a display name
             <div
-              className={clsx(
+              className={cn(
                 resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
                 'gap- flex w-full items-center rounded-[10px] border border-zinc-800 pl-3 backdrop-blur-[400px]'
               )}
             >
               <div className="mr-2">
                 <UserIcon
-                  className={clsx(
+                  className={cn(
                     resolvedTheme == 'dark'
                       ? 'text-slate-100'
                       : 'text-gray-900',

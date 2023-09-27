@@ -128,7 +128,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
             showCount={true} tags={''}          />
         )
       )}
-      {hasMore && <span ref={observe} />}
+      {hasMore ? <span ref={observe} /> : null}
     </Card>
   );
 };

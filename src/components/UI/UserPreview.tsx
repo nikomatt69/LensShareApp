@@ -1,6 +1,6 @@
 import formatHandle from '@/utils/functions/formatHandle';
 import Tippy from '@tippyjs/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Profile } from '@/utils/lens/generatedLenster';
 import { useProfileLazyQuery } from '@/utils/lens/generatedLenster';
 import type { FC, ReactNode } from 'react';
@@ -37,7 +37,7 @@ const UserPreview: FC<Props> = ({
     <img
       src={getProfilePicture(lazyProfile)}
       loading="lazy"
-      className={clsx(
+      className={cn(
         isBig ? 'h-14 w-14' : 'h-10 w-10',
         'rounded-full border bg-gray-200 '
       )}
@@ -50,7 +50,7 @@ const UserPreview: FC<Props> = ({
   const UserName = () => (
     <>
       <div className="flex max-w-sm items-center gap-1 truncate">
-        <div className={clsx(isBig ? 'font-bold' : 'text-md')}>
+        <div className={cn(isBig ? 'font-bold' : 'text-md')}>
           {lazyProfile?.name ?? formatHandle(lazyProfile?.handle)}
         </div>
       </div>
@@ -75,7 +75,7 @@ const UserPreview: FC<Props> = ({
         <div>
           {lazyProfile?.bio && (
             <div
-              className={clsx(
+              className={cn(
                 isBig ? 'text-base' : 'text-sm',
                 'mt-2',
                 'linkify break-words leading-6'

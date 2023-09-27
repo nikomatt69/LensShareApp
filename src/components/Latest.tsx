@@ -212,7 +212,7 @@ const Latest = () => {
         publication={publication as Publication}
         showCount={true} tags={''} />
     ))}
-    {hasMore && <span ref={observe} />}
+    {hasMore ? <span ref={observe} /> : null}
   </Card>
     </div>
   );

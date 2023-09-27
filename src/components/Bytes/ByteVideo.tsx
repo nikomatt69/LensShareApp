@@ -11,7 +11,7 @@ import VideoPlayer from '@/utils/VideoPlayer';
 import BottomOverlay from './BottomOverlay';
 import ByteActions from './ByteActions';
 import TopOverlay from './TopOverlay';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useAppStore } from '@/store/app';
 import MobileBottomOverlay from './MobileBottomOverlay';
 import { Image } from '../UI/Image';

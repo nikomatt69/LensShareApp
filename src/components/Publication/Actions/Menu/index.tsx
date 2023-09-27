@@ -1,6 +1,6 @@
 import { Menu } from '@headlessui/react';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useAppStore } from 'src/store/app';
@@ -36,7 +36,7 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
           aria-label="More"
           data-testid={`publication-${publication.id}-menu`}
         >
-          <BiDotsVertical className={clsx('lt-text-gray-500', iconClassName)} />
+          <BiDotsVertical className={cn('lt-text-gray-500', iconClassName)} />
         </button>
       </Menu.Button>
       <MenuTransition>

@@ -4,7 +4,7 @@ import type {
   Profile,
   Publication
 } from '@/utils/lens/generatedLenster';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 
 import HiddenPublication from './HiddenPublication';
@@ -66,7 +66,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
 
   return (
     <PublicationWrapper
-      className={clsx(
+      className={cn(
         isFirst && 'rounded-t-xl',
         isLast && 'rounded-b-xl',
         'cursor-pointer p-5 hover:bg-gray-100 dark:hover:bg-gray-700'

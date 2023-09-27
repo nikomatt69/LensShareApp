@@ -1,5 +1,5 @@
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import React, { useMemo } from 'react';
 import { THUMBNAIL_GENERATE_COUNT } from './ChooseThumbnail';
 
@@ -11,7 +11,7 @@ const ThumbnailsShimmer = () => {
       {thumbnails.map((e, i) => (
         <div
           key={`${e}_${i}`}
-          className={clsx(
+          className={cn(
             'h-32 w-full max-w-[5rem] animate-pulse rounded-lg',
             i === 0 && 'min-w-[4rem]'
           )}

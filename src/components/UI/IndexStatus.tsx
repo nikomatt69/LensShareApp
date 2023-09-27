@@ -1,6 +1,6 @@
 import { useHasTxHashBeenIndexedQuery } from '@/types/graph';
 import { FC, useState } from 'react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { Spinner } from './Spinner';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { POLYGONSCAN_URL } from '@/constants';
@@ -42,7 +42,7 @@ const IndexStatus: FC<Props> = ({
 
   return (
     <Link
-      className={clsx({ hidden: hide }, 'ml-auto text-sm font-medium')}
+      className={cn({ hidden: hide }, 'ml-auto text-sm font-medium')}
       href={`${POLYGONSCAN_URL}/tx/${txHash}`}
       target="_blank"
       rel="noreferrer noopener"

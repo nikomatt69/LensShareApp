@@ -17,7 +17,7 @@ import type {
 } from '@lens-protocol/sdk-gated/dist/graphql/types';
 
 import axios from 'axios';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
@@ -29,10 +29,14 @@ import { Card } from '../UI/Card';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { RiLogoutCircleFill } from 'react-icons/ri';
 import {
+  ArrowRightOnRectangleIcon,
+  CircleStackIcon,
   EyeIcon,
   FingerPrintIcon,
   LockClosedIcon,
   PhotoIcon,
+  RectangleStackIcon,
+  UserPlusIcon,
   UsersIcon
 } from '@heroicons/react/24/outline';
 import { BsCollection, BsDatabase, BsDatabaseFill } from 'react-icons/bs';
@@ -48,43 +52,8 @@ import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { BiLogInCircle, BiLogOut } from 'react-icons/bi';
 import { SuperfluidInflowsDocument } from '@/utils/lens/generated4';
 import superfluidClient from '@/apollo-client';
-export interface Sender {
-  id: string;
-}
-export interface UnderlyingToken {
-  name: string;
-  symbol: string;
-}
-export interface Token {
-  name: string;
-  symbol: string;
-  decimals: string;
-  id: string;
-  underlyingToken: UnderlyingToken;
-}
 
-export interface Inflow {
-  id: string;
-  sender: Sender;
-  token: Token;
-  deposit: string;
-  currentFlowRate: string;
-  createdAtTimestamp: string;
-}
-
-
-
-export interface Account {
-  createdAtTimestamp: string;
-  createdAtBlockNumber: string;
-  isSuperApp: boolean;
-  updatedAtBlockNumber: string;
-  updatedAtTimestamp: string;
-  inflows: Inflow[];
-}
-export interface SuplerfluidInflowsDataType {
-  account: Account;
-}
+import useContractMetadata from '@/utils/hooks/useContractMetadata';
 interface DecryptMessageProps {
   icon: ReactNode;
   children: ReactNode;
@@ -99,19 +68,10 @@ const DecryptMessage: FC<DecryptMessageProps> = ({ icon, children }) => (
 
 interface DecryptedPublicationBodyProps {
   encryptedPublication: Publication;
-  profile: Profile;
-  inflow:{ id: string;
-    sender: Sender;
-    token: Token;
-    deposit: string;
-    currentFlowRate: string;
-    createdAtTimestamp: string;}
 }
 
 const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
-  encryptedPublication,
-  profile,
-  inflow
+  encryptedPublication
 }) => {
   const [content, setContent] = useState<any>();
   const { pathname } = useRouter();
@@ -119,27 +79,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   const setShowAuthModal = useGlobalModalStateStore(
     (state) => state.setShowAuthModal
   );
-  const [currentAddress, setCurrentAddress] = useState('');
-  const [superfluidInflowsData, setSuperfluidInflowsData] =
-    useState<SuplerfluidInflowsDataType>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error>();
-  console.log('profile?.ownedBy', profile?.ownedBy);
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } =
-        await superfluidClient.query<SuplerfluidInflowsDataType>({
-          query: SuperfluidInflowsDocument,
-          variables: { id: profile?.ownedBy.toLowerCase() }
-        });
-      setCurrentAddress(profile?.ownedBy);
-      setSuperfluidInflowsData(data);
-      setLoading(false);
-      setError(error);
-    };
-
-    fetchData();
-  }, [profile]);
   const [decryptedData, setDecryptedData] = useState<any>(null);
   const [decryptError, setDecryptError] = useState<any>(null);
   const [isDecrypting, setIsDecrypting] = useState(false);
@@ -204,7 +143,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
     enabled: Boolean(tokenCondition)
   });
 
-  const { data: nftData } = useNft({
+  const { data: contractMetadata } = useContractMetadata({
     address: nftCondition?.contractAddress,
     chainId: nftCondition?.chainID,
     enabled: Boolean(nftCondition)
@@ -236,8 +175,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   // NFT check - https://docs.lens.xyz/docs/gated#erc20-token-ownership
   const doesNotOwnNft = reasons?.includes(DecryptFailReason.DoesNotOwnNft);
 
-
-
   const getDecryptedData = async () => {
     if (!walletClient || isDecrypting) {
       return;
@@ -251,7 +188,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
     const sdk = await LensGatedSDK.create({
       provider: publicClient as any,
       signer: walletClient as any,
-      env: LIT_PROTOCOL_ENV as LensEnvironment
+      env: LIT_PROTOCOL_ENVIRONMENT as LensEnvironment
     });
     const { decrypted, error } = await sdk.gated.decryptMetadata(data);
     setDecryptedData(decrypted);
@@ -263,14 +200,14 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!currentProfile) {
     return (
       <Card
-        className={clsx(cardClasses, 'bg-blue-700 !cursor-pointer')}
+        className={cn(cardClasses, '!cursor-pointer')}
         onClick={(event) => {
           stopEventPropagation(event);
           setShowAuthModal(true);
         }}
       >
-        <div className="flex items-center space-x-1 font-bold bg-blue-700 text-white">
-          <BiLogOut className="h-5 w-5" />
+        <div className="flex items-center space-x-1 font-bold text-white">
+          <ArrowRightOnRectangleIcon className="h-5 w-5" />
           <span>Login to decrypt</span>
         </div>
       </Card>
@@ -280,67 +217,67 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!canDecrypt) {
     return (
       <Card
-        className={clsx(cardClasses, 'bg-blue-700 cursor-text')}
+        className={cn(cardClasses, 'cursor-text')}
         onClick={stopEventPropagation}
       >
-        <div className="flex items-center bg-blue-700 space-x-2 font-bold">
+        <div className="flex items-center space-x-2 font-bold">
           <LockClosedIcon className="h-5 w-5 text-green-300" />
           <span className="text-base font-black text-white">
-            To view this...
+           To view this...
           </span>
         </div>
-        <div className="space-y-2 pt-3.5 bg-blue-700 text-white">
+        <div className="space-y-2 pt-3.5 text-white">
           {/* Collect checks */}
-          {hasNotCollectedPublication && (
-            <DecryptMessage icon={<BsCollection className="h-4 w-4" />}>
+          {hasNotCollectedPublication ? (
+            <DecryptMessage icon={<RectangleStackIcon className="h-4 w-4" />}>
               Collect the{' '}
               <Link
                 href={`/post/${collectCondition?.publicationId}`}
                 className="font-bold lowercase underline"
-               
+              
               >
                 {encryptedPublication?.__typename}
               </Link>
             </DecryptMessage>
-          )}
-          {collectNotFinalisedOnChain && (
+          ) : null}
+          {collectNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<BsCollection className="h-4 w-4 animate-pulse" />}
+              icon={<RectangleStackIcon className="h-4 w-4 animate-pulse" />}
             >
               Collect finalizing on chain...
             </DecryptMessage>
-          )}
+          ) : null}
 
           {/* Follow checks */}
-          {doesNotFollowProfile && (
-            <DecryptMessage icon={<UsersIcon className="h-4 w-4" />}>
+          {doesNotFollowProfile ? (
+            <DecryptMessage icon={<UserPlusIcon className="h-4 w-4" />}>
               Follow{' '}
               <Link
-                href={`/u/${
+                href={`/u/${formatHandle(
                   encryptedPublication?.profile?.id
-                }`}
+                )}`}
                 className="font-bold"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
               </Link>
             </DecryptMessage>
-          )}
-          {followNotFinalisedOnChain && (
+          ) : null}
+          {followNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<UsersIcon className="h-4 w-4 animate-pulse" />}
+              icon={<UserPlusIcon className="h-4 w-4 animate-pulse" />}
             >
-              Follow finalizing on chain...
+             Follow finalizing on chain...
             </DecryptMessage>
-          )}
+          ) : null}
 
           {/* Token check */}
-          {unauthorizedBalance && (
-            <DecryptMessage icon={<BsDatabase className="h-4 w-4" />}>
+          {unauthorizedBalance ? (
+            <DecryptMessage icon={<CircleStackIcon className="h-4 w-4" />}>
               You need{' '}
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}
                 className="font-bold underline"
-                
+               
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -348,16 +285,13 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               </Link>{' '}
               to unlock
             </DecryptMessage>
-          )}
+          ) : null}
 
           {/* NFT check */}
-          {doesNotOwnNft && (
+          {doesNotOwnNft ? (
             <DecryptMessage icon={<PhotoIcon className="h-4 w-4" />}>
               You need{' '}
-              <Tooltip
-                content={nftData?.contractMetadata?.name}
-                placement="top"
-              >
+              <Tooltip content={contractMetadata?.name} placement="top">
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
                   className="font-bold underline"
@@ -365,15 +299,12 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  {nftData?.contractMetadata?.symbol}
+                  {contractMetadata?.symbol}
                 </Link>
               </Tooltip>{' '}
               nft to unlock
             </DecryptMessage>
-          )}
-
-
-
+          ) : null}
         </div>
       </Card>
     );
@@ -397,14 +328,14 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   if (!decryptedData) {
     return (
       <Card
-        className={clsx(cardClasses, 'bg-blue-700 !cursor-pointer')}
+        className={cn(cardClasses, '!cursor-pointer')}
         onClick={async (event) => {
           stopEventPropagation(event);
           await getDecryptedData();
-         
+        
         }}
       >
-        <div className="flex items-center space-x-1 font-bold bg-blue-700 text-white">
+        <div className="flex items-center space-x-1 font-bold text-white">
           <FingerPrintIcon className="h-5 w-5" />
           <span>
             Decrypt{' '}
@@ -428,22 +359,22 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
   return (
     <div className="break-words">
       <Markup
-        className={clsx(
+        className={cn(
           { 'line-clamp-5': showMore },
           'markup linkify text-md break-words'
         )}
       >
         {content}
       </Markup>
-      {showMore && (
+      {showMore ? (
         <div className="mt-4 flex items-center space-x-1 text-sm font-bold text-gray-500">
           <EyeIcon className="h-4 w-4" />
           <Link href={`/post/${encryptedPublication?.id}`}>
             Show more
           </Link>
         </div>
-      )}
-    {publication?.media?.length ? (
+      ) : null}
+      {publication?.media?.length ? (
         <Attachments attachments={publication?.media} />
       ) : content && urls.length > 0 ? (
         <Oembed
@@ -455,4 +386,5 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
     </div>
   );
 };
+
 export default DecryptedPublicationBody;

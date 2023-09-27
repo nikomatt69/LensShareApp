@@ -12,7 +12,7 @@ import {
   useCreateSetDispatcherTypedDataMutation
 } from '@/utils/lens/generatedLenster';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -121,7 +121,7 @@ const ToggleDispatcher: FC<ToggleDispatcherProps> = ({ buttonSize = 'md' }) => {
   ) : (
     <Button
       variant={canUseRelay ? 'danger' : 'primary'}
-      className={clsx({ 'text-sm': buttonSize === 'sm' }, 'mr-auto')}
+      className={cn({ 'text-sm': buttonSize === 'sm' }, 'mr-auto')}
       disabled={isLoading}
       icon={
         isLoading ? (

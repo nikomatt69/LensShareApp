@@ -56,7 +56,6 @@ import {SuperfluidInflowsDocument} from '@/utils/lens/generated4'
 import { $convertFromMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-import clsx from 'clsx';
 import { $getRoot } from 'lexical';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -121,7 +120,7 @@ import { useReferenceModuleStore } from '@/store/reference-module';
 import ScheduleSpacesMenu from './Actions/SpaceSettings/ScheduleSpacesMenu';
 import dayjs from 'dayjs';
 
-import cn from '../UI/cn';
+import cn from '@/components/UI/cn';
 import EmojiPicker from './EmojiPicker';
 
 const Attachment = dynamic(

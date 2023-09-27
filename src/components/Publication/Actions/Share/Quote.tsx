@@ -3,7 +3,7 @@ import { NewPublicationTypes } from '@/enums';
 import { Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import { ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+
 import type { FC } from 'react';
 import { HiAnnotation } from 'react-icons/hi';
 import { useGlobalModalStateStore } from 'src/store/modals';

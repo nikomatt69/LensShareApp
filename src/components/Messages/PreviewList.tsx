@@ -7,7 +7,7 @@ import type { Profile } from '@/utils/lens/generatedLenster';
 
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/lib/conversationKey';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
@@ -107,7 +107,7 @@ const PreviewList: FC<PreviewListProps> = ({
 
   return (
     <GridItemFour
-      className={clsx(
+      className={cn(
         'xs:h-[100vh] xs:mx-2 xs:col-span-4 w-full justify-between rounded-xl sm:mx-2 sm:h-[76vh] md:h-[80vh] xl:h-[84vh]',
         className
       )}

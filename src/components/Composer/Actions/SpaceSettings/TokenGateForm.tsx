@@ -3,14 +3,14 @@ import Search from '@/components/Search/Search';
 import { Input } from '@/components/UI/Input';
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Toggle } from '@/components/UI/Toggle';
-import cn from '@/components/UI/cn';
+
 import { Profile } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 import  SearchProfile from './SeachProfile'
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import React from 'react';
 import { TokenGateCondition } from 'src/enums';

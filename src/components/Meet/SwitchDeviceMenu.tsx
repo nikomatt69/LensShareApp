@@ -1,4 +1,4 @@
-import { clsx } from 'clsx';
+import cn from '@/components/UI/cn';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ const SwitchDeviceMenu: FC = () => {
     <>
       <button
         onClick={() => setShowSettings(!showSettings)}
-        className={clsx(
+        className={cn(
           resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
           'flex h-10 w-10 items-center justify-center rounded-xl'
         )}
@@ -27,7 +27,7 @@ const SwitchDeviceMenu: FC = () => {
       </button>
       <Modal show={showSettings} onClose={() => setShowSettings(false)}>
         <div
-          className={clsx(
+          className={cn(
             resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
             'rounded-xl p-5'
           )}

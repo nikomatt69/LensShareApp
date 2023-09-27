@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC, ReactNode } from 'react';
 import { Fragment } from 'react';
 
@@ -58,7 +58,7 @@ export const Modal: FC<ModalProps> = ({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              className={clsx(
+              className={cn(
                 { 'sm:max-w-5xl': size === 'lg' },
                 { 'sm:max-w-3xl': size === 'md' },
                 { 'sm:max-w-lg': size === 'sm' },

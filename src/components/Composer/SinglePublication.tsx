@@ -4,7 +4,7 @@ import type {
   Profile,
   Publication
 } from '@/utils/lens/generatedLenster';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 
 import HiddenPublication from './HiddenPublication';

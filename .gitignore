@@ -14,7 +14,7 @@
 
 .next
 
-
+/.well-know
 
 # production
 /build
@@ -34,7 +34,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
+.well-know
 # local env files
 .env*.local
 .env

@@ -8,7 +8,7 @@ import formatTime from '@/utils/functions/formatTime';
 import Link from 'next/link';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { getTwitterFormat } from '@/lib/formatTime4';
 import { Profile } from '@/utils/lens/generatedLenster';
 
@@ -27,7 +27,7 @@ const SmallUserProfile: FC<UserProfileProps> = ({
     <Image
       src={getAvatar(profile)}
       loading="lazy"
-      className={clsx(
+      className={cn(
         smallAvatar ? 'h-5 w-5' : 'h-6 w-6',
         'rounded-full border bg-gray-200 dark:border-gray-700'
       )}

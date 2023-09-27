@@ -7,7 +7,7 @@ import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import FollowButton from '@/components/Buttons/FollowButton';
 import { useAppStore } from 'src/store/app';
 import MesssageIcon from 'src/components/Messages/MessageIcon';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import ProfileVideos from '@/components/ProfilePage/ProfileVideos';
 import UnfollowButton from '../Buttons/UnfollowButton';
 import getAvatar from '@/lib/getAvatar';

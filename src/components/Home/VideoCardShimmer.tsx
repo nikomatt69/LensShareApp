@@ -1,12 +1,12 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import React from 'react';
 
 export const CardShimmer = ({ rounded = true }) => {
   return (
-    <div className={clsx('w-full', rounded && 'rounded-sm')}>
+    <div className={cn('w-full', rounded && 'rounded-sm')}>
       <div className="flex animate-pulse flex-col space-x-2">
         <div
-          className={clsx(
+          className={cn(
             'aspect-w-16 aspect-h-9 bg-gray-300 dark:bg-gray-700',
             rounded && 'rounded-sm'
           )}

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import React, { Fragment } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
@@ -40,7 +40,7 @@ const FullScreenModal: FC<Props> = ({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={clsx(
+                className={cn(
                   'bg-secondary h-full w-full transform text-left align-middle shadow-xl transition-all',
                   panelClassName
                 )}

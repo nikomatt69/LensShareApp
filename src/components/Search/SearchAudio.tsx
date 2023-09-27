@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import {
   Profile,
   ProfileInterestsDocument,
@@ -100,7 +100,7 @@ const Search: FC<SearchProps> = ({
           iconLeft={<HiSearchCircle />}
           iconRight={
             <XMarkIcon
-              className={clsx(
+              className={cn(
                 'cursor-pointer',
                 searchText ? 'visible' : 'invisible'
               )}
@@ -112,7 +112,7 @@ const Search: FC<SearchProps> = ({
       </form>
       {pathname !== '/search' && !hideDropdown && searchText.length > 0 && (
         <div
-          className={clsx(
+          className={cn(
             'justify-content absolute mt-2 flex w-[90%] flex-col  items-center rounded-xl text-xs',
             modalWidthClassName
           )}

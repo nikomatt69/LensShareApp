@@ -2,7 +2,7 @@ import DropMenu from '@/components/UI/DropMenu';
 import { Menu } from '@headlessui/react';
 import usePersistStore from '@/store/persist';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import React from 'react';
 import { CustomNotificationsFilterEnum } from '@/utils/custom-types';
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
@@ -23,7 +23,7 @@ const NotificationsFilter = () => {
     >
       <div className="mt-1 overflow-hidden rounded-xl border border-gray-200 bg-blue-700 p-1 text-sm shadow dark:border-gray-800">
         <Menu.Item
-          className={clsx(
+          className={cn(
             ' rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.HIGH_SIGNAL
@@ -40,7 +40,7 @@ const NotificationsFilter = () => {
           <span className="whitespace-nowrap">High signal</span>
         </Menu.Item>
         <Menu.Item
-          className={clsx(
+          className={cn(
             ' rounded-lg px-3 py-1.5 text-left',
             selectedNotificationsFilter ===
               CustomNotificationsFilterEnum.ALL_NOTIFICATIONS

@@ -3,7 +3,7 @@ import MenuTransition from '@/components/UI/MenuTransition';
 import { Tooltip } from '@/components/UI/Tooltip';
 import { useProfileFeedStore } from '@/store/profile-feed';
 import { Menu } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { ChangeEvent } from 'react';
 import { HiAdjustments } from 'react-icons/hi';
 
@@ -37,7 +37,7 @@ const MediaFilter = () => {
           <Menu.Item
             as="label"
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item flex cursor-pointer items-center gap-1 space-x-1 rounded-lg'
               )
@@ -53,7 +53,7 @@ const MediaFilter = () => {
           <Menu.Item
             as="label"
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item flex cursor-pointer items-center gap-1 space-x-1 rounded-lg'
               )
@@ -69,7 +69,7 @@ const MediaFilter = () => {
           <Menu.Item
             as="label"
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item flex cursor-pointer items-center gap-1 space-x-1 rounded-lg'
               )

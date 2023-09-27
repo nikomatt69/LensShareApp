@@ -7,7 +7,7 @@ import { useSpacesStore } from '@/store/spaces';
 import { Menu } from '@headlessui/react';
 
 import { CalendarIcon, CheckCircleIcon, CheckIcon, ChevronDownIcon, LockClosedIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC, ReactNode } from 'react';
 import React, { useState } from 'react';
 

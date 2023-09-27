@@ -5,7 +5,7 @@ import {
   MenuOption,
   useBasicTypeaheadTriggerMatch
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { TextNode } from 'lexical';
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
@@ -144,7 +144,7 @@ const MentionsTypeaheadMenuItem: FC<MentionsTypeaheadMenuItemProps> = ({
       aria-hidden="true"
     >
       <div
-        className={clsx(
+        className={cn(
           { 'bg-gray-200 dark:bg-gray-800': isSelected },
           'm-1.5 flex items-center space-x-2 rounded-xl px-3 py-1 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800'
         )}

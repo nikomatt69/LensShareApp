@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { Tooltip } from '@/components/UI/Tooltip';
 import { Modal } from '@/components/UI/Modal';
 import HelpTooltip from '@/components/UI/HelpTooltip';
 import { LockClosedIcon } from '@heroicons/react/24/outline';
+import cn from '@/components/UI/cn';
 
 const AccessSettings: FC = () => {
   const restricted = useAccessSettingsStore((state) => state.restricted);
@@ -26,7 +27,7 @@ const AccessSettings: FC = () => {
           aria-label="Access"
         >
           <LockClosedIcon
-            className={clsx(
+            className={cn(
               restricted ? 'text-green-500' : 'text-brand',
               'h-5 w-5'
             )}

@@ -11,7 +11,7 @@ import {
   UsersIcon
 } from '@heroicons/react/24/outline';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { motion } from 'framer-motion';
 import type { FC, ReactNode } from 'react';
 
@@ -60,7 +60,7 @@ const ReferenceSettings: FC = () => {
   const Module: FC<ModuleProps> = ({ title, icon, onClick, selected }) => (
     <Menu.Item
       as="a"
-      className={clsx({ 'dropdown-active': selected }, 'menu-item')}
+      className={cn({ 'dropdown-active': selected }, 'menu-item')}
       onClick={onClick}
     >
       <div className="flex items-center justify-between space-x-2">

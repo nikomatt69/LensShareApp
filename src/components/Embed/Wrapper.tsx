@@ -1,8 +1,8 @@
 import stopEventPropagation from '@/lib/stopEventPropagation';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC, ReactNode } from 'react';
 import { Card } from '../UI/Card';
-import cn from '../UI/cn';
+
 
 interface WrapperProps {
   children: ReactNode;

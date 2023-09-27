@@ -1,5 +1,5 @@
 import useEchoStore from '@/store/echos';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Publication } from '@/utils/lens/generatedLenster';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -35,7 +35,7 @@ const Item: FC<Props> = ({ publication }) => {
         />
         <button
           onClick={() => onPlayPause(publication)}
-          className={clsx(
+          className={cn(
             'invisible absolute bottom-2.5 left-2.5 rounded-full bg-white dark:bg-gray-900/70 p-2 outline-none backdrop-blur-lg transition-all duration-100 ease-in-out group-hover:visible'
           )}
         >

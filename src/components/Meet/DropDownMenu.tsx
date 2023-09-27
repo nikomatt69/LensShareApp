@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { Fragment, useEffect, useState } from 'react';
@@ -72,7 +72,7 @@ const DropDownMenu: FC<DropDownProps> = ({ deviceType }) => {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button
-          className={clsx(
+          className={cn(
             resolvedTheme == 'dark'
               ? 'bg-gray-900 text-slate-500'
               : 'bg-brand-100 text-brand-500',
@@ -101,7 +101,7 @@ const DropDownMenu: FC<DropDownProps> = ({ deviceType }) => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={clsx(
+          className={cn(
             resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
             'absolute right-0 z-10 mt-2 w-full origin-top-right rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
           )}

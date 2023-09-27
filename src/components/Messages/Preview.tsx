@@ -6,7 +6,7 @@ import { Profile } from '@/utils/lens/generatedLenster';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
 import { ContentTypeText } from '@xmtp/xmtp-js';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
@@ -60,7 +60,7 @@ const Preview: FC<PreviewProps> = ({
   return (
     message?.content && (
       <div
-        className={clsx(
+        className={cn(
           'cursor-pointer py-3 hover:bg-gray-100 dark:hover:bg-blue-100',
           isSelected && 'bg-gray-50 dark:bg-gray-800'
         )}

@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import { Fragment, useState } from 'react';
 
@@ -40,7 +40,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
       <Menu as="div" className="relative">
         <Menu.Button as={Fragment}>
           <button
-            className={clsx(
+            className={cn(
               mirrored ? 'text-green-500' : 'text-brand',
               'rounded-full  hover:bg-gray-300/20'
             )}
@@ -80,7 +80,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
       </Menu>
       {count > 0 && !showCount && (
         <span
-          className={clsx(
+          className={cn(
             mirrored ? 'text-green-500' : 'text-brand',
             'text-[11px] sm:text-xs'
           )}

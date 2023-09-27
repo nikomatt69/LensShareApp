@@ -6,7 +6,7 @@ import {
   MenuOption,
   useBasicTypeaheadTriggerMatch
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { TextNode } from 'lexical';
 import { $createTextNode, $getSelection, $isRangeSelection } from 'lexical';
 import type { FC } from 'react';
@@ -55,7 +55,7 @@ const EmojiMenuItem: FC<EmojiMenuItemProps> = ({
     <li
       key={key}
       tabIndex={-1}
-      className={clsx(
+      className={cn(
         { 'dropdown-active': isSelected },
         'm-2 cursor-pointer rounded-lg p-2 outline-none'
       )}

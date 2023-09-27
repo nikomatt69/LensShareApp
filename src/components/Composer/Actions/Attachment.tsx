@@ -15,7 +15,7 @@ import {
   VideoCameraIcon
 } from '@heroicons/react/24/outline';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { ChangeEvent, FC } from 'react';
 import { Fragment, useId, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -102,7 +102,7 @@ const Attachment: FC = () => {
             as="label"
             disabled={disableImageUpload()}
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item !flex cursor-pointer items-center gap-3  space-x-1 rounded-lg'
               )
@@ -125,7 +125,7 @@ const Attachment: FC = () => {
             as="label"
             disabled={Boolean(attachments.length)}
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item !flex cursor-pointer items-center gap-3 space-x-1 text-black rounded-lg'
               )
@@ -147,7 +147,7 @@ const Attachment: FC = () => {
             disabled={Boolean(attachments.length)}
             as="label"
             className={({ active }) =>
-              clsx(
+              cn(
                 { 'dropdown-active': active },
                 'menu-item !flex cursor-pointer items-center gap-3 space-x-1 rounded-lg'
               )

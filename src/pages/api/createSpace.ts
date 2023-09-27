@@ -73,7 +73,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
     const createRoomResponse: CreateRoomResponse = await data.json();
-    res.status(200).json(createRoomResponse);
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json(error);
   }

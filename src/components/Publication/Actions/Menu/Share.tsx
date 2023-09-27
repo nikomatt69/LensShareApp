@@ -2,7 +2,7 @@ import stopEventPropagation from '@/lib/stopEventPropagation';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { Menu } from '@headlessui/react';
 import { ClipboardIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import toast from 'react-hot-toast';
 
@@ -15,7 +15,7 @@ const Share: FC<ShareProps> = ({ publication }) => {
     <Menu.Item
       as="div"
       className={({ active }) =>
-        clsx(
+        cn(
           { 'dropdown-active': active },
           'm-2 block cursor-pointer rounded-lg px-4 py-1.5 text-sm'
         )

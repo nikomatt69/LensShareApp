@@ -2,7 +2,7 @@
 import getChannelByTag from '@/lib/getChannelByTag';
 import { MetadataOutput } from '@/utils/lens/generated5';
 import type { FC } from 'react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { useRouter } from 'next/router';
@@ -50,7 +50,7 @@ const FeaturedChannel: FC<FeaturedChannelProps> = ({
   return (
     <Link
       href={`/c/${community.slug}`}
-      className={clsx(
+      className={cn(
         'flex items-center space-x-2 text-xs hover:underline',
         className
       )}

@@ -1,7 +1,7 @@
 
 import type { FC } from 'react';
 import { useState } from 'react';
-import clsx from 'clsx';
+
 import Wrapper from '../Wrapper';
 
 import getPublicationAttribute from '@/utils/lib/getPublicationAttribute';

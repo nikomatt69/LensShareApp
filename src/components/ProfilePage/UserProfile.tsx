@@ -4,7 +4,7 @@ import getAvatar from '@/lib/getAvatar';
 
 import { Image } from '../UI/Image';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { memo, useState } from 'react';
@@ -61,7 +61,7 @@ const UserProfile: FC<UserProfileProps> = ({
     <Image
       src={getAvatar(profile)}
       loading="lazy"
-      className={clsx(
+      className={cn(
         isBig ? 'h-14 w-14' : 'h-10 w-10',
         'rounded-full border bg-gray-200 dark:border-gray-700'
       )}
@@ -74,7 +74,7 @@ const UserProfile: FC<UserProfileProps> = ({
   const UserName = () => (
     <>
       <div className="flex dark:text-white max-w-sm items-center">
-        <div className={clsx(isBig ? 'font-bold' : 'text-md', 'grid')}>
+        <div className={cn(isBig ? 'font-bold' : 'text-md', 'grid')}>
           <div className="truncate font-bold dark:text-white font-serif">
             {sanitizeDisplayName(profile?.name) ??
               formatHandle(profile?.handle)}
@@ -125,7 +125,7 @@ const UserProfile: FC<UserProfileProps> = ({
               <div
                 // Replace with Tailwind
                 style={{ wordBreak: 'break-word' }}
-                className={clsx(
+                className={cn(
                   isBig ? 'text-base' : 'text-sm',
                   'mt-2',
                   'linkify leading-6'

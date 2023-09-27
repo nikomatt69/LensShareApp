@@ -3,7 +3,7 @@ import Loader from '@/components/UI/Loader';
 import { Tab } from '@headlessui/react';
 import { useAppStore } from '@/store/app';
 import usePersistStore from '@/store/persist';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Notification } from '@/utils/lens/generatedLenster';
 import {
   NotificationTypes,
@@ -136,7 +136,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'
@@ -152,7 +152,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters, subscriptions: true });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'
@@ -167,7 +167,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters, likes: true });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 whitespace-nowrap border-b-2 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'
@@ -182,7 +182,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters, comments: true });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'
@@ -197,7 +197,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters, mentions: true });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'
@@ -212,7 +212,7 @@ const Notifications = () => {
                   setActiveFilter({ ...initialFilters, collects: true });
                 }}
                 className={({ selected }) =>
-                  clsx(
+                  cn(
                     'flex items-center space-x-2 border-b-2 px-1 py-2 text-sm focus:outline-none',
                     selected
                       ? 'border-indigo-900 opacity-100'

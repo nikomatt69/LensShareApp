@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import type { FC, ReactElement, ReactNode } from 'react';
 import React from 'react';
@@ -43,7 +43,7 @@ const DropMenu: FC<Props> = ({
       leave="transition duration-75 ease-out"
       leaveFrom="transform scale-100 opacity-100"
       leaveTo="transform scale-95 opacity-0"
-      className={clsx(
+      className={cn(
         'absolute z-30 focus:outline-none focus:ring-0 focus-visible:outline-none',
         {
           'right-0': position === 'right',

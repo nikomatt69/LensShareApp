@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import { usePublicationStore } from 'src/store/publication4';
@@ -127,7 +127,7 @@ const Attachments: FC<AttachmentsProps> = ({
   return attachmentsLength !== 0 ? (
     <>
       <div
-        className={clsx(getClass(attachmentsLength)?.row, 'mt-3 grid gap-2')}
+        className={cn(getClass(attachmentsLength)?.row, 'mt-3 grid gap-2')}
       >
         {slicedAttachments?.map(
           (attachment: NewLensshareAttachment & MediaSet, index: number) => {
@@ -141,7 +141,7 @@ const Attachments: FC<AttachmentsProps> = ({
 
             return (
               <div
-                className={clsx(
+                className={cn(
                   isImage
                     ? `${getClass(attachmentsLength, isNew)?.aspect} ${
                         attachmentsLength === 3 && index === 0
@@ -236,7 +236,7 @@ const Attachments: FC<AttachmentsProps> = ({
                     </Button>
                   ) : (
                     <div
-                      className={clsx(
+                      className={cn(
                         isAudio ? 'absolute left-2 top-2' : 'm-3'
                       )}
                     >

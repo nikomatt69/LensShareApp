@@ -11,7 +11,7 @@ import getStampFyiURL from '@/lib/getStampFyiURL';
 
 import formatTime from '@/utils/functions/formatTime';
 import type { DecodedMessage } from '@xmtp/xmtp-js';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import dayjs from 'dayjs';
 import type { FC, ReactNode } from 'react';
 import { memo, useEffect, useRef } from 'react';
@@ -90,7 +90,7 @@ const MessageTile: FC<MessageTileProps> = ({
 
   return (
     <div
-      className={clsx(
+      className={cn(
         address === message.senderAddress ? 'mr-4 items-end' : 'items-start',
         'mx-auto mb-4 flex flex-col'
       )}
@@ -104,7 +104,7 @@ const MessageTile: FC<MessageTileProps> = ({
           />
         )}
         <div
-          className={clsx(
+          className={cn(
             address === message.senderAddress
               ? 'bg-brand-500'
               : 'bg-gray-100 dark:bg-blue-700',
@@ -112,7 +112,7 @@ const MessageTile: FC<MessageTileProps> = ({
           )}
         >
           <span
-            className={clsx(
+            className={cn(
               address === message.senderAddress && 'text-black dark:text-white',
               'linkify-message block break-words text-xs font-bold'
             )}
@@ -126,9 +126,9 @@ const MessageTile: FC<MessageTileProps> = ({
           </span>
         </div>
       </div>
-      <div className={clsx(address !== message.senderAddress ? 'ml-12' : '')}>
+      <div className={cn(address !== message.senderAddress ? 'ml-12' : '')}>
         <span
-          className={clsx(
+          className={cn(
             address === message.senderAddress ? 'flex-row' : 'flex-row-reverse',
             'flex items-center gap-1 text-xs text-gray-400'
           )}

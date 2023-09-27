@@ -1,6 +1,6 @@
 import MenuTransition from '@/components/UI/MenuTransition';
 import { Menu } from '@headlessui/react';
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import type { Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import type { FC } from 'react';
@@ -27,7 +27,7 @@ const PublicationMenu: FC<Props> = ({ publication }) => {
           aria-label="More"
         >
           <BiDotsVertical
-            className={clsx('lt-text-gray-500 right-2', iconClassName)}
+            className={cn('lt-text-gray-500 right-2', iconClassName)}
           />
         </button>
       </Menu.Button>

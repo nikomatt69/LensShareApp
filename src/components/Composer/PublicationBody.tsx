@@ -4,7 +4,7 @@ import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import isFeatureEnabled from '@/utils/functions/isFeatureEnabled';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 
-import clsx from 'clsx';
+import cn from '@/components/UI/cn';
 import Link from 'next/link';
 import { useState, type FC } from 'react';
 import Markup from '../UI/Markup';
@@ -69,8 +69,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
-    return <DecryptedPublicationBody profile={profile} inflow={ id
-     } encryptedPublication={publication} />;
+    return <DecryptedPublicationBody  encryptedPublication={publication} />;
   }
  
   
@@ -78,8 +77,10 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   if (Boolean(space?.id)) {
     return <Space publication={publication} />;
   }
-  const showAttachments = metadata?.media?.length > 0;
 
+
+
+  const showAttachments = metadata?.media?.length > 0;
   const showQuotedPublication = quotedPublicationId && !quoted;
   const showOembed =
     hasURLs &&
@@ -100,7 +101,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   return (
     <div className="break-words">
       <Markup
-        className={clsx(
+        className={cn(
           { 'line-clamp-8': canShowMore },
           'markup linkify  font-helvetica break-words text-xs'
         )}
