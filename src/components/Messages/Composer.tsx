@@ -262,7 +262,7 @@ const Composer: FC<ComposerProps> = ({
           attachment={attachment}
         />
       ) : null}
-      <div className="flex space-x-4 p-4">
+      <div className="flex space-x-4 p-2">
         <label className="flex cursor-pointer items-center">
           <PhotoIcon className="text-brand-900 h-6 w-5" />
           <input
@@ -281,6 +281,7 @@ const Composer: FC<ComposerProps> = ({
           disabled={disabledInput}
           onKeyDown={handleKeyDown}
           onChange={(event) => onChangeCallback(event.target.value)}
+          className='text-black'
         />
         <Button
           disabled={!canSendMessage}

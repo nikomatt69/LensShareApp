@@ -124,12 +124,12 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
       <div className="mt-2 space-y-3">
-        <b className="text-lg">{metadata.content}</b>
+        <b className="text-xs">{metadata.content}</b>
         <Button
           className={cn(
-            '!md:pointer-events-none !mt-4 flex w-full justify-center',
+            '!mt-4 flex w-full justify-center',
             calculateRemainingTime() !== 'Start Listening'
-              ? 'pointer-events-none'
+              ? 'pointer-events-auyo'
               : 'pointer-events-auto'
           )}
           disabled={signing}
@@ -155,10 +155,9 @@ const Space: FC<SpaceProps> = ({ publication }) => {
             signMessage({ message: msg.message });
           }}
         >
+          Open Space
           <div className="hidden md:block">{calculateRemainingTime()}</div>
-          <div className="md:hidden">
-            Spaces will open in desktop only
-          </div>
+          
         </Button>
       </div>
     </Wrapper>

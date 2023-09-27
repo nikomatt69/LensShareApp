@@ -25,14 +25,6 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
   const setCollectToView = useAccessSettingsStore(
     (state) => state.setCollectToView
   );
-
-  const superfluidToView = useAccessSettingsStore(
-    (state) => state.superfluidToView
-  );
-  const setSuperfluidToView = useAccessSettingsStore(
-    (state) => state.setSuperfluidToView
-  );
-  
   const hasConditions = useAccessSettingsStore((state) => state.hasConditions);
   const reset = useAccessSettingsStore((state) => state.reset);
   const collectModule = useCollectModuleStore((state) => state.collectModule);
@@ -43,6 +35,8 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
     }
     setShowModal(false);
   };
+
+
 
   return (
     <div className="p-5">
@@ -58,15 +52,6 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
       />
       {restricted && (
         <>
-          <Card className="mt-5 p-5">
-            <ToggleWithHelper
-              on={superfluidToView}
-              setOn={() => setSuperfluidToView(!superfluidToView)}
-              heading={`Superfluid Subscribers`}
-              description={`People need to subscribe to your content to be able to view it`}
-              icon={<CurrencyDollarIcon className="h-4 w-4" />}
-            />
-          </Card>
           <Card className="mt-5 p-5">
             <ToggleWithHelper
               on={collectToView}
@@ -108,3 +93,5 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
 };
 
 export default BasicSettings;
+
+

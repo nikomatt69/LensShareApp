@@ -31,7 +31,7 @@ import type {
   Publication,
   PublicationMetadataMediaInput,
   PublicationMetadataV2Input
-} from '@/utils/lens/generated5';
+} from '@/utils/lens/generatedLenster';
 import {
   CollectModules,
   PublicationDocument,
@@ -40,7 +40,7 @@ import {
   ReferenceModules,
   useBroadcastDataAvailabilityMutation,
   useBroadcastMutation,
-  PublicationTypes,
+ 
   useCreateCommentTypedDataMutation,
   useCreateCommentViaDispatcherMutation,
   useCreateDataAvailabilityCommentTypedDataMutation,
@@ -50,7 +50,7 @@ import {
   useCreatePostTypedDataMutation,
   useCreatePostViaDispatcherMutation,
   usePublicationLazyQuery
-} from '@/utils/lens/generated5';
+} from '@/utils/lens/generatedLenster';
 import {SuperfluidInflowsDocument} from '@/utils/lens/generated4'
 
 import { $convertFromMarkdownString } from '@lexical/markdown';

@@ -71,7 +71,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   }
 
   return (
-    <div className="divider flex items-center justify-between rounded-xl  border border-blue-700 px-4 py-2">
+    <div className="divider flex items-center justify-between rounded-xl  border border-blue-700 px-3 py-1">
       <div className="flex items-center">
         <ChevronLeftIcon
           onClick={onBackClick}

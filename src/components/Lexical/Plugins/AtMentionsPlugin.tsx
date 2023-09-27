@@ -229,7 +229,7 @@ const MentionsPlugin: FC = () => {
         .map(({ id, name, picture, handle }) => {
           return new MentionTypeaheadOption(
             id,
-            name ?? handle,
+            name ?? id,
             imageKit(sanitizeDStorageUrl(picture), AVATAR),
             handle
           );
