@@ -55,8 +55,8 @@ next-env.d.ts
 /hop.yml
 .yarn.lock.turbo
 ./simplelocalize.yml
-
-
+/.well-know/
+.well-know/
 /.turbo.json
 .turbo
 
