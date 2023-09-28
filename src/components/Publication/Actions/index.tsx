@@ -9,7 +9,7 @@ import ShareMenu from './Share';
 import { ElectedMirror, Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import PublicationMenu from './Menu';
-import Sub from './Menu/Sub';
+
 
 interface PublicationActionsProps {
   publication: Publication;

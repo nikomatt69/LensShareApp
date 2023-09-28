@@ -45,7 +45,7 @@ const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
     try {
       const response = await axios.post(`${SPACES_WORKER_URL}/createSpace`,{
         data: payload,
-        fetchPolicy:'no-cors'
+       
       });
       return response.data;
     } catch (error) {

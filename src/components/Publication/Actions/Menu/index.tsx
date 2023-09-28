@@ -15,8 +15,7 @@ import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { BiDotsVertical } from 'react-icons/bi';
 import MenuTransition from '@/components/UI/MenuTransition';
-import { SuperfluidSubscribePub } from '@/components/Superfluid/SubPublication';
-import Sub from './Sub';
+
 
 interface PublicationMenuProps {
   publication: Publication;

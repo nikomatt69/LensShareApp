@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = ({ proposal }) => {
           className="mr-1 h-5 w-5 rounded-full"
           alt={space?.id}
         />
-        <Link href={spaceUrl} className="font-bold" target="_blank">
+        <Link href={spaceUrl} className="font-bold text-xs" target="_blank">
           {space?.name ?? space?.id}
         </Link>
         <span>by</span>

@@ -65,10 +65,6 @@ import { LightBox } from '../UI/LightBox';
 import formatAddress from '@/lib/formatAddress';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Button } from '../UI/Button';
-import SuperfluidSubscribe from '../Superfluid';
-import StreamOutline from '../UI/Icons/StreamOutline';
-import Cover from '../Profile/Cover';
-import ProfileImage from '../Bytes/ProfileImage';
 
 interface Props {
   profile: Profile;

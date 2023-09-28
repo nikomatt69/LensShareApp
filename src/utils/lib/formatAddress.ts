@@ -1,20 +1,21 @@
-import { ADDRESS_REGEX } from 'src/constants';
+import { Regex } from "@/regex";
+
 
 /**
+ * Format the given Ethereum address by displaying only the first and last few characters.
  *
- * @param address - Complete ethereum address
- * @returns formatted ethereum address
+ * @param address Complete Ethereum address
+ * @param slice Number of characters to display from the start and end of the address
+ * @returns Formatted Ethereum address
  */
-const formatAddress = (address: string | null): string => {
+const formatAddress = (address: string | null, slice = 4): string => {
   if (!address) {
     return '';
   }
 
-  const regex = ADDRESS_REGEX;
-  if (address.match(regex)) {
-    return `${address.slice(0, 4)}…${address.slice(
-      address.length - 4,
-      address.length
+  if (address.match(Regex.ethereumAddress)) {
+    return `${address.slice(0, slice + 2)}…${address.slice(
+      address.length - slice
     )}`;
   }
 
