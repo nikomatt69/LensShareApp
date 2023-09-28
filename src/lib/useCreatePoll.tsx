@@ -1,7 +1,9 @@
 import { IS_MAINNET, SNAPSHOR_RELAY_WORKER_URL } from '@/constants';
+import { Localstorage } from '@/storage';
 import axios from 'axios';
 import { useAppStore } from 'src/store/app';
 import { usePublicationStore } from 'src/store/publication4';
+
 
 type CreatePollResponse = string;
 
@@ -14,17 +16,21 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
 
   const createPoll = async (): Promise<CreatePollResponse> => {
     try {
-      const response = await axios({
-        url: `${SNAPSHOR_RELAY_WORKER_URL}/createPoll`,
-        method: 'POST',
-        data: {
-          isMainnet: IS_MAINNET,
+      const response = await axios.post(
+        `${SNAPSHOR_RELAY_WORKER_URL}/createPoll`,
+        {
           title: `Poll by @${currentProfile?.handle}`,
           description: publicationContent,
           choices: pollConfig.choices,
-          length: pollConfig.length
+          length: pollConfig.length,
+          isMainnet: IS_MAINNET
+        },
+        {
+          headers: {
+            'X-Access-Token': localStorage.getItem(Localstorage.AccessToken)
+          }
         }
-      });
+      );
 
       return `${publicationContent}\n\n${response.data.snapshotUrl}`;
     } catch (error) {

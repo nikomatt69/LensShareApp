@@ -1,6 +1,5 @@
 
 import type { FC } from 'react';
-import { useState } from 'react';
 
 import Wrapper from '../Wrapper';
 

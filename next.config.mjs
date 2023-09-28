@@ -4,6 +4,7 @@ import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  productionBrowserSourceMaps: true,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -77,12 +78,24 @@ const nextConfig = {
  
 
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: 'https://sitemap.lenshareapp.xyz/sitemap.xml'
+      },
+      {
+        source: '/sitemaps/:match*',
+        destination: 'https://sitemap.lenshareapp.xyz/:match*'
+      }
+    ];
+  },
 
   async redirects() {
     return [
-      { source: '/u/:id(.+).lens', destination: '/u/:id', permanent: true },
-      { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
-      { source: '/u/:id(.+).dev', destination: '/u/:id', permanent: true }
+      { source: '/u/:handle(.+).lens', destination: '/u/:handle', permanent: true },
+      { source: '/u/:handle(.+).test', destination: '/u/:handle', permanent: true },
+     
     ];
   },
   async headers() {

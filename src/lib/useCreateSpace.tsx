@@ -1,7 +1,8 @@
-import { SPACES_WORKER_URL } from '@/constants';
+
 import axios from 'axios';
+import { useSpacesStore } from 'src/store/spaces';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
-import { useSpacesStore } from '@/store/spaces';
+import { SPACES_WORKER_URL } from '@/constants';
 
 type CreateSpaceResponse = {
   success: boolean;
@@ -42,10 +43,9 @@ const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
       };
     }
     try {
-      const response = await axios({
-        url: `${SPACES_WORKER_URL}/createSpace`,
-        method: 'POST',
-        data: payload
+      const response = await axios.post(`${SPACES_WORKER_URL}/createSpace`,{
+        data: payload,
+        fetchPolicy:'no-cors'
       });
       return response.data;
     } catch (error) {

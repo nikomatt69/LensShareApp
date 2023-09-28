@@ -21,6 +21,8 @@ import PreviewSpaces from '../Spaces/PreviewSpaces/PreviewSpaces';
 import Spaces from '../Spaces';
 import { OG } from '@/types/misc';
 import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
+import getNft from '@/utils/lib/nft/getNft';
+import Snapshot from './OpenActions/Snapshot';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -42,6 +44,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const snapshotProposalId = getSnapshotProposalId(urls);
   const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
 
+  const nft = getNft(urls);
   const quotedPublicationId = getPublicationAttribute(
     metadata.attributes,
     'quotedPublicationId'
@@ -69,24 +72,33 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
-    return <DecryptedPublicationBody  encryptedPublication={publication} />;
+    return <DecryptedPublicationBody  encryptedPublication={publication} />
   }
  
   
 
   if (Boolean(space?.id)) {
-    return <Space publication={publication} />;
+    return <Space publication={publication} />
   }
 
 
 
+  const showNft = nft;
+  // Show snapshot if it's there
+  const showSnapshot = snapshotProposalId;
+  // Show attachments if it's there
   const showAttachments = metadata?.media?.length > 0;
+  // Show quoted publication if it's there
   const showQuotedPublication = quotedPublicationId && !quoted;
+  // Show oembed if no NFT, no attachments, no snapshot, no quoted publication
   const showOembed =
     hasURLs &&
     !showAttachments &&
+    !showSnapshot &&
     !showQuotedPublication &&
     !quoted;
+
+
   const onOembedData = (data: OG) => {
     if (showOembed && data?.title) {
       const updatedContent = removeUrlAtEnd(urls, content);
@@ -117,6 +129,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       {showAttachments ? (
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
+      {showSnapshot ? <Snapshot proposalId={snapshotProposalId} /> : null}
+      
   
 
 

@@ -7,10 +7,11 @@
 const validateLensAccount = async (accessToken: string, isMainnet: boolean) => {
   const response = await fetch(
     isMainnet ? 'https://api.lens.dev' : 'https://api-mumbai.lens.dev',
-    { mode:'no-cors',
+    { 
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-agent': 'LensShare'
       },
       body: JSON.stringify({
         query: `
