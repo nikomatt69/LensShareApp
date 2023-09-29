@@ -84,7 +84,7 @@ const NoneRelevantFeed: FC<NoneRelevantFeedProps> = ({ publication }) => {
         {showMore ? 'Hide more comments' : 'Show more comments'}
       </Card>
       {showMore ? (
-        <Card className="divide-y-[1px] dark:bg-black/70 bg-white border-blue-700 rounded-xl divide-blue-700">
+        <Card className="divide-y-[1px] divide-blue-700 rounded-xl border-blue-700 bg-white dark:bg-black/70">
           {comments?.map((comment, index) =>
             comment?.__typename === 'Comment' && comment.hidden ? null : (
               <SinglePublication
@@ -94,7 +94,9 @@ const NoneRelevantFeed: FC<NoneRelevantFeedProps> = ({ publication }) => {
                 isLast={index === comments.length - 1}
                 publication={comment as Comment}
                 showType={false}
-                showCount={true} tags={''}              />
+                showCount={true}
+                tags={''}
+              />
             )
           )}
           {hasMore && <span ref={observe} />}

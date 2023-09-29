@@ -1,5 +1,3 @@
-
-
 export const mainnetVerified = [
   '0x7cca', // songadaymann
   '0x01cd87', // curve
@@ -247,8 +245,7 @@ export const mainnetVerified = [
   '0x84ed', // bensparks
   '0x0636', // jenny
   '0xe2ae', // philand
-  '0x01c173', // pancakesbrah
-
+  '0x01c173' // pancakesbrah
 ];
 
 export const testnetVerified = [

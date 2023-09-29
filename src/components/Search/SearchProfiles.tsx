@@ -80,7 +80,7 @@ const SearchProfiles: FC<Props> = ({ query }) => {
   });
 
   return (
-    <div className="space-y-2 mx-3 rounded-xl">
+    <div className="mx-3 space-y-2 rounded-xl">
       {profiles?.map((profile: Profile) => (
         <div key={profile?.id} className="p-5">
           <Link href={`/u/${profile?.id}`}>
@@ -93,14 +93,13 @@ const SearchProfiles: FC<Props> = ({ query }) => {
                 alt={formatHandle(profile?.handle)}
               />
               <div className=" lg:block">
-                <p className="text-md flex items-center gap-1 font-bold lowercase dark:text-white text-black">
+                <p className="text-md flex items-center gap-1 font-bold lowercase text-black dark:text-white">
                   {profile?.name}
-                  </p>
-                  <p className="capitalize text-gray-400">
-                    {formatHandle(profile?.handle)}
-                    {''}
-                  </p>
-             
+                </p>
+                <p className="capitalize text-gray-400">
+                  {formatHandle(profile?.handle)}
+                  {''}
+                </p>
               </div>
             </div>
           </Link>

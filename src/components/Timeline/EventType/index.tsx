@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 
 import Collected from './Collected';
@@ -16,10 +15,10 @@ const getCanCombined = (aggregations: number[]) => {
 
 interface ActionTypeProps {
   feedItem: FeedItem;
-  profile:Profile
+  profile: Profile;
 }
 
-const ActionType: FC<ActionTypeProps> = ({ feedItem,profile }) => {
+const ActionType: FC<ActionTypeProps> = ({ feedItem, profile }) => {
   const publication = feedItem.root;
   const isComment = publication.__typename === 'Comment';
   const showThread = isComment || (feedItem.comments?.length ?? 0) > 0;
@@ -44,11 +43,16 @@ const ActionType: FC<ActionTypeProps> = ({ feedItem,profile }) => {
             <Collected collects={feedItem.collects} />
           ) : null}
           {feedItem.reactions.length && !isComment ? (
-            <Liked profile={profile as Profile} reactions={feedItem.reactions} />
+            <Liked
+              profile={profile as Profile}
+              reactions={feedItem.reactions}
+            />
           ) : null}
         </>
       )}
-      {showThread ? <Commented profile={profile as Profile} feedItem={feedItem} /> : null}
+      {showThread ? (
+        <Commented profile={profile as Profile} feedItem={feedItem} />
+      ) : null}
     </span>
   );
 };

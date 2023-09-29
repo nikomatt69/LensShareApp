@@ -3,7 +3,6 @@ import { AssumeRoleCommand, STSClient } from '@aws-sdk/client-sts';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-
 interface Data {
   accessKeyId?: string;
   secretAccessKey?: string;

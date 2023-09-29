@@ -143,13 +143,10 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   const isActivePath = (path: string) => router.pathname === path;
 
   return (
-    
-      
     <div className="mx-4 mb-2 flex justify-center">
       <MetaTags title={`User • ${profile?.name} ${APP_NAME}`} />
-      
+
       <div className="xs:max-w-[680px] w-full max-w-[1150px] sm:max-w-[680px]">
-      
         <div className="relative -mt-24 h-32 w-32 sm:-mt-32 sm:h-52 sm:w-52">
           <Image
             onClick={() => setExpandedImage(getAvatar(profile))}
@@ -160,7 +157,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             alt={formatHandle(profile?.handle)}
             data-testid="profile-avatar"
           />
-         
+
           <LightBox
             show={Boolean(expandedImage)}
             url={expandedImage}
@@ -168,7 +165,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
           />
         </div>
         <div className="space-y-1 py-2">
-          <div className="flex items-center dark:text-white gap-1.5 text-2xl font-bold">
+          <div className="flex items-center gap-1.5 text-2xl font-bold dark:text-white">
             <div className="truncate" data-testid="profile-name">
               {sanitizeDisplayName(profile?.name) ??
                 formatHandle(profile?.handle)}
@@ -198,18 +195,13 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
                 </div>
               )}
           </div>
-          <div className='flex mt-4 pt-2  '>
-         
-                <Message onClick={onMessageClick} />
-                
-                </div>
+          <div className="mt-4 flex pt-2  ">
+            <Message onClick={onMessageClick} />
+          </div>
 
           <div className="display:inline-block right-2 pt-1 ">
-    
             {itsNotMe ? (
               <div className="text-md fl  right-2">
-            
-               
                 {following ? (
                   <UnfollowButton
                     setFollowing={setFollowing}
@@ -281,7 +273,6 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
               </Modal>
             </div>
           </div>
-
         </div>
 
         {getProfileAttribute(profile?.attributes, 'location') && (
@@ -370,11 +361,8 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
             </Link>
           </MetaDetails>
         )}
-        
       </div>
-      
     </div>
-
   );
 };
 

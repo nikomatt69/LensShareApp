@@ -18,7 +18,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
-import { useAppStore, } from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 
 import { ErrorMessage } from '../ErrorMessage';
 import { EmptyState } from '../UI/EmptyState';
@@ -104,7 +104,7 @@ const FeedComment: FC<FeedProps> = ({ publication, feedItem }) => {
 
   return (
     <Card
-      className="divide-y-[1px] border-trasparent dark:bg-black/70 bg-white divide-blue-700 w-full"
+      className="border-trasparent w-full divide-y-[1px] divide-blue-700 bg-white dark:bg-black/70"
       dataTestId="comments-feed"
     >
       {txnQueue.map(
@@ -119,14 +119,15 @@ const FeedComment: FC<FeedProps> = ({ publication, feedItem }) => {
       {comments?.map((comment, index) =>
         comment?.__typename === 'Comment' && comment.hidden ? null : (
           <SinglePublication
-          
             key={`${publicationId}_${index}`}
             isFirst={index === 0}
             profile={profileId}
             isLast={index === comments.length - 1}
             publication={comment as Comment}
             showType={false}
-            showCount={true} tags={''}          />
+            showCount={true}
+            tags={''}
+          />
         )
       )}
       {hasMore ? <span ref={observe} /> : null}

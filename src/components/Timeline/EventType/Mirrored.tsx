@@ -1,4 +1,3 @@
-
 import Profiles from '@/components/Publication/Profiles';
 import { MirrorEvent } from '@/utils/lens/generatedLenster';
 

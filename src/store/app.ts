@@ -1,4 +1,3 @@
-
 import { Localstorage } from '@/storage';
 import { Channel } from '@/types/lenster';
 import { Profile } from '@/utils/lens/generatedLenster';
@@ -16,7 +15,6 @@ interface AppState {
   setFeaturedChannels: (featuredChannels: Channel[]) => void;
 }
 
-
 export const useAppStore = create<AppState>((set) => ({
   profiles: [],
   setProfiles: (profiles) => set(() => ({ profiles })),
@@ -26,7 +24,6 @@ export const useAppStore = create<AppState>((set) => ({
   setMute: (isMute: boolean) => set({ isMute }),
   featuredChannels: [],
   setFeaturedChannels: (featuredChannels) => set(() => ({ featuredChannels }))
-
 }));
 
 interface AppPersistState {

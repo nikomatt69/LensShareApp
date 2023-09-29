@@ -141,8 +141,8 @@ export const useMessageStore = create<MessageState>((set) => ({
   selectedProfileId: '',
   setSelectedProfileId: (selectedProfileId) =>
     set(() => ({ selectedProfileId })),
-    selectedTab: 'All',
-    setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
+  selectedTab: 'All',
+  setSelectedTab: (selectedTab) => set(() => ({ selectedTab })),
   syncedProfiles: new Set(),
   addSyncedProfiles: (profileIds) =>
     set(({ syncedProfiles }) => ({

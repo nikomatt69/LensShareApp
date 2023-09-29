@@ -1,4 +1,3 @@
-
 import React, { FC } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
@@ -27,7 +26,7 @@ const PreviewSpacesHeader: FC = () => {
     <div className="relative border-b border-gray-300 bg-gray-100 p-3 dark:border-gray-800 dark:bg-gray-800">
       <div className="mx-auto flex w-fit items-center gap-2 text-gray-900 dark:text-gray-100">
         {hostProfile?.name}
-        
+
         <span className="text-sm"> | </span>
         <Slug slug={`@${hostProfile.handle}`} />
       </div>
@@ -43,4 +42,3 @@ const PreviewSpacesHeader: FC = () => {
 };
 
 export default PreviewSpacesHeader;
-

@@ -10,7 +10,6 @@ import { ElectedMirror, Publication } from '@/utils/lens/generatedLenster';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import PublicationMenu from './Menu';
 
-
 interface PublicationActionsProps {
   publication: Publication;
   electedMirror?: ElectedMirror;
@@ -44,8 +43,7 @@ const PublicationActions: FC<PublicationActionsProps> = ({
           showCount={showCount}
         />
       )}
-       <PublicationMenu publication={publication} />
-
+      <PublicationMenu publication={publication} />
     </span>
   );
 };

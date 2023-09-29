@@ -64,10 +64,7 @@ const Search: FC<SearchProps> = ({
             type: SearchRequestTypes.Publication,
             query: keyword,
             customFilters: [CustomFiltersTypes.Gardeners],
-            limit: 8,
-            
-        
-         
+            limit: 8
           }
         }
       });
@@ -119,7 +116,7 @@ const Search: FC<SearchProps> = ({
           ref={dropdownRef}
           data-testid="search-profiles-dropdown"
         >
-          <Card className="justify-content max-h-[80vh] items-center overflow-y-auto rounded-xl z-999 bg-white dark:bg-gray-900/70 py-2 text-xs">
+          <Card className="justify-content z-999 max-h-[80vh] items-center overflow-y-auto rounded-xl bg-white py-2 text-xs dark:bg-gray-900/70">
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />
@@ -127,21 +124,18 @@ const Search: FC<SearchProps> = ({
               </div>
             ) : (
               <>
-                {profiles.map((publication:Publication) => (
+                {profiles.map((publication: Publication) => (
                   <div
                     key={publication?.id}
-                    className="cursor-pointer bg-white dark:bg-gray-900/70 px-4 py-2 "
+                    className="cursor-pointer bg-white px-4 py-2 dark:bg-gray-900/70 "
                     onClick={() => {
-                     
                       setSearchText('');
                     }}
                     data-testid={`search-profile-${formatHandle(
                       publication?.id
                     )}`}
                   >
-                    <SearchPublications
-                      query={`${(publication?.id)}`}
-                    />
+                    <SearchPublications query={`${publication?.id}`} />
                   </div>
                 ))}
                 {profiles.length === 0 && (

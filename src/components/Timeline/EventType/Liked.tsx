@@ -2,12 +2,11 @@ import Profiles from '@/components/Publication/Profiles';
 import { Profile, ReactionEvent } from '@/utils/lens/generatedLenster';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
-
 import type { FC } from 'react';
 
 interface LikedProps {
   reactions: ReactionEvent[];
-  profile:Profile
+  profile: Profile;
 }
 
 const Liked: FC<LikedProps> = ({ reactions }) => {

@@ -36,13 +36,12 @@ import { useTheme } from 'next-themes';
 import { profile } from 'console';
 import ProfileVideos from '../ProfilePage/ProfileVideos';
 
-
 const FeedStory = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const { resolvedTheme } = useTheme();
-  const [currentViewingId, setCurrentViewingId] = useState('')
-  
+  const [currentViewingId, setCurrentViewingId] = useState('');
+
   const bytesContainer = useRef<HTMLDivElement>(null);
   const [byte, setByte] = useState<Publication>();
   const [following, setFollowing] = useState(false);
@@ -52,7 +51,7 @@ const FeedStory = () => {
     sortCriteria: PublicationSortCriteria.Latest,
     feedEventItemTypes: [FeedEventItemType.Post],
     profileId: currentProfile,
-    limit:5,
+    limit: 5,
 
     sources: [
       APP_ID,
@@ -103,8 +102,6 @@ const FeedStory = () => {
     setShow(false);
   };
 
-
-
   if (bytes?.length === 0) {
     return (
       <EmptyState icon message="You got no videos in your feed, explore!" />
@@ -115,24 +112,22 @@ const FeedStory = () => {
     return <EmptyState message={undefined} icon={undefined} />;
   }
   return (
-    <div className="mt-2 border-0 dark:bg-black bg-white pt-3">
+    <div className="mt-2 border-0 bg-white pt-3 dark:bg-black">
       <Head>
-      <meta
+        <meta
           name="theme-color"
           content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
         />
-      </Head>  
+      </Head>
       <MetaTags title={`Feed • ${APP_NAME} `} />
- 
+
       {!error && !loading && (
         <>
           <div
             ref={bytesContainer}
-            className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-80px)]"
+            className="mt-3 h-screen border-0 bg-white pt-3 font-semibold dark:bg-black md:h-[calc(100vh-80px)]"
           >
-            {bytes?.map((video: Publication, index) => (
-              <ProfileVideos/>
-            ))}
+            {bytes?.map((video: Publication, index) => <ProfileVideos />)}
 
             {pageInfo?.next && (
               <span ref={observe} className="flex justify-center border-0 ">

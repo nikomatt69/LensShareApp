@@ -12,7 +12,6 @@ import PeerList from './PeerList';
 import PeerMetaData from './PeerMetaData';
 import { Input } from '@/components/UI/Input';
 
-
 const Peers: FC = () => {
   const BlackList = ['peer', 'listener'];
 

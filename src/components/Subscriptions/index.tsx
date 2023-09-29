@@ -7,11 +7,7 @@ import { APP_NAME } from '@/constants';
 import NavbarDetails from '../NavbarDetails';
 import * as Apollo from '@apollo/client';
 import { useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -143,19 +139,13 @@ const FeedRender = () => {
   }
 
   return (
-    
     <GridLayout className="max-w-[1200px] pt-6">
-       
-      <MetaTags title={`Bytes • ${APP_NAME}`} />
-   
-     
-   
-    <GridItemEight className="space-y-5">
-     <Bytes/>
-    </GridItemEight>
-     
-   
-  </GridLayout>
+      <MetaTags />
+
+      <GridItemEight className="space-y-5">
+        <Bytes />
+      </GridItemEight>
+    </GridLayout>
   );
 };
 

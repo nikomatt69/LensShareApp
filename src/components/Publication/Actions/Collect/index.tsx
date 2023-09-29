@@ -1,4 +1,3 @@
-
 import Loader from '@/components/UI/Loader';
 import { Modal } from '@/components/UI/Modal';
 import { Tooltip } from '@/components/UI/Tooltip';
@@ -10,7 +9,6 @@ import dynamic from 'next/dynamic';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { BsCollection, BsCollectionFill } from 'react-icons/bs';
-
 
 const CollectModule = dynamic(() => import('./CollectModule'), {
   loading: () => <Loader message={`Loading collect`} />
@@ -60,7 +58,6 @@ const Collect: FC<CollectProps> = ({
           whileTap={{ scale: 0.9 }}
           onClick={() => {
             setShowCollectModal(true);
-           
           }}
           aria-label="Collect"
         >

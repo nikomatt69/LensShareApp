@@ -20,5 +20,5 @@ export interface Community {
   created_at: string;
   staffpicked_at?: string;
   rules?: Rule[];
-  tags:string
+  tags: string;
 }

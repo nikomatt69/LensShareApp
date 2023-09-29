@@ -16,10 +16,8 @@ import stopEventPropagation from '@/lib/stopEventPropagation';
 import { BiDotsVertical } from 'react-icons/bi';
 import MenuTransition from '@/components/UI/MenuTransition';
 
-
 interface PublicationMenuProps {
   publication: Publication;
-
 }
 
 const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
@@ -41,7 +39,7 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
       <MenuTransition>
         <Menu.Items
           static
-          className="absolute right-0 cursor-pointer z-[5] mt-1 w-max rounded-xl border bg-white dark:bg-gray-900/70 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-300"
+          className="absolute right-0 z-[5] mt-1 w-max cursor-pointer rounded-xl border bg-white shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-300 dark:bg-gray-900/70"
           data-testid={`publication-${publication.id}-menu-items`}
         >
           {currentProfile?.id === publication?.profile?.id ? (
@@ -49,7 +47,6 @@ const PublicationMenu: FC<PublicationMenuProps> = ({ publication }) => {
           ) : (
             <Report publication={publication} />
           )}
-          
 
           <Share publication={publication} />
           <Translate publication={publication} />

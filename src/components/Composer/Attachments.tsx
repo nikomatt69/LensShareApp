@@ -7,13 +7,15 @@ import { useUpdateEffect } from 'usehooks-ts';
 
 import Audio from './Audio';
 
-import { MediaSet, MetadataOutput, Publication } from '@/utils/lens/generatedLenster';
+import {
+  MediaSet,
+  MetadataOutput,
+  Publication
+} from '@/utils/lens/generatedLenster';
 import {
   ALLOWED_AUDIO_TYPES,
   ALLOWED_VIDEO_TYPES,
-
   ATTACHMENT,
-
   STATIC_IMAGES_URL
 } from '@/constants';
 import { NewLensshareAttachment } from '@/types/misc';
@@ -30,8 +32,6 @@ import VideoPlayer from '@/utils/VideoPlayer';
 import Item from '../Echos/Item';
 import { HiExternalLink } from 'react-icons/hi';
 import Video from './Video';
-
-
 
 const getClass = (attachments: number, isNew = false) => {
   if (attachments === 1) {
@@ -96,26 +96,23 @@ const Attachments: FC<AttachmentsProps> = ({
   };
 
   /**
- * Returns the thumbnail URL for the specified publication metadata.
- *
- * @param metadata The publication metadata.
- * @returns The thumbnail URL.
- */
- const getThumbnailUrl = (metadata?: MetadataOutput): string => {
-  const fallbackUrl = `${STATIC_IMAGES_URL}/icon.png`;
+   * Returns the thumbnail URL for the specified publication metadata.
+   *
+   * @param metadata The publication metadata.
+   * @returns The thumbnail URL.
+   */
+  const getThumbnailUrl = (metadata?: MetadataOutput): string => {
+    const fallbackUrl = `${STATIC_IMAGES_URL}/icon.png`;
 
-  if (!metadata) {
-    return fallbackUrl;
-  }
+    if (!metadata) {
+      return fallbackUrl;
+    }
 
-  const { cover } = metadata;
-  const url = cover?.original?.url || fallbackUrl;
+    const { cover } = metadata;
+    const url = cover?.original?.url || fallbackUrl;
 
-  return sanitizeDStorageUrl(url);
- };
-
-
-
+    return sanitizeDStorageUrl(url);
+  };
 
   const slicedAttachments = attachments?.some((e: any) =>
     ALLOWED_VIDEO_TYPES.includes(e?.original?.mimeType)
@@ -126,9 +123,7 @@ const Attachments: FC<AttachmentsProps> = ({
 
   return attachmentsLength !== 0 ? (
     <>
-      <div
-        className={cn(getClass(attachmentsLength)?.row, 'mt-3 grid gap-2')}
-      >
+      <div className={cn(getClass(attachmentsLength)?.row, 'mt-3 grid gap-2')}>
         {slicedAttachments?.map(
           (attachment: NewLensshareAttachment & MediaSet, index: number) => {
             const type = attachment.original?.mimeType;
@@ -166,9 +161,7 @@ const Attachments: FC<AttachmentsProps> = ({
                     icon={<HiExternalLink className="h-4 w-4" />}
                     onClick={() => window.open(url, '_blank')}
                   >
-                    <span>
-                      Open Image in new tab
-                    </span>
+                    <span>Open Image in new tab</span>
                   </Button>
                 ) : isVideo ? (
                   isNew ? (
@@ -185,25 +178,26 @@ const Attachments: FC<AttachmentsProps> = ({
                       <ChooseThumbnail />
                     </>
                   ) : (
-                    <Video src={url} poster={getThumbnailUrl(publication?.metadata)} />
+                    <Video
+                      src={url}
+                      poster={getThumbnailUrl(publication?.metadata)}
+                    />
                   )
-                ) : isAudio ? ( isNew ? (
-                  <>
-                    <Audio
-                    src={url}
-                    isNew={isNew}
-                    publication={publication}
-                    txn={txn}
-                    expandCover={(url) => setExpandedImage(url)}
-                  />
-                   
-                   
-                  </>) :(
-                  <Item
-                    publication={publication as Publication}
-                   
-                  /> 
-                ) ): (
+                ) : isAudio ? (
+                  isNew ? (
+                    <>
+                      <Audio
+                        src={url}
+                        isNew={isNew}
+                        publication={publication}
+                        txn={txn}
+                        expandCover={(url) => setExpandedImage(url)}
+                      />
+                    </>
+                  ) : (
+                    <Item publication={publication as Publication} />
+                  )
+                ) : (
                   <Image
                     className="cursor-pointer rounded-lg border bg-gray-100 object-cover dark:border-gray-700 dark:bg-gray-800"
                     loading="lazy"
@@ -214,7 +208,6 @@ const Attachments: FC<AttachmentsProps> = ({
                     }}
                     onClick={() => {
                       setExpandedImage(url);
-                     
                     }}
                     src={isNew ? url : imageKit(url, ATTACHMENT)}
                     alt={isNew ? url : imageKit(url, ATTACHMENT)}
@@ -236,9 +229,7 @@ const Attachments: FC<AttachmentsProps> = ({
                     </Button>
                   ) : (
                     <div
-                      className={cn(
-                        isAudio ? 'absolute left-2 top-2' : 'm-3'
-                      )}
+                      className={cn(isAudio ? 'absolute left-2 top-2' : 'm-3')}
                     >
                       <button
                         type="button"

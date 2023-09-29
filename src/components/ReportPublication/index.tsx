@@ -83,7 +83,7 @@ const ReportPublication: FC<Props> = ({ publication, onSuccess }) => {
                 {topics.map((topic) => (
                   <option
                     key={topic.name}
-                    className="text-md bg-white dark:bg-gray-900/70 p-2 capitalize text-gray-700 outline-none hover:bg-slate-300"
+                    className="text-md bg-white p-2 capitalize text-gray-700 outline-none hover:bg-slate-300 dark:bg-gray-900/70"
                     value={topic.name}
                   >
                     {topic.name}

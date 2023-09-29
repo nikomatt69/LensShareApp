@@ -1,10 +1,13 @@
-
 import type { FC } from 'react';
 
 import Wrapper from '../Wrapper';
 
 import getPublicationAttribute from '@/utils/lib/getPublicationAttribute';
-import { Profile, Publication, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  Publication,
+  useProfilesQuery
+} from '@/utils/lens/generatedLenster';
 import SmallUserProfile from '@/components/SmallUserProfile';
 import { Button } from '@/components/UI/Button';
 import { ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
@@ -16,8 +19,6 @@ import { useAccount, useSignMessage } from 'wagmi';
 import { useSpacesStore } from '@/store/spaces';
 import cn from '@/components/UI/cn';
 import dayjs from 'dayjs';
-
-
 
 interface SpaceProps {
   publication: Publication;
@@ -38,7 +39,6 @@ const Space: FC<SpaceProps> = ({ publication }) => {
   const space: SpaceMetadata = JSON.parse(
     getPublicationAttribute(metadata.attributes, 'audioSpace')
   );
-
 
   const { signMessage, isLoading: signing } = useSignMessage({
     onSuccess: async (data) => {
@@ -156,7 +156,6 @@ const Space: FC<SpaceProps> = ({ publication }) => {
         >
           Open Space
           <div className="hidden md:block">{calculateRemainingTime()}</div>
-          
         </Button>
       </div>
     </Wrapper>
@@ -164,4 +163,3 @@ const Space: FC<SpaceProps> = ({ publication }) => {
 };
 
 export default Space;
-

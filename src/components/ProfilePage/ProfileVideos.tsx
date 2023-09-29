@@ -30,24 +30,21 @@ import InfiniteLoader from '../UI/InfiniteLoader';
 import Loader from '../UI/Loader';
 import { date } from 'zod';
 
-
 const ProfileVideos = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { id } = router.query;
-  const timestamp= {formatTime(date: Date | undefined) { (date?.getDay)}}
- 
+  const timestamp = {
+    formatTime(date: Date | undefined) {
+      date?.getDay;
+    }
+  };
 
-  
-   
-
- 
-
-  const  { data, loading, error,fetchMore } = useQuery<{
+  const { data, loading, error, fetchMore } = useQuery<{
     publications: PaginatedPublicationResult;
   }>(PublicationsDocument, {
     variables: {
-      expiresAt:{timestamp},
+      expiresAt: { timestamp },
       request: {
         sources: [
           LENSTUBE_BYTES_APP_ID,
@@ -61,41 +58,33 @@ const ProfileVideos = () => {
         publicationTypes: ['POST'],
         limit: 10,
         metadata: {
-          mainContentFocus: [PublicationMainFocus.Video,PublicationMainFocus.Image]
-        },
-     
+          mainContentFocus: [
+            PublicationMainFocus.Video,
+            PublicationMainFocus.Image
+          ]
+        }
       }
     }
   });
- 
-
-
 
   const publications = data?.publications.items;
   console.log('DATA', data?.publications?.items);
 
   const pageInfo = data?.publications?.pageInfo?.next;
-  
 
-  const hasMore = pageInfo?.next  ;
-
+  const hasMore = pageInfo?.next;
 
   const { observe } = useInView({
     onEnter: async () => {
       await fetchMore({
         variables: {
           request: {
-            
-            cursor: pageInfo?.next,
-      
-           
+            cursor: pageInfo?.next
           }
         }
       });
     }
   });
-
-
 
   const handleOnMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.play();
@@ -106,20 +95,18 @@ const ProfileVideos = () => {
 
   return (
     <InfiniteScroll
-        className='overflow-y-auto'
-        scrollThreshold={0.5}
-        hasMore={hasMore}
-        next={observe}
-    
-        loader={<Loader/>}
-        scrollableTarget="scrollableDiv" dataLength={0}>
-   
-       
+      className="overflow-y-auto"
+      scrollThreshold={0.5}
+      hasMore={hasMore}
+      next={observe}
+      loader={<Loader />}
+      scrollableTarget="scrollableDiv"
+      dataLength={0}
+    >
       {publications?.length === 0 ? (
         <p className="text-center">No videos yet</p>
       ) : (
         <div className=" xs:grid-col-3 mb-2 mt-2 grid-cols-3 gap-2 gap-x-4 gap-y-2 pl-1 pr-1 sm:grid-cols-3 md:grid-cols-3 md:gap-y-6 lg:grid-cols-3">
-         
           {publications?.map((pub) => (
             <div key={pub.id}>
               <Link href={`/post/${pub.id}`} key={pub.id}>
@@ -144,12 +131,8 @@ const ProfileVideos = () => {
               </Link>
             </div>
           ))}
-           
-          
         </div>
       )}
-     
-   
     </InfiniteScroll>
   );
 };

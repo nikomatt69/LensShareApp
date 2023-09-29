@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { useGlobalAlertStateStore } from 'src/store/alerts';
 
@@ -25,9 +24,7 @@ const GlobalAlerts: FC = () => {
           title={`Mod actions`}
           description={`Perform mod actions on this publication.`}
           onClose={() => setShowModActionAlert(false, null)}
-        >
- 
-        </Alert>
+        ></Alert>
       ) : null}
     </>
   );

@@ -125,7 +125,7 @@ const LoginWalletMobile: FC = () => {
           toast.error('Log in to view profile', { duration: 1000 });
         }
       }}
-      className="border-gray-800 text-blue-700 hover:text-gray-600 focus:text-black dark:text-white focus:outline-none"
+      className="border-gray-800 text-blue-700 hover:text-gray-600 focus:text-black focus:outline-none dark:text-white"
     >
       <svg
         className="h-6 w-6"

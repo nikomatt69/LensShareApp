@@ -93,51 +93,47 @@ const SettingsTray: FC<SettingsTrayProps> = ({
     <>
       {showSettings && (
         <div className="flex w-48 flex-col gap-2 rounded-lg border border-gray-300 bg-white p-2 text-sm text-gray-500 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-400">
-           <div className="flex border-b border-gray-300  py-2 font-semibold text-gray-700 dark:border-gray-700 dark:text-gray-200">
-          <span>
-            <ChevronLeftIcon
-              className="mr-2 h-4 w-4 cursor-pointer"
-              onClick={() => setShowSettings(false)}
-            />
-          </span>
-          <span className="text-sm font-medium ">
-            Settings
-          </span>
+          <div className="flex border-b border-gray-300  py-2 font-semibold text-gray-700 dark:border-gray-700 dark:text-gray-200">
+            <span>
+              <ChevronLeftIcon
+                className="mr-2 h-4 w-4 cursor-pointer"
+                onClick={() => setShowSettings(false)}
+              />
+            </span>
+            <span className="text-sm font-medium ">Settings</span>
+          </div>
+          <Dropdown
+            triggerChild={
+              <button className="flex items-center border-b border-gray-300 pb-2 dark:border-gray-500">
+                <span className="text-start">{activeMicDevice?.label}</span>
+                <span>
+                  <ChevronUpDownIcon className="h-5 w-5" />
+                </span>
+              </button>
+            }
+          >
+            <div className="absolute top-24 w-44">
+              <DeviceList devices={micDevices} deviceType="mic" />
+            </div>
+          </Dropdown>
+          <Dropdown
+            triggerChild={
+              <button className="flex items-center">
+                <span className="text-start">{activeSpeakerDevice?.label}</span>
+                <span>
+                  <ChevronUpDownIcon className="h-5 w-5" />
+                </span>
+              </button>
+            }
+          >
+            <div className="absolute top-36 w-44">
+              <DeviceList devices={speakerDevices} deviceType="speaker" />
+            </div>
+          </Dropdown>
         </div>
-        <Dropdown
-          triggerChild={
-            <button className="flex items-center border-b border-gray-300 pb-2 dark:border-gray-500">
-              <span className="text-start">{activeMicDevice?.label}</span>
-              <span>
-                <ChevronUpDownIcon className="h-5 w-5" />
-              </span>
-            </button>
-          }
-        >
-          <div className="absolute top-24 w-44">
-            <DeviceList devices={micDevices} deviceType="mic" />
-          </div>
-        </Dropdown>
-        <Dropdown
-          triggerChild={
-            <button className="flex items-center">
-              <span className="text-start">{activeSpeakerDevice?.label}</span>
-              <span>
-                <ChevronUpDownIcon className="h-5 w-5" />
-              </span>
-            </button>
-          }
-        >
-          <div className="absolute top-36 w-44">
-            <DeviceList devices={speakerDevices} deviceType="speaker" />
-          </div>
-        </Dropdown>
-      </div>
-      
       )}
     </>
   );
 };
 
 export default SettingsTray;
-  

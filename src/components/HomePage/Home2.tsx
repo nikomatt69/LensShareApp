@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import Spaces from '@/components/Spaces';
 import Navbar from '@/components/Navbar';
@@ -9,11 +8,7 @@ import { Image } from '../UI/Image';
 import * as Apollo from '@apollo/client';
 
 import { Children, FC, useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -56,11 +51,10 @@ import { SpaceMetadata } from '@/types/misc';
 import getURLs from '../Composer/getURLs';
 import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
 interface Props {
-  publication:Publication
-
+  publication: Publication;
 }
 
-const Home2: FC<Props> = ({ publication}) => {
+const Home2: FC<Props> = ({ publication }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -83,11 +77,6 @@ const Home2: FC<Props> = ({ publication}) => {
   const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
 
-
-
-
-
-
   const resetAuthState = () => {
     setProfileId(null);
     setCurrentProfile(null);
@@ -105,9 +94,6 @@ const Home2: FC<Props> = ({ publication}) => {
       options
     );
   }
-
-
- 
 
   const { showSpacesLobby, showSpacesWindow } = useSpacesStore();
 
@@ -176,61 +162,55 @@ const Home2: FC<Props> = ({ publication}) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    
+    <>
+      <GridLayout className="max-w-[1200px] pt-6">
+        <MetaTags />
+        {showSpacesLobby && <Spaces />}
+        <GridItemEight>
+          <>
+            <AddToHome />
 
-  <div>
-    <GridLayout className="max-w-[1200px] pt-6"> 
-    <MetaTags title={`Home • ${APP_NAME}`} /> 
-    {showSpacesLobby && <Spaces />}
-    <GridItemEight>
-      <AddToHome />
-  
-      {resolvedTheme === 'dark' ? (
-    <Image
-            className="cursor-pointer"
-            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
-            alt="logo"
-           
-          />) : (<Image
-            className="cursor-pointer"
-            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
-            alt="logo"
-           
-          />)}
-          
-         
-    
-   <BytesSection />
-   
-   </GridItemEight>
-  
+            {resolvedTheme === 'dark' ? (
+              <Image
+                className="cursor-pointer"
+                src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
+                alt="logo"
+              />
+            ) : (
+              <Image
+                className="cursor-pointer"
+                src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
+                alt="logo"
+              />
+            )}
 
-    
-  
+            <BytesSection />
+          </>
+        </GridItemEight>
 
+        <GridItemEight className="space-y-5">
+          {currentProfile?.id ? (
+            <>
+              <NewPost />
+              <Timeline />
+            </>
+          ) : (
+            <Explore />
+          )}
+        </GridItemEight>
+        <GridItemFour className=" max-h-40">
+          <>
+            <Footer />
 
-    <GridItemEight className="space-y-5">
-    {currentProfile?.id ? 
-            
-            <><NewPost /><Timeline /></>
-            :<Explore/>
-          }
-    </GridItemEight>
-    <GridItemFour className='block max-h-40'>
-
-    <Footer />
-  
-    
-
-    <Wrapper publication={publication}>
-    <div className='hidden lg:block xl:block'><CuratedHome /></div>
-        </Wrapper>
-
-  
- </GridItemFour>
-    
-  </GridLayout>
-  </div>
+            <Wrapper publication={publication}>
+              <div className="hidden lg:block xl:block">
+                <CuratedHome />
+              </div>
+            </Wrapper>
+          </>
+        </GridItemFour>
+      </GridLayout>
+    </>
   );
 };
 

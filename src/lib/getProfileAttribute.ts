@@ -1,6 +1,5 @@
 import type { Attribute, Maybe } from '@/utils/lens/generatedLenster';
 
-
 type Key = 'x' | 'location' | 'website' | 'statusEmoji' | 'statusMessage';
 
 /**

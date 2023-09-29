@@ -11,7 +11,6 @@ const Message: FC<MessageProps> = ({ onClick }) => {
   return (
     <button
       className="!px-3 !py-1.5 text-sm"
-   
       onClick={onClick}
       aria-label="Message"
     >

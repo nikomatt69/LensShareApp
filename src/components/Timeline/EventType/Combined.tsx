@@ -1,4 +1,3 @@
-
 import Profiles from '@/components/Publication/Profiles';
 import { FeedItem } from '@/utils/lens/generatedLenster';
 import { SparklesIcon } from '@heroicons/react/24/outline';
@@ -46,46 +45,36 @@ const Combined: FC<CombinedProps> = ({ feedItem }) => {
       <div className="flex items-center space-x-1">
         {mirrorsLength ? (
           <span>
-            
-              mirrored
-              {totalActions < 3 ? (totalActions !== 1 ? ' and ' : '') : ', '}
-           
+            mirrored
+            {totalActions < 3 ? (totalActions !== 1 ? ' and ' : '') : ', '}
           </span>
         ) : null}
         {commentsLength ? (
           <span>
-          
-              commented
-              {totalActions < 3
-                ? collectsLength && reactionsLength
-                  ? ' and '
-                  : !mirrorsLength && totalActions !== 1
-                  ? ' and '
-                  : ''
-                : ', '}
-              {totalActions >= 3 && (!collectsLength || !reactionsLength)
+            commented
+            {totalActions < 3
+              ? collectsLength && reactionsLength
                 ? ' and '
-                : ''}
-           
+                : !mirrorsLength && totalActions !== 1
+                ? ' and '
+                : ''
+              : ', '}
+            {totalActions >= 3 && (!collectsLength || !reactionsLength)
+              ? ' and '
+              : ''}
           </span>
         ) : null}
         {collectsLength ? (
           <span>
-           
-              collected
-              {totalActions >= 3 && reactionsLength
-                ? ' and '
-                : reactionsLength
-                ? ' and '
-                : ''}
-          
+            collected
+            {totalActions >= 3 && reactionsLength
+              ? ' and '
+              : reactionsLength
+              ? ' and '
+              : ''}
           </span>
         ) : null}
-        {reactionsLength ? (
-          <span>
-            liked
-          </span>
-        ) : null}
+        {reactionsLength ? <span>liked</span> : null}
       </div>
     </div>
   );

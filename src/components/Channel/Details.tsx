@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import type { FC, ReactNode } from 'react';
@@ -13,7 +12,7 @@ import { STATIC_IMAGES_URL } from '@/constants';
 import { Image } from '../UI/Image';
 import Markup from '../UI/Markup';
 
-import {formatDate} from '@/utils/lib/formatTime2';
+import { formatDate } from '@/utils/lib/formatTime2';
 interface DetailsProps {
   channel: Channel;
 }

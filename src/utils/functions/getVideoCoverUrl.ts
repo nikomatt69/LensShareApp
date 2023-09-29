@@ -1,4 +1,3 @@
-
 import { Publication } from '@/utils/lens/generatedLenster';
 import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
 

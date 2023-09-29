@@ -114,15 +114,15 @@ const PreviewList: FC<PreviewListProps> = ({
     >
       <Card className="flex h-full flex-col justify-between rounded-xl">
         <div className="divider relative flex items-center justify-between p-5">
-        <div className="flex items-center space-x-2">
-          <img
-            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
-            draggable={false}
-            className="h-12 w-12 md:h-16 md:w-16"
-            alt="lensshare"
-          />
-          <h1 className="text-md font-semibold">Messages</h1>
-        </div>
+          <div className="flex items-center space-x-2">
+            <img
+              src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+              draggable={false}
+              className="h-12 w-12 md:h-16 md:w-16"
+              alt="lensshare"
+            />
+            <h1 className="text-md font-semibold">Messages</h1>
+          </div>
           {currentProfile && !showAuthenticating && !showLoading && (
             <button onClick={newMessageClick} type="button">
               <PlusCircleIcon className="h-6 w-6" />

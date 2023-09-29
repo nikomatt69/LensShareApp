@@ -22,4 +22,4 @@ const getIsFeatureEnabled = (featureKey: string): boolean => {
   return IS_MAINNET ? feature.enabledFor.includes(user.state.profileId) : true;
 };
 
-export default getIsFeatureEnabled
+export default getIsFeatureEnabled;

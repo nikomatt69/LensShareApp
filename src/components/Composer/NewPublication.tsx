@@ -5,7 +5,7 @@ import type {
   EncryptedMetadata,
   FollowCondition,
   LensEnvironment,
-  EoaOwnership,
+  EoaOwnership
 } from '@lens-protocol/sdk-gated';
 import { LensGatedSDK } from '@lens-protocol/sdk-gated';
 import type {
@@ -40,7 +40,6 @@ import {
   ReferenceModules,
   useBroadcastDataAvailabilityMutation,
   useBroadcastMutation,
- 
   useCreateCommentTypedDataMutation,
   useCreateCommentViaDispatcherMutation,
   useCreateDataAvailabilityCommentTypedDataMutation,
@@ -51,7 +50,7 @@ import {
   useCreatePostViaDispatcherMutation,
   usePublicationLazyQuery
 } from '@/utils/lens/generatedLenster';
-import {SuperfluidInflowsDocument} from '@/utils/lens/generated4'
+import { SuperfluidInflowsDocument } from '@/utils/lens/generated4';
 
 import { $convertFromMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -64,10 +63,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { NewPublicationTypes, OptmisticPublicationType } from 'src/enums';
 
-import {
-  useAppStore,
-  
-} from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 import { useCollectModuleStore } from 'src/store/collect-module';
 
 import { usePublicationStore } from 'src/store/publication4';
@@ -75,7 +71,7 @@ import { usePublicationStore } from 'src/store/publication4';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { v4 as uuid } from 'uuid';
 import { useContractWrite, usePublicClient, useSignTypedData } from 'wagmi';
-import { superfluidClient} from '@/utils/lens/apollo'
+import { superfluidClient } from '@/utils/lens/apollo';
 import PollEditor from './Actions/PollSettings/PollEditor';
 
 import Editor from './Editor';
@@ -103,11 +99,20 @@ import { LENS_HUB_ABI } from '@/abi/abi';
 import useCreatePoll from '@/lib/useCreatePoll';
 import useCreateSpace from '@/lib/useCreateSpace';
 import QuotedPublication from './QuotedPublication';
-import { CalendarIcon, ChatBubbleLeftRightIcon, ChatBubbleOvalLeftIcon, MicrophoneIcon, PencilIcon } from '@heroicons/react/24/outline';
+import {
+  CalendarIcon,
+  ChatBubbleLeftRightIcon,
+  ChatBubbleOvalLeftIcon,
+  MicrophoneIcon,
+  PencilIcon
+} from '@heroicons/react/24/outline';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
 import { LensHub } from '@/abi/LensHub';
 import { useNonceStore } from '@/store/nonce';
-import { ChatBubbleOvalLeftEllipsisIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
+import {
+  ChatBubbleOvalLeftEllipsisIcon,
+  PencilSquareIcon
+} from '@heroicons/react/20/solid';
 import Discard from './Post/Discard';
 import Dropdown from '../Spaces/Common/Dropdown';
 import { Input } from '../UI/Input';
@@ -164,21 +169,20 @@ const SpaceSettings = dynamic(
 );
 interface NewPublicationProps {
   publication: Publication;
-  profile:Profile
+  profile: Profile;
 }
-const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
+const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
   const { push } = useRouter();
   const { cache } = useApolloClient();
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
   // Modal store
 
-
   const { setShowComposerModal, showComposerModal, modalPublicationType } =
-  useGlobalModalStateStore();
+    useGlobalModalStateStore();
 
   // Spaces store
-   const spacesStartTime = useSpacesStore((state) => state.spacesStartTime);
+  const spacesStartTime = useSpacesStore((state) => state.spacesStartTime);
   const setShowDiscardModal = useGlobalModalStateStore(
     (state) => state.setShowDiscardModal
   );
@@ -319,7 +323,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
           : null,
       publication_has_poll: showPollEditor
     };
-   
   };
 
   const onError = (error: any) => {
@@ -756,7 +759,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
       }
 
       // Create Space in Huddle
-      
+
       let spaceData = {
         success: false,
         response: {
@@ -982,72 +985,76 @@ const NewPublication: FC<NewPublicationProps> = ({ publication ,profile}) => {
 
   return (
     <Card
-    onClick={() => setShowEmojiPicker(false)}
-    className={cn(
-      { '!rounded-b-xl !rounded-t-none border-none': !isComment },
-      'pb-3'
-    )}
-  >
-    {error ? (
-      <ErrorMessage
-        className="!rounded-none"
-        title={`Transaction failed!`}
-        error={error}
-      />
-    ) : null}
-    <Editor />
-    {publicationContentError ? (
-      <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
-        {publicationContentError}
-      </div>
-    ) : null}
-    {showPollEditor ? <PollEditor /> : null}
-    {quotedPublication ? (
-      <Wrapper className="m-5" zeroPadding>
-        <QuotedPublication profile={profile} publication={quotedPublication} isNew />
-      </Wrapper>
-    ) : null}
-    <div className="items-center  p-1 px-5 block sm:flex">
-      <div className=" right-2 lg:block ">
-        <div className=" pr-2 sm:pt-0 pb-2">
-          <Button
-            disabled={
-              isLoading ||
-              isUploading ||
-              isSubmitDisabledByPoll ||
-              videoThumbnail.uploading
-            }
-            icon={getButtonIcon()}
-            onClick={createPublication}
-          >
-            {getButtonText()}
-          </Button>
-        </div>
-      </div>
-      {showComposerModal &&
-      modalPublicationType === NewPublicationTypes.Spaces ? (
-        <SpaceSettings />
-      ) : (
-        <div className="flex items-center space-x-4">
-          <Attachment />
-          
-          <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-          {!publication?.isDataAvailability ? (
-            <>
-              <CollectSettings />
-              <ReferenceSettings />
-              <AccessSettings />
-            </>
-          ) : null}
-          <PollSettings />
-        </div>
+      onClick={() => setShowEmojiPicker(false)}
+      className={cn(
+        { '!rounded-b-xl !rounded-t-none border-none': !isComment },
+        'pb-3'
       )}
-    </div>
-    <div className="px-5">
-      <Attachments attachments={attachments} isNew />
-    </div>
-    <Discard onDiscard={onDiscardClick} />
-  </Card>
+    >
+      {error ? (
+        <ErrorMessage
+          className="!rounded-none"
+          title={`Transaction failed!`}
+          error={error}
+        />
+      ) : null}
+      <Editor />
+      {publicationContentError ? (
+        <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
+          {publicationContentError}
+        </div>
+      ) : null}
+      {showPollEditor ? <PollEditor /> : null}
+      {quotedPublication ? (
+        <Wrapper className="m-5" zeroPadding>
+          <QuotedPublication
+            profile={profile}
+            publication={quotedPublication}
+            isNew
+          />
+        </Wrapper>
+      ) : null}
+      <div className="block  items-center p-1 px-5 sm:flex">
+        <div className=" right-2 lg:block ">
+          <div className=" pb-2 pr-2 sm:pt-0">
+            <Button
+              disabled={
+                isLoading ||
+                isUploading ||
+                isSubmitDisabledByPoll ||
+                videoThumbnail.uploading
+              }
+              icon={getButtonIcon()}
+              onClick={createPublication}
+            >
+              {getButtonText()}
+            </Button>
+          </div>
+        </div>
+        {showComposerModal &&
+        modalPublicationType === NewPublicationTypes.Spaces ? (
+          <SpaceSettings />
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Attachment />
+
+            <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
+            {!publication?.isDataAvailability ? (
+              <>
+                <CollectSettings />
+                <ReferenceSettings />
+                <AccessSettings />
+              </>
+            ) : null}
+            <PollSettings />
+          </div>
+        )}
+      </div>
+      <div className="px-5">
+        <Attachments attachments={attachments} isNew />
+      </div>
+      <Discard onDiscard={onDiscardClick} />
+    </Card>
   );
 };
 

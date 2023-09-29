@@ -1,4 +1,3 @@
-
 import Profiles from '@/components/Publication/Profiles';
 import { CollectedEvent } from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';

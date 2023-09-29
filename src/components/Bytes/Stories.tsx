@@ -1,5 +1,13 @@
-
-import { Comment, FeedEventItemType, Profile, Publication, PublicationMainFocus, PublicationSortCriteria, useExploreFeedLazyQuery, usePublicationLazyQuery } from '@/utils/lens/generatedLenster';
+import {
+  Comment,
+  FeedEventItemType,
+  Profile,
+  Publication,
+  PublicationMainFocus,
+  PublicationSortCriteria,
+  useExploreFeedLazyQuery,
+  usePublicationLazyQuery
+} from '@/utils/lens/generatedLenster';
 import type { Dispatch, FC } from 'react';
 import React, { useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
@@ -16,7 +24,6 @@ import FollowButton from '../Buttons/FollowButton';
 import { Image } from '@/components/UI/Image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
-
 
 import { useAppStore } from '@/store/app';
 import PublicationActions from '../Publication/Actions';
@@ -41,23 +48,15 @@ import StoryRender from '../Subscriptions/StoryRender';
 type Props = {
   trigger: React.ReactNode;
   publication: Publication;
-  profile :Profile
-
+  profile: Profile;
 };
 
-const StoriesRender: FC<Props> = ({
-  trigger,
-  publication,
-  profile
-
-}) => {
+const StoriesRender: FC<Props> = ({ trigger, publication, profile }) => {
   const [show, setShow] = useState(false);
-  const [currentViewingId, setCurrentViewingId] = useState('')
+  const [currentViewingId, setCurrentViewingId] = useState('');
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [showModal, setShowModal] = useState(false);
   const profilePic = currentProfile?.picture;
-
-
 
   return (
     <>
@@ -66,23 +65,14 @@ const StoriesRender: FC<Props> = ({
         className="focus:outline-none"
         onClick={() => setShow(true)}
       >
-         <div
-        className="w-14 h-14 md:w-22 overflow-y-auto pl-4 md:h-22 md:mx-auto"
-    
-      >
-        
+        <div className="md:w-22 md:h-22 h-14 w-14 overflow-y-auto pl-4 md:mx-auto">
           <Image
-            
             src={getAvatar(profile)}
             className="rounded-full"
-         
             alt={formatHandle(profile?.handle)}
             data-testid="profile-avatar"
           />
-         
-          
-        
-      </div>
+        </div>
         {trigger}
       </button>
       <FullScreenModal
@@ -99,18 +89,12 @@ const StoriesRender: FC<Props> = ({
             <MdOutlineClose className="h-4 w-4 text-white" />
           </button>
         </div>
-        <div className=' overflow-y-auto'>
-        
-       <ProfileVideos/>
-       </div>
-      
-        
-
-
+        <div className=" overflow-y-auto">
+          <ProfileVideos />
+        </div>
       </FullScreenModal>
     </>
   );
 };
 
 export default StoriesRender;
-  

@@ -1,5 +1,4 @@
-import { SNAPSHOT_URL } from "@/constants";
-
+import { SNAPSHOT_URL } from '@/constants';
 
 /**
  * Get Snapshot proposal ID from URL

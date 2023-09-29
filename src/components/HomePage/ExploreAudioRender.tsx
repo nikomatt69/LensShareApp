@@ -1,11 +1,7 @@
 import * as Apollo from '@apollo/client';
 
 import { FC, useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -147,22 +143,11 @@ const ExploreAudioRender: FC<Props> = ({ publication, profile }) => {
   }
 
   return (
-   
-     <GridLayout className="max-w-[1200px] pt-6">
-      
-   
-     
-   
-     <GridItemEight className="space-y-5">
-     <ExploreAudio publication={publication} profile={profile} />
-    
-     </GridItemEight>
-      
-    
-  
-   </GridLayout>
-
-    
+    <GridLayout className="max-w-[1200px] pt-6">
+      <GridItemEight className="space-y-5">
+        <ExploreAudio publication={publication} profile={profile} />
+      </GridItemEight>
+    </GridLayout>
   );
 };
 

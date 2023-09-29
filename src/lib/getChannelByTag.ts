@@ -1,7 +1,6 @@
-import { featuredChannels } from "@/store/app";
-import { Community } from "@/types/communities";
-import { Channel } from "@/types/lenster";
-
+import { featuredChannels } from '@/store/app';
+import { Community } from '@/types/communities';
+import { Channel } from '@/types/lenster';
 
 const getChannelByTag = (tags: string[]): Community | undefined => {
   for (const tag of tags) {
@@ -9,7 +8,7 @@ const getChannelByTag = (tags: string[]): Community | undefined => {
       (channel) => channel.tags?.includes(tag)
     );
     if (channel) {
-      return ;
+      return;
     }
   }
 

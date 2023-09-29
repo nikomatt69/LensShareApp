@@ -17,17 +17,13 @@ interface EchosPersistState {
   setSelectedTrackId: (selectedTrack: string | null) => void;
 }
 
-
-
 export const useEchosPersistStore = create(
   persist<EchosPersistState>(
-    
     (set) => ({
       selectedTrackId: null,
       setSelectedTrackId: (selectedTrackId) => set(() => ({ selectedTrackId }))
     }),
 
-    
     { name: Localstorage.LensshareStore }
   )
 );

@@ -5,14 +5,13 @@ import React, { useState } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 import { useUpdateEffect } from 'usehooks-ts';
 
-
 import Audio from '../Audio';
 import Dropdown from '../Dropdown';
 import CoHostData from '../Sidebar/Peers/PeerRole/CoHostData';
 import HostData from '../Sidebar/Peers/PeerRole/HostData';
 import ListenersData from '../Sidebar/Peers/PeerRole/ListenersData';
 import SpeakerData from '../Sidebar/Peers/PeerRole/SpeakerData';
-import type {  RoleEnum } from '../SpacesTypes';
+import type { RoleEnum } from '../SpacesTypes';
 import { BiDotsVertical } from 'react-icons/bi';
 import { HiDotsVertical } from 'react-icons/hi';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';

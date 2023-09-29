@@ -1,3 +1,3 @@
-import Main from "@/components/Meet";
+import Main from '@/components/Meet';
 
 export default Main;

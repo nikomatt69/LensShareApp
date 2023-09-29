@@ -1,7 +1,11 @@
 import { Card } from '@/components/UI/Card';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
-import { MicrophoneIcon, PencilIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import {
+  MicrophoneIcon,
+  PencilIcon,
+  PencilSquareIcon
+} from '@heroicons/react/24/outline';
 
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
@@ -22,7 +26,6 @@ const NewPost: FC = () => {
   const setPublicationContent = usePublicationStore(
     (state) => state.setPublicationContent
   );
-
 
   const openPublicationModal = () => {
     setShowComposerModal(true, NewPublicationTypes.Publication);
@@ -68,18 +71,15 @@ const NewPost: FC = () => {
           onClick={openPublicationModal}
         >
           <PencilIcon className="h-5 w-5" />
-          <span>
-            New Post?
-          </span>
+          <span>New Post?</span>
         </button>
-        
-          <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
-            <MicrophoneIcon
-              className="text-brand h-6 w-6"
-              onClick={openSpacesModal}
-            />
-          </button>
 
+        <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
+          <MicrophoneIcon
+            className="text-brand h-6 w-6"
+            onClick={openSpacesModal}
+          />
+        </button>
       </div>
     </Card>
   );

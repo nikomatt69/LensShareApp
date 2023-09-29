@@ -61,8 +61,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
     sources: [APP_ID, LENSTUBE_APP_ID, LENSTER_APP_ID, RIFF_APP_ID],
     publicationTypes: [PublicationTypes.Post],
     metadata: {
-    
-
       mainContentFocus: [PublicationMainFocus.Audio, PublicationMainFocus.Audio]
     }
   };
@@ -107,7 +105,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
       onCompleted: () => fetchAllBytes()
     });
   };
-
 
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
@@ -171,7 +168,7 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags title={`Explore • ${APP_NAME} `} />
-    
+
       <div
         ref={bytesContainer}
         className="h-screen border-0 md:h-[calc(100vh-70px)]"

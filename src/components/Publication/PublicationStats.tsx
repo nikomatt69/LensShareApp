@@ -27,7 +27,7 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
   const isMirror = publication.__typename === 'Mirror';
   const commentsCount = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfComments
-    : publication?.stats?.totalAmountOfComments
+    : publication?.stats?.totalAmountOfComments;
   const mirrorCount = isMirror
     ? publication?.mirrorOf?.stats?.totalAmountOfMirrors
     : publication?.stats?.totalAmountOfMirrors;
@@ -85,11 +85,11 @@ const PublicationStats: FC<PublicationStatsProps> = ({ publication }) => {
           </button>
           <Modal
             title={`Liked by`}
-            icon={<HeartIcon className="text-red-700 h-5 w-5" />}
+            icon={<HeartIcon className="h-5 w-5 text-red-700" />}
             show={showLikesModal}
             onClose={() => setShowLikesModal(false)}
           >
-            <Likes publicationId={publicationId}  />
+            <Likes publicationId={publicationId} />
           </Modal>
         </>
       )}

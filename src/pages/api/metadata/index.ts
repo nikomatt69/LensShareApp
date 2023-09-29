@@ -1,7 +1,12 @@
 import Bundlr from '@bundlr-network/client';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { APP_NAME, BUNDLR_CURRENCY, BUNDLR_NODE_URL, ERROR_MESSAGE } from 'src/constants';
+import {
+  APP_NAME,
+  BUNDLR_CURRENCY,
+  BUNDLR_NODE_URL,
+  ERROR_MESSAGE
+} from 'src/constants';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'OPTIONS') {
@@ -19,7 +24,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const payload = JSON.stringify(req.body);
 
   try {
-    const bundlr = new Bundlr(BUNDLR_NODE_URL, BUNDLR_CURRENCY, process.env.BUNDLR_PRIVATE_KEY);
+    const bundlr = new Bundlr(
+      BUNDLR_NODE_URL,
+      BUNDLR_CURRENCY,
+      process.env.BUNDLR_PRIVATE_KEY
+    );
     const tags = [
       { name: 'Content-Type', value: 'application/json' },
       { name: 'App-Name', value: APP_NAME }

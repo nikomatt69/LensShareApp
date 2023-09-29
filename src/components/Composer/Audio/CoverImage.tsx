@@ -8,10 +8,8 @@ import cn from '@/components/UI/cn';
 import type { ChangeEvent, FC, Ref } from 'react';
 import { useState } from 'react';
 import { Image } from '@/components/UI/Image';
-import {uploadFileToIPFS}  from '@/lib/uploadToIPFS3';
+import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 import errorToast from '../errorToast';
-
-
 
 interface CoverImageProps {
   isNew: boolean;

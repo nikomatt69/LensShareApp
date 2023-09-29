@@ -1,4 +1,9 @@
-import { LIT_PROTOCOL_ENV, LIT_PROTOCOL_ENVIRONMENT, POLYGONSCAN_URL, RARIBLE_URL } from '@/constants';
+import {
+  LIT_PROTOCOL_ENV,
+  LIT_PROTOCOL_ENVIRONMENT,
+  POLYGONSCAN_URL,
+  RARIBLE_URL
+} from '@/constants';
 import sanitizeDStorageUrl from '@/utils/functions/sanitizeDStorageUrl';
 import useEthersWalletClient from '@/utils/hooks/useEthersWalletClient';
 import {
@@ -223,7 +228,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         <div className="flex items-center space-x-2 font-bold">
           <LockClosedIcon className="h-5 w-5 text-green-300" />
           <span className="text-base font-black text-white">
-           To view this...
+            To view this...
           </span>
         </div>
         <div className="space-y-2 pt-3.5 text-white">
@@ -234,7 +239,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               <Link
                 href={`/post/${collectCondition?.publicationId}`}
                 className="font-bold lowercase underline"
-              
               >
                 {encryptedPublication?.__typename}
               </Link>
@@ -253,9 +257,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage icon={<UserPlusIcon className="h-4 w-4" />}>
               Follow{' '}
               <Link
-                href={`/u/${formatHandle(
-                  encryptedPublication?.profile?.id
-                )}`}
+                href={`/u/${formatHandle(encryptedPublication?.profile?.id)}`}
                 className="font-bold"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
@@ -266,7 +268,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
             <DecryptMessage
               icon={<UserPlusIcon className="h-4 w-4 animate-pulse" />}
             >
-             Follow finalizing on chain...
+              Follow finalizing on chain...
             </DecryptMessage>
           ) : null}
 
@@ -277,7 +279,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}
                 className="font-bold underline"
-               
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -295,7 +296,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
                   className="font-bold underline"
-                 
                   target="_blank"
                   rel="noreferrer noopener"
                 >
@@ -332,7 +332,6 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         onClick={async (event) => {
           stopEventPropagation(event);
           await getDecryptedData();
-        
         }}
       >
         <div className="flex items-center space-x-1 font-bold text-white">
@@ -369,9 +368,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       {showMore ? (
         <div className="mt-4 flex items-center space-x-1 text-sm font-bold text-gray-500">
           <EyeIcon className="h-4 w-4" />
-          <Link href={`/post/${encryptedPublication?.id}`}>
-            Show more
-          </Link>
+          <Link href={`/post/${encryptedPublication?.id}`}>Show more</Link>
         </div>
       ) : null}
       {publication?.media?.length ? (

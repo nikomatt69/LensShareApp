@@ -15,7 +15,6 @@ import type { ChangeEvent, FC } from 'react';
 import { useRef, useState } from 'react';
 import { useEffectOnce } from 'usehooks-ts';
 
-
 interface ListProps {
   setEmoji: (emoji: string) => void;
 }

@@ -1,7 +1,6 @@
 import { useDisplayName } from '@huddle01/react/app-utils';
 import {
   useAudio,
-
   useHuddle01,
   useLobby,
   useRoom,
@@ -14,7 +13,7 @@ import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 import { useAppStore } from 'src/store/app';
 import { useMeetPersistStore } from 'src/store/meet';
-import {  useUpdateEffect } from 'usehooks-ts';
+import { useUpdateEffect } from 'usehooks-ts';
 
 import { BasicIcons } from '../BasicIcons';
 import SwitchDeviceMenu from '../SwitchDeviceMenu';
@@ -214,7 +213,7 @@ const Lobby: NextPage = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
-                className="flex-1 rounded-lg border-transparent bg-transparent py-3 text-blue-700 outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
+                className="flex rounded-lg border-transparent max-w-xs bg-transparent py-3 text-blue-700 outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}
               />

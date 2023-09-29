@@ -1,4 +1,3 @@
-
 import { METADATA_WORKER_URL } from '@/constants';
 import { Errors } from '@/lib/errors';
 import axios from 'axios';

@@ -89,7 +89,6 @@ const VoteProposal: FC<VoteProposalProps> = ({
 
       refetch?.();
       setVoteConfig({ show: false, position: 0 });
-     
     } catch {
       toast.error(Errors.SomethingWentWrong);
     } finally {

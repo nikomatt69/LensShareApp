@@ -36,8 +36,6 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
     setShowModal(false);
   };
 
-
-
   return (
     <div className="p-5">
       <ToggleWithHelper
@@ -93,5 +91,3 @@ const BasicSettings: FC<BasicSettingsProps> = ({ setShowModal }) => {
 };
 
 export default BasicSettings;
-
-

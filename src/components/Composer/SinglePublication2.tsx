@@ -21,7 +21,6 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Community } from '@/types/communities';
 
-
 interface SinglePublicationProps {
   publication: Publication;
   feedItem?: FeedItem;
@@ -33,8 +32,8 @@ interface SinglePublicationProps {
   isFirst?: boolean;
   isLast?: boolean;
   profile: Profile;
-  showCount:boolean
- tags:string
+  showCount: boolean;
+  tags: string;
 }
 
 const SinglePublication: FC<SinglePublicationProps> = ({
@@ -46,7 +45,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   showType = true,
   showActions = true,
   showModActions = false,
-  showCount= true,
+  showCount = true,
   showMore = true,
   isFirst = false,
   isLast = false
@@ -54,8 +53,6 @@ const SinglePublication: FC<SinglePublicationProps> = ({
   const {
     query: { slug }
   } = useRouter();
-  
-
 
   const firstComment = feedItem?.comments && feedItem.comments[0];
   const rootPublication = feedItem
@@ -85,7 +82,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
         feedItem={feedItem}
         profile={profile}
       />
-    
+
       <div className="ml-[53px] border-blue-500">
         {publication?.hidden ? (
           <HiddenPublication type={publication.__typename} />
@@ -103,9 +100,6 @@ const SinglePublication: FC<SinglePublicationProps> = ({
                 showCount={showCount}
               />
             )}
-          
-          
-            
           </>
         )}
       </div>

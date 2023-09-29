@@ -18,7 +18,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
-import { useAppStore, } from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 
 import { ErrorMessage } from '../ErrorMessage';
 import { EmptyState } from '../UI/EmptyState';
@@ -104,7 +104,7 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
 
   return (
     <Card
-      className="divide-y-[1px] dark:bg-black/70 bg-white border-blue-700 rounded-xl divide-blue-700"
+      className="divide-y-[1px] divide-blue-700 rounded-xl border-blue-700 bg-white dark:bg-black/70"
       dataTestId="comments-feed"
     >
       {txnQueue.map(
@@ -125,7 +125,9 @@ const Feed: FC<FeedProps> = ({ publication, feedItem }) => {
             isLast={index === comments.length - 1}
             publication={comment as Comment}
             showType={false}
-            showCount={true} tags={''}          />
+            showCount={true}
+            tags={''}
+          />
         )
       )}
       {hasMore ? <span ref={observe} /> : null}

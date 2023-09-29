@@ -1,10 +1,6 @@
-
-
 import type { Profile } from '@/utils/lens/generated4';
 import { SuperfluidInflowsDocument } from '@/utils/lens/generated4';
 import { superfluidClient } from '@/utils/lens/apollo';
-
-
 
 import { type FC, useEffect, useState } from 'react';
 import Loading from '../Loading';
@@ -78,7 +74,7 @@ const SubscribersFeed: FC<SubscribersFeedProps> = ({ profile }) => {
   }, [profile]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (superfluidInflowsData?.account === null) {

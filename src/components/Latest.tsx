@@ -20,7 +20,7 @@ import { useInView } from 'react-cool-inview';
 
 import ByteVideo from '@/components/Bytes/ByteVideo';
 
-import { useAppStore} from '@/store/app';
+import { useAppStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
@@ -48,8 +48,6 @@ import { OptmisticPublicationType } from '@/enums';
 import imageKit from '@/lib/imageKit';
 import { useTransactionPersistStore } from '@/store/transaction';
 
-
-
 const Latest = () => {
   const router = useRouter();
   const bytesContainer = useRef<HTMLDivElement>(null);
@@ -59,23 +57,14 @@ const Latest = () => {
   const { resolvedTheme } = useTheme();
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
 
-
   const request = {
     sortCriteria: PublicationSortCriteria.Latest,
     limit: 20,
     noRandomize: false,
-    sources: [
-      APP_ID,
-      LENSTUBE_APP_ID,
-      LENSTER_APP_ID,
-      ORB_APP_ID,
-      RIFF_APP_ID
-    ],
+    sources: [APP_ID, LENSTUBE_APP_ID, LENSTER_APP_ID, ORB_APP_ID, RIFF_APP_ID],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
- 
-    
       mainContentFocus: [
         PublicationMainFocus.Video,
         PublicationMainFocus.Image,
@@ -102,7 +91,7 @@ const Latest = () => {
           : null,
         profileId: currentProfile?.id ?? null
       },
-      onCompleted: ({ explorePublications:any }) => {}
+      onCompleted: ({ explorePublications: any }) => {}
     });
   console.log(data);
 
@@ -140,8 +129,6 @@ const Latest = () => {
     setShow(false);
   };
 
-
-
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
       openDetail(singleBytePublication);
@@ -164,7 +151,7 @@ const Latest = () => {
       await fetchMore({
         variables: {
           request: { ...request, cursor: pageInfo?.next },
-          
+
           profileId: currentProfile?.id
         }
       });
@@ -184,36 +171,39 @@ const Latest = () => {
       <Head>
         <meta name="theme-color" content="#000000" />
       </Head>
-      <MetaTags title={`Explore • ${APP_NAME} `} />
-      <div className="flex mb-5 items-center space-x-2">
-          <img
-            src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
-            draggable={false}
-            className="h-12 w-12 md:h-16 md:w-16"
-            alt="lensshare"
+      <MetaTags  />
+      <div className="mb-5 flex items-center space-x-2">
+        <img
+          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          draggable={false}
+          className="h-12 w-12 md:h-16 md:w-16"
+          alt="lensshare"
+        />
+        <h1 className="text-xl font-semibold">Latest</h1>
+      </div>
+
+      <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
+        {txnQueue.map(
+          (txn) =>
+            txn?.type === OptmisticPublicationType.NewPost && (
+              <div key={txn.id}>
+                <QueuedPublication txn={txn} />
+              </div>
+            )
+        )}
+        {bytes?.map((publication, index) => (
+          <SinglePublication
+            profile={currentProfile as Profile}
+            key={`${publication?.id}_${index}`}
+            isFirst={index === 0}
+            isLast={index === bytes.length - 1}
+            publication={publication as Publication}
+            showCount={true}
+            tags={''}
           />
-          <h1 className="text-xl font-semibold">Latest</h1>
-        </div>
-      
-      <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
-    {txnQueue.map(
-      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
-        <div key={txn.id}>
-          <QueuedPublication txn={txn} />
-        </div>
-      )
-    )}
-    {bytes?.map((publication, index) => (
-      <SinglePublication
-        profile={currentProfile as Profile}
-        key={`${publication?.id}_${index}`}
-        isFirst={index === 0}
-        isLast={index === bytes.length - 1}
-        publication={publication as Publication}
-        showCount={true} tags={''} />
-    ))}
-    {hasMore ? <span ref={observe} /> : null}
-  </Card>
+        ))}
+        {hasMore ? <span ref={observe} /> : null}
+      </Card>
     </div>
   );
 };

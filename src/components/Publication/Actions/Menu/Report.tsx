@@ -25,7 +25,7 @@ const Report: FC<ReportProps> = ({ publication }) => {
           'm-2 block cursor-pointer rounded-lg px-4 py-1.5 text-sm text-red-500'
         )
       }
-      onClick={(event:any) => {
+      onClick={(event: any) => {
         stopEventPropagation(event);
         setShowPublicationReportModal(true, publication);
       }}

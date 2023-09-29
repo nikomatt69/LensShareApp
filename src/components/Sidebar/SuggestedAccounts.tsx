@@ -25,8 +25,7 @@ interface Props {
 const SuggestedAccounts = () => {
   const { data, loading, error } = useQuery(RecommendedProfilesDocument, {
     nextFetchPolicy: 'standby',
-    variables: { options: { shuffle: true ,limit: 10} },
-
+    variables: { options: { shuffle: true, limit: 10 } }
   });
   console.log('Recommended', data);
   return (
@@ -59,7 +58,6 @@ const SuggestedAccounts = () => {
                       src={getAvatar(currentProfile)}
                       alt={getAvatar(currentProfile)}
                       className="rounded-full"
-                      
                     />
                   </div>
                   <div />

@@ -1,4 +1,3 @@
-
 import { Comment, Profile, Publication } from '@/utils/lens/generatedLenster';
 import type { Dispatch, FC } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -17,7 +16,6 @@ import { Image } from '@/components/UI/Image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
 
-
 import { useAppStore } from '@/store/app';
 import PublicationActions from '../Publication/Actions';
 import Feed from '../Comment/Feed';
@@ -26,14 +24,9 @@ import FeedComment from '../Comment/FeedComment';
 type Props = {
   trigger: React.ReactNode;
   publication: Publication;
-
 };
 
-const CommentModal: FC<Props> = ({
-  trigger,
-  publication,
-
-}) => {
+const CommentModal: FC<Props> = ({ trigger, publication }) => {
   const [show, setShow] = useState(false);
   const subscriber = publication.profile;
   const [following, setFollowing] = useState(false);
@@ -77,7 +70,7 @@ const CommentModal: FC<Props> = ({
         <div className="ml-12 mt-3 items-center justify-center p-5 text-center">
           <PublicationActions publication={publication} />
         </div>
-        <div className=" flex max-h-[60%] overflow-y-auto center-items w-full bg-white dark:bg-gray-900/70 border-0  pt-3">
+        <div className=" center-items flex max-h-[60%] w-full overflow-y-auto border-0 bg-white pt-3  dark:bg-gray-900/70">
           <FeedComment publication={publication as Comment} />
         </div>
         <NewPublication publication={publication} />

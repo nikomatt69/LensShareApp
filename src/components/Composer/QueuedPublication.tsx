@@ -1,4 +1,4 @@
-import { useAppStore, } from '@/store/app';
+import { useAppStore } from '@/store/app';
 import { OptimisticTransaction } from '@/typesLenster';
 import {
   Profile,

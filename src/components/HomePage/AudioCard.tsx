@@ -99,7 +99,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   }, [profile?.isFollowedByMe]);
 
   return (
-    <div className="justify-content break-word m-3 flex flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#F2F6F9] dark:bg-black pb-0 md:pb-6">
+    <div className="justify-content break-word m-3 flex flex-col rounded-xl border-0 border-b-2 border-gray-200 bg-[#F2F6F9] pb-0 dark:bg-black md:pb-6">
       <div className="break-word flex flex-row ">
         <div className="break-word mt-4 flex-auto cursor-pointer gap-3 rounded p-2 font-semibold">
           <Link href={`/u/${profile.id}`} key={profile.id} />
@@ -215,19 +215,19 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
       </div>
 
       <div className="flex flex-row space-x-3 py-3">
-        <p className="text-black dark:text-white-400 block pl-1 text-xs font-semibold md:hidden">
+        <p className="dark:text-white-400 block pl-1 text-xs font-semibold text-black md:hidden">
           {' '}
           {likes} Likes
         </p>
-        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
+        <p className="dark:text-white-400 block text-xs font-semibold text-black md:hidden">
           {' '}
           {comments} Comments
         </p>
-        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
+        <p className="dark:text-white-400 block text-xs font-semibold text-black md:hidden">
           {' '}
           {mirrors} Mirrors
         </p>
-        <p className="text-black dark:text-white-400 block text-xs font-semibold md:hidden">
+        <p className="dark:text-white-400 block text-xs font-semibold text-black md:hidden">
           {' '}
           {collects} Collects
         </p>

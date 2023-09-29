@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import React from 'react';
 // Store
@@ -6,7 +5,6 @@ import { useSpacesStore } from 'src/store/spaces';
 
 import ViewComponent from './ViewController';
 import cn from '@/components/UI/cn';
-
 
 const Sidebar: FC = () => {
   const isSidebarOpen = useSpacesStore((state) => state.sidebar.isSidebarOpen);

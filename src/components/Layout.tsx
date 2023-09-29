@@ -1,7 +1,11 @@
 import { useAppStore, useAppPersistStore } from '@/store/app';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { Profile, ProfilesDocument, Publication } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  ProfilesDocument,
+  Publication
+} from '@/utils/lens/generatedLenster';
 import { useQuery } from '@apollo/client';
 import toast, { Toaster } from 'react-hot-toast';
 import { CHAIN_ID } from '@/constants';
@@ -27,10 +31,8 @@ import PreviewSpaces from './Spaces/PreviewSpaces/PreviewSpaces';
 import Loader from './UI/Loader';
 import { useNonceStore } from '@/store/nonce';
 
-
 interface Props {
   children: ReactNode;
- 
 }
 
 const Layout = ({ children }: Props) => {
@@ -117,7 +119,7 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-     <Head>
+      <Head>
         <meta
           name="theme-color"
           content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
@@ -128,27 +130,19 @@ const Layout = ({ children }: Props) => {
         toastOptions={getToastOptions(resolvedTheme)}
       />
       <Spaces />
-     
+
       <GlobalModals />
       <GlobalAlerts />
-      <div className="flex min-h-screen pb-14 flex-col md:pb-0">
-      {pathname.includes( `/bytes` && `/feed`) ? (
-          <>
-  
-            {children}
-          </>
+      <div className="flex min-h-screen flex-col pb-14 md:pb-0">
+        {pathname.includes(`/bytes` && `/feed`) ? (
+          <>{children}</>
         ) : (
           <>
-      
-        <Navbar />
-        <BottomNav />
-        {children}
-        </>
+            <Navbar />
+            <BottomNav />
+            {children}
+          </>
         )}
-      
-
-
-
       </div>
     </>
   );

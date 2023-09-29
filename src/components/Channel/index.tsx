@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import type { NextPage } from 'next';
@@ -20,8 +19,6 @@ const ViewChannel: NextPage = () => {
     query: { slug },
     isReady
   } = useRouter();
-
-
 
   const fetchCommunity = async (): Promise<Channel> => {
     const response = await axios.get(`${CHANNELS_WORKER_URL}/get/${slug}`);

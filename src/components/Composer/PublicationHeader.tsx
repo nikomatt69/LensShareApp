@@ -63,9 +63,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
             timestamp={timestamp}
             showStatus
           />
-          
         )}
-        
       </span>
       <div className="!-mr-[7px] flex items-center space-x-1">
         {quoted && isNew && (

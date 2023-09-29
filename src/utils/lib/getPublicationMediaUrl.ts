@@ -3,7 +3,6 @@ import type { Publication } from '@/utils/lens/generatedLenster';
 import { STATIC_ASSETS_URL } from '@/constants';
 import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
 
-
 export const getPublicationMediaUrl = (video: Publication) => {
   const url = video?.metadata?.media[0]?.original.url;
   if (!url) {

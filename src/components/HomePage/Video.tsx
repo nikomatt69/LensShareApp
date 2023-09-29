@@ -1,6 +1,4 @@
-
 import 'plyr-react/plyr.css';
-
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
@@ -15,7 +13,6 @@ import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl
 import ViewCount from './ViewCount';
 
 import VideoPlayer from '@/utils/VideoPlayer';
-
 
 import {
   APP_ID,
@@ -35,7 +32,6 @@ interface Props {
   publication: Publication;
 }
 const Video: FC<Props> = ({ publication }) => {
-
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
@@ -85,35 +81,24 @@ const Video: FC<Props> = ({ publication }) => {
   const handleOnMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause();
   };
-  const thumbnailUrl = imageCdn(
-    sanitizeDStorageUrl(getThumbnailUrl(video)),
-   
-  )
+  const thumbnailUrl = imageCdn(sanitizeDStorageUrl(getThumbnailUrl(video)));
   const isBytesVideo =
-    video.appId === LENSTUBE_APP_ID ||   
-    publication.appId === APP_ID
-   
+    video.appId === LENSTUBE_APP_ID || publication.appId === APP_ID;
 
   return (
     <div className="lenshare-player">
-      <div className='border-2 border-blue-700 rounded-2xl'>
+      <div className="rounded-2xl border-2 border-blue-700">
         <VideoPlayer
-         
-      
-         
           publicationId={video?.id}
           permanentUrl={getPublicationMediaUrl(video as Publication)}
           posterUrl={thumbnailUrl}
           showControls={true}
           options={{
-            autoPlay:true,
+            autoPlay: true,
             muted: false,
             loop: true,
             loadingSpinner: false,
-            isCurrentlyShown: false,
-       
-
-            
+            isCurrentlyShown: false
           }}
         />
       </div>

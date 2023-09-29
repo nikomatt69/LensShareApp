@@ -26,11 +26,11 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
             draggable={false}
           />
           <div className="flex items-center space-x-0.5">
-            <span>{(notification?.profile?.name)}</span>
+            <span>{notification?.profile?.name}</span>
           </div>
         </Link>
         <span className="truncate text-gray-600 dark:text-gray-400">
-          commented 
+          commented
           <Link
             href={`/post/${
               notification?.comment?.commentOn &&
@@ -42,16 +42,14 @@ const CommentedNotification: FC<Props> = ({ notification }) => {
           </Link>
         </span>
       </div>
-      <div className="flex items-center line-clamp-2 truncate break-words justify-between">
+      <div className="line-clamp-2 flex items-center justify-between truncate break-words">
         <Link
           href={`/post/${
             notification?.comment?.commentOn &&
             notification?.comment?.commentOn?.id
           }`}
           className="line-clamp-2 truncate break-words py-1 text-gray-600 dark:text-gray-400"
-        >
-          
-        </Link>
+        ></Link>
         <div className="flex flex-none items-center text-xs text-blue-500">
           <span>{getRelativeTime(notification?.createdAt)}</span>
         </div>

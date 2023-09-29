@@ -17,4 +17,3 @@ const Player: FC<PlayerProps> = ({ og }) => {
 };
 
 export default Player;
-

@@ -3,7 +3,6 @@ import React from 'react';
 
 const terms = () => {
   return (
-    
     <div className="relative overflow-hidden py-[5rem]">
       <div className="px-2">
         <div className="relative mx-auto max-w-4xl pb-24 text-center">

@@ -39,9 +39,7 @@ const SmallUserProfile: FC<UserProfileProps> = ({
 
   const UserName = () => (
     <div className="flex max-w-sm items-center">
-      <div className="truncate">
-        {(profile?.name)}
-      </div>
+      <div className="truncate">{profile?.name}</div>
 
       <Slug
         className="ml-2 text-sm"

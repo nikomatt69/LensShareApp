@@ -25,16 +25,14 @@ const BottomNav: React.FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [homePage, setHomePage] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
 
   const profilePic = currentProfile?.picture;
   console.log('CURRENT PROFILE', currentProfile?.picture);
 
-
   return (
     <div>
-
-      <nav className="z-99 fixed  bottom-0 left-0 right-0 z-[5] m-auto flex h-[50px] items-center justify-around overflow-hidden   border-2 border-b-0 rounded-md border-t border-blue-700 bg-white/70 dark:bg-gray-800/70 px-4 py-3 lg:w-[1100px] xl:w-[1200px]">
+      <nav className="z-99 fixed  bottom-0 left-0 right-0 z-[5] m-auto flex h-[50px] items-center justify-around overflow-hidden   rounded-md border-2 border-b-0 border-t border-blue-700 bg-white/70 px-4 py-3 dark:bg-gray-800/70 lg:w-[1100px] xl:w-[1200px]">
         {/* //swap timelines */}
         {homePage ? (
           <Link href="/">
@@ -118,29 +116,27 @@ const BottomNav: React.FC = () => {
         {/* //log into lens & profile page */}
         {currentProfile ? (
           <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-           {profilePic?.__typename === 'MediaSet' ? (
-                    profilePic.original?.url.includes('ipfs') ? (
-                      <Image
-                        src={sanitizeIpfsUrl(profilePic?.original.url)}
-                        width={30}
-                        height={30}
-                        className="cursor-pointer rounded-full"
-                        alt={currentProfile.id.handle}
-                        
-                      />
-                    ) : (
-                      <Image
-                        src={profilePic?.original.url}
-                        width={30}
-                        height={30}
-                        className="cursor-pointer rounded-full"
-                        alt={currentProfile.id.handle}
-                     
-                      />
-                    )
-                  ) : (
-                    <LoginWalletMobile />
-                  )}
+            {profilePic?.__typename === 'MediaSet' ? (
+              profilePic.original?.url.includes('ipfs') ? (
+                <Image
+                  src={sanitizeIpfsUrl(profilePic?.original.url)}
+                  width={30}
+                  height={30}
+                  className="cursor-pointer rounded-full"
+                  alt={currentProfile.id.handle}
+                />
+              ) : (
+                <Image
+                  src={profilePic?.original.url}
+                  width={30}
+                  height={30}
+                  className="cursor-pointer rounded-full"
+                  alt={currentProfile.id.handle}
+                />
+              )
+            ) : (
+              <LoginWalletMobile />
+            )}
           </Link>
         ) : (
           <LoginWalletMobile />

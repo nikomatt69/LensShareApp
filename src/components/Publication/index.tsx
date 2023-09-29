@@ -29,8 +29,6 @@ const ViewPublication: NextPage = (profile) => {
     (state) => state.showComposerModal
   );
 
-
-
   const {
     query: { id }
   } = useRouter();
@@ -63,7 +61,6 @@ const ViewPublication: NextPage = (profile) => {
 
   return (
     <div>
-      
       <GridLayout>
         <MetaTags
           title={
@@ -75,9 +72,8 @@ const ViewPublication: NextPage = (profile) => {
           }
         />
 
-      
-        <GridItemEight className="h-[vh-80] space-y-5 rounded-xl mb-10 bg-[#F2F6F9] dark:bg-black">
-          <Card className='rounded-xl border-blue-700'>
+        <GridItemEight className="mb-10 h-[vh-80] space-y-5 rounded-xl bg-[#F2F6F9] dark:bg-black">
+          <Card className="rounded-xl border-blue-700">
             <FullPublication
               profile={profile as Profile}
               publication={publication}
@@ -85,10 +81,8 @@ const ViewPublication: NextPage = (profile) => {
             />
           </Card>
           {currentProfile && !publication?.hidden && !showComposerModal ? (
-        
             <NewPublication publication={publication} />
-          
-        ) : null}
+          ) : null}
 
           <Feed publication={publication} />
           <NoneRelevantFeed publication={publication} />

@@ -79,7 +79,7 @@ const SearchBarDiscover: FC<Props> = ({ hideDropdown = false }) => {
           className="absolute mt-2 flex w-full  flex-col rounded-xl"
           ref={dropdownRef}
         >
-          <div className="overflow-y-scroll rounded-xl border bg-white dark:bg-gray-900/70 py-2">
+          <div className="overflow-y-scroll rounded-xl border bg-white py-2 dark:bg-gray-900/70">
             {searchUsersLoading ? (
               <div className="space-y-2 rounded-xl px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />

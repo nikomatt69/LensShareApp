@@ -1,5 +1,5 @@
 import { lensshareMembers } from './pinsta-members';
-import {mainnetVerified} from './verified'
+import { mainnetVerified } from './verified';
 
 export enum FeatureFlag {
   TrendingWidget = 'trending-widget',
@@ -17,38 +17,38 @@ export enum FeatureFlag {
 export const featureFlags = [
   {
     key: FeatureFlag.TrendingWidget,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.NftGallery,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.NftDetail,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.GatedLocales,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.Polls,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.Spaces,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.ForYou,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.WTF2,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   },
   {
     key: FeatureFlag.ExploreTags,
-    enabledFor: [...lensshareMembers,...mainnetVerified]
+    enabledFor: [...lensshareMembers, ...mainnetVerified]
   }
 ];

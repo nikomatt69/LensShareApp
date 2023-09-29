@@ -1,8 +1,6 @@
 import 'plyr-react/plyr.css';
 
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-
 
 // @ts-ignore
 import mux from 'mux-embed';

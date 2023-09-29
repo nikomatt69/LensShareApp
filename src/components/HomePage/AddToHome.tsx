@@ -1,6 +1,5 @@
-import * as React from "react";
-import { useAddToHomescreenPrompt } from "./useAddToHome";
-
+import * as React from 'react';
+import { useAddToHomescreenPrompt } from './useAddToHome';
 
 export function AddToHome() {
   const [prompt, promptToInstall] = useAddToHomescreenPrompt();
@@ -8,14 +7,11 @@ export function AddToHome() {
 
   const hide = () => setVisibleState(false);
 
-  React.useEffect(
-    () => {
-      if (prompt) {
-        setVisibleState(true);
-      }
-    },
-    [prompt]
-  );
+  React.useEffect(() => {
+    if (prompt) {
+      setVisibleState(true);
+    }
+  }, [prompt]);
 
   if (!isVisible) {
     return <div />;
@@ -24,7 +20,7 @@ export function AddToHome() {
   return (
     <div onClick={hide}>
       <button onClick={hide}>Close</button>
-      Add To Home 
+      Add To Home
       <button onClick={promptToInstall}>Install</button>
     </div>
   );

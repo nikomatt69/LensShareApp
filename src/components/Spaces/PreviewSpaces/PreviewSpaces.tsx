@@ -8,16 +8,12 @@ import React, { FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
 import { useSpacesStore } from 'src/store/spaces';
 
-
 import AvatarGrid from '../Common/AvatarGrid/AvatarGrid';
 import SpacesButton from '../Common/SpacesButton';
 import PreviewSpacesHeader from './PreviewSpacesHeader';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { useRouter } from 'next/router';
 import { SpacesEvents } from '@/enums';
-
-
-
 
 const PreviewSpaces: FC = () => {
   const { setShowSpacesLobby, setShowSpacesWindow } = useSpacesStore();
@@ -31,8 +27,6 @@ const PreviewSpaces: FC = () => {
   useEffectOnce(() => {
     initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
   });
-
-
 
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {
     joinLobby(space.id, lensAccessToken);
@@ -65,11 +59,9 @@ const PreviewSpaces: FC = () => {
               joinRoom();
             }}
           >
-            
-              {currentProfile?.ownedBy === space.host
-                ? 'Start spaces'
-                : 'Start listening'}
-            
+            {currentProfile?.ownedBy === space.host
+              ? 'Start spaces'
+              : 'Start listening'}
           </SpacesButton>
         </div>
       </div>

@@ -31,9 +31,9 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
     ? publication?.mirrorOf?.mirrors?.length > 0
     : // @ts-expect-error
       publication?.mirrors?.length > 0;
-      const iconClassName = showCount
-      ? 'w-[17px] sm:w-[20px] pt-1.5 '
-      : 'w-[15px] sm:w-[18px] pt-1.5';
+  const iconClassName = showCount
+    ? 'w-[17px] sm:w-[20px] pt-1.5 '
+    : 'w-[15px] sm:w-[18px] pt-1.5';
 
   return (
     <div className="flex items-center space-x-1">
@@ -66,7 +66,7 @@ const ShareMenu: FC<PublicationMenuProps> = ({ publication, showCount }) => {
         </Menu.Button>
         <MenuTransition>
           <Menu.Items
-            className="absolute z-[5] mt-1 w-max rounded-xl border bg-white dark:bg-gray-900/70 shadow-sm focus:outline-none dark:border-gray-700"
+            className="absolute z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-900/70"
             static
           >
             <Mirror

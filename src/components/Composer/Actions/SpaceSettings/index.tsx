@@ -1,4 +1,3 @@
-
 import { Input } from '@/components/UI/Input';
 import MenuTransition from '@/components/UI/MenuTransition';
 
@@ -6,11 +5,16 @@ import { Toggle } from '@/components/UI/Toggle';
 import { useSpacesStore } from '@/store/spaces';
 import { Menu } from '@headlessui/react';
 
-import { CalendarIcon, CheckCircleIcon, CheckIcon, ChevronDownIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import {
+  CalendarIcon,
+  CheckCircleIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  LockClosedIcon
+} from '@heroicons/react/24/outline';
 import cn from '@/components/UI/cn';
 import type { FC, ReactNode } from 'react';
 import React, { useState } from 'react';
-
 
 import TokenGateForm from './TokenGateForm';
 import { Modal } from '@/components/UI/Modal';

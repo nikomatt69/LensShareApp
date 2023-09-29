@@ -90,7 +90,11 @@ const PUBLICATION_QUERY = gql`
   }
 `;
 
-const getPublicationMeta = async (req: NextApiRequest, res: NextApiResponse, id: string) => {
+const getPublicationMeta = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  id: string
+) => {
   try {
     const { data } = await client.query({
       query: PUBLICATION_QUERY,
@@ -100,11 +104,13 @@ const getPublicationMeta = async (req: NextApiRequest, res: NextApiResponse, id:
     if (data?.publication) {
       const publication: Publication = data?.publication;
       const profile: any =
-        publication?.__typename === 'Mirror' ? publication?.mirrorOf?.profile : publication?.profile;
+        publication?.__typename === 'Mirror'
+          ? publication?.mirrorOf?.profile
+          : publication?.profile;
 
-      const title = `${publication?.__typename === 'Post' ? 'Post' : 'Comment'} by @${
-        profile.handle
-      } • LensShare`;
+      const title = `${
+        publication?.__typename === 'Post' ? 'Post' : 'Comment'
+      } by @${profile.handle} • LensShare`;
       const description = publication.metadata?.content ?? '';
       const image = profile
         ? `${OG_MEDIA_PROXY_URL}/tr:n-avatar,tr:di-placeholder.webp/${getIPFSLink(

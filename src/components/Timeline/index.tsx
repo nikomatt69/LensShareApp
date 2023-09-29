@@ -1,5 +1,11 @@
-
-import { FeedEventItemType, FeedItem, FeedRequest, Profile, Publication, useTimelineQuery } from '@/utils/lens/generatedLenster';
+import {
+  FeedEventItemType,
+  FeedItem,
+  FeedRequest,
+  Profile,
+  Publication,
+  useTimelineQuery
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
@@ -20,7 +26,6 @@ import { SCROLL_ROOT_MARGIN } from '@/constants';
 import Loader from '../UI/Loader';
 import { useTransactionPersistStore } from '@/store/transaction';
 
-
 const Timeline: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
@@ -30,7 +35,6 @@ const Timeline: FC = () => {
   const seeThroughProfile = useTimelineStore(
     (state) => state.seeThroughProfile
   );
-
 
   const getFeedEventItems = () => {
     const filters: FeedEventItemType[] = [];
@@ -106,26 +110,29 @@ const Timeline: FC = () => {
   }
 
   return (
-   <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
-        {txnQueue.map(
-          (txn) => txn?.type === OptmisticPublicationType.NewPost && (
+    <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
+      {txnQueue.map(
+        (txn) =>
+          txn?.type === OptmisticPublicationType.NewPost && (
             <div key={txn.id}>
               <QueuedPublication txn={txn} />
             </div>
           )
-        )}
-        {publications?.map((publication, index) => (
-          <SinglePublication
-            profile={currentProfile?.id as Profile}
-            key={`${publication?.root.id}_${index}`}
-            isFirst={index === 0}
-            isLast={index === publications.length - 1}
-            feedItem={publication as FeedItem}
-            publication={publication.root as Publication}
-            showCount={true} tags={''} />
-        ))}
-        {hasMore ? <span ref={observe} /> : null}
-      </Card>
+      )}
+      {publications?.map((publication, index) => (
+        <SinglePublication
+          profile={currentProfile?.id as Profile}
+          key={`${publication?.root.id}_${index}`}
+          isFirst={index === 0}
+          isLast={index === publications.length - 1}
+          feedItem={publication as FeedItem}
+          publication={publication.root as Publication}
+          showCount={true}
+          tags={''}
+        />
+      ))}
+      {hasMore ? <span ref={observe} /> : null}
+    </Card>
   );
 };
 

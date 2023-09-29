@@ -32,7 +32,6 @@ import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import NavbarDetails from '../NavbarDetails';
 
-
 interface MessageProps {
   conversationKey: string;
 }
@@ -147,7 +146,6 @@ const Message: FC<MessageProps> = ({ conversationKey }) => {
     : APP_NAME;
 
   return (
-
     <GridLayout classNameChild="gap-1">
       <MetaTags title={title} />
       <PreviewList

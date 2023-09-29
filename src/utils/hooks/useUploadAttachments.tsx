@@ -1,4 +1,3 @@
-
 import uploadToIPFS, { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 import { usePublicationStore } from '@/store/publication4';
 import { NewLensshareAttachment } from '@/types/misc';
@@ -6,7 +5,6 @@ import { NewLensshareAttachment } from '@/types/misc';
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { v4 as uuid } from 'uuid';
-
 
 const useUploadAttachments = () => {
   const addAttachments = usePublicationStore((state) => state.addAttachments);

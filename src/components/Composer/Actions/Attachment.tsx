@@ -95,7 +95,7 @@ const Attachment: FC = () => {
       <MenuTransition show={showMenu}>
         <Menu.Items
           ref={dropdownRef}
-          className="absolute z-[5] mt-2 rounded-xl border bg-white dark:bg-gray-900/70 py-2 px-2 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-white "
+          className="absolute z-[5] mt-2 rounded-xl border bg-white px-2 py-2 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-900/70 dark:bg-white "
           static
         >
           <Menu.Item
@@ -109,7 +109,7 @@ const Attachment: FC = () => {
             }
             htmlFor={`image_${id}`}
           >
-            <PhotoIcon className="text-brand text-black h-4 w-4" />
+            <PhotoIcon className="text-brand h-4 w-4 text-black" />
             <span className="text-sm text-black">Upload image(s)</span>
             <input
               id={`image_${id}`}
@@ -127,12 +127,12 @@ const Attachment: FC = () => {
             className={({ active }) =>
               cn(
                 { 'dropdown-active': active },
-                'menu-item !flex cursor-pointer items-center gap-3 space-x-1 text-black rounded-lg'
+                'menu-item !flex cursor-pointer items-center gap-3 space-x-1 rounded-lg text-black'
               )
             }
             htmlFor={`video_${id}`}
           >
-            <VideoCameraIcon className="text-brand text-black h-4 w-4" />
+            <VideoCameraIcon className="text-brand h-4 w-4 text-black" />
             <span className="text-sm text-black">Upload video</span>
             <input
               id={`video_${id}`}
@@ -154,7 +154,7 @@ const Attachment: FC = () => {
             }
             htmlFor={`audio_${id}`}
           >
-            <MusicalNoteIcon className="text-brand text-black h-4 w-4" />
+            <MusicalNoteIcon className="text-brand h-4 w-4 text-black" />
             <span className="text-sm text-black">Upload audio</span>
             <input
               id={`audio_${id}`}

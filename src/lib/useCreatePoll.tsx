@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useAppStore } from 'src/store/app';
 import { usePublicationStore } from 'src/store/publication4';
 
-
 type CreatePollResponse = string;
 
 const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {

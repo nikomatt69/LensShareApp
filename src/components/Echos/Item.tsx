@@ -36,11 +36,11 @@ const Item: FC<Props> = ({ publication }) => {
         <button
           onClick={() => onPlayPause(publication)}
           className={cn(
-            'invisible absolute bottom-2.5 left-2.5 rounded-full bg-white dark:bg-gray-900/70 p-2 outline-none backdrop-blur-lg transition-all duration-100 ease-in-out group-hover:visible'
+            'invisible absolute bottom-2.5 left-2.5 rounded-full bg-white p-2 outline-none backdrop-blur-lg transition-all duration-100 ease-in-out group-hover:visible dark:bg-gray-900/70'
           )}
         >
           {publication?.id === 'selectedTrack?.id' ? (
-            <FcDvdLogo className="animate-spin-slow text-black dark:text-white h-7 w-7" />
+            <FcDvdLogo className="animate-spin-slow h-7 w-7 text-black dark:text-white" />
           ) : (
             <BsPlay className="h-7 w-7 pl-0.5 text-black dark:text-white" />
           )}
@@ -49,13 +49,13 @@ const Item: FC<Props> = ({ publication }) => {
       <div className="mt-1">
         <Link
           href={`/u/${publication?.profile?.id}`}
-          className="text-xs font-medium uppercase opacity-80 text-black dark:text-white hover:underline hover:opacity-70"
+          className="text-xs font-medium uppercase text-black opacity-80 hover:underline hover:opacity-70 dark:text-white"
         >
           {publication?.profile?.handle}
         </Link>
         <Link
           href={`/post/${publication?.id}`}
-          className="md:text-md line-clamp-1 text-sm text-black dark:text-white font-semibold hover:opacity-70"
+          className="md:text-md line-clamp-1 text-sm font-semibold text-black hover:opacity-70 dark:text-white"
         >
           {publication?.metadata?.name}
         </Link>

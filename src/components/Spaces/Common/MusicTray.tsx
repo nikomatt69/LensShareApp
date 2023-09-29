@@ -1,6 +1,5 @@
 import { useAppUtils } from '@huddle01/react/app-utils';
 
-
 import React, { FC } from 'react';
 
 import { useUpdateEffect } from 'usehooks-ts';
@@ -9,7 +8,11 @@ import { Icons } from '../Common/assets/Icons';
 import { Radio } from '@/components/UI/Radio';
 import { useSpacesStore } from '@/store/spaces';
 import { MusicTrack } from '@/enums';
-import { MusicalNoteIcon, PlayIcon, StopIcon } from '@heroicons/react/24/outline';
+import {
+  MusicalNoteIcon,
+  PlayIcon,
+  StopIcon
+} from '@heroicons/react/24/outline';
 import cn from '@/components/UI/cn';
 
 interface MusicTrackSelectionProps {
@@ -56,9 +59,7 @@ const MusicTray: FC = () => {
       <div className="relative">
         <div className="flex items-center justify-center border-b border-gray-300 px-2 py-3 font-semibold text-gray-700 dark:border-gray-700 dark:text-gray-200">
           <MusicalNoteIcon className="mr-2 h-5 w-5 " />
-          <span className="text-sm font-medium">
-            Background Music
-          </span>
+          <span className="text-sm font-medium">Background Music</span>
         </div>
       </div>
       <MusicTrackSelection

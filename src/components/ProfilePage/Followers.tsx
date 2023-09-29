@@ -90,7 +90,6 @@ const Followers: FC<Props> = ({ profile }) => {
                     src={getAvatar(followers?.wallet?.defaultProfile)}
                     alt="profilepic"
                     className="rounded-full"
-                    
                   />
                 </div>
                 <div />

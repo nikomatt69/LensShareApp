@@ -7,7 +7,7 @@ export const CardShimmer = ({ rounded = true }) => {
       <div className="flex animate-pulse flex-col space-x-2">
         <div
           className={cn(
-            'aspect-w-16 aspect-h-9 bg-gray-300 dark:bg-gray-700',
+            'aspect-h-9 aspect-w-16 bg-gray-300 dark:bg-gray-700',
             rounded && 'rounded-sm'
           )}
         />
@@ -20,7 +20,7 @@ const VideoCardShimmer = () => {
   return (
     <div className="w-full rounded-sm">
       <div className="flex animate-pulse flex-col space-x-2">
-        <div className="aspect-w-16 aspect-h-9 rounded-sm bg-gray-300 dark:bg-gray-700" />
+        <div className="aspect-h-9 aspect-w-16 rounded-sm bg-gray-300 dark:bg-gray-700" />
         <div className="flex space-x-2 py-3">
           <div className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-700" />
           <div className="flex-1 space-y-2 py-1">

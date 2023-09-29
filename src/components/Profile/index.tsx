@@ -47,9 +47,9 @@ const ViewProfile: NextPage = (publication) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [feedType, setFeedType] = useState(
     type &&
-    ['feed', 'replies', 'media', 'collects', 'nft', 'subscribers'].includes(
-      type as string
-    )
+      ['feed', 'replies', 'media', 'collects', 'nft', 'subscribers'].includes(
+        type as string
+      )
       ? type.toString().toUpperCase()
       : ProfileFeedType.Feed
   );
@@ -149,29 +149,23 @@ const ViewProfile: NextPage = (publication) => {
             : `${STATIC_IMAGES_URL}/patterns/2.svg`
         }
       />
-      
-   
-
 
       <GridLayout className="max-w-[1200px] pt-6">
-     
         <GridItemFour>
-       
           <ProfileCard
             profile={profile as Profile}
             following={Boolean(following)}
             setFollowing={setFollowing}
           />
           <StoriesRender
-                profile={profile as Profile}
-                trigger
-                publication={publication as Publication}
-          
+            profile={profile as Profile}
+            trigger
+            publication={publication as Publication}
           />
-          <Wrapper children publication={publication as Publication}/>
+          <Wrapper children publication={publication as Publication} />
         </GridItemFour>
         <GridItemEight className="space-y-5">
-        {currentProfile?.id ?(<NewPost />):(null) }
+          {currentProfile?.id ? <NewPost /> : null}
           <FeedType setFeedType={setFeedType} feedType={feedType} />
 
           {(feedType === ProfileFeedType.Feed ||
@@ -185,7 +179,6 @@ const ViewProfile: NextPage = (publication) => {
           )}
         </GridItemEight>
       </GridLayout>
-      
     </>
   );
 };

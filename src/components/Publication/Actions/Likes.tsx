@@ -1,16 +1,17 @@
-
 import { ErrorMessage } from '@/components/ErrorMessage';
 import UserProfile from '@/components/ProfilePage/UserProfile';
 import { EmptyState } from '@/components/UI/EmptyState';
 import Loader from '@/components/UI/Loader';
-import { Profile, WhoReactedPublicationRequest, useLikesQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  WhoReactedPublicationRequest,
+  useLikesQuery
+} from '@/utils/lens/generatedLenster';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { Virtuoso } from 'react-virtuoso';
-
-
 
 interface LikesProps {
   publicationId: string;
@@ -81,8 +82,6 @@ const Likes: FC<LikesProps> = ({ publicationId }) => {
                 profile={like?.profile as Profile}
                 isFollowing={like?.profile?.isFollowedByMe}
                 followUnfollowPosition={index + 1}
-                
-                
                 showFollow
                 showUserPreview={false}
               />

@@ -147,7 +147,7 @@ const SetProfile: FC = () => {
       <div>
         <div className="label">Select profile</div>
         <select
-          className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white dark:bg-gray-900/70 outline-none dark:border-gray-700 "
+          className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 dark:bg-gray-900/70 "
           onChange={(e) => setSelectedUser(e.target.value)}
         >
           {sortedProfiles?.map((profile: Profile) => (

@@ -4,7 +4,7 @@ import { SNAPSHOT_URL } from '@/constants';
 import { Proposal } from '@/utils/snapshot/generated';
 import Link from 'next/link';
 import type { FC } from 'react';
-import formatAddress  from '@/utils/lib/formatAddress';
+import formatAddress from '@/utils/lib/formatAddress';
 
 interface HeaderProps {
   proposal: Proposal;
@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = ({ proposal }) => {
 
   return (
     <>
-      <div className="mb-2 flex items-center space-x-1 text-sm">
+      <div className="mb-2 flex- items-center space-x-1 text-xs">
         <div
           className={cn(
             state === 'active' ? 'bg-green-500' : 'bg-brand-500',
@@ -30,21 +30,24 @@ const Header: FC<HeaderProps> = ({ proposal }) => {
           className="mr-1 h-5 w-5 rounded-full"
           alt={space?.id}
         />
-        <Link href={spaceUrl} className="font-bold text-xs" target="_blank">
+         <Link href={spaceUrl} className="font-serif text-xs" target="_blank">
           {space?.name ?? space?.id}
         </Link>
         <span>by</span>
         <Link href={`${SNAPSHOT_URL}/#/profile/${author}`} target="_blank">
           {formatAddress(author)}
         </Link>
-      </div>
+
+        
+
       <Link
         href={`${spaceUrl}/proposal/${id}`}
-        className="font-bold"
+        className="font-serif text-xs"
         target="_blank"
       >
         {title}
       </Link>
+      </div>
     </>
   );
 };

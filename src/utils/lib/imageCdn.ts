@@ -1,7 +1,6 @@
 import { IMAGE_CDN_URL } from '@/constants';
 import sanitizeIpfsUrl from '../sanitizeIpfsUrl';
 
-
 const imageCdn = (
   url: string,
   type?: 'thumbnail' | 'avatar' | 'avatar_lg' | 'square' | 'thumbnail_v'

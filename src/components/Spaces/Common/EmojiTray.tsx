@@ -1,7 +1,6 @@
 import cn from '@/components/UI/cn';
 import { useAppUtils } from '@huddle01/react/app-utils';
 
-
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { useSpacesStore } from 'src/store/spaces';

@@ -29,9 +29,7 @@ module.exports = {
         900: '900px',
         458: '458px'
       },
-      top: {
-        ' 50%': '50%'
-      },
+      
       backgroundColor: {
         primary: '#000',
         blur: '#030303'
@@ -45,5 +43,9 @@ module.exports = {
       }
     }
   },
-  plugins: [require('@headlessui/tailwindcss'),require('@tailwindcss/aspect-ratio'), require('@tailwindcss/forms')]
+  plugins: [
+    require('@headlessui/tailwindcss'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms')
+  ]
 };

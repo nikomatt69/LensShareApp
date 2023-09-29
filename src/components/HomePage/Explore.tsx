@@ -57,8 +57,6 @@ const Explore = () => {
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const [following, setFollowing] = useState(false);
 
-
-
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 10,
@@ -73,8 +71,6 @@ const Explore = () => {
     ],
     publicationTypes: [PublicationTypes.Post],
     metadata: {
-    
-
       mainContentFocus: [
         PublicationMainFocus.Video,
         PublicationMainFocus.Image,
@@ -126,8 +122,6 @@ const Explore = () => {
     });
   };
 
- 
-   
   const hasMore = pageInfo?.next;
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
@@ -190,27 +184,30 @@ const Explore = () => {
       <Head>
         <meta name="theme-color" content="#000000" />
       </Head>
-      <MetaTags title={`Explore • ${APP_NAME} `} />
-      
-      <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
-    {txnQueue.map(
-      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
-        <div key={txn.id}>
-          <QueuedPublication txn={txn} />
-        </div>
-      )
-    )}
-    {bytes?.map((publication, index) => (
-      <SinglePublication
-        profile={currentProfile as Profile}
-        key={`${publication?.id}_${index}`}
-        isFirst={index === 0}
-        isLast={index === bytes.length - 1}
-        publication={publication as Publication}
-        showCount={true} tags={''}/>
-    ))}
-  {hasMore ? <span ref={observe} /> : null}
-  </Card>
+      <MetaTags  />
+
+      <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
+        {txnQueue.map(
+          (txn) =>
+            txn?.type === OptmisticPublicationType.NewPost && (
+              <div key={txn.id}>
+                <QueuedPublication txn={txn} />
+              </div>
+            )
+        )}
+        {bytes?.map((publication, index) => (
+          <SinglePublication
+            profile={currentProfile as Profile}
+            key={`${publication?.id}_${index}`}
+            isFirst={index === 0}
+            isLast={index === bytes.length - 1}
+            publication={publication as Publication}
+            showCount={true}
+            tags={''}
+          />
+        ))}
+        {hasMore ? <span ref={observe} /> : null}
+      </Card>
     </div>
   );
 };

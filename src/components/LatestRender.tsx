@@ -1,11 +1,7 @@
 import * as Apollo from '@apollo/client';
 
 import { FC, useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -37,11 +33,10 @@ import { useNonceStore } from '@/store/nonce';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import CuratedHome from './Echos/CuratedHome';
 interface Props {
-  publication:Publication
-
+  publication: Publication;
 }
 
-const LatestRender: FC<Props> = ({ publication}) => {
+const LatestRender: FC<Props> = ({ publication }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -150,31 +145,26 @@ const LatestRender: FC<Props> = ({ publication}) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <GridLayout className="max-w-[1200px] pt-6">
-        
-      <GridItemEight>
-      
-   
-     
-   
-    
-     <Latest/>
-     </GridItemEight>
-     <GridItemFour className='block'>
-     <Footer/>
-      
-      <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><CuratedHome /></div>
-        
-          </Wrapper>
-      
-    
-   </GridItemFour>
-   
-   
-     
-  
-  </GridLayout>
+    <>
+      <GridLayout className="max-w-[1200px] pt-6">
+        <GridItemEight>
+          <>
+          <Latest />
+          </>
+        </GridItemEight>
+        <GridItemFour>
+          <>
+            <Footer />
+
+            <Wrapper publication={publication}>
+              <div className="hidden lg:block xl:block">
+                <CuratedHome />
+              </div>
+            </Wrapper>
+          </>
+        </GridItemFour>
+      </GridLayout>
+    </>
   );
 };
 

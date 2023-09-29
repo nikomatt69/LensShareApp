@@ -16,41 +16,34 @@ const Video: FC<VideoProps> = ({ src, poster }) => {
   return (
     <div className="lp-player" data-testid={`attachment-video-${src}`}>
       <Player
-       
-       
         theme={{
           borderStyles: {
-            containerBorderStyle: 'solid',
-
-            
+            containerBorderStyle: 'solid'
           },
           colors: {
             accent: '#1d4ed8',
-            containerBorderColor:'#1d4ed8'
+            containerBorderColor: '#1d4ed8'
           },
           space: {
             controlsBottomMarginX: '10px',
             controlsBottomMarginY: '5px',
             controlsTopMarginX: '15px',
-            controlsTopMarginY: '8pxpx',
+            controlsTopMarginY: '8pxpx'
           },
           radii: {
-            containerBorderRadius: '16px',
-          },
+            containerBorderRadius: '16px'
+          }
         }}
         src={src}
         poster={imageKit(sanitizeDStorageUrl(poster))}
         objectFit="contain"
         showLoadingSpinner
-        
         muted
         showPipButton
         showUploadingIndicator={false}
-        controls={{ defaultVolume: 0 } }
+        controls={{ defaultVolume: 0 }}
         autoUrlUpload={{ fallback: true, ipfsGateway: IPFS_GATEWAY }}
-      >
-       
-      </Player>
+      ></Player>
     </div>
   );
 };

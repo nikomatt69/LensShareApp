@@ -3,7 +3,6 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { Errors } from './errors';
 
-
 /**
  * Uploads the given data to Arweave.
  *
@@ -14,7 +13,6 @@ import { Errors } from './errors';
 const uploadToArweave = async (data: any): Promise<string> => {
   try {
     const upload = await axios(METADATA_WORKER_URL, {
-      
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,4 +31,3 @@ const uploadToArweave = async (data: any): Promise<string> => {
 };
 
 export default uploadToArweave;
-

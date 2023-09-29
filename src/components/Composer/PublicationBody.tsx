@@ -72,16 +72,12 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
-    return <DecryptedPublicationBody  encryptedPublication={publication} />
+    return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
- 
-  
 
   if (Boolean(space?.id)) {
-    return <Space publication={publication} />
+    return <Space publication={publication} />;
   }
-
-
 
   const showNft = nft;
   // Show snapshot if it's there
@@ -98,7 +94,6 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     !showQuotedPublication &&
     !quoted;
 
-
   const onOembedData = (data: OG) => {
     if (showOembed && data?.title) {
       const updatedContent = removeUrlAtEnd(urls, content);
@@ -108,13 +103,11 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     }
   };
 
- 
-
   return (
     <div className="break-words">
       <Markup
         className={cn(
-          { 'line-clamp-8': canShowMore },
+          { 'line-clamp-5': canShowMore },
           'markup linkify  font-helvetica break-words text-xs'
         )}
       >
@@ -130,20 +123,20 @@ const PublicationBody: FC<PublicationBodyProps> = ({
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
       {showSnapshot ? <Snapshot proposalId={snapshotProposalId} /> : null}
-      
-  
 
-
-    
-     {showOembed ? (
+      {showOembed ? (
         <Oembed
           url={urls[0]}
           publicationId={publication.id}
           onData={onOembedData}
-        />):null}
-    
+        />
+      ) : null}
+
       {showQuotedPublication ? (
-        <Quote publicationId={quotedPublicationId} profile={profile as Profile} />
+        <Quote
+          publicationId={quotedPublicationId}
+          profile={profile as Profile}
+        />
       ) : null}
     </div>
   );

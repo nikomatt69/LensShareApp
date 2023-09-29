@@ -65,9 +65,8 @@ class Lit {
       await this.connect();
     }
     const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain });
-    const { encryptedString, symmetricKey } = await LitJsSdk.encryptString(
-      text
-    );
+    const { encryptedString, symmetricKey } =
+      await LitJsSdk.encryptString(text);
     console.log('encrypted string:', encryptedString);
 
     const conditions = await setAccessControlConditions(address1, address2);

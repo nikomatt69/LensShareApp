@@ -1,6 +1,5 @@
-import { IS_MAINNET } from "@/constants";
-import { Localstorage } from "@/storage";
-
+import { IS_MAINNET } from '@/constants';
+import { Localstorage } from '@/storage';
 
 const getBasicWorkerPayload = () => {
   const accessToken = localStorage.getItem(Localstorage.AccessToken);

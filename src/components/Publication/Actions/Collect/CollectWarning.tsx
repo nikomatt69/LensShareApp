@@ -1,4 +1,3 @@
-
 import { Card } from '@/components/UI/Card';
 import Slug from '@/components/UI/Slug';
 import { StarIcon, UsersIcon } from '@heroicons/react/24/outline';

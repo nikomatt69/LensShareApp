@@ -25,7 +25,6 @@ const FollowingAccounts = () => {
   }>(FollowingDocument, {
     nextFetchPolicy: 'standby',
     variables: {
-      
       request: {
         limit: 15,
         address: address
@@ -54,7 +53,6 @@ const FollowingAccounts = () => {
                   src={getAvatar(following?.profile)}
                   alt="profilepic"
                   className="rounded-full"
-             
                 />
               </div>
               <div />

@@ -28,7 +28,7 @@ const Translate: FC<TranslateProps> = ({ publication }) => {
         )
       }
       href={getGoogleTranslateUrl(publication?.metadata?.content)}
-      onClick={(event:any) => {
+      onClick={(event: any) => {
         stopEventPropagation(event);
       }}
       target="_blank"

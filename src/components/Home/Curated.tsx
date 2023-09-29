@@ -25,8 +25,6 @@ import TimelineShimmer from './TimelineShimmer';
 import App from 'next/app';
 
 const Curated = (onDetail: (video: Publication) => void) => {
-
-
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
     limit: 32,
@@ -41,7 +39,6 @@ const Curated = (onDetail: (video: Publication) => void) => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-
       mainContentFocus: [PublicationMainFocus.Video]
     }
   };

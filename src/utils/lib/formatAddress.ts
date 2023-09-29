@@ -1,5 +1,4 @@
-import { Regex } from "@/regex";
-
+import { Regex } from '@/regex';
 
 /**
  * Format the given Ethereum address by displaying only the first and last few characters.

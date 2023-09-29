@@ -56,8 +56,6 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
           type={ProfileFeedType.Collects.toLowerCase()}
           onClick={() => switchTab(ProfileFeedType.Collects)}
         />
-      
-        
       </div>
       <div>{feedType === ProfileFeedType.Media && <MediaFilter />}</div>
     </div>

@@ -9,8 +9,6 @@ import { Modal } from './UI/Modal';
 import { usePublicationStore } from '@/store/publication4';
 import { NewPublicationTypes } from '@/enums';
 
-
-
 const GlobalModals: FC = () => {
   // Report modal state
   const {
@@ -66,8 +64,6 @@ const GlobalModals: FC = () => {
 
   return (
     <>
-      
-    
       <Modal
         title={`Create post`}
         size="md"
@@ -82,7 +78,6 @@ const GlobalModals: FC = () => {
       >
         <NewPublication />
       </Modal>
-    
     </>
   );
 };

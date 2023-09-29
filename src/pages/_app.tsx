@@ -21,32 +21,21 @@ const Layout = dynamic(() => import('@/components/Layout'), {
 });
 
 interface AppProps {
-  publication:Publication,
-  Component :any,
-  pageProps:any,
+  publication: Publication;
+  Component: any;
+  pageProps: any;
 }
 
-
-
-
-
-const App = ({ Component, pageProps ,publication }: AppProps) => {
-
-
-
-
-
+const App = ({ Component, pageProps, publication }: AppProps) => {
   return (
-    
-      <Suspense fallback={<Loading />}>
-        <Providers>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Providers>
-       <Analytics />
-      </Suspense>
- 
+    <Suspense fallback={<Loading />}>
+      <Providers>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Providers>
+      <Analytics />
+    </Suspense>
   );
 };
 

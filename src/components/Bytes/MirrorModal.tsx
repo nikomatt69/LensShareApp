@@ -16,7 +16,6 @@ import { Image } from '@/components/UI/Image';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import getMedia from '@/lib/getMedia';
 
-
 import MirroredList from '@/components/Bytes/MirrorList';
 import MirrorOutline from '../Buttons/MirrorOutline';
 type Props = {

@@ -1,8 +1,12 @@
-
 import type { FC } from 'react';
 import React from 'react';
 
-import { MegaphoneIcon, PhoneXMarkIcon, UserIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import {
+  MegaphoneIcon,
+  PhoneXMarkIcon,
+  UserIcon,
+  XCircleIcon
+} from '@heroicons/react/24/outline';
 import { HiPhoneMissedCall, HiSpeakerphone } from 'react-icons/hi';
 import cn from '@/components/UI/cn';
 

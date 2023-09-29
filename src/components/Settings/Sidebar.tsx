@@ -16,11 +16,11 @@ import Navbar from '../Navbar';
 import BottomNav from '../Navs/BottomNav';
 import SunOutline from '../UI/Icons/SunOutline';
 import MoonOutline from '../UI/Icons/MoonOutline';
-import { useTheme } from 'next-themes'
+import { useTheme } from 'next-themes';
 
 const SettingsSidebar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="mb-4 space-y-1.5 px-3 sm:px-0">
@@ -31,19 +31,18 @@ const SettingsSidebar: FC = () => {
           showUserPreview={false}
         />
         <button
-                  type="button"
-                  className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  onClick={() => {
-                    setTheme(theme === 'dark' ? 'light' : 'dark')
-                  
-                  }}
-                >
-                  {theme === 'dark' ? (
-                    <SunOutline className="h-4 w-4" />
-                  ) : (
-                    <MoonOutline className="h-4 w-4" />
-                  )}
-                </button>
+          type="button"
+          className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+          onClick={() => {
+            setTheme(theme === 'dark' ? 'light' : 'dark');
+          }}
+        >
+          {theme === 'dark' ? (
+            <SunOutline className="h-4 w-4" />
+          ) : (
+            <MoonOutline className="h-4 w-4" />
+          )}
+        </button>
       </div>
       <Sidebar
         items={[

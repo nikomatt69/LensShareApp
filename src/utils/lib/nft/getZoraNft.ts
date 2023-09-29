@@ -1,4 +1,4 @@
-import { ZoraNftMetadata } from "@/types/zora-nft";
+import { ZoraNftMetadata } from '@/types/zora-nft';
 
 export const regex =
   /https:\/\/(?:testnet\.)?zora\.co\/collect\/(eth|oeth|base|zora|gor|ogor|basegor|zgor):(0x[\dA-Fa-f]{40})((?:\/(\d+))?|$)/;

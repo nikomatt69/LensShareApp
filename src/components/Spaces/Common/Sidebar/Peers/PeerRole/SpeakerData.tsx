@@ -6,7 +6,6 @@ import React from 'react';
 import Strip from './Strip';
 import toast from 'react-hot-toast';
 
-
 interface SpeakerDataProps {
   peerId: string;
 }

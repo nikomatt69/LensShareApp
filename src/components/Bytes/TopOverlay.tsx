@@ -1,20 +1,16 @@
-
-import Link from 'next/link'
-import type { FC } from 'react'
-import React, { useState } from 'react'
-import ChevronLeftOutline from '../UI/Icons/ChevronLeftOutline'
-import { useAppStore } from '@/store/app'
-import { MdVolumeOff, MdVolumeUp } from 'react-icons/md'
+import Link from 'next/link';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+import ChevronLeftOutline from '../UI/Icons/ChevronLeftOutline';
+import { useAppStore } from '@/store/app';
+import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 
 type Props = {
-  onClickVideo: () => void
-}
-
+  onClickVideo: () => void;
+};
 
 const TopOverlay: FC<Props> = ({ onClickVideo }) => {
-
   return (
- 
     <div
       role="button"
       tabIndex={0}
@@ -25,9 +21,7 @@ const TopOverlay: FC<Props> = ({ onClickVideo }) => {
         <ChevronLeftOutline className="h-4 w-4 text-white" />
       </Link>
     </div>
-    
-  
-  )
-}
+  );
+};
 
-export default TopOverlay
+export default TopOverlay;

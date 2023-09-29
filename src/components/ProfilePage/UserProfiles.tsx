@@ -72,7 +72,6 @@ const UserProfiles: NextPage = () => {
                   src={getAvatar(profile)}
                   alt="profilepic"
                   className="rounded-full"
-            
                 />
               </div>
               <div />

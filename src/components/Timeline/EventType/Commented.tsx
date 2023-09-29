@@ -1,14 +1,13 @@
-
 import ThreadBody from '@/components/Publication/ThreadBody';
 import { FeedItem, Profile } from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 
 interface CommentedProps {
   feedItem: FeedItem;
-  profile:Profile
+  profile: Profile;
 }
 
-const Commented: FC<CommentedProps> = ({ feedItem,profile }) => {
+const Commented: FC<CommentedProps> = ({ feedItem, profile }) => {
   const publication = feedItem.root;
   const firstComment = feedItem.comments?.[0];
   const firstCommentParent =
@@ -17,7 +16,10 @@ const Commented: FC<CommentedProps> = ({ feedItem,profile }) => {
   return firstComment ? (
     <>
       {firstCommentParent ? (
-        <ThreadBody profile={profile as Profile} publication={firstCommentParent} />
+        <ThreadBody
+          profile={profile as Profile}
+          publication={firstCommentParent}
+        />
       ) : null}
       <ThreadBody profile={profile as Profile} publication={publication} />
     </>

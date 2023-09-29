@@ -34,9 +34,7 @@ const SubscribedNotification: FC<Props> = ({ notification }) => {
               draggable={false}
             />
             <div className="flex items-center space-x-0.5">
-              <span>
-                {(notification?.wallet?.defaultProfile?.name)}
-              </span>
+              <span>{notification?.wallet?.defaultProfile?.name}</span>
             </div>
           </Link>
         ) : (

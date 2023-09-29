@@ -16,7 +16,7 @@ import PublicationType from './Type';
 interface FullPublicationProps {
   publication: Publication;
   profile: Profile;
-  showCount:boolean
+  showCount: boolean;
 }
 
 const FullPublication: FC<FullPublicationProps> = ({
@@ -45,7 +45,7 @@ const FullPublication: FC<FullPublicationProps> = ({
     <article className="p-5" data-testid={`publication-${publication.id}`}>
       <PublicationType profile={profile} publication={publication} showType />
 
-      <div className='border-blue-700 rounded-xl'>
+      <div className="rounded-xl border-blue-700">
         <PublicationHeader profile={profile} publication={publication} />
         <div className="ml-[53px]">
           {publication?.hidden ? (
@@ -68,7 +68,10 @@ const FullPublication: FC<FullPublicationProps> = ({
                 </>
               )}
               <div className="divider" />
-              <PublicationActions publication={publication} showCount={showCount} />
+              <PublicationActions
+                publication={publication}
+                showCount={showCount}
+              />
             </>
           )}
         </div>

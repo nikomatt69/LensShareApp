@@ -1,4 +1,3 @@
-
 import { Alert } from '@/components/UI/Alert';
 import { publicationKeyFields } from '@/utils/functions/publicationKeyFields';
 import { useHidePublicationMutation } from '@/utils/lens/generatedLenster';
@@ -6,7 +5,6 @@ import { useHidePublicationMutation } from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import { toast } from 'react-hot-toast';
 import { useGlobalAlertStateStore } from 'src/store/alerts';
-
 
 const DeletePublication: FC = () => {
   const showPublicationDeleteAlert = useGlobalAlertStateStore(
@@ -22,7 +20,7 @@ const DeletePublication: FC = () => {
   const [hidePost, { loading }] = useHidePublicationMutation({
     onCompleted: () => {
       setShowPublicationDeleteAlert(false, null);
-      
+
       toast.success(`Publication deleted successfully`);
     },
     update: (cache) => {

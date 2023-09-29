@@ -154,7 +154,7 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
             withDelay
           >
             {liked ? (
-              <HeartIcon className={iconClassName}/>
+              <HeartIcon className={iconClassName} />
             ) : (
               <HeartOutline className={iconClassName} />
             )}
@@ -162,7 +162,9 @@ const Like: FC<LikeProps> = ({ publication, showCount }) => {
         </div>
       </motion.button>
       {count > 0 && !showCount && (
-        <span className="text-[11px] text-pink sm:text-xs">{nFormatter(count)}</span>
+        <span className="text-pink text-[11px] sm:text-xs">
+          {nFormatter(count)}
+        </span>
       )}
     </div>
   );

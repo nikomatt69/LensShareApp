@@ -90,7 +90,6 @@ const Following: FC<Props> = ({ profile }) => {
                     src={getAvatar(following?.profile)}
                     alt="profilepic"
                     className="rounded-full"
-                    
                   />
                 </div>
                 <div />

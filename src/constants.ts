@@ -22,13 +22,14 @@ export const LENS_PERIPHERY = getEnvConfig().lensPeripheryAddress;
 export const DEFAULT_COLLECT_TOKEN = getEnvConfig().defaultCollectToken;
 export const LIT_PROTOCOL_ENVIRONMENT = getEnvConfig().litProtocolEnvironment;
 
-export const SUPERFLUID_SUBGRAPH ='https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic';
+export const SUPERFLUID_SUBGRAPH =
+  'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic';
 
 export const OLD_LENS_RELAYER_ADDRESS =
   '0xD1FecCF6881970105dfb2b654054174007f0e07E';
 
 export const LENSSHARE_TAIL_INGEST_URL = 'https://tail.lenshareapp.xyz';
-export const LENSTER_POLLS_SPACE = 'polls.lenster.xyz';
+export const LENSTER_POLLS_SPACE = 'vote.lenshareapp.xyz';
 export const SNAPSHOT_HUB_URL = IS_MAINNET
   ? 'https://hub.snapshot.org'
   : 'https://testnet.snapshot.org';
@@ -65,7 +66,8 @@ export const ALCHEMY_KEY = 'ko67M7MTbwy-pJHRMi7VdhHemweoRzY_';
 
 export const REQUESTING_SIGNATURE_MESSAGE = 'Requesting signature...';
 
-export const LENS_MEDIA_SNAPSHOT_URL = 'https://ik.imagekit.io/lens/media-snapshot';
+export const LENS_MEDIA_SNAPSHOT_URL =
+  'https://ik.imagekit.io/lens/media-snapshot';
 
 export const PINSTA_SERVER_URL = 'https://lensshare.4everland.store';
 
@@ -106,17 +108,15 @@ export const S3_BUCKET = {
 };
 export const EVER_API = 'https://endpoint.4everland.co';
 export const IMAGE_TRANSFORMATIONS = {
-
   AVATAR_LG: 'tr:w-300,h-300',
   THUMBNAIL: 'tr:w-720,h-404',
   THUMBNAIL_V: 'tr:w-404,h-720',
-  SQUARE: 'tr:w-200,h-200',
-}
+  SQUARE: 'tr:w-200,h-200'
+};
 export const AVATAR = 'tr:w-300,h-300';
 export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
 export const COVER = 'tr:w-1500,h-500';
 export const ATTACHMENT = 'tr:w-1000';
-
 
 export const TALLY_VERIFICATION_FORM_URL = 'https://tally.so/r/mY5e80';
 export const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
@@ -133,7 +133,6 @@ export const XMTP_ENV = IS_MAINNET ? 'production' : 'dev';
 export const XMTP_PREFIX = 'lens.dev/dm';
 
 export const CHAIN_ID = IS_MAINNET ? polygon.id : polygon.id;
-
 
 export const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_ID;
 export const INFURA_RPC = IS_MAINNET
@@ -172,7 +171,6 @@ export const ALLOWED_MEDIA_TYPES = [
   ...ALLOWED_AUDIO_TYPES
 ];
 
-
 export const IPFS_GATEWAY = 'https://nftstorage.link/ipfs/';
 export const EVER_ENDPOINT = 'https://endpoint.4everland.co';
 export const EVER_REGION = 'us-west-2';
@@ -191,7 +189,6 @@ export const LIVEPEER_VIEWS_URL = 'https://views.lenshareapp.xyz';
 export const LENSSHARE_EMBED_URL = 'https://embed.lenshareapp.xyz';
 
 export const STATIC_ASSETS_URL = 'https://asset.lenshareapp.xyz';
-
 
 export const FALLBACK_COVER_URL = `${STATIC_ASSETS_URL}/images/logo.png`;
 
@@ -258,11 +255,7 @@ export const POLYGONSCAN_URL = IS_MAINNET
   ? 'https://polygonscan.com'
   : 'https://mumbai.polygonscan.com';
 
-
-
 export const LIVE_API_KEY = process.env.NEXT_PUBLIC_LIVE_STUDIO_API_KEY;
-
-
 
 export const LIT_PROTOCOL_ENV = IS_MAINNET ? 'polygon' : 'mumbai';
 
@@ -273,8 +266,6 @@ export const OG_IMAGE = `${STATIC_ASSETS_URL}/images/logo.png`;
 export const MESSAGE_PAGE_LIMIT = 35;
 export const SCROLL_THRESHOLD = 0.1;
 export const MIN_WIDTH_DESKTOP = 600;
-
-
 
 // External Apps
 export const LENSTER_URL = 'https://lenster.xyz';

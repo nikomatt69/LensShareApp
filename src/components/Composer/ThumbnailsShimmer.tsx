@@ -1,4 +1,3 @@
-
 import cn from '@/components/UI/cn';
 import React, { useMemo } from 'react';
 import { THUMBNAIL_GENERATE_COUNT } from './ChooseThumbnail';

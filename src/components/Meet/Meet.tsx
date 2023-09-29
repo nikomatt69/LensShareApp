@@ -1,8 +1,6 @@
 import {
   useAudio,
-
   useEventListener,
-
   useHuddle01,
   usePeers,
   useRoom,
@@ -156,8 +154,8 @@ const Meet: FC = () => {
               className={cn(
                 resolvedTheme == 'dark'
                   ? 'bg-gray-900 text-blue-700 '
-                  : 'text-blue-700 bg-brand-100',
-                'absolute bottom-1  left-1 rounded-lg p-1 xs:hidden sm:hidden'
+                  : 'bg-brand-100 text-blue-700',
+                'xs:hidden absolute  bottom-1 left-1 rounded-lg p-1 sm:hidden'
               )}
             >
               {me.displayName ?? 'Me'}

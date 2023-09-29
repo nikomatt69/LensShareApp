@@ -1,4 +1,4 @@
-import { LENS_MEDIA_SNAPSHOT_URL } from "@/constants";
+import { LENS_MEDIA_SNAPSHOT_URL } from '@/constants';
 
 /**
  * Transforms the URL of an image to use ImageKit.
@@ -16,7 +16,7 @@ const imageKit = (url: string, name?: string): string => {
     const splitedUrl = url.split('/');
     const path = splitedUrl[splitedUrl.length - 1];
 
-    return name ? `${LENS_MEDIA_SNAPSHOT_URL}/${name}/${path}` : url ;
+    return name ? `${LENS_MEDIA_SNAPSHOT_URL}/${name}/${path}` : url;
   }
 
   return url;

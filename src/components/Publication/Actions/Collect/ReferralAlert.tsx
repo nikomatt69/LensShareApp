@@ -1,4 +1,3 @@
-
 import Slug from '@/components/UI/Slug';
 import formatHandle from '@/utils/functions/formatHandle';
 import { ElectedMirror, Publication } from '@/utils/lens/generatedLenster';
@@ -28,9 +27,7 @@ const ReferralAlert: FC<ReferralAlertProps> = ({
       <Slug slug={formatHandle(publication?.profile?.handle)} prefix="@" />
       <span>
         {' '}
-        
-          will get <b>{referralFee}%</b> referral fee
-       
+        will get <b>{referralFee}%</b> referral fee
       </span>
     </div>
   );

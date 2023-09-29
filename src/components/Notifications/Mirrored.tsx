@@ -26,7 +26,7 @@ const MirroredNotification: FC<Props> = ({ notification }) => {
             draggable={false}
           />
           <div className="flex items-center space-x-0.5">
-            <span>{(notification?.profile?.name)}</span>
+            <span>{notification?.profile?.name}</span>
           </div>
         </Link>
       </div>

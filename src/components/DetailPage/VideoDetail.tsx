@@ -11,7 +11,6 @@ import { Image } from '@/components/UI/Image';
 import Link from 'next/link';
 import { Toaster } from 'react-hot-toast';
 
-
 import { useQuery } from '@apollo/client';
 import {
   Publication,
@@ -48,8 +47,7 @@ import { Modal } from '../UI/Modal';
 import Followers from '../ProfilePage/Followers';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
 
-
-import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
+import { getThumbnailUrl } from '@/utils/functions/getThumbnailUrl';
 import VideoPlayer from '@/utils/VideoPlayer';
 import imageKit from '@/lib/imageKit';
 import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
@@ -71,7 +69,6 @@ const VideoDetail: FC<Props> = ({
   following,
   isShow
 }) => {
-
   const [showShare, setShowShare] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [liked, setLiked] = useState(false);
@@ -145,7 +142,6 @@ const VideoDetail: FC<Props> = ({
       <Toaster position="bottom-right" />
       <div className="relative flex items-center  justify-center bg-black lg:flex-grow">
         <VideoPlayer
-          
           refCallback={refCallback}
           permanentUrl={getMedia(publication as Publication)}
           posterUrl={imageKit(
@@ -324,7 +320,6 @@ const VideoDetail: FC<Props> = ({
             </button>
           </div>
         </div>
-       
       </div>
     </div>
   );

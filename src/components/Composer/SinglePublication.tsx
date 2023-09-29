@@ -47,7 +47,7 @@ const SinglePublication: FC<SinglePublicationProps> = ({
     : publication;
 
   return (
-    <div className="vh-88% ml-[20px] mt-2 rounded-xl  bg-[#F2F6F9] dark:bg-black p-3 ">
+    <div className="vh-88% ml-[20px] mt-2 rounded-xl  bg-[#F2F6F9] p-3 dark:bg-black ">
       {publication?.hidden ? (
         <HiddenPublication type={publication.__typename} />
       ) : (
@@ -58,7 +58,6 @@ const SinglePublication: FC<SinglePublicationProps> = ({
             profile={profile as Profile}
           />
         </>
-        
       )}
     </div>
   );

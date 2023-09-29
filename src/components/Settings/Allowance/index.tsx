@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import Custom404 from 'src/pages/404';
@@ -82,7 +81,7 @@ const AllowanceSettings: NextPage = () => {
             <div className="divider my-5" />
             <div className="label mt-6">Select Currency</div>
             <select
-              className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white dark:bg-gray-900/70 outline-none dark:border-gray-700 "
+              className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 dark:bg-gray-900/70 "
               onChange={(e) => {
                 setCurrencyLoading(true);
                 refetch({

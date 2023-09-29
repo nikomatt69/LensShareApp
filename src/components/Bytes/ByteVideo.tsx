@@ -4,7 +4,7 @@ import type { Dispatch, FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import getProfilePicture from '@/utils/functions/getProfilePicture';
 import { getPublicationMediaUrl } from '@/utils/functions/getPublicationMediaUrl';
-import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
+import { getThumbnailUrl } from '@/utils/functions/getThumbnailUrl';
 
 import VideoPlayer from '@/utils/VideoPlayer';
 
@@ -23,9 +23,9 @@ import imageKit from '@/lib/imageKit';
 
 type Props = {
   video: Publication;
- 
-  currentViewingId: string
-  intersectionCallback: (id: string) => void
+
+  currentViewingId: string;
+  intersectionCallback: (id: string) => void;
 };
 
 const ByteVideo: FC<Props> = ({
@@ -33,68 +33,64 @@ const ByteVideo: FC<Props> = ({
   currentViewingId,
   intersectionCallback
 }) => {
-  const videoRef = useRef<HTMLMediaElement>()
-  const intersectionRef = useRef<HTMLDivElement>(null)
-  const thumbnailUrl = imageKit(
-    sanitizeDStorageUrl(getThumbnailUrl(video)),
- 
-  )
-  const { color: black } = useAverageColor(thumbnailUrl, true)
-  const currentProfile = useAppStore((state) => state.currentProfile)
+  const videoRef = useRef<HTMLMediaElement>();
+  const intersectionRef = useRef<HTMLDivElement>(null);
+  const thumbnailUrl = imageKit(sanitizeDStorageUrl(getThumbnailUrl(video)));
+  const { color: black } = useAverageColor(thumbnailUrl, true);
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   const playVideo = () => {
     if (!videoRef.current) {
-      return
+      return;
     }
-    videoRef.current.currentTime = 0
-    videoRef.current.volume = 1
-    videoRef.current.autoplay = true
-    videoRef.current?.play().catch(() => {})
-   
-  }
+    videoRef.current.currentTime = 0;
+    videoRef.current.volume = 1;
+    videoRef.current.autoplay = true;
+    videoRef.current?.play().catch(() => {});
+  };
 
   const observer = new IntersectionObserver((data) => {
     if (data[0].target.id && data[0].isIntersecting) {
-      intersectionCallback(data[0].target.id)
-      const nextUrl = `${location.origin}/bytes/${video?.id}`
-      history.replaceState({ path: nextUrl }, '', nextUrl)
+      intersectionCallback(data[0].target.id);
+      const nextUrl = `${location.origin}/bytes/${video?.id}`;
+      history.replaceState({ path: nextUrl }, '', nextUrl);
     }
-  })
+  });
 
   useEffect(() => {
     if (intersectionRef.current) {
-      observer.observe(intersectionRef.current)
+      observer.observe(intersectionRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const pauseVideo = () => {
     if (!videoRef.current) {
-      return
+      return;
     }
-    videoRef.current.volume = 0
-    videoRef.current?.pause()
-    videoRef.current.autoplay = false
-  }
+    videoRef.current.volume = 0;
+    videoRef.current?.pause();
+    videoRef.current.autoplay = false;
+  };
 
   const onClickVideo = () => {
     if (videoRef.current?.paused) {
-      playVideo()
+      playVideo();
     } else {
-      pauseVideo()
+      pauseVideo();
     }
-  }
+  };
 
   const refCallback = (ref: HTMLMediaElement) => {
     if (!ref) {
-      return
+      return;
     }
-    videoRef.current = ref
-    playVideo()
-  }
+    videoRef.current = ref;
+    playVideo();
+  };
 
   if (!video) {
-    return null
+    return null;
   }
 
   return (
@@ -106,7 +102,7 @@ const ByteVideo: FC<Props> = ({
         <div
           className="ultrawide:w-[650px] flex h-screen w-screen min-w-[250px] items-center overflow-hidden bg-black md:h-[calc(100vh-145px)] md:w-[400px] md:rounded-xl"
           style={{
-            backgroundColor: black ? black: black
+            backgroundColor: black ? black : black
           }}
         >
           <div
@@ -116,10 +112,8 @@ const ByteVideo: FC<Props> = ({
           />
           {currentViewingId === video.id ? (
             <VideoPlayer
-              
               refCallback={refCallback}
               permanentUrl={getPublicationMediaUrl(video)}
-             
               posterUrl={thumbnailUrl}
               ratio="9to16"
               showControls={false}
@@ -133,7 +127,6 @@ const ByteVideo: FC<Props> = ({
             />
           ) : (
             <div className="h-full w-full">
-              
               <span className="invisible absolute">
                 <VideoPlayer
                   permanentUrl={getPublicationMediaUrl(video)}
@@ -148,7 +141,6 @@ const ByteVideo: FC<Props> = ({
               </span>
             </div>
           )}
-          
         </div>
         <TopOverlay onClickVideo={onClickVideo} />
         <BottomOverlay video={video} />
@@ -158,7 +150,6 @@ const ByteVideo: FC<Props> = ({
             'RevertCollectModuleSettings' && (
             <div className="text-center text-white md:text-gray-500">
               <Collect publication={video as Publication} showCount={true} />
-              
             </div>
           )}
         </div>
@@ -167,7 +158,7 @@ const ByteVideo: FC<Props> = ({
         <ByteActions video={video} />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default React.memo(ByteVideo);

@@ -1,5 +1,5 @@
 import { useHuddle01, useLobby, usePeers } from '@huddle01/react/hooks';
-import  Plural from 'react-i18next';
+import Plural from 'react-i18next';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
@@ -16,7 +16,6 @@ import getCoverPicture from '@/utils/lib/getCoverPicture';
 import getMedia from '@/lib/getMedia';
 import { Spinner } from '@/components/UI/Spinner';
 import { useEffectOnce } from 'usehooks-ts';
-
 
 interface AvatarGridProps {
   isLobbyPreview: boolean;
@@ -81,9 +80,7 @@ const AvatarGrid: FC<AvatarGridProps> = ({ isLobbyPreview }) => {
                 />
               ))}
           </div>
-          <div className="py-4 text-sm font-normal leading-none text-gray-400">
-            
-          </div>
+          <div className="py-4 text-sm font-normal leading-none text-gray-400"></div>
           <div className="grid min-h-[8rem] grid-cols-5 items-center justify-between gap-5 self-stretch pb-6">
             {showSpacesWindow && me.role === 'listener' && (
               <Avatar

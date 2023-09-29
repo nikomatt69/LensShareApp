@@ -1,4 +1,3 @@
-
 import { Alert } from '@/components/UI/Alert';
 
 import type { FC } from 'react';
@@ -19,7 +18,6 @@ const Discard: FC<DiscardProps> = ({ onDiscard }) => {
 
   return (
     <Alert
-    
       isDestructive
       show={showDiscardModal}
       title={`Discard Post`}

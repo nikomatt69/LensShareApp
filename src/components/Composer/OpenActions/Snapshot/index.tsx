@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { useAppStore } from 'src/store/app';
 
@@ -67,12 +66,13 @@ const Snapshot: FC<SnapshotProps> = ({ proposalId }) => {
 
   return (
     <Wrapper dataTestId={`snapshot-${proposal.id}`}>
-      <Header proposal={proposal as Proposal} />
+     <div> <div><Header proposal={proposal as Proposal} /></div>
       <Choices
         proposal={proposal as Proposal}
         votes={votes as Vote[]}
         refetch={refetch}
       />
+      </div>
     </Wrapper>
   );
 };

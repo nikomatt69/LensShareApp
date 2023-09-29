@@ -1,9 +1,12 @@
-
-
 import { gql } from '@apollo/client';
 import client from '@/apollo-client';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { MediaSet, NftImage, Profile, Publication } from '../lens/generatedLenster';
+import {
+  MediaSet,
+  NftImage,
+  Profile,
+  Publication
+} from '../lens/generatedLenster';
 import getIPFSLink from '@/lib/getIPFSLink';
 import generateMeta from './generateMeta';
 
@@ -34,13 +37,18 @@ const PROFILE_QUERY = gql`
   }
 `;
 
-const getProfileMeta = async (req: NextApiRequest, res: NextApiResponse, handle: string) => {
+const getProfileMeta = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  handle: string
+) => {
   try {
     let processedHandle;
     if (handle.includes(HANDLE_SUFFIX)) {
       processedHandle = handle;
     } else {
-      processedHandle = handle === LENSPROTOCOL_HANDLE ? handle : handle.concat(HANDLE_SUFFIX);
+      processedHandle =
+        handle === LENSPROTOCOL_HANDLE ? handle : handle.concat(HANDLE_SUFFIX);
     }
 
     const { data } = await client.query({

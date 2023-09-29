@@ -12,7 +12,12 @@ import { Icons } from '../Common/assets/Icons';
 import Dropdown from '../Common/Dropdown';
 import EmojiTray from '../Common/EmojiTray';
 import MusicTray from '../Common/MusicTray';
-import { FaceSmileIcon, MicrophoneIcon, MusicalNoteIcon, UserIcon } from '@heroicons/react/24/outline';
+import {
+  FaceSmileIcon,
+  MicrophoneIcon,
+  MusicalNoteIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
 import EmojiOutline from '@/components/UI/Icons/EmojiOutline';
 import { HiOutlineEmojiHappy } from 'react-icons/hi';
 import { SpacesEvents } from '@/enums';
@@ -129,4 +134,3 @@ const SpacesWindowBottomBar: FC = () => {
 };
 
 export default SpacesWindowBottomBar;
-

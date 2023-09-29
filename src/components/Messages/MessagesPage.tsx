@@ -4,11 +4,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import BottomNav from '../Navs/BottomNav';
 
 import { FC, useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { Profile, ReferenceModules } from '@/utils/lens/generatedLenster';
 import { CHAIN_ID } from '@/constants';

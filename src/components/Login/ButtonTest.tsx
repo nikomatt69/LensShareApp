@@ -14,7 +14,7 @@ const ButtonTest: FC = () => {
        hover:text-white"
       >
         {currentProfile ? (
-          <div className="flex justify-center">{<MainButton/>}</div>
+          <div className="flex justify-center">{<MainButton />}</div>
         ) : (
           <LoginWallet />
         )}

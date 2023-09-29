@@ -26,13 +26,11 @@ import {
 } from '@heroicons/react/24/outline';
 import BytesShimmer from './BytesShimmer';
 
-import getThumbnailUrl  from '@/utils/lib/getThumbnailUrl';
+import getThumbnailUrl from '@/utils/lib/getThumbnailUrl';
 import imageKit from '@/lib/imageKit';
-
 
 const BytesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
@@ -42,8 +40,6 @@ const BytesSection = () => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-     
-
       mainContentFocus: [PublicationMainFocus.Video]
     }
   };

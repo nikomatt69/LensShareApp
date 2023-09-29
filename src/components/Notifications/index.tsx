@@ -51,7 +51,7 @@ const initialFilters = {
 const Notifications = () => {
   const [activeFilter, setActiveFilter] = useState(initialFilters);
   const currentProfile = useAppStore((state) => state.currentProfile);
- 
+
   const selectedNotificationsFilter = usePersistStore(
     (state) => state.selectedNotificationsFilter
   );
@@ -102,8 +102,7 @@ const Notifications = () => {
   const { data, loading, fetchMore } = useNotificationsQuery({
     variables: {
       request
-    },
-  
+    }
   });
 
   const notifications = data?.notifications?.items as Notification[];
@@ -123,11 +122,10 @@ const Notifications = () => {
   });
 
   return (
-    <div className="mx-auto  sm:container lg:container md:container truncate break-words border-blue-700 md:max-w-3xl md:p-0">
+    <div className="mx-auto  truncate break-words border-blue-700 sm:container md:container lg:container md:max-w-3xl md:p-0">
       <MetaTags title={`Notifications • ${APP_NAME}`} />
 
-
-      <Card className="p-2 border-blue-700 mt-2">
+      <Card className="mt-2 border-blue-700 p-2">
         <Tab.Group as="div" className="w-full">
           <div className="mb-4 flex items-center justify-between">
             <Tab.List className="no-scrollbar flex w-full space-x-4 overflow-x-auto pr-4">

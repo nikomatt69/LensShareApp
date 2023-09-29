@@ -1,11 +1,16 @@
-
 import UserProfile from '@/components/ProfilePage/UserProfile';
 import { Card } from '@/components/UI/Card';
 import { Input } from '@/components/UI/Input';
 import { Spinner } from '@/components/UI/Spinner';
 import cn from '@/components/UI/cn';
 import formatHandle from '@/utils/functions/formatHandle';
-import { CustomFiltersTypes, Profile, ProfileSearchResult, SearchRequestTypes, useSearchProfilesLazyQuery } from '@/utils/lens/generated5';
+import {
+  CustomFiltersTypes,
+  Profile,
+  ProfileSearchResult,
+  SearchRequestTypes,
+  useSearchProfilesLazyQuery
+} from '@/utils/lens/generated5';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { motion } from 'framer-motion';
@@ -117,9 +122,7 @@ const Search: FC<SearchProps> = ({
             {searchUsersLoading ? (
               <div className="space-y-2 px-4 py-2 text-center text-sm font-bold">
                 <Spinner size="sm" className="mx-auto" />
-                <div>
-                  Searching users
-                </div>
+                <div>Searching users</div>
               </div>
             ) : (
               <>
@@ -148,9 +151,7 @@ const Search: FC<SearchProps> = ({
                   </motion.div>
                 ))}
                 {profiles.length === 0 ? (
-                  <div className="px-4 py-2">
-                    No matching users
-                  </div>
+                  <div className="px-4 py-2">No matching users</div>
                 ) : null}
               </>
             )}

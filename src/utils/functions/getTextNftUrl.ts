@@ -1,5 +1,4 @@
-import { uploadFileToIPFS } from "@/lib/uploadToIPFS3";
-
+import { uploadFileToIPFS } from '@/lib/uploadToIPFS3';
 
 /**
  * Generates a URL for an SVG image that represents an NFT with the specified content, username, and timestamp.

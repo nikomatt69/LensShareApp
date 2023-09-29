@@ -38,7 +38,7 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
   }, [subscriber?.isFollowedByMe]);
 
   return (
-    <div className="absolute bottom-0   left-0 right-0 z-[10]  overflow-auto  rounded-b-2xl dark:bg-gray-700 bg-slate-100   px-3 pb-6 pt-3 md:rounded-b-xl">
+    <div className="absolute bottom-0   left-0 right-0 z-[10]  overflow-auto  rounded-b-2xl bg-slate-100 px-3   pb-6 pt-3 dark:bg-gray-700 md:rounded-b-xl">
       <Link href={`/bytes/${video?.id}`} key={video.id}>
         <div className="pb-2">
           {isMirror ? (
@@ -67,13 +67,13 @@ const MobileBottomOverlay: FC<Props> = ({ video }) => {
               draggable={false}
               alt={subscriber?.handle}
             />
-            <div className="flex min-w-0 flex-col items-start font-bold dark:text-white text-black">
+            <div className="flex min-w-0 flex-col items-start font-bold text-black dark:text-white">
               <h6 className="flex max-w-full items-center space-x-1">
                 <span className="truncate">
                   {formatHandle(subscriber?.handle)}
                 </span>
               </h6>
-              <span className="inline-flex items-center space-x-1 dark:text-white text-black text-xs">
+              <span className="inline-flex items-center space-x-1 text-xs text-black dark:text-white">
                 {formatNumber(subscriber?.stats.totalFollowers)} Followers
               </span>
             </div>

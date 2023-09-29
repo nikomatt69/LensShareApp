@@ -16,7 +16,6 @@ import { GiMirrorMirror } from 'react-icons/gi';
 import { getSharableLink } from '@/utils/functions/getSharableLink';
 import { Card } from '../UI/Card';
 
-
 import FullScreenModal from '../UI/FullScreenModal';
 import { MdOutlineClose } from 'react-icons/md';
 

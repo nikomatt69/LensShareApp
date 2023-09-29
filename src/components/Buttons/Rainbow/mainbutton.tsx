@@ -26,9 +26,7 @@ const StyledButton = styled.button`
 `;
 
 export const MainButton = () => {
-  return (
-    <Web3Button />
-  );
+  return <Web3Button />;
 };
 
 export default MainButton;

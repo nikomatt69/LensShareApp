@@ -1,4 +1,3 @@
-
 import getChannelByTag from '@/lib/getChannelByTag';
 import { MetadataOutput } from '@/utils/lens/generated5';
 import type { FC } from 'react';
@@ -12,21 +11,15 @@ import axios from 'axios';
 import { Community } from '@/types/communities';
 import { Channel } from '@/types/lenster';
 interface FeaturedChannelProps {
-
   className?: string;
 
-  
-  community:Channel
+  community: Channel;
 }
 
-const FeaturedChannel: FC<FeaturedChannelProps> = ({
-
-  className = ''
-}) => {
+const FeaturedChannel: FC<FeaturedChannelProps> = ({ className = '' }) => {
   const {
     query: { slug }
   } = useRouter();
-  
 
   const fetchCommunity = async () => {
     try {
@@ -44,7 +37,6 @@ const FeaturedChannel: FC<FeaturedChannelProps> = ({
     fetchCommunity().then((res) => res)
   );
 
-  
   const community: Channel = data;
 
   return (

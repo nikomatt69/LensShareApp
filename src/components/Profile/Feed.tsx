@@ -11,7 +11,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType, ProfileFeedType } from 'src/enums';
-import { useAppStore, } from 'src/store/app';
+import { useAppStore } from 'src/store/app';
 
 import { EmptyState } from '../UI/EmptyState';
 import formatHandle from '@/utils/functions/formatHandle';
@@ -35,8 +35,7 @@ interface FeedProps {
     | ProfileFeedType.Feed
     | ProfileFeedType.Replies
     | ProfileFeedType.Media
-    | ProfileFeedType.Collects
-    
+    | ProfileFeedType.Collects;
 }
 
 const Feed: FC<FeedProps> = ({ profile, type }) => {
@@ -100,7 +99,6 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
 
   const publications = data?.publications?.items;
   const pageInfo = data?.publications?.pageInfo;
-  
 
   const { observe } = useInView({
     onChange: async ({ inView }) => {
@@ -134,7 +132,7 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
         ? "hasn't replied yet!"
         : type === ProfileFeedType.Collects
         ? "hasn't collected anything yet!"
-        :'';
+        : '';
 
     return (
       <EmptyState
@@ -156,25 +154,28 @@ const Feed: FC<FeedProps> = ({ profile, type }) => {
   }
 
   return (
-    <Card className="divide-y-[1px] border-2 border-blue-700 rounded-xl dark:divide-blue-700">
-    {txnQueue.map(
-      (txn) => txn?.type === OptmisticPublicationType.NewPost && (
-        <div key={txn.id}>
-          <QueuedPublication txn={txn} />
-        </div>
-      )
-    )}
-    {publications?.map((publication, index) => (
-      <SinglePublication
-        profile={currentProfile?.id as Profile}
-        key={`${publication?.id}_${index}`}
-        isFirst={index === 0}
-        isLast={index === publications.length - 1}
-        publication={publication as Publication}
-        showCount={true} tags={''} />
-    ))}
-   {hasMore && <span ref={observe} />}
-  </Card>
+    <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
+      {txnQueue.map(
+        (txn) =>
+          txn?.type === OptmisticPublicationType.NewPost && (
+            <div key={txn.id}>
+              <QueuedPublication txn={txn} />
+            </div>
+          )
+      )}
+      {publications?.map((publication, index) => (
+        <SinglePublication
+          profile={currentProfile?.id as Profile}
+          key={`${publication?.id}_${index}`}
+          isFirst={index === 0}
+          isLast={index === publications.length - 1}
+          publication={publication as Publication}
+          showCount={true}
+          tags={''}
+        />
+      ))}
+      {hasMore && <span ref={observe} />}
+    </Card>
   );
 };
 

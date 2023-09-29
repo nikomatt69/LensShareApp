@@ -1,4 +1,3 @@
-
 import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 import getStampFyiURL from './getStampFyiURL';
 

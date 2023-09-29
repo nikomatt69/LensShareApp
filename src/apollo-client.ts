@@ -1,7 +1,7 @@
 import { API_URL } from '@/constants';
 
 import toast from 'react-hot-toast';
-import {  fromPromise, toPromise } from '@apollo/client';
+import { fromPromise, toPromise } from '@apollo/client';
 import {
   ApolloClient,
   ApolloLink,
@@ -12,7 +12,6 @@ import {
 import { publicationKeyFields } from './lib/keyFields';
 import cursorBasedPagination from './lib/cursorBasedPagination';
 import result from './types/lens';
-
 
 import axios from 'axios';
 import createFeedFieldPolicy from './utils/lens/apollo/cache/createFeedFieldPolicy';
@@ -42,10 +41,7 @@ export default superfluidClient;
 
 const httpLink = new HttpLink({ uri: API_URL, fetchOptions: 'no-cors', fetch });
 
-
-
 const resetAuthData = () => {
- 
   localStorage.removeItem(Localstorage.NotificationStore);
   localStorage.removeItem(Localstorage.TransactionStore);
   localStorage.removeItem(Localstorage.TimelineStore);
@@ -89,12 +85,18 @@ const authLink = new ApolloLink((operation, forward) => {
     axios
       .post(
         API_URL,
-        { fetchOptions: 'no-cors',
+        {
+          fetchOptions: 'no-cors',
           operationName: 'Refresh',
           query: REFRESH_AUTHENTICATION_MUTATION,
           variables: { request: { refreshToken } }
         },
-        { headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' } }
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        }
       )
       .then(({ data }) => {
         const accessToken = data?.data?.refresh?.accessToken;
@@ -118,8 +120,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const apolloClient = new ApolloClient({
-
-  link: from([ authLink, httpLink]),
+  link: from([authLink, httpLink]),
   cache: new InMemoryCache({
     possibleTypes: result.possibleTypes,
     typePolicies: {
@@ -146,5 +147,5 @@ export const apolloClient = new ApolloClient({
         }
       }
     }
-    })
+  })
 });

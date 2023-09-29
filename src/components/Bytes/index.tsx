@@ -1,4 +1,3 @@
-
 import type { Profile, Publication } from '@/utils/lens/generatedLenster';
 import {
   PublicationSortCriteria,
@@ -32,9 +31,7 @@ import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
 
 import Link from 'next/link';
-import {
-
-} from '@/utils/lens/generatedLenster';
+import {} from '@/utils/lens/generatedLenster';
 import Navbar from '../Navbar';
 import { useTheme } from 'next-themes';
 import ChevronDownOutline from '../UI/Icons/ChevronDownOutline';
@@ -52,16 +49,16 @@ const request = {
   sources: [LENSTUBE_BYTES_APP_ID],
   publicationTypes: [PublicationTypes.Post],
   customFilters: LENS_CUSTOM_FILTERS
-}
+};
 
 const Bytes = () => {
-  const router = useRouter()
-  const bytesContainer = useRef<HTMLDivElement>(null)
-  const [currentViewingId, setCurrentViewingId] = useState('')
-  const currentProfile = useAppStore((state) => state.currentProfile)
+  const router = useRouter();
+  const bytesContainer = useRef<HTMLDivElement>(null);
+  const [currentViewingId, setCurrentViewingId] = useState('');
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationLazyQuery()
+    usePublicationLazyQuery();
 
   const [fetchAllBytes, { data, loading, error, fetchMore }] =
     useExploreFeedLazyQuery({
@@ -73,23 +70,23 @@ const Bytes = () => {
         profileId: currentProfile?.id ?? null
       },
       onCompleted: ({ explorePublications }) => {
-        const items = explorePublications?.items as Publication[]
-        const publicationId = router.query.id
+        const items = explorePublications?.items as Publication[];
+        const publicationId = router.query.id;
         if (!publicationId) {
-          const nextUrl = `${location.origin}/bytes/${items[0]?.id}`
-          history.pushState({ path: nextUrl }, '', nextUrl)
+          const nextUrl = `${location.origin}/bytes/${items[0]?.id}`;
+          history.pushState({ path: nextUrl }, '', nextUrl);
         }
       }
-    })
+    });
 
-  const bytes = data?.explorePublications?.items as Publication[]
-  const pageInfo = data?.explorePublications?.pageInfo
-  const singleBytePublication = singleByte?.publication as Publication
+  const bytes = data?.explorePublications?.items as Publication[];
+  const pageInfo = data?.explorePublications?.pageInfo;
+  const singleBytePublication = singleByte?.publication as Publication;
 
   const fetchSingleByte = async () => {
-    const publicationId = router.query.id
+    const publicationId = router.query.id;
     if (!publicationId) {
-      return fetchAllBytes()
+      return fetchAllBytes();
     }
     await fetchPublication({
       variables: {
@@ -101,16 +98,15 @@ const Bytes = () => {
       },
       onCompleted: () => fetchAllBytes(),
       fetchPolicy: 'network-only'
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (router.isReady) {
-      fetchSingleByte()
-      
+      fetchSingleByte();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady])
+  }, [router.isReady]);
 
   const { observe } = useInView({
     rootMargin: SCROLL_ROOT_MARGIN,
@@ -122,16 +118,16 @@ const Bytes = () => {
             cursor: pageInfo?.next
           }
         }
-      })
+      });
     }
-  })
+  });
 
   if (loading || singleByteLoading) {
     return (
       <div className="grid h-[80vh] place-items-center">
         <Loader />
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -139,7 +135,7 @@ const Bytes = () => {
       <div className="grid h-[80vh] place-items-center">
         <EmptyState message icon />
       </div>
-    )
+    );
   }
 
   return (
@@ -150,9 +146,8 @@ const Bytes = () => {
       <MetaTags title="Bytes" />
       <div
         ref={bytesContainer}
-        className="no-scrollbar h-screen bg-white dark:bg-black snap-y pb-3 snap-mandatory overflow-y-scroll scroll-smooth md:h-[calc(100vh-70px)]"
+        className="no-scrollbar h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-white pb-3 dark:bg-black md:h-[calc(100vh-70px)]"
       >
-        
         {bytes?.map(
           (video: Publication, index) =>
             singleByte?.publication?.id !== video.id && (
@@ -185,7 +180,7 @@ const Bytes = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bytes
+export default Bytes;

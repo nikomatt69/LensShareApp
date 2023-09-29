@@ -32,7 +32,6 @@ interface Props {
   publication: Publication;
 }
 const Audio: FC<Props> = ({ publication }) => {
-
   const [isHover, setIsHover] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [showButtons, setShowButtons] = useState(true);

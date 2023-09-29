@@ -1,4 +1,3 @@
-
 import { LensHub } from '@/abi/LensHub';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Button } from '@/components/UI/Button';
@@ -197,7 +196,7 @@ const NftPicture: FC<NftPictureProps> = ({ profile }) => {
         <div className="label">Chain</div>
         <div>
           <select
-            className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white dark:bg-gray-900/70 outline-none dark:border-gray-700"
+            className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 dark:bg-gray-900/70"
             onChange={(e) => setChainId(parseInt(e.target.value))}
             value={chainId}
           >

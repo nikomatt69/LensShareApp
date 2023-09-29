@@ -6,13 +6,17 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
-import { Icons} from '../../assets/Icons';
+import { Icons } from '../../assets/Icons';
 import Dropdown from '../../Dropdown';
 import CoHostData from './PeerRole/CoHostData';
 import HostData from './PeerRole/HostData';
 import ListenersData from './PeerRole/ListenersData';
 import SpeakerData from './PeerRole/SpeakerData';
-import { CheckIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  CheckIcon,
+  EllipsisVerticalIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { BiDotsVertical } from 'react-icons/bi';
 import { SpacesEvents } from '@/enums';

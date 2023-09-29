@@ -1,9 +1,12 @@
-
 import { ErrorMessage } from '@/components/ErrorMessage';
 import UserProfile from '@/components/ProfilePage/UserProfile';
 import { EmptyState } from '@/components/UI/EmptyState';
 import Loader from '@/components/UI/Loader';
-import { Profile, ProfileQueryRequest, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  ProfileQueryRequest,
+  useProfilesQuery
+} from '@/utils/lens/generatedLenster';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
@@ -78,8 +81,6 @@ const Mirrors: FC<MirrorsProps> = ({ publicationId }) => {
                 profile={profile as Profile}
                 isFollowing={profile?.isFollowedByMe}
                 followUnfollowPosition={index + 1}
-                
-                
                 showFollow
                 showUserPreview={false}
               />

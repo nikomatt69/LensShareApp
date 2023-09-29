@@ -53,7 +53,7 @@ const Stories = () => {
     sortCriteria: PublicationSortCriteria.Latest,
     limit: 5,
     noRandomize: false,
- 
+
     sources: [
       APP_ID,
       LENSTUBE_BYTES_APP_ID,
@@ -65,12 +65,7 @@ const Stories = () => {
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
-
-      mainContentFocus: [
-        PublicationMainFocus.Video,
-        PublicationMainFocus.Image,
-
-      ]
+      mainContentFocus: [PublicationMainFocus.Video, PublicationMainFocus.Image]
     }
   };
 
@@ -90,7 +85,7 @@ const Stories = () => {
           : null,
         profileId: currentProfile?.id ?? null
       },
-      onCompleted: ({ explorePublications:any }) => {}
+      onCompleted: ({ explorePublications: any }) => {}
     });
   console.log(data);
 
@@ -128,8 +123,6 @@ const Stories = () => {
     setShow(false);
   };
 
-
-
   useEffect(() => {
     if (router.query.id && singleBytePublication) {
       openDetail(singleBytePublication);
@@ -165,33 +158,33 @@ const Stories = () => {
   }
 
   return (
-    <div className='mt-2 border-0 dark:bg-black bg-white pt-3' >
+    <div className="mt-2 border-0 bg-white pt-3 dark:bg-black">
       <Head>
-      <meta
+        <meta
           name="theme-color"
           content={resolvedTheme === 'dark' ? '#1b1b1d' : '#ffffff'}
         />
-      </Head>  
+      </Head>
       <MetaTags title={`Latest • ${APP_NAME} `} />
 
       <>
-      <div
-        ref={bytesContainer}
-        className="mt-3 h-screen border-0 pt-3 dark:bg-black bg-white font-semibold md:h-[calc(100vh-70px)]"
-      >
-        {bytes?.map((video: Publication, index) => (
-          <VideoCard
-            publication={video}
-            key={`${video?.id}_${video.createdAt}1`}
-            onDetail={openDetail}
-          />
-        ))}
-        {pageInfo?.next && (
-          <span ref={observe} className="flex justify-center border-0 p-10">
-            <Loader />
-          </span>
-        )}
-      </div>
+        <div
+          ref={bytesContainer}
+          className="mt-3 h-screen border-0 bg-white pt-3 font-semibold dark:bg-black md:h-[calc(100vh-70px)]"
+        >
+          {bytes?.map((video: Publication, index) => (
+            <VideoCard
+              publication={video}
+              key={`${video?.id}_${video.createdAt}1`}
+              onDetail={openDetail}
+            />
+          ))}
+          {pageInfo?.next && (
+            <span ref={observe} className="flex justify-center border-0 p-10">
+              <Loader />
+            </span>
+          )}
+        </div>
       </>
     </div>
   );

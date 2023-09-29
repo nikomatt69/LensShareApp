@@ -31,50 +31,49 @@ const PlayerInstance: FC<PlayerProps> = ({
   showControls
 }) => {
   return (
-    <div className='lensshare-player'>
-    <Player
-      src={permanentUrl}
-      poster={posterUrl}
-      showTitle={false}
-      objectFit="contain"
-      aspectRatio={ratio}
-      showPipButton
-      theme={{
-        borderStyles: {
-          containerBorderStyle: 'solid',
-          
-        },
-        colors: {
-          accent: '#1d4ed8',
-        },
-        space: {
-          controlsBottomMarginX: '10px',
-          controlsBottomMarginY: '5px',
-          controlsTopMarginX: '15px',
-          controlsTopMarginY: '8pxpx',
-        },
-        radii: {
-          containerBorderRadius: '16px',
-        },
-      }}
-      mediaElementRef={playerRef}
-      loop={options.loop ?? true}
-      showUploadingIndicator={true}
-      muted={options?.muted ?? false}
-      controls={{ defaultVolume: 1 }}
-      autoPlay={options.autoPlay ?? false}
-      showLoadingSpinner={options.loadingSpinner}
-      _isCurrentlyShown={options.isCurrentlyShown}
-      autoUrlUpload={
-        IS_MAINNET && {
-          fallback: true,
-          ipfsGateway: IPFS_GATEWAY
+    <div className="lensshare-player">
+      <Player
+        src={permanentUrl}
+        poster={posterUrl}
+        showTitle={false}
+        objectFit="contain"
+        aspectRatio={ratio}
+        showPipButton
+        theme={{
+          borderStyles: {
+            containerBorderStyle: 'solid'
+          },
+          colors: {
+            accent: '#1d4ed8'
+          },
+          space: {
+            controlsBottomMarginX: '10px',
+            controlsBottomMarginY: '5px',
+            controlsTopMarginX: '15px',
+            controlsTopMarginY: '8pxpx'
+          },
+          radii: {
+            containerBorderRadius: '16px'
+          }
+        }}
+        mediaElementRef={playerRef}
+        loop={options.loop ?? true}
+        showUploadingIndicator={true}
+        muted={options?.muted ?? false}
+        controls={{ defaultVolume: 1 }}
+        autoPlay={options.autoPlay ?? false}
+        showLoadingSpinner={options.loadingSpinner}
+        _isCurrentlyShown={options.isCurrentlyShown}
+        autoUrlUpload={
+          IS_MAINNET && {
+            fallback: true,
+            ipfsGateway: IPFS_GATEWAY
+          }
         }
-      }
-    >
-      {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
-      {!showControls ? <></> : null}
-    </Player>
+      >
+        {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
+        {!showControls ? <></> : null}
+      </Player>
     </div>
   );
 };

@@ -39,7 +39,6 @@ import { Input } from '../UI/Input';
 import { Button } from '../UI/Button';
 import { uploadFileToIPFS } from '@/lib/uploadToIPFS3 copy';
 
-
 interface ComposerProps {
   sendMessage: <T extends AllowedContent = string>(
     content: SendMessageContent<T>,
@@ -281,7 +280,7 @@ const Composer: FC<ComposerProps> = ({
           disabled={disabledInput}
           onKeyDown={handleKeyDown}
           onChange={(event) => onChangeCallback(event.target.value)}
-          className='text-black'
+          className="text-black"
         />
         <Button
           disabled={!canSendMessage}

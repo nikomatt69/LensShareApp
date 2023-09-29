@@ -36,41 +36,41 @@ import { useTheme } from 'next-themes';
 import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
 
-
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const { id } = router.query;
   const profilePic = currentProfile?.picture;
   console.log('CURRENT PROFILE', currentProfile?.picture);
 
-
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
 
   const { resolvedTheme } = useTheme();
-  
+
   const handleScroll = () => {
-      const currentScrollPos = window.scrollY
-  
-      if(currentScrollPos > prevScrollPos){
-          setVisible(false)
-      }else{
-          setVisible(true)
-      }
-  
-      setPrevScrollPos(currentScrollPos)
-  }
-  
-  useEffect( () => {
-      window.addEventListener('scroll', handleScroll);
-  
-      return () => window.removeEventListener('scroll', handleScroll)
-  })
-  
+    const currentScrollPos = window.scrollY;
+
+    if (currentScrollPos > prevScrollPos) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+
+    setPrevScrollPos(currentScrollPos);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
 
   return (
-    <div className={`flex w-full z-10 items-center justify-between h-[50px] border-2 rounded-t-sm rounded-md border-b border-t-0  border-blue-700 bg-white/70 dark:bg-gray-900/70  p-2  sticky ${visible ? 'top-0' : ''} `}>
-
+    <div
+      className={`sticky z-10 flex h-[50px] w-full items-center justify-between rounded-md rounded-t-sm border-2 border-b  border-t-0 border-blue-700 bg-white/70  p-2  dark:bg-gray-900/70 ${
+        visible ? 'top-0' : ''
+      } `}
+    >
       <Link href="/discover">
         <button
           className="text-md text-md flex cursor-pointer items-center gap-2 rounded-full   border-[#57B8FF] px-2 py-2 
@@ -97,35 +97,34 @@ const Navbar: FC = () => {
       {/* //home */}
       <Link href="/">
         <div className="w-[100px] md:w-[129px]">
-        {resolvedTheme === 'dark' ? (
-    <Image
-            className="cursor-pointer"
-            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
-            alt="logo"
-           
-          />) : (<Image
-            className="cursor-pointer"
-            src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
-            alt="logo"
-           
-          />)}
+          {resolvedTheme === 'dark' ? (
+            <Image
+              className="cursor-pointer"
+              src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
+              alt="logo"
+            />
+          ) : (
+            <Image
+              className="cursor-pointer"
+              src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
+              alt="logo"
+            />
+          )}
         </div>
       </Link>
-      
+
       <div>
         <div className="centre-item flex gap-5 pl-2 md:gap-10 ">
           <button>
             <NotificationIcon />
           </button>
-          
-      
-        
-              <div className="block">
-                <MainButton />
+
+          <div className="block">
+            <MainButton />
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

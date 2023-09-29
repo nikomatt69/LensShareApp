@@ -1175,7 +1175,7 @@ export enum DecryptFailReason {
   ProfileDoesNotExist = 'PROFILE_DOES_NOT_EXIST',
   UnauthorizedAddress = 'UNAUTHORIZED_ADDRESS',
   UnauthorizedBalance = 'UNAUTHORIZED_BALANCE',
-  superfluidInflowsData='UNAUTHORIZED_ADDRESS'
+  superfluidInflowsData = 'UNAUTHORIZED_ADDRESS'
 }
 
 export type DefaultProfileRequest = {
@@ -3629,8 +3629,7 @@ export type PublicationStatsCommentsTotalArgs = {
 export enum PublicationTypes {
   Comment = 'COMMENT',
   Mirror = 'MIRROR',
-  Post = 'POST',
-
+  Post = 'POST'
 }
 
 export type PublicationValidateMetadataResult = {

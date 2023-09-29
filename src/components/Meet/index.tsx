@@ -1,4 +1,3 @@
-
 import { useRoom } from '@huddle01/react/hooks';
 import type { NextPage } from 'next';
 

@@ -47,9 +47,11 @@ const authLink = new ApolloLink((operation, forward) => {
 
   return fromPromise(
     axios(API_URL, {
-      
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
       data: JSON.stringify({
         fetchOptions: 'no-cors',
         operationName: 'Refresh',

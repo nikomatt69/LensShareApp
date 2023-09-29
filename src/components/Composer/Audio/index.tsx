@@ -9,7 +9,7 @@ import CoverImage from './CoverImage';
 import Player from './Player';
 import { Publication } from '@/utils/lens/generatedLenster';
 import { OptimisticTransaction } from '@/typesLenster';
-import {getThumbnailUrl} from '@/utils/functions/getThumbnailUrl';
+import { getThumbnailUrl } from '@/utils/functions/getThumbnailUrl';
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/outline';
 import getPublicationAttribute from '@/utils/functions/getPublicationAttribute';
 import sanitizeDisplayName from '@/utils/sanitizeDisplayName';

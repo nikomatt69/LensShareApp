@@ -1,11 +1,7 @@
 import * as Apollo from '@apollo/client';
 
 import { useEffect, useState } from 'react';
-import {
-  useAppPersistStore,
-  useAppStore,
-
-} from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,

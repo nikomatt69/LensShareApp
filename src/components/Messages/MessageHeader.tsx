@@ -45,7 +45,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
 
   const { sendMessage } = useSendOptimisticMessage(conversationKey ?? '');
   const [show, setShow] = useState(false);
- 
+
   const currentProfile = profile;
 
   const HUDDLE_API_KEY = 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0';
@@ -98,21 +98,20 @@ const MessageHeader: FC<MessageHeaderProps> = ({
           <img
             src="/camera-video.svg"
             onClick={async () => {
-              const apiCall = await fetch(
-                '/api/create-room',
-                { mode:'no-cors',
-                  method: 'POST',
-                  body: JSON.stringify({
-                    title: 'LensShare-Space',
-                  
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
-                  }
+              const apiCall = await fetch('/api/create-room', {
+                mode: 'no-cors',
+                method: 'POST',
+                body: JSON.stringify({
+                  title: 'LensShare-Space'
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
                 }
-              );
-              const data = await apiCall.json() as { data: { roomId: string } };
+              });
+              const data = (await apiCall.json()) as {
+                data: { roomId: string };
+              };
               const { roomId } = data.data;
               const currentUrl = window.location.href;
               const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
@@ -120,20 +119,16 @@ const MessageHeader: FC<MessageHeaderProps> = ({
                 `Join here for a call: ${url}/meet/${roomId}`,
                 ContentTypeText
               );
-            
             }}
             className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
           />
           {!following ? (
             <FollowButton
-              
               profile={profile}
               setFollowing={setFollowingWrapped}
-
             />
           ) : (
             <UnfollowButton
-             
               profile={profile}
               setFollowing={setFollowingWrapped}
             />

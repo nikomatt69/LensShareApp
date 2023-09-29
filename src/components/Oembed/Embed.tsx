@@ -5,7 +5,7 @@ import { Card } from '../UI/Card';
 import imageKit from '@/lib/imageKit';
 import { ATTACHMENT, AVATAR } from '@/constants';
 import { OG } from '@/types/misc';
-import {Image} from '@/components/UI/Image';
+import { Image } from '@/components/UI/Image';
 import { Publication } from '@/utils/lens/generatedLenster';
 import sanitizeDStorageUrl from '@/utils/lib/sanitizeDStorageUrl';
 
@@ -24,7 +24,6 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         href={og.url}
         onClick={(event) => {
           stopEventPropagation(event);
-      
         }}
         target={og.url.includes(location.host) ? '_self' : '_blank'}
         rel="noreferrer noopener"
@@ -32,11 +31,10 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         <Card forceRounded>
           {og.isLarge && og.image ? (
             <Image
-              className="divider aspect-2  rounded-xl inline-flex"
+              className="divider inline-flex  aspect-2 rounded-xl"
               onError={({ currentTarget }) => {
                 currentTarget.src = og.image as string;
               }}
-             
               src={imageKit(og.image, ATTACHMENT)}
               alt="Thumbnail"
             />
@@ -51,13 +49,10 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
                   currentTarget.src = og.thumbnail as string;
                 }}
                 src={imageKit(og.image, ATTACHMENT)}
-             
               />
             ) : null}
             <div className="truncate break-words p-5">
               <div className="space-y-1.5 truncate break-words">
-                
-                
                 {og.site ? (
                   <div className="flex items-center space-x-2 pt-1.5">
                     {og.favicon ? (

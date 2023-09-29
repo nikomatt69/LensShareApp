@@ -34,7 +34,6 @@ const Messages: NextPage = () => {
 
   return (
     <div className="flex-col">
-      
       <GridLayout classNameChild="md:gap-8">
         <MetaTags title={`Messages • ${APP_NAME}`} />
 

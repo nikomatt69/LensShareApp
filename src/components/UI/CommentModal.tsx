@@ -7,7 +7,6 @@ import FullScreenModal from './FullScreenModal';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import Feed from '../Comment/Feed';
 
-
 type Props = {
   trigger: React.ReactNode;
   video: Publication;
@@ -37,10 +36,7 @@ const CommentModal: FC<Props> = ({ trigger, video, profile }) => {
           </button>
         </div>
         <div className="no-scrollbar max-h-[40vh] overflow-y-auto pt-3">
-          <Feed
-   
-            publication={video as Publication}
-          />
+          <Feed publication={video as Publication} />
         </div>
       </FullScreenModal>
     </>

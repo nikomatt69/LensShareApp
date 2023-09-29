@@ -31,7 +31,7 @@ const SearchSidebar = () => {
             </Link>
             <Link href={`/search?q=${query.q}&type=pubs`}>
               <div className={normalLink}>
-                <a className="text-md cursor-pointer text-blu-700 lg:block">
+                <a className="text-md text-blu-700 cursor-pointer lg:block">
                   Publications
                 </a>
               </div>

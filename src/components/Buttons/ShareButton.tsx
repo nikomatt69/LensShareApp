@@ -24,7 +24,7 @@ const ShareButton: FC<Props> = ({ publication }) => {
   return (
     <div className="flex gap-6">
       <div
-        className="  flex cursor-pointer  flex-col items-center justify-center rounded-full  bg-gray-600/50 p-2 dark:bg-gray-600/50 md:mt-2 md:bg-gray-200 md:text-black dark:text-white"
+        className="  flex cursor-pointer  flex-col items-center justify-center rounded-full  bg-gray-600/50 p-2 dark:bg-gray-600/50 dark:text-white md:mt-2 md:bg-gray-200 md:text-black"
         onClick={() => setShowShare(true)}
       >
         <ShareModal

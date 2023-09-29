@@ -9,7 +9,6 @@ interface MetaProps {
   name: string;
   uri: string;
   hash: string;
-
 }
 
 const Meta: FC<MetaProps> = ({ name, uri, hash }) => (
@@ -50,14 +49,13 @@ const OnchainMeta: FC<OnchainMetaProps> = ({ publication }) => {
   }
 
   return (
-    <Card as="aside" className='rounded-xl ' dataTestId="onchain-meta">
-      <div className="lt-text-gray-500 divide-y rounded-xl border border-blue-700 bg-[#F2F6F9] dark:bg-black dark:divide-blue-700">
+    <Card as="aside" className="rounded-xl " dataTestId="onchain-meta">
+      <div className="lt-text-gray-500 divide-y rounded-xl border border-blue-700 bg-[#F2F6F9] dark:divide-blue-700 dark:bg-black">
         {isArweaveHash ? (
           <Meta
             name={`ARWEAVE TRANSACTION`}
             uri={`https://arweave.app/tx/${hash}`}
             hash={hash}
-            
           />
         ) : null}
         {publication?.isDataAvailability ? (

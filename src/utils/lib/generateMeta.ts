@@ -1,7 +1,10 @@
-import { APP_INFOPAGE, APP_NAME, OG_IMAGE } from "@/constants";
+import { APP_INFOPAGE, APP_NAME, OG_IMAGE } from '@/constants';
 
-
-const generateMeta = (title = APP_NAME, description = APP_INFOPAGE, image = OG_IMAGE): string => {
+const generateMeta = (
+  title = APP_NAME,
+  description = APP_INFOPAGE,
+  image = OG_IMAGE
+): string => {
   return `<!DOCTYPE html>
     <html lang="en">
       <head>

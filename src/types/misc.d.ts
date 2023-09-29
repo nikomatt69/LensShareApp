@@ -66,14 +66,11 @@ export interface MarkupLinkProps {
   title?: string;
 }
 
-
 export interface SpaceMetadata {
   id: string;
   host: `0x${string}`;
   startTime: string;
 }
-
-
 
 export interface InflowType {
   id: string;

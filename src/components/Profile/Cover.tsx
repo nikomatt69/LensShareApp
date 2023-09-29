@@ -26,10 +26,7 @@ const Cover: FC<CoverProps> = ({ cover }) => {
         backgroundPosition: 'center center',
         backgroundRepeat: cover ? 'no-repeat' : 'repeat'
       }}
-     
     />
-
-  
   );
 };
 

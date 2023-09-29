@@ -10,8 +10,6 @@ import { NotificationType } from '@/enums';
 
 interface Props {
   notification: NewReactionNotification;
- 
-  
 }
 
 const ReactedNotification: FC<Props> = ({ notification }) => {
@@ -29,22 +27,19 @@ const ReactedNotification: FC<Props> = ({ notification }) => {
             draggable={false}
           />
           <div className="flex items-center space-x-0.5">
-            <span>{(notification?.profile?.name)}</span>
+            <span>{notification?.profile?.name}</span>
           </div>
         </Link>
       </div>
       <div className="flex items-center justify-between">
         <span className="truncate text-gray-600 dark:text-gray-400">
           {notification.reaction === 'DOWNVOTE' ? `disliked` : `liked`}{' '}
-          {' '}
-          {notification.publication.__typename === 'Comment' && (
-            'comment'
-          )}
+          {notification.publication.__typename === 'Comment' && 'comment'}
           <Link
             href={`/post/${
               notification.publication.__typename === 'Post'
-              ? notification.publication?.id
-              : notification?.publication.id
+                ? notification.publication?.id
+                : notification?.publication.id
             }`}
             className="ml-1 text-indigo-500"
           >

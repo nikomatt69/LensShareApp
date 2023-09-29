@@ -24,7 +24,6 @@ import { Proposal, Vote } from '@/utils/snapshot/generated';
 import generateTypedData from '@/utils/snapshot/lib/generateTypedData';
 import { Spinner } from '@/components/UI/Spinner';
 
-
 interface ChoicesProps {
   proposal: Proposal;
   votes: Vote[];
@@ -82,7 +81,6 @@ const Choices: FC<ChoicesProps> = ({
     }
 
     setVoteConfig({ show: true, position });
-
   };
 
   const voteLensterPoll = async (position: number) => {
@@ -117,7 +115,7 @@ const Choices: FC<ChoicesProps> = ({
       });
 
       refetch?.();
-      
+
       toast.success(`Your vote has been casted!`);
     } catch {
       toast.error(Errors.SomethingWentWrong);
@@ -135,7 +133,6 @@ const Choices: FC<ChoicesProps> = ({
               <Bars3BottomLeftIcon className="h-4 w-4" />
               <b>{state === 'active' ? `Current results` : `Results`}</b>
             </div>
-        
           </div>
         ) : null}
         <div className="space-y-1 p-3">
@@ -194,24 +191,16 @@ const Choices: FC<ChoicesProps> = ({
           <div className="flex items-center justify-between border-t px-5 py-3 dark:border-gray-700 ">
             <div className="flex items-center space-x-2 text-xs text-gray-500">
               <Bars3BottomLeftIcon className="h-4 w-4" />
-              <b>
-                Poll
-              </b>
+              <b>Poll</b>
               <span>·</span>
-              <span>
-                {humanize(scores_total ?? 0)}{' '}
-                
-              </span>
+              <span>{humanize(scores_total ?? 0)} </span>
               {state === 'active' ? (
                 <>
                   <span>·</span>
-                  <span>
-                    {getTimetoNow(new Date(end * 1000))} left
-                  </span>
+                  <span>{getTimetoNow(new Date(end * 1000))} left</span>
                 </>
               ) : null}
             </div>
-       
           </div>
         ) : null}
       </Card>

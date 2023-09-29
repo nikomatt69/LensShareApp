@@ -33,7 +33,7 @@ const PublicationMenu: FC<Props> = ({ publication }) => {
       </Menu.Button>
       <MenuTransition>
         <Menu.Item>
-          <div className="absolute right-0 z-[5] mt-1 w-max rounded-xl border bg-white dark:bg-gray-900/70 shadow-sm focus:outline-none">
+          <div className="absolute right-0 z-[5] mt-1 w-max rounded-xl border bg-white shadow-sm focus:outline-none dark:bg-gray-900/70">
             {currentProfile?.id === publication?.profile?.id ? (
               <Delete publication={publication} />
             ) : (

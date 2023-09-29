@@ -1,4 +1,3 @@
-
 import type { FC } from 'react';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 
@@ -36,9 +35,7 @@ const ChannelPageShimmer: FC = () => {
           </div>
         </div>
       </GridItemFour>
-      <GridItemEight>
-
-      </GridItemEight>
+      
     </GridLayout>
   );
 };

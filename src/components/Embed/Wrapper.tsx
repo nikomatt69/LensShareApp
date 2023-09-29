@@ -3,7 +3,6 @@ import cn from '@/components/UI/cn';
 import type { FC, ReactNode } from 'react';
 import { Card } from '../UI/Card';
 
-
 interface WrapperProps {
   children: ReactNode;
   className?: string;

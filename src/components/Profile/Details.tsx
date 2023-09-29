@@ -283,7 +283,6 @@ const Details: FC<DetailsProps> = ({ profile, following, setFollowing }) => {
               </Link>
             </MetaDetails>
           )}
-     
         </div>
       </div>
     </div>

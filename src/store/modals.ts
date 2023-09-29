@@ -1,5 +1,9 @@
 import { NewPublicationTypes } from '@/enums';
-import { Profile, Publication, PublicationTypes } from '@/utils/lens/generatedLenster';
+import {
+  Profile,
+  Publication,
+  PublicationTypes
+} from '@/utils/lens/generatedLenster';
 import { create } from 'zustand';
 
 interface GlobalModalState {

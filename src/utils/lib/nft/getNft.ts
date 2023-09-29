@@ -1,4 +1,3 @@
-
 import { ZoraNftMetadata } from '@/types/zora-nft';
 import getZoraNFT from './getZoraNft';
 

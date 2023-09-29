@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { useSpacesStore } from 'src/store/spaces';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
@@ -43,9 +42,8 @@ const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
       };
     }
     try {
-      const response = await axios.post(`${SPACES_WORKER_URL}/createSpace`,{
-        data: payload,
-       
+      const response = await axios.post(`${SPACES_WORKER_URL}/createSpace`, {
+        data: payload
       });
       return response.data;
     } catch (error) {

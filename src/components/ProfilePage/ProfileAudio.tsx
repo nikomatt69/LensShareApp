@@ -40,7 +40,6 @@ import {
 import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
 
-
 import Loading from '../Loading';
 
 import Wrapper from '../Echos/Wrapper';
@@ -71,7 +70,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
     profileId: id,
     publicationTypes: [PublicationTypes.Post],
     metadata: {
-
       mainContentFocus: [PublicationMainFocus.Audio, PublicationMainFocus.Audio]
     }
   };
@@ -118,8 +116,6 @@ const ExploreAudio: FC<Props> = ({ publication }) => {
       onCompleted: () => fetchAllBytes()
     });
   };
-
-
 
   useEffect(() => {
     if (router.query.id && singleBytePublication) {

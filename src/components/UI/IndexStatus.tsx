@@ -57,7 +57,9 @@ const IndexStatus: FC<Props> = ({
       ) : (
         <div className="flex items-center space-x-1">
           <CheckCircleIcon className="h-5 w-5 text-green-500" />
-          <div className="text-black dark:text-white dark:text-white">Index Successful</div>
+          <div className="text-black dark:text-white dark:text-white">
+            Index Successful
+          </div>
         </div>
       )}
     </Link>

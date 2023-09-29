@@ -1,7 +1,12 @@
-
 import { useEventListener, useHuddle01, useRoom } from '@huddle01/react/hooks';
 
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState
+} from 'react';
 import { useSpacesStore } from 'src/store/spaces';
 
 import { Icons } from '../Common/assets/Icons';
@@ -9,7 +14,12 @@ import { Profile, useProfilesQuery } from '@/utils/lens/generatedLenster';
 import Slug from '@/components/UI/Slug';
 import getAvatar from '@/lib/getAvatar';
 import { Image } from '@/components/UI/Image';
-import { ChevronDownIcon, ChevronUpIcon, ClipboardDocumentIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ClipboardDocumentIcon,
+  EllipsisVerticalIcon
+} from '@heroicons/react/24/outline';
 import { HiClipboardCopy } from 'react-icons/hi';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import toast from 'react-hot-toast';
@@ -17,7 +27,6 @@ import { BiDotsVertical } from 'react-icons/bi';
 import { SpacesEvents } from '@/enums';
 import Dropdown from '../Common/Dropdown';
 import SettingsTray from '../Common/SettingsTray';
-
 
 interface SpacesWindowProps {
   isExpanded?: boolean;
@@ -154,7 +163,6 @@ const SpaceWindowHeader: FC<SpacesWindowProps> = ({
               slug={`@${hostProfile.handle}`}
               className="text-sm font-normal"
             />
-          
           </div>
         </>
       )}

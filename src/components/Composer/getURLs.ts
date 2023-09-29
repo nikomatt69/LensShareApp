@@ -1,4 +1,4 @@
-import { Regex } from "@/regex";
+import { Regex } from '@/regex';
 
 /**
  * Returns an array of URLs found in the specified text.

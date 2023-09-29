@@ -1,14 +1,15 @@
 import SinglePublication from '@/components/Composer/SinglePublication2';
 
-
-import type { ExplorePublicationRequest, Publication } from '@/utils/lens/generatedLenster';
+import type {
+  ExplorePublicationRequest,
+  Publication
+} from '@/utils/lens/generatedLenster';
 import {
   PublicationSortCriteria,
   PublicationTypes,
   useExploreFeedQuery
 } from '@/utils/lens/generatedLenster';
 import type { Channel } from '@/types/lenster';
-
 
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
@@ -81,9 +82,7 @@ const Feed: FC<FeedProps> = ({ channel }) => {
   }
 
   if (error) {
-    return (
-      <ErrorMessage title={`Failed to load channel feed`} error={error} />
-    );
+    return <ErrorMessage title={`Failed to load channel feed`} error={error} />;
   }
 
   return (
@@ -94,7 +93,10 @@ const Feed: FC<FeedProps> = ({ channel }) => {
           isFirst={index === 0}
           isLast={index === publications.length - 1}
           publication={publication as Publication}
-          profile={profileId} showCount={false} tags={''}        />
+          profile={profileId}
+          showCount={false}
+          tags={''}
+        />
       ))}
       {hasMore ? <span ref={observe} /> : null}
     </Card>

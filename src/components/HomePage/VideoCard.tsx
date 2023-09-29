@@ -102,7 +102,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
   }, [profile?.isFollowedByMe]);
 
   return (
-    <div className="divide-y-[1px] m-2 border border-blue-700 rounded-xl dark:divide-blue-700">
+    <div className="m-2 divide-y-[1px] rounded-xl border border-blue-700 dark:divide-blue-700">
       <div className="break-word flex flex-row ">
         <div className="break-word mt-4 flex-auto cursor-pointer gap-3 rounded p-2 font-semibold">
           <Link href={`/u/${profile.id}`} key={profile.id} />
@@ -118,7 +118,7 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           <div className="break-word ">
             <Link href={`/u/${profile.id}`} key={profile.id}>
               <div className="flex items-center gap-2">
-                <p className="text-md flex items-center gap-1 pl-1 pt-3 font-bold capitalize dark:text-white text-primary">
+                <p className="text-md flex items-center gap-1 pl-1 pt-3 font-bold capitalize text-primary dark:text-white">
                   {profile.name}{' '}
                 </p>
               </div>
@@ -184,13 +184,11 @@ const VideoCard: FC<Props> = ({ publication, onDetail }) => {
           />
         </button>
         <button className="block  pb-2 pr-2">
-          <Comment showCount={true}
-           publication={publication as Publication} />
+          <Comment showCount={true} publication={publication as Publication} />
         </button>
         <button className="block   pb-2  pr-2 lg:mb-3.5 xl:mb-3.5">
           <Collect publication={publication as Publication} showCount={true} />
         </button>
-        
       </div>
     </div>
   );
