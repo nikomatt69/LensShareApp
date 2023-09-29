@@ -115,6 +115,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       </Markup>
       {canShowMore && (
         <div className="lt-text-blue-700 mt-4 flex items-center space-x-1 text-sm font-bold">
+          
           <Link href={`/post/${id}`}>Show more</Link>
         </div>
       )}

@@ -27,6 +27,7 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
         {
           headers: {
             'X-Access-Token': localStorage.getItem(Localstorage.AccessToken)
+            
           }
         }
       );

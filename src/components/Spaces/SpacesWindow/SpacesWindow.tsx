@@ -174,7 +174,7 @@ const SpacesWindow: FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 top-auto z-20 mx-auto flex h-fit w-full grow">
+    <div className="fixed inset-0 top-auto z-[100] mx-auto flex h-fit w-full grow">
       {musicTrack !== MusicTrack.DEFAULT && isMusicPlaying && (
         <audio ref={audioRef} src={musicTrack} loop />
       )}

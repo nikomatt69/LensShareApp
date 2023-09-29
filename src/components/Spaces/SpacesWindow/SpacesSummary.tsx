@@ -29,7 +29,7 @@ const SpacesSummary: FC = () => {
   ).length;
 
   return (
-    <div className="flex items-center justify-between pt-4">
+    <div className="flex items-center z-[100] justify-between pt-4">
       <div className="flex items-center gap-2">
         <span>{Icons.speaking}</span>
         <Image

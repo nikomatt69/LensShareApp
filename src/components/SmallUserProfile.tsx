@@ -43,7 +43,7 @@ const SmallUserProfile: FC<UserProfileProps> = ({
 
       <Slug
         className="ml-2 text-sm"
-        slug={formatHandle(profile?.id)}
+        slug={formatHandle(profile?.handle)}
         prefix="@"
       />
       {timestamp ? (

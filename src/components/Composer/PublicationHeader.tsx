@@ -9,6 +9,7 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 import Source from './Source';
 import useModMode from '@/lib/useModMode';
 import Profiles from '../ProfilePage/Profiles';
+import SmallUserProfile from '../SmallUserProfile';
 
 interface PublicationHeaderProps {
   publication: Publication;
@@ -56,7 +57,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
     >
       <span onClick={stopEventPropagation} aria-hidden="true">
         {quoted ? (
-          <UserProfile profile={profile as Profiles} timestamp={timestamp} />
+          <SmallUserProfile profile={profile} timestamp={timestamp} />
         ) : (
           <UserProfile
             profile={profile as Profiles}

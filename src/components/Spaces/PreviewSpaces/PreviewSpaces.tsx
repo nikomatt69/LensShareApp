@@ -24,9 +24,11 @@ const PreviewSpaces: FC = () => {
   const { joinLobby, previewPeers } = useLobby();
   const { joinRoom, isRoomJoined } = useRoom();
 
-  useEffectOnce(() => {
-    initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
-  });
+  useEffect(() => {
+    if (query.roomid && '9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm') {
+      initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
+    }
+  }, [query.roomid]);
 
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {
     joinLobby(space.id, lensAccessToken);
@@ -46,7 +48,7 @@ const PreviewSpaces: FC = () => {
   }, [isRoomJoined]);
 
   return (
-    <div className="fixed inset-0 z-10 grid place-items-center bg-gray-900/80 text-center">
+    <div className="fixed inset-0 z-[100] grid place-items-center bg-gray-900/80 text-center">
       <div className="overflow-hidden rounded-lg bg-gray-100 dark:bg-black">
         <PreviewSpacesHeader />
         <AvatarGrid isLobbyPreview={previewPeers.length ? true : false} />
