@@ -197,23 +197,14 @@ const Lobby: NextPage = () => {
             <div
               className={cn(
                 resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
-                'gap- flex w-full items-center rounded-[10px] border border-zinc-800 pl-3 backdrop-blur-[400px]'
+                'gap- flex w-full items-center rounded-[10px] border border-zinc-800  backdrop-blur-[400px]'
               )}
             >
-              <div className="mr-2">
-                <UserIcon
-                  className={cn(
-                    resolvedTheme == 'dark'
-                      ? 'text-slate-100'
-                      : 'text-gray-900',
-                    'h-6 w-6'
-                  )}
-                />
-              </div>
+              
               <input
                 type="text"
                 placeholder="Enter your name"
-                className="flex rounded-lg border-transparent max-w-xs bg-transparent py-3 text-blue-700 outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
+                className=" rounded-lg border-transparent max-w-xs bg-transparent py-3 text-blue-700 items-center outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}
               />
