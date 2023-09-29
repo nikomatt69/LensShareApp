@@ -51,7 +51,7 @@ const Item: FC<Props> = ({ publication }) => {
           href={`/u/${publication?.profile?.id}`}
           className="text-xs font-medium uppercase text-black opacity-80 hover:underline hover:opacity-70 dark:text-white"
         >
-          {publication?.profile?.handle}
+          {publication?.profile?.name}
         </Link>
         <Link
           href={`/post/${publication?.id}`}

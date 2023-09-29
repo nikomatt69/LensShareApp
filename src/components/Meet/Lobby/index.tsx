@@ -19,6 +19,7 @@ import { BasicIcons } from '../BasicIcons';
 import SwitchDeviceMenu from '../SwitchDeviceMenu';
 import { ArrowRightIcon, UserIcon } from '@heroicons/react/24/outline';
 import cn from '@/components/UI/cn';
+import MetaTags from '@/components/UI/MetaTags';
 
 type HTMLAudioElementWithSetSinkId = HTMLAudioElement & {
   setSinkId: (id: string) => void;
@@ -114,7 +115,9 @@ const Lobby: NextPage = () => {
   });
 
   return (
+
     <main className="bg-lobby flex h-screen flex-col items-center justify-center">
+      <MetaTags/>
       <div className="flex h-[35vh] w-[35vw] flex-col items-center justify-center gap-4">
         <div
           className={cn(
