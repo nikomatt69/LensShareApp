@@ -13,7 +13,7 @@ type CreateSpaceResponse = {
   };
 };
 
-const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
+const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => {
   const {
     isTokenGated,
     tokenGateConditionType,
@@ -42,7 +42,7 @@ const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
       };
     }
     try {
-      const response = await axios.post(`${SPACES_WORKER_URL}/createSpace`, {
+      const response = await axios.post(`api/createSpace`, {
         data: payload
       });
       return response.data;

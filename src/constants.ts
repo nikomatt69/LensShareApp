@@ -44,6 +44,11 @@ export const TESTNET_SNAPSHOT_URL = 'https://demo.snapshot.org';
 export const SNAPSHOT_URL = IS_MAINNET
   ? MAINNET_SNAPSHOT_URL
   : TESTNET_SNAPSHOT_URL;
+export const MAINNET_PROPOSAL_CREATOR_ADDRESS =
+  '0x38B2b78246B9b162f3B365f3970ac77FB07AbF90';
+export const TESTNET_PROPOSAL_CREATOR_ADDRESS =
+  '0x38B2b78246B9b162f3B365f3970ac77FB07AbF90';
+
 
 export const IPFS_FREE_UPLOAD_LIMIT = IS_MAINNET ? 5000 : 100; // in MB
 
@@ -114,6 +119,7 @@ export const IMAGE_TRANSFORMATIONS = {
   SQUARE: 'tr:w-200,h-200'
 };
 export const AVATAR = 'tr:w-300,h-300';
+export const SQUARE = 'tr:w-30,h-30'
 export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
 export const COVER = 'tr:w-1500,h-500';
 export const ATTACHMENT = 'tr:w-1000';

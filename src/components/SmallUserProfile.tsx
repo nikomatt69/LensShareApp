@@ -11,6 +11,7 @@ import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 import cn from '@/components/UI/cn';
 import { getTwitterFormat } from '@/lib/formatTime4';
 import { Profile } from '@/utils/lens/generatedLenster';
+import IsVerified from './IsVerified';
 
 interface UserProfileProps {
   profile: Profile;
@@ -38,17 +39,17 @@ const SmallUserProfile: FC<UserProfileProps> = ({
   );
 
   const UserName = () => (
-    <div className="flex max-w-sm items-center">
+    <div className="flex max-w-xs items-center">
       <div className="truncate">{profile?.name}</div>
-
       <Slug
-        className="ml-2 text-sm"
+        className="ml-1 text-xs"
         slug={formatHandle(profile?.handle)}
         prefix="@"
       />
+      <IsVerified id={profile?.id} size='xs' />
       {timestamp ? (
         <span className="lt-text-gray-500">
-          <span className="mx-1.5">·</span>
+          <span className="mx-1">·</span>
           <span className="text-xs" title={formatTime(timestamp as Date)}>
             {getTwitterFormat(timestamp)}
           </span>

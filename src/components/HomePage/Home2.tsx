@@ -203,7 +203,7 @@ const Home2: FC<Props> = ({ publication }) => {
             <Footer />
 
             <Wrapper publication={publication}>
-              <div className="hidden lg:block xl:block">
+              <div className="hidden lg:absolute xl:absolute">
                 <CuratedHome />
               </div>
             </Wrapper>

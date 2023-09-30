@@ -26,7 +26,7 @@ import {
   CogIcon,
   MapIcon
 } from '@heroicons/react/24/outline';
-import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleOvalLeftIcon, CheckBadgeIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
 import router, { useRouter } from 'next/router';
@@ -65,6 +65,12 @@ import { LightBox } from '../UI/LightBox';
 import formatAddress from '@/lib/formatAddress';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { Button } from '../UI/Button';
+import { Tooltip } from '../UI/Tooltip';
+import getMisuseDetails from '@/lib/getMisuseDetails';
+import isVerified from '@/lib/isVerified';
+import hasMisused from '@/lib/hasMisused';
+import IsVerified from '../IsVerified';
+
 
 interface Props {
   profile: Profile;
@@ -139,6 +145,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
   );
 
   const followType = profile?.followModule?.__typename;
+  const misuseDetails = getMisuseDetails(profile.id);
 
   const isActivePath = (path: string) => router.pathname === path;
 
@@ -170,6 +177,8 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
               {sanitizeDisplayName(profile?.name) ??
                 formatHandle(profile?.handle)}
             </div>
+            <IsVerified id={profile?.id} size='lg' />
+         
           </div>
           <div
             className="flex items-center space-x-3"

@@ -16,7 +16,8 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
   const createPoll = async (): Promise<CreatePollResponse> => {
     try {
       const response = await axios.post(
-        `${SNAPSHOR_RELAY_WORKER_URL}/createPoll`,
+        `api/createPoll`,
+        
         {
           title: `Poll by @${currentProfile?.handle}`,
           description: publicationContent,
@@ -29,6 +30,7 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
             'X-Access-Token': localStorage.getItem(Localstorage.AccessToken)
             
           }
+          
         }
       );
 
