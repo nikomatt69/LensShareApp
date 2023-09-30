@@ -32,14 +32,14 @@ const SmallUserProfile: FC<UserProfileProps> = ({
         smallAvatar ? 'h-5 w-5' : 'h-6 w-6',
         'rounded-full border bg-gray-200 dark:border-gray-700'
       )}
-      height={smallAvatar ? 20 : 24}
-      width={smallAvatar ? 20 : 24}
+      height={smallAvatar ? 24 : 28}
+      width={smallAvatar ? 24 : 28}
       alt={formatHandle(profile?.handle)}
     />
   );
 
   const UserName = () => (
-    <div className="flex max-w-xs items-center">
+    <div className="flex-grow max-w-xs items-center">
       <div className="truncate">{profile?.name}</div>
       <Slug
         className="ml-1 text-xs"

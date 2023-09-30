@@ -334,7 +334,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           await getDecryptedData();
         }}
       >
-        <div className="flex items-center space-x-1 font-bold text-white">
+        <div className="flex items-center space-x-1 font-bold text-blue-700">
           <FingerPrintIcon className="h-5 w-5" />
           <span>
             Decrypt{' '}
