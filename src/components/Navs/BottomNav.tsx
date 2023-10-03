@@ -42,7 +42,7 @@ const BottomNav: React.FC = () => {
                   setHomePage(false);
                 }
               }}
-              className="border-gray-800 text-blue-500 hover:text-gray-100 focus:text-gray-100 focus:outline-none"
+              className="border-gray-800 text-blue-700 hover:text-gray-100 focus:text-gray-100 focus:outline-none"
             >
               <svg
                 className="h-6 w-6"
@@ -68,7 +68,7 @@ const BottomNav: React.FC = () => {
                   setHomePage(true);
                 }
               }}
-              className="border-gray-800 text-blue-500 hover:text-gray-100 focus:text-gray-100 focus:outline-none"
+              className="border-gray-800 text-blue-700 hover:text-gray-100 focus:text-gray-100 focus:outline-none"
             >
               <svg
                 className="h-6 w-6"
@@ -90,13 +90,13 @@ const BottomNav: React.FC = () => {
         <div>
           {/* //feed */}
           <Link href="/feed">
-            <VideoOutline className="h-6 w-6 pb-1 text-blue-500" />{' '}
+            <VideoOutline className="h-6 w-6 pb-1 text-blue-700" />{' '}
           </Link>
         </div>
         <div>
           {/* //latest */}
           <Link href="/explore">
-            <FilmIcon className="h-6 w-6 pb-1 text-blue-500" />{' '}
+            <FilmIcon className="h-6 w-6 pb-1 text-blue-700" />{' '}
           </Link>
         </div>
 
@@ -105,7 +105,7 @@ const BottomNav: React.FC = () => {
         <div>
           {/* //listen */}
           <Link href="/listen">
-            <MusicalNoteIcon className="h-6 w-6 pb-1 text-blue-500" />{' '}
+            <MusicalNoteIcon className="h-6 w-6 pb-1 text-blue-700" />{' '}
           </Link>
         </div>
 
