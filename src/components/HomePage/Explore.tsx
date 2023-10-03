@@ -48,6 +48,7 @@ import SinglePublication from '../Composer/SinglePublication2';
 import QueuedPublication from '../Composer/QueuedPublication';
 import { OptmisticPublicationType } from '@/enums';
 import { useTransactionPersistStore } from '@/store/transaction';
+import imageKit from '@/lib/imageKit';
 
 const Explore = () => {
   const router = useRouter();
@@ -185,6 +186,17 @@ const Explore = () => {
         <meta name="theme-color" content="#000000" />
       </Head>
       <MetaTags  />
+      <div className="mb-5 flex items-center space-x-2">
+        <img
+          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          draggable={false}
+          className="h-12 w-12 md:h-16 md:w-16"
+          alt="lensshare"
+        />
+        <h1 className="text-2xl font-semibold">Explore</h1>
+      </div>
+      <div className='mb-2'>{currentProfile ? <NewPost /> : null}</div>
+      
 
       <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
         {txnQueue.map(

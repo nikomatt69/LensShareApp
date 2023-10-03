@@ -130,7 +130,7 @@ const MessageTile: FC<MessageTileProps> = ({
         <span
           className={cn(
             address === message.senderAddress ? 'flex-row' : 'flex-row-reverse',
-            'flex items-center gap-1 text-xs text-gray-400'
+            'flex items-center mr-2 gap-1 text-xs text-gray-400'
           )}
           title={formatTime(message.sent)}
         >

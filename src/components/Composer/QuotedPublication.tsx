@@ -18,8 +18,9 @@ const QuotedPublication: FC<QuotedPublicationProps> = ({
 }) => {
   return (
     <PublicationWrapper
-       className="cursor-pointer p-3 first:rounded-t-xl  break-words last:rounded-b-xl hover:bg-gray-100 dark:hover:bg-gray-900"
+       className="cursor-pointer object-contain p-3 first:rounded-t-xl line-clamp-4 break-words last:rounded-b-xl text-xs hover:bg-gray-100 dark:hover:bg-gray-900"
       publication={publication}
+    
     >
       <PublicationHeader
         profile={profile as Profile}
@@ -31,6 +32,7 @@ const QuotedPublication: FC<QuotedPublicationProps> = ({
         <HiddenPublication type={publication.__typename} />
       ) : (
         <PublicationBody
+      
           profile={profile}
           publication={publication}
           showMore

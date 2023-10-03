@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useAddToHomescreenPrompt } from './useAddToHome';
+import { XCircleIcon } from '@heroicons/react/24/outline';
+import { MdAddHome } from 'react-icons/md';
 
 export function AddToHome() {
   const [prompt, promptToInstall] = useAddToHomescreenPrompt();
@@ -19,9 +21,8 @@ export function AddToHome() {
 
   return (
     <div onClick={hide}>
-      <button onClick={hide}>Close</button>
-      Add To Home
-      <button onClick={promptToInstall}>Install</button>
+      <button onClick={hide}><XCircleIcon className='h-2 w-2'/> </button>
+      <button onClick={promptToInstall}><MdAddHome className='h-2 w-2'/> </button>
     </div>
   );
 }

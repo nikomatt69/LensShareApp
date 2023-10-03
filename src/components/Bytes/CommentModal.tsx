@@ -21,6 +21,7 @@ import PublicationActions from '../Publication/Actions';
 import Feed from '../Comment/Feed';
 import NewPublication from '../Composer/NewPublication';
 import FeedComment from '../Comment/FeedComment';
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline';
 type Props = {
   trigger: React.ReactNode;
   publication: Publication;
@@ -31,6 +32,7 @@ const CommentModal: FC<Props> = ({ trigger, publication }) => {
   const subscriber = publication.profile;
   const [following, setFollowing] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
+ 
   useEffect(() => {
     if (subscriber?.isFollowedByMe === true) {
       setFollowing(true);
@@ -48,8 +50,8 @@ const CommentModal: FC<Props> = ({ trigger, publication }) => {
         className="focus:outline-none"
         onClick={() => setShow(true)}
       >
-        <div className="flex items-center overflow-y-auto rounded-full bg-gray-600/50 p-2  drop-shadow-lg dark:bg-gray-600/50 md:bg-gray-200">
-          <FaRegCommentAlt className="h-3 w-3 font-bold" />
+        <div className="flex items-center space-x-1 text-blue-500">
+           <ChatBubbleOvalLeftEllipsisIcon className='h-5 w-5' />
         </div>
         {trigger}
       </button>

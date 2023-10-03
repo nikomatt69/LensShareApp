@@ -20,6 +20,7 @@ import SwitchDeviceMenu from '../SwitchDeviceMenu';
 import { ArrowRightIcon, UserIcon } from '@heroicons/react/24/outline';
 import cn from '@/components/UI/cn';
 import MetaTags from '@/components/UI/MetaTags';
+import { APP_NAME } from '@/constants';
 
 type HTMLAudioElementWithSetSinkId = HTMLAudioElement & {
   setSinkId: (id: string) => void;
@@ -117,7 +118,7 @@ const Lobby: NextPage = () => {
   return (
 
     <main className="bg-lobby flex h-screen flex-col items-center justify-center">
-      <MetaTags/>
+      <MetaTags title={`${APP_NAME} Meet`}/>
       <div className="flex h-[35vh] w-[35vw] flex-col items-center justify-center gap-4">
         <div
           className={cn(
@@ -125,7 +126,7 @@ const Lobby: NextPage = () => {
             'relative mx-auto flex w-fit items-center justify-center rounded-lg text-center'
           )}
         >
-          <div className="flex h-[35vh] w-[35vw] items-center justify-center rounded-lg ">
+          <div className="flex h-[36vh] w-[44vw] items-center justify-center rounded-lg ">
             {camStream ? (
               <video
                 ref={videoRef}
@@ -144,7 +145,7 @@ const Lobby: NextPage = () => {
         </div>
         <div
           className={cn(
-            resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
+           
             'flex items-center justify-center self-stretch rounded-lg p-2'
           )}
         >
@@ -162,7 +163,7 @@ const Lobby: NextPage = () => {
               <button
                 onClick={stopVideoStream}
                 className={cn(
-                  resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
+                  
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
               >
@@ -184,7 +185,7 @@ const Lobby: NextPage = () => {
                   stopAudioStream();
                 }}
                 className={cn(
-                  resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
+                  
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
               >
@@ -196,18 +197,21 @@ const Lobby: NextPage = () => {
         </div>
         <div className="flex w-full items-center">
           <div className="flex w-full flex-col justify-center gap-1">
-            Set a display name
+            <div className="flex w-full flex-col justify-center gap-1">
+           Allow Mic and Cam
+            </div>
+            Set Usernsme
             <div
               className={cn(
                 resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
-                'gap- flex w-full items-center rounded-[10px] border border-zinc-800  backdrop-blur-[400px]'
+                'gap-2 justify-center flex w-full items-center rounded-[10px] border border-zinc-800  backdrop-blur-[400px]'
               )}
             >
               
               <input
                 type="text"
-                placeholder="Enter your name"
-                className=" rounded-lg border-transparent max-w-xs bg-transparent py-3 text-blue-700 items-center outline-none focus-within:outline-none hover:outline-none focus:border-transparent focus:outline-none"
+                placeholder=""
+                className=" rounded-lg  max-w-xs bg-transparent  text-blue-700 items-center outline-none "
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}
               />

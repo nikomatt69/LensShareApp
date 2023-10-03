@@ -7,7 +7,7 @@ import ShareModal from '../HomePage/ShareModal';
 import ReportModal from '../DetailPage/ReportModal';
 import { Profile, Publication } from '@/utils/lens/generatedLenster';
 import MirrorButton from '../Buttons/Mirrors/MirrorButton';
-import Like from '../Buttons/Likes/Like';
+
 import CollectButton from '../Buttons/Collects/CollectButton';
 import CommentButton from '../Buttons/CommentButton';
 import LikeButton from '../Buttons/Likes/LikeButton';
@@ -26,9 +26,11 @@ import CommentOptions from './CommentOptions';
 
 import MirrorOutline from '../UI/Icons/MirrorOutline';
 import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
+import Like from '../Publication/Actions/Like';
 
 type Props = {
   video: Publication;
+
 };
 
 const ByteActions: FC<Props> = ({ video }) => {
@@ -59,26 +61,18 @@ const ByteActions: FC<Props> = ({ video }) => {
     <div className="w-12 flex-col items-center justify-between md:flex md:w-14">
       <div className="flex justify-center space-y-4 p-2 md:flex-col"></div>
       <div className="items-center space-y-1.5 pt-2.5 md:flex md:flex-col">
-        <div className="cursor-pointer ">
-          <button className="mr-5" onClick={handleClickMute}>
-            {mute ? (
-              <MdVolumeOff className="h-6 w-6" fill="white" />
-            ) : (
-              <MdVolumeUp className="h-6 w-6" fill="white" />
-            )}
-          </button>
+       
+        <div className="pb-2 pr-2 text-white md:pr-5 md:text-inherit">
+        <Like publication={video} showCount={true} />
         </div>
-        <div className="pb-2 pr-1 text-white md:pr-5 md:text-inherit">
-          <LikeButton publication={video} />
-        </div>
-        <div className="w-full pb-2 pr-6 text-center text-white md:text-inherit">
+        <div className="w-full pb-1 pr-6 text-center text-white md:text-inherit">
           <CommentModal trigger publication={video} />
         </div>
-        <button className="mt-0.5  block pb-2 pr-2 dark:text-white md:pr-5">
+        <button className="mt-0.5 pl-1.5  pb-2 dark:text-white md:pr-5">
           <ShareMenu publication={video as Publication} showCount={true} />
         </button>
         {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (
-          <div className="hidden w-full pb-3 text-center md:block">
+          <div className="hidden w-full pb-10 pr-3 text-center md:block">
             <Collect publication={video as Publication} showCount={false} />
           </div>
         )}

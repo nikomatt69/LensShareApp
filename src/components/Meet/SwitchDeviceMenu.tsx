@@ -19,7 +19,7 @@ const SwitchDeviceMenu: FC = () => {
       <button
         onClick={() => setShowSettings(!showSettings)}
         className={cn(
-          resolvedTheme == 'dark' ? 'bg-gray-900' : 'bg-brand-100',
+          
           'flex h-10 w-10 items-center justify-center rounded-xl'
         )}
       >

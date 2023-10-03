@@ -50,6 +50,14 @@ import getPublicationAttribute from '@/utils/lib/getPublicationAttribute';
 import { SpaceMetadata } from '@/types/misc';
 import getURLs from '../Composer/getURLs';
 import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
+import Followerings from '../Profile/Followerings';
+import RelevantPeople from '../Publication/RelevantPeople';
+import Suggested from '../Sidebar/SuggestedAccounts';
+import { Card } from '../UI/Card';
+import FeedType from './FeedType';
+import { HomeFeedType } from '@/enums';
+import ForYou from './ForYou';
+import Highlights from './Highlights';
 interface Props {
   publication: Publication;
 }
@@ -136,6 +144,10 @@ const Home2: FC<Props> = ({ publication }) => {
       setUserSigNonce(data?.userSigNonces?.lensHubOnChainSigNonce);
     }
   });
+  const [feedType, setFeedType] = useState<HomeFeedType>(
+    HomeFeedType.FOLLOWING
+  );
+
 
   const validateAuthentication = () => {
     const currentProfileAddress = currentProfile?.ownedBy;
@@ -189,25 +201,53 @@ const Home2: FC<Props> = ({ publication }) => {
         </GridItemEight>
 
         <GridItemEight className="space-y-5">
-          {currentProfile?.id ? (
+          {currentProfile ? (
             <>
               <NewPost />
-              <Timeline />
+              <div className="space-y-3">
+                <FeedType feedType={feedType} setFeedType={setFeedType} />
+               
+              </div>
+              {feedType === HomeFeedType.FOR_YOU ? (
+                <ForYou />
+              ) : feedType === HomeFeedType.FOLLOWING ? (
+                <Timeline />
+              ) :  (
+                <Highlights />
+              )}
             </>
+          
           ) : (
             <Explore />
           )}
         </GridItemEight>
-        <GridItemFour className=" max-h-40">
+        <GridItemFour className=" max-h-80">
+        {currentProfile ? (
           <>
+      <Card className='hidden mb-3 lg:block xl:blockn border-blue-700'>
+             <Wrapper publication={publication}>
+        <div className='hidden lg:block xl:block'><CuratedHome /></div>
+        
+          </Wrapper>
+          </Card>
+          <Card className='hidden lg:block xl:block border-blue-700'>
+          <Suggested />
+            </Card>
             <Footer />
+            </>) :
+            (<> 
+            
+             <Wrapper publication={publication}>
+        <div className='hidden lg:block xl:block'><CuratedHome /></div>
+        
+          </Wrapper>
+         
 
-            <Wrapper publication={publication}>
-              <div className="hidden lg:absolute xl:absolute">
-                <CuratedHome />
-              </div>
-            </Wrapper>
-          </>
+           <Footer />
+           
+              </> )}
+          
+      
         </GridItemFour>
       </GridLayout>
     </>

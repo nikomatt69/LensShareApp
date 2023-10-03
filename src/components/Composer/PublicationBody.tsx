@@ -43,7 +43,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const hasURLs = urls?.length > 0;
   const snapshotProposalId = getSnapshotProposalId(urls);
   const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
-
+  const isSpacesEnabled = isFeatureEnabled(FeatureFlag.Spaces);
   const nft = getNft(urls);
   const quotedPublicationId = getPublicationAttribute(
     metadata.attributes,
@@ -75,7 +75,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
 
-  if (Boolean(space?.id)) {
+  if (Boolean(space?.id)&& isSpacesEnabled) {
     return <Space publication={publication} />;
   }
 

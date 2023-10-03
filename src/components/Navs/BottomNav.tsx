@@ -95,7 +95,7 @@ const BottomNav: React.FC = () => {
         </div>
         <div>
           {/* //latest */}
-          <Link href="/latest">
+          <Link href="/explore">
             <FilmIcon className="h-6 w-6 pb-1 text-blue-500" />{' '}
           </Link>
         </div>

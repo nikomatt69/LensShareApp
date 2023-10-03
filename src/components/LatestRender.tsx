@@ -32,6 +32,10 @@ import Footer from './Sidebar/Footer';
 import { useNonceStore } from '@/store/nonce';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import CuratedHome from './Echos/CuratedHome';
+import SuggestedAccounts from './Sidebar/SuggestedAccounts';
+import Suggested from './Sidebar/SuggestedAccounts';
+import { Card } from './UI/Card';
+import Explore from './HomePage/Explore';
 interface Props {
   publication: Publication;
 }
@@ -149,19 +153,35 @@ const LatestRender: FC<Props> = ({ publication }) => {
       <GridLayout className="max-w-[1200px] pt-6">
         <GridItemEight>
           <>
-          <Latest />
+          <Explore/>
           </>
         </GridItemEight>
-        <GridItemFour>
+        <GridItemFour className=" max-h-80">
+        {currentProfile ? (
           <>
+      <Card className='hidden mb-3 lg:block xl:block border-blue-700'>
+             <Wrapper publication={publication}>
+        <div className='hidden lg:block xl:block'><CuratedHome /></div>
+        
+          </Wrapper>
+          </Card>
+          <Card className='hidden lg:block xl:block border-blue-700'>
+          <Suggested />
+            </Card>
             <Footer />
+            </>) :
+            (<> 
+            
+             <Wrapper publication={publication}>
+        <div className='hidden lg:block xl:block'><CuratedHome /></div>
+        
+          </Wrapper>
+         
 
-            <Wrapper publication={publication}>
-              <div className="hidden lg:block xl:block">
-                <CuratedHome />
-              </div>
-            </Wrapper>
-          </>
+           <Footer />
+           
+              </> )}
+          
         </GridItemFour>
       </GridLayout>
     </>

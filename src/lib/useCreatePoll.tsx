@@ -16,7 +16,7 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
   const createPoll = async (): Promise<CreatePollResponse> => {
     try {
       const response = await axios.post(
-        `api/createPoll`,
+        `${SNAPSHOR_RELAY_WORKER_URL}/createPoll`,
         
         {
           title: `Poll by @${currentProfile?.handle}`,

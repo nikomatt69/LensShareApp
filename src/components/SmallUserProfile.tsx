@@ -32,8 +32,8 @@ const SmallUserProfile: FC<UserProfileProps> = ({
         smallAvatar ? 'h-5 w-5' : 'h-6 w-6',
         'rounded-full border bg-gray-200 dark:border-gray-700'
       )}
-      height={smallAvatar ? 24 : 28}
-      width={smallAvatar ? 24 : 28}
+      height={smallAvatar ? 28 : 28}
+      width={smallAvatar ? 28 : 28}
       alt={formatHandle(profile?.handle)}
     />
   );

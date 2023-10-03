@@ -42,7 +42,9 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
       };
     }
     try {
-      const response = await axios.post(`api/createSpace`, {
+      const response = await axios({
+        url: `${SPACES_WORKER_URL}/createSpace`,
+        method: 'POST',
         data: payload
       });
       return response.data;

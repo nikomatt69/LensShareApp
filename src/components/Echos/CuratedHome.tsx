@@ -28,10 +28,10 @@ import imageKit from '@/lib/imageKit';
 const CuratedHome = () => {
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 24,
+    limit: 6,
     noRandomize: false,
     publicationTypes: [PublicationTypes.Post],
-    customFilters: LENS_CUSTOM_FILTERS,
+ 
     metadata: {
       mainContentFocus: [PublicationMainFocus.Audio]
     }

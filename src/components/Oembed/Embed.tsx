@@ -8,6 +8,7 @@ import { OG } from '@/types/misc';
 import { Image } from '@/components/UI/Image';
 import { Publication } from '@/utils/lens/generatedLenster';
 import sanitizeDStorageUrl from '@/utils/lib/sanitizeDStorageUrl';
+import { title } from 'process';
 
 interface EmbedProps {
   og: OG;
@@ -29,14 +30,14 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         rel="noreferrer noopener"
       >
         <Card forceRounded>
-          {og.isLarge && og.image ? (
+          {og.isLarge &&  og.image? (
             <Image
               className="divider inline-flex  aspect-2 rounded-xl"
               onError={({ currentTarget }) => {
                 currentTarget.src = og.image as string;
               }}
               src={imageKit(og.image , ATTACHMENT)}
-              alt={(og.favicon,SQUARE)}
+              alt={imageKit(og.image ,ATTACHMENT)}
             />
           ) : null}
           <div className="flex items-center">

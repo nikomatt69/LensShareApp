@@ -45,7 +45,7 @@ const DiscoverMain = () => {
             className="h-12 w-12 md:h-16 md:w-16"
             alt="lensshare"
           />
-          <h1 className="text-xl font-semibold">Discover</h1>
+          <h1 className="text-3xl font-semibold">Discover</h1>
         </div>
         <div className="mb-5 flex w-full items-center justify-center gap-10 rounded-full p-5  text-blue-700">
           <span
@@ -65,7 +65,7 @@ const DiscoverMain = () => {
         {selectedTab === 'suggestedaccounts' && (
           <>
             <SuggestedAccounts />
-            <FollowingAccounts />
+           
           </>
         )}
         {selectedTab === 'categories' && <Categories />}

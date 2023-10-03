@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import type { FC } from 'react';
+import { useEffect, type FC, useRef } from 'react';
 
 import PublicationActions from './Actions';
 
@@ -40,12 +40,20 @@ const FullPublication: FC<FullPublicationProps> = ({
     ? publication?.mirrorOf?.stats?.totalAmountOfCollects
     : publication?.stats?.totalAmountOfCollects;
   const showStats = mirrorCount > 0 || reactionCount > 0 || collectCount > 0;
+  const publicationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (publicationRef?.current) {
+      publicationRef.current.style.scrollMargin = '4.2rem';
+      publicationRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   return (
     <article className="p-5" data-testid={`publication-${publication.id}`}>
       <PublicationType profile={profile} publication={publication} showType />
 
-      <div className="rounded-xl border-blue-700">
+      <div ref={publicationRef} className="rounded-xl  border-blue-700">
         <PublicationHeader profile={profile} publication={publication} />
         <div className="ml-[53px]">
           {publication?.hidden ? (

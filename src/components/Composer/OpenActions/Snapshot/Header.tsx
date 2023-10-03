@@ -42,10 +42,10 @@ const Header: FC<HeaderProps> = ({ proposal }) => {
 
       <Link
         href={`${spaceUrl}/proposal/${id}`}
-        className="font-serif text-xs"
+        className="font-serif line-clamp-5 text-xs"
         target="_blank"
       >
-        {title}
+      <div className='font-serif break-words line-clamp-5 text-xs'>{title}</div>  
       </Link>
       </div>
     </>

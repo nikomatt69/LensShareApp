@@ -16,6 +16,8 @@ import { useEffectOnce } from 'usehooks-ts';
 import { Image } from '@/components/UI/Image';
 import { PublicationTypes } from '@/utils/lens/generatedLenster';
 import { NewPublicationTypes } from '@/enums';
+import isFeatureEnabled from '@/utils/lib/isFeatureEnabled';
+import { FeatureFlag } from '@/utils/data/feature-flags';
 
 const NewPost: FC = () => {
   const { query, isReady, push } = useRouter();
@@ -34,6 +36,7 @@ const NewPost: FC = () => {
   const openSpacesModal = () => {
     setShowComposerModal(true, NewPublicationTypes.Spaces);
   };
+  const isSpacesEnabled = isFeatureEnabled(FeatureFlag.Spaces);
 
   useEffectOnce(() => {
     if (isReady && query.text) {
@@ -73,13 +76,14 @@ const NewPost: FC = () => {
           <PencilIcon className="h-5 w-5" />
           <span>New Post?</span>
         </button>
-
+        {isSpacesEnabled && (
         <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
           <MicrophoneIcon
             className="text-brand h-6 w-6"
             onClick={openSpacesModal}
           />
         </button>
+        )}
       </div>
     </Card>
   );

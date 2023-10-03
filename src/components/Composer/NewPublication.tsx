@@ -259,7 +259,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
       case isLoading:
         return <Spinner size="xs" />;
       case isComment:
-        return <ChatBubbleLeftRightIcon className="h-4 w-4" />;
+        return <ChatBubbleOvalLeftEllipsisIcon className="h-4 w-4" />;
       case showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces:
         return <MicrophoneIcon className="h-4 w-4" />;

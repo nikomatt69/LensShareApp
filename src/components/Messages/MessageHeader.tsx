@@ -25,6 +25,8 @@ import { Button } from '../UI/Button';
 import { LENSTOK_URL } from '@/constants';
 import MeetingIcon from '../Meet/MeetingIcon';
 import useSendOptimisticMessage from '@/lib/useSendOptimisticMessage';
+import { PhoneIcon } from '@heroicons/react/24/solid';
+import { BiPhoneIncoming } from 'react-icons/bi';
 
 interface MessageHeaderProps {
   profile?: Profile;
@@ -35,6 +37,7 @@ const MessageHeader: FC<MessageHeaderProps> = ({
   profile,
   conversationKey
 }) => {
+  const [meetingUrl, setMeetingUrl] = useState('');
   const router = useRouter();
   const [following, setFollowing] = useState(true);
   const unsyncProfile = useMessageStore((state) => state.unsyncProfile);
@@ -94,48 +97,65 @@ const MessageHeader: FC<MessageHeaderProps> = ({
         )}
       </div>
       {profile && (
-        <div>
-          <img
-            src="/camera-video.svg"
-            onClick={async () => {
-              const apiCall = await fetch('/api/create-room', {
-                mode: 'no-cors',
-                method: 'POST',
-                body: JSON.stringify({
-                  title: 'LensShare-Space'
-                }),
-                headers: {
-                  'Content-Type': 'application/json',
-                  'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
-                }
-              });
-              const data = (await apiCall.json()) as {
-                data: { roomId: string };
-              };
-              const { roomId } = data.data;
-              const currentUrl = window.location.href;
-              const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
-              sendMessage(
-                `Join here for a call: ${url}/meet/${roomId}`,
-                ContentTypeText
-              );
-            }}
-            className="mb-2 mr-4 inline h-8 w-8 cursor-pointer"
-          />
-          {!following ? (
-            <FollowButton
-              profile={profile}
-              setFollowing={setFollowingWrapped}
-            />
-          ) : (
-            <UnfollowButton
-              profile={profile}
-              setFollowing={setFollowingWrapped}
-            />
-          )}
-        </div>
-      )}
+  <div className='flex mx-3 mt-1'>
+    <img
+      src="/camera-video.svg"
+      onClick={async () => {
+        const apiCall = await fetch('/api/create-room', {
+          mode: 'no-cors',
+          method: 'POST',
+          body: JSON.stringify({
+            title: 'LensShare-Space'
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
+          }
+        });
+        const data = (await apiCall.json()) as {
+          data: { roomId: string };
+        };
+        const { roomId } = data.data;
+        const currentUrl = window.location.href;
+        const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+        const meetingUrl = `${url}/meet/${roomId}`;
+        sendMessage(
+          `VideoCall Incoming at ${url}/meet/${roomId}`,
+          ContentTypeText
+        );
+
+        // Instead of sending a message, set the meeting URL in the state
+        setShow(true);
+        setMeetingUrl(meetingUrl);
+      }}
+      className="mb-2 mr-4  inline h-8 w-8 cursor-pointer"
+    />
+    <div className='mx-3 mt-2 '>
+
+    {show && (
+      <Link href={meetingUrl}>
+        
+          <BiPhoneIncoming className='h-6 w-6 text-green-500'/>
+        
+      </Link>
+    )}
     </div>
+    <div className='mx-2 '>
+    {!following ? (
+      <FollowButton
+        profile={profile}
+        setFollowing={setFollowingWrapped}
+      />
+    ) : (
+      <UnfollowButton
+        profile={profile}
+        setFollowing={setFollowingWrapped}
+      />
+    )}
+    </div>
+  </div>
+ )}
+  </div>
   );
 };
 export default MessageHeader;

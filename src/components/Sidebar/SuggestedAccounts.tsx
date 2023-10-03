@@ -6,7 +6,8 @@ import {
   Key,
   ReactElement,
   ReactFragment,
-  ReactPortal
+  ReactPortal,
+  FC
 } from 'react';
 import Link from 'next/link';
 import { Image } from '@/components/UI/Image';
@@ -17,65 +18,86 @@ import {
 } from '@/utils/lens/generatedLenster';
 import getAvatar from '@/lib/getAvatar';
 import formatHandle from '@/utils/functions/formatHandle';
+import { Virtuoso } from 'react-virtuoso';
+import { useAppStore } from '@/store/app';
+import { useRecommendedProfilesQuery } from '@/utils/lens/generated5';
+import { Loader } from '@giphy/react-components';
+import { EmptyState } from '../UI/EmptyState';
+import { UsersIcon } from '@heroicons/react/24/outline';
+import { ErrorMessage } from '../UI/ErrorMessage';
+import { motion } from 'framer-motion';
+import UserProfile from '../ProfilePage/UserProfile';
+import imageKit from '@/lib/imageKit';
+import { STATIC_ASSETS_URL } from '@/constants';
 
 interface Props {
   currentProfile: Profile;
 }
 
-const SuggestedAccounts = () => {
-  const { data, loading, error } = useQuery(RecommendedProfilesDocument, {
-    nextFetchPolicy: 'standby',
-    variables: { options: { shuffle: true, limit: 10 } }
-  });
-  console.log('Recommended', data);
-  return (
-    <div className="border-gray-200 pb-4 lg:border-b-2">
-      <p className="m-3 mt-4 hidden font-semibold text-gray-500 dark:text-white lg:block">
-        Suggested Accounts
-      </p>
+const Suggested: FC = () => {
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
-      <div>
-        {data?.recommendedProfiles
-          .slice(0, 10)
-          .map(
-            (currentProfile: {
-              id: Key | null | undefined;
-              name:
-                | string
-                | number
-                | boolean
-                | ReactElement<any, string | JSXElementConstructor<any>>
-                | ReactFragment
-                | ReactPortal
-                | null
-                | undefined;
-              handle: string | null;
-            }) => (
-              <Link href={`/u/${currentProfile.id}`} key={currentProfile.id}>
-                <div className="flex cursor-pointer items-center gap-3 rounded p-2 font-semibold hover:bg-blue-100 dark:hover:bg-gray-700">
-                  <div className="relative h-[32px] w-[32px]">
-                    <Image
-                      src={getAvatar(currentProfile)}
-                      alt={getAvatar(currentProfile)}
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div />
-                  <div>
-                    <p className="text-md flex items-center gap-1 font-bold lowercase text-primary dark:text-white">
-                      {currentProfile.name}
-                    </p>
-                    <p className="text-xs capitalize text-gray-400">
-                      {formatHandle(currentProfile.handle)} {''}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            )
-          )}
-      </div>
+  const { data, loading, error } = useRecommendedProfilesQuery({
+    variables: {
+      options: { profileId: currentProfile?.id}
+    }
+  });
+
+  if (loading) {
+    return <Loader  />;
+  }
+
+  if (data?.recommendedProfiles?.length === 0) {
+    return (
+      <EmptyState
+        message={`Nothing to suggest`}
+        icon={<UsersIcon className="text-brand h-8 w-8" />}
+        hideCard
+      />
+    );
+  }
+
+  return (
+    <div className="max-h-[80vh] overflow-y-auto">
+      <ErrorMessage title={`Failed to load recommendations`} error={error} />
+      <div className="mb-5 mt-3 flex items-center space-x-2">
+            <img
+              src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+              draggable={false}
+              className="h-12 w-12 md:h-16 md:w-16"
+              alt="lensshare"
+            />
+            <h1 className="text-xl font-semibold">Suggested</h1>
+          </div>
+      <Virtuoso
+        className="virtual-profile-list"
+        data={data?.recommendedProfiles}
+        itemContent={(index, profile) => {
+          return (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex items-center space-x-3 p-5"
+            >
+              <div className="w-full">
+                <UserProfile
+                  profile={profile as Profile}
+                  isFollowing={profile?.isFollowedByMe}
+                  followUnfollowPosition={index + 1}
+                 
+                 
+                  showFollow
+                  showUserPreview
+                />
+              </div>
+           
+            </motion.div>
+          );
+        }}
+      />
     </div>
   );
 };
 
-export default SuggestedAccounts;
+export default Suggested;
