@@ -45,7 +45,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@huddle01/auth": "^0.0.1",
     "@huddle01/iframe": "^0.0.7",
-    "@huddle01/react": "0.0.14-beta.1",
+    "@huddle01/react": "0.0.15",
     "@lens-protocol/sdk-gated": "^1.2.0",
     "@lexical/markdown": "^0.12.0",
     "@lexical/react": "^0.11.2",
@@ -175,7 +175,7 @@
     "wrangler": "^3.7.0",
     "xmtp": "^0.0.0",
     "xmtp-content-type-remote-attachment": "^1.0.7",
-    "zod": "^3.19.1"
+    "zod": "^3.22.3"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",

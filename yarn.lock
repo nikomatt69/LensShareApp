@@ -4466,20 +4466,20 @@
   dependencies:
     zod "^3.21.4"
 
-"@huddle01/react@0.0.14-beta.1":
-  version "0.0.14-beta.1"
-  resolved "https://registry.yarnpkg.com/@huddle01/react/-/react-0.0.14-beta.1.tgz#d37f239ceeab98ec3756b31dce36a0f0c5b9f148"
-  integrity sha512-1GO2n6GCQMR2hogD6UKeXPuebpQGR3uVY+RtSCjLf+yeUo6xrDASwMzGh9b9TWNWMjmaDSHKvsMxksHqQa5J8A==
+"@huddle01/react@0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@huddle01/react/-/react-0.0.15.tgz#4e379919ef7bf1e476d68155a58ee8f10f467668"
+  integrity sha512-siDBsJWlMBNULrvl90yiNd3A5ddxy2xI5YhEfB/VtA7HSYYYe4Q2LYOPFEjxmT+M6k+E/zvIPOvGnubdddhKpA==
   dependencies:
-    "@huddle01/web-core" "0.0.16-beta.2"
+    "@huddle01/web-core" "0.0.16"
     jotai "^2.0.3"
     react "18.2.0"
     ws "^8.0.0"
 
-"@huddle01/web-core@0.0.16-beta.2":
-  version "0.0.16-beta.2"
-  resolved "https://registry.yarnpkg.com/@huddle01/web-core/-/web-core-0.0.16-beta.2.tgz#8ccd541ae901356f9e062099229054f03fdd07fc"
-  integrity sha512-fQ+IoQzw5Ph3rrD1m6HCnVSxvc2aB1X551Nmf0MSUgMqndiqNdepOV0FhdOcIbOl7HgUoOWAwM/F7Y70s5s99g==
+"@huddle01/web-core@0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@huddle01/web-core/-/web-core-0.0.16.tgz#f85fedf14fa7b495235b99f672ed7956fd1600d9"
+  integrity sha512-iDxQC7yBwKt1M1W4Jf4yKsMpufEqgEdIqsfCzUGOLwgPSjSXG5kh553IF4ih4/qNq1715a9QdZVYVjOgFDwAAQ==
   dependencies:
     axios "^1.4.0"
     mediasoup-client "^3.6.89"
@@ -28387,7 +28387,7 @@ zen-observable@0.8.15:
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
 
-zod@^3.19.1, zod@^3.20.6:
+zod@^3.20.6:
   version "3.22.2"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.2.tgz#3add8c682b7077c05ac6f979fea6998b573e157b"
   integrity sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==
@@ -28396,6 +28396,11 @@ zod@^3.21.4:
   version "3.21.4"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.21.4.tgz#10882231d992519f0a10b5dd58a38c9dabbb64db"
   integrity sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==
+
+zod@^3.22.3:
+  version "3.22.3"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.3.tgz#2fbc96118b174290d94e8896371c95629e87a060"
+  integrity sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==
 
 zustand@^4.3.1, zustand@^4.3.9:
   version "4.4.1"
