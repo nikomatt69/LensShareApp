@@ -2,9 +2,9 @@ import { useHuddle01, usePeers } from '@huddle01/react/hooks';
 import { Image } from '@/components/UI/Image';
 import React, { FC } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
-
+import type { Profile} from '@/utils/lens/generated5';
 import { Icons } from '../Common/assets/Icons';
-import { Profile, useProfilesQuery } from '@/utils/lens/generated5';
+import {  useProfilesQuery } from '@/utils/lens/generated5';
 import getAvatar from '@/lib/getAvatar';
 
 const SpacesSummary: FC = () => {

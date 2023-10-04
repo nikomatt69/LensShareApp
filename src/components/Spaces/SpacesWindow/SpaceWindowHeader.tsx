@@ -8,9 +8,9 @@ import React, {
   useState
 } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
-
+import type { Profile} from '@/utils/lens/generated5';
 import { Icons } from '../Common/assets/Icons';
-import { Profile, useProfilesQuery } from '@/utils/lens/generatedLenster';
+import { useProfilesQuery } from '@/utils/lens/generatedLenster';
 import Slug from '@/components/UI/Slug';
 import getAvatar from '@/lib/getAvatar';
 import { Image } from '@/components/UI/Image';

@@ -1,4 +1,4 @@
-import type { Attribute } from 'src/utils/lens';
+import type { Attribute } from 'src/utils/lens/generated5';
 
 /**
  *

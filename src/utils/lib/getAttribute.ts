@@ -13,6 +13,8 @@ type Query =
   | 'website'
   | 'statusEmoji'
   | 'statusMessage';
+ 
+
 
 /**
  *

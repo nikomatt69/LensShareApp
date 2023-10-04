@@ -25,10 +25,9 @@ const PreviewSpaces: FC = () => {
   const { joinRoom, isRoomJoined } = useRoom();
 
   useEffect(() => {
-    if (query.roomid && '9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm') {
-      initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
-    }
-  }, [query.roomid]);
+    initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
+  });
+
 
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {
     joinLobby(space.id, lensAccessToken);

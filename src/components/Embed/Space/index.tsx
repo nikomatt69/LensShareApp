@@ -3,16 +3,20 @@ import type { FC } from 'react';
 import Wrapper from '../Wrapper';
 
 import getPublicationAttribute from '@/utils/lib/getPublicationAttribute';
-import {
+import type {
   Profile,
   Publication,
+
+} from '@/utils/lens/generatedLenster';
+import{
+
   useProfilesQuery
 } from '@/utils/lens/generatedLenster';
 import SmallUserProfile from '@/components/SmallUserProfile';
 import { Button } from '@/components/UI/Button';
 import { ClockIcon, MicrophoneIcon } from '@heroicons/react/24/outline';
 import { Modal } from '@/components/UI/Modal';
-import { SpaceMetadata } from '@/types/misc';
+import type { SpaceMetadata } from '@/types/misc';
 import { getLensAccessToken, getLensMessage } from '@huddle01/auth';
 import { Spinner } from '@/components/UI/Spinner';
 import { useAccount, useSignMessage } from 'wagmi';

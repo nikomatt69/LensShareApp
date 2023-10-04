@@ -1,7 +1,9 @@
+
+
+import { BASE_URL, SPACES_WORKER_URL } from '@/constants';
 import axios from 'axios';
-import { useSpacesStore } from 'src/store/spaces';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
-import { SPACES_WORKER_URL } from '@/constants';
+import { useSpacesStore } from '@/store/spaces';
 
 type CreateSpaceResponse = {
   success: boolean;
@@ -13,7 +15,7 @@ type CreateSpaceResponse = {
   };
 };
 
-const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => {
+const useCreateSpace = (): [() => Promise<CreateSpaceResponse>] => {
   const {
     isTokenGated,
     tokenGateConditionType,
@@ -42,13 +44,13 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
       };
     }
     try {
-      const response = await axios({
-        url: `${SPACES_WORKER_URL}/createSpace`,
-        method: 'POST',
+      const response = await axios.post( `${BASE_URL}/api/createSpace`,{
+       
         data: payload
       });
       return response.data;
     } catch (error) {
+      console.error('Error creating space:', error);
       throw error;
     }
   };

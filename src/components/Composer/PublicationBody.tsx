@@ -69,13 +69,14 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     }
   }
 
+
   const [content, setContent] = useState(rawContent);
 
   if (metadata?.encryptionParams) {
     return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
 
-  if (Boolean(space?.id)&& isSpacesEnabled) {
+  if (Boolean(space?.id) && isSpacesEnabled) {
     return <Space publication={publication} />;
   }
 

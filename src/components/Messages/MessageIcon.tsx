@@ -141,7 +141,7 @@ const MessageIcon: FC = () => {
         currentProfile && clearMessagesBadge(currentProfile.id);
       }}
     >
-      <ChatBubbleOvalLeftIcon className="h-6 w-6 pb-1 text-blue-500  " />
+      <ChatBubbleOvalLeftIcon className="h-6 w-6 pb-1 text-blue-700  " />
       {showMessagesBadge.get(currentProfile?.id) ? (
         <span className="z-[6] h-2 w-2 rounded-full bg-red-500 text-red-500" />
       ) : null}

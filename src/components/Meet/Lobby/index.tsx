@@ -200,17 +200,17 @@ const Lobby: NextPage = () => {
             <div className="flex w-full flex-col justify-center gap-1">
            Allow Mic and Cam
             </div>
-            Set Usernsme
+         
             <div
               className={cn(
                 resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
-                'gap-2 justify-center flex w-full items-center rounded-[10px] border border-zinc-800  backdrop-blur-[400px]'
+                'gap-2 justify-center flex w-full items-center rounded-[10px]  backdrop-blur-[400px]'
               )}
             >
               
               <input
                 type="text"
-                placeholder=""
+                placeholder="Set Usernsme"
                 className=" rounded-lg  max-w-xs bg-transparent  text-blue-700 items-center outline-none "
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}

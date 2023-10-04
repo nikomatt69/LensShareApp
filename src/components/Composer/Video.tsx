@@ -9,7 +9,7 @@ import { IPFS_GATEWAY } from '@/constants';
 
 interface VideoProps {
   src: string;
-  poster: string;
+  poster?: string;
 }
 
 const Video: FC<VideoProps> = ({ src, poster }) => {

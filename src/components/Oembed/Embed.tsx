@@ -30,9 +30,9 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         rel="noreferrer noopener"
       >
         <Card forceRounded>
-          {og.isLarge &&  og.image? (
+          {og.isLarge && og.image? (
             <Image
-              className="divider inline-flex  aspect-2 rounded-xl"
+              className="divider inline-flex aspect-2 w-full  object-cover"
               onError={({ currentTarget }) => {
                 currentTarget.src = og.image as string;
               }}
@@ -44,10 +44,10 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
             {!og.isLarge && og.image ? (
               <Image
                 className="h-30 w-30 rounded-l-xl border-r dark:border-gray-700"
-                height={60}
-                width={60}
+                height={30}
+                width={30}
                 onError={({ currentTarget }) => {
-                  currentTarget.src = og.thumbnail as string;
+                  currentTarget.src = og.image as string;
                 }}
                 src={imageKit(og.image , ATTACHMENT)}
               />
