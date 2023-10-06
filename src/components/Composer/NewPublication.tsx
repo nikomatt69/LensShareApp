@@ -182,7 +182,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     useGlobalModalStateStore();
 
   // Spaces store
-  const spacesStartTime = useSpacesStore((state) => state.spacesStartTime);
+
   const setShowDiscardModal = useGlobalModalStateStore(
     (state) => state.setShowDiscardModal
   );
@@ -231,6 +231,13 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     collectToView,
     reset: resetAccessSettings
   } = useAccessSettingsStore();
+
+  const {
+    setSpacesTimeInHour,
+    setSpacesTimeInMinute,
+    spacesTimeInHour,
+    spacesTimeInMinute
+  } = useSpacesStore();
 
   // States
   const [isLoading, setIsLoading] = useState(false);
@@ -760,24 +767,23 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
 
       // Create Space in Huddle
 
-      let spaceData = {
-        success: false,
-        response: {
-          message: '',
-          data: {
-            roomId: ''
-          }
-        }
-      };
+      let spaceId = null;
 
       if (
         showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces
       ) {
-        spaceData = await createSpace();
+        spaceId = await createSpace();
       }
+      const now = new Date();
+      now.setHours(Number(spacesTimeInHour));
+      now.setMinutes(Number(spacesTimeInMinute));
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const formattedTime = new Date(
+        now.toLocaleString('en-US', { timeZone: userTimezone })
+      );
+      const startTime = formattedTime.toISOString();
 
-      const startTime = dayjs(spacesStartTime);
 
       const attributes: MetadataAttributeInput[] = [
         {
@@ -785,17 +791,16 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
           displayType: PublicationMetadataDisplayTypes.String,
           value: getMainContentFocus()?.toLowerCase()
         },
-        ...(showComposerModal &&
-        spaceData.success &&
-        modalPublicationType === NewPublicationTypes.Spaces
+        ...(showComposerModal && modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceData.response.data.roomId,
+                  id: spaceId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
+          
                 })
               }
             ]
@@ -999,11 +1004,11 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
         />
       ) : null}
       <Editor />
-      {publicationContentError ? (
+      {publicationContentError && (
         <div className="mt-1 px-5 pb-3 text-sm font-bold text-red-500">
           {publicationContentError}
         </div>
-      ) : null}
+      )}
       {showPollEditor ? <PollEditor /> : null}
       {quotedPublication ? (
         <Wrapper className="m-5" zeroPadding>
@@ -1039,13 +1044,13 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
             <Attachment />
 
             <Giphy setGifAttachment={(gif: IGif) => setGifAttachment(gif)} />
-            {!publication?.isDataAvailability ? (
+            {!publication?.isDataAvailability && (
               <>
                 <CollectSettings />
                 <ReferenceSettings />
                 <AccessSettings />
               </>
-            ) : null}
+            )}
             <PollSettings />
           </div>
         )}

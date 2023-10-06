@@ -57,9 +57,10 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const space: SpaceMetadata = Boolean(spaceObject)
     ? JSON.parse(spaceObject)
     : null;
+  let rawContent = metadata?.content;
 
   const filterId = snapshotProposalId || quotedPublicationId;
-  let rawContent = metadata?.content;
+
 
   if (filterId) {
     for (const url of urls) {
@@ -76,7 +77,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
     return <DecryptedPublicationBody encryptedPublication={publication} />;
   }
 
-  if (Boolean(space?.id) && isSpacesEnabled) {
+  if (Boolean(space?.id)) {
     return <Space publication={publication} />;
   }
 
@@ -133,6 +134,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           onData={onOembedData}
         />
       ) : null}
+      {showSpacesLobby ? (<Space publication={publication} />):(null)}
 
       {showQuotedPublication ? (
         <Quote

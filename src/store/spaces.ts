@@ -50,6 +50,10 @@ interface SpacesState {
   setActiveMicDevice: (val: MediaDeviceInfo | null) => void;
   activeSpeakerDevice: MediaDeviceInfo | null;
   setActiveSpeakerDevice: (val: MediaDeviceInfo | null) => void;
+  spacesTimeInHour: string;
+  setSpacesTimeInHour: (val: string) => void;
+  spacesTimeInMinute: string;
+  setSpacesTimeInMinute: (val: string) => void;
 }
 
 export const useSpacesStore = create<SpacesState>((set, get) => ({
@@ -125,5 +129,11 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
   setActiveMicDevice: (activeMicDevice) => set(() => ({ activeMicDevice })),
   activeSpeakerDevice: null,
   setActiveSpeakerDevice: (activeSpeakerDevice) =>
-    set(() => ({ activeSpeakerDevice }))
+    set(() => ({ activeSpeakerDevice })),
+    spacesTimeInHour: '00',
+    setSpacesTimeInHour: (spacesTimeInHour) => set(() => ({ spacesTimeInHour })),
+    spacesTimeInMinute: '00',
+    setSpacesTimeInMinute: (spacesTimeInMinute) =>
+      set(() => ({ spacesTimeInMinute })),
+    isSpacesTimeInAM: true
 }));

@@ -30,6 +30,7 @@ import { useSpacesStore } from '@/store/spaces';
 import PreviewSpaces from './Spaces/PreviewSpaces/PreviewSpaces';
 import Loader from './UI/Loader';
 import { useNonceStore } from '@/store/nonce';
+import AudioSpaces from './Spaces';
 
 interface Props {
   children: ReactNode;
@@ -129,7 +130,7 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-      <Spaces />
+      <AudioSpaces  />
 
       <GlobalModals />
       <GlobalAlerts />
