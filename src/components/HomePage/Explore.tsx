@@ -1,4 +1,4 @@
-import type { Publication } from '@/utils/lens/generatedLenster';
+import type { Publication } from '@/utils/lens/generated5';
 import {
   PublicationSortCriteria,
   PublicationTypes,
@@ -6,10 +6,11 @@ import {
   usePublicationLazyQuery,
   PublicationMainFocus,
   Profile
-} from '@/utils/lens/generatedLenster';
+} from '@/utils/lens/generated5';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, {
+  FC,
   useCallback,
   useEffect,
   useMemo,
@@ -52,182 +53,113 @@ import QueuedPublication from '../Composer/QueuedPublication';
 import { OptmisticPublicationType } from '@/enums';
 import { useTransactionPersistStore } from '@/store/transaction';
 import imageKit from '@/lib/imageKit';
+import { ExplorePublicationRequest, useExploreFeedQuery } from '@/utils/lens/generated5';
+import { RectangleStackIcon } from '@heroicons/react/24/outline';
+import { ErrorMessage } from '../UI/ErrorMessage';
 
-const Explore = () => {
-  const router = useRouter();
-  const bytesContainer = useRef<HTMLDivElement>(null);
+interface FeedProps {
+  focus?: PublicationMainFocus;
+  feedType?: PublicationSortCriteria;
+}
+
+const Explore: FC<FeedProps> = ({
+  focus,
+  feedType = PublicationSortCriteria.CuratedProfiles
+}) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
-  const [byte, setByte] = useState<Publication>();
-  const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
-  const [following, setFollowing] = useState(false);
+ 
 
-  const request = {
-    sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 30,
-    noRandomize: false,
-    sources: [
-      APP_ID,
-      LENSTUBE_APP_ID,
-      LENSTOK_APP_ID,
-      LENSTER_APP_ID,
-      ORB_APP_ID,
-      RIFF_APP_ID,
-      BUTTRFLY_APP_ID,
-      PHAVER_APP_ID
-
-    ],
-    publicationTypes: [PublicationTypes.Post],
+  // Variables
+  const request: ExplorePublicationRequest = {
+    sortCriteria: feedType,
+    noRandomize: feedType === 'LATEST',
     metadata: {
-      mainContentFocus: [
-        PublicationMainFocus.Video,
-        PublicationMainFocus.Image,
-        PublicationMainFocus.Article,
-        PublicationMainFocus.Audio,
-        PublicationMainFocus.TextOnly
-      ]
-    }
+      ...(focus && { mainContentFocus: [focus] }),
+      
+    },
+    limit: 30
   };
+  const reactionRequest = currentProfile
+    ? { profileId: currentProfile?.id }
+    : null;
+  const profileId = currentProfile?.id ?? null;
 
-  const [show, setShow] = useState(false);
+  const { data, loading, error, fetchMore } = useExploreFeedQuery({
+    variables: { request, reactionRequest, profileId }
+  });
 
-  const [fetchPublication, { data: singleByte, loading: singleByteLoading }] =
-    usePublicationLazyQuery();
-
-  const [fetchAllBytes, { data, loading, error, fetchMore }] =
-    useExploreFeedLazyQuery({
-      // prevent the query from firing again after the first fetch
-
-      variables: {
-        request,
-        reactionRequest: currentProfile
-          ? { profileId: currentProfile?.id }
-          : null,
-        profileId: currentProfile?.id ?? null
-      },
-      onCompleted: ({ explorePublications }) => {}
-    });
-  console.log(data);
-
-  const bytes = data?.explorePublications?.items as Publication[];
+  const publications = data?.explorePublications?.items;
   const pageInfo = data?.explorePublications?.pageInfo;
-  const singleBytePublication = singleByte?.publication as Publication;
-
-  const fetchSingleByte = async () => {
-    const publicationId = router.query.id;
-    if (!publicationId) {
-      return fetchAllBytes();
-    }
-    await fetchPublication({
-      variables: {
-        request: { publicationId },
-        reactionRequest: currentProfile
-          ? { profileId: currentProfile?.id }
-          : null,
-        profileId: currentProfile?.id ?? null
-      },
-      onCompleted: () => fetchAllBytes()
-    });
-  };
-
   const hasMore = pageInfo?.next;
-  useEffect(() => {
-    if (router.query.id && singleBytePublication) {
-      openDetail(singleBytePublication);
-    }
-  }, [singleByte]);
-
-  useEffect(() => {
-    if (router.isReady) {
-      fetchSingleByte();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady]);
 
   const { observe } = useInView({
-    rootMargin: SCROLL_ROOT_MARGIN,
-    onEnter: async () => {
+    onChange: async ({ inView }) => {
+      if (!inView || !hasMore) {
+        return;
+      }
+
       await fetchMore({
         variables: {
-          request: {
-            ...request,
-            cursor: pageInfo?.next
-          }
+          request: { ...request, cursor: pageInfo?.next },
+          reactionRequest,
+          profileId
         }
       });
     }
   });
 
-  const openDetail = (byte: Publication) => {
-    const nextUrl = `/${byte.id}`;
-    setByte(byte);
-    history.pushState({ path: nextUrl }, '', nextUrl);
-    setShow(!show);
-  };
-
-  const closeDialog = () => {
-    const nextUrl = `/`;
-    history.pushState({ path: nextUrl }, '', nextUrl);
-    setShow(false);
-  };
-
   if (loading) {
+    return <Loading />;
+  }
+
+  if (publications?.length === 0) {
     return (
-      <div className="grid h-[80vh] place-items-center">
-        <Loader />
-      </div>
+      <EmptyState
+        message={`No posts yet!`}
+        icon={<RectangleStackIcon className="text-brand h-8 w-8" />}
+      />
     );
   }
 
   if (error) {
     return (
-      <div className="grid h-[80vh] place-items-center">
-        <EmptyState message="No bytes found" icon />
-      </div>
+      <ErrorMessage title={`Failed to load explore feed`} error={error} />
     );
   }
 
   return (
     <div>
-      <Head>
-        <meta name="theme-color" content="#000000" />
-      </Head>
-      <MetaTags  />
-      <div className="mb-5 flex items-center space-x-2">
-        <img
-          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
-          draggable={false}
-          className="h-12 w-12 md:h-16 md:w-16"
-          alt="lensshare"
+    <MetaTags  />
+    <div className="mb-5 flex items-center space-x-2">
+      <img
+        src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+        draggable={false}
+        className="h-12 w-12 md:h-16 md:w-16"
+        alt="lensshare"
+      />
+      <h1 className="text-2xl font-semibold">Explore</h1>
+    </div>
+    <div className='mb-2'>{currentProfile ? <NewPost /> : null}</div>
+    
+    <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700"
+      dataTestId="explore-feed"
+    >
+      {publications?.map((publication, index) => (
+        <SinglePublication
+          key={`${publication.id}_${index}`}
+          isFirst={index === 0}
+          isLast={index === publications.length - 1}
+          publication={publication as Publication}
+          profile={currentProfile as Profile}
+          showCount={true}
+          tags={''}
         />
-        <h1 className="text-2xl font-semibold">Explore</h1>
-      </div>
-      <div className='mb-2'>{currentProfile ? <NewPost /> : null}</div>
-      
-
-      <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
-        {txnQueue.map(
-          (txn) =>
-            txn?.type === OptmisticPublicationType.NewPost && (
-              <div key={txn.id}>
-                <QueuedPublication txn={txn} />
-              </div>
-            )
-        )}
-        {bytes?.map((publication, index) => (
-          <SinglePublication
-            profile={currentProfile as Profile}
-            key={`${publication?.id}_${index}`}
-            isFirst={index === 0}
-            isLast={index === bytes.length - 1}
-            publication={publication as Publication}
-            showCount={true}
-            tags={''}
-          />
-        ))}
-        {hasMore ? <span ref={observe} /> : null}
-      </Card>
+      ))}
+      {hasMore ? <span ref={observe} /> : null}
+    </Card>
     </div>
   );
 };
+
 
 export default Explore;
