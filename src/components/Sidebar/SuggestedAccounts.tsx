@@ -30,16 +30,15 @@ import UserProfile from '../ProfilePage/UserProfile';
 import imageKit from '@/lib/imageKit';
 import { STATIC_ASSETS_URL } from '@/constants';
 
-interface Props {
-  currentProfile: Profile;
-}
 
 const Suggested: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const { data, loading, error } = useRecommendedProfilesQuery({
     variables: {
-      options: { profileId: currentProfile?.id}
+    
+  
+      options: {profileId: currentProfile?.id}
     }
   });
 

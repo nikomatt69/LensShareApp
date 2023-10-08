@@ -9,6 +9,7 @@ import {
   LENSSHARE_API_URL,
   LENSSHARE_EMBED_URL,
   LENSTOK_URL,
+  OEMBED_WORKER_URL,
   OG_IMAGE,
   STATIC_ASSETS_URL
 } from '@/constants';
@@ -55,6 +56,7 @@ const MetaTags: FC<MetaTagsProps> = ({
         href="/opensearch.xml"
         title={APP_NAME}
       />
+
     </Head>
   );
 };

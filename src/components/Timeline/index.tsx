@@ -5,7 +5,7 @@ import {
   Profile,
   Publication,
   useTimelineQuery
-} from '@/utils/lens/generatedLenster';
+} from '@/utils/lens/generated5';
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
@@ -22,7 +22,7 @@ import NewPost from '../Composer/Post/New';
 import { Modal } from '../UI/Modal';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
-import { SCROLL_ROOT_MARGIN } from '@/constants';
+import { APP_ID, BUTTRFLY_APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, ORB_APP_ID, PHAVER_APP_ID, RIFF_APP_ID, SCROLL_ROOT_MARGIN } from '@/constants';
 import Loader from '../UI/Loader';
 import { useTransactionPersistStore } from '@/store/transaction';
 
@@ -61,8 +61,9 @@ const Timeline: FC = () => {
 
   // Variables
   const request: FeedRequest = {
+
     profileId: seeThroughProfile?.id ?? currentProfile?.id,
-    limit: 20,
+    limit: 30,
     feedEventItemTypes: getFeedEventItems()
   };
   const reactionRequest = currentProfile
@@ -121,7 +122,8 @@ const Timeline: FC = () => {
       )}
       {publications?.map((publication, index) => (
         <SinglePublication
-          profile={currentProfile?.id as Profile}
+          profile={currentProfile as Profile}
+    
           key={`${publication?.root.id}_${index}`}
           isFirst={index === 0}
           isLast={index === publications.length - 1}

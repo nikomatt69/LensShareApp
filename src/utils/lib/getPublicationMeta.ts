@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import client from '@/apollo-client';
+import { apolloClient } from '@/apollo-client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Publication } from '../lens/generatedLenster';
 import getIPFSLink from '@/lib/getIPFSLink';
@@ -96,7 +96,7 @@ const getPublicationMeta = async (
   id: string
 ) => {
   try {
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: PUBLICATION_QUERY,
       variables: { request: { publicationId: id } }
     });

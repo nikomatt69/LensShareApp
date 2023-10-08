@@ -1,21 +1,57 @@
-
-
 import { SPACES_WORKER_URL } from '@/constants';
 import axios from 'axios';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
+import { useSpacesStore } from '@/store/spaces';
 
-type CreateSpaceResponse = string;
+type CreateSpaceResponse = {
+  success: boolean;
+  response: {
+    message: string;
+    data: {
+      roomId: string;
+    };
+  };
+};
 
-const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => {
+const useCreateSpace = (): [createPoll: () => Promise<CreateSpaceResponse>] => {
+  const {
+    isTokenGated,
+    tokenGateConditionType,
+    tokenGateConditionValue,
+    spacesTimeInHour,
+    spacesTimeInMinute
+  } = useSpacesStore();
+  ``;
+  let payload = {};
+  const now = new Date();
+  now.setHours(Number(spacesTimeInHour));
+  now.setMinutes(Number(spacesTimeInMinute));
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const formattedTime = new Date(
+    now.toLocaleString('en-US', { timeZone: userTimezone })
+  );
+  const startTime = formattedTime.toISOString();
   const createSpace = async (): Promise<CreateSpaceResponse> => {
+    if (isTokenGated) {
+      payload = {
+        ...getBasicWorkerPayload(),
+        conditionType: tokenGateConditionType,
+        conditionValue: tokenGateConditionValue,
+        isTokenGated: isTokenGated,
+        startTime: startTime
+      };
+    } else {
+      payload = {
+        ...getBasicWorkerPayload(),
+        startTime: startTime
+      };
+    }
     try {
-      const response = await axios.post(
-       `${SPACES_WORKER_URL}/createSpace`,
-      
-        getBasicWorkerPayload(),
-
-        
-      );
+      const response = await axios({
+        url: `${SPACES_WORKER_URL}/createSpace`,
+        method: 'POST',
+        data: payload
+      });
       return response.data;
     } catch (error) {
       throw error;

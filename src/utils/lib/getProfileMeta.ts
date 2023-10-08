@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import client from '@/apollo-client';
+import { apolloClient } from '@/apollo-client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   MediaSet,
@@ -51,7 +51,7 @@ const getProfileMeta = async (
         handle === LENSPROTOCOL_HANDLE ? handle : handle.concat(HANDLE_SUFFIX);
     }
 
-    const { data } = await client.query({
+    const { data } = await apolloClient.query({
       query: PROFILE_QUERY,
       variables: { request: { handle: processedHandle } }
     });

@@ -24,11 +24,14 @@ import { useAppStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
+  BUTTRFLY_APP_ID,
   LENSTER_APP_ID,
+  LENSTOK_APP_ID,
   LENSTUBE_APP_ID,
   LENSTUBE_BYTES_APP_ID,
   LENS_CUSTOM_FILTERS,
   ORB_APP_ID,
+  PHAVER_APP_ID,
   RIFF_APP_ID,
   SCROLL_ROOT_MARGIN,
   STATIC_ASSETS_URL
@@ -61,7 +64,15 @@ const Latest = () => {
     sortCriteria: PublicationSortCriteria.Latest,
     limit: 20,
     noRandomize: false,
-    sources: [APP_ID, LENSTUBE_APP_ID, LENSTER_APP_ID, ORB_APP_ID, RIFF_APP_ID],
+    sources: [
+      APP_ID,
+      LENSTUBE_APP_ID, 
+      LENSTER_APP_ID,
+      LENSTOK_APP_ID,
+      ORB_APP_ID,
+      RIFF_APP_ID,
+      BUTTRFLY_APP_ID,
+      PHAVER_APP_ID],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {

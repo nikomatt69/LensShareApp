@@ -14,6 +14,7 @@ import { ErrorMessage } from '../ErrorMessage';
 import { Card } from '../UI/Card';
 import QueuedPublication from '../Composer/QueuedPublication';
 import SinglePublication from '../Composer/SinglePublication2';
+import { APP_ID, LENSTUBE_APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, ORB_APP_ID, RIFF_APP_ID, BUTTRFLY_APP_ID, PHAVER_APP_ID } from '@/constants';
 
 const Highlights: FC = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);

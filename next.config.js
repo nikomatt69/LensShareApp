@@ -1,8 +1,9 @@
-import million from 'million/compiler';
 
- 
+const linguiConfig = require('./lingui.config');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   reactStrictMode: false,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -73,10 +74,9 @@ const nextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    newNextLinkBehavior: true,
- 
-
+   
   },
+
   async rewrites() {
     return [
       {
@@ -92,8 +92,8 @@ const nextConfig = {
 
   async redirects() {
     return [
-      { source: '/u/:handle(.+).lens', destination: '/u/:handle', permanent: true },
-      { source: '/u/:handle(.+).test', destination: '/u/:handle', permanent: true },
+      { source: '/u/:id(.+).lens', destination: '/u/:id', permanent: true },
+      { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
      
     ];
   },
@@ -119,10 +119,4 @@ const nextConfig = {
  
 };
  
-const millionConfig = {
-
-  // if you're using RSC:
-   auto: { rsc: true },
-}
- 
-export default million.next(nextConfig, millionConfig);
+module.exports = nextConfig

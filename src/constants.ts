@@ -100,6 +100,9 @@ export const SPACES_WORKER_URL = IS_MAINNET
 export const LEAFWATCH_WORKER_URL = IS_MAINNET
   ? 'https://leafwatch.lenster.xyz'
   : 'http://localhost:8089';
+  export const NFT_WORKER_URL = IS_PRODUCTION
+  ? 'https://nft.lenshareapp.xyz'
+  : 'https://nft.lenshareapp.xyz';
 
 export const CHANNELS_WORKER_URL = IS_MAINNET
   ? 'https://channels.lenster.xyz'
@@ -132,6 +135,7 @@ export const GROWTHBOOK_KEY = IS_MAINNET
   : 'sdk-STENQl8vU1da648';
 
 export const EVER_BUCKET_NAME = 'lensshare';
+export const OPENSEA_KEY = '3dc11eabc74e425abb39ee2ba16f3ae7';
 
 export const SCROLL_ROOT_MARGIN = '40% 0px';
 
@@ -208,9 +212,17 @@ export const ERROR_MESSAGE = 'Something went wrong!';
 export const LENSTUBE_APP_ID = 'lenstube';
 export const LENSTUBE_BYTES_APP_ID = 'lenstube-bytes';
 export const LENSTOK_APP_ID = 'lenstok';
-export const LENSTER_APP_ID = 'lenster';
+export const LENSTER_APP_ID = 'hey';
 export const RIFF_APP_ID = 'beats';
 export const ORB_APP_ID = 'orb';
+export const TAPE_APP_ID = 'tape';
+export const BUTTRFLY_APP_ID = 'buttrfly';
+export const PHAVER_APP_ID = 'phaver';
+export const DIVERSE_APP_ID = 'phaver';
+
+
+
+
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'
   : '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';

@@ -12,7 +12,19 @@ export function handler(req: NextApiRequest, res: NextApiResponse) {
         'Content-Type': 'application/json'
       }
     });
-  } else {
+  }
+  if (req.method === 'GET') {
+    return new Response('Hello, Next.js!', {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+   else {
     // Handle any other HTTP method
     return new Response('Hello, Next.js!', {
       status: 200,

@@ -151,32 +151,29 @@ const LatestRender: FC<Props> = ({ publication }) => {
   return (
     <>
       <GridLayout className="max-w-[1200px] pt-6">
+      <Wrapper children publication={publication} />
         <GridItemEight>
           <>
           <Explore/>
           </>
         </GridItemEight>
         <GridItemFour className=" max-h-80">
-        {currentProfile ? (
+        {currentProfile?.id ? (
           <>
-      <Card className='hidden mb-3 lg:block xl:block border-blue-700'>
-             <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><CuratedHome /></div>
-        
-          </Wrapper>
-          </Card>
+           <Card className='hidden lg:block xl:block border-blue-700'>
+          <CuratedHome />
+            </Card>
+  
+          
+          
+      
           <Card className='hidden lg:block xl:block border-blue-700'>
           <Suggested />
             </Card>
             <Footer />
             </>) :
             (<> 
-            
-             <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><CuratedHome /></div>
         
-          </Wrapper>
-         
 
            <Footer />
            

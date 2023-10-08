@@ -8,7 +8,8 @@ import {
   IS_MAINNET,
   LENSTOK_URL,
   NEXT_PUBLIC_STUDIO_API_KEY,
-  WALLETCONNECT_PROJECT_ID
+  WALLETCONNECT_PROJECT_ID,
+  APP_NAME
 } from 'src/constants';
 import {
   LivepeerConfig,
@@ -35,22 +36,39 @@ import {
   w3mProvider
 } from '@web3modal/ethereum';
 import { W3mQrCode, Web3Modal } from '@web3modal/react';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { arbitrum, mainnet, polygon } from 'wagmi/chains';
+import { configureChains, Connector, createConfig, WagmiConfig } from 'wagmi';
+import { arbitrum, base, baseGoerli, goerli, mainnet, optimism, optimismGoerli, polygon, polygonMumbai, zora, zoraTestnet } from 'wagmi/chains';
 import UserSigNoncesProvider from './UserSigNoncesProvider';
-
+import { publicProvider } from 'wagmi/providers/public';
 import FeaturedChannelsProvider from './FeaturedChannelsProvider';
 
-const chains = [polygon, mainnet];
-const projectId = WALLETCONNECT_PROJECT_ID;
+const { chains, publicClient } = configureChains(
+  [
+    polygon,
+    polygonMumbai,
+    mainnet,
+    goerli,
+    zora,
+    zoraTestnet,
+    optimism,
+    optimismGoerli,
+    base,
+    baseGoerli
+  ],
+  [publicProvider()]
+);
 
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
+const projectId =  WALLETCONNECT_PROJECT_ID
+
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, chains }),
+  connectors:w3mConnectors({ projectId, chains }) as Connector<any, any>[],
   publicClient
 });
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+
+interface Web3ProviderProps {
+  children: ReactNode;
+}
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
@@ -58,7 +76,7 @@ const livepeerClient = createReactClient({
     baseUrl: LENSTOK_URL
   })
 });
-
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } }
 });

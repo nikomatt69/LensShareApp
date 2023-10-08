@@ -36,20 +36,23 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
               onError={({ currentTarget }) => {
                 currentTarget.src = og.image as string;
               }}
-              src={imageKit(og.image , ATTACHMENT)}
-              alt={imageKit(og.image ,ATTACHMENT)}
+              height={30}
+              width={30}
+              src={imageKit(og.image , SQUARE)}
+              alt="Thumbnail"
             />
           ) : null}
           <div className="flex items-center">
             {!og.isLarge && og.image ? (
               <Image
-                className="h-30 w-30 rounded-l-xl border-r dark:border-gray-700"
+                className="h-36 w-36 rounded-l-xl border-r dark:border-gray-700"
                 height={30}
                 width={30}
                 onError={({ currentTarget }) => {
                   currentTarget.src = og.image as string;
                 }}
-                src={imageKit(og.image , ATTACHMENT)}
+                src={imageKit(og.image , SQUARE)}
+                alt="Thumbnail"
               />
             ) : null}
             <div className="truncate break-words p-5">

@@ -76,6 +76,7 @@ const ViewPublication: NextPage = (profile) => {
           <Card className="rounded-xl border-blue-700">
             <FullPublication
               profile={profile as Profile}
+              key={publication?.id}
               publication={publication}
               showCount={true}
             />

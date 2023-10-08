@@ -15,9 +15,9 @@ const REFRESH_AUTHENTICATION_MUTATION = `
 `;
 
 const clearStorage = () => {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
-  localStorage.removeItem(localStorage.LensterStore);
+  localStorage.removeItem(localStorage.AccessToken);
+  localStorage.removeItem(localStorage.RefreshToken);
+  localStorage.removeItem(localStorage.LensshareStore);
   localStorage.removeItem(localStorage.TransactionStore);
   localStorage.removeItem(localStorage.MessageStore);
   localStorage.removeItem(localStorage.AttachmentCache);

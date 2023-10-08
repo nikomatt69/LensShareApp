@@ -31,7 +31,7 @@ import type {
   Publication,
   PublicationMetadataMediaInput,
   PublicationMetadataV2Input
-} from '@/utils/lens/generatedLenster';
+} from '@/utils/lens/generated5';
 import {
   CollectModules,
   PublicationDocument,
@@ -230,7 +230,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     followToView,
     collectToView,
     reset: resetAccessSettings
-  } = useAccessSettingsStore();
+  } = useAccessSettingsStore((state) => state);
 
   const {
     setSpacesTimeInHour,
@@ -767,7 +767,14 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
 
       // Create Space in Huddle
 
-      let spaceId = null;
+      let spaceId = {
+        success: false,
+        response: {
+          message: '',
+          data: {
+            roomId: '',
+          },
+      }};
 
       if (
         showComposerModal &&
@@ -783,25 +790,24 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
         now.toLocaleString('en-US', { timeZone: userTimezone })
       );
       const startTime = formattedTime.toISOString();
-
-
       const attributes: MetadataAttributeInput[] = [
         {
           traitType: 'type',
           displayType: PublicationMetadataDisplayTypes.String,
           value: getMainContentFocus()?.toLowerCase()
         },
-        ...(showComposerModal && modalPublicationType === NewPublicationTypes.Spaces
+        ...(showComposerModal &&
+        spaceId.success &&
+        modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceId,
+                  id: spaceId.response.data.roomId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
-          
-                })
+                })  
               }
             ]
           : []),

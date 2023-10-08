@@ -10,7 +10,7 @@ import {
   ProfileSearchResult,
   SearchRequestTypes,
   useSearchProfilesLazyQuery
-} from '@/utils/lens/generated5';
+} from '@/utils/lens/generatedLenster';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { motion } from 'framer-motion';

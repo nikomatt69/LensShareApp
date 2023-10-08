@@ -21,8 +21,10 @@ import PreviewSpaces from '../Spaces/PreviewSpaces/PreviewSpaces';
 import Spaces from '../Spaces';
 import { OG } from '@/types/misc';
 import getSnapshotProposalId from '@/lib/getSnapshotProposalId';
-import getNft from '@/utils/lib/nft/getNft';
+
 import Snapshot from './OpenActions/Snapshot';
+import Nft from './OpenActions/Nft';
+import getNft from '@/lib/nft/getNft';
 
 interface PublicationBodyProps {
   publication: Publication;
@@ -43,6 +45,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   const hasURLs = urls?.length > 0;
   const snapshotProposalId = getSnapshotProposalId(urls);
   const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
   const isSpacesEnabled = isFeatureEnabled(FeatureFlag.Spaces);
   const nft = getNft(urls);
   const quotedPublicationId = getPublicationAttribute(
@@ -91,6 +94,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
   // Show oembed if no NFT, no attachments, no snapshot, no quoted publication
   const showOembed =
     hasURLs &&
+    !showNft &&
     !showAttachments &&
     !showSnapshot &&
     !showQuotedPublication &&
@@ -126,6 +130,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
         <Attachments attachments={metadata?.media} publication={publication} />
       ) : null}
       {showSnapshot ? <Snapshot proposalId={snapshotProposalId} /> : null}
+      {showNft ? <Nft nftMetadata={nft} publication={publication} /> : null}
 
       {showOembed ? (
         <Oembed
@@ -135,6 +140,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
         />
       ) : null}
       {showSpacesLobby ? (<Space publication={publication} />):(null)}
+     {showSpacesWindow ? (<PreviewSpaces />):(null)}
 
       {showQuotedPublication ? (
         <Quote

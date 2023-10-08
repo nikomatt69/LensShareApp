@@ -4,8 +4,7 @@ import { Localstorage } from '@/storage';
  * Resets the auth data
  */
 const resetAuthData = () => {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
+
   localStorage.removeItem(Localstorage.LensshareStore);
   localStorage.removeItem(Localstorage.NotificationStore);
   localStorage.removeItem(Localstorage.TransactionStore);

@@ -56,7 +56,6 @@ import useNft from '@/lib/useNft';
 import removeUrlAtEnd from '@/lib/removeUrlAtEnd';
 import { BiLogInCircle, BiLogOut } from 'react-icons/bi';
 import { SuperfluidInflowsDocument } from '@/utils/lens/generated4';
-import superfluidClient from '@/apollo-client';
 
 import useContractMetadata from '@/utils/hooks/useContractMetadata';
 interface DecryptMessageProps {

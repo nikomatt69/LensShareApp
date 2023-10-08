@@ -18,7 +18,6 @@ export interface UserSuggestion {
 }
 
 export interface OG {
-  thumbnail: string | null;
   url: string;
   title: string | null;
   description: string | null;
@@ -27,7 +26,6 @@ export interface OG {
   favicon: string | null;
   isLarge: boolean | null;
   html: string | null;
-  image: string | null;
 }
 
 export interface ProfileInterest {

@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import type { FC } from 'react';
-
+import urlcat from 'urlcat';
 import Embed from './Embed';
 import Player from './Player';
 import { OEMBED_WORKER_URL } from '@/constants';
-import { OG } from '@/types/misc';
+import type { OG } from '@/types/misc';
 
 interface OembedProps {
   url?: string;
@@ -34,13 +34,13 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
     title: data?.title,
     description: data?.description,
     site: data?.site,
-    favicon: `https://www.google.com/s2/favicons?domain=${data.url}`,
+    favicon: urlcat('https://www.google.com/s2/favicons', {
+      domain: data.url
+    }),
     image: data?.image,
     isLarge: data?.isLarge,
-    html: data?.html,
-    thumbnail: data?.thumbnail
+    html: data?.html
   };
-
   if (!og.title) {
     return null;
   }

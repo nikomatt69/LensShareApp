@@ -24,7 +24,8 @@ const ForYou: FC = () => {
   // Variables
   const request: PublicationForYouRequest = {
     for: seeThroughProfile?.id ?? currentProfile?.id,
-    limit: 30
+    limit: 30,
+    
   };
   const reactionRequest = currentProfile
     ? { profileId: currentProfile?.id }
@@ -32,6 +33,7 @@ const ForYou: FC = () => {
   const profileId = currentProfile?.id ?? null;
 
   const { data, loading, error, fetchMore } = useForYouQuery({
+    
     variables: { request, reactionRequest, profileId }
   });
 

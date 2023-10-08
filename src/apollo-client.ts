@@ -32,12 +32,6 @@ import superfluidLink from './superfluidLink';
 import { Localstorage } from './storage';
 import parseJwt from './utils/lens/apollo/lib/parseJwt';
 
-const superfluidClient = new ApolloClient({
-  link: superfluidLink,
-  cache: new InMemoryCache()
-});
-
-export default superfluidClient;
 
 const httpLink = new HttpLink({ uri: API_URL, fetchOptions: 'no-cors', fetch });
 

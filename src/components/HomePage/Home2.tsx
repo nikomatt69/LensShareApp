@@ -178,6 +178,7 @@ const Home2: FC<Props> = ({ publication }) => {
       <GridLayout className="max-w-[1200px] pt-6">
         <MetaTags />
         {showSpacesLobby && <Spaces />}
+        <Wrapper children publication={publication} />
         <GridItemEight>
           <>
             <AddToHome />
@@ -222,14 +223,14 @@ const Home2: FC<Props> = ({ publication }) => {
           )}
         </GridItemEight>
         <GridItemFour className=" max-h-80">
-        {currentProfile ? (
+        {currentProfile?.id ? (
           <>
-      <Card className='hidden mb-3 lg:block xl:blockn border-blue-700'>
-             <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><CuratedHome /></div>
+          <Card className='hidden lg:block xl:block border-blue-700'>
+          <CuratedHome />
+            </Card>
+      
+
         
-          </Wrapper>
-          </Card>
           <Card className='hidden lg:block xl:block border-blue-700'>
           <Suggested />
             </Card>
@@ -237,10 +238,7 @@ const Home2: FC<Props> = ({ publication }) => {
             </>) :
             (<> 
             
-             <Wrapper publication={publication}>
-        <div className='hidden lg:block xl:block'><CuratedHome /></div>
-        
-          </Wrapper>
+      
          
 
            <Footer />

@@ -16,6 +16,7 @@ import {
 } from 'wagmi';
 import type { Connector } from 'wagmi';
 import toast from 'react-hot-toast';
+import SwitchNetwork from '../Composer/OpenActions/Nft/ZoraNft/Mint/SwitchNetwork';
 
 const LoginWalletMobile: FC = () => {
   const setProfiles = useAppStore((state) => state.setProfiles);
@@ -104,18 +105,11 @@ const LoginWalletMobile: FC = () => {
           {mounted ? 'Log In' : ''}
         </button>
       ) : (
-        <button
-          className="flex-1 text-blue-700"
-          onClick={() => {
-            if (switchNetwork) {
-              switchNetwork(CHAIN_ID);
-            } else {
-              toast.error('Please change your network!');
-            }
-          }}
-        >
-          Switch Network
-        </button>
+        <SwitchNetwork
+        className="mt-5 w-full justify-center"
+        toChainId={CHAIN_ID}
+        
+      />
       )}
     </div>
   ) : (

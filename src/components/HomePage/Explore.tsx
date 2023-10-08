@@ -24,15 +24,18 @@ import { useAppStore } from '@/store/app';
 import {
   APP_ID,
   APP_NAME,
+  BUTTRFLY_APP_ID,
   LENSTER_APP_ID,
   LENSTOK_APP_ID,
   LENSTUBE_APP_ID,
   LENSTUBE_BYTES_APP_ID,
   LENS_CUSTOM_FILTERS,
   ORB_APP_ID,
+  PHAVER_APP_ID,
   RIFF_APP_ID,
   SCROLL_ROOT_MARGIN,
   STATIC_ASSETS_URL
+  
 } from '@/constants';
 import Loader from '../UI/Loader';
 import { EmptyState } from '../UI/EmptyState';
@@ -60,7 +63,7 @@ const Explore = () => {
 
   const request = {
     sortCriteria: PublicationSortCriteria.CuratedProfiles,
-    limit: 10,
+    limit: 30,
     noRandomize: false,
     sources: [
       APP_ID,
@@ -68,7 +71,10 @@ const Explore = () => {
       LENSTOK_APP_ID,
       LENSTER_APP_ID,
       ORB_APP_ID,
-      RIFF_APP_ID
+      RIFF_APP_ID,
+      BUTTRFLY_APP_ID,
+      PHAVER_APP_ID
+
     ],
     publicationTypes: [PublicationTypes.Post],
     metadata: {

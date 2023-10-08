@@ -18,7 +18,7 @@ const QuotedPublication: FC<QuotedPublicationProps> = ({
 }) => {
   return (
     <PublicationWrapper
-       className="cursor-pointer object-contain p-3 first:rounded-t-xl line-clamp-4 break-words last:rounded-b-xl text-xs hover:bg-gray-100 dark:hover:bg-gray-900"
+       className="cursor-pointer flex-col  p-3 first:rounded-t-xl line-clamp-5 break-words  last:rounded-b-xl text-xs hover:bg-gray-100 dark:hover:bg-gray-900"
       publication={publication}
     
     >

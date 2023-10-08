@@ -2,7 +2,7 @@ import {
   Profile,
   Publication,
   usePublicationQuery
-} from '@/utils/lens/generated5';
+} from '@/utils/lens/generatedLenster';
 import type { FC } from 'react';
 import QuotedPublication from './QuotedPublication';
 import Wrapper from '../Embed/Wrapper';
