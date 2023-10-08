@@ -9,7 +9,8 @@ class LensshareDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
           {/* Prefetch and Preconnect */}
-        
+          <link rel="preconnect" href="https://asset.lenshareapp.xyz" />
+          <link rel="dns-prefetch" href="https://asset.lenshareapp.xyz" />
           <link rel="preconnect" href="https://prerender.lenshareapp.xyz" />
           <link rel="dns-prefetch" href="https://prerender.lenshareapp.xyz" />
 
