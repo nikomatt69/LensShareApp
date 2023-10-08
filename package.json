@@ -177,7 +177,7 @@
     "wrangler": "^3.7.0",
     "xmtp": "^0.0.0",
     "xmtp-content-type-remote-attachment": "^1.0.7",
-    "zod": "^3.19.1"
+    "zod": "^3.22.3"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
