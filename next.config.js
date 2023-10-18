@@ -1,9 +1,7 @@
-
 const linguiConfig = require('./lingui.config');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   reactStrictMode: false,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -25,7 +23,7 @@ const nextConfig = {
       'source.unsplash.com',
       'ar://',
       'arweave.net',
-   
+
       'ipfs://',
       'avatar.tobi.sh',
       'statics-lens-staging.s3.eu-west-1.amazonaws.com',
@@ -44,10 +42,10 @@ const nextConfig = {
       'oembed.lenshareapp.xyz',
       'lenshareapp.infura-ipfs.io',
       'ik.imagekit.io/lens/media-snapshot',
- 
+
       '.ipfs.4everland.io',
       'statics-polygon-lens.s3.eu-west-1.amazonaws.com',
-  
+
       'statics-mumbai-lens-staging.s3.eu-west-1.amazonaws.com',
       'statics-mumbai-polygon-lens.s3.eu-west-1.amazonaws.com',
       'statics-polygon-lens.s3.us-west-2.amazonaws.com',
@@ -66,15 +64,13 @@ const nextConfig = {
       'media.lenster.xyz',
       'static-asset.lenshareapp.xyz',
       'metadata.lenshareapp.xyz',
-     
-      'metalens.lenshareapp.xyz',
-     
+
+      'metalens.lenshareapp.xyz'
     ]
   },
 
   experimental: {
-    scrollRestoration: true,
-   
+    scrollRestoration: true
   },
 
   async rewrites() {
@@ -93,8 +89,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/u/:id(.+).lens', destination: '/u/:id', permanent: true },
-      { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true },
-     
+      { source: '/u/:id(.+).test', destination: '/u/:id', permanent: true }
     ];
   },
   async headers() {
@@ -104,19 +99,11 @@ const nextConfig = {
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
-          { key: 'Referrer-Policy', value: 'strict-origin' },
-
-         
-    
+          { key: 'Referrer-Policy', value: 'strict-origin' }
         ]
-      },
-      
+      }
     ];
   }
-
-
-
- 
 };
- 
-module.exports = nextConfig
+
+module.exports = nextConfig;

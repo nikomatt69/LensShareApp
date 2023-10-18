@@ -23,8 +23,7 @@ export function handler(req: NextApiRequest, res: NextApiResponse) {
         'Content-Type': 'application/json'
       }
     });
-  }
-   else {
+  } else {
     // Handle any other HTTP method
     return new Response('Hello, Next.js!', {
       status: 200,

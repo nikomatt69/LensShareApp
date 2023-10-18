@@ -1,4 +1,3 @@
-
 import { KeyIcon } from '@heroicons/react/24/outline';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
@@ -19,7 +18,11 @@ import {
   useSignMessage
 } from 'wagmi';
 import errorToast from './Composer/errorToast';
-import { useAuthenticateMutation, useChallengeLazyQuery, useUserProfilesLazyQuery } from '@/utils/lens/generated5';
+import {
+  useAuthenticateMutation,
+  useChallengeLazyQuery,
+  useUserProfilesLazyQuery
+} from '@/utils/lens/generated5';
 import { Errors } from '@/lib/errors';
 import { Localstorage } from '@/storage';
 import { Spinner } from './UI/Spinner';
@@ -76,7 +79,6 @@ const WalletSelector: FC<WalletSelectorProps> = ({
       if (account) {
         setHasConnected?.(true);
       }
-     
     } catch {}
   };
 
@@ -128,7 +130,6 @@ const WalletSelector: FC<WalletSelectorProps> = ({
         setCurrentProfile(currentProfile);
         setProfileId(currentProfile.id);
       }
-    
     } catch {
     } finally {
       setIsLoading(false);
@@ -153,7 +154,7 @@ const WalletSelector: FC<WalletSelectorProps> = ({
             }
             onClick={handleSign}
           >
-           Sign-In with Lens
+            Sign-In with Lens
           </Button>
         ) : (
           <SwitchNetwork toChainId={CHAIN_ID} />
@@ -161,14 +162,11 @@ const WalletSelector: FC<WalletSelectorProps> = ({
         <button
           onClick={() => {
             disconnect?.();
-            
           }}
           className="flex items-center space-x-1 text-sm underline"
         >
           <KeyIcon className="h-4 w-4" />
-          <div>
-            Change wallet
-          </div>
+          <div>Change wallet</div>
         </button>
       </div>
       {errorChallenge || errorAuthenticate || errorProfiles ? (

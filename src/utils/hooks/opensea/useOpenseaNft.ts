@@ -1,4 +1,3 @@
-
 import { OPENSEA_KEY } from '@/constants';
 import { OpenSeaNft } from '@/types/opensea-nft';
 import { useQuery } from '@tanstack/react-query';

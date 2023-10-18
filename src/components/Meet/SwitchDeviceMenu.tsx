@@ -18,10 +18,7 @@ const SwitchDeviceMenu: FC = () => {
     <>
       <button
         onClick={() => setShowSettings(!showSettings)}
-        className={cn(
-          
-          'flex h-10 w-10 items-center justify-center rounded-xl'
-        )}
+        className={cn('flex h-10 w-10 items-center justify-center rounded-xl')}
       >
         <HiAdjustments className="text-brand-500 flex h-6 w-6 items-center justify-center rounded-xl" />
       </button>

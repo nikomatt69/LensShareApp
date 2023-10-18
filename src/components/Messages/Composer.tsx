@@ -290,7 +290,6 @@ const Composer: FC<ComposerProps> = ({
           aria-label="Send message"
         >
           <div className="flex items-center space-x-2">
-            
             <PaperAirplaneIcon className="h-5 w-5" />
           </div>
         </Button>

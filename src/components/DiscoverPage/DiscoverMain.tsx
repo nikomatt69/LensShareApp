@@ -65,7 +65,6 @@ const DiscoverMain = () => {
         {selectedTab === 'suggestedaccounts' && (
           <>
             <SuggestedAccounts />
-           
           </>
         )}
         {selectedTab === 'categories' && <Categories />}

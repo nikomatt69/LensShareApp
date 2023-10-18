@@ -1,4 +1,3 @@
-
 import { Card } from '@/components/UI/Card';
 import type { FC } from 'react';
 

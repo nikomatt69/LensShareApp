@@ -772,9 +772,10 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
         response: {
           message: '',
           data: {
-            roomId: '',
-          },
-      }};
+            roomId: ''
+          }
+        }
+      };
 
       if (
         showComposerModal &&
@@ -807,7 +808,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
                   id: spaceId.response.data.roomId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
-                })  
+                })
               }
             ]
           : []),

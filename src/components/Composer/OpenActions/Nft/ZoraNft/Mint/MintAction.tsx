@@ -1,10 +1,8 @@
-
 import {
   CurrencyDollarIcon,
   CursorArrowRaysIcon
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-
 
 import Link from 'next/link';
 import { useState, type FC } from 'react';
@@ -110,7 +108,6 @@ const MintAction: FC<MintActionProps> = ({
   useUpdateEffect(() => {
     if (txnData?.transactionHash) {
       onCompleted?.();
-      
     }
   }, [isSuccess]);
 
@@ -182,13 +179,8 @@ const MintAction: FC<MintActionProps> = ({
               className="mt-5 w-full justify-center"
               icon={<CursorArrowRaysIcon className="h-5 w-5" />}
               size="md"
-             
             >
-              {saleInactiveError ? (
-                'Collect on Zora'
-              ) : (
-                'Mint on Zora'
-              )}
+              {saleInactiveError ? 'Collect on Zora' : 'Mint on Zora'}
             </Button>
           </Link>
         )
@@ -214,17 +206,13 @@ const MintAction: FC<MintActionProps> = ({
       {isLoading ? (
         <div className="flex items-center space-x-1.5">
           <Spinner size="xs" />
-          <div>
-            Minting in progress
-          </div>
+          <div>Minting in progress</div>
         </div>
       ) : null}
       {isSuccess ? (
         <div className="flex items-center space-x-1.5">
           <CheckCircleIcon className="h-5 w-5 text-green-500" />
-          <div>
-            Minted successful
-          </div>
+          <div>Minted successful</div>
         </div>
       ) : null}
     </div>

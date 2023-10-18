@@ -100,14 +100,7 @@ const BottomNav: React.FC = () => {
           </Link>
         </div>
 
-        {/* //upload */}
 
-        <div>
-          {/* //listen */}
-          <Link href="/listen">
-            <MusicalNoteIcon className="h-6 w-6 pb-1 text-blue-700" />{' '}
-          </Link>
-        </div>
 
         <div>
           {/* //messages */}

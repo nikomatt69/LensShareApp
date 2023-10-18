@@ -77,12 +77,12 @@ const NewPost: FC = () => {
           <span>New Post?</span>
         </button>
         {isSpacesEnabled && (
-        <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
-          <MicrophoneIcon
-            className="text-brand h-6 w-6"
-            onClick={openSpacesModal}
-          />
-        </button>
+          <button className="inline-flex h-10 w-10 items-center justify-center gap-2.5 rounded-lg border bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-900">
+            <MicrophoneIcon
+              className="text-brand h-6 w-6"
+              onClick={openSpacesModal}
+            />
+          </button>
         )}
       </div>
     </Card>

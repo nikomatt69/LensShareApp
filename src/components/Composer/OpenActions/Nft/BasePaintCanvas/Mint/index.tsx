@@ -1,4 +1,3 @@
-
 import { formatEther } from 'viem';
 import { base } from 'viem/chains';
 import { useContractRead } from 'wagmi';

@@ -1,5 +1,4 @@
-import { UnlonelyChannelMetadata } from "@/types/nft";
-
+import { UnlonelyChannelMetadata } from '@/types/nft';
 
 const regex = /https:\/\/www\.unlonely\.app\/channels\/(\w+)/;
 

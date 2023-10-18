@@ -2,9 +2,9 @@ import { useHuddle01, usePeers } from '@huddle01/react/hooks';
 import { Image } from '@/components/UI/Image';
 import React, { FC } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
-import type { Profile} from '@/utils/lens/generated5';
+import type { Profile } from '@/utils/lens/generated5';
 import { Icons } from '../Common/assets/Icons';
-import {  useProfilesQuery } from '@/utils/lens/generated5';
+import { useProfilesQuery } from '@/utils/lens/generated5';
 import getAvatar from '@/lib/getAvatar';
 
 const SpacesSummary: FC = () => {
@@ -29,7 +29,7 @@ const SpacesSummary: FC = () => {
   ).length;
 
   return (
-    <div className="flex items-center z-[100] justify-between pt-4">
+    <div className="z-[100] flex items-center justify-between pt-4">
       <div className="flex items-center gap-2">
         <span>{Icons.speaking}</span>
         <Image

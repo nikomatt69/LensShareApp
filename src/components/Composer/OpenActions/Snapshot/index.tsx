@@ -66,12 +66,16 @@ const Snapshot: FC<SnapshotProps> = ({ proposalId }) => {
 
   return (
     <Wrapper dataTestId={`snapshot-${proposal.id}`}>
-     <div className='text-xs font-poppins'> <div><Header proposal={proposal as Proposal} /></div>
-      <Choices
-        proposal={proposal as Proposal}
-        votes={votes as Vote[]}
-        refetch={refetch}
-      />
+      <div className="font-poppins text-xs">
+        {' '}
+        <div>
+          <Header proposal={proposal as Proposal} />
+        </div>
+        <Choices
+          proposal={proposal as Proposal}
+          votes={votes as Vote[]}
+          refetch={refetch}
+        />
       </div>
     </Wrapper>
   );

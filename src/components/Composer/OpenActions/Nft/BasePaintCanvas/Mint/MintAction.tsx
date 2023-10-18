@@ -1,4 +1,3 @@
-
 import {
   CurrencyDollarIcon,
   CursorArrowRaysIcon
@@ -133,17 +132,13 @@ const MintAction: FC<MintActionProps> = ({
       {isLoading ? (
         <div className="flex items-center space-x-1.5">
           <Spinner size="xs" />
-          <div>
-            Minting in progress
-          </div>
+          <div>Minting in progress</div>
         </div>
       ) : null}
       {isSuccess ? (
         <div className="flex items-center space-x-1.5">
           <CheckCircleIcon className="h-5 w-5 text-green-500" />
-          <div>
-            Minted successful
-          </div>
+          <div>Minted successful</div>
         </div>
       ) : null}
     </div>

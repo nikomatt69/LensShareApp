@@ -116,9 +116,8 @@ const Lobby: NextPage = () => {
   });
 
   return (
-
     <main className="bg-lobby flex h-screen flex-col items-center justify-center">
-      <MetaTags title={`${APP_NAME} Meet`}/>
+      <MetaTags title={`${APP_NAME} Meet`} />
       <div className="flex h-[35vh] w-[35vw] flex-col items-center justify-center gap-4">
         <div
           className={cn(
@@ -145,7 +144,6 @@ const Lobby: NextPage = () => {
         </div>
         <div
           className={cn(
-           
             'flex items-center justify-center self-stretch rounded-lg p-2'
           )}
         >
@@ -163,7 +161,6 @@ const Lobby: NextPage = () => {
               <button
                 onClick={stopVideoStream}
                 className={cn(
-                  
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
               >
@@ -185,7 +182,6 @@ const Lobby: NextPage = () => {
                   stopAudioStream();
                 }}
                 className={cn(
-                  
                   'flex h-10 w-10 items-center justify-center rounded-xl'
                 )}
               >
@@ -198,20 +194,19 @@ const Lobby: NextPage = () => {
         <div className="flex w-full items-center">
           <div className="flex w-full flex-col justify-center gap-1">
             <div className="flex w-full flex-col justify-center gap-1">
-           Allow Mic and Cam
+              Allow Mic and Cam
             </div>
-         
+
             <div
               className={cn(
                 resolvedTheme == 'dark' ? 'text-blue-700 ' : 'text-blue-700 ',
-                'gap-2 justify-center flex w-full items-center rounded-[10px]  backdrop-blur-[400px]'
+                'flex w-full items-center justify-center gap-2 rounded-[10px]  backdrop-blur-[400px]'
               )}
             >
-              
               <input
                 type="text"
                 placeholder="Set Usernsme"
-                className=" rounded-lg  max-w-xs bg-transparent  text-blue-700 items-center outline-none "
+                className=" max-w-xs  items-center rounded-lg  bg-transparent text-blue-700 outline-none "
                 value={displayUserName}
                 onChange={(e) => setDisplayUserName(e.target.value)}
               />

@@ -1,5 +1,4 @@
-import { UnlonelyNfcMetadata } from "@/types/nft";
-
+import { UnlonelyNfcMetadata } from '@/types/nft';
 
 const regex = /https:\/\/www\.unlonely\.app\/nfc\/(\w+)/;
 

@@ -15,6 +15,9 @@ export const LENSTOK_URL = process.env.NEXT_PUBLIC_LENSTOK_URL;
 export const APP_INFOPAGE = 'Decentralized Social Video & Message Platform';
 export const LENS_NETWORK = process.env.NEXT_PUBLIC_LENS_NETWORK ?? 'mainnet';
 
+export const GIT_COMMIT_SHA =
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
+
 export const API_URL = getEnvConfig().apiEndpoint;
 
 export const LENSHUB_PROXY = getEnvConfig().lensHubProxyAddress;
@@ -48,7 +51,6 @@ export const MAINNET_PROPOSAL_CREATOR_ADDRESS =
   '0x38B2b78246B9b162f3B365f3970ac77FB07AbF90';
 export const TESTNET_PROPOSAL_CREATOR_ADDRESS =
   '0x38B2b78246B9b162f3B365f3970ac77FB07AbF90';
-
 
 export const IPFS_FREE_UPLOAD_LIMIT = IS_MAINNET ? 5000 : 100; // in MB
 
@@ -100,7 +102,7 @@ export const SPACES_WORKER_URL = IS_MAINNET
 export const LEAFWATCH_WORKER_URL = IS_MAINNET
   ? 'https://leafwatch.lenster.xyz'
   : 'http://localhost:8089';
-  export const NFT_WORKER_URL = IS_PRODUCTION
+export const NFT_WORKER_URL = IS_PRODUCTION
   ? 'https://nft.lenshareapp.xyz'
   : 'https://nft.lenshareapp.xyz';
 
@@ -122,7 +124,7 @@ export const IMAGE_TRANSFORMATIONS = {
   SQUARE: 'tr:w-200,h-200'
 };
 export const AVATAR = 'tr:w-300,h-300';
-export const SQUARE = 'tr:w-30,h-30'
+export const SQUARE = 'tr:w-30,h-30';
 export const EXPANDED_AVATAR = 'tr:w-1000,h-1000';
 export const COVER = 'tr:w-1500,h-500';
 export const ATTACHMENT = 'tr:w-1000';
@@ -219,9 +221,6 @@ export const TAPE_APP_ID = 'tape';
 export const BUTTRFLY_APP_ID = 'buttrfly';
 export const PHAVER_APP_ID = 'phaver';
 export const DIVERSE_APP_ID = 'phaver';
-
-
-
 
 export const WMATIC_TOKEN_ADDRESS = IS_MAINNET
   ? '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'

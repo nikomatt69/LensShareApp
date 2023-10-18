@@ -51,7 +51,7 @@ const PublicationHeader: FC<PublicationHeaderProps> = ({
     <div
       className={cn(
         quoted ? 'pb-2' : 'pb-4',
-        'relative m-2 flex justify-between space-x-1.5 pt-2'
+        'relative m-2 flex justify-between space-x-1.5 pt-2 z-1'
       )}
       data-testid={`publication-${publication.id}-header`}
     >

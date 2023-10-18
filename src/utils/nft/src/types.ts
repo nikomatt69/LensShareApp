@@ -7,5 +7,4 @@ export interface Env {
 export type WorkerRequest = {
   req: Request;
   env: Env;
-
 } & IRequestStrict;

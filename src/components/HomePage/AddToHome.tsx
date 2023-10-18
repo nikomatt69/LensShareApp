@@ -21,8 +21,12 @@ export function AddToHome() {
 
   return (
     <div onClick={hide}>
-      <button onClick={hide}><XCircleIcon className='h-2 w-2'/> </button>
-      <button onClick={promptToInstall}><MdAddHome className='h-2 w-2'/> </button>
+      <button onClick={hide}>
+        <XCircleIcon className="h-2 w-2" />{' '}
+      </button>
+      <button onClick={promptToInstall}>
+        <MdAddHome className="h-2 w-2" />{' '}
+      </button>
     </div>
   );
 }

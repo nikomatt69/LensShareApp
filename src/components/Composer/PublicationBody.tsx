@@ -64,7 +64,6 @@ const PublicationBody: FC<PublicationBodyProps> = ({
 
   const filterId = snapshotProposalId || quotedPublicationId;
 
-
   if (filterId) {
     for (const url of urls) {
       if (url.includes(filterId)) {
@@ -72,7 +71,6 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       }
     }
   }
-
 
   const [content, setContent] = useState(rawContent);
 
@@ -121,7 +119,6 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       </Markup>
       {canShowMore && (
         <div className="lt-text-blue-700 mt-4 flex items-center space-x-1 text-sm font-bold">
-          
           <Link href={`/post/${id}`}>Show more</Link>
         </div>
       )}
@@ -139,8 +136,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           onData={onOembedData}
         />
       ) : null}
-      {showSpacesLobby ? (<Space publication={publication} />):(null)}
-     {showSpacesWindow ? (<PreviewSpaces />):(null)}
+      {showSpacesLobby ? <Space publication={publication} /> : null}
+      {showSpacesWindow ? <PreviewSpaces /> : null}
 
       {showQuotedPublication ? (
         <Quote

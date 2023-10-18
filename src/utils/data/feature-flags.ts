@@ -37,7 +37,7 @@ export const featureFlags = [
   },
   {
     key: FeatureFlag.Spaces,
-    enabledFor: [...lensshareMembers,]
+    enabledFor: [...lensshareMembers]
   },
   {
     key: FeatureFlag.ForYou,

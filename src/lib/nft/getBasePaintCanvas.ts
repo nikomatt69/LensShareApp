@@ -1,4 +1,4 @@
-import { BasePaintCanvasMetadata } from "@/types/nft";
+import { BasePaintCanvasMetadata } from '@/types/nft';
 
 const regex = /https:\/\/basepaint\.art\/mint\/(\d+)/;
 

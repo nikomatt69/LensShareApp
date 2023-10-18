@@ -56,7 +56,6 @@ const MetaTags: FC<MetaTagsProps> = ({
         href="/opensearch.xml"
         title={APP_NAME}
       />
-
     </Head>
   );
 };

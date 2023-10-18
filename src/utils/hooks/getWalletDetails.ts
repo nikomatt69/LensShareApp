@@ -1,5 +1,4 @@
-import { STATIC_IMAGES_URL } from "@/constants";
-
+import { STATIC_IMAGES_URL } from '@/constants';
 
 interface WalletDetails {
   name: string;
@@ -17,7 +16,7 @@ const getWalletDetails = (name: string): WalletDetails => {
     WalletConnect: {
       name: 'WalletConnect',
       logo: `${STATIC_IMAGES_URL}/wallets/walletconnect.svg`
-    },
+    }
   };
   const defaultDetails: WalletDetails = {
     name,

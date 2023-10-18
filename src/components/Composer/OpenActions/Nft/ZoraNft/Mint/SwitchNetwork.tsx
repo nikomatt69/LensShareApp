@@ -1,7 +1,6 @@
 import { Button } from '@/components/UI/Button';
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
 
-
 import type { FC } from 'react';
 import toast from 'react-hot-toast';
 import { useSwitchNetwork } from 'wagmi';
@@ -34,7 +33,6 @@ const SwitchNetwork: FC<SwitchNetworkProps> = ({
         } else {
           toast.error(`Please change your network wallet!`);
         }
-       
       }}
     >
       {title}

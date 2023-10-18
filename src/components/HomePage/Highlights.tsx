@@ -1,5 +1,9 @@
-
-import { FeedHighlightsRequest, Profile, Publication, useFeedHighlightsQuery } from '@/utils/lens/generated5';
+import {
+  FeedHighlightsRequest,
+  Profile,
+  Publication,
+  useFeedHighlightsQuery
+} from '@/utils/lens/generated5';
 import { t } from '@lingui/macro';
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
@@ -14,7 +18,18 @@ import { ErrorMessage } from '../ErrorMessage';
 import { Card } from '../UI/Card';
 import QueuedPublication from '../Composer/QueuedPublication';
 import SinglePublication from '../Composer/SinglePublication2';
-import { APP_ID, LENSTUBE_APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, ORB_APP_ID, RIFF_APP_ID, BUTTRFLY_APP_ID, PHAVER_APP_ID } from '@/constants';
+import {
+  APP_ID,
+  LENSTUBE_APP_ID,
+  LENSTER_APP_ID,
+  LENSTOK_APP_ID,
+  ORB_APP_ID,
+  RIFF_APP_ID,
+  BUTTRFLY_APP_ID,
+  PHAVER_APP_ID,
+  STATIC_ASSETS_URL
+} from '@/constants';
+import imageKit from '@/lib/imageKit';
 
 const Highlights: FC = (profile) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -74,6 +89,16 @@ const Highlights: FC = (profile) => {
   }
 
   return (
+    <div>
+    <div className="mb-5 flex items-center space-x-2">
+        <img
+          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          draggable={false}
+          className="h-12 w-12 md:h-16 md:w-16"
+          alt="lensshare"
+        />
+        <h1 className="text-2xl font-semibold">Highlights</h1>
+      </div>
     <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
       {txnQueue.map((txn) =>
         txn?.type === OptmisticPublicationType.NewPost ? (
@@ -90,11 +115,12 @@ const Highlights: FC = (profile) => {
           publication={publication as Publication}
           profile={profile as Profile}
           showCount
-          tags=''
+          tags=""
         />
       ))}
       {hasMore ? <span ref={observe} /> : null}
     </Card>
+    </div>
   );
 };
 

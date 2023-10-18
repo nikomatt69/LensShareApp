@@ -65,13 +65,11 @@ const BasePaintCanvas: FC<BasePaintCanvasProps> = ({
         className="h-[400px] max-h-[400px] w-full rounded-t-xl object-cover"
         style={{ imageRendering: 'pixelated' }}
       />
-      <div className="flex-col items-center justify-between border-t px-3 py-2 dark:border-gray-700">
-        <div className="mr-5 flex py-2 flex-wrap items-center gap-2">
-          
-          <div className="text-sm font-serif">
+      <div className="flex-col items-center justify-between border-t rounded-b-xl px-3 py-2 dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
+        <div className="mr-5 flex flex-wrap items-center gap-2 py-2">
+          <div className="font-serif text-sm">
             Day #{canvas.id}: {theme}
           </div>
-         
         </div>
         {canMint ? (
           <>
@@ -82,7 +80,6 @@ const BasePaintCanvas: FC<BasePaintCanvasProps> = ({
               onClick={() => {
                 setQuantity(1);
                 setShowMintModal(true);
-               
               }}
             >
               Mint
@@ -106,7 +103,6 @@ const BasePaintCanvas: FC<BasePaintCanvasProps> = ({
               className="text-xs"
               icon={<CursorArrowRaysIcon className="h-4 w-4" />}
               size="sm"
-              
             >
               Contribute
             </Button>
@@ -124,7 +120,6 @@ const BasePaintCanvas: FC<BasePaintCanvasProps> = ({
               className="text-xs"
               icon={<CursorArrowRaysIcon className="h-4 w-4" />}
               size="sm"
-            
             >
               View on OpenSea
             </Button>

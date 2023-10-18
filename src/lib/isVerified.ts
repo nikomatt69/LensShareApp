@@ -1,5 +1,5 @@
-import { IS_MAINNET } from "@/constants";
-import { verifiedMembers } from "@/store/app";
+import { IS_MAINNET } from '@/constants';
+import { verifiedMembers } from '@/store/app';
 
 /**
  * Checks whether a profile is verified or not.

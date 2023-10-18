@@ -1,4 +1,4 @@
-import { MisuseType, misused } from "@/utils/data/misused";
+import { MisuseType, misused } from '@/utils/data/misused';
 
 /**
  * Get misused details.

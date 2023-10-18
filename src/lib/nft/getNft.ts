@@ -1,5 +1,3 @@
-
-
 import { NftMetadata } from '@/types/nft';
 import getBasePaintCanvas from './getBasePaintCanvas';
 import getUnlonelyChannel from './getUnlonelyChannel';

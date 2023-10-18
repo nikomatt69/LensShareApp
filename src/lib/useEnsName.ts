@@ -1,4 +1,3 @@
-
 import { resolveEns } from '@/utils/resolveEns';
 import { useQuery } from '@tanstack/react-query';
 

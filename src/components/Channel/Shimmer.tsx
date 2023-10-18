@@ -35,7 +35,6 @@ const ChannelPageShimmer: FC = () => {
           </div>
         </div>
       </GridItemFour>
-      
     </GridLayout>
   );
 };

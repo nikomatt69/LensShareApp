@@ -26,7 +26,11 @@ import {
   CogIcon,
   MapIcon
 } from '@heroicons/react/24/outline';
-import { ChatBubbleOvalLeftIcon, CheckBadgeIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import {
+  ChatBubbleOvalLeftIcon,
+  CheckBadgeIcon,
+  ExclamationCircleIcon
+} from '@heroicons/react/24/solid';
 import buildConversationId from '@/utils/functions/buildConversationId';
 import { buildConversationKey } from '@/utils/functions/conversationKey';
 import router, { useRouter } from 'next/router';
@@ -70,7 +74,6 @@ import getMisuseDetails from '@/lib/getMisuseDetails';
 import isVerified from '@/lib/isVerified';
 import hasMisused from '@/lib/hasMisused';
 import IsVerified from '../IsVerified';
-
 
 interface Props {
   profile: Profile;
@@ -177,8 +180,7 @@ const ProfileCard: FC<Props> = ({ profile, setFollowing, following }) => {
               {sanitizeDisplayName(profile?.name) ??
                 formatHandle(profile?.handle)}
             </div>
-            <IsVerified id={profile?.id} size='lg' />
-         
+            <IsVerified id={profile?.id} size="lg" />
           </div>
           <div
             className="flex items-center space-x-3"

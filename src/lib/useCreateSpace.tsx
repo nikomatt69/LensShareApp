@@ -1,4 +1,4 @@
-import { SPACES_WORKER_URL } from '@/constants';
+import { BASE_URL, SPACES_WORKER_URL } from '@/constants';
 import axios from 'axios';
 import getBasicWorkerPayload from './getBasicWorkerPayload';
 import { useSpacesStore } from '@/store/spaces';

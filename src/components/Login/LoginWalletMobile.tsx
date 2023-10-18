@@ -106,10 +106,9 @@ const LoginWalletMobile: FC = () => {
         </button>
       ) : (
         <SwitchNetwork
-        className="mt-5 w-full justify-center"
-        toChainId={CHAIN_ID}
-        
-      />
+          className="mt-5 w-full justify-center"
+          toChainId={CHAIN_ID}
+        />
       )}
     </div>
   ) : (

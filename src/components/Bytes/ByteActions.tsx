@@ -30,7 +30,6 @@ import Like from '../Publication/Actions/Like';
 
 type Props = {
   video: Publication;
-
 };
 
 const ByteActions: FC<Props> = ({ video }) => {
@@ -61,14 +60,13 @@ const ByteActions: FC<Props> = ({ video }) => {
     <div className="w-12 flex-col items-center justify-between md:flex md:w-14">
       <div className="flex justify-center space-y-4 p-2 md:flex-col"></div>
       <div className="items-center space-y-1.5 pt-2.5 md:flex md:flex-col">
-       
         <div className="pb-2 pr-2 text-white md:pr-5 md:text-inherit">
-        <Like publication={video} showCount={true} />
+          <Like publication={video} showCount={true} />
         </div>
         <div className="w-full pb-1 pr-6 text-center text-white md:text-inherit">
           <CommentModal trigger publication={video} />
         </div>
-        <button className="mt-0.5 pl-1.5  pb-2 dark:text-white md:pr-5">
+        <button className="mt-0.5 pb-2  pl-1.5 dark:text-white md:pr-5">
           <ShareMenu publication={video as Publication} showCount={true} />
         </button>
         {video?.collectModule?.__typename !== 'RevertCollectModuleSettings' && (

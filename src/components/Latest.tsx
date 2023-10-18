@@ -66,13 +66,14 @@ const Latest = () => {
     noRandomize: false,
     sources: [
       APP_ID,
-      LENSTUBE_APP_ID, 
+      LENSTUBE_APP_ID,
       LENSTER_APP_ID,
       LENSTOK_APP_ID,
       ORB_APP_ID,
       RIFF_APP_ID,
       BUTTRFLY_APP_ID,
-      PHAVER_APP_ID],
+      PHAVER_APP_ID
+    ],
     publicationTypes: [PublicationTypes.Post],
     customFilters: LENS_CUSTOM_FILTERS,
     metadata: {
@@ -182,7 +183,7 @@ const Latest = () => {
       <Head>
         <meta name="theme-color" content="#000000" />
       </Head>
-      <MetaTags  />
+      <MetaTags />
       <div className="mb-5 flex items-center space-x-2">
         <img
           src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}

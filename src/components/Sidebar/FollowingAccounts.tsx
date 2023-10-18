@@ -15,7 +15,6 @@ import { useAccount } from 'wagmi';
 import formatHandle from '@/utils/functions/formatHandle';
 
 const FollowingAccounts = () => {
-  
   const currentProfile = useAppStore((state) => state.currentProfile);
   console.log('ADDRESSS', currentProfile?.id);
   const { address } = useAccount();
@@ -57,7 +56,7 @@ const FollowingAccounts = () => {
               </div>
               <div />
               <div>
-                <p className="text-sm flex items-center gap-1 font-bold lowercase text-primary dark:text-white">
+                <p className="flex items-center gap-1 text-sm font-bold lowercase text-primary dark:text-white">
                   {following?.profile.name}
                 </p>
                 <p className="text-xs capitalize text-gray-400">

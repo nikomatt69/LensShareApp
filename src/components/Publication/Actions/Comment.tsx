@@ -21,9 +21,8 @@ const Comment: FC<CommentProps> = ({ publication, showCount }) => {
       ? publication?.mirrorOf?.stats?.commentsTotal
       : publication?.stats?.commentsTotal;
   const iconClassName = showCount
-  ? 'w-[20px] sm:w-[20px] '
-  : 'w-[20px] sm:w-[18px]';
-
+    ? 'w-[20px] sm:w-[20px] '
+    : 'w-[20px] sm:w-[18px]';
 
   return (
     <div className="flex items-center space-x-1 text-blue-500">

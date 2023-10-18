@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
-import type { Profile, } from '@/utils/lens/generatedLenster';
+import type { Profile } from '@/utils/lens/generatedLenster';
 import { Icons } from '../Common/assets/Icons';
 import { useProfilesQuery } from '@/utils/lens/generatedLenster';
 import Slug from '@/components/UI/Slug';

@@ -8,7 +8,7 @@ import React, {
   useState
 } from 'react';
 import { useSpacesStore } from 'src/store/spaces';
-import type { Profile} from '@/utils/lens/generated5';
+import type { Profile } from '@/utils/lens/generated5';
 import { Icons } from '../Common/assets/Icons';
 import { useProfilesQuery } from '@/utils/lens/generatedLenster';
 import Slug from '@/components/UI/Slug';

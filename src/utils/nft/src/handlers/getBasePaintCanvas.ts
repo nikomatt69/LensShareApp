@@ -1,5 +1,3 @@
-
-
 import response from '../helper/response';
 import type { WorkerRequest } from '../types';
 

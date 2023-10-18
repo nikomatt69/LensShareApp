@@ -1,4 +1,3 @@
-
 import { createCors, error, Router, status } from 'itty-router';
 
 import getBasePaintCanvas from './handlers/getBasePaintCanvas';
@@ -33,12 +32,8 @@ router
   .all('*', () => error(404));
 
 export default {
-  async fetch(
-    request: Request,
-    env: Env,
-  
-  ): Promise<Response> {
-    const incomingRequest = buildRequest(request, env, );
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const incomingRequest = buildRequest(request, env);
 
     return await router
       .handle(incomingRequest)

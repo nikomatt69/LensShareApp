@@ -22,9 +22,21 @@ import NewPost from '../Composer/Post/New';
 import { Modal } from '../UI/Modal';
 import NewPublication from '../Composer/NewPublication';
 import { useGlobalModalStateStore } from '@/store/modals';
-import { APP_ID, BUTTRFLY_APP_ID, LENSTER_APP_ID, LENSTOK_APP_ID, LENSTUBE_APP_ID, ORB_APP_ID, PHAVER_APP_ID, RIFF_APP_ID, SCROLL_ROOT_MARGIN } from '@/constants';
+import {
+  APP_ID,
+  BUTTRFLY_APP_ID,
+  LENSTER_APP_ID,
+  LENSTOK_APP_ID,
+  LENSTUBE_APP_ID,
+  ORB_APP_ID,
+  PHAVER_APP_ID,
+  RIFF_APP_ID,
+  SCROLL_ROOT_MARGIN,
+  STATIC_ASSETS_URL
+} from '@/constants';
 import Loader from '../UI/Loader';
 import { useTransactionPersistStore } from '@/store/transaction';
+import imageKit from '@/lib/imageKit';
 
 const Timeline: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -61,7 +73,6 @@ const Timeline: FC = () => {
 
   // Variables
   const request: FeedRequest = {
-
     profileId: seeThroughProfile?.id ?? currentProfile?.id,
     limit: 30,
     feedEventItemTypes: getFeedEventItems()
@@ -111,6 +122,16 @@ const Timeline: FC = () => {
   }
 
   return (
+    <div>
+    <div className="mb-5 flex items-center space-x-2">
+        <img
+          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          draggable={false}
+          className="h-12 w-12 md:h-16 md:w-16"
+          alt="lensshare"
+        />
+        <h1 className="text-2xl font-semibold">Timeline</h1>
+      </div>
     <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
       {txnQueue.map(
         (txn) =>
@@ -123,7 +144,6 @@ const Timeline: FC = () => {
       {publications?.map((publication, index) => (
         <SinglePublication
           profile={currentProfile as Profile}
-    
           key={`${publication?.root.id}_${index}`}
           isFirst={index === 0}
           isLast={index === publications.length - 1}
@@ -135,6 +155,7 @@ const Timeline: FC = () => {
       ))}
       {hasMore ? <span ref={observe} /> : null}
     </Card>
+    </div>
   );
 };
 

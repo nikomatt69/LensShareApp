@@ -21,7 +21,6 @@ class LensshareDocument extends Document {
           <meta name="application-name" content="LensShare" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          
 
           {/* Icons */}
           <link

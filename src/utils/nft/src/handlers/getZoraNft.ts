@@ -1,4 +1,3 @@
-
 import urlcat from 'urlcat';
 
 import type { WorkerRequest } from '../types';

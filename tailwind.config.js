@@ -29,7 +29,7 @@ module.exports = {
         900: '900px',
         458: '458px'
       },
-      
+
       backgroundColor: {
         primary: '#000',
         blur: '#030303'

@@ -32,7 +32,7 @@ const CommentModal: FC<Props> = ({ trigger, publication }) => {
   const subscriber = publication.profile;
   const [following, setFollowing] = useState(false);
   const currentProfile = useAppStore((state) => state.currentProfile);
- 
+
   useEffect(() => {
     if (subscriber?.isFollowedByMe === true) {
       setFollowing(true);
@@ -51,7 +51,7 @@ const CommentModal: FC<Props> = ({ trigger, publication }) => {
         onClick={() => setShow(true)}
       >
         <div className="flex items-center space-x-1 text-blue-500">
-           <ChatBubbleOvalLeftEllipsisIcon className='h-5 w-5' />
+          <ChatBubbleOvalLeftEllipsisIcon className="h-5 w-5" />
         </div>
         {trigger}
       </button>

@@ -1,12 +1,18 @@
-
-
 import { NextApiRequest, NextApiResponse } from 'next';
-import { LENSTER_POLLS_SPACE, MAINNET_PROPOSAL_CREATOR_ADDRESS, MAINNET_SNAPSHOT_SEQUNECER_URL, MAINNET_SNAPSHOT_URL, TESTNET_PROPOSAL_CREATOR_ADDRESS, TESTNET_SNAPSHOT_SEQUNECER_URL, TESTNET_SNAPSHOT_URL } from "@/constants";
-import { Errors } from "@/lib/errors";
-import publicClient from "@/lib/publicClient";
-import response from "@/lib/response";
-import walletClient from "@/lib/walletClient";
-import { keysValidator } from "@/utils/data/keysValidator";
+import {
+  LENSTER_POLLS_SPACE,
+  MAINNET_PROPOSAL_CREATOR_ADDRESS,
+  MAINNET_SNAPSHOT_SEQUNECER_URL,
+  MAINNET_SNAPSHOT_URL,
+  TESTNET_PROPOSAL_CREATOR_ADDRESS,
+  TESTNET_SNAPSHOT_SEQUNECER_URL,
+  TESTNET_SNAPSHOT_URL
+} from '@/constants';
+import { Errors } from '@/lib/errors';
+import publicClient from '@/lib/publicClient';
+import response from '@/lib/response';
+import walletClient from '@/lib/walletClient';
+import { keysValidator } from '@/utils/data/keysValidator';
 import serializedTypedData from '@/lib/serializedTypedData';
 type ExtensionRequest = {
   title: string;
@@ -94,7 +100,7 @@ async function createPoll(body: ExtensionRequest) {
 
   const sequencerResponse = await fetch(sequencerUrl, {
     method: 'POST',
-  
+
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       address: relayerAddress,
@@ -114,12 +120,16 @@ async function createPoll(body: ExtensionRequest) {
     snapshotUrl: `${snapshotUrl}/#/${LENSTER_POLLS_SPACE}/proposal/${snapshotResponse.id}`
   };
 }
- 
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const body = req.body as ExtensionRequest;
   if (!body) {
-    return res.status(500).json({ success: false, error: Errors.SomethingWentWrong })
+    return res
+      .status(500)
+      .json({ success: false, error: Errors.SomethingWentWrong });
   }
 
   const missingKeysError = keysValidator(requiredKeys, body);
@@ -131,6 +141,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const result = await createPoll(body);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ success: false, error:  Errors.SomethingWentWrong });
+    res.status(500).json({ success: false, error: Errors.SomethingWentWrong });
   }
 }

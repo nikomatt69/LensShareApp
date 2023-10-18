@@ -97,65 +97,62 @@ const MessageHeader: FC<MessageHeaderProps> = ({
         )}
       </div>
       {profile && (
-  <div className='flex mx-3 mt-1'>
-    <img
-      src="/camera-video.svg"
-      onClick={async () => {
-        const apiCall = await fetch('/api/create-room', {
-          mode: 'no-cors',
-          method: 'POST',
-          body: JSON.stringify({
-            title: 'LensShare-Space'
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
-          }
-        });
-        const data = (await apiCall.json()) as {
-          data: { roomId: string };
-        };
-        const { roomId } = data.data;
-        const currentUrl = window.location.href;
-        const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
-        const meetingUrl = `${url}/meet/${roomId}`;
-        sendMessage(
-          `VideoCall Incoming at ${url}/meet/${roomId}`,
-          ContentTypeText
-        );
+        <div className="mx-3 mt-1 flex">
+          <img
+            src="/camera-video.svg"
+            onClick={async () => {
+              const apiCall = await fetch('/api/create-room', {
+                mode: 'no-cors',
+                method: 'POST',
+                body: JSON.stringify({
+                  title: 'LensShare-Space'
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
+                }
+              });
+              const data = (await apiCall.json()) as {
+                data: { roomId: string };
+              };
+              const { roomId } = data.data;
+              const currentUrl = window.location.href;
+              const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+              const meetingUrl = `${url}/meet/${roomId}`;
+              sendMessage(
+                `VideoCall Incoming at ${url}/meet/${roomId}`,
+                ContentTypeText
+              );
 
-        // Instead of sending a message, set the meeting URL in the state
-        setShow(true);
-        setMeetingUrl(meetingUrl);
-      }}
-      className="mb-2 mr-4  inline h-8 w-8 cursor-pointer"
-    />
-    <div className='mx-3 mt-2 '>
-
-    {show && (
-      <Link href={meetingUrl}>
-        
-          <BiPhoneIncoming className='h-6 w-6 text-green-500'/>
-        
-      </Link>
-    )}
+              // Instead of sending a message, set the meeting URL in the state
+              setShow(true);
+              setMeetingUrl(meetingUrl);
+            }}
+            className="mb-2 mr-4  inline h-8 w-8 cursor-pointer"
+          />
+          <div className="mx-3 mt-2 ">
+            {show && (
+              <Link href={meetingUrl}>
+                <BiPhoneIncoming className="h-6 w-6 text-green-500" />
+              </Link>
+            )}
+          </div>
+          <div className="mx-2 ">
+            {!following ? (
+              <FollowButton
+                profile={profile}
+                setFollowing={setFollowingWrapped}
+              />
+            ) : (
+              <UnfollowButton
+                profile={profile}
+                setFollowing={setFollowingWrapped}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </div>
-    <div className='mx-2 '>
-    {!following ? (
-      <FollowButton
-        profile={profile}
-        setFollowing={setFollowingWrapped}
-      />
-    ) : (
-      <UnfollowButton
-        profile={profile}
-        setFollowing={setFollowingWrapped}
-      />
-    )}
-    </div>
-  </div>
- )}
-  </div>
   );
 };
 export default MessageHeader;

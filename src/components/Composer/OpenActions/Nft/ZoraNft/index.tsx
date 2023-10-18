@@ -3,7 +3,6 @@ import {
   RectangleStackIcon
 } from '@heroicons/react/24/outline';
 
-
 import Link from 'next/link';
 import { type FC, useState } from 'react';
 
@@ -70,7 +69,7 @@ const ZoraNft: FC<ZoraNftProps> = ({ nftMetadata, publication }) => {
 
   return (
     <Card
-      className="mt-3 flex-col"
+      className="mt-3 flex-col "
       forceRounded
       onClick={(event) => stopEventPropagation(event)}
     >
@@ -82,16 +81,16 @@ const ZoraNft: FC<ZoraNftProps> = ({ nftMetadata, publication }) => {
         })}
         className="h-[400px] max-h-[400px] w-full rounded-t-xl object-cover"
       />
-      <div className="flex-col py-1 items-center justify-between border-t px-3 py-2 dark:border-gray-700">
-        <div className="flex-col py-1 items-center space-x-2">
+      <div className="flex-col items-center justify-between border-t px-3 py-1 py-2 rounded-b-xl dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
+        <div className="flex-col items-center space-x-2 py-1">
           <Tooltip
             placement="right"
             content={getZoraChainInfo(nft.chainId).name}
-            className='datk:text-white text-black'
+            className="datk:text-white text-black"
           >
             <img src={getZoraChainInfo(nft.chainId).logo} className="h-5 w-5" />
           </Tooltip>
-          <div className="text-xs py-1 font-serif">{nft.name}</div>
+          <div className="py-1 font-serif text-xs">{nft.name}</div>
           {nft.contractType === 'ERC1155_COLLECTION' ? (
             <Tooltip placement="right" content={`ERC-1155 Collection`}>
               <RectangleStackIcon className="h-4 w-4" />
@@ -108,7 +107,6 @@ const ZoraNft: FC<ZoraNftProps> = ({ nftMetadata, publication }) => {
                 setQuantity(1);
                 setCanMintOnHey(false);
                 setShowMintModal(true);
-               
               }}
             >
               Mint
@@ -129,11 +127,9 @@ const ZoraNft: FC<ZoraNftProps> = ({ nftMetadata, publication }) => {
               icon={<CursorArrowRaysIcon className="h-4 w-4" />}
               size="sm"
             >
-              {nft.contractType === 'ERC1155_COLLECTION' ? (
-               'Mint all on Zora'
-              ) : (
-               'Mint on Zora'
-              )}
+              {nft.contractType === 'ERC1155_COLLECTION'
+                ? 'Mint all on Zora'
+                : 'Mint on Zora'}
             </Button>
           </Link>
         )}

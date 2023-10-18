@@ -17,7 +17,10 @@ import UnfollowButton from '../Buttons/UnfollowButton';
 import FollowButton from '../Buttons/FollowButton';
 import getProfileAttribute from '@/lib/getProfileAttribute';
 import { getTwitterFormat } from '@/lib/formatTime4';
-import { CheckBadgeIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import {
+  CheckBadgeIcon,
+  ExclamationCircleIcon
+} from '@heroicons/react/24/solid';
 import hasMisused from '@/lib/hasMisused';
 import isVerified from '@/lib/isVerified';
 import IsVerified from '../IsVerified';
@@ -84,10 +87,10 @@ const UserProfile: FC<UserProfileProps> = ({
               formatHandle(profile?.handle)}
           </div>
         </div>
-        <IsVerified id={profile?.id} size='sm' />
-      {hasMisused(profile.id) ? (
-        <ExclamationCircleIcon className="mr-2 h-4 w-4 text-red-500" />
-      ) : null}
+        <IsVerified id={profile?.id} size="sm" />
+        {hasMisused(profile.id) ? (
+          <ExclamationCircleIcon className="mr-2 h-4 w-4 text-red-500" />
+        ) : null}
 
         {showStatus && hasStatus ? (
           <div className="lt-text-gray-500 flex items-center">

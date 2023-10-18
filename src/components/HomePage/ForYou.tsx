@@ -1,5 +1,8 @@
-
-import { Publication, PublicationForYouRequest, useForYouQuery } from '@/utils/lens/generated5';
+import {
+  Publication,
+  PublicationForYouRequest,
+  useForYouQuery
+} from '@/utils/lens/generated5';
 import type { FC } from 'react';
 import { useInView } from 'react-cool-inview';
 import { OptmisticPublicationType } from 'src/enums';
@@ -13,6 +16,8 @@ import { ErrorMessage } from '../UI/ErrorMessage';
 import { Card } from '../UI/Card';
 import QueuedPublication from '../Composer/QueuedPublication';
 import SinglePublication from '../Composer/SinglePublication2';
+import imageKit from '@/lib/imageKit';
+import { STATIC_ASSETS_URL } from '@/constants';
 
 const ForYou: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -24,8 +29,7 @@ const ForYou: FC = () => {
   // Variables
   const request: PublicationForYouRequest = {
     for: seeThroughProfile?.id ?? currentProfile?.id,
-    limit: 30,
-    
+    limit: 30
   };
   const reactionRequest = currentProfile
     ? { profileId: currentProfile?.id }
@@ -33,7 +37,6 @@ const ForYou: FC = () => {
   const profileId = currentProfile?.id ?? null;
 
   const { data, loading, error, fetchMore } = useForYouQuery({
-    
     variables: { request, reactionRequest, profileId }
   });
 
@@ -58,7 +61,7 @@ const ForYou: FC = () => {
   });
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (publications?.length === 0) {
@@ -75,6 +78,16 @@ const ForYou: FC = () => {
   }
 
   return (
+    <div>
+    <div className="mb-5 flex items-center space-x-2">
+        <img
+          src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
+          draggable={false}
+          className="h-12 w-12 md:h-16 md:w-16"
+          alt="lensshare"
+        />
+        <h1 className="text-2xl font-semibold">For You</h1>
+      </div>
     <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
       {txnQueue.map((txn) =>
         txn?.type === OptmisticPublicationType.NewPost ? (
@@ -91,11 +104,12 @@ const ForYou: FC = () => {
           publication={publication as Publication}
           profile={profileId}
           showCount
-          tags=''
+          tags=""
         />
       ))}
       {hasMore ? <span ref={observe} /> : null}
     </Card>
+    </div>
   );
 };
 

@@ -31,7 +31,7 @@ const CuratedHome = () => {
     limit: 6,
     noRandomize: false,
     publicationTypes: [PublicationTypes.Post],
- 
+
     metadata: {
       mainContentFocus: [PublicationMainFocus.Audio]
     }

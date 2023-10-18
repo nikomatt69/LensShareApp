@@ -11,7 +11,6 @@ import { Profile } from '@/utils/lens/generatedLenster';
 
 const Mention: FC<MarkupLinkProps> = ({ href, title = href }) => {
   const handle = title?.slice(1);
-  
 
   if (!handle) {
     return null;

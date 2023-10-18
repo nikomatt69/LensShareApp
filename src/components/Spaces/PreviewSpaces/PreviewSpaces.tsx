@@ -28,7 +28,6 @@ const PreviewSpaces: FC = () => {
     initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
   });
 
-
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {
     joinLobby(space.id, lensAccessToken);
   });

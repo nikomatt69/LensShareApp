@@ -130,10 +130,10 @@ export const useSpacesStore = create<SpacesState>((set, get) => ({
   activeSpeakerDevice: null,
   setActiveSpeakerDevice: (activeSpeakerDevice) =>
     set(() => ({ activeSpeakerDevice })),
-    spacesTimeInHour: '00',
-    setSpacesTimeInHour: (spacesTimeInHour) => set(() => ({ spacesTimeInHour })),
-    spacesTimeInMinute: '00',
-    setSpacesTimeInMinute: (spacesTimeInMinute) =>
-      set(() => ({ spacesTimeInMinute })),
-    isSpacesTimeInAM: true
+  spacesTimeInHour: '00',
+  setSpacesTimeInHour: (spacesTimeInHour) => set(() => ({ spacesTimeInHour })),
+  spacesTimeInMinute: '00',
+  setSpacesTimeInMinute: (spacesTimeInMinute) =>
+    set(() => ({ spacesTimeInMinute })),
+  isSpacesTimeInAM: true
 }));

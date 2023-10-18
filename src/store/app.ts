@@ -37,7 +37,6 @@ interface AppPersistState {
   setStaffMode: (staffMode: boolean) => void;
   modMode: boolean;
   setModMode: (modMode: boolean) => void;
-
 }
 
 export const useAppPersistStore = create(

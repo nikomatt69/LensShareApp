@@ -18,7 +18,7 @@ interface EmbedProps {
 const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
   return (
     <div
-      className="mt-4 truncate text-sm sm:w-2/6"
+      className="mt-4 truncate text-sm sm:w-4/6"
       data-testid={`normal-oembed-${og.url}`}
     >
       <Link
@@ -30,33 +30,19 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         rel="noreferrer noopener"
       >
         <Card forceRounded>
-          {og.isLarge && og.image? (
-            <Image
-              className="divider inline-flex aspect-2 w-full  object-cover"
-              onError={({ currentTarget }) => {
-                currentTarget.src = og.image as string;
-              }}
-              height={30}
-              width={30}
-              src={imageKit(og.image , SQUARE)}
-              alt="Thumbnail"
-            />
-          ) : null}
+          
           <div className="flex items-center">
-            {!og.isLarge && og.image ? (
-              <Image
-                className="h-36 w-36 rounded-l-xl border-r dark:border-gray-700"
-                height={30}
-                width={30}
-                onError={({ currentTarget }) => {
-                  currentTarget.src = og.image as string;
-                }}
-                src={imageKit(og.image , SQUARE)}
-                alt="Thumbnail"
-              />
-            ) : null}
+            
             <div className="truncate break-words p-5">
               <div className="space-y-1.5 truncate break-words">
+              {og.title ? (
+                  <div className=" line-clamp-3 whitespace-break-spaces font-serif">{og.title}</div>
+                ) : null}
+                {og.description ? (
+                  <div className="lt-text-gray-500 line-clamp-2 whitespace-break-spaces">
+                    {og.description}
+                  </div>
+                ) : null}
                 {og.site ? (
                   <div className="flex items-center space-x-2 pt-1.5">
                     {og.favicon ? (

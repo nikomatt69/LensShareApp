@@ -1,9 +1,8 @@
-
 import SmallWalletProfile from '@/components/Composer/SmallWalletProfile';
 import SmallUserProfile from '@/components/SmallUserProfile';
 import Loader from '@/components/UI/Loader';
 import { useDefaultProfileQuery } from '@/utils/lens/generated5';
-import { Profile,  } from '@/utils/lens/generatedLenster';
+import { Profile } from '@/utils/lens/generatedLenster';
 import { type FC } from 'react';
 import type { Address } from 'viem';
 
@@ -25,7 +24,7 @@ const MintedBy: FC<MintedByProps> = ({ address }) => {
     <div className="mb-4 flex items-center gap-x-2">
       <span>by</span>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : data?.defaultProfile ? (
         <SmallUserProfile
           profile={data.defaultProfile as Profile}

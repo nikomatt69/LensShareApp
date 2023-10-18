@@ -11,7 +11,6 @@ import type { FC } from 'react';
 import cn from '../UI/cn';
 import useEnsName from '@/lib/useEnsName';
 
-
 interface SmallWalletProfileProps {
   wallet: Wallet;
   smallAvatar?: boolean;

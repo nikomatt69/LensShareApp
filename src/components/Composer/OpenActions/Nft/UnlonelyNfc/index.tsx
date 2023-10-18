@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { type FC } from 'react';
 
@@ -53,14 +52,10 @@ const UnlonelyNfc: FC<UnlonelyNfcProps> = ({ nftMetadata, publication }) => {
       forceRounded
       onClick={(event) => stopEventPropagation(event)}
     >
-      <Video
-        src={videoLink}
-        poster={videoThumbnail}
-        
-      />
-      <div className="flex-col items-center justify-between border-t px-3 py-2 dark:border-gray-700">
+      <Video src={videoLink} poster={videoThumbnail} />
+      <div className="flex-col items-center justify-between border-t rounded-b-xl px-3 py-2 dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
         <div className="mr-5 flex-col items-center gap-2">
-          <div className="text-xs font-serif">{title}</div>
+          <div className="font-serif text-xs">{title}</div>
         </div>
         <Link
           href={urlcat('https://www.unlonely.app/nfc/:id', {
@@ -73,8 +68,6 @@ const UnlonelyNfc: FC<UnlonelyNfcProps> = ({ nftMetadata, publication }) => {
             className="text-xs"
             icon={<CursorArrowRaysIcon className="h-4 w-4" />}
             size="sm"
-            
-            
           >
             Open
           </Button>

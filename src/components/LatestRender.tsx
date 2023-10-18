@@ -11,7 +11,7 @@ import {
   UserProfilesQuery,
   UserProfilesQueryVariables
 } from '@/utils/lens/generatedLenster';
-import { APP_NAME, CHAIN_ID } from '@/constants';
+import { APP_NAME, CHAIN_ID, STATIC_ASSETS_URL } from '@/constants';
 import Loading from './Loading';
 import ProfileCard from './ProfilePage/ProfileCard';
 import Profiles from './ProfilePage/Profiles';
@@ -36,13 +36,24 @@ import SuggestedAccounts from './Sidebar/SuggestedAccounts';
 import Suggested from './Sidebar/SuggestedAccounts';
 import { Card } from './UI/Card';
 import Explore from './HomePage/Explore';
+import NewPost from './Composer/Post/New';
+import { Image } from '@/components/UI/Image'
+import Echos from './Echos/EchosPage';
+import { HomeFeedType } from '@/enums';
+import Highlights from './HomePage/Highlights';
+import EchosPage from '@/pages/musicfeed';
+import FeedType from './FeedType';
+import Search from './Search/Search';
+import SearchAudio from './Search/SearchAudio';
+import Spaces from './Spaces';
+import { useSpacesStore } from '@/store/spaces';
 interface Props {
   publication: Publication;
 }
 
 const LatestRender: FC<Props> = ({ publication }) => {
   const [mounted, setMounted] = useState(false);
-
+  const { showSpacesLobby, showSpacesWindow } = useSpacesStore();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -139,6 +150,11 @@ const LatestRender: FC<Props> = ({ publication }) => {
     }
   };
 
+
+  const [feedType, setFeedType] = useState<HomeFeedType>(
+    HomeFeedType.EXPLORE
+  );
+
   useEffect(() => {
     validateAuthentication();
   }, [isDisconnected, address, chain, disconnect, profileId]);
@@ -151,34 +167,71 @@ const LatestRender: FC<Props> = ({ publication }) => {
   return (
     <>
       <GridLayout className="max-w-[1200px] pt-6">
-      <Wrapper children publication={publication} />
+      <MetaTags />
+      {showSpacesLobby && <Spaces />}
+        <Wrapper children publication={publication} />
         <GridItemEight>
           <>
-          <Explore/>
+            
+
+            {resolvedTheme === 'dark' ? (
+              <Image
+                className="cursor-pointer"
+                src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo3.png`}
+                alt="logo"
+              />
+            ) : (
+              <Image
+                className="cursor-pointer"
+                src={`${STATIC_ASSETS_URL}/images/Lenstoknewlogo.png`}
+                alt="logo"
+              />
+            )}
+
+       
           </>
         </GridItemEight>
-        <GridItemFour className=" max-h-80">
-        {currentProfile?.id ? (
-          <>
-           <Card className='hidden lg:block xl:block border-blue-700'>
-          <CuratedHome />
-            </Card>
-  
-          
-          
-      
-          <Card className='hidden lg:block xl:block border-blue-700'>
-          <Suggested />
-            </Card>
-            <Footer />
-            </>) :
-            (<> 
+        <GridItemEight>
         
+        {currentProfile ? (
+            <>
+              <NewPost />
+              <div className="space-y-3 mt-3">
+                <FeedType feedType={feedType} setFeedType={setFeedType} />
+              </div>
+              {feedType === HomeFeedType.EXPLORE ? (
+                <Explore />
+              ) : feedType === HomeFeedType.MUSIC ? (
+               
+                <Curated />
+             
+              ) : feedType === HomeFeedType.LATEST ? (
+                <Latest />
+              ) : (
+                <Highlights />
+              )}
+            </>
+          ) : (
+            <Latest />
+          )}
+        </GridItemEight>
+        <GridItemFour className=" max-h-80">
+          {currentProfile?.id ? (
+            <>
+              <Card className="hidden border-blue-700 lg:block xl:block">
+                <CuratedHome />
+              </Card>
 
-           <Footer />
-           
-              </> )}
-          
+              <Card className="hidden border-blue-700 lg:block xl:block">
+                <Suggested />
+              </Card>
+              <Footer />
+            </>
+          ) : (
+            <>
+              <Footer />
+            </>
+          )}
         </GridItemFour>
       </GridLayout>
     </>

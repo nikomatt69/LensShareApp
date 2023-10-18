@@ -1,4 +1,4 @@
-import { misused } from "@/utils/data/misused";
+import { misused } from '@/utils/data/misused';
 
 /**
  * Checks whether a profile is scam or not.

@@ -58,6 +58,7 @@ import FeedType from './FeedType';
 import { HomeFeedType } from '@/enums';
 import ForYou from './ForYou';
 import Highlights from './Highlights';
+import Latest from '../Latest';
 interface Props {
   publication: Publication;
 }
@@ -148,7 +149,6 @@ const Home2: FC<Props> = ({ publication }) => {
     HomeFeedType.FOLLOWING
   );
 
-
   const validateAuthentication = () => {
     const currentProfileAddress = currentProfile?.ownedBy;
     const isSwitchedAccount =
@@ -207,45 +207,45 @@ const Home2: FC<Props> = ({ publication }) => {
               <NewPost />
               <div className="space-y-3">
                 <FeedType feedType={feedType} setFeedType={setFeedType} />
-               
               </div>
               {feedType === HomeFeedType.FOR_YOU ? (
                 <ForYou />
               ) : feedType === HomeFeedType.FOLLOWING ? (
                 <Timeline />
-              ) :  (
+              ) : feedType === HomeFeedType.LATEST ? (
+                <Latest />
+              ) :
+              feedType === HomeFeedType.EXPLORE ? (
+                <Explore />
+              ) : feedType === HomeFeedType.MUSIC ? (
+               
+                <Curated />
+             
+              ) : (
                 <Highlights />
               )}
             </>
-          
           ) : (
-            <Explore />
+            <Latest />
           )}
         </GridItemEight>
         <GridItemFour className=" max-h-80">
-        {currentProfile?.id ? (
-          <>
-          <Card className='hidden lg:block xl:block border-blue-700'>
-          <CuratedHome />
-            </Card>
-      
+          {currentProfile?.id ? (
+            <>
+              <Card className="hidden border-blue-700 lg:block xl:block">
+                <CuratedHome />
+              </Card>
 
-        
-          <Card className='hidden lg:block xl:block border-blue-700'>
-          <Suggested />
-            </Card>
-            <Footer />
-            </>) :
-            (<> 
-            
-      
-         
-
-           <Footer />
-           
-              </> )}
-          
-      
+              <Card className="hidden border-blue-700 lg:block xl:block">
+                <Suggested />
+              </Card>
+              <Footer />
+            </>
+          ) : (
+            <>
+              <Footer />
+            </>
+          )}
         </GridItemFour>
       </GridLayout>
     </>

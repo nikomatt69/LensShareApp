@@ -1,4 +1,3 @@
-
 import generateMeta from '@/utils/lib/generateMeta';
 import getProfileMeta from '@/utils/lib/getProfileMeta';
 import getPublicationMeta from '@/utils/lib/getPublicationMeta';

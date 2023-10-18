@@ -8,7 +8,7 @@ import {
 
 import React, { FC, createRef, useEffect, useState } from 'react';
 import { useAppStore } from 'src/store/app';
-import type { Profile} from '@/utils/lens/generated5';
+import type { Profile } from '@/utils/lens/generated5';
 import AvatarGrid from '../Common/AvatarGrid/AvatarGrid';
 import InvitationModal from '../Common/InvitationModal';
 import Sidebar from '../Common/Sidebar/Sidebar';

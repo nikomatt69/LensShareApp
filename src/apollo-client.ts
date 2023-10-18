@@ -32,7 +32,6 @@ import superfluidLink from './superfluidLink';
 import { Localstorage } from './storage';
 import parseJwt from './utils/lens/apollo/lib/parseJwt';
 
-
 const httpLink = new HttpLink({ uri: API_URL, fetchOptions: 'no-cors', fetch });
 
 const resetAuthData = () => {

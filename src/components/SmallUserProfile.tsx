@@ -39,14 +39,14 @@ const SmallUserProfile: FC<UserProfileProps> = ({
   );
 
   const UserName = () => (
-    <div className="flex-grow max-w-xs items-center">
+    <div className="max-w-xs flex-grow items-center">
       <div className="truncate">{profile?.name}</div>
       <Slug
         className="ml-1 text-xs"
         slug={formatHandle(profile?.handle)}
         prefix="@"
       />
-      <IsVerified id={profile?.id} size='xs' />
+      <IsVerified id={profile?.id} size="xs" />
       {timestamp ? (
         <span className="lt-text-gray-500">
           <span className="mx-1">·</span>

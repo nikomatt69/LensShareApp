@@ -37,7 +37,19 @@ import {
 } from '@web3modal/ethereum';
 import { W3mQrCode, Web3Modal } from '@web3modal/react';
 import { configureChains, Connector, createConfig, WagmiConfig } from 'wagmi';
-import { arbitrum, base, baseGoerli, goerli, mainnet, optimism, optimismGoerli, polygon, polygonMumbai, zora, zoraTestnet } from 'wagmi/chains';
+import {
+  arbitrum,
+  base,
+  baseGoerli,
+  goerli,
+  mainnet,
+  optimism,
+  optimismGoerli,
+  polygon,
+  polygonMumbai,
+  zora,
+  zoraTestnet
+} from 'wagmi/chains';
 import UserSigNoncesProvider from './UserSigNoncesProvider';
 import { publicProvider } from 'wagmi/providers/public';
 import FeaturedChannelsProvider from './FeaturedChannelsProvider';
@@ -58,11 +70,11 @@ const { chains, publicClient } = configureChains(
   [publicProvider()]
 );
 
-const projectId =  WALLETCONNECT_PROJECT_ID
+const projectId = WALLETCONNECT_PROJECT_ID;
 
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors:w3mConnectors({ projectId, chains }) as Connector<any, any>[],
+  connectors: w3mConnectors({ projectId, chains }) as Connector<any, any>[],
   publicClient
 });
 
@@ -76,7 +88,7 @@ const livepeerClient = createReactClient({
     baseUrl: LENSTOK_URL
   })
 });
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
+const ethereumClient = new EthereumClient(wagmiConfig, chains);
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } }
 });

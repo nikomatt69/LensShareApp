@@ -64,7 +64,7 @@ const SearchPublications: FC<Props> = ({ query }) => {
   });
 
   return (
-    <div>
+    <div className='z-1000 inset-96  bg-black'>
       {publications?.map((publication) => (
         <VideoCard
           key={publication?.id}
