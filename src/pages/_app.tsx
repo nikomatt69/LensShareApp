@@ -21,7 +21,6 @@ const Layout = dynamic(() => import('@/components/Layout'), {
   ssr: false
 });
 
-LogRocket.init('rttnrz/lensshare');
 const client = new Client();
 
 client
