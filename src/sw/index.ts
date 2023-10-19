@@ -4,7 +4,7 @@ declare let self: ServiceWorkerGlobalScope;
 
 const preCachedAssets = (process.env.STATIC_ASSETS ?? []) as string[];
 const CACHEABLE_PATHS = ['/', '/contact', '/explore'];
-const CACHEABLE_DOMAINS = ['https://static-assets.lenshareapp.xyz'];
+const CACHEABLE_DOMAINS = ['https://static-asset.lenshareapp.xyz','https://asset.lenshareapp.xyz',];
 
 const cache = new ServiceWorkerCache({
   cachePrefix: 'SWCache',

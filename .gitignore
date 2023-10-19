@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 
-
+/.well-know
 # testing
 /coverage
 
@@ -13,8 +13,8 @@
 /.next/
 
 .next
-
-/.well-know
+.vscode
+.well-know
 
 # production
 /build
