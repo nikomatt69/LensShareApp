@@ -4,6 +4,8 @@
   "scope": "/",
   "start_url": "/",
   "name": "LensShare",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "short_name": "LensShare",
   "description": "Decentralized Social Network",
   "icons": [

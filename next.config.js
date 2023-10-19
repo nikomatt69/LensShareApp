@@ -68,6 +68,10 @@ const nextConfig = {
       'metalens.lenshareapp.xyz'
     ]
   },
+  i18n: {
+    locales: linguiConfig.locales,
+    defaultLocale: linguiConfig.sourceLocale
+  },
 
   experimental: {
     scrollRestoration: true
