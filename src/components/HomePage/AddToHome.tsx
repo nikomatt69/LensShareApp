@@ -20,12 +20,12 @@ export function AddToHome() {
   }
 
   return (
-    <div onClick={hide}>
+    <div className='space-y-3' onClick={hide}>
       <button onClick={hide}>
-        <XCircleIcon className="h-2 w-2" />{' '}
+        <XCircleIcon className="h-4 w-4" />{' '}
       </button>
       <button onClick={promptToInstall}>
-        <MdAddHome className="h-2 w-2" />{' '}
+        <MdAddHome className="h-4 w-4" />{' '}
       </button>
     </div>
   );

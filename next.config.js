@@ -1,14 +1,8 @@
 const linguiConfig = require('./lingui.config');
-const withPWA = require("@ducanh2912/next-pwa").default({
-  dest: "public",
-   disable: process.env.NODE_ENV === "development",
-   register: true,
 
-  //...
-});
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withPWA({
+const nextConfig = {
   reactStrictMode: false,
   eslint: {
     // Warning: This allows production builds to successfully complete even if
@@ -49,6 +43,7 @@ const nextConfig = withPWA({
       'oembed.lenshareapp.xyz',
       'lenshareapp.infura-ipfs.io',
       'ik.imagekit.io/lens/media-snapshot',
+      'statics-polygon-lens.s3.eu-west-1.amazonaws.com/profile/',
 
       '.ipfs.4everland.io',
       'statics-polygon-lens.s3.eu-west-1.amazonaws.com',
@@ -111,6 +106,6 @@ const nextConfig = withPWA({
       }
     ];
   }
-});
+};
 
 module.exports = nextConfig;
