@@ -48,8 +48,6 @@ const nextConfig = {
       '.ipfs.4everland.io',
       'statics-polygon-lens.s3.eu-west-1.amazonaws.com',
 
-      'statics-mumbai-lens-staging.s3.eu-west-1.amazonaws.com',
-      'statics-mumbai-polygon-lens.s3.eu-west-1.amazonaws.com',
       'statics-polygon-lens.s3.us-west-2.amazonaws.com',
       'statics-lens-staging.s3.us-west-2.amazonaws.com',
       'gateway.ipfscdn.io',
