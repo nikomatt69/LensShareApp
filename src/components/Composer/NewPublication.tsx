@@ -767,16 +767,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
 
       // Create Space in Huddle
 
-      let spaceId = {
-        success: false,
-        response: {
-          message: '',
-          data: {
-            roomId: ''
-          }
-        }
-      };
-
+      let spaceId = null;
       if (
         showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces
@@ -798,14 +789,14 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
           value: getMainContentFocus()?.toLowerCase()
         },
         ...(showComposerModal &&
-        spaceId.success &&
-        modalPublicationType === NewPublicationTypes.Spaces
+         spaceId &&
+         modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceId.response.data.roomId,
+                  id: spaceId,
                   host: currentProfile.ownedBy,
                   startTime: startTime
                 })
