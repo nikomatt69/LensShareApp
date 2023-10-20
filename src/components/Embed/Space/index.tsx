@@ -22,16 +22,16 @@ interface SpaceProps {
 }
 
 const Space: FC<SpaceProps> = ({ publication }) => {
-  const { address } = useAccount();
-  const { metadata } = publication;
-
   const {
     setShowSpacesLobby,
-    setShowSpacesWindow,
     setLensAccessToken,
     lensAccessToken,
-    setSpace
+    setSpace,
+    setSpacesPublicationId
   } = useSpacesStore();
+
+  const { address } = useAccount();
+  const { metadata } = publication;
 
   const space: SpaceMetadata = JSON.parse(
     getPublicationAttribute(metadata.attributes, 'audioSpace')
@@ -42,6 +42,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
       const token = await getLensAccessToken(data, address as string);
       if (token.accessToken) {
         setShowSpacesLobby(true);
+        setSpacesPublicationId(publication.id);
         setLensAccessToken(token.accessToken);
         setSpace({
           ...space,
@@ -65,6 +66,56 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     (profile) => profile?.ownedBy === space.host
   ) as Profile;
 
+  const calculateRemainingTime = () => {
+    const now = dayjs();
+    const targetTime = dayjs(space.startTime);
+    const timeDifference = targetTime.diff(now);
+
+    if (timeDifference <= 0) {
+      return `Start Listening`;
+    }
+
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
+    let result = `Starts in`;
+    result += ' ';
+
+    if (days > 0) {
+      result += `${days} day`;
+      if (days > 1) {
+        result += 's'; // Pluralize "day" when there are more than one day.
+      }
+      result += ' ';
+    }
+
+    if (hours > 0) {
+      result += `${hours} hour`;
+      if (hours > 1) {
+        result += 's'; // Pluralize "hour" when there are more than one hour.
+      }
+      result += ' ';
+    }
+
+    if (minutes > 0) {
+      result += `${minutes} minute`;
+      if (minutes > 1) {
+        result += 's'; // Pluralize "minute" when there are more than one minute.
+      }
+    }
+
+    if (days === 0 && hours === 0 && minutes === 0) {
+      result = `Start Listening`;
+    }
+
+    return result;
+  };
+
   return (
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
@@ -72,18 +123,20 @@ const Space: FC<SpaceProps> = ({ publication }) => {
         <b className="text-lg">{metadata.content}</b>
         <Button
           className={cn(
-            'pointer-events-none !mt-4 flex w-full justify-center',
-            'Start Listening' ? 'pointer-events-auto' : 'pointer-events-auto'
+            '!md:pointer-events-none !mt-4 flex w-full justify-center',
+            calculateRemainingTime() !== 'Start Listening'
+              ? 'pointer-events-none'
+              : 'pointer-events-auto'
           )}
           disabled={signing}
           icon={
             signing ? (
-              <Spinner size="xs" className="mr-1" />
-            ) : 'Start Listening' ? (
-              <div className="flex h-5 w-5 items-center justify-center">
-                <MicrophoneIcon className="h-5 w-5" />
-              </div>
-            ) : null
+              <Spinner size="xs" className="p-1" />
+            ) : calculateRemainingTime() !== 'Start Listening' ? (
+              <ClockIcon className="h-5 w-5" />
+            ) : (
+              <MicrophoneIcon className="h-5 w-5" />
+            )
           }
           onClick={async () => {
             if (lensAccessToken) {
@@ -92,12 +145,17 @@ const Space: FC<SpaceProps> = ({ publication }) => {
                 ...space,
                 title: metadata.content
               });
-              return setShowSpacesWindow(true);
+              return;
             }
             const msg = await getLensMessage(address as string);
             signMessage({ message: msg.message });
           }}
-        ></Button>
+        >
+          <div className="hidden md:block">{calculateRemainingTime()}</div>
+          <div className="md:hidden">
+            Spaces will open in desktop only
+          </div>
+        </Button>
       </div>
     </Wrapper>
   );
