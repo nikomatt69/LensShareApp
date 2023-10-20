@@ -5,7 +5,7 @@ type IsLiveResponse = {
   roomId: string;
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse, spaceId: string) => {
+const isLive = async (req: NextApiRequest, res: NextApiResponse, spaceId: string) => {
   try {
     const huddleResponse = await axios(
       `http://api.huddle01.com/api/v1/live-meeting?roomId=${spaceId}`,
@@ -30,4 +30,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse, spaceId: strin
   }
 };
 
-export default handler;
+export default isLive;

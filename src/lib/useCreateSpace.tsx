@@ -49,6 +49,8 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
         method: 'POST',
         data: payload
       });
+      
+      
       return `${publicationContent}\n\n${response.data.spaceId}`;
     } catch (error) {
       throw error;

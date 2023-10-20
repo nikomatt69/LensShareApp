@@ -130,7 +130,7 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-      <AudioSpaces />
+     <Spaces />
 
       <GlobalModals />
       <GlobalAlerts />
