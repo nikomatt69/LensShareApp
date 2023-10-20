@@ -15,7 +15,8 @@ const useCreatePoll = (): [createPoll: () => Promise<CreatePollResponse>] => {
   const createPoll = async (): Promise<CreatePollResponse> => {
     try {
       const response = await axios({
-        url: `/api/createPoll`,
+    
+        url: `${BASE_URL}/api/createPoll`,
         method: 'POST',
         data: {
           isMainnet: IS_MAINNET,
