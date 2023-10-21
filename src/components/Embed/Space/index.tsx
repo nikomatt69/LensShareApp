@@ -24,6 +24,7 @@ interface SpaceProps {
 const Space: FC<SpaceProps> = ({ publication }) => {
   const {
     setShowSpacesLobby,
+    setShowSpacesWindow,
     setLensAccessToken,
     lensAccessToken,
     setSpace,
@@ -145,16 +146,13 @@ const Space: FC<SpaceProps> = ({ publication }) => {
                 ...space,
                 title: metadata.content
               });
-              return;
+              return setShowSpacesWindow(true);
             }
             const msg = await getLensMessage(address as string);
             signMessage({ message: msg.message });
           }}
         >
-          <div className="hidden md:block">{calculateRemainingTime()}</div>
-          <div className="md:hidden">
-            Spaces will open in desktop only
-          </div>
+         
         </Button>
       </div>
     </Wrapper>
