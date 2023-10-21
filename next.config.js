@@ -112,7 +112,9 @@ const nextConfig = withPWA({
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           {key:'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups'},
-          {key:'Content-Security-Policy', value: 'strict-dynamic'}
+          {key:'Content-Security-Policy', value: 'strict-dynamic'},
+       
+        
         ]
       }
     ];

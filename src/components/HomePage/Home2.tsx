@@ -177,7 +177,7 @@ const Home2: FC<Props> = ({ publication }) => {
     <>
       <GridLayout className="max-w-[1200px] pt-6">
         <MetaTags />
-        {showSpacesLobby && <Spaces />}
+       
         <Wrapper children publication={publication} />
         <GridItemEight>
           <>
