@@ -178,8 +178,8 @@ const SpacesWindow: FC = () => {
       {musicTrack !== MusicTrack.DEFAULT && isMusicPlaying && (
         <audio ref={audioRef} src={musicTrack} loop />
       )}
-      <div className="relative mx-auto max-w-screen-xl grow">
-        <div className="absolute bottom-0 right-0 ml-auto rounded-xl rounded-b-none border-[1.5px] border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
+      <div className="relative mx-auto max-w-screen grow">
+        <div className="absolute bottom-12 right-0 ml-auto rounded-xl  border-[1.5px] border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
           <div className="flex justify-center">
             {showAcceptRequest && isExpanded && (
               <InvitationModal
@@ -209,7 +209,7 @@ const SpacesWindow: FC = () => {
             isExpanded={isExpanded}
             setIsExpanded={setIsExpanded}
           />
-          <div className="min-w-[28rem]">
+          <div className="max-w-[18rem]">
             {isExpanded ? (
               <div className="relative mt-4">
                 <div className="absolute bottom-12 right-0 z-10 h-fit">

@@ -18,7 +18,7 @@ const Sidebar: FC = () => {
   return (
     <div
       className={cn(
-        'min-h-[35vh] w-[20vw] flex-col rounded-xl border border-gray-300 bg-white transition-all duration-300 ease-out dark:border-gray-500 dark:bg-gray-900',
+        'min-h-[35vh] w-[40vw] flex-col rounded-xl border border-gray-300 bg-white transition-all duration-300 ease-out dark:border-gray-500 dark:bg-gray-900',
         isSidebarOpen ? 'flex' : 'hidden'
       )}
     >
