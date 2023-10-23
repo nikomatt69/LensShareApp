@@ -136,8 +136,8 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           onData={onOembedData}
         />
       ) : null}
-      {showSpacesLobby ? <Space publication={publication} /> : null}
-      {showSpacesWindow ? <PreviewSpaces /> : null}
+     
+     
 
       {showQuotedPublication ? (
         <Quote
