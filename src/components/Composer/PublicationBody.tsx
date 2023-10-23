@@ -137,8 +137,6 @@ const PublicationBody: FC<PublicationBodyProps> = ({
         />
       ) : null}
      
-     
-
       {showQuotedPublication ? (
         <Quote
           publicationId={quotedPublicationId}
