@@ -24,8 +24,8 @@ const PreviewSpaces: FC = () => {
   const { joinLobby, previewPeers } = useLobby();
   const { joinRoom, isRoomJoined } = useRoom();
 
-  useEffect(() => {
-    initialize('9EgOP0pSsr1xThGWAmYqoF8xr3y2ktKm');
+  useEffectOnce(() => {
+    initialize('3kzet_ujpjtF8dzciFefEOAZqrDNpdQS');
   });
 
   useEventListener(SpacesEvents.APP_INITIALIZED, () => {
