@@ -171,7 +171,7 @@ const Home2: FC<Props> = ({ publication }) => {
       disconnect?.();
     }
   };
-  const { joinRoom, isRoomJoined } = useRoom();
+  
 
   useEffect(() => {
     validateAuthentication();

@@ -133,7 +133,7 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-      {isRoomJoined ? <Spaces /> : null}
+      {showSpacesWindow ? <Spaces /> : null}
   
 
       <GlobalModals />

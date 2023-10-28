@@ -9,6 +9,7 @@ import UnfollowButton from '../Buttons/UnfollowButton';
 import getAvatar from '@/lib/getAvatar';
 import useAverageColor from '@/utils/hooks/useAverageColor';
 import Unfollow from '../Profile/Unfollow';
+import { useAppStore } from '@/store/app';
 
 type Props = {
   video: Publication;
@@ -18,6 +19,7 @@ const BottomOverlay: FC<Props> = ({ video }) => {
   const subscribeType = video.profile?.followModule?.__typename;
   const channel = video.profile;
   const [following, setFollowing] = useState(false);
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   return (
     <div className="from-trasparent absolute bottom-0 left-0 right-0 z-[1] mb-24 rounded-xl  bg-gradient-to-t to-transparent px-3 pb-3 text-xs text-gray-400 md:rounded-b-xl">
@@ -55,12 +57,12 @@ const BottomOverlay: FC<Props> = ({ video }) => {
         <div className="flex items-center space-x-2 text-xs">
         {!following ? (
               <FollowButton
-              profile={channel as Profile}
+              profile={currentProfile as Profile}
                 setFollowing={setFollowing}
               />
             ) : (
               <UnfollowButton
-                profile={channel as Profile}
+                profile={currentProfile as Profile}
                 setFollowing={setFollowing}
               />
             )}
