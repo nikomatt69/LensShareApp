@@ -84,7 +84,7 @@
     "abitype": "^0.8.11",
     "add": "^2.0.6",
     "appwrite": "^13.0.0",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "connectkit": "^1.4.0",
     "cors": "^2.8.5",
     "critters": "^0.0.16",
