@@ -53,6 +53,7 @@ import {
 import UserSigNoncesProvider from './UserSigNoncesProvider';
 import { publicProvider } from 'wagmi/providers/public';
 import FeaturedChannelsProvider from './FeaturedChannelsProvider';
+import Web3Provider from './Web3Provider';
 
 const { chains, publicClient } = configureChains(
   [
@@ -94,7 +95,7 @@ const queryClient = new QueryClient({
 });
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <WagmiConfig config={wagmiConfig}>
+   <Web3Provider>
       <ApolloProvider client={apolloClient}>
         <UserSigNoncesProvider />
         <QueryClientProvider client={queryClient}>
@@ -107,20 +108,9 @@ const Providers = ({ children }: { children: ReactNode }) => {
           </LivepeerConfig>
         </QueryClientProvider>
       </ApolloProvider>
-      <Web3Modal
-        themeVariables={{
-          '--w3m-font-family': 'Roboto, sans-serif',
-          '--w3m-accent-color': '#000fff',
-          '--w3m-background-color': '#FFFF',
-          '--w3m-logo-image-url': 'https://lenshareapp.xyz/images/icon.png',
-          '--w3m-container-border-radius': '25px',
-          '--w3m-background-border-radius': '25px'
-        }}
-        themeMode="dark"
-        projectId={projectId}
-        ethereumClient={ethereumClient}
-      />
-    </WagmiConfig>
+      </Web3Provider>
+      
+    
   );
 };
 

@@ -47,6 +47,7 @@ import Search from './Search/Search';
 import SearchAudio from './Search/SearchAudio';
 import Spaces from './Spaces';
 import { useSpacesStore } from '@/store/spaces';
+import PullToRefreshExample from './HomePage/Refresh';
 interface Props {
   publication: Publication;
 }
@@ -168,9 +169,10 @@ const LatestRender: FC<Props> = ({ publication }) => {
     <>
       <GridLayout className="max-w-[1200px] pt-6">
       <MetaTags />
-      {showSpacesLobby && <Spaces />}
+      {showSpacesWindow ? <Spaces /> : null}
         <Wrapper children publication={publication} />
         <GridItemEight>
+ 
           <>
             
 
@@ -192,13 +194,14 @@ const LatestRender: FC<Props> = ({ publication }) => {
           </>
         </GridItemEight>
         <GridItemEight>
-        
+      
         {currentProfile ? (
             <>
               <NewPost />
               <div className="space-y-3 mt-3">
                 <FeedType feedType={feedType} setFeedType={setFeedType} />
               </div>
+              <PullToRefreshExample />
               {feedType === HomeFeedType.EXPLORE ? (
                 <Explore />
               ) : feedType === HomeFeedType.MUSIC ? (

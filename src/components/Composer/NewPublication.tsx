@@ -232,12 +232,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
     reset: resetAccessSettings
   } = useAccessSettingsStore((state) => state);
 
-  const {
-    setSpacesTimeInHour,
-    setSpacesTimeInMinute,
-    spacesTimeInHour,
-    spacesTimeInMinute
-  } = useSpacesStore();
+  const spacesStartTime = useSpacesStore((state) => state.spacesStartTime);
 
   // States
   const [isLoading, setIsLoading] = useState(false);
@@ -767,21 +762,22 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
 
       // Create Space in Huddle
 
-      let spaceId = null;
+      let spaceData = {
+        success: false,
+        response: {
+          message: '',
+          data: {
+            roomId: ''
+          }
+        }
+      }
       if (
         showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces
       ) {
-        spaceId = await createSpace();
+        spaceData = await createSpace();
       }
-      const now = new Date();
-      now.setHours(Number(spacesTimeInHour));
-      now.setMinutes(Number(spacesTimeInMinute));
-      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      const formattedTime = new Date(
-        now.toLocaleString('en-US', { timeZone: userTimezone })
-      );
-      const startTime = formattedTime.toISOString();
+      const startTime = dayjs(spacesStartTime);
       const attributes: MetadataAttributeInput[] = [
         {
           traitType: 'type',
@@ -789,14 +785,14 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
           value: getMainContentFocus()?.toLowerCase()
         },
         ...(showComposerModal &&
-         spaceId &&
+        spaceData &&
          modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
                 displayType: PublicationMetadataDisplayTypes.String,
                 value: JSON.stringify({
-                  id: spaceId,
+                  id: spaceData,
                   host: currentProfile.ownedBy,
                   startTime: startTime
                 })

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ProfileFeedType } from 'src/enums';
 import Custom404 from 'src/pages/404';
-
-import { useAppStore } from 'src/store/app';
+import * as Apollo from '@apollo/client';
+import { useAppPersistStore, useAppStore } from 'src/store/app';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
-
+import RefreshButton from '../HomePage/Refresh';
 import Cover from './Cover';
 import Details from './Details';
 import Feed from './Feed';
@@ -24,7 +24,7 @@ import {
 } from '@/utils/lens/generatedLenster';
 import { GridItemEight, GridItemFour, GridLayout } from '../UI/GridLayout';
 import NewPost from '../Composer/Post/New';
-import { APP_NAME, STATIC_IMAGES_URL } from '@/constants';
+import { APP_NAME, CHAIN_ID, STATIC_IMAGES_URL } from '@/constants';
 import MetaTags from '../UI/MetaTags';
 import { Modal } from '../UI/Modal';
 import { useQuery } from '@apollo/client';
@@ -39,12 +39,17 @@ import Stories from '../Bytes/Stories';
 import StoriesRender from '../Bytes/Stories';
 import Loader from '../UI/Loader';
 import Wrapper from '../Echos/Wrapper';
+import { useTheme } from 'next-themes';
+import { ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from '@/utils/lens/generated5';
+import { useAccount, useDisconnect, useNetwork } from 'wagmi';
+import { useReferenceModuleStore } from '@/store/reference-module';
+import { useNonceStore } from '@/store/nonce';
 
 const ViewProfile: NextPage = (publication) => {
   const {
     query: { id, type, followIntent }
   } = useRouter();
-  const currentProfile = useAppStore((state) => state.currentProfile);
+
   const [feedType, setFeedType] = useState(
     type &&
       ['feed', 'replies', 'media', 'collects', 'nft', 'subscribers'].includes(
@@ -66,6 +71,86 @@ const ViewProfile: NextPage = (publication) => {
 
   const profile = data?.profile;
   console.log('Profile', profile);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  console.log(mounted);
+
+  const setProfiles = useAppStore((state) => state.setProfiles);
+  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
+  const currentProfile = useAppStore((state) => state.currentProfile);
+  const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
+  const profileId = useAppPersistStore((state) => state.profileId);
+  const setProfileId = useAppPersistStore((state) => state.setProfileId);
+  const setSelectedReferenceModule = useReferenceModuleStore(
+    (state) => state.setSelectedReferenceModule
+  );
+
+  const { address, isDisconnected } = useAccount();
+  const { chain } = useNetwork();
+  const { disconnect } = useDisconnect();
+
+  const resetAuthState = () => {
+    setProfileId(null);
+    setCurrentProfile(null);
+  };
+
+  function useUserProfilesQuery(
+    baseOptions?: Apollo.QueryHookOptions<
+      UserProfilesQuery,
+      UserProfilesQueryVariables
+    >
+  ) {
+    const options = { ...baseOptions };
+    return Apollo.useQuery<UserProfilesQuery, UserProfilesQueryVariables>(
+      UserProfilesDocument,
+      options
+    );
+  }
+
+
+
+  const getIsAuthTokensAvailable = () => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    return accessToken !== 'undefined' && refreshToken !== 'undefined';
+  };
+
+  const resetAuthData = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  };
+
+  
+ 
+  const validateAuthentication = () => {
+    const currentProfileAddress = currentProfile?.ownedBy;
+    const isSwitchedAccount =
+      currentProfileAddress !== undefined && currentProfileAddress !== address;
+    const isWrongNetworkChain = chain?.id !== CHAIN_ID;
+    const shouldLogout =
+      !getIsAuthTokensAvailable() ||
+      isWrongNetworkChain ||
+      isDisconnected ||
+      isSwitchedAccount;
+
+    if (shouldLogout && profileId) {
+      resetAuthState();
+      resetAuthData();
+      disconnect?.();
+    }
+  };
+  
+
+  useEffect(() => {
+    validateAuthentication();
+  }, [isDisconnected, address, chain, disconnect, profileId]);
+
+  const { resolvedTheme } = useTheme();
+
 
   useEffect(
     () => {
@@ -167,6 +252,7 @@ const ViewProfile: NextPage = (publication) => {
         <GridItemEight className="space-y-5">
           {currentProfile?.id ? <NewPost /> : null}
           <FeedType setFeedType={setFeedType} feedType={feedType} />
+          <RefreshButton />
 
           {(feedType === ProfileFeedType.Feed ||
             feedType === ProfileFeedType.Replies ||

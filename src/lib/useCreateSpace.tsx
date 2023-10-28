@@ -4,7 +4,15 @@ import getBasicWorkerPayload from './getBasicWorkerPayload';
 import { useSpacesStore } from '@/store/spaces';
 import { usePublicationStore } from '@/store/publication4';
 
-type CreateSpaceResponse = string
+type CreateSpaceResponse = {
+  success: boolean;
+  response: {
+    message: string;
+    data: {
+      roomId: string;
+    };
+  };
+};
 
 const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => {
   const publicationContent = usePublicationStore(
@@ -51,7 +59,7 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
       });
       
       
-      return `${publicationContent}\n\n${response.data.spaceId}`;
+      return response.data ;
     } catch (error) {
       throw error;
     }

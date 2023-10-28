@@ -9,6 +9,8 @@ import * as Apollo from '@apollo/client';
 
 import { Children, FC, useEffect, useState } from 'react';
 import { useAppPersistStore, useAppStore } from '@/store/app';
+
+import ReactPullToRefresh from 'react-pull-to-refresh'
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -59,6 +61,9 @@ import { HomeFeedType } from '@/enums';
 import ForYou from './ForYou';
 import Highlights from './Highlights';
 import Latest from '../Latest';
+import { useRoom } from '@huddle01/react/hooks';
+import Refresh from './Refresh';
+import PullToRefreshExample from './Refresh';
 interface Props {
   publication: Publication;
 }
@@ -166,6 +171,7 @@ const Home2: FC<Props> = ({ publication }) => {
       disconnect?.();
     }
   };
+  const { joinRoom, isRoomJoined } = useRoom();
 
   useEffect(() => {
     validateAuthentication();
@@ -173,15 +179,19 @@ const Home2: FC<Props> = ({ publication }) => {
 
   const { resolvedTheme } = useTheme();
 
+
+  
   return (
     <>
       <GridLayout className="max-w-[1200px] pt-6">
         <MetaTags />
-       
+        
         <Wrapper children publication={publication} />
         <GridItemEight>
+        
           <>
             <AddToHome />
+         
 
             {resolvedTheme === 'dark' ? (
               <Image
@@ -208,6 +218,7 @@ const Home2: FC<Props> = ({ publication }) => {
               <div className="space-y-3">
                 <FeedType feedType={feedType} setFeedType={setFeedType} />
               </div>
+              <PullToRefreshExample />
               {feedType === HomeFeedType.FOR_YOU ? (
                 <ForYou />
               ) : feedType === HomeFeedType.FOLLOWING ? (

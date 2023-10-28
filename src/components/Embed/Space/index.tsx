@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 
 import Wrapper from '../Wrapper';
 
@@ -16,6 +16,8 @@ import { useAccount, useSignMessage } from 'wagmi';
 import { useSpacesStore } from '@/store/spaces';
 import cn from '@/components/UI/cn';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import { BiPhoneIncoming } from 'react-icons/bi';
 
 interface SpaceProps {
   publication: Publication;
@@ -30,6 +32,8 @@ const Space: FC<SpaceProps> = ({ publication }) => {
     setSpace,
     setSpacesPublicationId
   } = useSpacesStore();
+  const [show, setShow] = useState(false);
+  const [meetingUrl, setMeetingUrl] = useState('');
 
   const { address } = useAccount();
   const { metadata } = publication;
@@ -141,12 +145,30 @@ const Space: FC<SpaceProps> = ({ publication }) => {
           }
           onClick={async () => {
             if (lensAccessToken) {
-              setShowSpacesLobby(true);
-              setSpace({
-                ...space,
-                title: metadata.content
+              const apiCall = await fetch('/api/create-room', {
+                mode: 'no-cors',
+                method: 'POST',
+                body: JSON.stringify({
+                  title: 'LensShare-Space'
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                  'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || ''
+                }
               });
-              return setShowSpacesWindow(true);
+              const data = (await apiCall.json()) as {
+                data: { roomId: string };
+              };
+              const { roomId } = data.data;
+              const currentUrl = window.location.href;
+              const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
+              const meetingUrl = `${url}/spaces/${roomId}`;
+              
+
+              // Instead of sending a message, set the meeting URL in the state
+              setShow(true);
+              setMeetingUrl(meetingUrl);
+            
             }
             const msg = await getLensMessage(address as string);
             signMessage({ message: msg.message });
@@ -154,6 +176,13 @@ const Space: FC<SpaceProps> = ({ publication }) => {
         >
          
         </Button>
+        <div className="mx-3 mt-2 ">
+            {show && (
+              <Link href={meetingUrl}>
+                <BiPhoneIncoming className="h-6 w-6 text-green-500" />
+              </Link>
+            )}
+          </div>
       </div>
     </Wrapper>
   );

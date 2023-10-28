@@ -1,32 +1,20 @@
-import { Web3Button } from '@web3modal/react';
-import { ConnectKitButton } from 'connectkit';
+import { Web3Button, useWeb3Modal } from '@web3modal/react';
+import { useWeb3ModalEvents, useWeb3ModalState, useWeb3ModalTheme } from '@web3modal/wagmi/react';
 
-import styled from 'styled-components';
-const StyledButton = styled.button`
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  padding: 8px 16px;
-  color: #ffffff;
-  background: #000;
-  font-size: 13px;
-  font-weight: 400;
-  border-radius: 10rem;
-  box-shadow: 0 4px 20px -6px #1a88f8;
 
-  transition: 200ms ease;
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 40px -6px #1a88f8;
-  }
-  &:active {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 26px -6px #1a88f8;
-  }
-`;
+
 
 export const MainButton = () => {
-  return <Web3Button />;
-};
+  const { open } = useWeb3Modal()
+  const modal = useWeb3Modal()
+  const state = useWeb3ModalState()
+  const { themeMode, themeVariables, setThemeMode } = useWeb3ModalTheme()
+  const events = useWeb3ModalEvents()
 
+  return (
+    <w3m-button balance='hide' size='sm'/>
+  );
+};
 export default MainButton;
+
+

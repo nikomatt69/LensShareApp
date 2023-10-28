@@ -116,7 +116,7 @@ const Feed = () => {
     return <EmptyState message={undefined} icon={undefined} />;
   }
   return (
-    <div className="mt-2 border-0 bg-white pt-3 dark:bg-black">
+    <div className=" border-0 bg-black dark:bg-black">
       <Head>
         <meta
           name="theme-color"
@@ -129,7 +129,7 @@ const Feed = () => {
         <>
           <div
             ref={bytesContainer}
-            className="mt-3 h-screen border-0 bg-white pt-3 font-semibold dark:bg-black md:h-[calc(100vh-80px)]"
+            className=" h-screen border-0 bg-black font-semibold dark:bg-black md:h-[calc(100vh-80px)]"
           >
             {bytes?.map((video: Publication, index) => (
               <ByteVideo

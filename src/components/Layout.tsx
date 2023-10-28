@@ -31,6 +31,8 @@ import PreviewSpaces from './Spaces/PreviewSpaces/PreviewSpaces';
 import Loader from './UI/Loader';
 import { useNonceStore } from '@/store/nonce';
 import AudioSpaces from './Spaces';
+import PullToRefreshExample from './HomePage/Refresh';
+import { useRoom } from '@huddle01/react/hooks';
 
 interface Props {
   children: ReactNode;
@@ -72,6 +74,7 @@ const Layout = ({ children }: Props) => {
       setProfileId(null);
     }
   });
+  const { joinRoom, isRoomJoined } = useRoom();
 
   const resetAuthState = () => {
     setCurrentProfile(null);
@@ -130,7 +133,8 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-     <Spaces />
+      {isRoomJoined ? <Spaces /> : null}
+  
 
       <GlobalModals />
       <GlobalAlerts />
@@ -139,6 +143,7 @@ const Layout = ({ children }: Props) => {
           <>{children}</>
         ) : (
           <>
+          
             <Navbar />
             <BottomNav />
             {children}
