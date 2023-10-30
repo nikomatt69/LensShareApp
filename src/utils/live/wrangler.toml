@@ -1,0 +1,16 @@
+name = "live"
+main = "src/index.ts"
+compatibility_date = "2023-01-25"
+keep_vars = true
+node_compat = true
+
+routes = [
+	{ pattern = "live.lenshareapp.xyz", custom_domain = true }
+]
+
+[placement]
+mode = "smart"
+
+[env.production.vars]
+RELEASE = ""
+LIVEPEER_API_KEY = "30c0057f-d721-414e-8e03-7ff98f407535"

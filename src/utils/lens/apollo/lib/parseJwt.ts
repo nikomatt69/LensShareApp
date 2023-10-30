@@ -17,17 +17,20 @@ const parseJwt = (
   token: string
 ): {
   id: string;
+  evmAddress: string;
   role: string;
+  authorizationId: string;
   iat: number;
   exp: number;
 } => {
   try {
     return JSON.parse(decoded(token.split('.')[1]));
-  } catch (error) {
-    console.error('Failed to parse JWT', error);
+  } catch {
     return {
       id: '',
+      evmAddress: '',
       role: '',
+      authorizationId: '',
       iat: 0,
       exp: 0
     };

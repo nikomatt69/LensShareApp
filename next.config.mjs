@@ -1,11 +1,10 @@
-const linguiConfig = require('./lingui.config');
-const withPWA = require("@ducanh2912/next-pwa").default({
-  dest: "public",
-   disable: process.env.NODE_ENV === "development",
-   register: true,
+import million from 'million/compiler';
+import withPWA from '@ducanh2912/next-pwa';
+import linguiConfig from './lingui.config.js';
 
-  //...
-});
+
+
+
 
 
 /** @type {import('next').NextConfig} */
@@ -120,5 +119,9 @@ const nextConfig = withPWA({
     ];
   }
 });
+const millionConfig = {
+  auto: true,
+}
 
-module.exports = nextConfig;
+
+export default million.next(nextConfig, millionConfig,linguiConfig);

@@ -6,11 +6,19 @@ interface NotificationPersistState {
   notificationCountMap: { profileId: string; count: number }[] | undefined;
   setNotificationCount: (profileId: string, count: number) => void;
   getNotificationCount: (profileId: string) => number;
+  latestNotificationId: string | null;
+  setLatestNotificationId: (id: string) => void;
+  lastOpenedNotificationId: string | null;
+  setLastOpenedNotificationId: (id: string) => void;
 }
 
 export const useNotificationPersistStore = create(
   persist<NotificationPersistState>(
     (set, get) => ({
+      latestNotificationId: null,
+      setLatestNotificationId: (id) => set({ latestNotificationId: id }),
+      lastOpenedNotificationId: null,
+      setLastOpenedNotificationId: (id) => set({ lastOpenedNotificationId: id }),
       notificationCountMap: undefined,
       setNotificationCount: (profileId, count) => {
         const { notificationCountMap } = get();

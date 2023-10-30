@@ -169,7 +169,7 @@ const LatestRender: FC<Props> = ({ publication }) => {
     <>
       <GridLayout className="max-w-[1200px] pt-6">
       <MetaTags />
-      {showSpacesWindow ? <Spaces /> : null}
+      
         <Wrapper children publication={publication} />
         <GridItemEight>
  

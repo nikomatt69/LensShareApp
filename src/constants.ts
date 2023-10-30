@@ -112,6 +112,10 @@ export const CHANNELS_WORKER_URL = IS_MAINNET
 export const COMMUNITIES_WORKER_URL = IS_MAINNET
   ? 'https://communities.lenshareapp.xyz'
   : 'http://localhost:8091';
+  export const LIVE_WORKER_URL = IS_MAINNET
+  ? 'https://live.lenshareapp.xyz'
+  : 'https://live.lenshareapp.xyz';
+
 
 export const S3_BUCKET = {
   LENSSHARE: 'lensshare'

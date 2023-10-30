@@ -17,7 +17,10 @@ interface AppPerisistState {
   sidebarCollapsed: boolean;
   latestNotificationId: string;
   selectedNotificationsFilter: CustomNotificationsFilterEnum;
-
+  highSignalNotificationFilter: boolean;
+  setHighSignalNotificationFilter: (
+    highSignalNotificationFilter: boolean
+  ) => void;
   queuedVideos: QueuedVideoType[];
   queuedComments: QueuedCommentType[];
   setLatestNotificationId: (id: string) => void;
@@ -43,6 +46,9 @@ export const usePersistStore = create(
       latestNotificationId: '',
       queuedComments: [],
       queuedVideos: [],
+      highSignalNotificationFilter: false,
+     setHighSignalNotificationFilter: (highSignalNotificationFilter) =>
+     set(() => ({ highSignalNotificationFilter })),
       setQueuedVideos: (queuedVideos) => set({ queuedVideos }),
       setQueuedComments: (queuedComments) => set({ queuedComments }),
       setSidebarCollapsed: (sidebarCollapsed) => set({ sidebarCollapsed }),

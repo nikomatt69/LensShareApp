@@ -21338,10 +21338,10 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-million@^2.6.0-beta.12:
-  version "2.6.0-beta.12"
-  resolved "https://registry.yarnpkg.com/million/-/million-2.6.0-beta.12.tgz#8161e5c37a44491b2f41e0ad24068f72f7272fb2"
-  integrity sha512-ps7oiPYgl2rlmFSdNKvhcfCxaRHTfueUYEjdzOxWcvRuF/jO+ngL4gq1P6+CamG3CLCRXdcPRgHZ9IQHAkI31A==
+million@^2.6.4:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/million/-/million-2.6.4.tgz#1379d524f266a3ed93edcf8cb0d6df410628d432"
+  integrity sha512-voUkdd/jHWrG+7NS+mX49Pat+POKdgGW78V7pYMSrTaOjUitR6ySEcAci8hn17Rsx1IMI3+5w41dkADM1J1ZEg==
   dependencies:
     "@babel/core" "^7.21.0"
     "@babel/generator" "^7.22.7"
@@ -24020,6 +24020,11 @@ react-use-measure@^2.1.1:
   integrity sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==
   dependencies:
     debounce "^1.2.1"
+
+react-use-websocket@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/react-use-websocket/-/react-use-websocket-4.5.0.tgz#8e3a18c51328522876bfea28661521292d6f210a"
+  integrity sha512-oxYVLWM3Lv0InCfjW7hG/Hk0hkE0P1SiLd5/I3d5x0W4riAnDUkD4VEu7qNVAqxNjBF3nU7k0jLMOetLXpwfsA==
 
 react-use@17.4.0, react-use@^17.4.0:
   version "17.4.0"

@@ -22,6 +22,7 @@ import { Card } from '@/components/UI/Card';
 import { CubeIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import ProfileSettingsForm from './Profile';
 import Loader from '@/components/UI/Loader';
+import PushNotifications from './PushNotifications';
 
 const ProfileSettings: NextPage = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -58,6 +59,7 @@ const ProfileSettings: NextPage = () => {
       </GridItemFour>
       <GridItemEight className="space-y-5">
         <ProfileSettingsForm profile={profile as any} />
+        <PushNotifications />
         <Card className="space-y-5 p-5">
           <div className="flex items-center space-x-2">
             <TabButton

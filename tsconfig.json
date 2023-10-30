@@ -7,7 +7,8 @@
       "DOM",
       "DOM.Iterable",
       "ESNext",
-      "webworker"
+      "webworker",
+      "ES7"
     ],
   
     "skipLibCheck": true,

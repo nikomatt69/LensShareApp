@@ -54,6 +54,8 @@ import UserSigNoncesProvider from './UserSigNoncesProvider';
 import { publicProvider } from 'wagmi/providers/public';
 import FeaturedChannelsProvider from './FeaturedChannelsProvider';
 import Web3Provider from './Web3Provider';
+import LensSubscriptionsProvider from './LensSubscriptionsProvider';
+import WebSocketProvider from './WebSocketProvider';
 
 const { chains, publicClient } = configureChains(
   [
@@ -89,15 +91,17 @@ const livepeerClient = createReactClient({
     baseUrl: LENSTOK_URL
   })
 });
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } }
 });
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
    <Web3Provider>
-      <ApolloProvider client={apolloClient}>
-        <UserSigNoncesProvider />
+     <ApolloProvider client={apolloClient}>
+       <UserSigNoncesProvider />
+       <WebSocketProvider />
+        <LensSubscriptionsProvider />
         <QueryClientProvider client={queryClient}>
           <LivepeerConfig client={livepeerClient}>
             <ThemeProvider defaultTheme="light" attribute="class">
@@ -107,8 +111,8 @@ const Providers = ({ children }: { children: ReactNode }) => {
             {/* <Video /> */}
           </LivepeerConfig>
         </QueryClientProvider>
-      </ApolloProvider>
-      </Web3Provider>
+     </ApolloProvider>
+    </Web3Provider>
       
     
   );

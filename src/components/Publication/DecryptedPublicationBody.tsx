@@ -226,18 +226,18 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
       >
         <div className="flex items-center space-x-2 font-bold">
           <LockClosedIcon className="h-5 w-5 text-green-300" />
-          <span className="text-base font-black text-white">
+          <span className="text-base font-black text-blue-700 dark:text-blue-700">
             To view this...
           </span>
         </div>
-        <div className="space-y-2 pt-3.5 text-white">
+        <div className="space-y-2 pt-3.5 text-blue-700">
           {/* Collect checks */}
           {hasNotCollectedPublication ? (
-            <DecryptMessage icon={<RectangleStackIcon className="h-4 w-4" />}>
+            <DecryptMessage icon={<RectangleStackIcon className="h-4 w-4 text-blue-700" />}>
               Collect the{' '}
               <Link
                 href={`/post/${collectCondition?.publicationId}`}
-                className="font-bold lowercase underline"
+                className="font-bold lowercase underline text-blue-700"
               >
                 {encryptedPublication?.__typename}
               </Link>
@@ -245,7 +245,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           ) : null}
           {collectNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<RectangleStackIcon className="h-4 w-4 animate-pulse" />}
+              icon={<RectangleStackIcon className="h-4 w-4 animate-pulse text-blue-700" />}
             >
               Collect finalizing on chain...
             </DecryptMessage>
@@ -253,11 +253,11 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
           {/* Follow checks */}
           {doesNotFollowProfile ? (
-            <DecryptMessage icon={<UserPlusIcon className="h-4 w-4" />}>
+            <DecryptMessage icon={<UserPlusIcon className="h-4 w-4 text-blue-700" />}>
               Follow{' '}
               <Link
                 href={`/u/${formatHandle(encryptedPublication?.profile?.id)}`}
-                className="font-bold"
+                className="font-bold text-blue-700"
               >
                 @{formatHandle(encryptedPublication?.profile?.handle)}
               </Link>
@@ -265,7 +265,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           ) : null}
           {followNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<UserPlusIcon className="h-4 w-4 animate-pulse" />}
+              icon={<UserPlusIcon className="h-4 w-4 animate-pulse text-blue-700" />}
             >
               Follow finalizing on chain...
             </DecryptMessage>
@@ -273,11 +273,11 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
           {/* Token check */}
           {unauthorizedBalance ? (
-            <DecryptMessage icon={<CircleStackIcon className="h-4 w-4" />}>
+            <DecryptMessage icon={<CircleStackIcon className="h-4 w-4 text-blue-700" />}>
               You need{' '}
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}
-                className="font-bold underline"
+                className="font-bold text-blue-700 underline"
                 target="_blank"
                 rel="noreferrer noopener"
               >
@@ -294,7 +294,7 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
               <Tooltip content={contractMetadata?.name} placement="top">
                 <Link
                   href={`${RARIBLE_URL}/collection/polygon/${nftCondition.contractAddress}/items`}
-                  className="font-bold underline"
+                  className="font-bold text-blue-700 underline"
                   target="_blank"
                   rel="noreferrer noopener"
                 >

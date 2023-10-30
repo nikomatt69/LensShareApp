@@ -20,12 +20,22 @@ export enum HomeFeedType {
   LENSTER_MOSTINTERACTED = 'LENSTER_MOSTINTERACTED'
 }
 
-export enum NotificationType {
+export enum NotificationTabType {
   All = 'ALL',
   Mentions = 'MENTIONS',
   Comments = 'COMMENTS',
   Likes = 'LIKES',
   Collects = 'COLLECTS'
+}
+
+
+export enum NotificationType {
+  All = 'ALL',
+  Mentions = 'MENTIONS',
+  Comments = 'COMMENTS',
+  Likes = 'LIKES',
+  Collects = 'COLLECTS',
+  Reacted = "Reacted"
 }
 
 export enum ProfileFeedType {

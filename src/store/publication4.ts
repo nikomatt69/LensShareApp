@@ -52,6 +52,19 @@ interface PublicationState {
   resetPollConfig: () => void;
   showSpaceEditor: boolean;
   setShowSpaceEditor: (showSpaceEditor: boolean) => void;
+  showLiveVideoEditor: boolean;
+  setShowLiveVideoEditor: (showLiveVideoEditor: boolean) => void;
+  liveVideoConfig: {
+    id: string;
+    streamKey: string;
+    playbackId: string;
+  };
+  setLiveVideoConfig: (liveVideoConfig: {
+    id: string;
+    streamKey: string;
+    playbackId: string;
+  }) => void;
+  resetLiveVideoConfig: () => void;
 }
 
 export const usePublicationStore = create<PublicationState>((set) => ({
@@ -111,5 +124,12 @@ export const usePublicationStore = create<PublicationState>((set) => ({
   resetPollConfig: () =>
     set(() => ({ pollConfig: { length: 1, choices: ['', ''] } })),
   showSpaceEditor: false,
-  setShowSpaceEditor: (showSpaceEditor) => set(() => ({ showSpaceEditor }))
+  setShowSpaceEditor: (showSpaceEditor) => set(() => ({ showSpaceEditor })),
+  showLiveVideoEditor: false,
+  setShowLiveVideoEditor: (showLiveVideoEditor) =>
+    set(() => ({ showLiveVideoEditor })),
+  liveVideoConfig: { id: '', streamKey: '', playbackId: '' },
+  setLiveVideoConfig: (liveVideoConfig) => set(() => ({ liveVideoConfig })),
+  resetLiveVideoConfig: () =>
+    set(() => ({ liveVideoConfig: { id: '', streamKey: '', playbackId: '' } }))
 }));

@@ -124,7 +124,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
   return (
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
-      <div className="mt-2 space-y-3">
+      <div className="mt-2 ml-2 space-y-3">
         <b className="text-lg">{metadata.content}</b>
         <Button
           className={cn(
