@@ -99,8 +99,6 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
    <Web3Provider>
      <ApolloProvider client={apolloClient}>
-       <UserSigNoncesProvider />
-       <WebSocketProvider />
         <LensSubscriptionsProvider />
         <QueryClientProvider client={queryClient}>
           <LivepeerConfig client={livepeerClient}>

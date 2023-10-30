@@ -33,6 +33,14 @@ import { useNonceStore } from '@/store/nonce';
 import AudioSpaces from './Spaces';
 import PullToRefreshExample from './HomePage/Refresh';
 import { useRoom } from '@huddle01/react/hooks';
+import getCurrentSessionProfileId from '@/lib/getCurrentSessionProfileId';
+import { useProfileQuery } from '@/utils/lens';
+import { useEffectOnce, useIsMounted, useUpdateEffect } from 'usehooks-ts';
+import { hydrateAuthTokens, signOut } from '@/store/persist';
+import { useDisconnectXmtp } from '@/utils/hooks/useXmtpClient';
+import { useUserProfilesWithGuardianInformationQuery } from '@/utils/lens/generated5';
+import { getIsAuthTokensAvailable } from '@/utils/lib/getIsAuthTokensAvailable';
+import resetAuthData from '@/utils/hooks/resetAuthData';
 
 interface Props {
   children: ReactNode;
@@ -40,84 +48,72 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const { resolvedTheme } = useTheme();
-  const setUserSigNonce = useNonceStore((state) => state.setUserSigNonce);
-  const setProfiles = useAppStore((state) => state.setCurrentProfile);
-  const currentProfile = useAppStore((state) => state.currentProfile);
-  const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
-  const profileId = useAppPersistStore((state) => state.profileId);
-  const setProfileId = useAppPersistStore((state) => state.setProfileId);
-  const { address, isDisconnected } = useAccount();
+  const { setProfiles, currentProfile, setCurrentProfile } = useAppStore();
+  const { pathname } = useRouter();
+  const { profileId, setProfileId } = useAppPersistStore();
 
+
+  const isMounted = useIsMounted();
+  const { address } = useAccount();
   const { chain } = useNetwork();
-  const [mounted, setMounted] = useState(false);
-  const { disconnect } = useDisconnect({
-    onError(error) {
-      toast.error(error?.message);
-    }
-  });
+  const { disconnect } = useDisconnect();
+  const disconnectXmtp = useDisconnectXmtp();
 
-  const showSpacesLobby = useSpacesStore((state) => state.showSpacesLobby);
-  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
+  const resetAuthState = () => {
+    setProfileId(null);
+    setCurrentProfile(null);
+   
+    
+  };
 
-  const { loading } = useQuery(ProfilesDocument, {
+  // Fetch current profiles and sig nonce owned by the wallet address
+  const { loading } = useUserProfilesWithGuardianInformationQuery({
     variables: {
-      request: {
-        ownedBy: [address]
-      }
+      profileGuardianInformationRequest: { profileId },
+      profilesRequest: { ownedBy: [address] }
     },
     skip: !profileId,
     onCompleted: (data) => {
-      const profiles = data?.profiles?.items as Profile[];
-      if (!profiles.length) return resetAuthState();
-    },
-    onError: () => {
-      setProfileId(null);
-    }
-  });
-  const { joinRoom, isRoomJoined } = useRoom();
+      const profiles = data?.profiles?.items
+        ?.slice()
+        ?.sort((a, b) => Number(a.id) - Number(b.id))
+        ?.sort((a, b) =>
+          a.isDefault === b.isDefault ? 0 : a.isDefault ? -1 : 1
+        );
 
-  const resetAuthState = () => {
-    setCurrentProfile(null);
-    setProfileId(null);
-  };
+      if (!profiles.length) {
+        return resetAuthState();
+      }
+
+      const selectedUser = profiles.find((profile) => profile.id === profileId);
+      setProfiles(profiles as Profile[]);
+      setCurrentProfile(selectedUser as Profile);
+      setProfileId(selectedUser?.id);
+     
+    },
+    onError: () => setProfileId(null)
+  });
 
   const validateAuthentication = () => {
-    const logout = () => {
-      setCurrentProfile(null);
-      setProfileId(null);
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      disconnect?.();
-    };
-    const ownerAddress = currentProfile?.ownedBy;
-    const isAuthTokenAvailable =
-      localStorage.getItem('accessToken') &&
-      localStorage.getItem('refreshToken');
-    const isWrongNetworkChain = chain?.id !== CHAIN_ID;
+    const currentProfileAddress = currentProfile?.ownedBy;
     const isSwitchedAccount =
-      ownerAddress !== undefined && ownerAddress !== address;
-    const shouldLogout =
-      !isAuthTokenAvailable ||
-      isWrongNetworkChain ||
-      isDisconnected ||
-      isSwitchedAccount;
+      currentProfileAddress !== undefined && currentProfileAddress !== address;
+    const shouldLogout = !getIsAuthTokensAvailable() || isSwitchedAccount;
 
+    // If there are no auth data, clear and logout
     if (shouldLogout && profileId) {
-      logout();
+      disconnectXmtp();
+      resetAuthState();
+      resetAuthData();
+      disconnect?.();
     }
   };
-  const { pathname } = useRouter();
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     validateAuthentication();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDisconnected, address, chain, disconnect, profileId]);
+  }, [address, chain, disconnect, profileId]);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (loading) {
+  if (loading || !isMounted()) {
     return <Loading />;
   }
 

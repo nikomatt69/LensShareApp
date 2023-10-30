@@ -20,24 +20,22 @@ import {
 
 } from '@/utils/lens/generated7';
 
-import getCurrentSessionId from '@/lib/getCurrentSessionId';
+import getCurrentSessionProfileId from '@/lib/getCurrentSessionProfileId';
 import getPushNotificationData from '@/lib/getPushNotificationData';
 import { BrowserPush } from '@/lib/browserPush';
 import resetAuthData from '@/utils/hooks/resetAuthData';
 import { isSupported, share} from 'shared-zustand';
 import { useNotificationPersistStore } from '@/store/notification';
 import { useNonceStore } from '@/store/nonce';
+import { signOut } from '@/store/persist';
+import getCurrentSessionId from '@/lib/getCurrentSessionId';
 
 const LensSubscriptionsProvider: FC = () => {
-  const profileId = useAppPersistStore((state) => state.profileId);
+  const currentSessionProfileId = getCurrentSessionProfileId();
   const setLatestNotificationId = useNotificationPersistStore(
     (state) => state.setLatestNotificationId
   );
-  const {
-    setLensHubOnchainSigNonce,
-    setLensTokenHandleRegistryOnchainSigNonce,
-    setLensPublicActProxyOnchainSigNonce
-  } = useNonceStore();
+  const { setLensHubOnchainSigNonce } = useNonceStore();
   const { address } = useAccount();
 
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
@@ -50,12 +48,12 @@ const LensSubscriptionsProvider: FC = () => {
   });
 
   useUpdateEffect(() => {
-    if (readyState === 1 && profileId && address) {
+    if (readyState === 1 && currentSessionProfileId && address) {
       sendJsonMessage({
         id: '1',
         type: 'start',
         payload: {
-          variables: { for: profileId },
+          variables: { for: currentSessionProfileId },
           query: NotificationsDocument
         }
       });
@@ -73,13 +71,13 @@ const LensSubscriptionsProvider: FC = () => {
         }
       });
     }
-  }, [readyState, profileId]);
+  }, [readyState, currentSessionProfileId]);
 
   useUpdateEffect(() => {
     const jsonData = JSON.parse(lastMessage?.data || '{}');
     const wsData = jsonData?.payload?.data;
 
-    if (profileId && address && wsData) {
+    if (currentSessionProfileId && address && wsData) {
       if (jsonData.id === '1') {
         const notification = wsData.newNotification as Notification;
         if (getPushNotificationData(notification)) {
@@ -93,13 +91,9 @@ const LensSubscriptionsProvider: FC = () => {
       if (jsonData.id === '2') {
         const userSigNonces = wsData.userSigNonces as UserSigNonces;
         setLensHubOnchainSigNonce(userSigNonces.lensHubOnChainSigNonce);
-        
-        setLensPublicActProxyOnchainSigNonce(
-          userSigNonces.peripheryOnChainSigNonce
-        );
       }
       if (jsonData.id === '3') {
-        resetAuthData();
+        signOut();
         location.reload();
       }
     }
@@ -108,8 +102,6 @@ const LensSubscriptionsProvider: FC = () => {
   // Sync zustand stores between tabs
   if (isSupported()) {
     share('lensHubOnchainSigNonce', useNonceStore);
-    share('lensTokenHandleRegistryOnchainSigNonce', useNonceStore);
-    share('lensPublicActProxyOnchainSigNonce', useNonceStore);
   }
 
   return null;

@@ -28,41 +28,6 @@ client
   .setProject(`652d6677a03334471169`)
 ;
 
-const onBrowserPushWorkerMessage = (event: MessageEvent) => {
-  const { data } = event;
-  postMessage(data);
-  
-};
-
-addEventListener('message', onBrowserPushWorkerMessage);
-
-
-let browserPushWorker: Worker;
-
-if (typeof Worker !== 'undefined') {
-  browserPushWorker = new Worker(
-    new URL('src/sw/browserPushWorker', import.meta.url)
-  );
-}
-
-/**
- * Browser push notification
- */
-export const BrowserPush = {
-  notify: ({ title }: { title: string }) => {
-    browserPushWorker.postMessage({ title });
-
-    browserPushWorker.onmessage = function (event: MessageEvent) {
-      const response = event.data;
-      new Notification('LensShare', {
-        body: response.title,
-        icon: 'public/images/icon.png'
-      });
-    };
-  }
-};
-
-
 
 
 interface AppProps {

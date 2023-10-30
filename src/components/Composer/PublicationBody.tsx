@@ -111,7 +111,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       <Markup
         className={cn(
           { 'line-clamp-5': canShowMore },
-          'markup linkify  font-helvetica break-words text-xs'
+          'markup linkify font-semibold font-poppins break-words text-xs'
         )}
       >
         {content}

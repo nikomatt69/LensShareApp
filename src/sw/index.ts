@@ -50,7 +50,7 @@ export const BrowserPush = {
       const response = event.data;
       new Notification('LensShare', {
         body: response.title,
-        icon: '/public/images/icon.png'
+        icon: 'public/images/icon.png'
       });
     };
   }
@@ -59,12 +59,11 @@ export const BrowserPush = {
 const onBrowserPushWorkerMessage = (event: MessageEvent) => {
   const { data } = event;
   postMessage(data);
-  
+  return;
 };
 
-addEventListener('message', onBrowserPushWorkerMessage);
-
-self.addEventListener('message', (event) => event.data);
+browserPushWorker.addEventListener('message', onBrowserPushWorkerMessage);
+browserPushWorker.addEventListener('message', (event) => event.data);
 self.addEventListener('fetch', handleFetch);
 self.addEventListener('install', (event) => event.waitUntil(handleInstall()));
 self.addEventListener('activate', (event) => event.waitUntil(handleActivate()));
