@@ -57,29 +57,7 @@ import Web3Provider from './Web3Provider';
 import LensSubscriptionsProvider from './LensSubscriptionsProvider';
 import WebSocketProvider from './WebSocketProvider';
 
-const { chains, publicClient } = configureChains(
-  [
-    polygon,
-    polygonMumbai,
-    mainnet,
-    goerli,
-    zora,
-    zoraTestnet,
-    optimism,
-    optimismGoerli,
-    base,
-    baseGoerli
-  ],
-  [publicProvider()]
-);
 
-const projectId = WALLETCONNECT_PROJECT_ID;
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ projectId, chains }) as Connector<any, any>[],
-  publicClient
-});
 
 interface Web3ProviderProps {
   children: ReactNode;
@@ -100,12 +78,13 @@ const Providers = ({ children }: { children: ReactNode }) => {
    <Web3Provider>
      <ApolloProvider client={apolloClient}>
         <LensSubscriptionsProvider />
+        <WebSocketProvider />
         <QueryClientProvider client={queryClient}>
           <LivepeerConfig client={livepeerClient}>
             <ThemeProvider defaultTheme="light" attribute="class">
               {children}
             </ThemeProvider>
-            <Analytics />
+           <Analytics />
             {/* <Video /> */}
           </LivepeerConfig>
         </QueryClientProvider>
