@@ -1,4 +1,3 @@
-
 import { API_URL } from '@/constants';
 import type { FC } from 'react';
 import useWebSocket from 'react-use-websocket';
@@ -31,8 +30,8 @@ const WebSocketProvider: FC = () => {
     const jsonData = JSON.parse(lastMessage?.data || '{}');
     const daData = jsonData?.payload?.data;
 
-    if (profileId && daData && daData?.newNotification?.id) {
-      setLatestNotificationId(daData.newNotification.id);
+    if (profileId && daData && daData?.Notification?.notificationId) {
+      setLatestNotificationId(daData.Notification.notificationId);
     }
   }, [lastMessage]);
 

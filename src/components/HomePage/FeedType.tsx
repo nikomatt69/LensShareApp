@@ -63,7 +63,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
             setFeedType(HomeFeedType.LATEST);
           }}
         />
-         <TabButton
+        <TabButton
           className="text-blue-700"
           name={`Explore`}
           icon={<BiWorld className="h-4 w-4 text-blue-700" />}
@@ -72,7 +72,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
             setFeedType(HomeFeedType.EXPLORE);
           }}
         />
-         <TabButton
+        <TabButton
           className="text-blue-700"
           name={`Music`}
           icon={<MusicalNoteIcon className="h-4 w-4 text-blue-700" />}

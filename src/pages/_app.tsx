@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import Loading from '@/components/Loading';
-import { Client, Account } from "appwrite";
+import { Client, Account } from 'appwrite';
 import { lazy, Suspense, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import MetaTags from '@/components/UI/MetaTags';
@@ -25,10 +25,7 @@ const client = new Client();
 
 client
   .setEndpoint(`https://cloud.appwrite.io/v1`)
-  .setProject(`652d6677a03334471169`)
-;
-
-
+  .setProject(`652d6677a03334471169`);
 
 interface AppProps {
   publication: Publication;

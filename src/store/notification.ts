@@ -18,7 +18,8 @@ export const useNotificationPersistStore = create(
       latestNotificationId: null,
       setLatestNotificationId: (id) => set({ latestNotificationId: id }),
       lastOpenedNotificationId: null,
-      setLastOpenedNotificationId: (id) => set({ lastOpenedNotificationId: id }),
+      setLastOpenedNotificationId: (id) =>
+        set({ lastOpenedNotificationId: id }),
       notificationCountMap: undefined,
       setNotificationCount: (profileId, count) => {
         const { notificationCountMap } = get();

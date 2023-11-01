@@ -1,4 +1,3 @@
-
 import Video from '@/components/Composer/Video';
 import { Card } from '@/components/UI/Card';
 import { Spinner } from '@/components/UI/Spinner';
@@ -13,13 +12,10 @@ import {
 } from '@heroicons/react/24/outline';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
-
-
 import axios from 'axios';
 import { type FC, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAppStore } from 'src/store/app';
-
 
 const LivestreamEditor: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -38,16 +34,10 @@ const LivestreamEditor: FC = () => {
   const createLiveStream = async () => {
     try {
       setCreating(true);
-      const response = await axios.post(
-        `${LIVE_WORKER_URL}/create`,
-        {
-          
-          id: currentProfile?.id,
-          isMainnet: IS_MAINNET
-
-        },
-       
-      );
+      const response = await axios.post(`${LIVE_WORKER_URL}/create`, {
+        id: currentProfile?.id,
+        isMainnet: IS_MAINNET
+      });
       const { data } = response;
       setLiveVideoConfig({
         id: data.result.id,
@@ -66,9 +56,7 @@ const LivestreamEditor: FC = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2 text-sm">
           <VideoCameraIcon className="text-brand h-4 w-4" />
-          <b>
-            Go Live
-          </b>
+          <b>Go Live</b>
         </div>
         <div className="flex items-center space-x-3">
           <Tooltip placement="top" content={`Delete`}>
@@ -85,13 +73,11 @@ const LivestreamEditor: FC = () => {
         </div>
       </div>
       <div className="mt-3 space-y-2">
-        {liveVideoConfig.playbackId  ? (
+        {liveVideoConfig.playbackId ? (
           <>
             <Card className="space-y-2 p-3">
               <div className="flex items-center space-x-1">
-                <b>
-                 Stream URL:
-                </b>
+                <b>Stream URL:</b>
                 <div className="">rtmp://rtmp.livepeer.com/live</div>
                 <button
                   onClick={async () => {
@@ -105,9 +91,7 @@ const LivestreamEditor: FC = () => {
                 </button>
               </div>
               <div className="flex items-center space-x-1">
-                <b>
-                  Stream Key:
-                </b>
+                <b>Stream Key:</b>
                 <div className="">{liveVideoConfig.streamKey}</div>
                 <button
                   onClick={async () => {
@@ -132,16 +116,12 @@ const LivestreamEditor: FC = () => {
                 {creating ? (
                   <>
                     <Spinner size="xs" />
-                    <div>
-                      Creating Live Stream...
-                    </div>
+                    <div>Creating Live Stream...</div>
                   </>
                 ) : (
                   <>
                     <SignalIcon className="text-brand h-5 w-5" />
-                    <div>
-                     Create Live Stream
-                    </div>
+                    <div>Create Live Stream</div>
                   </>
                 )}
               </div>

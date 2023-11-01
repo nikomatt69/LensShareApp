@@ -81,7 +81,7 @@ const ZoraNft: FC<ZoraNftProps> = ({ nftMetadata, publication }) => {
         })}
         className="h-[400px] max-h-[400px] w-full rounded-t-xl object-cover"
       />
-      <div className="flex-col items-center justify-between border-t px-3 py-1 py-2 rounded-b-xl dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
+      <div className="flex-col items-center justify-between rounded-b-xl border-t border-blue-700 border-l-blue-700 border-r-blue-700 bg-gray-400 px-3 py-1 py-2 dark:bg-gray-700">
         <div className="flex-col items-center space-x-2 py-1">
           <Tooltip
             placement="right"

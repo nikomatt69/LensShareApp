@@ -100,8 +100,6 @@ const BottomNav: React.FC = () => {
           </Link>
         </div>
 
-
-
         <div>
           {/* //messages */}
           <MessageIcon />

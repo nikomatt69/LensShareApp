@@ -12,32 +12,33 @@ import {
   useNetwork,
   useConnect,
   useSignMessage,
-  useSwitchNetwork
+  useSwitchNetwork,
+  useChainId
 } from 'wagmi';
 import type { Connector } from 'wagmi';
 import toast from 'react-hot-toast';
-import MainButton from '../Buttons/Rainbow/mainbutton';
+import SwitchNetwork from '../Composer/OpenActions/Nft/ZoraNft/Mint/SwitchNetwork';
+import { useAuthenticateMutation, useChallengeLazyQuery, useUserProfilesLazyQuery } from '@/utils/lens/generated5';
+import onError from '@/lib/onError';
 
-const LoginWallet: FC = () => {
+const LoginWalletMobile: FC = () => {
   const setProfiles = useAppStore((state) => state.setProfiles);
   const setCurrentProfile = useAppStore((state) => state.setCurrentProfile);
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
   const [mounted, setMounted] = useState(false);
 
-  const { chain } = useNetwork();
+  const chain = useChainId();
   const { switchNetwork } = useSwitchNetwork();
   const [hasConnected, setHasConnected] = useState(false);
   const { address, connector: activeConnector } = useAccount();
-  const { connectors, error, connectAsync } = useConnect();
-  const { signMessageAsync, isLoading: signLoading } = useSignMessage();
-  const [loadChallenge, { error: errorChallenge, loading: challengeLoading }] =
-    useLazyQuery(GetChallengeDocument, {
-      fetchPolicy: 'no-cache'
-    });
-  const [authenticate, { error: errorAuthenticate, loading: authLoading }] =
-    useMutation(AuthenticateDocument);
-  const [getUserProfiles, { error: errorProfiles, loading: profilesLoading }] =
-    useLazyQuery(ProfilesDocument);
+  const { signMessageAsync } = useSignMessage({ onError });
+  const [loadChallenge, { error: errorChallenge }] = useChallengeLazyQuery({
+    fetchPolicy: 'no-cache'
+  });
+  const [authenticate, { error: errorAuthenticate }] =
+    useAuthenticateMutation();
+  const [getProfiles, { error: errorProfiles }] = useUserProfilesLazyQuery();
+
 
   useEffect(() => {
     setMounted(true);
@@ -51,8 +52,15 @@ const LoginWallet: FC = () => {
         console.log('Account', account);
       }
     } catch {}
-    toast.error('Please download metamask!');
   };
+
+  const {
+    connectors,
+    error,
+    connectAsync,
+    isLoading: isConnectLoading,
+    pendingConnector
+  } = useConnect({ chainId: CHAIN_ID });
 
   const handleLogin = async () => {
     try {
@@ -83,14 +91,19 @@ const LoginWallet: FC = () => {
       );
 
       // Get authed profiles
-      const { data: profilesData } = await getUserProfiles({
+      const { data: profilesData } = await getProfiles({
         variables: { request: { ownedBy: [address] } }
       });
 
       if (profilesData?.profiles?.items?.length === 0) {
         return toast.error('You have no lens profile yet, please create one');
       } else {
-        const profiles: any = profilesData?.profiles?.items;
+        const profiles: any = profilesData?.profiles?.items
+          ?.slice()
+          ?.sort((a, b) => Number(a.id) - Number(b.id))
+          ?.sort((a, b) =>
+            a.isDefault === b.isDefault ? 0 : a.isDefault ? -1 : 1
+          );
         const currentProfile = profiles[0];
         setProfiles(profiles);
         setCurrentProfile(currentProfile);
@@ -100,31 +113,43 @@ const LoginWallet: FC = () => {
   };
 
   return activeConnector?.id ? (
-    <div className="flex flex-1">
-      {chain?.id === CHAIN_ID ? (
-        <button className="flex-1" onClick={() => handleLogin()}>
-          {mounted ? 'Log In With Lens' : ''}
+    <div>
+      {chain === CHAIN_ID ? (
+        <button className="flex-1 text-blue-700" onClick={() => handleLogin()}>
+          {mounted ? 'Log In' : ''}
         </button>
       ) : (
-        <button
-          className="flex-1"
-          onClick={() => {
-            if (switchNetwork) {
-              switchNetwork(CHAIN_ID);
-            } else {
-              toast.error('Please change your network!');
-            }
-          }}
-        >
-          Switch Network
-        </button>
+        <SwitchNetwork
+          className="mt-5 w-full justify-center"
+          toChainId={CHAIN_ID}
+        />
       )}
     </div>
   ) : (
-    <div className="flex flex-1">
-      <MainButton />
-    </div>
+    <button
+      onClick={() => {
+        {
+          toast.error('Log in to view profile', { duration: 1000 });
+        }
+      }}
+      className="border-gray-800 text-blue-700 hover:text-gray-600 focus:text-black focus:outline-none dark:text-white"
+    >
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        ></path>
+      </svg>
+    </button>
   );
 };
 
-export default LoginWallet;
+export default LoginWalletMobile;

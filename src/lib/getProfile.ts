@@ -1,6 +1,5 @@
-import { Profile } from "@/utils/lens/generated5";
-import sanitizeDisplayName from "@/utils/sanitizeDisplayName";
-
+import { Profile } from '@/utils/lens/generated5';
+import sanitizeDisplayName from '@/utils/sanitizeDisplayName';
 
 const getProfile = (
   profile: Profile | null
@@ -26,9 +25,7 @@ const getProfile = (
     slug,
     slugWithPrefix: `${prefix}${slug}`,
     displayName: sanitizeDisplayName(profile.metadata?.displayName) || slug,
-    link: profile.handle
-      ? `/u/${profile.id}`
-      : `/profile/${profile.id}`
+    link: profile.handle ? `/u/${profile.id}` : `/profile/${profile.id}`
   };
 };
 

@@ -10,7 +10,7 @@ import * as Apollo from '@apollo/client';
 import { Children, FC, useEffect, useState } from 'react';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 
-import ReactPullToRefresh from 'react-pull-to-refresh'
+import ReactPullToRefresh from 'react-pull-to-refresh';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import {
   Profile,
@@ -171,7 +171,6 @@ const Home2: FC<Props> = ({ publication }) => {
       disconnect?.();
     }
   };
-  
 
   useEffect(() => {
     validateAuthentication();
@@ -179,19 +178,15 @@ const Home2: FC<Props> = ({ publication }) => {
 
   const { resolvedTheme } = useTheme();
 
-
-  
   return (
     <>
       <GridLayout className="max-w-[1200px] pt-6">
         <MetaTags />
-        
+
         <Wrapper children publication={publication} />
         <GridItemEight>
-        
           <>
             <AddToHome />
-         
 
             {resolvedTheme === 'dark' ? (
               <Image
@@ -225,13 +220,10 @@ const Home2: FC<Props> = ({ publication }) => {
                 <Timeline />
               ) : feedType === HomeFeedType.LATEST ? (
                 <Latest />
-              ) :
-              feedType === HomeFeedType.EXPLORE ? (
+              ) : feedType === HomeFeedType.EXPLORE ? (
                 <Explore />
               ) : feedType === HomeFeedType.MUSIC ? (
-               
                 <Curated />
-             
               ) : (
                 <Highlights />
               )}

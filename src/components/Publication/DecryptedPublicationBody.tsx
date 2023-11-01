@@ -233,11 +233,13 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
         <div className="space-y-2 pt-3.5 text-blue-700">
           {/* Collect checks */}
           {hasNotCollectedPublication ? (
-            <DecryptMessage icon={<RectangleStackIcon className="h-4 w-4 text-blue-700" />}>
+            <DecryptMessage
+              icon={<RectangleStackIcon className="h-4 w-4 text-blue-700" />}
+            >
               Collect the{' '}
               <Link
                 href={`/post/${collectCondition?.publicationId}`}
-                className="font-bold lowercase underline text-blue-700"
+                className="font-bold lowercase text-blue-700 underline"
               >
                 {encryptedPublication?.__typename}
               </Link>
@@ -245,7 +247,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           ) : null}
           {collectNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<RectangleStackIcon className="h-4 w-4 animate-pulse text-blue-700" />}
+              icon={
+                <RectangleStackIcon className="h-4 w-4 animate-pulse text-blue-700" />
+              }
             >
               Collect finalizing on chain...
             </DecryptMessage>
@@ -253,7 +257,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
           {/* Follow checks */}
           {doesNotFollowProfile ? (
-            <DecryptMessage icon={<UserPlusIcon className="h-4 w-4 text-blue-700" />}>
+            <DecryptMessage
+              icon={<UserPlusIcon className="h-4 w-4 text-blue-700" />}
+            >
               Follow{' '}
               <Link
                 href={`/u/${formatHandle(encryptedPublication?.profile?.id)}`}
@@ -265,7 +271,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
           ) : null}
           {followNotFinalisedOnChain ? (
             <DecryptMessage
-              icon={<UserPlusIcon className="h-4 w-4 animate-pulse text-blue-700" />}
+              icon={
+                <UserPlusIcon className="h-4 w-4 animate-pulse text-blue-700" />
+              }
             >
               Follow finalizing on chain...
             </DecryptMessage>
@@ -273,7 +281,9 @@ const DecryptedPublicationBody: FC<DecryptedPublicationBodyProps> = ({
 
           {/* Token check */}
           {unauthorizedBalance ? (
-            <DecryptMessage icon={<CircleStackIcon className="h-4 w-4 text-blue-700" />}>
+            <DecryptMessage
+              icon={<CircleStackIcon className="h-4 w-4 text-blue-700" />}
+            >
               You need{' '}
               <Link
                 href={`${POLYGONSCAN_URL}/token/${tokenCondition.contractAddress}`}

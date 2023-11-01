@@ -4,5 +4,8 @@ const onBrowserPushWorkerMessage = (event: MessageEvent) => {
 };
 
 self.addEventListener('message', onBrowserPushWorkerMessage);
-self.addEventListener('message',  (event) => event.data.onBrowserPushWorkerMessage);
+self.addEventListener(
+  'message',
+  (event) => event.data.onBrowserPushWorkerMessage
+);
 self.addEventListener('message', (event) => event.data);

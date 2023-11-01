@@ -111,7 +111,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
       <Markup
         className={cn(
           { 'line-clamp-5': canShowMore },
-          'markup linkify font-semibold font-poppins break-words text-xs'
+          'markup linkify break-words font-poppins text-xs font-semibold'
         )}
       >
         {content}
@@ -135,7 +135,7 @@ const PublicationBody: FC<PublicationBodyProps> = ({
           onData={onOembedData}
         />
       ) : null}
-     
+
       {showQuotedPublication ? (
         <Quote
           publicationId={quotedPublicationId}

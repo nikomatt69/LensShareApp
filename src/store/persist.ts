@@ -47,8 +47,8 @@ export const usePersistStore = create(
       queuedComments: [],
       queuedVideos: [],
       highSignalNotificationFilter: false,
-     setHighSignalNotificationFilter: (highSignalNotificationFilter) =>
-     set(() => ({ highSignalNotificationFilter })),
+      setHighSignalNotificationFilter: (highSignalNotificationFilter) =>
+        set(() => ({ highSignalNotificationFilter })),
       setQueuedVideos: (queuedVideos) => set({ queuedVideos }),
       setQueuedComments: (queuedComments) => set({ queuedComments }),
       setSidebarCollapsed: (sidebarCollapsed) => set({ sidebarCollapsed }),

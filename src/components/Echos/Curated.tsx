@@ -21,8 +21,6 @@ import Loader from '../UI/Loader';
 import EchosShimmer from './EchosShimmer';
 import { EmptyState } from '../UI/EmptyState';
 
-import Search from '../Search/Search';
-import SearchAudio from '../Search/SearchAudio';
 import imageKit from '@/lib/imageKit';
 
 const Curated = () => {

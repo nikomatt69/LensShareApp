@@ -1,4 +1,3 @@
-
 import { Profile } from '@/utils/lens/generated5';
 import {
   CheckBadgeIcon,
@@ -21,7 +20,7 @@ export const NotificationProfileAvatar: FC<NotificationProfileProps> = ({
   profile
 }) => {
   return (
-    <UserPreview profile={profile?.id} >
+    <UserPreview profile={profile?.id}>
       <Link href={getProfile(profile).link}>
         <Image
           src={getAvatar(profile)}
@@ -39,7 +38,7 @@ export const NotificationProfileName: FC<NotificationProfileProps> = ({
   profile
 }) => {
   return (
-    <UserPreview profile={profile.id} >
+    <UserPreview profile={profile.id}>
       <Link
         href={getProfile(profile).link}
         className="inline-flex items-center space-x-1 font-bold hover:underline"

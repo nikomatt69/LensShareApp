@@ -4,7 +4,6 @@ import { VideoCameraIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 
-
 const LivestreamSettings: FC = () => {
   const showLiveVideoEditor = usePublicationStore(
     (state) => state.showLiveVideoEditor

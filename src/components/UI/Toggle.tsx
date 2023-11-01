@@ -2,7 +2,6 @@ import { Switch } from '@headlessui/react';
 import type { FC } from 'react';
 import cn from './cn';
 
-
 interface ToggleProps {
   on: boolean;
   setOn: (on: boolean) => void;

@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ["sw.js"],
+  ignorePatterns: ['sw.js'],
   settings: {
     next: {
       rootDir: ['/']

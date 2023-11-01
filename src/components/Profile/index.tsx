@@ -40,7 +40,12 @@ import StoriesRender from '../Bytes/Stories';
 import Loader from '../UI/Loader';
 import Wrapper from '../Echos/Wrapper';
 import { useTheme } from 'next-themes';
-import { ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from '@/utils/lens/generated5';
+import {
+  ReferenceModules,
+  UserProfilesDocument,
+  UserProfilesQuery,
+  UserProfilesQueryVariables
+} from '@/utils/lens/generated5';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import { useNonceStore } from '@/store/nonce';
@@ -111,8 +116,6 @@ const ViewProfile: NextPage = (publication) => {
     );
   }
 
-
-
   const getIsAuthTokensAvailable = () => {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -124,8 +127,6 @@ const ViewProfile: NextPage = (publication) => {
     localStorage.removeItem('refreshToken');
   };
 
-  
- 
   const validateAuthentication = () => {
     const currentProfileAddress = currentProfile?.ownedBy;
     const isSwitchedAccount =
@@ -143,14 +144,12 @@ const ViewProfile: NextPage = (publication) => {
       disconnect?.();
     }
   };
-  
 
   useEffect(() => {
     validateAuthentication();
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   const { resolvedTheme } = useTheme();
-
 
   useEffect(
     () => {

@@ -137,7 +137,6 @@ const Explore: FC<FeedProps> = ({
         />
         <h1 className="text-2xl font-semibold">Explore</h1>
       </div>
-     
 
       <Card
         className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700"

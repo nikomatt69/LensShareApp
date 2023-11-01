@@ -20,9 +20,9 @@ export function AddToHome() {
   }
 
   return (
-    <div className='space-y-3' onClick={hide}>
+    <div className="space-y-3" onClick={hide}>
       <button onClick={hide}>
-        <XCircleIcon className="h-4 w-4 mx-3 text-blue-700" />{' '}
+        <XCircleIcon className="mx-3 h-4 w-4 text-blue-700" />{' '}
       </button>
       <button onClick={promptToInstall}>
         <MdAddHome className="h-4 w-4 text-blue-700" />{' '}

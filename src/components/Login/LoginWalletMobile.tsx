@@ -12,11 +12,15 @@ import {
   useNetwork,
   useConnect,
   useSignMessage,
-  useSwitchNetwork
+  useSwitchNetwork,
+  useChainId
 } from 'wagmi';
 import type { Connector } from 'wagmi';
 import toast from 'react-hot-toast';
 import SwitchNetwork from '../Composer/OpenActions/Nft/ZoraNft/Mint/SwitchNetwork';
+import { useAuthenticateMutation, useChallengeLazyQuery, useUserProfilesLazyQuery } from '@/utils/lens/generated5';
+import onError from '@/lib/onError';
+import { Localstorage } from '@/storage';
 
 const LoginWalletMobile: FC = () => {
   const setProfiles = useAppStore((state) => state.setProfiles);
@@ -24,20 +28,18 @@ const LoginWalletMobile: FC = () => {
   const setProfileId = useAppPersistStore((state) => state.setProfileId);
   const [mounted, setMounted] = useState(false);
 
-  const { chain } = useNetwork();
+  const chain = useChainId();
   const { switchNetwork } = useSwitchNetwork();
   const [hasConnected, setHasConnected] = useState(false);
   const { address, connector: activeConnector } = useAccount();
-  const { connectors, error, connectAsync } = useConnect();
-  const { signMessageAsync, isLoading: signLoading } = useSignMessage();
-  const [loadChallenge, { error: errorChallenge, loading: challengeLoading }] =
-    useLazyQuery(GetChallengeDocument, {
-      fetchPolicy: 'no-cache'
-    });
-  const [authenticate, { error: errorAuthenticate, loading: authLoading }] =
-    useMutation(AuthenticateDocument);
-  const [getUserProfiles, { error: errorProfiles, loading: profilesLoading }] =
-    useLazyQuery(ProfilesDocument);
+  const { signMessageAsync } = useSignMessage({ onError });
+  const [loadChallenge, { error: errorChallenge }] = useChallengeLazyQuery({
+    fetchPolicy: 'no-cache'
+  });
+  const [authenticate, { error: errorAuthenticate }] =
+    useAuthenticateMutation();
+  const [getProfiles, { error: errorProfiles }] = useUserProfilesLazyQuery();
+
 
   useEffect(() => {
     setMounted(true);
@@ -52,6 +54,14 @@ const LoginWalletMobile: FC = () => {
       }
     } catch {}
   };
+
+  const {
+    connectors,
+    error,
+    connectAsync,
+    isLoading: isConnectLoading,
+    pendingConnector
+  } = useConnect({ chainId: CHAIN_ID });
 
   const handleLogin = async () => {
     try {
@@ -75,21 +85,24 @@ const LoginWalletMobile: FC = () => {
       const auth = await authenticate({
         variables: { request: { address, signature } }
       });
-      localStorage.setItem('accessToken', auth.data?.authenticate.accessToken);
-      localStorage.setItem(
-        'refreshToken',
-        auth.data?.authenticate.refreshToken
-      );
-
+      const accessToken = auth.data?.authenticate.accessToken;
+      const refreshToken = auth.data?.authenticate.refreshToken;
+      localStorage.setItem(Localstorage.AccessToken, accessToken);
+      localStorage.setItem(Localstorage.RefreshToken, refreshToken);
       // Get authed profiles
-      const { data: profilesData } = await getUserProfiles({
+      const { data: profilesData } = await getProfiles({
         variables: { request: { ownedBy: [address] } }
       });
 
       if (profilesData?.profiles?.items?.length === 0) {
         return toast.error('You have no lens profile yet, please create one');
       } else {
-        const profiles: any = profilesData?.profiles?.items;
+        const profiles: any = profilesData?.profiles?.items
+          ?.slice()
+          ?.sort((a, b) => Number(a.id) - Number(b.id))
+          ?.sort((a, b) =>
+            a.isDefault === b.isDefault ? 0 : a.isDefault ? -1 : 1
+          );
         const currentProfile = profiles[0];
         setProfiles(profiles);
         setCurrentProfile(currentProfile);
@@ -100,7 +113,7 @@ const LoginWalletMobile: FC = () => {
 
   return activeConnector?.id ? (
     <div>
-      {chain?.id === CHAIN_ID ? (
+      {chain === CHAIN_ID ? (
         <button className="flex-1 text-blue-700" onClick={() => handleLogin()}>
           {mounted ? 'Log In' : ''}
         </button>

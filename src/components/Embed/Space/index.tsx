@@ -124,7 +124,7 @@ const Space: FC<SpaceProps> = ({ publication }) => {
   return (
     <Wrapper className="!bg-brand-500/30 border-brand-400 mt-0 !p-3">
       <SmallUserProfile profile={hostProfile} smallAvatar />
-      <div className="mt-2 ml-2 space-y-3">
+      <div className="ml-2 mt-2 space-y-3">
         <b className="text-lg">{metadata.content}</b>
         <Button
           className={cn(
@@ -163,26 +163,22 @@ const Space: FC<SpaceProps> = ({ publication }) => {
               const currentUrl = window.location.href;
               const url = currentUrl.match(/^https?:\/\/([^/]+)/)?.[0];
               const meetingUrl = `${url}/spaces/${roomId}`;
-              
 
               // Instead of sending a message, set the meeting URL in the state
               setShow(true);
               setMeetingUrl(meetingUrl);
-            
             }
             const msg = await getLensMessage(address as string);
             signMessage({ message: msg.message });
           }}
-        >
-         
-        </Button>
+        ></Button>
         <div className="mx-3 mt-2 ">
-            {show && (
-              <Link href={meetingUrl}>
-                <BiPhoneIncoming className="h-6 w-6 text-green-500" />
-              </Link>
-            )}
-          </div>
+          {show && (
+            <Link href={meetingUrl}>
+              <BiPhoneIncoming className="h-6 w-6 text-green-500" />
+            </Link>
+          )}
+        </div>
       </div>
     </Wrapper>
   );

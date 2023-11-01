@@ -1,6 +1,5 @@
-import { Localstorage } from "@/storage";
-import parseJwt from "@/utils/lens/apollo/lib/parseJwt";
-
+import { Localstorage } from '@/storage';
+import parseJwt from '@/utils/lens/apollo/lib/parseJwt';
 
 const getCurrentSessionProfileId = (): string | null => {
   const currentSession = parseJwt(

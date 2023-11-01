@@ -5,7 +5,11 @@ type IsLiveResponse = {
   roomId: string;
 };
 
-const isLive = async (req: NextApiRequest, res: NextApiResponse, spaceId: string) => {
+const isLive = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  spaceId: string
+) => {
   try {
     const huddleResponse = await axios(
       `http://api.huddle01.com/api/v1/live-meeting?roomId=${spaceId}`,
@@ -14,7 +18,7 @@ const isLive = async (req: NextApiRequest, res: NextApiResponse, spaceId: string
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': 'wWUkmfVYqMCcYLKEGA8VE1fZ4hWyo5d0' || '',
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': '*'
         }
       }
     );

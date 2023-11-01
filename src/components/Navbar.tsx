@@ -4,7 +4,7 @@ import { Image } from '@/components/UI/Image';
 import { useState, type FC, useEffect } from 'react';
 import { useAppStore } from 'src/store/app';
 
-import { VideoCameraIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { BiSearch } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import LoginButtonMobile from './Login/LoginButtonMobile';
@@ -35,12 +35,18 @@ import { STATIC_ASSETS_URL } from '@/constants';
 import { useTheme } from 'next-themes';
 import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import sanitizeIpfsUrl from '@/utils/sanitizeIpfsUrl';
+import Search from './HomePage/Search';
 
 const Navbar: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const { id } = router.query;
   const profilePic = currentProfile?.picture;
   console.log('CURRENT PROFILE', currentProfile?.picture);
+  const [showSearch, setShowSearch] = useState(false);
+
+  const onProfileSelected = (profile: Profile) => {
+    router.push(`/u/${(profile?.id)}`);
+  };
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -66,32 +72,22 @@ const Navbar: FC = () => {
   });
 
   return (
+    <header>
     <div
       className={`sticky z-10 flex h-[50px] w-full items-center justify-between rounded-md rounded-t-sm border-2 border-b  border-t-0 border-blue-700 bg-white/70  p-2  dark:bg-gray-900/70 ${
         visible ? 'top-0' : ''
       } `}
     >
-      <Link href="/discover">
-        <button
-          className="text-md text-md flex cursor-pointer items-center gap-2 rounded-full   border-[#57B8FF] px-2 py-2 
-         pt-3 font-semibold text-blue-500 dark:hover:bg-gray-700  md:px-4"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
-        </button>
-      </Link>
+      <button
+              className="inline-flex items-center justify-center mr-1 rounded-md text-gray-500 focus:outline-none md:hidden"
+              onClick={() => setShowSearch(!showSearch)}
+            >
+              {showSearch ? (
+                <XMarkIcon className="h-6 w-6 text-blue-700" />
+              ) : (
+                <MagnifyingGlassIcon className="h-6 w-6 text-blue-700" />
+              )}
+            </button>
       {/* //discover page */}
       <SearchBar />
       {/* //home */}
@@ -124,7 +120,15 @@ const Navbar: FC = () => {
           </div>
         </div>
       </div>
+     
     </div>
+    
+    {showSearch ? (
+      <div className="m-3 md:hidden">
+        <Search hideDropdown onProfileSelected={onProfileSelected} />
+      </div>
+    ) : null}
+    </header>
   );
 };
 

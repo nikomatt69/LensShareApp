@@ -18,7 +18,6 @@ interface FeedTypeProps {
 const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
   const switchTab = (type: string) => {
     setFeedType(type);
-   
   };
 
   return (

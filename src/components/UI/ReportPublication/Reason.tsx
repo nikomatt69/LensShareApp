@@ -1,5 +1,9 @@
-
-import { PublicationReportingFraudSubreason, PublicationReportingIllegalSubreason, PublicationReportingSensitiveSubreason, PublicationReportingSpamSubreason } from '@/utils/lens/generated5';
+import {
+  PublicationReportingFraudSubreason,
+  PublicationReportingIllegalSubreason,
+  PublicationReportingSensitiveSubreason,
+  PublicationReportingSpamSubreason
+} from '@/utils/lens/generated5';
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 interface ReasonProps {
@@ -25,7 +29,7 @@ const Reason: FC<ReasonProps> = ({
             onChange={(e) => setType(e.target.value)}
           >
             <option disabled selected>
-             Select type
+              Select type
             </option>
             <option value="illegalReason" selected={type === 'illegalReason'}>
               Illegal
@@ -40,16 +44,14 @@ const Reason: FC<ReasonProps> = ({
               Sensitive
             </option>
             <option value="spamReason" selected={type === 'spamReason'}>
-            Spam
+              Spam
             </option>
           </select>
         </div>
       </div>
       {type ? (
         <div>
-          <div className="label">
-           Reason
-          </div>
+          <div className="label">Reason</div>
           <div>
             <select
               className="focus:border-brand-500 focus:ring-brand-400 w-full rounded-xl border border-gray-300 bg-white outline-none dark:border-gray-700 dark:bg-gray-800"
@@ -76,7 +78,7 @@ const Reason: FC<ReasonProps> = ({
                       PublicationReportingIllegalSubreason.DirectThreat
                     }
                   >
-                 Direct Threat
+                    Direct Threat
                   </option>
                   <option
                     value={PublicationReportingIllegalSubreason.HumanAbuse}

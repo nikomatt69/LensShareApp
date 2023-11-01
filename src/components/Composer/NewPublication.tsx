@@ -170,7 +170,10 @@ const SpaceSettings = dynamic(
 );
 
 const LivestreamSettings = dynamic(
-  () => import('@/components/Composer/Actions/LivestreamSettings/LivestreamSettings'),
+  () =>
+    import(
+      '@/components/Composer/Actions/LivestreamSettings/LivestreamSettings'
+    ),
   {
     loading: () => <div className="shimmer mb-1 h-5 w-5 rounded-lg" />
   }
@@ -266,7 +269,6 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
   );
   const hasLiveVideo =
     showLiveVideoEditor && liveVideoConfig.playbackId.length > 0;
-
 
   // Dispatcher
   const canUseRelay = currentProfile?.dispatcher?.canUseRelay;
@@ -792,7 +794,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
             roomId: ''
           }
         }
-      }
+      };
       if (
         showComposerModal &&
         modalPublicationType === NewPublicationTypes.Spaces
@@ -808,7 +810,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
         },
         ...(showComposerModal &&
         spaceData &&
-         modalPublicationType === NewPublicationTypes.Spaces
+        modalPublicationType === NewPublicationTypes.Spaces
           ? [
               {
                 traitType: 'audioSpace',
@@ -821,34 +823,34 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
               }
             ]
           : []),
-          ...(hasLiveVideo
-            ? [
-                {
-                  traitType: 'isLive',
-                  displayType: PublicationMetadataDisplayTypes.String,
-                  value: 'true'
-                },
-                {
-                  traitType: 'liveId',
-                  displayType: PublicationMetadataDisplayTypes.String,
-                  value: liveVideoConfig.id
-                },
-                {
-                  traitType: 'livePlaybackId',
-                  displayType: PublicationMetadataDisplayTypes.String,
-                  value: liveVideoConfig.playbackId
-                }
-              ]
-            : []),
-          ...(quotedPublication
-            ? [
-                {
-                  traitType: 'quotedPublicationId',
-                  displayType: PublicationMetadataDisplayTypes.String,
-                  value: quotedPublication.id
-                }
-              ]
-            : []),  
+        ...(hasLiveVideo
+          ? [
+              {
+                traitType: 'isLive',
+                displayType: PublicationMetadataDisplayTypes.String,
+                value: 'true'
+              },
+              {
+                traitType: 'liveId',
+                displayType: PublicationMetadataDisplayTypes.String,
+                value: liveVideoConfig.id
+              },
+              {
+                traitType: 'livePlaybackId',
+                displayType: PublicationMetadataDisplayTypes.String,
+                value: liveVideoConfig.playbackId
+              }
+            ]
+          : []),
+        ...(quotedPublication
+          ? [
+              {
+                traitType: 'quotedPublicationId',
+                displayType: PublicationMetadataDisplayTypes.String,
+                value: quotedPublication.id
+              }
+            ]
+          : []),
         ...(quotedPublication
           ? [
               {
@@ -879,24 +881,24 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
       ];
 
       const attachmentsInput: PublicationMetadataMediaInput[] = hasLiveVideo
-      ? [
-          {
-            item: `https://livepeercdn.studio/hls/${liveVideoConfig.playbackId}/index.m3u8`,
-            type: 'video/mp4'
-          }
-        ]
-      : attachments.map((attachment) => ({
-          item: attachment.original.url,
-          cover: getAttachmentImage(),
-          type: attachment.original.mimeType,
-          altTag: attachment.original.altTag
-        }));
+        ? [
+            {
+              item: `https://livepeercdn.studio/hls/${liveVideoConfig.playbackId}/index.m3u8`,
+              type: 'video/mp4'
+            }
+          ]
+        : attachments.map((attachment) => ({
+            item: attachment.original.url,
+            cover: getAttachmentImage(),
+            type: attachment.original.mimeType,
+            altTag: attachment.original.altTag
+          }));
 
-    let processedPublicationContent = publicationContent;
+      let processedPublicationContent = publicationContent;
 
-    if (showPollEditor) {
-      processedPublicationContent = await createPoll();
-    }
+      if (showPollEditor) {
+        processedPublicationContent = await createPoll();
+      }
       const metadata: PublicationMetadataV2Input = {
         version: '2.0.0',
         metadata_id: uuid(),
@@ -1101,7 +1103,7 @@ const NewPublication: FC<NewPublicationProps> = ({ publication, profile }) => {
               </>
             )}
             <PollSettings />
-            <LivestreamSettings /> 
+            <LivestreamSettings />
           </div>
         )}
       </div>

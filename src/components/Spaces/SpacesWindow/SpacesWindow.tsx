@@ -178,7 +178,7 @@ const SpacesWindow: FC = () => {
       {musicTrack !== MusicTrack.DEFAULT && isMusicPlaying && (
         <audio ref={audioRef} src={musicTrack} loop />
       )}
-      <div className="relative mx-auto max-w-screen grow">
+      <div className="max-w-screen relative mx-auto grow">
         <div className="absolute bottom-12 right-0 ml-auto rounded-xl  border-[1.5px] border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
           <div className="flex justify-center">
             {showAcceptRequest && isExpanded && (

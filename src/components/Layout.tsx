@@ -129,8 +129,6 @@ const Layout = ({ children }: Props) => {
     return <Loading />;
   }
 
-
-
   return (
     <>
       <Head>
@@ -143,8 +141,6 @@ const Layout = ({ children }: Props) => {
         position="bottom-right"
         toastOptions={getToastOptions(resolvedTheme)}
       />
-    
-  
 
       <GlobalModals />
       <GlobalAlerts />
@@ -153,7 +149,6 @@ const Layout = ({ children }: Props) => {
           <>{children}</>
         ) : (
           <>
-          
             <Navbar />
             <BottomNav />
             {children}

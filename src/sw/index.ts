@@ -4,7 +4,10 @@ declare let self: ServiceWorkerGlobalScope;
 declare let browserPushWorker: Worker;
 const preCachedAssets = (process.env.STATIC_ASSETS ?? []) as string[];
 const CACHEABLE_PATHS = ['/', '/contact', '/explore'];
-const CACHEABLE_DOMAINS = ['https://static-asset.lenshareapp.xyz','https://asset.lenshareapp.xyz',];
+const CACHEABLE_DOMAINS = [
+  'https://static-asset.lenshareapp.xyz',
+  'https://asset.lenshareapp.xyz'
+];
 
 const cache = new ServiceWorkerCache({
   cachePrefix: 'SWCache',
@@ -31,7 +34,6 @@ const handleFetch = (event: FetchEvent): void => {
   }
   return;
 };
-
 
 if (typeof Worker !== 'undefined') {
   browserPushWorker = new Worker(
@@ -64,6 +66,7 @@ const onBrowserPushWorkerMessage = (event: MessageEvent) => {
 
 browserPushWorker.addEventListener('message', onBrowserPushWorkerMessage);
 browserPushWorker.addEventListener('message', (event) => event.data);
+self.addEventListener('message', (event) => event.data);
 self.addEventListener('fetch', handleFetch);
 self.addEventListener('install', (event) => event.waitUntil(handleInstall()));
 self.addEventListener('activate', (event) => event.waitUntil(handleActivate()));

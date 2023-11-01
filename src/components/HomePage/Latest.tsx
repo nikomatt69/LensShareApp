@@ -37,7 +37,6 @@ import {
   STATIC_ASSETS_URL
 } from '@/constants';
 
-
 import { OptmisticPublicationType } from '@/enums';
 import imageKit from '@/lib/imageKit';
 import { useTransactionPersistStore } from '@/store/transaction';

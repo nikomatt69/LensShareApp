@@ -9,8 +9,9 @@ import SearchSidebar from './SearchSidebar';
 import SearchPublications from './SearchPublications';
 import NavbarDetails from '../NavbarDetails';
 import BottomNav from '../Navs/BottomNav';
+import { Profile } from '@/utils/lens/generated5';
 
-const SearchPage: NextPage = () => {
+const SearchPage: NextPage = (profile) => {
   const { query } = useRouter();
 
   if (!query.q || !['pubs', 'profiles'].includes(query.type as any)) {
@@ -27,7 +28,7 @@ const SearchPage: NextPage = () => {
             <SearchSidebar />
           </div>
           {query.type === 'profiles' && <SearchProfiles query={query.q} />}
-          {query.type === 'pubs' && <SearchPublications query={query.q} />}
+          {query.type === 'pubs' && <SearchPublications query={query.q} profile={profile as Profile}/>}
         </div>
       </div>
       <BottomNav />

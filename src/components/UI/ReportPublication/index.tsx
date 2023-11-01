@@ -7,13 +7,16 @@ import { useEffectOnce } from 'usehooks-ts';
 import { object, string } from 'zod';
 
 import Reason from './Reason';
-import { Publication, useReportPublicationMutation } from '@/utils/lens/generated5';
+import {
+  Publication,
+  useReportPublicationMutation
+} from '@/utils/lens/generated5';
 import { Form, useZodForm } from '../Form';
 import stopEventPropagation from '@/lib/stopEventPropagation';
 import { EmptyState } from '../EmptyState';
 import { ErrorMessage } from '../ErrorMessage';
 import { TextArea } from '../TextArea';
-import {Spinner} from '@/components/UI/Spinner';
+import { Spinner } from '@/components/UI/Spinner';
 import { Button } from '../Button';
 
 const newReportPublicationSchema = object({
@@ -30,15 +33,11 @@ const ReportPublication: FC<ReportProps> = ({ publication }) => {
   const [type, setType] = useState('');
   const [subReason, setSubReason] = useState('');
 
-
-
   const [
     createReport,
     { data: submitData, loading: submitLoading, error: submitError }
   ] = useReportPublicationMutation({
-    onCompleted: () => {
-     
-    }
+    onCompleted: () => {}
   });
 
   const form = useZodForm({

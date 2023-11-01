@@ -57,8 +57,6 @@ import Web3Provider from './Web3Provider';
 import LensSubscriptionsProvider from './LensSubscriptionsProvider';
 import WebSocketProvider from './WebSocketProvider';
 
-
-
 interface Web3ProviderProps {
   children: ReactNode;
 }
@@ -75,8 +73,8 @@ const queryClient = new QueryClient({
 });
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
-   <Web3Provider>
-     <ApolloProvider client={apolloClient}>
+    <Web3Provider>
+      <ApolloProvider client={apolloClient}>
         <LensSubscriptionsProvider />
         <WebSocketProvider />
         <QueryClientProvider client={queryClient}>
@@ -84,14 +82,12 @@ const Providers = ({ children }: { children: ReactNode }) => {
             <ThemeProvider defaultTheme="light" attribute="class">
               {children}
             </ThemeProvider>
-           <Analytics />
+            <Analytics />
             {/* <Video /> */}
           </LivepeerConfig>
         </QueryClientProvider>
-     </ApolloProvider>
+      </ApolloProvider>
     </Web3Provider>
-      
-    
   );
 };
 

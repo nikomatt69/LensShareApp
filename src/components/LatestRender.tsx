@@ -37,14 +37,14 @@ import Suggested from './Sidebar/SuggestedAccounts';
 import { Card } from './UI/Card';
 import Explore from './HomePage/Explore';
 import NewPost from './Composer/Post/New';
-import { Image } from '@/components/UI/Image'
+import { Image } from '@/components/UI/Image';
 import Echos from './Echos/EchosPage';
 import { HomeFeedType } from '@/enums';
 import Highlights from './HomePage/Highlights';
 import EchosPage from '@/pages/musicfeed';
 import FeedType from './FeedType';
 import Search from './Search/Search';
-import SearchAudio from './Search/SearchAudio';
+
 import Spaces from './Spaces';
 import { useSpacesStore } from '@/store/spaces';
 import PullToRefreshExample from './HomePage/Refresh';
@@ -151,10 +151,7 @@ const LatestRender: FC<Props> = ({ publication }) => {
     }
   };
 
-
-  const [feedType, setFeedType] = useState<HomeFeedType>(
-    HomeFeedType.EXPLORE
-  );
+  const [feedType, setFeedType] = useState<HomeFeedType>(HomeFeedType.EXPLORE);
 
   useEffect(() => {
     validateAuthentication();
@@ -168,14 +165,11 @@ const LatestRender: FC<Props> = ({ publication }) => {
   return (
     <>
       <GridLayout className="max-w-[1200px] pt-6">
-      <MetaTags />
-      
+        <MetaTags />
+
         <Wrapper children publication={publication} />
         <GridItemEight>
- 
           <>
-            
-
             {resolvedTheme === 'dark' ? (
               <Image
                 className="cursor-pointer"
@@ -189,25 +183,20 @@ const LatestRender: FC<Props> = ({ publication }) => {
                 alt="logo"
               />
             )}
-
-       
           </>
         </GridItemEight>
         <GridItemEight>
-      
-        {currentProfile ? (
+          {currentProfile ? (
             <>
               <NewPost />
-              <div className="space-y-3 mt-3">
+              <div className="mt-3 space-y-3">
                 <FeedType feedType={feedType} setFeedType={setFeedType} />
               </div>
               <PullToRefreshExample />
               {feedType === HomeFeedType.EXPLORE ? (
                 <Explore />
               ) : feedType === HomeFeedType.MUSIC ? (
-               
                 <Curated />
-             
               ) : feedType === HomeFeedType.LATEST ? (
                 <Latest />
               ) : (

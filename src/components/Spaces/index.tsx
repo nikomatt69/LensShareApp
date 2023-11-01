@@ -10,9 +10,7 @@ import { useRoom } from '@huddle01/react/hooks';
 
 const AudioSpaces: NextPage = () => {
   const { isRoomJoined } = useRoom();
-  const showSpacesWindow = useSpacesStore(
-    (state) => state.showSpacesWindow
-  );
+  const showSpacesWindow = useSpacesStore((state) => state.showSpacesWindow);
 
   return isRoomJoined ? <SpacesWindow /> : <Lobby />;
 };

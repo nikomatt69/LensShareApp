@@ -12,12 +12,14 @@ import Video from '../HomePage/Video';
 import Loading from '../Loading';
 import { useInView } from 'react-cool-inview';
 import Loader from '../UI/Loader';
+import SinglePublication from '../Composer/SinglePublication2';
 
 interface Props {
   query: string | string[];
+  profile :Profile,
 }
 
-const SearchPublications: FC<Props> = ({ query }) => {
+const SearchPublications: FC<Props> = ({ query ,profile}) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const [byte, setByte] = useState<Publication>();
   const [show, setShow] = useState(false);
@@ -64,12 +66,14 @@ const SearchPublications: FC<Props> = ({ query }) => {
   });
 
   return (
-    <div className='z-1000 inset-96  bg-black'>
+    <div className="z-1000 inset-96  bg-black">
       {publications?.map((publication) => (
-        <VideoCard
+        <SinglePublication
           key={publication?.id}
           publication={publication}
-          onDetail={openDetail}
+          showCount
+          tags=''
+          profile={profile as Profile}
         />
       ))}
       {pageInfo?.next && (

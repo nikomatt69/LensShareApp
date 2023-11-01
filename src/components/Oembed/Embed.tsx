@@ -30,13 +30,13 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         rel="noreferrer noopener"
       >
         <Card forceRounded>
-          
           <div className="flex items-center">
-            
             <div className="truncate break-words p-5">
               <div className="space-y-1.5 truncate break-words">
-              {og.title ? (
-                  <div className=" line-clamp-3 whitespace-break-spaces font-serif">{og.title}</div>
+                {og.title ? (
+                  <div className=" line-clamp-3 whitespace-break-spaces font-serif">
+                    {og.title}
+                  </div>
                 ) : null}
                 {og.description ? (
                   <div className="lt-text-gray-500 line-clamp-2 whitespace-break-spaces">

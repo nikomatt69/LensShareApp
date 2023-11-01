@@ -1,30 +1,23 @@
-
 import { API_URL } from '@/constants';
-import { useAppPersistStore } from '@/store/app';
-
+import { useAppPersistStore, useAppStore } from '@/store/app';
 
 import { FC } from 'react';
 import { useEffectOnce, useUpdateEffect } from 'usehooks-ts';
 import { useAccount } from 'wagmi';
 import useWebSocket from 'react-use-websocket';
 import {
-
   type Notification,
   NotificationsDocument,
   type UserSigNonces,
   UserSigNoncesDocument
 } from '@/utils/lens/generated5';
-import {
- 
-  AuthorizationRecordRevokedDocument,
-
-} from '@/utils/lens/generated7';
+import { AuthorizationRecordRevokedDocument } from '@/utils/lens/generated7';
 
 import getCurrentSessionProfileId from '@/lib/getCurrentSessionProfileId';
 import getPushNotificationData from '@/lib/getPushNotificationData';
 import { BrowserPush } from '@/lib/browserPush';
 import resetAuthData from '@/utils/hooks/resetAuthData';
-import { isSupported, share} from 'shared-zustand';
+import { isSupported, share } from 'shared-zustand';
 import { useNotificationPersistStore } from '@/store/notification';
 import { useNonceStore } from '@/store/nonce';
 import { signOut } from '@/store/persist';
@@ -35,8 +28,11 @@ const LensSubscriptionsProvider: FC = () => {
   const setLatestNotificationId = useNotificationPersistStore(
     (state) => state.setLatestNotificationId
   );
+  const profileId = useAppPersistStore((state) => state.profileId);
   const { setLensHubOnchainSigNonce } = useNonceStore();
   const { address } = useAccount();
+  const currentProfile = useAppStore((state) => state.currentProfile);
+
 
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
     API_URL.replace('http', 'ws'),
@@ -48,12 +44,12 @@ const LensSubscriptionsProvider: FC = () => {
   });
 
   useUpdateEffect(() => {
-    if (readyState === 1 && currentSessionProfileId && address) {
+    if (readyState === 1 && profileId && address && currentProfile) {
       sendJsonMessage({
         id: '1',
         type: 'start',
         payload: {
-          variables: { for: currentSessionProfileId },
+          variables: { for: currentProfile.id },
           query: NotificationsDocument
         }
       });
@@ -71,15 +67,15 @@ const LensSubscriptionsProvider: FC = () => {
         }
       });
     }
-  }, [readyState, currentSessionProfileId]);
+  }, [readyState, profileId ,currentProfile?.id]);
 
   useUpdateEffect(() => {
     const jsonData = JSON.parse(lastMessage?.data || '{}');
     const wsData = jsonData?.payload?.data;
 
-    if (currentSessionProfileId && address && wsData) {
+    if (profileId && currentProfile?.id && address && wsData) {
       if (jsonData.id === '1') {
-        const notification = wsData.newNotification as Notification;
+        const notification = wsData.Notification as Notification;
         if (getPushNotificationData(notification)) {
           const notify = getPushNotificationData(notification);
           BrowserPush.notify({

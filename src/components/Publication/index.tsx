@@ -23,7 +23,12 @@ import Loading from '../Loading';
 import Loader from '../UI/Loader';
 import { useGlobalModalStateStore } from '@/store/modals';
 import { useEffect } from 'react';
-import { ReferenceModules, UserProfilesDocument, UserProfilesQuery, UserProfilesQueryVariables } from '@/utils/lens/generated5';
+import {
+  ReferenceModules,
+  UserProfilesDocument,
+  UserProfilesQuery,
+  UserProfilesQueryVariables
+} from '@/utils/lens/generated5';
 import { useAccount, useDisconnect, useNetwork } from 'wagmi';
 import { useReferenceModuleStore } from '@/store/reference-module';
 import { useNonceStore } from '@/store/nonce';
@@ -73,7 +78,6 @@ const ViewPublication: NextPage = (profile) => {
     localStorage.removeItem('refreshToken');
   };
 
-  
   const validateAuthentication = () => {
     const currentProfileAddress = currentProfile?.ownedBy;
     const isSwitchedAccount =
@@ -92,13 +96,9 @@ const ViewPublication: NextPage = (profile) => {
     }
   };
 
-
-  
   useEffect(() => {
     validateAuthentication();
   }, [isDisconnected, address, chain, disconnect, profileId]);
-
- 
 
   const {
     query: { id }
@@ -126,8 +126,6 @@ const ViewPublication: NextPage = (profile) => {
   if (!data.publication) {
     return <Custom404 />;
   }
-
-
 
   const { publication } = data as any;
   const canComment = publication?.canComment?.result;

@@ -1,4 +1,3 @@
-
 import jwt from '@tsndr/cloudflare-worker-jwt';
 import { boolean, object, string } from 'zod';
 
@@ -24,18 +23,16 @@ const validationSchema = object({
 export default async (request: WorkerRequest) => {
   const body = await request.json();
   if (!body) {
-    return response({ success: false, error: Errors.SomethingWentWrong});
+    return response({ success: false, error: Errors.SomethingWentWrong });
   }
-
-  
 
   const validation = validationSchema.safeParse(body);
 
   if (!validation.success) {
-    return response({ success: false, error: Errors.SomethingWentWrong});
+    return response({ success: false, error: Errors.SomethingWentWrong });
   }
 
-  const { id, isMainnet ,accessToken} = body as ExtensionRequest;
+  const { id, isMainnet, accessToken } = body as ExtensionRequest;
 
   try {
     const isAuthenticated = await validateLensAccount(accessToken, isMainnet);

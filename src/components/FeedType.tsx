@@ -15,7 +15,6 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline';
 import TabButton from './UI/TabButton';
 import ExploreOutline from './UI/Icons/ExploreOutline';
 
-
 interface FeedTypeProps {
   setFeedType: Dispatch<SetStateAction<HomeFeedType>>;
   feedType: HomeFeedType;
@@ -27,7 +26,6 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
   return (
     <div className="flex flex-wrap items-center justify-between px-1 md:px-0">
       <div className="flex gap-3 overflow-x-auto sm:px-0">
-       
         <TabButton
           className="text-blue-700"
           name={`Highlights`}
@@ -46,7 +44,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
             setFeedType(HomeFeedType.LATEST);
           }}
         />
-         <TabButton
+        <TabButton
           className="text-blue-700"
           name={`Explore`}
           icon={<BiWorld className="h-4 w-4 text-blue-700" />}
@@ -55,7 +53,7 @@ const FeedType: FC<FeedTypeProps> = ({ setFeedType, feedType }) => {
             setFeedType(HomeFeedType.EXPLORE);
           }}
         />
-         <TabButton
+        <TabButton
           className="text-blue-700"
           name={`Music`}
           icon={<MusicalNoteIcon className="h-4 w-4 text-blue-700" />}

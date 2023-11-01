@@ -53,7 +53,7 @@ const UnlonelyNfc: FC<UnlonelyNfcProps> = ({ nftMetadata, publication }) => {
       onClick={(event) => stopEventPropagation(event)}
     >
       <Video src={videoLink} poster={videoThumbnail} />
-      <div className="flex-col items-center justify-between border-t rounded-b-xl px-3 py-2 dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
+      <div className="flex-col items-center justify-between rounded-b-xl border-t border-blue-700 border-l-blue-700 border-r-blue-700 bg-gray-400 px-3 py-2 dark:bg-gray-700">
         <div className="mr-5 flex-col items-center gap-2">
           <div className="font-serif text-xs">{title}</div>
         </div>

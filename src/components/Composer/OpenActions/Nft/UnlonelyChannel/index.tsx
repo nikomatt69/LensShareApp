@@ -62,7 +62,7 @@ const UnlonelyChannel: FC<UnlonelyChannelProps> = ({
       onClick={(event) => stopEventPropagation(event)}
     >
       <Video src={playbackUrl} />
-      <div className="flex-col items-center justify-between border-t px-3 py-2 rounded-b-xl dark:bg-gray-700 bg-gray-400 border-blue-700 border-l-blue-700 border-r-blue-700">
+      <div className="flex-col items-center justify-between rounded-b-xl border-t border-blue-700 border-l-blue-700 border-r-blue-700 bg-gray-400 px-3 py-2 dark:bg-gray-700">
         <div className="mr-5 flex-col flex-wrap items-center gap-2 py-1">
           <div className="gap-1 py-1 font-serif text-xs">{name}</div>
           <div

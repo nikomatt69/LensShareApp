@@ -55,17 +55,17 @@ const BottomOverlay: FC<Props> = ({ video }) => {
           </Link>
         </div>
         <div className="flex items-center space-x-2 text-xs">
-        {!following ? (
-              <FollowButton
+          {!following ? (
+            <FollowButton
               profile={currentProfile as Profile}
-                setFollowing={setFollowing}
-              />
-            ) : (
-              <UnfollowButton
-                profile={currentProfile as Profile}
-                setFollowing={setFollowing}
-              />
-            )}
+              setFollowing={setFollowing}
+            />
+          ) : (
+            <UnfollowButton
+              profile={currentProfile as Profile}
+              setFollowing={setFollowing}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export enum HomeFeedType {
   LATEST = 'LATEST',
   MUSIC = 'MUSIC',
   EXPLORE = 'EXPLORE',
- 
+
   K3L_RECENT = 'K3L_RECENT',
   K3L_RECOMMENDED = 'K3L_RECOMMENDED',
   K3L_POPULAR = 'K3L_POPULAR',
@@ -28,14 +28,13 @@ export enum NotificationTabType {
   Collects = 'COLLECTS'
 }
 
-
 export enum NotificationType {
   All = 'ALL',
   Mentions = 'MENTIONS',
   Comments = 'COMMENTS',
   Likes = 'LIKES',
   Collects = 'COLLECTS',
-  Reacted = "Reacted"
+  Reacted = 'Reacted'
 }
 
 export enum ProfileFeedType {

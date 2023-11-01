@@ -1,5 +1,3 @@
-
-
 import { createCors, error, Router, status } from 'itty-router';
 
 import createStream from './handlers/createStream';

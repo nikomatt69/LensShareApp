@@ -14,7 +14,9 @@ type CreateSpaceResponse = {
   };
 };
 
-const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => {
+const useCreateSpace = (): [
+  createSpace: () => Promise<CreateSpaceResponse>
+] => {
   const publicationContent = usePublicationStore(
     (state) => state.publicationContent
   );
@@ -26,7 +28,7 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
     spacesTimeInHour,
     spacesTimeInMinute
   } = useSpacesStore();
-  
+
   let payload = {};
   const now = new Date();
   now.setHours(Number(spacesTimeInHour));
@@ -57,9 +59,8 @@ const useCreateSpace = (): [createSpace: () => Promise<CreateSpaceResponse>] => 
         method: 'POST',
         data: payload
       });
-      
-      
-      return response.data ;
+
+      return response.data;
     } catch (error) {
       throw error;
     }

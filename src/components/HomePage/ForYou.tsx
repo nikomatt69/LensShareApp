@@ -79,7 +79,7 @@ const ForYou: FC = () => {
 
   return (
     <div>
-    <div className="mb-5 flex items-center space-x-2">
+      <div className="mb-5 flex items-center space-x-2">
         <img
           src={imageKit(`${STATIC_ASSETS_URL}/images/icon.png`)}
           draggable={false}
@@ -88,27 +88,27 @@ const ForYou: FC = () => {
         />
         <h1 className="text-2xl font-semibold">For You</h1>
       </div>
-    <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
-      {txnQueue.map((txn) =>
-        txn?.type === OptmisticPublicationType.NewPost ? (
-          <div key={txn.id}>
-            <QueuedPublication txn={txn} />
-          </div>
-        ) : null
-      )}
-      {publications?.map((publication, index) => (
-        <SinglePublication
-          key={`${publication?.id}_${index}`}
-          isFirst={index === 0}
-          isLast={index === publications.length - 1}
-          publication={publication as Publication}
-          profile={profileId}
-          showCount
-          tags=""
-        />
-      ))}
-      {hasMore ? <span ref={observe} /> : null}
-    </Card>
+      <Card className="divide-y-[1px] rounded-xl border-2 border-blue-700 dark:divide-blue-700">
+        {txnQueue.map((txn) =>
+          txn?.type === OptmisticPublicationType.NewPost ? (
+            <div key={txn.id}>
+              <QueuedPublication txn={txn} />
+            </div>
+          ) : null
+        )}
+        {publications?.map((publication, index) => (
+          <SinglePublication
+            key={`${publication?.id}_${index}`}
+            isFirst={index === 0}
+            isLast={index === publications.length - 1}
+            publication={publication as Publication}
+            profile={profileId}
+            showCount
+            tags=""
+          />
+        ))}
+        {hasMore ? <span ref={observe} /> : null}
+      </Card>
     </div>
   );
 };
