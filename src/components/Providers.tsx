@@ -76,7 +76,6 @@ const Providers = ({ children }: { children: ReactNode }) => {
     <Web3Provider>
       <ApolloProvider client={apolloClient}>
         <LensSubscriptionsProvider />
-        <WebSocketProvider />
         <QueryClientProvider client={queryClient}>
           <LivepeerConfig client={livepeerClient}>
             <ThemeProvider defaultTheme="light" attribute="class">

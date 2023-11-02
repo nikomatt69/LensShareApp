@@ -35,38 +35,6 @@ const handleFetch = (event: FetchEvent): void => {
   return;
 };
 
-if (typeof Worker !== 'undefined') {
-  browserPushWorker = new Worker(
-    new URL('./browserPushWorker', import.meta.url)
-  );
-}
-
-/**
- * Browser push notification
- */
-export const BrowserPush = {
-  notify: ({ title }: { title: string }) => {
-    browserPushWorker.postMessage({ title });
-
-    browserPushWorker.onmessage = function (event: MessageEvent) {
-      const response = event.data;
-      new Notification('LensShare', {
-        body: response.title,
-        icon: 'public/images/icon.png'
-      });
-    };
-  }
-};
-
-const onBrowserPushWorkerMessage = (event: MessageEvent) => {
-  const { data } = event;
-  postMessage(data);
-  return;
-};
-
-browserPushWorker.addEventListener('message', onBrowserPushWorkerMessage);
-browserPushWorker.addEventListener('message', (event) => event.data);
-self.addEventListener('message', (event) => event.data);
 self.addEventListener('fetch', handleFetch);
 self.addEventListener('install', (event) => event.waitUntil(handleInstall()));
 self.addEventListener('activate', (event) => event.waitUntil(handleActivate()));

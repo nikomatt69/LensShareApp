@@ -13,11 +13,8 @@ const PollSettings: FC = () => {
     (state) => state.setShowPollEditor
   );
   const resetPollConfig = usePublicationStore((state) => state.resetPollConfig);
-  const isPollsEnabled = isFeatureEnabled(FeatureFlag.Polls);
 
-  if (!isPollsEnabled) {
-    return null;
-  }
+
 
   return (
     <Tooltip placement="top" content={`Poll`}>

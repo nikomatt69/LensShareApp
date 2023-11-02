@@ -72,14 +72,16 @@ const Navbar: FC = () => {
   });
 
   return (
-    <header>
+    <header className={` ${
+      visible ? 'top-0' : ''
+    } `}>
     <div
       className={`sticky z-10 flex h-[50px] w-full items-center justify-between rounded-md rounded-t-sm border-2 border-b  border-t-0 border-blue-700 bg-white/70  p-2  dark:bg-gray-900/70 ${
         visible ? 'top-0' : ''
       } `}
     >
       <button
-              className="inline-flex items-center justify-center mr-1 rounded-md text-gray-500 focus:outline-none md:hidden"
+              className="inline-flex items-center justify-center mr-1 rounded-md text-gray-500 focus:outline-none "
               onClick={() => setShowSearch(!showSearch)}
             >
               {showSearch ? (

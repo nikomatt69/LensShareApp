@@ -62,7 +62,7 @@ const Latest = () => {
 
   const request = {
     sortCriteria: PublicationSortCriteria.Latest,
-    limit: 20,
+    limit: 15,
     noRandomize: false,
     sources: [
       APP_ID,

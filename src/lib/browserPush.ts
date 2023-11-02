@@ -2,7 +2,7 @@ let browserPushWorker: Worker;
 
 if (typeof Worker !== 'undefined') {
   browserPushWorker = new Worker(
-    new URL('src/sw/browserPushWorker', import.meta.url)
+    new URL('./browserPushWorker', import.meta.url)
   );
 }
 
