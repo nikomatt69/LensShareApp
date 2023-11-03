@@ -32,7 +32,7 @@
     "@capacitor/android": "^5.2.3",
     "@capacitor/cli": "^5.2.3",
     "@capacitor/core": "^5.2.3",
-    "@capacitor/ios": "^5.2.3",
+    "@capacitor/ios": "^5.4.2",
     "@cloudflare/workers-types": "^4.20230724.0",
     "@ducanh2912/next-pwa": "^9.7.2",
     "@emotion/css": "^11.11.0",
