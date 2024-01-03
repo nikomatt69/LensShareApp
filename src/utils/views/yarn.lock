@@ -840,10 +840,10 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
-wrangler@2.20.1:
-  version "2.20.1"
-  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-2.20.1.tgz#0b301fe41914b23f3d58edd0e2032d60b0da76b0"
-  integrity sha512-5fl7xF7OkRHim0B0kVXtmSPMrRhRKZ3rqAdn9tKYgi6MnZOvWC+HesGKpNxpVUWsJYpPfJ5AU6gZ6gEL1OLmFQ==
+wrangler@2.20.2:
+  version "2.20.2"
+  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-2.20.2.tgz#9249a73fa3c2a419c76852e3f9265d641e17dbb0"
+  integrity sha512-ZWydYGuKbHC8PdKLk7JAdRYMK78mHVnmaFsLRf2ZpnmVl2nQl9lKIXKKGVUdmezj70FvLhJCD/2LsGOPGg2AFg==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
     "@esbuild-plugins/node-globals-polyfill" "^0.1.1"
