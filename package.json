@@ -182,7 +182,7 @@
     "wagmi": "^1.3.3",
     "wavesurfer.js": "^6.6.3",
     "web-push": "^3.6.6",
-    "wrangler": "^3.7.0",
+    "wrangler": "^3.19.0",
     "xmtp": "^0.0.0",
     "xmtp-content-type-remote-attachment": "^1.0.7",
     "zod": "^3.19.1"
